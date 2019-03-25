@@ -1,0 +1,33 @@
+<?php
+return[
+    'transaction' => 'লেনদেন',
+    'fund_allocation' =>'তহবিল বরাদ্দ',
+    'fund_allocation_progress_list' => 'তহবিল বরাদ্দ অগ্রগতির তালিকা',
+    'cost_center' => 'খরচ কেন্দ্র',
+    'allocation_date' => 'বরাদ্দ তারিখ',
+    'financial_year' => 'আর্থিক বছর',
+    'approve' => 'অনুমোদন এবং স্থিতি স্থানান্তর',
+    'total_amount' => 'সর্বমোট পরিমাণ',
+    'fund_allocation_create' => 'ফান্ড বরাদ্দ তৈরি করুন',
+    'available_fund' => 'উপলব্ধ তহবিল',
+    'finance_year' => 'আর্থিক বছর',
+    'date' => 'তারিখ',
+    'cost_center_type' => 'খরচ কেন্দ্রের প্রকার',
+    'installment' => 'কিস্তি',
+    'cost_center_name' => 'খরচ কেন্দ্রের নাম',
+    'cost_center_type' => 'খরচ কেন্দ্রের প্রকার',
+    'activity' => 'কার্যকলাপ',
+    'technology' => 'প্রযুক্তি',
+    'source_type' => 'উত্স প্রকার',
+    'season' => 'ঋতু',
+    'unit_cost' => 'ইউনিট খরচ',
+    'batch' => 'ব্যাচ / বরাদ্দ সংখ্যা',
+    'view' => 'প্রযুক্তি ইউনিট খরচ দেখুন',
+    'edit' => 'প্রযুক্তি ইউনিট খরচ সম্পাদনা করুন',
+    'delete' => 'প্রযুক্তি ইউনিট খরচ মুছুন',
+    'approve_fund_allocations' => 'ফান্ড বরাদ্দ অনুমোদন',
+    'send_approved_fund' => 'অনুমোদিত তহবিল পাঠান',
+    'account' => 'হিসাব নাম্বার',
+    'sent' => 'পাঠান'
+
+];

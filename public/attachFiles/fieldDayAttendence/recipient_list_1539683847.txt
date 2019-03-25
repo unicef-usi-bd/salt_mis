@@ -1,0 +1,3 @@
+https://pureinfotech.com/install-xampp-windows-10/
+
+https://stackoverflow.com/questions/5524116/accessing-localhost-xampp-from-another-computer-over-lan-network-how-to

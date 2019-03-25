@@ -1,0 +1,26 @@
+<?php
+ return[
+     'name' => 'Name',
+     'icon' => 'Icon',
+     'status' => 'Status',
+     'module_list' => 'Module List',
+     'access_control' => 'Access Control',
+     'module' => 'Module',
+     'module_create' => 'Module Create',
+     'module_name' => 'Module Name',
+     'module_icon' => 'Module Icon',
+     'sl_no' => 'SL No.',
+     'edit_module' => ' Edit Module',
+     'delete_module' => 'Delete Module',
+     'user_group' => 'User Group',
+     'user_group_level' => 'User Group Level',
+     'user_group_create' => 'User Group Create',
+     'delete_user_group' => 'Delete User Group',
+     'edit_user_group' => 'Edit User Group',
+     'add_new' => 'Add New',
+     'group_level_name' => 'Group Level Name',
+     'edit_user_group_level' => 'Edit User Group Level',
+     'delete_user_group_level' => 'Delete User Group Level' ,
+     'group_name' => 'Group Name',
+     'example_group_name_here' => 'Example:- Group name here'
+ ];

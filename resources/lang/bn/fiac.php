@@ -1,0 +1,25 @@
+<?php
+return[
+    'fiac' => 'ফিয়াক',
+    'total_cig_farmer' => 'মোট সিআইজি কৃষক',
+    'total_non_cig_farmer' => 'মোট অ-সিআইজি কৃষক',
+    'total_farmer' => 'মোট কৃষক',
+    'solution' => 'সমাধান',
+    'fiac_date' => 'ফিয়াক তারিখ',
+    'village' => 'গ্রাম',
+    'farmer_type' => 'কৃষকের প্রকার',
+    'mobile_no' => 'মোবাইল নাম্বার',
+    'area_of_land' => 'ভূমি এলাকা(শতাংশ)',
+    'problem' => 'সমস্যা',
+    'solution' => 'সমাধান',
+    'save_as_draft' => 'খসড়া হিসেবে সংরক্ষণ করুন',
+    'problem_name' => 'সমস্যা নাম',
+    'upazilla' => 'উপজেলা',
+    'village_name' => 'গ্রামের নাম',
+    'crop_name' => 'ফসলের  নাম',
+    'solution_by' => 'সমাধান দ্বারা',
+    'fiac_create' => 'ফিয়াক তৈরি করুন',
+    'view_fiac' => 'ফিয়াক দেখুন',
+    'edit_fiac' => 'সম্পাদনা করুন',
+    'delete_fiac' => 'ফিয়াক মুছুন'
+];

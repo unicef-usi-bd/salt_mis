@@ -1,0 +1,65 @@
+training list query
+
+select tr.batch, te.technology_desc_en, tr.training_date,tr.trainee_type,
+(select count(a.gender_id) from farmers_training as a where a.gender_id=45 and a.technology_id = te.technology_id) as male,
+(select count(b.gender_id) from farmers_training as b where b.gender_id=46 and b.technology_id = te.technology_id) as female,
+(select count(c.gender) from farmers as c where c.ethnicity=1 and c.gender=45 and ft.technology_id = te.technology_id) as E_Male,
+(select count(d.gender) from farmers as d where d.ethnicity=1 and d.gender=46 and ft.technology_id = te.technology_id) as E_FeMale
+from farmers_training as ft
+left join farmers as f on ft.farmer_id = f.farmer_id
+left join dae_technology as te on ft.technology_id = te.technology_id
+left join training as tr on ft.training_id = tr.training_id
+group by(ft.technology_id);
+
+trainee list query
+
+select tr.batch,ft.farmer_name_en,lgd.group_data_name,f.mobile_no,algd.group_data_name,f.ethnicity,f.age
+from farmers_training as ft
+left join training as tr on ft.training_id = tr.training_id
+left join farmers as f on ft.farmer_id = f.farmer_id
+left join lookup_group_data as lgd on f.designation = lgd.lookup_group_data_id
+left join lookup_group_data as algd on f.gender = algd.lookup_group_data_id;
+
+
+training summery
+
+ public static function daeTrainingSummery($activityId){
+        $daeTrainingSummery = DB::select( DB::raw("select c.technology_desc_en,c.technology_desc_bn,
+                                                        (SELECT (a.batch_or_alc_no) as total_batch
+                                                            FROM  soe a
+                                                             where a.financial_year=6 
+                                                             and a.cost_center_id=2  
+                                                             and a.activity_id=$activityId 
+                                                             and a.season_id=64 
+                                                             and a.technology_id=c.technology_id)as kharip_one,
+                                                         (SELECT (a.batch_or_alc_no) as total_batch
+                                                            FROM  soe a
+                                                             where a.financial_year=6 
+                                                             and a.cost_center_id=2  
+                                                             and a.activity_id=$activityId 
+                                                             and a.season_id=67 
+                                                             and a.technology_id=c.technology_id)as kharip_two,
+                                                          (SELECT (a.batch_or_alc_no) as total_batch
+                                                             FROM  soe a
+                                                              where a.financial_year=6 
+                                                              and a.cost_center_id=2  
+                                                              and a.activity_id=$activityId 
+                                                              and a.season_id=68 
+                                                              and a.technology_id=c.technology_id)as robi
+                                                         
+                                                      from dae_technology c where c.is_technology=1"));
+
+        return $daeTrainingSummery;
+    }
+
+
+
+Dae training list
+
+
+//        $daeTraineeList = DB::select(DB::raw("select tr.batch,ft.farmer_name_en,lgd.group_data_name as designation,f.mobile_no,algd.group_data_name as gender,f.ethnicity,f.age,f.village
+//                                                from farmers_training as ft
+//                                                left join training as tr on ft.training_id = tr.training_id
+//                                                left join farmers as f on ft.farmer_id = f.farmer_id
+//                                                left join lookup_group_data as lgd on f.designation = lgd.lookup_group_data_id
+//                                                left join lookup_group_data as algd on f.gender = algd.lookup_group_data_id"));
