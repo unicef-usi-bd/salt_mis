@@ -57,5 +57,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('user-group-level', 'UserModuleController@getUserGroupLevelByAjax');
     Route::get('user-group-level-permission', 'UserModuleController@userGroupLevelPermissionAjax');
     Route::get('action-user-permission', 'UserModuleController@addRemovePermissionByAjax');
+
+    // Setup
+    Route::resource('mill-profile', 'MillProfileController');
+    Route::resource('monitoring', 'MonitorController');
 });
 

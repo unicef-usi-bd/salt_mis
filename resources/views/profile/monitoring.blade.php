@@ -24,16 +24,16 @@
 
             <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('moduleLinks.module_link_list') }}">
                 <thead>
-                    <tr>
+                <tr>
 
-                        <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                        <th>{{ trans('module.module_name') }} </th>
-                        <th>{{ trans('moduleLinks.link_name') }}</th>
-                        <th>{{ trans('moduleLinks.link_url') }}</th>
-                        <th>{{ trans('moduleLinks.link_serial') }}</th>
-                        <th>{{ trans('module.status') }}</th>
-                        <th>{{ trans('dashboard.action') }}</th>
-                    </tr>
+                    <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
+                    <th>{{ trans('module.module_name') }} </th>
+                    <th>{{ trans('moduleLinks.link_name') }}</th>
+                    <th>{{ trans('moduleLinks.link_url') }}</th>
+                    <th>{{ trans('moduleLinks.link_serial') }}</th>
+                    <th>{{ trans('module.status') }}</th>
+                    <th>{{ trans('dashboard.action') }}</th>
+                </tr>
                 </thead>
 
 
@@ -58,9 +58,9 @@
 
 
                                 {{--<a href="#" id="{{ 'module-links/'.$moduleLink->LINK_ID }}" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" role="button" title="View Link">--}}
-                                        {{--<span class="blue">--}}
-                                            {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                                        {{--</span>--}}
+                                {{--<span class="blue">--}}
+                                {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
+                                {{--</span>--}}
                                 {{--</a>--}}
 
                                 @php
