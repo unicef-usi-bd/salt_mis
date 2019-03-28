@@ -2,6 +2,7 @@
 
 @section('mainContent')
 
+    {{--page header--}}
     <div class="page-header">
         <h1>
             {{ trans('module.access_control') }}
