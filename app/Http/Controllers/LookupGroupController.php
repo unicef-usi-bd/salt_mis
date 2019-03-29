@@ -39,7 +39,7 @@ class LookupGroupController extends Controller
         );
 
         $lookupGroups = LookupGroup::getSSCLookupData();
-//        $this->pr($lookupGroups);
+        //print_r($lookupGroups);exit;
         return view('setup.generalSetup.lookupGroups.lookupGroupIndex', compact( 'heading','previllage','lookupGroups'));
     }
 

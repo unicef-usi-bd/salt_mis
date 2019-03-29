@@ -61,5 +61,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Setup
     Route::resource('lookup-groups', 'LookupGroupController'); //Rubiyat
     Route::resource('lookup-groups-data', 'LookupGroupDataController'); //Rubiyat
+    Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
 });
 

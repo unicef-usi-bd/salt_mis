@@ -11,20 +11,18 @@
                 <tr>
                     <th>{{ trans('lookupGroupIndex.group_data_name') }} </th>
                     <th> :</th>
-                    <td>{{$lookupGroupData->group_data_name}}</td>
-                    <th>{{ trans('lookupGroupIndex.abbreviation') }}   </th>
-                    <th> :</th>
-                    <td>{{$lookupGroupData->group_data_abbr}}</td>
+                    <td>{{$lookupGroupData->LOOKUPCHD_NAME}}</td>
+
 
                 </tr>
                 <tr>
                     <th>{{ trans('lookupGroupIndex.user_define_id') }} </th>
                     <th> :</th>
-                    <td>{{$lookupGroupData->user_define_id}}</td>
+                    <td>{{$lookupGroupData->UD_ID}}</td>
                     <th>{{ trans('lookupGroupIndex.status') }}</th>
                     <th> :</th>
                     <td>
-                        @if($lookupGroupData->active_status==1)
+                        @if($lookupGroupData->ACTIVE_FLG==1)
                             <span class="label label-md label-info arrowed arrowed-righ"> Active </span>
                         @else
                             <span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>
@@ -35,7 +33,7 @@
                 <tr>
                     <th>{{ trans('lookupGroupIndex.description') }} </th>
                     <th> :</th>
-                    <td>{{$lookupGroupData->description}}</td>
+                    <td>{{$lookupGroupData->DESCRIPTION}}</td>
                 </tr>
             </table>
         </div>

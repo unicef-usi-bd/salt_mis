@@ -1,39 +1,33 @@
 <div class="col-md-12">
-    <form action="{{ url('/lookup-groups-data/'.$lookupGroupData->lookup_group_data_id) }}" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/lookup-groups-data/'.$lookupGroupData->LOOKUPCHD_ID) }}" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.group_data_name') }}</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess group-data-name" placeholder="Example:- Group Data name here" name="group_data_name" class="form-control" value="{{ $lookupGroupData->group_data_name }}"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.abbreviation') }}</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
-                <input type="text" id="inputSuccess group_data_abbr" placeholder="Example:- Group Data Abbreviation here" name="group_data_abbr" class="form-control col-xs-10 col-sm-5" value="{{ $lookupGroupData->group_data_abbr }}"/>
+                <input type="text" id="inputSuccess LOOKUPCHD_NAME" placeholder="Example:- Group Data name here" name="LOOKUPCHD_NAME" class="form-control" value="{{ $lookupGroupData->LOOKUPCHD_NAME }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.user_define_id') }}</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="number" id="inputSuccess user_define_id" placeholder="Example:- User Define Serial  here" name="user_define_id" class="form-control col-xs-10 col-sm-5" value="{{ $lookupGroupData->user_define_id }}"/>
+                <input type="number" id="inputSuccess UD_ID" placeholder="Example:- User Define Serial  here" name="UD_ID" class="form-control col-xs-10 col-sm-5" value="{{ $lookupGroupData->UD_ID }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.description') }}</b></label>
             <div class="col-sm-8">
-                <textarea class="form-control" rows="5" style="height:50%;" id="inputSuccess description form-field-8" name="description" placeholder="Description">{{ $lookupGroupData->description }}</textarea>
+                <textarea class="form-control" rows="5" style="height:50%;" id="inputSuccess DESCRIPTION form-field-8" name="DESCRIPTION" placeholder="Description">{{ $lookupGroupData->DESCRIPTION }}</textarea>
             </div>
         </div>
         <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('lookupGroupIndex.active_status') }} </b></label>
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
+                <select id="inputSuccess ACTIVE_FLG" class="form-control" name="ACTIVE_FLG">
                     <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
+                    <option value="1" @if($lookupGroupData->ACTIVE_FLG == 1) selected @endif>Active</option>
+                    <option value="0" @if($lookupGroupData->ACTIVE_FLG == 0) selected @endif>Inactive</option>
                 </select>
             </span>
             </div>

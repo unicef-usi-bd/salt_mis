@@ -49,37 +49,36 @@ class LookupGroupDataController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'group_data_name' => 'required|max:150',
-            //'group_data_abbr' => 'required|max:100',
-            'user_define_id' => 'required|max:11'
-        );
-        $error = array(
-            'group_data_abbr.required' => 'The abbreviation  field is required.',
-            'user_define_id.required' => 'The user define serial field is required.'
+            'LOOKUPCHD_NAME' => 'required|max:60',
+            'UD_ID' => 'required|integer'
         );
 
-        $validator = Validator::make(Input::all(), $rules, $error);
-        if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
         }else {
 
             $data = array([
-                'lookup_group_id' => $request->input('lookup_group_id'),
-                'group_data_name' => $request->input('group_data_name'),
-                'group_data_abbr' => $request->input('group_data_abbr'),
-                'user_define_id' => $request->input('user_define_id'),
-                'description' => $request->input('description'),
-                //'active_status' => $request->input('active_status'),
-                'active_status' => 1,
-                'create_by' => Auth::user()->id
+                'LOOKUPMST_ID' => $request->input('LOOKUPMST_ID'),
+                'LOOKUPCHD_NAME' => $request->input('LOOKUPCHD_NAME'),
+                'UD_ID' => $request->input('UD_ID'),
+                'DESCRIPTION' => $request->input('DESCRIPTION'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id
             ]);
 
-            $lookupGroupData = LookupGroupData::insertData($data);
+            $lookupGroupData = LookupGroupData::insertSSCLookGroupData($data);
 
-            if ($lookupGroupData) {
-                return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                return json_encode('Success');
+//            if ($lookupGroupData) {
+//                return response()->json(['success'=>'Lookup Group Successfully Saved']);
+//                return json_encode('Success');
+//            }
+
+            if($lookupGroupData){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/lookup-groups')->with('success', 'Lookup Group Data Created !');
             }
 
         }
@@ -93,7 +92,7 @@ class LookupGroupDataController extends Controller
      */
     public function show($id)
     {
-        $lookupGroupData = LookupGroupData::viewData($id);
+        $lookupGroupData = LookupGroupData::viewSSCLookGroupData($id);
 
 
         return view('setup.generalSetup.lookupGroups.modals.viewLookupGroupData' , compact('lookupGroupData'));
@@ -107,7 +106,7 @@ class LookupGroupDataController extends Controller
      */
     public function edit($id)
     {
-        $lookupGroupData = LookupGroupData::editData($id); 
+        $lookupGroupData = LookupGroupData::editSSCLookGroupData($id);
         return view('setup.generalSetup.lookupGroups.modals.editLookupGroupData' , compact('lookupGroupData'));
     }
 
@@ -120,38 +119,23 @@ class LookupGroupDataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $editLookupGroupData = LookupGroupData::editData($id);
-
-        if ($editLookupGroupData->group_data_name == $request->input('group_data_name')) {
-            $rules = array(
-            'group_data_name' => 'required|max:150',
-            //'group_data_abbr' => 'required|max:100',
-            'user_define_id' => 'required|max:11'
-        );
-        }else{
-             $rules = array(
-            'group_data_name' => 'required|max:150',
-            //'group_data_abbr' => 'required|max:100',
-            'user_define_id' => 'required|max:11'
-        );
-        }
-        $error = array(
-            'group_data_abbr.required' => 'The abbreviation  field is required.',
-            'user_define_id.required' => 'The user define serial field is required.'
+        $rules = array(
+            'LOOKUPCHD_NAME' => 'required|max:60',
+            'UD_ID' => 'required|integer'
         );
 
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else  {
 
-         $validator = Validator::make(Input::all(), $rules, $error);
-        if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-        }else {
-
-            $lookupGroupData = LookupGroupData::updateData($request, $id);
+            $lookupGroupData = LookupGroupData::updateSSCLookGroupData($request, $id);
+            if($lookupGroupData){
+                return redirect('/lookup-groups')->with('success', 'Lookup Group Data Updated !');
+            }
         }
 
-            session()->flash('message','Lookup Group Successfully Updated');
-            //return json_encode('Success');
 
     }
 
@@ -163,7 +147,7 @@ class LookupGroupDataController extends Controller
      */
     public function destroy($id)
     {
-        $delete = LookupGroupData::deleteData($id);
+        $delete = LookupGroupData::deleteSSCLookGroupData($id);
 
         if($delete){
             echo json_encode([
