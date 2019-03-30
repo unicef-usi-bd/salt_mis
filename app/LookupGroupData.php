@@ -8,19 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class LookupGroupData extends Model
 {
-
-
+    public static function getActiveGroupDataByLookupGroup($id){
+        return DB::table('ssc_lookupchd')
+            ->select('LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION')
+            ->where('LOOKUPMST_ID', '=', $id)
+            ->where('ACTIVE_FLG', '=', 1)
+            ->get();
+    }
 
     public static function insertSSCLookGroupData($data){
         return DB::table('ssc_lookupchd')->insert($data);
-    }
-
-    public static function getActiveGroupDataByLookupGroup($id){
-        return DB::table('lookup_group_data')
-            ->select('lookup_group_data_id', 'group_data_name','group_data_abbr','description')
-            ->where('lookup_group_id', '=', $id)
-            ->where('active_status', '=', 1)
-            ->get();
     }
 
     public static function viewSSCLookGroupData($id){

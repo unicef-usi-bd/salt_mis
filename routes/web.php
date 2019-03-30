@@ -63,5 +63,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('lookup-groups-data', 'LookupGroupDataController'); //Rubiyat
     Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
     Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
+    Route::resource('monitoring', 'MonitoringController'); //Azharul
 });
 

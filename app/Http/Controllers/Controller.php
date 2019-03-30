@@ -10,6 +10,9 @@ use DB;
 
 class Controller extends BaseController
 {
+    //############## Look Up Group Static Id For Get Group Data ###############
+    public $agencyId= 1;
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function checkPrevillage($userGroupId,$userGroupLevelId,$url)
@@ -22,5 +25,11 @@ class Controller extends BaseController
             ->where('a.UG_LEVEL_ID','=',$userGroupLevelId)
             ->where('a.LINK_URI','=',$url)
             ->first();
+    }
+
+    protected function pr($data){
+        echo '<pre>';
+        print_r($data);
+        exit();
     }
 }
