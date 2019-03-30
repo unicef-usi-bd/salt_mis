@@ -6,6 +6,6 @@
         @foreach($errors->all() as $error)
             {{ $error }}
         @endforeach
-        <i class="ace-icon fa fa-check green"></i>
+
     </div>
 @endif

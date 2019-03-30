@@ -50,10 +50,15 @@ class LookupGroupDataController extends Controller
     {
         $rules = array(
             'LOOKUPCHD_NAME' => 'required|max:60',
-            'UD_ID' => 'required|integer'
+            'UD_ID' => 'required|integer|unique:ssc_lookupchd'
+        );
+        $error = array(
+            'LOOKUPCHD_NAME.required' =>'The Group Data Name field is required.',
+            'UD_ID.required' => 'The User Define Id field is required.',
+            'UD_ID.unique' => 'The User Define Id already been taken.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules,$error);
         if($validator->fails()){
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
@@ -123,8 +128,12 @@ class LookupGroupDataController extends Controller
             'LOOKUPCHD_NAME' => 'required|max:60',
             'UD_ID' => 'required|integer'
         );
+        $error = array(
+            'LOOKUPCHD_NAME.required' =>'The Group Data Name field is required.',
+            'UD_ID.required' => 'The User Define Id field is required.',
+        );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules,$error);
         if($validator->fails()){
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
