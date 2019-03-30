@@ -1,4 +1,4 @@
-<div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1a1a1a;">
+<div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1CABE2;">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
@@ -13,7 +13,7 @@
         <div class="navbar-header pull-left">
             <a href="{{ url('dashboard') }}" class="navbar-brand">
                 <small>
-                    Universal Salt Iodization Program
+                    UNIVERSAL SALT IODIZATION PROGRAM
                     {{--{{ Session::get('orgName') }} <span style="color:#02217d;"></span>--}}
                 </small>
                 <small>
