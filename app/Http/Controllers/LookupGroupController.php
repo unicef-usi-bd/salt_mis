@@ -63,10 +63,15 @@ class LookupGroupController extends Controller
     {
         $rules = array(
             'LOOKUPMST_NAME' => 'required|max:60',
-            'UD_SL' => 'required|integer'
+            'UD_SL' => 'required|integer|unique:ssc_lookupmst'
+        );
+        $error = array(
+            'LOOKUPMST_NAME.required' =>'The Group Name field is required.',
+            'UD_SL.required' => 'The User Defined Id field is required.',
+            'UD_SL.unique' => 'The User Defined Id already been taken.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules,$error);
         if($validator->fails()){
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
@@ -128,12 +133,18 @@ class LookupGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $rules = array(
             'LOOKUPMST_NAME' => 'required|max:60',
             'UD_SL' => 'required|integer'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
+        $error = array(
+            'LOOKUPMST_NAME.required' =>'The Group Name field is required.',
+            'UD_SL.required' => 'The User Defined Id field is required.',
+        );
+
+        $validator = Validator::make(Input::all(), $rules,$error);
         if($validator->fails()){
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);

@@ -1,4 +1,4 @@
-{{--<div class="col-md-12">--}}
+<div class="col-md-12">
     {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
         {{--<span id="successMessage"></span>--}}
         {{--<button type="button" class="close" data-dismiss="alert">--}}
