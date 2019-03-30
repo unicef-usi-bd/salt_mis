@@ -1,3 +1,10 @@
+<style>
+    .ace-nav>li.light-blue>a {
+        background-color: #006699;
+        color: #FFFFFF;
+    }
+
+</style>
 <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1CABE2;">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -31,7 +38,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="row" style="line-height: 35px;height: 20px;margin-top: 3px;">
-                                <span style="font-weight: bold;color: #02217d;">{{ Auth::user()->username }}</span>
+                                <span style="font-weight: bold;color: #FFFFFF;">{{ Auth::user()->username }}</span>
                                 <i class="ace-icon fa fa-caret-down" style="margin-left: 10px;"></i>
                             </div>
                             {{--<div class="row" style="line-height: 25px;height: 20px;">--}}

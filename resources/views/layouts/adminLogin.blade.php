@@ -57,7 +57,7 @@
                     <div class="center">
                         <h3>
                             {{--<span class="blue" id="id-text2">Universal Salt Iodization Program</span>--}}
-                            <span class="" id="id-text2" style="color: #FFFFFF">Universal Salt Iodization Program</span>
+                            <span class="" id="id-text2" style="color: #FFFFFF">UNIVERSAL SALT IODIZATION PROGRAM</span>
                         </h3>
                     </div>
 
