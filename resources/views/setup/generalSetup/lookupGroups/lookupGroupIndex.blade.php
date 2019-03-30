@@ -14,14 +14,14 @@
     <div class="row">
 
         <div class="col-lg-10 col-lg-offset-1 col-xs-12">
-            @if(session('message'))
-                <p  class="alert alert-warning alert-dismissible">{{ session('message') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </p>
+            {{--@if(session('message'))--}}
+                {{--<p  class="alert alert-warning alert-dismissible">{{ session('message') }}--}}
+                    {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close" >--}}
+                        {{--<span aria-hidden="true">&times;</span>--}}
+                    {{--</button>--}}
+                {{--</p>--}}
 
-            @endif
+            {{--@endif--}}
             <div class="row">
                 <div id="accordion" class="accordion-style2">
 
@@ -77,8 +77,8 @@
                                             <th class="fixedWidth" >{{ trans('lookupGroupIndex.sl') }}</th>
                                             <th>{{ trans('lookupGroupIndex.name') }}</th>
                                             <th class="hidden-480">User Define ID</th>
-                                            <th class="hidden-480">DESCRIPTION</th>
-                                            <th class="hidden-480">tatus</th>
+                                            <th class="hidden-480">Description</th>
+                                            <th class="hidden-480">Status</th>
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
                                         </tr>
                                         </thead>

@@ -12,7 +12,9 @@
                     <th>{{ trans('lookupGroupIndex.group_data_name') }} </th>
                     <th> :</th>
                     <td>{{$lookupGroupData->LOOKUPCHD_NAME}}</td>
-
+                    <th>{{ trans('lookupGroupIndex.description') }} </th>
+                    <th> :</th>
+                    <td>{{$lookupGroupData->DESCRIPTION}}</td>
 
                 </tr>
                 <tr>
@@ -30,11 +32,7 @@
                     </td>
 
                 </tr>
-                <tr>
-                    <th>{{ trans('lookupGroupIndex.description') }} </th>
-                    <th> :</th>
-                    <td>{{$lookupGroupData->DESCRIPTION}}</td>
-                </tr>
+
             </table>
         </div>
 
