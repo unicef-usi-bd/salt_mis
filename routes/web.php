@@ -62,7 +62,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('lookup-groups', 'LookupGroupController'); //Rubiyat
     Route::resource('lookup-groups-data', 'LookupGroupDataController'); //Rubiyat
     Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
+
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
     Route::resource('require-chemical-per-kg','RequireChemicalPerKgController');//jalal
+
+    Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
+
 });
 
