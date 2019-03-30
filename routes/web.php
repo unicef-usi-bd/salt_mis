@@ -59,7 +59,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('action-user-permission', 'UserModuleController@addRemovePermissionByAjax');
 
     // Setup
-    Route::resource('mill-profile', 'MillProfileController');
-    Route::resource('monitoring', 'MonitorController');
+    Route::resource('lookup-groups', 'LookupGroupController'); //Rubiyat
+    Route::resource('lookup-groups-data', 'LookupGroupDataController'); //Rubiyat
+    Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
 });
 
