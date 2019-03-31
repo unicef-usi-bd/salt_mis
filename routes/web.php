@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('monitoring', 'MonitoringController'); //Azharul
 
+    Route::resource('zone', 'ZoneController'); //Rubiyat
 
 
 });
