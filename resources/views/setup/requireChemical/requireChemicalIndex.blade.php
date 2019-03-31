@@ -4,10 +4,10 @@
 
     <div class="page-header">
         <h1>
-            {{ trans('breadcrumb.all_setup') }}
+            All Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                {{ trans('breadcrumb.banks') }}
+                Require Chemical Per KG
             </small>
         </h1>
     </div><!-- /.page-header -->
