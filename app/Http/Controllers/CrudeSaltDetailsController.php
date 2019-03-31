@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CrudeSaltDetails;
+use App\LookupGroupData;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
@@ -40,10 +41,10 @@ class CrudeSaltDetailsController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $crudeSalt = CrudeSaltDetails::getBasicSetupData();
+        $crudeSalts = CrudeSaltDetails::getAllCrudDetailsData();
 
         //print_r($lookupGroups);exit;
-        return view('setup.crudeSalt.crudeSaltIndex', compact( 'heading','previllage','crudeSalt'));
+        return view('setup.crudeSalt.crudeSaltIndex', compact( 'heading','previllage','crudeSalts'));
     }
 
     /**
@@ -53,7 +54,8 @@ class CrudeSaltDetailsController extends Controller
      */
     public function create()
     {
-        return view('setup.crudeSalt.modals.createCrudeSalt');
+        $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
+        return view('setup.crudeSalt.modals.createCrudeSalt',compact('crudSaltTypes'));
     }
 
     /**
@@ -65,8 +67,7 @@ class CrudeSaltDetailsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'LOOKUPMST_NAME' => 'required|max:60',
-            'UD_SL' => 'required|integer'
+            'CRUDSALT_TYPE_ID' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -75,20 +76,19 @@ class CrudeSaltDetailsController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
            $data = array([
-                'LOOKUPMST_NAME' => $request->input('LOOKUPMST_NAME'),
-                'UD_SL' => $request->input('UD_SL'),
-                'DESCRIPTION' => $request->input('DESCRIPTION'),
-                //'active_status' => $request->input('active_status'),
+                'CRUDSALT_TYPE_ID' => $request->input('CRUDSALT_TYPE_ID'),
+                'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
+                'MOISTURIZER' => $request->input('MOISTURIZER'),
+                'PPM' => $request->input('PPM'),
+                'PH' => $request->input('PH'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id
            ]);
 
-            $lookupGroup = LookupGroup::insertIntoSSCLookupMst($data);
+            $crudSaltDetails = CrudeSaltDetails::insertCrudSaltDetailData($data);
                
-            if($lookupGroup){
-    //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/lookup-groups')->with('success', 'Lookup Group Data Created !');
+            if($crudSaltDetails){
+                return redirect('/crude-salt-details')->with('success', 'CRUD salt details Data Created !');
             }
         }
     }
@@ -101,10 +101,10 @@ class CrudeSaltDetailsController extends Controller
      */
     public function show($id)
     {
-        $lookupGroup = LookupGroup::viewSSCLookupMst($id);
+        $viewCrudSaltDetail = CrudeSaltDetails::viewCrudSaltDetailData($id);
 
 
-        return view('setup.crudeSalt.modals.viewCrudeSalt');
+        return view('setup.crudeSalt.modals.viewCrudeSalt',compact('viewCrudSaltDetail'));
     }
 
     /**
@@ -115,12 +115,9 @@ class CrudeSaltDetailsController extends Controller
      */
     public function edit($id)
      {
-
-//        $lookupGroup = LookupGroup::editSSCLookupMst($id);
-        $lookupGroup = LookupGroup::editSSCLookupMst(1);
-
-
-        return view('setup.crudeSalt.modals.editCrudeSalt' , compact('lookupGroup'));
+         $editCrudSaltDetail = CrudeSaltDetails::editCrudSaltDetailData($id);
+         $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
+        return view('setup.crudeSalt.modals.editCrudeSalt' , compact('editCrudSaltDetail','crudSaltTypes'));
 
     }
 
@@ -134,8 +131,7 @@ class CrudeSaltDetailsController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'LOOKUPMST_NAME' => 'required|max:60',
-            'UD_SL' => 'required|integer'
+            'CRUDSALT_TYPE_ID' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -143,9 +139,9 @@ class CrudeSaltDetailsController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-        $updateLookupGroup = LookupGroup::updateSSCLookupMst($request, $id);
-            if($updateLookupGroup){
-                return redirect('/lookup-groups')->with('success', 'Lookup Group Data Updated !');
+        $updateCrudeSaltDetails = CrudeSaltDetails::updateCrudSaltDetailData($request, $id);
+            if($updateCrudeSaltDetails){
+                return redirect('/crude-salt-details')->with('success', 'Update Crude Salt Details Data Updated !');
             }
         }
 
@@ -159,10 +155,10 @@ class CrudeSaltDetailsController extends Controller
      */
     public function destroy($id)
     {
-        $delete = LookupGroup::deleteSSCLookupMst($id);
+        $delete = CrudeSaltDetails::deleteCrudSaltDetail($id);
         if($delete){
             echo json_encode([
-                'type' => 'div',
+                'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
                 'message' => 'Level Successfully Deleted.',

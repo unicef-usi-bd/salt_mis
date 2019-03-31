@@ -1,103 +1,68 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="col-md-12" style="margin-top: 10px">
-    {{--<form action="{{ url('/modules/'.$editModule->MODULE_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
-    <form action="" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-
+    <form action="{{ url('/crude-salt-details/'.$editCrudSaltDetail->CRUDSALTDETAIL_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="col-md-12" style="padding: 0px;">
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_name') }}</b><span style="color: red;"> *</span> </label>--}}
-                {{--<div class="col-xs-12 col-sm-7">--}}
-            {{--<span class="block input-icon input-icon-right">--}}
-                {{--<input type="text" id="inputSuccess module_name" name="module_name" value="{{ $editModule->MODULE_NAME }}" class="width-100" />--}}
-                {{--<input type="text" id="inputSuccess module_name" name="module_name" value="1" class="width-100" />--}}
-            {{--</span>--}}
-
-                {{--</div>--}}
-            {{--</div>--}}
-
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Salt Type *</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control" name="active_status">
-                            <option value="">Select One</option>
-                            <option value="1" >Black</option>
-                            <option value="0">Polythene</option>
-                        </select>
-                    </span>
-                </div>
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>CRUD Salt Type</b><span style="color: red;">* </span></label>
+            <div class="col-sm-8">
+            <span class="block input-icon input-icon-right">
+                <select id="inputSuccess" class="form-control" name="CRUDSALT_TYPE_ID">
+                    <option value="">Select One</option>
+                    @foreach($crudSaltTypes as $crudSaltType)
+                        <option value="{{ $crudSaltType->LOOKUPCHD_ID }}" @if($editCrudSaltDetail->CRUDSALT_TYPE_ID == $crudSaltType->LOOKUPCHD_ID) selected @endif>{{ $crudSaltType->LOOKUPCHD_NAME  }}</option>
+                    @endforeach
+                </select>
+            </span>
             </div>
-
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Sodium chloride</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="module_icon" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />--}}
-                        <input type="text" name="module_icon" value="" id="inputSuccess module_icon" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Moisturizer</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="module_icon" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />--}}
-                        <input type="text" name="module_icon" value="" id="inputSuccess module_icon" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Iodine content(PPM)</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="module_icon" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />--}}
-                        <input type="text" name="module_icon" value="" id="inputSuccess module_icon" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Iodine content(PPM)</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="module_icon" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />--}}
-                        <input type="text" name="module_icon" value="" id="inputSuccess module_icon" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>PH</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="module_icon" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />--}}
-                        <input type="text" name="module_icon" value="" id="inputSuccess module_icon" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control" name="active_status">
-                            <option value="">Select One</option>
-                            <option value="1" selected>Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
-
         </div>
-
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Sodium chloride</b><span style="color: red;"> </span> </label>
+            <span class="col-sm-7">
+                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Sodium chloride Here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->SODIUM_CHLORIDE }}"/>
+            </span>
+            <span class="col-sm-1">
+                <span class="group-addon percentageSize">
+                    <i class="ace-icon fa fa-percent"></i>
+                </span>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
+            <span class="col-sm-7">
+                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Moisturizer Here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->MOISTURIZER }}"/>
+            </span>
+            <span class="col-sm-1">
+                <span class="group-addon percentageSize">
+                    <i class="ace-icon fa fa-percent"></i>
+                </span>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodine content(PPM)</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Iodine content(PPM) Here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PPM }}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- PH Here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PH }}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('lookupGroupIndex.active_status') }} </b></label>
+            <div class="col-sm-8">
+            <span class="block input-icon input-icon-right">
+                <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
+                    <option value="">Select One</option>
+                    <option value="1" @if($editCrudSaltDetail->ACTIVE_FLG == 1) selected @endif>Active</option>
+                    <option value="0" @if($editCrudSaltDetail->ACTIVE_FLG == 0) selected @endif>Inactive</option>
+                </select>
+            </span>
+            </div>
+        </div>
+        <hr>
         <div class="clearfix">
             <div class="col-md-offset-5 col-md-7" style="margin-top: 20px;">
                 <button type="reset" class="btn" disabled="disabled">
@@ -112,5 +77,3 @@
         </div>
     </form>
 </div>
-@include('masterGlobal.formValidationEdit')
-@include('masterGlobal.getBankBranchesEvent')
