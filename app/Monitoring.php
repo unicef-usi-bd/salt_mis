@@ -39,9 +39,9 @@ class Monitoring extends Model
              ->where('MILLMONITORE_ID', '=', $id)
              ->first();
      }
-    public static function getCrudeSaltType ()
+    public static function agencyName ()
     {
-        return DB::table('ssc_lookupchd')->where('LOOKUPMST_ID', '=', 2)->get();
+        return DB::table('ssc_lookupchd')->where('LOOKUPMST_ID', '=', 1)->get();
     }
      public static function editMonitorData($id){
          return DB::table('tsm_millmonitore')

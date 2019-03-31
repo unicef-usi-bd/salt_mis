@@ -19,12 +19,12 @@
 
             <div class="form-group">
                 {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>--}}
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Agency Name *</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Agency Name </b><span style="color: red;"> *</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control" name="AGENCY_ID">
                             <option value="">Select One</option>
-                            @foreach($crudeSaltType as $row)
+                            @foreach($agencyName as $row)
                                 <option value="{{$row->LOOKUPCHD_ID}}" @if($row->LOOKUPCHD_ID==$editMonitoring->AGENCY_ID) selected @endif> {{$row->LOOKUPCHD_NAME}}</option>
                             @endforeach
                         </select>
@@ -37,8 +37,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Monitoring Date</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="MOMITOR_DATE" value="{{ $editMonitoring->MOMITOR_DATE }}" id="inputSuccess module_icon" class="width-100"  />
-
+                        <input type="date" name="MOMITOR_DATE" class="form-control" value="{{ $editMonitoring->MOMITOR_DATE }}"/>
                     </span>
                 </div>
             </div>
@@ -47,24 +46,23 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100"  />
+                        <input type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100" placeholder="Example:- Remarks Here" />
                     </span>
                 </div>
             </div>
 
         </div>
 
-        <div class="clearfix">
-            <div class="col-md-offset-5 col-md-7" style="margin-top: 20px;">
-                <button type="reset" class="btn" disabled="disabled">
-                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                    {{ trans('dashboard.reset') }}
-                </button>
-                <button type="submit" class="btn btn-info" id="formSubmit">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{ trans('dashboard.update') }}
-                </button>
-            </div>
+
+        <div style="text-align: center;" class="form-group">
+            <button type="reset" class="btn" disabled>
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                {{ trans('dashboard.reset') }}
+            </button>
+            <button type="submit" class="btn btn-info">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                {{ trans('dashboard.update') }}
+            </button>
         </div>
     </form>
 </div>

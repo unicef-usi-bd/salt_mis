@@ -120,8 +120,8 @@ class MonitoringController extends Controller
     public function edit($id)
      {
          $editMonitoring = Monitoring::editMonitorData($id);
-         $crudeSaltType = Monitoring::getCrudeSaltType();
-        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','crudeSaltType'));
+         $agencyName = Monitoring::agencyName();
+        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
 
     }
 
@@ -164,7 +164,7 @@ class MonitoringController extends Controller
         $delete = Monitoring::deleteMonitorData($id);
         if($delete){
             echo json_encode([
-                'type' => 'div',
+                'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
                 'message' => 'Monitor Data Successfully Deleted.',
@@ -174,5 +174,7 @@ class MonitoringController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
+
+
     }
 }

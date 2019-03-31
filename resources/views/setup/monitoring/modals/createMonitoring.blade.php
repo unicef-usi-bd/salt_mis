@@ -19,14 +19,15 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Monitoring Date</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
-                        <input type="date" name="MOMITOR_DATE"  value=""/>
+                        <input type="date" name="MOMITOR_DATE"  class="form-control" value=""/>
                     </span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
             <div class="col-sm-8">
-                <textarea class="form-control" rows="5" style="height:50%;" id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Description"></textarea>
+                {{--<textarea class="form-control" rows="5" style="height:50%;" id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Description"></textarea>--}}
+                <input type="text" name="REMARKS" class="form-control" value="" placeholder="Example:- Remarks Here"/>
             </div>
         </div>
 
