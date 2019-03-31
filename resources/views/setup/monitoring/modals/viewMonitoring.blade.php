@@ -10,15 +10,20 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th class="center fixedWidth">Agency Name</th>
-                    <th class="center fixedWidth">Monitoring Date</th>
-                    <th class="center fixedWidth">Remarks</th>
+                    <th class=" ">Agency Name</th>
+                    <th> :</th>
+                    <td>{{ trans($viewMonitoring->LOOKUPCHD_NAME) }} </td>
+                    <th class=" ">Monitoring Date</th>
+                    <th> :</th>
+                    <td>{{ trans($viewMonitoring->MOMITOR_DATE) }} </td>
+
                </tr>
                 <tr>
-                    <th>{{ trans($viewMonitoring->LOOKUPCHD_NAME) }} </th>
-                    <th>{{ trans($viewMonitoring->MOMITOR_DATE) }} </th>
-                    <th>{{ trans($viewMonitoring->REMARKS) }} </th>
-                 </tr>
+                    <th class=" ">Remarks</th>
+                    <th> :</th>
+                    <td>{{ trans($viewMonitoring->REMARKS) }} </td>
+
+                </tr>
 
             </table>
         </div>

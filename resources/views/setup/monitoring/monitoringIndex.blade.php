@@ -78,32 +78,32 @@
                                     $viewPermissionLevel = $previllage->READ;
                                 @endphp
                                 @if($viewPermissionLevel == 1)
-                                    <a href="#" id='{{ "monitoring/$row->MILLMONITORE_ID" }}' class="blue showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Crude Salt Details">
+                                    <a href="#" id='{{ "monitoring/$row->MILLMONITORE_ID" }}' class="blue showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Monitoring Details">
                                                         <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                         </span>
                                     </a>
                                 @else
-                                    <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" role="button" data-permission="{{ $viewPermissionLevel }}" title="{{ trans('lookupGroupIndex.view_lookup_group_data') }}" style="display: none;">
+                                    <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Monitoring Details" style="display: none;">
                                                         <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                         </span>
                                     </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID/edit" }}' data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('module.edit_module') }}">
+                                    <a class="green showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID/edit" }}' data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Monitoring Details">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
 
 
                                 @else
-                                    <a class="green showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID/edit" }}' data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('module.edit_module') }}" style="display: none;">
+                                    <a class="green showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID/edit" }}' data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Monitoring Details" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
 
                                 @endif
                                 @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete" data-token="{{ csrf_token() }}" data-action="{{ 'monitoring/'.$row->MILLMONITORE_ID }}" role="button" title="{{ trans('module.delete_module') }}">
+                                    <a class="red clickForDelete row{{ $row->MILLMONITORE_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'monitoring/'.$row->MILLMONITORE_ID }}" role="button" title="Delete Monitoring Details">
                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                     </a>
 
