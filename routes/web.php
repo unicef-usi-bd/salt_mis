@@ -70,9 +70,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
 
     Route::resource('monitoring', 'MonitoringController'); //Azharul
-
-    Route::resource('zone', 'ZoneController'); //Rubiyat
-
-
+    
 });
 
