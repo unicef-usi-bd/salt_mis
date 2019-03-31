@@ -5,7 +5,7 @@
 </style>
 <div class="col-md-12">
     <div class="error-container">
-        <h4 class="center text-success">View Monitoring Details </h4>
+        <h4 class="center text-success">Details </h4>
         {{--<h4 class="center text-success">{{ trans('dashboard.details') }} </h4>--}}
         <div class="row table-responsive">
             <table class="table">

@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\LookupGroupData;
-use App\Monitoring;
+use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +13,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-class MonitoringController extends Controller
+class SupplierProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,20 +29,20 @@ class MonitoringController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Monitoring Create');
+        $title = trans('Supplier Profile Create');
 
         $heading=array(
             'title'=> $title,
             'library'=>'datatable',
-            'modalSize'=>'modal-md',
-            'action'=>'monitoring/create',
+            'modalSize'=>'modal-lg',
+            'action'=>'supplier-profile/create',
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $monitoring = Monitoring::getMonitorData();
+        $supplierProfile = SupplierProfile::supplierProfile();
 
         //print_r($lookupGroups);exit;
-        return view('setup.monitoring.monitoringIndex', compact( 'heading','previllage','monitoring'));
+        return view('profile.supplier.supplierProfileIndex', compact( 'heading','previllage','supplierProfile'));
     }
 
     /**
@@ -54,9 +52,11 @@ class MonitoringController extends Controller
      */
     public function create()
     {
-        $agencyList = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
+        $digits = 4;
+        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $getDivision = SupplierProfile::getDivision();
        // $this->pr($agencyList);
-        return view('setup.monitoring.modals.createMonitoring',compact('agencyList'));
+        return view('profile.supplier.createSupplierProfile',compact('getDivision','supplierId'));
     }
 
     /**
@@ -68,7 +68,8 @@ class MonitoringController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'AGENCY_ID' => 'required|integer'
+            'TRADING_NAME' => 'required|max:100',
+            'LICENCE_NO' => 'required|max:100',
 
         );
 
@@ -78,22 +79,29 @@ class MonitoringController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
            $data = array([
-                'AGENCY_ID' => $request->input('AGENCY_ID'),
-                'MOMITOR_DATE' =>date('Y-m-d', strtotime($request->input('MOMITOR_DATE'))),
+                'TRADING_NAME' => $request->input('TRADING_NAME'),
+                'TRADER_NAME' => $request->input('TRADER_NAME'),
+                'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
+                'LICENCE_NO' => $request->input('LICENCE_NO'),
+                'DIVISION_ID' => $request->input('DIVISION_ID'),
+                'DISTRICT_ID' => $request->input('DISTRICT_ID'),
+                'UPAZILA_ID' => $request->input('UPAZILA_ID'),
+                'UNION_ID' => $request->input('UNION_ID'),
+                'BAZAR_NAME' => $request->input('BAZAR_NAME'),
+                'PHONE' => $request->input('PHONE'),
+                'EMAIL' => $request->input('EMAIL'),
                 'REMARKS' => $request->input('REMARKS'),
-                //'active_status' => $request->input('active_status'),
-                //'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
            ]);
 
-
-            $createMonitoring = Monitoring::insertIntoMonitor($data);
+            //$this->pr($request->input());
+            $createSupplierProfile = SupplierProfile::insertIntoSupplierProfile($data);
                
-            if($createMonitoring){
+            if($createSupplierProfile){
     //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
                 //return json_encode('Success');
-                return redirect('/monitoring')->with('success', 'Monitoring Has been Created !');
+                return redirect('/supplier-profile')->with('success', 'Supplier profile Has been Created !');
             }
         }
     }
@@ -106,9 +114,9 @@ class MonitoringController extends Controller
      */
     public function show($id)
     {
-         $viewMonitoring = Monitoring::showMonitorData($id);
+         $viewSupplierProfile = SupplierProfile::showSupplierProfile($id);
 
-        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
+        return view('profile.supplier.viewSupplierProfile',compact( 'viewSupplierProfile'));
     }
 
     /**
@@ -119,9 +127,9 @@ class MonitoringController extends Controller
      */
     public function edit($id)
      {
-         $editMonitoring = Monitoring::editMonitorData($id);
-         $agencyName = Monitoring::agencyName();
-        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
+         $editData = SupplierProfile::editSupplierProfile($id);
+         $getDivision = SupplierProfile::getDivision();
+        return view('profile.supplier.editSupplierProfile' , compact('editData','getDivision'));
 
     }
 
@@ -137,7 +145,8 @@ class MonitoringController extends Controller
         //print_r($request->input());exit();
 
         $rules = array(
-            'AGENCY_ID' => 'required'
+            'TRADING_NAME' => 'required|max:100',
+            'LICENCE_NO' => 'required|max:100',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -145,9 +154,9 @@ class MonitoringController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-        $updateMonitoringData = Monitoring::updateMonitorData($request, $id);
-            if($updateMonitoringData){
-                return redirect('/monitoring')->with('success', 'Monitoring Data Updated !');
+        $updateSupplierData = SupplierProfile::updateSupplierProfileData($request, $id);
+            if($updateSupplierData){
+                return redirect('/supplier-profile')->with('success', 'Supplier Profile Data Updated !');
             }
         }
 
@@ -161,13 +170,13 @@ class MonitoringController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Monitoring::deleteMonitorData($id);
+        $delete = SupplierProfile::deleteSupplierProfile($id);
         if($delete){
             echo json_encode([
                 'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
-                'message' => 'Monitor Data Successfully Deleted.',
+                'message' => 'Supplier Profile Successfully Deleted.',
             ]);
         } else{
             echo json_encode([
@@ -178,4 +187,19 @@ class MonitoringController extends Controller
 
     }
 
+    public function getDistrictByAjax(Request $request){
+        $divisionId = $request->input('divisionId');
+        return SupplierProfile::getDistrictByAjax($divisionId);
+
+    }
+    public function getUpazilaByAjax(Request $request){
+        $districtId = $request->input('districtId');
+        return SupplierProfile::getUpazilaByAjax($districtId);
+
+    }
+    public function getUnionByAjax(Request $request){
+        $upazilaId = $request->input('upazilaId');
+        return SupplierProfile::getUnionByAjax($upazilaId);
+
+    }
 }
