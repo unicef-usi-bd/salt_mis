@@ -12,6 +12,7 @@ class Controller extends BaseController
 {
     //############## Look Up Group Static Id For Get Group Data ###############
     public $agencyId= 1;
+    public $crudSaltTypeId= 2;
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
