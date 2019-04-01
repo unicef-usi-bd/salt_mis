@@ -50,13 +50,26 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar Name</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Upazila Name</b></label>
                 <div class="col-xs-12 col-sm-7">
-            <span class="block input-icon input-icon-right">
-                <input type="text"  name="BAZAR_NAME" id="inputSuccess email_address" value="{{ $editData->BAZAR_NAME }}" class="width-100"  />
-             </span>
+                    <span class="block input-icon input-icon-right">
+                        <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                            <option value="{{ $editData->UPAZILA_ID }}">{{ $editData->UPAZILA_NAME }}</option>
+                        </select>
+                    </span>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Union Name</b></label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                            <option value="{{ $editData->UNION_ID }}">{{ $editData->UNION_NAME }}</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+
 
         </div>
         <div class="col-md-6" style="padding: 0px;">
@@ -85,33 +98,21 @@
                     </span>
                 </div>
             </div>
+
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Upazila Name</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar Name</b></label>
                 <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->UPAZILA_ID }}">{{ $editData->UPAZILA_NAME }}</option>
-                        </select>
-                    </span>
+            <span class="block input-icon input-icon-right">
+                <input type="text"  name="BAZAR_NAME" id="inputSuccess email_address" value="{{ $editData->BAZAR_NAME }}" class="width-100"  />
+             </span>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Union Name</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->UNION_ID }}">{{ $editData->UNION_NAME }}</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
-
-
             <div class="form-group">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>REMARKS</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="REMARKS" id="inputSuccess phone" value="{{ $editData->REMARKS }}" class="width-100"  />
+                        {{--<input type="text" name="REMARKS" id="inputSuccess phone" value="{{ $editData->REMARKS }}" class="width-100"  />--}}
+                        <textarea class="form-control" rows="6" name="REMARKS" placeholder="Remarks here">{{ $editData->REMARKS }}</textarea>
                     </span>
                 </div>
             </div>

@@ -29,7 +29,7 @@ class SupplierProfileController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Supplier Profile Create');
+        $title = trans('Create New Supplier Profile');
 
         $heading=array(
             'title'=> $title,
