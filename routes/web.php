@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
 
     Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
+    Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
 
 });
 

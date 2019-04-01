@@ -27,23 +27,19 @@ class AssociationSetup extends Model
         return $editData;
     }
 
-//    public  static function updateAssociationData($id, Request $request){
-//        $update = DB::table('ssm_associationsetup')
-//            ->where('ASSOCIATION_ID', $id)
-//            ->update([
-//                'cost_center_type' => $request->input('cost_center_type'),
-//                'cost_center_status_type' => $request->input('cost_center_status_type'),
-//                'cost_center_name' => $request->input('cost_center_name'),
-//                'bank_id' => $request->input('bank_id'),
-//                'branch_id' => $request->input('branch_id'),
-//                'account_no' => $request->input('account_no'),
-//                'route_no' => $request->input('route_no'),
-//                'active_status' => $request->input('active_status'),
-//                'update_by' => Auth::user()->id,
-//                'update_at' => date("Y-m-d h:i:s")
-//            ]);
-//        return $update;
-//    }
+    public  static function updateAssociationData($id, Request $request){
+        $update = DB::table('ssm_associationsetup')
+            ->where('ASSOCIATION_ID', $id)
+            ->update([
+                'PARENT_ID' => $request->input('PARENT_ID'),
+                'ASSOCIATION_NAME' => $request->input('ASSOCIATION_NAME'),
+                'PARENT_ID' => $request->input('PARENT_ID'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+                'UPDATE_BY' => Auth::user()->id
+            ]);
+        return $update;
+    }
 
     public  static function deleteAssociationData($id){
         return DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', $id)->delete();
