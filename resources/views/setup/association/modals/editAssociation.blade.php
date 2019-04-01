@@ -20,7 +20,7 @@
 
         @if($editData->cost_center_type==4)
         <div class="form-group showSelector">
-            <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('costCenter.upazilla_type') }}</b></label>
+            <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('association') }}</b></label>
             <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
                 <select class="form-control cost_center_status_type" name="cost_center_status_type">
