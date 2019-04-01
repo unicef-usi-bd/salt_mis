@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Monitor;
-use App\Module;
-use App\ModuleLink;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
-use UxWeb\SweetAlert\SweetAlert;
+use App\Http\Controllers\Controller;
+use App\SellerDistributorProfile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 
-class MonitorController extends Controller
+class SellerDistributorProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,18 +22,15 @@ class MonitorController extends Controller
         $url = Route::getFacadeRoot()->current()->uri();
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
-
-        $modulelink = trans('moduleLinks.module_link_create');
-        $heading = array(
-            'title'=>$modulelink,
+        $heading=array(
+            'title'=>'Seller & Distributor Profile',
             'library'=>'datatable',
-            'modalSize'=>'modal-md  ',
-            'action'=>'module-links/create',
+            'modalSize'=>'modal-lg',
+            'action'=>'seller-distributor-profile/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-        $moduleLinks = ModuleLink::getMLData();
-//        $this->pr($moduleLinks);
-        return view('profile.monitoring', compact('heading', 'moduleLinks','previllage'));
+
+        return view('setup.sellerDistributorProfile.sellerDistributorProfileIndex',compact('heading'));
     }
 
     /**
@@ -49,7 +40,7 @@ class MonitorController extends Controller
      */
     public function create()
     {
-        //
+        return view('setup.sellerDistributorProfile.modals.createSellerDistributorProfile');
     }
 
     /**
@@ -66,10 +57,10 @@ class MonitorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Monitor  $monitor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Monitor $monitor)
+    public function show($id)
     {
         //
     }
@@ -77,22 +68,22 @@ class MonitorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Monitor  $monitor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Monitor $monitor)
+    public function edit($id)
     {
-        //
+        return view('setup.sellerDistributorProfile.modals.editSellerDistributorProfile');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Monitor  $monitor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Monitor $monitor)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -100,10 +91,10 @@ class MonitorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Monitor  $monitor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Monitor $monitor)
+    public function destroy($id)
     {
         //
     }
