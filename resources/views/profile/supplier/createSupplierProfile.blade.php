@@ -62,12 +62,7 @@
                     </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
-                    <div class="col-xs-8">
-                        <input type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
-                    </div>
-                </div>
+
 
             </div>
 
@@ -92,6 +87,12 @@
                         <input type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
+                    <div class="col-xs-8">
+                        <input type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
@@ -105,7 +106,8 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
                     <div class="col-xs-8">
-                        <textarea class="form-control" rows="6" name="REMARKS" placeholder="Remarks here"></textarea>
+                        <textarea class="form-control" rows="5" name="REMARKS" placeholder="Remarks here"></textarea>
+
                     </div>
                 </div>
 
