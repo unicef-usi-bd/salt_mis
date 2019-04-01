@@ -5,29 +5,41 @@
 </style>
 <div class="col-md-12">
     <div class="error-container">
-        <h4 class="center text-success">View Crude Salt Details</h4>
-        {{--<h4 class="center text-success">{{ trans('dashboard.details') }} </h4>--}}
+        <h4 class="center text-success">{{ trans('dashboard.details') }}</h4>
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th class="center fixedWidth">Salt Type</th>
-                    <th class="center fixedWidth">Sodium chloride</th>
-                    <th class="center fixedWidth">Moisturizer</th>
-                    <th class="center fixedWidth">Iodine content(PPM)</th>
-                    <th class="center fixedWidth">Iodine content(PPM)</th>
-                    <th class="center fixedWidth"> PH</th>
+                    <th>CRUD Salt Type </th>
+                    <th> :</th>
+                    <td>{{$viewCrudSaltDetail->LOOKUPCHD_NAME}}</td>
+                    <th>Sodium chloride</th>
+                    <th> :</th>
+                    <td>{{$viewCrudSaltDetail->SODIUM_CHLORIDE}}</td>
+                </tr>
+                <tr>
+                    <th>Moisturizer </th>
+                    <th> :</th>
+                    <td>{{$viewCrudSaltDetail->MOISTURIZER}}</td>
+                    <th>Iodine content(PPM)</th>
+                    <th> :</th>
+                    <td>{{$viewCrudSaltDetail->PPM}}</td>
 
                 </tr>
                 <tr>
-                    <th> </th>
-                    <th></th>
-                    <td></td>
-                    <th></th>
-                    <th> </th>
-                    <td> </td>
+                    <th>PH</th>
+                    <th> :</th>
+                    <td>{{$viewCrudSaltDetail->PH}}</td>
+                    <th>Active Status</th>
+                    <th> :</th>
+                    <td>
+                        @if($viewCrudSaltDetail->ACTIVE_FLG==1)
+                            <span class="label label-md label-info arrowed arrowed-righ"> Active </span>
+                        @else
+                            <span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>
+                        @endif
+                    </td>
 
                 </tr>
-
             </table>
         </div>
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CrudeSaltDetails;
 use App\LookupGroupData;
+use App\Monitoring;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-class CrudeSaltDetailsController extends Controller
+class MonitoringController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,20 +31,20 @@ class CrudeSaltDetailsController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Crude Salt Create');
+        $title = trans('Monitoring Create');
 
         $heading=array(
             'title'=> $title,
             'library'=>'datatable',
             'modalSize'=>'modal-md',
-            'action'=>'crude-salt-details/create',
+            'action'=>'monitoring/create',
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $crudeSalts = CrudeSaltDetails::getAllCrudDetailsData();
+        $monitoring = Monitoring::getMonitorData();
 
         //print_r($lookupGroups);exit;
-        return view('setup.crudeSalt.crudeSaltIndex', compact( 'heading','previllage','crudeSalts'));
+        return view('setup.monitoring.monitoringIndex', compact( 'heading','previllage','monitoring'));
     }
 
     /**
@@ -54,8 +54,9 @@ class CrudeSaltDetailsController extends Controller
      */
     public function create()
     {
-        $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
-        return view('setup.crudeSalt.modals.createCrudeSalt',compact('crudSaltTypes'));
+        $agencyList = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
+       // $this->pr($agencyList);
+        return view('setup.monitoring.modals.createMonitoring',compact('agencyList'));
     }
 
     /**
@@ -67,7 +68,8 @@ class CrudeSaltDetailsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'CRUDSALT_TYPE_ID' => 'required'
+            'AGENCY_ID' => 'required|integer'
+
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -76,19 +78,22 @@ class CrudeSaltDetailsController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
            $data = array([
-                'CRUDSALT_TYPE_ID' => $request->input('CRUDSALT_TYPE_ID'),
-                'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
-                'MOISTURIZER' => $request->input('MOISTURIZER'),
-                'PPM' => $request->input('PPM'),
-                'PH' => $request->input('PH'),
-                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-                'ENTRY_BY' => Auth::user()->id
+                'AGENCY_ID' => $request->input('AGENCY_ID'),
+                'MOMITOR_DATE' =>date('Y-m-d', strtotime($request->input('MOMITOR_DATE'))),
+                'REMARKS' => $request->input('REMARKS'),
+                //'active_status' => $request->input('active_status'),
+                //'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
            ]);
 
-            $crudSaltDetails = CrudeSaltDetails::insertCrudSaltDetailData($data);
+
+            $createMonitoring = Monitoring::insertIntoMonitor($data);
                
-            if($crudSaltDetails){
-                return redirect('/crude-salt-details')->with('success', 'CRUD salt details Data Created !');
+            if($createMonitoring){
+    //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/monitoring')->with('success', 'Monitoring Has been Created !');
             }
         }
     }
@@ -101,10 +106,9 @@ class CrudeSaltDetailsController extends Controller
      */
     public function show($id)
     {
-        $viewCrudSaltDetail = CrudeSaltDetails::viewCrudSaltDetailData($id);
+         $viewMonitoring = Monitoring::showMonitorData($id);
 
-
-        return view('setup.crudeSalt.modals.viewCrudeSalt',compact('viewCrudSaltDetail'));
+        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
     }
 
     /**
@@ -115,9 +119,9 @@ class CrudeSaltDetailsController extends Controller
      */
     public function edit($id)
      {
-         $editCrudSaltDetail = CrudeSaltDetails::editCrudSaltDetailData($id);
-         $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
-        return view('setup.crudeSalt.modals.editCrudeSalt' , compact('editCrudSaltDetail','crudSaltTypes'));
+         $editMonitoring = Monitoring::editMonitorData($id);
+         $agencyName = Monitoring::agencyName();
+        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
 
     }
 
@@ -130,8 +134,10 @@ class CrudeSaltDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //print_r($request->input());exit();
+
         $rules = array(
-            'CRUDSALT_TYPE_ID' => 'required'
+            'AGENCY_ID' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -139,9 +145,9 @@ class CrudeSaltDetailsController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-        $updateCrudeSaltDetails = CrudeSaltDetails::updateCrudSaltDetailData($request, $id);
-            if($updateCrudeSaltDetails){
-                return redirect('/crude-salt-details')->with('success', 'Update Crude Salt Details Data Updated !');
+        $updateMonitoringData = Monitoring::updateMonitorData($request, $id);
+            if($updateMonitoringData){
+                return redirect('/monitoring')->with('success', 'Monitoring Data Updated !');
             }
         }
 
@@ -155,18 +161,21 @@ class CrudeSaltDetailsController extends Controller
      */
     public function destroy($id)
     {
-        $delete = CrudeSaltDetails::deleteCrudSaltDetail($id);
+        $delete = Monitoring::deleteMonitorData($id);
         if($delete){
             echo json_encode([
                 'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
-                'message' => 'Level Successfully Deleted.',
+                'message' => 'Monitor Data Successfully Deleted.',
             ]);
         } else{
             echo json_encode([
                 'message' => 'Error Founded Here!',
             ]);
         }
+
+
     }
+
 }

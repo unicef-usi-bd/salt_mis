@@ -9,49 +9,51 @@ use Illuminate\Database\Eloquent\Model;
 
 class CrudeSaltDetails extends Model
 {
-     protected $fillable = [
-        'group_name',
-        'group_abbr',
-        'sys_code',
-        'description',
-        'remarks',
-        'user_define_sl',
-        'active_status'
-    ];
 
-    public static function getBasicSetupData(){
-        return DB::select( DB::raw("select lg.*,(select COUNT(*) from ssc_lookupchd lgd 
-                        where lgd.LOOKUPMST_ID=lg.LOOKUPMST_ID)
-                        as checkDelete from ssc_lookupmst lg"));
+    public static function getAllCrudDetailsData(){
+        return DB::table('ssm_crud_salt_details')
+            ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
+            ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+            ->get();
     }
 
-     public static function insertIntoSSCLookupMst($data){
-         return DB::table('ssc_lookupmst')->insert($data);
+    public static function insertCrudSaltDetailData($data){
+        return DB::table('ssm_crud_salt_details')->insert($data);
+    }
+
+     public static function viewCrudSaltDetailData($id){
+         return DB::table('ssm_crud_salt_details')
+             ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
+             ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+             ->where('ssm_crud_salt_details.CRUDSALTDETAIL_ID','=',$id)
+             ->first();
      }
 
-     public static function viewSSCLookupMst($id){
-         return DB::table('ssc_lookupmst')->where('LOOKUPMST_ID', '=', $id)->first();
+     public static function editCrudSaltDetailData($id){
+         return DB::table('ssm_crud_salt_details')
+             ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
+             ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+             ->where('ssm_crud_salt_details.CRUDSALTDETAIL_ID','=',$id)
+             ->first();
      }
 
-     public static function editSSCLookupMst($id){
-         return DB::table('ssc_lookupmst')->where('LOOKUPMST_ID', '=', $id)->first();
-     }
-
-     public static function updateSSCLookupMst($request,$id){
-        $update = DB::table('ssc_lookupmst')->where('LOOKUPMST_ID', '=' , $id)->update([
-             'LOOKUPMST_NAME' => $request->input('LOOKUPMST_NAME'),
-             'UD_SL' => $request->input('UD_SL'),
-             'DESCRIPTION' => $request->input('DESCRIPTION'),
-             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-             'UPDATE_BY' => Auth::user()->id
+     public static function updateCrudSaltDetailData($request,$id){
+        $update = DB::table('ssm_crud_salt_details')->where('CRUDSALTDETAIL_ID', '=' , $id)->update([
+            'CRUDSALT_TYPE_ID' => $request->input('CRUDSALT_TYPE_ID'),
+            'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
+            'MOISTURIZER' => $request->input('MOISTURIZER'),
+            'PPM' => $request->input('PPM'),
+            'PH' => $request->input('PH'),
+            'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+            'UPDATE_BY' => Auth::user()->id
          ]);
 
         return $update;
      }
 
-     public static function deleteSSCLookupMst($id){
-        return DB::table('ssc_lookupmst')->where('LOOKUPMST_ID', $id)->delete();
+     public static function deleteCrudSaltDetail($id){
+        return DB::table('ssm_crud_salt_details')->where('CRUDSALTDETAIL_ID', $id)->delete();
      }
 
 }
