@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\BstiTestStandard;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class BstiTestStandardController extends Controller
 {
@@ -15,8 +20,16 @@ class BstiTestStandardController extends Controller
      */
     public function index()
     {
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
 
-        return view('setup.bstiTestStandard.createBstiTestStandard');
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+        $editBstiTestStandard = BstiTestStandard::getBstiTestData();
+
+        //$this->pr($editBstiTestStandard);
+
+        return view('setup.bstiTestStandard.createBstiTestStandard',compact('editBstiTestStandard','previllage'));
     }
 
     /**
@@ -38,7 +51,8 @@ class BstiTestStandardController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'CRUDSALT_TYPE_ID' => 'required'
+            'SODIUM_CHLORIDE' => 'required',
+            'MOISTURIZER' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -46,19 +60,10 @@ class BstiTestStandardController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-            $data = array([
-                'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
-                'MOISTURIZER' => $request->input('MOISTURIZER'),
-                'PPM' => $request->input('PPM'),
-                'PH' => $request->input('PH'),
-                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-                'ENTRY_BY' => Auth::user()->id
-            ]);
+            $bstiTestStandard = BstiTestStandard::insertBstiTestData($request);
 
-            $crudSaltDetails = CrudeSaltDetails::insertCrudSaltDetailData($data);
-
-            if($crudSaltDetails){
-                return redirect('/crude-salt-details')->with('success', 'CRUD salt details Data Created !');
+            if($bstiTestStandard){
+                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Data Created !');
             }
         }
     }
@@ -82,7 +87,8 @@ class BstiTestStandardController extends Controller
      */
     public function edit($id)
     {
-        //
+      $editBstiTestStandard = BstiTestStandard::editBstiTestData($id);
+      return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
     }
 
     /**
@@ -94,7 +100,21 @@ class BstiTestStandardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'SODIUM_CHLORIDE' => 'required',
+            'MOISTURIZER' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $updateBstiTestStandard = BstiTestStandard::updateBstiTestData($request, $id);
+            if($updateBstiTestStandard){
+                return redirect('/bsti-test-standard')->with('success', 'Update Bsti Test Standard Data Updated !');
+            }
+        }
     }
 
     /**
