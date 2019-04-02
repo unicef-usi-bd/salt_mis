@@ -78,6 +78,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
     Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
-
+    Route::resource('item', 'ItemController'); //Rubiyat
 });
 
