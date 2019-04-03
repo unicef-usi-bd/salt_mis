@@ -24,6 +24,8 @@ class Controller extends BaseController
     public $sellerTypeId = 3;
 
     public $itemTypeId = 10;
+    public $certificateTypeId = 12;
+    public $issureTypeId = 13;
 
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
