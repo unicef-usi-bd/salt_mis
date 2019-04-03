@@ -119,31 +119,50 @@ protected $fillable = [
             'PHONE' => $request->input('PHONE'),
             'EMAIL' => $request->input('EMAIL'),
             'REMARKS' => $request->input('REMARKS'),
-            'ENTRY_BY' => Auth::user()->id,
-            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            'UPDATE_BY' => Auth::user()->id,
+            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
+        //return $update;
         if($update){
             $coverageArea = count($_POST['COV_DIVISION_ID']);
             for ($i=0;$i<$coverageArea;$i++){
-                if($request->input('COVERAGE_ID')[$i]){
-                $insert = DB::table('ssm_coverage_area')->where('ssm_coverage_area.COVERAGE_ID',$request->input('COVERAGE_ID')[$i])->update([
-                    'CUSTOMER_ID' => $update,
+                if(isset($request->input('COVERAGE_ID')[$i])){
+                    $coverageAreaId = $request->input('COVERAGE_ID')[$i];
+                    $updateOrinsertSeller = DB::table('ssm_coverage_area')->where('ssm_coverage_area.COVERAGE_ID',$coverageAreaId)->update([
+                    'CUSTOMER_ID' => $id,
                     'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                     'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
                     'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
+                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
                 }else{
-                    $insertSeller = DB::table('ssm_coverage_area')->insertGetId([
-
+                    $updateOrinsertSeller = DB::table('ssm_coverage_area')->insertGetId([
+                        'CUSTOMER_ID' => $id,
+                        'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
+                        'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
+                        'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
                     ]);
                 }
             }
-            return $insert;
+            return $updateOrinsertSeller;
         }
 
     }
 
-    public static function deleteSellerProfile($id){
-        return DB::table('ssm_customer_info')->where('CUSTOMER_ID', $id)->delete();
+//    public static function deleteSellerProfile($id){
+//        return DB::table('ssm_customer_info')->where('CUSTOMER_ID', $id)->delete();
+//    }
+
+    public  static function deleteSellerProfile($id){
+        $deletePr = DB::table('ssm_customer_info')->where('CUSTOMER_ID', $id)->delete();
+        if($deletePr){
+            $deleteChd = DB::table('ssm_coverage_area')->where('COVERAGE_ID', $id)->delete();
+            return $deleteChd;
+        }
+    }
+
+    public static function deleteCoverageArea($id){
+        $deleteChd = DB::table('ssm_coverage_area')->where('ssm_coverage_area.COVERAGE_ID', $id)->delete();
+        return $deleteChd;
     }
 }

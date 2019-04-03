@@ -21,7 +21,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess DIVISION_ID" class="chosen-select form-control" name="DIVISION_ID"  data-placeholder="Select or search data">
+                <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID"  data-placeholder="Select or search data">
                    <option value=""></option>
                     @foreach($sellerType as $row)
                         <option value="{{ $row->LOOKUPCHD_ID }}" @if($row->LOOKUPCHD_ID==$editSellerProfile->SELLER_TYPE_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
@@ -45,15 +45,21 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}"/>
+                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
                     </div>
                 </div>
             </div>
@@ -91,7 +97,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazila/Thana</b><span style="color: red;"> </span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Upazila/Thana</b><span style="color: red;"> </span></label>
                 <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -102,7 +108,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Union</b><span style="color: red;"> </span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>
                 <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -124,16 +130,10 @@
                     <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Amount per KG here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->BAZAR_NAME }}"/>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
-                </div>
-            </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b><span style="color: red;"> </span> </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
                     <input type="text" id="inputSuccess EMAIL" placeholder="Example: Amount per KG here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->EMAIL }}"/>
                 </div>
@@ -161,7 +161,7 @@
                 <tr class="rowFirst">
                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select COV_DIVISION_ID" id="COV_DIVISION_ID" name="COV_DIVISION_ID[]" required >
+                                    <select class="form-control chosen-select COV_DIVISION_ID" id="COV_DIVISION_ID" name="COV_DIVISION_ID[]">
                                         <option value="">Select</option>
                                         @foreach($getDivision as $row)
                                             <option value="{{ $row->DIVISION_ID }}" @if($seller->COV_DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
@@ -185,7 +185,7 @@
                     </td>
 
 
-                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                    <td><span class="btn btn-danger btn-sm pull-right rowRemove btnRemove" data-fundAllocationChdId="{{ $seller->COVERAGE_ID }}"><i class="fa fa-remove"></i></span></td>
                 </tr>
                @endforeach
                 </tbody>
@@ -323,7 +323,20 @@
         });
     });
 
+    $(document).on('click','span.btnRemove',function(){
+        var fundAllocationChdId = $(this).attr('data-fundAllocationChdId');
 
+        $.ajax({
+            url: "{{ url('fund-allocations-chd-delete') }}",
+            type: 'GET',
+            data: {'fundAllocationChdId':fundAllocationChdId},
+            success: function (data) {
+
+
+            }
+
+        });
+    });
 
 </script>
 
