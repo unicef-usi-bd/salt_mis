@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('supplier-profile/get-district/{id}', 'SupplierProfileController@getDistrictByAjax'); //Azharul
     Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
     Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
+    Route::resource('miller-profile', 'EntrepreneurController'); //Azharul
+    Route::resource('miller-info', 'MillerInfoController'); //Azharul
 
 
 

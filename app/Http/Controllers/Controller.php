@@ -13,6 +13,13 @@ class Controller extends BaseController
     //############## Look Up Group Static Id For Get Group Data ###############
     public $agencyId= 1;
     public $crudSaltTypeId= 2;
+    public $registrationTypeId= 4;
+    public $ownerTypeId= 5;
+    public $processTypeId= 6;
+    public $millTypeId= 7;
+    public $zoneTypeId= 8;
+    public $capacityId= 9;
+
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
