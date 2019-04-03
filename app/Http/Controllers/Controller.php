@@ -21,6 +21,11 @@ class Controller extends BaseController
     public $capacityId= 9;
 
 
+    public $sellerTypeId = 3;
+
+    public $itemTypeId = 10;
+
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function checkPrevillage($userGroupId,$userGroupLevelId,$url)
@@ -33,6 +38,26 @@ class Controller extends BaseController
             ->where('a.UG_LEVEL_ID','=',$userGroupLevelId)
             ->where('a.LINK_URI','=',$url)
             ->first();
+    }
+
+    protected function buildTree($flat, $pidKey, $idKey = null){
+
+        $grouped = array();
+        foreach ($flat as $sub) {
+            $grouped[$sub[$pidKey]][] = $sub;
+        }
+        $treeBuilder = function($siblings) use (&$treeBuilder, $grouped, $idKey) {
+            foreach ($siblings as $k => $sibling) {
+                $id = $sibling[$idKey];
+                if (isset($grouped[$id])) {
+                    $sibling['children'] = $treeBuilder($grouped[$id]);
+                }
+                $siblings[$k] = $sibling;
+            }
+            return $siblings;
+        };
+        $tree = $treeBuilder($grouped[0]);
+        return $tree;
     }
 
     protected function pr($data){

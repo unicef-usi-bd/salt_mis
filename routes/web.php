@@ -78,7 +78,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('miller-profile', 'EntrepreneurController'); //Azharul
     Route::resource('miller-info', 'MillerInfoController'); //Azharul
 
-
-
+    Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
+    Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
+    Route::resource('item', 'ItemController'); //Rubiyat
 });
 

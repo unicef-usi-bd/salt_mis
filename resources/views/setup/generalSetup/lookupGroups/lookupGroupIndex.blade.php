@@ -35,10 +35,11 @@
                             @endphp
                             <h3 class="accordion-header action-buttons"> {{ ++$key }}.   {{$lookupGroup->LOOKUPMST_NAME}}
                                 @if($previllage->DELETE == 1)
-
-                                    <a class="red pull-right clickForDelete row{{ $lookupGroup->LOOKUPMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'lookup-groups/'.$lookupGroup->LOOKUPMST_ID }}" role="button">
-                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                    </a>
+                                    @if( $lookupGroup->checkDelete==0)
+                                        <a class="red pull-right clickForDelete row{{ $lookupGroup->LOOKUPMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'lookup-groups/'.$lookupGroup->LOOKUPMST_ID }}" role="button">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
+                                     @endif
                                 @endif
                                 @if($editPermissionLevel == 1)
                                     <a id="{{ 'lookup-groups/'.$lookupGroup->LOOKUPMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('lookupGroupIndex.edit_lookup') }}">
