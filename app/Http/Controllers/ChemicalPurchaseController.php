@@ -2,22 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\LookupGroupData;
-use App\MillerInfo;
-use App\SupplierProfile;
 use Illuminate\Http\Request;
-use App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\LookupGroup;
-use function Sodium\compare;
-use UxWeb\SweetAlert\SweetAlert;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
-class MillerInfoController extends Controller
+class ChemicalPurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +14,7 @@ class MillerInfoController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -36,7 +24,7 @@ class MillerInfoController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -47,22 +35,7 @@ class MillerInfoController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'MILL_NAME' => 'required',
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-
-            $millerInfoId = MillerInfo::insertMillerInfoData($request);
-//            $this->pr($createMillerInfo);
-            if($millerInfoId){
-                return redirect('/miller-profile')->with('success', 'Miller Profile has been Created !');
-
-             }
-        }
+        //
     }
 
     /**
@@ -73,7 +46,7 @@ class MillerInfoController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -83,8 +56,8 @@ class MillerInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-     {
-
+    {
+        //
     }
 
     /**
@@ -96,8 +69,7 @@ class MillerInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
+        //
     }
 
     /**
@@ -108,7 +80,6 @@ class MillerInfoController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
-
 }
