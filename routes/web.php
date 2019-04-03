@@ -75,9 +75,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('supplier-profile/get-district/{id}', 'SupplierProfileController@getDistrictByAjax'); //Azharul
     Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
     Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
+    Route::resource('miller-profile', 'EntrepreneurController'); //Azharul
+    Route::resource('miller-info', 'MillerInfoController'); //Azharul
 
     Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
     Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
     Route::resource('item', 'ItemController'); //Rubiyat
+
+    Route::resource('certificate-info', 'CertificateController'); //Azharul
+    Route::resource('qc-info', 'QcController'); //Azharul
+    Route::resource('employee-info', 'EmployeeController'); //Azharul
 });
 

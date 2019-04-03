@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class Item extends Model
 {
+    public static function itemTypeWiseItemList($itemTypeId){
+        return DB::table('smm_item')
+            ->select('smm_item.*')
+            ->where('smm_item.ITEM_TYPE','=',$itemTypeId)
+            ->get();
+    }
+
     public static function getItemData(){
         return DB::table('smm_item')
             ->select('smm_item.*','ssc_lookupchd.LOOKUPCHD_NAME')
