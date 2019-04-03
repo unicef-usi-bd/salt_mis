@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function () {
         $('#DIVISION_ID').on('change',function(){
-            var divisionId = $(this).val();
+            var divisionId = $(this).val(); //alert(divisionId);exit();
             var option = '<option value="">Select District</option>';
             $.ajax({
                 type : "get",

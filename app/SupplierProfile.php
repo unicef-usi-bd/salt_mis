@@ -24,6 +24,17 @@ class SupplierProfile extends Model
             ->select('*')
             ->get();
     }
+    public static function getZone(){
+        return DB::table('ssm_zonesetup')
+            ->select('*')
+            ->get();
+    }
+
+    public static function getDistrict(){
+        return DB::table('ssc_districts')
+            ->select('*')
+            ->get();
+    }
 
     public static function supplierProfile(){
         return DB::table('ssm_supplier_info')

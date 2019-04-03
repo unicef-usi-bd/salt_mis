@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\SellerDistributorProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\LookupGroupData;
+use App\SupplierProfile;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 
 class SellerDistributorProfileController extends Controller
 {
@@ -30,7 +37,8 @@ class SellerDistributorProfileController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        return view('setup.sellerDistributorProfile.sellerDistributorProfileIndex',compact('heading'));
+        $sellerDitributorProfile = SellerDistributorProfile::sellerDistributorProfile();
+        return view('profile.sellerDistributorProfile.sellerDistributorProfileIndex',compact('heading','previllage','sellerDitributorProfile'));
     }
 
     /**
@@ -40,7 +48,11 @@ class SellerDistributorProfileController extends Controller
      */
     public function create()
     {
-        return view('setup.sellerDistributorProfile.modals.createSellerDistributorProfile');
+        $digits = 4;
+        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
+        $getDivision = SupplierProfile::getDivision();
+        return view('profile.sellerDistributorProfile.modals.createSellerDistributorProfile',compact('sellerType','supplierId','getDivision'));
     }
 
     /**
@@ -51,7 +63,31 @@ class SellerDistributorProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'TRADING_NAME' => 'required|max:100',
+            'LICENCE_NO' => 'required|max:100',
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+
+            $SellerDistributorProfile = SellerDistributorProfile::insertData($request);
+        }
+
+        //$this->pr($request->input());
+
+
+        if ($SellerDistributorProfile) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/seller-distributor-profile')->with('success', 'Seller/Distributor profile Has been Created !');
+        }
+
     }
 
     /**
@@ -62,7 +98,10 @@ class SellerDistributorProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewSellerDistributor = SellerDistributorProfile::showSellerDistributorProfile($id);
+        $editsellerProfilearray = SellerDistributorProfile::editSellerDistributorProfilCoverageArea($id);
+
+        return view('profile.sellerDistributorProfile.modals.viewSellerDistributorProfile',compact('viewSellerDistributor','editsellerProfilearray'));
     }
 
     /**
@@ -73,7 +112,11 @@ class SellerDistributorProfileController extends Controller
      */
     public function edit($id)
     {
-        return view('setup.sellerDistributorProfile.modals.editSellerDistributorProfile');
+        $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
+        $editSellerProfile = SellerDistributorProfile::editSellerDistributorProfile($id);
+        $getDivision = SupplierProfile::getDivision();
+        $editsellerProfilearray = SellerDistributorProfile::editSellerDistributorProfilCoverageArea($id);
+        return view('profile.sellerDistributorProfile.modals.editSellerDistributorProfile',compact('sellerType','editSellerProfile','getDivision','editsellerProfilearray'));
     }
 
     /**
@@ -85,7 +128,30 @@ class SellerDistributorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'TRADING_NAME' => 'required|max:100',
+            'LICENCE_NO' => 'required|max:100',
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+
+            $SellerDistributorProfileupdae = SellerDistributorProfile::insertData($request);
+        }
+
+        //$this->pr($request->input());
+
+
+        if ($SellerDistributorProfileupdae) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/seller-distributor-profile')->with('success', 'Seller/Distributor profile Update!');
+        }
     }
 
     /**
@@ -96,6 +162,20 @@ class SellerDistributorProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = SellerDistributorProfile::deleteSellerProfile($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
+
 }

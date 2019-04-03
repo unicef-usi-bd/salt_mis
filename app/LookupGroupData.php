@@ -42,4 +42,5 @@ class LookupGroupData extends Model
     public static function deleteSSCLookGroupData($id){
         return DB::table('ssc_lookupchd')->where('LOOKUPCHD_ID', $id)->delete();
     }
+
 }
