@@ -63,9 +63,9 @@ class EntrepreneurController extends Controller
      */
     public function create()
     {
-        $agencyList = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
-       // $this->pr($agencyList);
-        return view('setup.monitoring.modals.createMonitoring',compact('agencyList'));
+//        $agencyList = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
+//        $this->pr($agencyList);
+//        return view('setup.monitoring.modals.createMonitoring',compact('agencyList'));
     }
 
     /**
@@ -101,9 +101,8 @@ class EntrepreneurController extends Controller
      */
     public function show($id)
     {
-         $viewMonitoring = Monitoring::showMonitorData($id);
-
-        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
+//         $viewMonitoring = Monitoring::showMonitorData($id);
+//        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
     }
 
     /**
@@ -114,9 +113,9 @@ class EntrepreneurController extends Controller
      */
     public function edit($id)
      {
-         $editMonitoring = Monitoring::editMonitorData($id);
-         $agencyName = Monitoring::agencyName();
-        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
+//         $editMonitoring = Monitoring::editMonitorData($id);
+//         $agencyName = Monitoring::agencyName();
+//        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
 
     }
 

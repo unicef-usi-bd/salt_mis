@@ -56,11 +56,12 @@ class MillerInfoController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
 
-            $createMillerInfo = MillerInfo::insertMillerInfoData($request);
+            $millerInfoId = MillerInfo::insertMillerInfoData($request);
 //            $this->pr($createMillerInfo);
-            if($createMillerInfo){
+            if($millerInfoId){
                 return redirect('/miller-profile')->with('success', 'Miller Profile has been Created !');
-            }
+
+             }
         }
     }
 
