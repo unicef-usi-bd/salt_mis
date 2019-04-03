@@ -4,6 +4,9 @@
 
             <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
+                @if(isset($millerInfoId))
+                    <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                @endif
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                     <tr>
@@ -14,54 +17,54 @@
                         <th style="width: 260px;">Trade License</th>
                         <th style="width:140px;" >Renewing Date</th>
                         <th  style="width:140px ;">Remarks</th>
-                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd2"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
-                    <tbody class="newRow">
-                    <tr class="rowFirst">
+                    <tbody class="newRow2">
+                    <tr class="rowFirst2">
 
                         <td>
                             <span class="block input-icon input-icon-right">
-                                <select class="form-control chosen-select DIVISION_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                     <option value="">Select</option>
-                                    @foreach($getDivision as $row)
-                                        <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                    @foreach($certificate as $row)
+                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                     @endforeach
                                 </select>
                             </span>
                         </td>
                         <td>
                             <span class="block input-icon input-icon-right">
-                                <select class="form-control chosen-select ent_district" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                     <option value="">Select</option>
-                                    @foreach($getDivision as $row)
-                                        <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                    @foreach($issueBy as $row)
+                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                     @endforeach
                                  </select>
                             </span>
                         </td>
                         <td>
                             <span class="block input-icon input-icon-right">
-                                <input type="date" name="ISSUING_DATE" class="chosen-container">
+                                <input type="date" name="ISSUING_DATE" class="chosen-container ISSUING_DATE">
                             </span>
                         </td>
 
                         <td>
                             <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                             <span class="block input-icon input-icon-right">
-                                <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 NID"  />
+                                <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
                             </span>
                         </td>
                         <td>
                             <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                             <span class="block input-icon input-icon-right">
-                                <input type="file" name="TRADE_LICENSE" class="chosen-container" multiple>
+                                <input type="file" name="TRADE_LICENSE" class="chosen-container TRADE_LICENSE" multiple>
                             </span>
                         </td>
                         <td>
                             <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                             <span class="block input-icon input-icon-right">
-                               <input type="date" name="RENEWING_DATE" class="chosen-container">
+                               <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE">
                             </span>
                         </td>
 
@@ -92,3 +95,31 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.rowAdd2').click(function(){
+            var getTr = $('tr.rowFirst2:first');
+//            alert(getTr.html());
+            $("select.chosen-select").chosen('destroy');
+            $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            var defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
+            defaultRow.find('select.ISSURE_ID').prop('disabled', false);
+
+//            For Ignore array Conflict
+            defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
+            defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
+            defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
+            defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
+            defaultRow.find('input.REMARKS').attr('disabled', false);
+            defaultRow.find('span.budget_against_code').text('');
+            defaultRow.find('span.errorMsg').text('');
+            $('.chosen-select').chosen(0);
+        });
+    });
+    // Fore Remove Row By Click
+    $(document).on("click", "span.rowRemove ", function () {
+        $(this).closest("tr.removableRow").remove();
+    });
+
+</script>
