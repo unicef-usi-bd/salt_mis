@@ -5,7 +5,7 @@
             <form action="{{ url('/miller-profile') }}" method="post" class="form-horizontal" role="form">
                 @csrf
                 @if(isset($createMillerInfo))
-                <input type="text" value="{{ $createMillerInfo }}">
+                <input type="text" value="{{ $millerInfoId }}">
                 @endif
                 <div class="col-md-6">
                     <div class="form-group">
