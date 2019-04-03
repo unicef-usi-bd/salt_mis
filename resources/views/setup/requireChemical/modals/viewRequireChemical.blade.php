@@ -11,32 +11,30 @@
                 <tr>
                     <th>Chemical Type</th>
                     <th> :</th>
-                    {{--<td>{{$union->cost_center_name}}</td>--}}
-                    <th>Salt Name</th>
+                    <td>{{$viewRequiredPerkg->ITEM_NAME}}</td>
+                    <th>Salt Amount</th>
                     <th> :</th>
-                    {{--<td>{{$union->union_name}}</td>--}}
+                    <td>{{$viewRequiredPerkg->SALT_AMOUNT}}</td>
                 </tr>
                 <tr>
-                    <th>Status</th>
+                    <th>Chemical Amount</th>
                     <th> :</th>
-                    {{--<td>{{$union->union_name_bn}}</td>--}}
-                    {{--<th>{{ trans('union.code') }} </th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>--}}
-                        {{--{{$union->union_code}}--}}
-                    {{--</td>--}}
+                    <td>{{$viewRequiredPerkg->CHEMICAL_AMOUNT}}</td>
+                    <th>Wastage Amount</th>
+                    <th> :</th>
+                    <td>{{$viewRequiredPerkg->WASTAGE_AMOUNT}}</td>
                 </tr>
-                {{--<tr>--}}
-                    {{--<th>{{ trans('union.active_status') }}</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>--}}
-                        {{--@if($union->active_status==1)--}}
-                            {{--<span class="label label-md label-info arrowed arrowed-righ"> Active </span>--}}
-                        {{--@else--}}
-                            {{--<span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>--}}
-                        {{--@endif--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
+                <tr>
+                    <th>Active Status</th>
+                    <th> :</th>
+                    <td>
+                        @if($viewRequiredPerkg->ACTIVE_FLG==1)
+                            <span class="label label-md label-info arrowed arrowed-righ"> Active </span>
+                        @else
+                            <span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>
+                        @endif
+                    </td>
+                </tr>
 
             </table>
         </div>

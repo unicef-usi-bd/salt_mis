@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
     Route::resource('require-chemical-per-kg','RequireChemicalPerKgController');//jalal
     Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
+    Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
 
     Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
 

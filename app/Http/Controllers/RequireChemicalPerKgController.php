@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\RequireChemicalPerKg;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class RequireChemicalPerKgController extends Controller
 {
@@ -29,7 +33,10 @@ class RequireChemicalPerKgController extends Controller
             'action'=>'require-chemical-per-kg/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-        return view('setup.requireChemical.requireChemicalIndex',compact('heading'));
+
+        $requiredPerkgs = RequireChemicalPerKg::getALLRequiredPerKg();
+
+        return view('setup.requireChemical.requireChemicalIndex',compact('heading','requiredPerkgs','previllage'));
     }
 
     /**
@@ -39,7 +46,8 @@ class RequireChemicalPerKgController extends Controller
      */
     public function create()
     {
-        return view('setup.requireChemical.modals.createRequirechemial');
+        $chemicalTypes = Item::itemTypeWiseItemList($this->chemicalId);
+        return view('setup.requireChemical.modals.createRequirechemial',compact('chemicalTypes'));
     }
 
     /**
@@ -50,7 +58,32 @@ class RequireChemicalPerKgController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'SALT_AMOUNT' => 'required',
+            'ITEM_NO' => 'required',
+            'CHEMICAL_AMOUNT' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $data = array([
+                'SALT_AMOUNT' => $request->input('SALT_AMOUNT'),
+                'CHEMICAL_AMOUNT' => $request->input('CHEMICAL_AMOUNT'),
+                'ITEM_NO' => $request->input('ITEM_NO'),
+                'WASTAGE_AMOUNT' => $request->input('WASTAGE_AMOUNT'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id
+            ]);
+
+            $requirePerKg = RequireChemicalPerKg::insertRequiredPerKgData($data);
+
+            if($requirePerKg){
+                return redirect('/require-chemical-per-kg')->with('success', 'Require Chemical Per Kg Data Created !');
+            }
+        }
     }
 
     /**
@@ -61,7 +94,8 @@ class RequireChemicalPerKgController extends Controller
      */
     public function show($id)
     {
-        return view('setup.requireChemical.modals.viewRequireChemical');
+        $viewRequiredPerkg = RequireChemicalPerKg::viewRequiredPerKgData($id);
+        return view('setup.requireChemical.modals.viewRequireChemical',compact('viewRequiredPerkg'));
     }
 
     /**
@@ -72,7 +106,9 @@ class RequireChemicalPerKgController extends Controller
      */
     public function edit($id)
     {
-        return view('setup.requireChemical.modals.editRequirechemial');
+        $editRequiredPerkg = RequireChemicalPerKg::editRequiredPerKgData($id);
+        $chemicalTypes = Item::itemTypeWiseItemList($this->chemicalId);
+        return view('setup.requireChemical.modals.editRequirechemical',compact('editRequiredPerkg','chemicalTypes'));
     }
 
     /**
@@ -84,7 +120,22 @@ class RequireChemicalPerKgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'SALT_AMOUNT' => 'required',
+            'ITEM_NO' => 'required',
+            'CHEMICAL_AMOUNT' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $updateRequireChemicalPerKg = RequireChemicalPerKg::updateRequiredPerKgData($request,$id);
+            if($updateRequireChemicalPerKg){
+                return redirect('/require-chemical-per-kg')->with('success', 'Require Chemical Per Kg Data Updated !');
+            }
+        }
     }
 
     /**
@@ -95,6 +146,18 @@ class RequireChemicalPerKgController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = RequireChemicalPerKg::deleteRequiredPerKgData($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }

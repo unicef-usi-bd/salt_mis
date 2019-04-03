@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CrudeSaltDetails;
+use App\Item;
 use App\LookupGroupData;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -54,7 +55,7 @@ class CrudeSaltDetailsController extends Controller
      */
     public function create()
     {
-        $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
+        $crudSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
         return view('setup.crudeSalt.modals.createCrudeSalt',compact('crudSaltTypes'));
     }
 
@@ -116,7 +117,7 @@ class CrudeSaltDetailsController extends Controller
     public function edit($id)
      {
          $editCrudSaltDetail = CrudeSaltDetails::editCrudSaltDetailData($id);
-         $crudSaltTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudSaltTypeId);
+         $crudSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
         return view('setup.crudeSalt.modals.editCrudeSalt' , compact('editCrudSaltDetail','crudSaltTypes'));
 
     }
