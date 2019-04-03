@@ -44,15 +44,21 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                <div class="col-sm-8">
+                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
                     <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}"/>
+                    <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                 </div>
             </div>
         </div>
@@ -89,7 +95,7 @@
           </div>
           <div class="col-md-6">
               <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana/Upazila</b></label>
+                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Thana/Upazila</b></label>
                   <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="UPAZILA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
@@ -99,7 +105,7 @@
                   </div>
               </div>
               <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Union</b></label>
+                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Union</b></label>
                   <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">
@@ -120,16 +126,10 @@
                         <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Bazar  here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
-                    </div>
-                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess EMAIL" placeholder="Example: Email here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>

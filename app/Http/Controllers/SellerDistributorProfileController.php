@@ -32,7 +32,7 @@ class SellerDistributorProfileController extends Controller
         $heading=array(
             'title'=>'Seller & Distributor Profile',
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-bg',
             'action'=>'seller-distributor-profile/create',
             'createPermissionLevel' => $previllage->CREATE
         );
@@ -128,6 +128,7 @@ class SellerDistributorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
             'LICENCE_NO' => 'required|max:100',
@@ -141,13 +142,13 @@ class SellerDistributorProfileController extends Controller
         } else {
 
 
-            $SellerDistributorProfileupdae = SellerDistributorProfile::insertData($request);
+            $SellerDistributorProfileupdate = SellerDistributorProfile::updateData($request,$id);
         }
 
-        //$this->pr($request->input());
+        //$this->pr($SellerDistributorProfileupdate);
 
 
-        if ($SellerDistributorProfileupdae) {
+        if ($SellerDistributorProfileupdate) {
             //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
             //return json_encode('Success');
             return redirect('/seller-distributor-profile')->with('success', 'Seller/Distributor profile Update!');
@@ -176,6 +177,12 @@ class SellerDistributorProfileController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
+    }
+
+    public function deleteCoverageareaByAjax(Request $request){
+        $fundAllocationChdId = $request->input('fundAllocationChdId');
+        $deleteChd = FundAllocation::deleteFundAllocationChd($fundAllocationChdId);
+        return $deleteChd;
     }
 
 }

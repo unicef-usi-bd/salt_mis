@@ -65,7 +65,7 @@
                             </a>
                             @endif
                             @if($editPermissionLevel == 1)
-                                <a class="green showModalGlobal" id="{{ 'seller-distributor-profile/'.$row->CUSTOMER_ID.'/edit' }}" data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Seller/Distributor Profile">
+                                <a class="green showModalGlobal" id="{{ 'seller-distributor-profile/'.$row->CUSTOMER_ID.'/edit' }}" data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Seller/Distributor Profile">
                                 <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @else
