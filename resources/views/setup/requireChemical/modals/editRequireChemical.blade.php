@@ -6,65 +6,56 @@
         </button>
     </div>
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
-
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('') }}" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/require-chemical-per-kg/'.$editRequiredPerkg->REQUIRE_CHEMICAL_ID) }}" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
-        {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess union_name" placeholder="Example: Salt Amount here" name="SALT_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->SALT_AMOUNT }}"/>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
             <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess " class="chosen-select form-control" name="" data-placeholder="Select or search data">
-                   <option value=""></option>
-                    {{--@foreach($upazillas as $upazilla)--}}
-                    {{--<option value="{{$upazilla->cost_center_id}}"> {{$upazilla->cost_center_name}}</option>--}}
-                    {{--@endforeach--}}
-                </select>
-            </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Salt Name</b><span style="color: red;"> *</span></label>
-            <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess " class="chosen-select form-control" name="" data-placeholder="Select or search data">
-                   <option value=""></option>
-                    {{--@foreach($upazillas as $upazilla)--}}
-                    {{--<option value="{{$upazilla->cost_center_id}}"> {{$upazilla->cost_center_name}}</option>--}}
-                    {{--@endforeach--}}
-                </select>
-            </span>
-            </div>
-        </div>
-        {{--@else--}}
-
-        {{--<input type="hidden" name="upazilla_id" value="{{ Auth::user()->cost_center_id }}">--}}
-        {{--@endif--}}
-        <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-8">
-                <input type="text" id="inputSuccess union_name" placeholder="Example: Amount per KG here" name="union_name" class="form-control col-xs-10 col-sm-5" value=""/>
+                <span class="block input-icon input-icon-right">
+                    <select id="form-field-select-3 inputSuccess " class="chosen-select form-control" name="ITEM_NO" data-placeholder="Select or search data">
+                       <option value=""></option>
+                        @foreach($chemicalTypes as $chemicalType)
+                            <option value="{{$chemicalType->ITEM_NO}}" @if($editRequiredPerkg->ITEM_NO == $chemicalType->ITEM_NO) selected @endif> {{$chemicalType->ITEM_NAME}}</option>
+                        @endforeach
+                    </select>
+                </span>
             </div>
         </div>
 
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess union_name" placeholder="Example: Chemical Amount here" name="CHEMICAL_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->CHEMICAL_AMOUNT }}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage Amount</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess union_name" placeholder="Example: Wastage Amount here" name="WASTAGE_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->WASTAGE_AMOUNT }}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('lookupGroupIndex.active_status') }} </b></label>
+            <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
+                <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
                     <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
+                    <option value="1" @if($editRequiredPerkg->ACTIVE_FLG == 1) selected @endif>Active</option>
+                    <option value="0" @if($editRequiredPerkg->ACTIVE_FLG == 0) selected @endif>Inactive</option>
                 </select>
             </span>
-                </div>
-            </div> -->
-
+            </div>
+        </div>
 
         <hr>
         <div class="clearfix">
@@ -73,7 +64,6 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
@@ -84,42 +74,3 @@
 </div>
 
 @include('masterGlobal.chosenSelect')
-{{--@include('masterGlobal.formValidation')--}}
-
-{{--<script>--}}
-{{--$(document).ready(function () {--}}
-{{--$('#success').hide();--}}
-{{--$('#error').hide();--}}
-{{--$('.createAjax').on('submit', function(e)  {--}}
-{{--e.preventDefault();--}}
-
-{{--$.ajax({--}}
-{{--url: "{{ route('unions.store') }}",--}}
-{{--type: 'POST',--}}
-{{--data: $(".createAjax").serialize(),--}}
-{{--success: function (data) {--}}
-
-{{--if(data.success){--}}
-{{--$('#successMessage').html('<span>'+data.success+'</span>');--}}
-{{--$('input[type=text]').val("");--}}
-{{--$('#success').delay(1000).show().fadeOut('slow');--}}
-{{--}else{--}}
-{{--var errorText = data.errors;--}}
-
-{{--errorText.map(function(error) {--}}
-{{--$('#errorMessage').html(error);--}}
-{{--$('input[type=text]').val("");--}}
-{{--$('#error').delay(1000).show().fadeOut('slow');--}}
-{{--//$('#error').show();--}}
-{{--});--}}
-
-{{--}--}}
-{{--}--}}
-{{--});--}}
-{{--});--}}
-{{--});--}}
-
-
-
-{{--</script>--}}
-
