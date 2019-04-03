@@ -134,7 +134,7 @@ protected $fillable = [
                 ]);
                 }else{
                     $insertSeller = DB::table('ssm_coverage_area')->insertGetId([
-                        
+
                     ]);
                 }
             }

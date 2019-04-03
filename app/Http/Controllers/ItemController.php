@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
+use App\LookupGroup;
+use App\LookupGroupData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\BstiTestStandard;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-class BstiTestStandardController extends Controller
+
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,11 +28,20 @@ class BstiTestStandardController extends Controller
         $url = Route::getFacadeRoot()->current()->uri();
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
-        $editBstiTestStandard = BstiTestStandard::getBstiTestData();
 
-        //$this->pr($editBstiTestStandard);
+//        $title = trans('lookupGroupIndex.create_lookup');
+        $title = 'Item Setup';
 
-        return view('setup.bstiTestStandard.createBstiTestStandard',compact('editBstiTestStandard','previllage'));
+        $heading=array(
+            'title'=> $title,
+            'library'=>'datatable',
+            'modalSize'=>'modal-md',
+            'action'=>'item/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+        $items = Item::getItemData();
+
+        return view('setup.item.itemIndex',compact('heading','previllage','items'));
     }
 
     /**
@@ -39,7 +51,8 @@ class BstiTestStandardController extends Controller
      */
     public function create()
     {
-        //
+        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+        return view('setup.item.modals.createItem',compact('itemTypes'));
     }
 
     /**
@@ -51,8 +64,7 @@ class BstiTestStandardController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'SODIUM_CHLORIDE' => 'required',
-            'MOISTURIZER' => 'required'
+            'ITEM_TYPE' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -60,10 +72,17 @@ class BstiTestStandardController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-            $bstiTestStandard = BstiTestStandard::insertBstiTestData($request);
+            $data = array([
+                'ITEM_TYPE' => $request->input('ITEM_TYPE'),
+                'ITEM_NAME' => $request->input('ITEM_NAME'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id
+            ]);
 
-            if($bstiTestStandard){
-                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Data Created !');
+            $item = Item::insertItemData($data);
+
+            if($item){
+                return redirect('/item')->with('success', 'Item Data Created !');
             }
         }
     }
@@ -71,38 +90,39 @@ class BstiTestStandardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $viewItem = Item::viewItemData($id);
+        return view('setup.item.modals.viewItem',compact('viewItem'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-      $editBstiTestStandard = BstiTestStandard::editBstiTestData($id);
-      return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
+        $editItem = Item::editItemData($id);
+        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+        return view('setup.item.modals.editItem',compact('editItem','itemTypes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $rules = array(
-            'SODIUM_CHLORIDE' => 'required',
-            'MOISTURIZER' => 'required'
+            'ITEM_TYPE' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -110,9 +130,9 @@ class BstiTestStandardController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-            $updateBstiTestStandard = BstiTestStandard::updateBstiTestData($request, $id);
-            if($updateBstiTestStandard){
-                return redirect('/bsti-test-standard')->with('success', 'Update Bsti Test Standard Data Updated !');
+            $updateItem = Item::updateItemData($request,$id);
+            if($updateItem){
+                return redirect('/item')->with('success', 'Item Data Updated !');
             }
         }
     }
@@ -120,11 +140,23 @@ class BstiTestStandardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $delete = Item::deleteItemData($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }
