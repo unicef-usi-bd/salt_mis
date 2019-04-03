@@ -59,7 +59,9 @@ class MillerInfoController extends Controller
             $createMillerInfo = MillerInfo::insertMillerInfoData($request);
 //            $this->pr($createMillerInfo);
             if($createMillerInfo){
-                return redirect('/miller-profile')->with('success', 'Miller Profile has been Created !');
+                //return redirect('/miller-profile#entrepreneur')->with('success', 'Miller Profile has been Created !');
+               //return Redirect::url('/miller-profile')->with('createMillerInfo', $createMillerInfo);
+                return Redirect::to('/account/'.$id.'/#hardware') ->with('success','The CPE was created succesfully!');
             }
         }
     }

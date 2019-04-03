@@ -4,7 +4,9 @@
 
             <form action="{{ url('/miller-profile') }}" method="post" class="form-horizontal" role="form">
                 @csrf
-
+                @if(isset($createMillerInfo))
+                <input type="text" value="{{ $createMillerInfo }}">
+                @endif
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>

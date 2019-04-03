@@ -13,7 +13,6 @@ class MillerInfo extends Model
      public static function insertMillerInfoData($request){
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
              'MILL_NAME' => $request->input('MILL_NAME'),
-             'ENTREPRENEUR_ID' => 7,
              'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
              'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
              'CAPACITY_ID' => $request->input('CAPACITY_ID'),
