@@ -34,7 +34,7 @@
                 @foreach($crudeSalts as $crudeSalt)
                 <tr>
                     <td class="center">{{ ++$sl }}</td>
-                    <td>{{$crudeSalt->LOOKUPCHD_NAME}}</td>
+                    <td>{{$crudeSalt->ITEM_NAME}}</td>
                     <td>{{$crudeSalt->SODIUM_CHLORIDE}}</td>
                     <td>{{$crudeSalt->MOISTURIZER}}</td>
                     <td>{{$crudeSalt->PPM}}</td>

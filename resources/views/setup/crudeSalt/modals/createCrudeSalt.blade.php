@@ -15,7 +15,7 @@
                 <select id="inputSuccess" class="form-control" name="CRUDSALT_TYPE_ID">
                     <option value="">Select One</option>
                     @foreach($crudSaltTypes as $crudSaltType)
-                        <option value="{{ $crudSaltType->LOOKUPCHD_ID }}">{{ $crudSaltType->LOOKUPCHD_NAME  }}</option>
+                        <option value="{{ $crudSaltType->ITEM_NO }}">{{ $crudSaltType->ITEM_NAME  }}</option>
                     @endforeach
                 </select>
             </span>

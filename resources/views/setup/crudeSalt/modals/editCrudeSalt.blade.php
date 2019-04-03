@@ -10,7 +10,7 @@
                 <select id="inputSuccess" class="form-control" name="CRUDSALT_TYPE_ID">
                     <option value="">Select One</option>
                     @foreach($crudSaltTypes as $crudSaltType)
-                        <option value="{{ $crudSaltType->LOOKUPCHD_ID }}" @if($editCrudSaltDetail->CRUDSALT_TYPE_ID == $crudSaltType->LOOKUPCHD_ID) selected @endif>{{ $crudSaltType->LOOKUPCHD_NAME  }}</option>
+                        <option value="{{ $crudSaltType->ITEM_NO }}" @if($editCrudSaltDetail->CRUDSALT_TYPE_ID == $crudSaltType->ITEM_NO) selected @endif>{{ $crudSaltType->ITEM_NAME  }}</option>
                     @endforeach
                 </select>
             </span>
