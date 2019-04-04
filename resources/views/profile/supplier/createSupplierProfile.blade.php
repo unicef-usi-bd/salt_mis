@@ -17,7 +17,19 @@
                         <input type="text" id="inputSuccess" placeholder="licence No Here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                    <div class="col-xs-8">
+                    <span class="block input-icon input-icon-right">
+                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select" name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
+                            <option value=""></option>
+                            @foreach($getSupplierType as $supplier)
+                                <option value="{{$supplier->LOOKUPCHD_ID}}"> {{$supplier->LOOKUPCHD_NAME}}</option>
+                            @endforeach
+                        </select>
+                    </span>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>

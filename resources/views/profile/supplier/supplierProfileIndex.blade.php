@@ -43,6 +43,7 @@
                     <th class="fixedWidth" style="width: 5px;">Sl</th>
                     <th class="center fixedWidth">Trading Name</th>
                     <th class="center fixedWidth">Trader Name</th>
+                    <th class="center fixedWidth">Supplier Type</th>
                     <th class="center fixedWidth">Trade licence No</th>
                     <th class="center fixedWidth">Phone Number</th>
                     <th class="center fixedWidth">Email</th>
@@ -57,6 +58,7 @@
                         <td class="center" >  {{ ++$sl }} </td>
                         <td> {{ $row->TRADING_NAME }} </td>
                         <td> {{ $row->TRADER_NAME }} </td>
+                        <td>{{ $row->LOOKUPCHD_NAME }}</td>
                         <td> {{ $row->LICENCE_NO }} </td>
                         <td> {{ $row->PHONE }} </td>
                         <td> {{ $row->EMAIL }} </td>
@@ -85,7 +87,7 @@
                                     </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile Details">
+                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile Details">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
 

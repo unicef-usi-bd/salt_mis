@@ -38,7 +38,8 @@ class SupplierProfile extends Model
 
     public static function supplierProfile(){
         return DB::table('ssm_supplier_info')
-            ->select('*')
+            ->select('*','ssc_lookupchd.LOOKUPCHD_NAME')
+            ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
             ->get();
     }
     public static function getDistrictByAjax($id){
@@ -70,22 +71,24 @@ class SupplierProfile extends Model
 
      public static function showSupplierProfile($id){
          return DB::table('ssm_supplier_info')
-             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME')
+             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME')
              ->leftjoin('ssc_divisions','ssm_supplier_info.DIVISION_ID', '=', 'ssc_divisions.DIVISION_ID')
              ->leftjoin('ssc_districts','ssm_supplier_info.DISTRICT_ID', '=', 'ssc_districts.DISTRICT_ID')
              ->leftjoin('ssc_upazilas','ssm_supplier_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
              ->leftjoin('ssc_unions','ssm_supplier_info.UNION_ID', '=', 'ssc_unions.UNION_ID')
+             ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
              ->where('SUPP_ID_AUTO', '=', $id)
              ->first();
      }
 
      public static function editSupplierProfile($id){
          return DB::table('ssm_supplier_info')
-             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME')
+             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME')
              ->leftjoin('ssc_divisions','ssm_supplier_info.DIVISION_ID', '=', 'ssc_divisions.DIVISION_ID')
              ->leftjoin('ssc_districts','ssm_supplier_info.DISTRICT_ID', '=', 'ssc_districts.DISTRICT_ID')
              ->leftjoin('ssc_upazilas','ssm_supplier_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
              ->leftjoin('ssc_unions','ssm_supplier_info.UNION_ID', '=', 'ssc_unions.UNION_ID')
+             ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
              ->where('SUPP_ID_AUTO', '=', $id)
              ->first();
      }
@@ -96,6 +99,7 @@ class SupplierProfile extends Model
             'TRADER_NAME' => $request->input('TRADER_NAME'),
             //'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
             'LICENCE_NO' => $request->input('LICENCE_NO'),
+            'SUPPLIER_TYPE_ID' => $request->input('SUPPLIER_TYPE_ID'),
             'DIVISION_ID' => $request->input('DIVISION_ID'),
             'DISTRICT_ID' => $request->input('DISTRICT_ID'),
             'UPAZILA_ID' => $request->input('UPAZILA_ID'),

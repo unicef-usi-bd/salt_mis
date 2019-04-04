@@ -25,6 +25,19 @@
                     </span>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select" name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
+                            <option value=""></option>
+                            @foreach($getSupplierType as $supplier)
+                                <option value="{{$supplier->LOOKUPCHD_ID}}" @if ($supplier->LOOKUPCHD_ID==$editData->SUPPLIER_TYPE_ID) selected @endif>{{ $supplier->LOOKUPCHD_NAME }}</option>
+                            @endforeach
+                        </select>
+                    </span>
+                </div>
+            </div>
             <div class="form-group" style="margin-top: 15px;">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b></label>
                 <div class="col-xs-12 col-sm-7">

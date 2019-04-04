@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\LookupGroupData;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -34,7 +35,7 @@ class SupplierProfileController extends Controller
         $heading=array(
             'title'=> $title,
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-bg',
             'action'=>'supplier-profile/create',
             'createPermissionLevel' => $previllage->CREATE
         );
@@ -55,8 +56,9 @@ class SupplierProfileController extends Controller
         $digits = 4;
         $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $getDivision = SupplierProfile::getDivision();
+        $getSupplierType = LookupGroupData::getActiveGroupDataByLookupGroup($this->supplierTypeId);
        // $this->pr($agencyList);
-        return view('profile.supplier.createSupplierProfile',compact('getDivision','supplierId'));
+        return view('profile.supplier.createSupplierProfile',compact('getDivision','supplierId','getSupplierType'));
     }
 
     /**
@@ -83,6 +85,7 @@ class SupplierProfileController extends Controller
                 'TRADER_NAME' => $request->input('TRADER_NAME'),
                 'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
                 'LICENCE_NO' => $request->input('LICENCE_NO'),
+                'SUPPLIER_TYPE_ID' => $request->input('SUPPLIER_TYPE_ID'),
                 'DIVISION_ID' => $request->input('DIVISION_ID'),
                 'DISTRICT_ID' => $request->input('DISTRICT_ID'),
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
@@ -129,7 +132,8 @@ class SupplierProfileController extends Controller
      {
          $editData = SupplierProfile::editSupplierProfile($id);
          $getDivision = SupplierProfile::getDivision();
-        return view('profile.supplier.editSupplierProfile' , compact('editData','getDivision'));
+         $getSupplierType = LookupGroupData::getActiveGroupDataByLookupGroup($this->supplierTypeId);
+        return view('profile.supplier.editSupplierProfile' , compact('editData','getDivision','getSupplierType'));
 
     }
 

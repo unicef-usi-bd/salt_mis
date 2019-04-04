@@ -64,6 +64,12 @@
 
                 </tr>
 
+                <tr>
+                    <th class="">Supplier Type</th>
+                    <th> :</th>
+                    <td>{{ $viewSupplierProfile->LOOKUPCHD_NAME }}</td>
+                </tr>
+
             </table>
         </div>
 
