@@ -3,8 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\CrudeSaltProcurement;
+use App\Item;
+use App\LookupGroupData;
+use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class CrudeSaltProcurementController extends Controller
 {
@@ -15,7 +23,24 @@ class CrudeSaltProcurementController extends Controller
      */
     public function index()
     {
-        //
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
+
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+
+//        $title = trans('lookupGroupIndex.create_lookup');
+        $title = trans('Crude Salt Create');
+
+        $heading=array(
+            'title'=> $title,
+            'library'=>'datatable',
+            'modalSize'=>'modal-md',
+            'action'=>'crude-salt-procurement/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+
+        return view('transactions.crudeSaltProcurement.crudeSaltProcurementIndex', compact( 'heading','previllage'));
     }
 
     /**
@@ -25,7 +50,10 @@ class CrudeSaltProcurementController extends Controller
      */
     public function create()
     {
-        //
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        $crudeSaltSuppliers = SupplierProfile::getCrudeSaltSupllier($this->crudeSaltSupplierTypeId);
+        $crudeSaltSources = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudeSaltSourceId);
+        return view('transactions.crudeSaltProcurement.modals.createCrudeSaltProcurement',compact('crudeSaltTypes','crudeSaltSuppliers','crudeSaltSources'));
     }
 
     /**

@@ -19,6 +19,12 @@ class SupplierProfile extends Model
         'active_status'
     ];
 
+     public static function getCrudeSaltSupllier($crudeSaltSupplierTypeId){
+         return DB::table('ssm_supplier_info')
+             ->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$crudeSaltSupplierTypeId)
+             ->get();
+     }
+
     public static function getDivision(){
         return DB::table('ssc_divisions')
             ->select('*')
