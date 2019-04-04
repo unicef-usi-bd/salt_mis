@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\ChemicalPurchase;
 use App\LookupGroupData;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class ChemicalPurchaseController extends Controller
 {
@@ -31,8 +34,8 @@ class ChemicalPurchaseController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        //$sellerDitributorProfile = SellerDistributorProfile::sellerDistributorProfile();
-        return view('transactions.chemicalPurchase.chemicalPurchaseIndex',compact('heading'));
+        $chemicalPuchase = ChemicalPurchase::chemicalPurchase();
+        return view('transactions.chemicalPurchase.chemicalPurchaseIndex',compact('heading','chemicalPuchase','previllage'));
     }
 
     /**
@@ -44,7 +47,7 @@ class ChemicalPurchaseController extends Controller
     {
         $chemicleType = ChemicalPurchase::getChemical($this->itemTypeId);
         $supplierName = ChemicalPurchase::getSupplierName();
-        $chemicalSupplier = ChemicalPurchase::getChemicalSupplier();
+        //$chemicalSupplier = ChemicalPurchase::getChemicalSupplier();
         return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName'));
     }
 
@@ -57,7 +60,7 @@ class ChemicalPurchaseController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'QTY' => 'required',
+            'RCV_QTY' => 'required',
 
 
         );
@@ -67,26 +70,10 @@ class ChemicalPurchaseController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-            $data = array([
-                'TRADING_NAME' => $request->input('TRADING_NAME'),
-                'TRADER_NAME' => $request->input('TRADER_NAME'),
-                'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
-                'LICENCE_NO' => $request->input('LICENCE_NO'),
-                'SUPPLIER_TYPE_ID' => $request->input('SUPPLIER_TYPE_ID'),
-                'DIVISION_ID' => $request->input('DIVISION_ID'),
-                'DISTRICT_ID' => $request->input('DISTRICT_ID'),
-                'UPAZILA_ID' => $request->input('UPAZILA_ID'),
-                'UNION_ID' => $request->input('UNION_ID'),
-                'BAZAR_NAME' => $request->input('BAZAR_NAME'),
-                'PHONE' => $request->input('PHONE'),
-                'EMAIL' => $request->input('EMAIL'),
-                'REMARKS' => $request->input('REMARKS'),
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+
 
             //$this->pr($request->input());
-            $chemicalePurchase = ChemicalPurchase::insertIntoItemStok($data);
+            $chemicalePurchase = ChemicalPurchase::insertChemicalPurchaseData($request);
 
             if($chemicalePurchase){
                 //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
@@ -104,7 +91,9 @@ class ChemicalPurchaseController extends Controller
      */
     public function show($id)
     {
-        //
+        $chemicalPurchaseView = ChemicalPurchase::chemicalPurchaseShow($id);
+
+        return view('transactions.chemicalPurchase.modals.viewChemicalPurches',compact('chemicalPurchaseView'));
     }
 
     /**
@@ -115,7 +104,11 @@ class ChemicalPurchaseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $chemicleType = ChemicalPurchase::getChemical($this->itemTypeId);
+        $supplierName = ChemicalPurchase::getSupplierName();
+        $editChemicalpurchase = ChemicalPurchase::editChemicalPurchase($id);
+
+        return view('transactions.chemicalPurchase.modals.editChemicalPurchase',compact('chemicleType','supplierName','editChemicalpurchase'));
     }
 
     /**
