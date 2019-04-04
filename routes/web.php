@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
     Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
     Route::resource('item', 'ItemController'); //Rubiyat
+    Route::resource('crude-salt-procurement', 'CrudeSaltProcurementController'); //Rubiyat
 
     Route::resource('certificate-info', 'CertificateController'); //Azharul
     Route::get('certificate-info/createCertificate/{millInfoId}', 'CertificateController@createCertificate'); //Azharul

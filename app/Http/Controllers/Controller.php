@@ -25,11 +25,15 @@ class Controller extends BaseController
     public $certificateTypeId = 12;
     public $issureTypeId = 13;
     public $supplierTypeId = 14;
+    public $crudeSaltSourceId = 15;
 
 //############## Look Up Group Data Static Id For Get Lookup Group Data ###############
     public $chemicalId = 25;
     public $crudSaltId = 26;
     public $finishedSaltId= 27;
+
+    public $crudeSaltSupplierTypeId = 41;
+    public $chemicalSupplierTypeId = 42;
 
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
