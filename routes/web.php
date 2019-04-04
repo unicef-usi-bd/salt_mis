@@ -79,12 +79,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('mill-info', 'MillerInfoController'); //Azharul
     Route::resource('entrepreneur-info', 'EntrepreneurController'); //Azharul
+    Route::get('entrepreneur-info/createEntrepreneur/{millInfoId}', 'EntrepreneurController@createEntrepreneur'); //Azharul
 
     Route::resource('association-setup', 'AssociationSetupController'); //Rubiyat
     Route::get('association-setup/create/{id}', 'AssociationSetupController@create'); //Rubiyat
     Route::resource('item', 'ItemController'); //Rubiyat
 
     Route::resource('certificate-info', 'CertificateController'); //Azharul
+    Route::get('certificate-info/createCertificate/{millInfoId}', 'CertificateController@createCertificate'); //Azharul
     Route::resource('qc-info', 'QcController'); //Azharul
     Route::resource('employee-info', 'EmployeeController'); //Azharul
 });

@@ -54,12 +54,13 @@ class EntrepreneurController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $millInfoId = $request->input('MILL_ID'); //$this->pr($millInfoId);exit();
+            $millerInfoId = $request->input('MILL_ID'); $this->pr($millerInfoId);
             $insert = Entrepreneur::insertMillerProfile($request);
-
+            //$millerInfoId = $request->input('MILL_ID');
 
             if($insert){
-                return redirect('/mill-info')->with('success', 'Entrepreneur Has been Created !');
+                //return redirect('/mill-info')->with('success', 'Entrepreneur Has been Created !');
+                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('success', 'Entrepreneur Has been Created !');
             }
         }
     }
@@ -126,25 +127,35 @@ class EntrepreneurController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Monitoring::deleteMonitorData($id);
-        if($delete){
-            echo json_encode([
-                'type' => 'tr',
-                'id' => $id,
-                'flag' => true,
-                'message' => 'Monitor Data Successfully Deleted.',
-            ]);
-        } else{
-            echo json_encode([
-                'message' => 'Error Founded Here!',
-            ]);
-        }
+//        $delete = Monitoring::deleteMonitorData($id);
+//        if($delete){
+//            echo json_encode([
+//                'type' => 'tr',
+//                'id' => $id,
+//                'flag' => true,
+//                'message' => 'Monitor Data Successfully Deleted.',
+//            ]);
+//        } else{
+//            echo json_encode([
+//                'message' => 'Error Founded Here!',
+//            ]);
+//        }
 
 
     }
 
-//    public function test($millerInfoId){
-//        return view('profile.miller.EnterpreneurInformation',compact('millerInfoId'));
-//    }
+    public function createEntrepreneur($millerInfoId){
+        $getDivision = SupplierProfile::getDivision();
+        $getZone = SupplierProfile::getZone();
+        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        return view('profile.miller.entrepreneurInformationNew',compact('$millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy'));
+    }
 
 }

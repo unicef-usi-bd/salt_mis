@@ -20,7 +20,7 @@ class Certificate extends Model
                  'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
                  'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
                  'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
-                 //'TRADE_LICENSE' => $request->input('TRADE_LICENSE')[$i],
+                 'TRADE_LICENSE' => 'image/user-image/'.$userImageName[$i],
                  'RENEWING_DATE' =>date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i])),
                  'REMARKS' => $request->input('REMARKS')[$i],
                  'ENTRY_BY' => Auth::user()->id,

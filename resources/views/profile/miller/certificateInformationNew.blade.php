@@ -16,7 +16,7 @@
             width:100% !important;
         }
 
-        </style>
+    </style>
 
     <div class="page-header">
         <h1>
@@ -36,11 +36,11 @@
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
 
-                            <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                            <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                            <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                            <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                            <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                        <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
+                        <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                        <li class="active"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                        <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                        <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">

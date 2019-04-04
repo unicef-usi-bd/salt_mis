@@ -91,23 +91,7 @@ class MillerInfoController extends Controller
             $millerInfoId = MillerInfo::insertMillerInfoData($request);
 //            $this->pr($createMillerInfo);
             if($millerInfoId){
-                //return redirect('/entrepreneur-info/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
-                //return $this->index();
-                $monitoring = Entrepreneur::getMonitorData();
-                $getDivision = SupplierProfile::getDivision();
-                $getZone = SupplierProfile::getZone();
-
-                $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
-                $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
-
-                $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
-                $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-                //$zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
-                $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-                $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-                $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-
-                return view('profile.miller.millerIndex', compact( 'millerInfoId','monitoring','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
+                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
 
 
              }

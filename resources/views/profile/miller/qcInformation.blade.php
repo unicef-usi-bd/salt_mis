@@ -36,19 +36,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
-                        <div class="col-sm-7">
-                            <label>
-                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
-                                <span class="lbl"> Yes</span>
-                            </label>
-                            <label>
-                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
-                                <span class="lbl"> No</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b> </label>
                         <div class="col-sm-7">
                             <label>
@@ -61,6 +48,20 @@
                             </label>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
+                        <div class="col-sm-7">
+                            <label>
+                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
+                                <span class="lbl"> Yes</span>
+                            </label>
+                            <label>
+                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
+                                <span class="lbl"> No</span>
+                            </label>
+                        </div>
+                    </div>
+
 
                 </div>
 

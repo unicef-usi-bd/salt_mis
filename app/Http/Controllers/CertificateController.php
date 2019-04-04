@@ -54,7 +54,41 @@ class CertificateController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $insert = Certificate::insertMillerCertificate($request);
+            $reqTime = count($_POST['CERTIFICATE_TYPE_ID']); //$this->pr($request->file('user_image'));
+            for($i=0; $i<$reqTime; $i++){
+                // file upload
+                if($request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
+                    try {
+                        $file = $request->file('user_image')[$i];
+                        $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
+                        $userImageName[$i] = $tempName.date("Y-m-d").$i.'_'.time().'.' . $file->getClientOriginalExtension();
+
+                        $request->file('user_image')[$i]->move("image/user-image", $userImageName[$i]);
+
+                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
+                    }
+                }
+                $data = ([
+                    //'MILL_ID' => $request->input('MILL_ID'),
+                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
+                    'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+                    'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
+                    'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
+                    //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
+                    'TRADE_LICENSE' => 'image/user-image/'.$userImageName[$i],
+                    'RENEWING_DATE' =>date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i])),
+                    'REMARKS' => $request->input('REMARKS')[$i],
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+
+                //$this->pr($userImageName[$i]);
+                // -/---file upload
+
+                $insert = DB::table('ssm_certificate_info')->insert($data);
+
+            }
 
             if($insert){
                 return redirect('/mill-info')->with('success', 'Certificate Has been Added !');
@@ -141,8 +175,19 @@ class CertificateController extends Controller
 
     }
 
-//    public function test($millerInfoId){
-//        return view('profile.miller.EnterpreneurInformation',compact('millerInfoId'));
-//    }
+    public function createCertificate($millerInfoId){
+        $getDivision = SupplierProfile::getDivision();
+        $getZone = SupplierProfile::getZone();
+
+        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy'));
+    }
 
 }
