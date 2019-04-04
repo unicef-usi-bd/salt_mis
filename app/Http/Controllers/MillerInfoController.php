@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LookupGroupData;
 use App\MillerInfo;
+use App\Entrepreneur;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -26,7 +27,38 @@ class MillerInfoController extends Controller
      */
     public function index()
     {
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
 
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+
+//        $title = trans('lookupGroupIndex.create_lookup');
+        $title = trans('Create Miller Profile');
+
+        $heading=array(
+            'title'=> $title,
+            'library'=>'datatable',
+            'modalSize'=>'modal-md',
+            //'action'=>'monitoring/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+
+        $monitoring = Entrepreneur::getMonitorData();
+        $getDivision = SupplierProfile::getDivision();
+        $getZone = SupplierProfile::getZone();
+
+        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        //$zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
+        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+
+        return view('profile.miller.millerIndex', compact( 'heading','previllage','monitoring','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
     }
 
     /**
@@ -59,7 +91,24 @@ class MillerInfoController extends Controller
             $millerInfoId = MillerInfo::insertMillerInfoData($request);
 //            $this->pr($createMillerInfo);
             if($millerInfoId){
-                return redirect('/miller-profile')->with('success', 'Miller Profile has been Created !');
+                //return redirect('/entrepreneur-info/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
+                //return $this->index();
+                $monitoring = Entrepreneur::getMonitorData();
+                $getDivision = SupplierProfile::getDivision();
+                $getZone = SupplierProfile::getZone();
+
+                $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+                $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+                $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+                $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+                //$zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
+                $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+                $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+                $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+
+                return view('profile.miller.millerIndex', compact( 'millerInfoId','monitoring','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
+
 
              }
         }

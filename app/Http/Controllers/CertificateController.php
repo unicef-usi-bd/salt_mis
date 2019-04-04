@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LookupGroupData;
-use App\Entrepreneur;
+use App\Certificate;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-class EntrepreneurController extends Controller
+class CertificateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class EntrepreneurController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'OWNER_NAME' => 'required',
+            'CERTIFICATE_TYPE_ID' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -54,12 +54,10 @@ class EntrepreneurController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $millInfoId = $request->input('MILL_ID'); //$this->pr($millInfoId);exit();
-            $insert = Entrepreneur::insertMillerProfile($request);
-
+            $insert = Certificate::insertMillerCertificate($request);
 
             if($insert){
-                return redirect('/mill-info')->with('success', 'Entrepreneur Has been Created !');
+                return redirect('/mill-info')->with('success', 'Certificate Has been Added !');
             }
         }
     }

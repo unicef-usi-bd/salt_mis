@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ url('/miller-info') }}" method="post" class="form-horizontal" role="form">
+            <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form">
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">

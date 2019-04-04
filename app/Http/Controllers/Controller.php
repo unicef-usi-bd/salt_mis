@@ -10,14 +10,12 @@ use DB;
 
 class Controller extends BaseController
 {
-    //############## Look Up Group Static Id For Get Group Data ###############
+    //############## Look Up Group Static Id For Get Lookup Group ###############
     public $agencyId= 1;
-    public $crudSaltTypeId= 2;
     public $registrationTypeId= 4;
     public $ownerTypeId= 5;
     public $processTypeId= 6;
     public $millTypeId= 7;
-    public $zoneTypeId= 8;
     public $capacityId= 9;
 
 
@@ -27,6 +25,11 @@ class Controller extends BaseController
     public $certificateTypeId = 12;
     public $issureTypeId = 13;
     public $supplierTypeId = 14;
+
+//############## Look Up Group Data Static Id For Get Lookup Group Data ###############
+    public $chemicalId = 25;
+    public $crudSaltId = 26;
+    public $finishedSaltId= 27;
 
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;

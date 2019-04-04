@@ -12,8 +12,8 @@ class CrudeSaltDetails extends Model
 
     public static function getAllCrudDetailsData(){
         return DB::table('ssm_crud_salt_details')
-            ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+            ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME')
+            ->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO')
             ->get();
     }
 
@@ -23,16 +23,16 @@ class CrudeSaltDetails extends Model
 
      public static function viewCrudSaltDetailData($id){
          return DB::table('ssm_crud_salt_details')
-             ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
-             ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+             ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME')
+             ->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO')
              ->where('ssm_crud_salt_details.CRUDSALTDETAIL_ID','=',$id)
              ->first();
      }
 
      public static function editCrudSaltDetailData($id){
          return DB::table('ssm_crud_salt_details')
-             ->select('ssm_crud_salt_details.*','ssc_lookupchd.LOOKUPCHD_NAME')
-             ->leftJoin('ssc_lookupchd', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'ssc_lookupchd.lookupchd_ID')
+             ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME')
+             ->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO')
              ->where('ssm_crud_salt_details.CRUDSALTDETAIL_ID','=',$id)
              ->first();
      }

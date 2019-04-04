@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ url('/miller-profile') }}" method="post" class="form-horizontal" role="form">
+            <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
                 @csrf
-                @if(isset($createMillerInfo))
-                <input type="text" value="{{ $millerInfoId }}">
+                @if(isset($millerInfoId))
+                <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
                 <div class="col-md-6">
                     <div class="form-group">

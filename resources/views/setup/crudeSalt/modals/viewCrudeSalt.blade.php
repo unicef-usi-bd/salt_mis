@@ -11,7 +11,7 @@
                 <tr>
                     <th>CRUD Salt Type </th>
                     <th> :</th>
-                    <td>{{$viewCrudSaltDetail->LOOKUPCHD_NAME}}</td>
+                    <td>{{$viewCrudSaltDetail->ITEM_NAME}}</td>
                     <th>Sodium chloride</th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->SODIUM_CHLORIDE}}</td>
