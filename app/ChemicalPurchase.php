@@ -121,7 +121,7 @@ class ChemicalPurchase extends Model
                 'TRAN_NO' => $id,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'RECEIVE_TYPE' => 'CR',//chemical receive
+                'TRAN_FLAG' => 'CP', //chemical receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
