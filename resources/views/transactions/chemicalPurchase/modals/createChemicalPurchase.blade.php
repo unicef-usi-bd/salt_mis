@@ -29,7 +29,7 @@
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($chemicleType as $chemical)
-                                    <option value="{{$chemical->ITEM_TYPE}}"> {{$chemical->ITEM_NAME}}</option>
+                                    <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>

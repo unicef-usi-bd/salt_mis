@@ -30,7 +30,7 @@
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($chemicleType as $chemical)
-                                    <option value="{{ $chemical->ITEM_TYPE }}" @if($chemical->ITEM_TYPE==$editChemicalpurchase->RECEIVE_NO) selected @endif>{{ $chemical->ITEM_NAME }}</option>
+                                    <option value="{{ $chemical->ITEM_NO }}" @if($chemical->ITEM_NO==$editChemicalpurchase->RECEIVE_NO) selected @endif>{{ $chemical->ITEM_NAME }}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -51,7 +51,8 @@
                             <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($supplierName as $name)
-                                    <option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>
+                                    {{--<option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>--}}
+                                    <option value="{{ $name->SUPP_ID_AUTO }}" @if($name->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $name->TRADING_NAME }}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -62,7 +63,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editChemicalpurchase->REMARKS }}</textarea>
                     </div>
                 </div>
             </div>

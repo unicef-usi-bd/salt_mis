@@ -11,6 +11,7 @@ use App\LookupGroupData;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use App\Item;
 
 class ChemicalPurchaseController extends Controller
 {
@@ -45,7 +46,7 @@ class ChemicalPurchaseController extends Controller
      */
     public function create()
     {
-        $chemicleType = ChemicalPurchase::getChemical($this->itemTypeId);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $supplierName = ChemicalPurchase::getSupplierName();
         //$chemicalSupplier = ChemicalPurchase::getChemicalSupplier();
         return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName'));
@@ -104,7 +105,7 @@ class ChemicalPurchaseController extends Controller
      */
     public function edit($id)
     {
-        $chemicleType = ChemicalPurchase::getChemical($this->itemTypeId);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $supplierName = ChemicalPurchase::getSupplierName();
         $editChemicalpurchase = ChemicalPurchase::editChemicalPurchase($id);
 
@@ -120,7 +121,27 @@ class ChemicalPurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'RCV_QTY' => 'required',
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+
+            $chemicalPurchesupdate = ChemicalPurchase::updateChemicalPurchaseData($request,$id);
+        }
+
+
+        if ($chemicalPurchesupdate) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/chemical-purchase')->with('success', 'Chemical Purchase Update!');
+        }
     }
 
     /**
@@ -131,6 +152,19 @@ class ChemicalPurchaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = ChemicalPurchase::deleteChemicalPurchase($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }
