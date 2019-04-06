@@ -69,7 +69,8 @@ class UserGroupController extends Controller
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails())
         {
-            return response()->json(['errors'=>$validator->errors()->all()]);
+            //return response()->json(['errors'=>$validator->errors()->all()]);
+            return Redirect::back()->withErrors($validator);
         }else {
             $data = array([
                 'USERGRP_NAME' => $request->input('group_name'),
@@ -83,7 +84,8 @@ class UserGroupController extends Controller
             $role = UserGroup::insertData($data);
 
             if ($role) {
-                return response()->json(['success'=>'User Group Successfully Saved']);
+                //return response()->json(['success'=>'User Group Successfully Saved']);
+                return redirect('/user-groups')->with('success', 'User Group Successfully Saved!');
                 //return json_encode('Success');
             }
         }

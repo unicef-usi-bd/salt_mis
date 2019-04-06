@@ -66,7 +66,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
     Route::resource('require-chemical-per-kg','RequireChemicalPerKgController');//jalal
     Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
-    Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
+    //Route::resource('');//jalal
+
 
     Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
 
@@ -88,5 +89,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('certificate-info', 'CertificateController'); //Azharul
     Route::resource('qc-info', 'QcController'); //Azharul
     Route::resource('employee-info', 'EmployeeController'); //Azharul
+
+    //transaction
+    Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
 });
 
