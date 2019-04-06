@@ -19,9 +19,11 @@ class Employee extends Model
             'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
             'FULLTIMEFEM_EMP' => $request->input('FULLTIMEFEM_EMP'),
             'PARTTIMEMALE_EMP' => $request->input('PARTTIMEMALE_EMP'),
-            'LAB_PERSON' => $request->input('LAB_PERSON'),
+            'PARTTIMEFEM_EMP' => $request->input('PARTTIMEFEM_EMP'),
+            'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
+            'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
             'REMARKS' => $request->input('REMARKS'),
-             'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
 

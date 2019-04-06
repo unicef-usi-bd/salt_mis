@@ -37,9 +37,9 @@
                     <ul class="nav nav-tabs" id="myTab">
 
                         <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                        <li class="active"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                        <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
                         <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                        <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                        <li class="active"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
                         <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
@@ -56,7 +56,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editData->MILL_NAME }}">
+                                                       <input type="text" name="MILL_NAME" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
@@ -67,8 +67,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($processType as $row)
-                                                               {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -82,7 +81,7 @@
                                                        <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($millType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -96,7 +95,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($capacity as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -110,7 +109,7 @@
                                                        <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($getZone as $row)
-                                                               <option value="{{ $row->ZONE_CODE }}" @if($editData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
+                                                               <option value="{{ $row->ZONE_CODE }}">{{ $row->ZONE_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -121,7 +120,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Millers ID</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editData->MILLERS_ID }}">
+                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId">
                                                     </span>
                                                 </div>
                                             </div>
@@ -139,7 +138,7 @@
                                                         <select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
                                                             <option value=""></option>
                                                             @foreach($getDivision as $row)
-                                                                <option value="{{ $row->DIVISION_ID }}" @if($editData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
+                                                                <option value="{{ $row->DIVISION_ID }}">{{ $row->DIVISION_NAME }}</option>
                                                             @endforeach
 
                                                         </select>
@@ -182,13 +181,8 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
-                                                               @if(isset($editData))
-                                                                   <option value="1" @if($editData->ACTIVE_FLG=='1') selected  @endif >Active</option>
-                                                                    <option value="0" @if($editData->ACTIVE_FLG=='0') selected  @endif >Inactive</option>
-                                                               @else
-                                                                   <option value="1">Active</option>
-                                                                   <option value="0">Inactive</option>
-                                                               @endif
+                                                           <option value="1">Active</option>
+                                                           <option value="0">Inactive</option>
                                                        </select>
                                                     </span>
                                                 </div>
@@ -197,7 +191,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" value="{{ $editData->REMARKS }}" class="chosen-container">
+                                                       <input type="text" name="REMARKS" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
@@ -222,7 +216,7 @@
                         </div>
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
-                        <div id="entrepreneur" class="tab-pane fade in active">
+                        <div id="entrepreneur" class="tab-pane fade ">
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -378,11 +372,250 @@
                         {{--/-Entrepreneur Information--}}
 
                         {{--Certificate Info--}}
-                        @include('profile.miller.certificateInformation')
+                        <div id="certificate" class="tab-pane fade ">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                                        @csrf
+                                        @if(isset($millerInfoId))
+                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                        @endif
+                                        <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                                            <thead>
+                                            <tr>
+                                                <th style="width:175px ;">Type of Certificate<span style="color:red;"> </span></th>
+                                                <th style="width:130px ;">Issure Name<span style="color:red;"> </span></th>
+                                                <th style="width:140px ;">Issuing Date</th>
+                                                <th style="width:150px ;">Certificate Number</th>
+                                                <th style="width: 260px;">Trade License</th>
+                                                <th style="width:140px;" >Renewing Date</th>
+                                                <th  style="width:140px ;">Remarks</th>
+                                                <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd2"><i class="fa fa-plus"></i></span></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="newRow2">
+                                            <tr class="rowFirst2">
+
+                                                <td>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                                            <option value="">Select</option>
+                                                            @foreach($certificate as $row)
+                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                                            <option value="">Select</option>
+                                                            @foreach($issueBy as $row)
+                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                            @endforeach
+                                                         </select>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="date" name="ISSUING_DATE" class="chosen-container ISSUING_DATE">
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"  />
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                    <span class="block input-icon input-icon-right">
+                                                       <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE">
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                                    </span>
+                                                </td>
+                                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr>
+                                        <div class="clearfix">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
+                                                <button type="reset" class="btn">
+                                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                    {{ trans('dashboard.reset') }}
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                                    {{ trans('dashboard.submit') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                $('.rowAdd2').click(function(){
+                                    var getTr = $('tr.rowFirst2:first');
+//            alert(getTr.html());
+                                    $("select.chosen-select").chosen('destroy');
+                                    $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+                                    var defaultRow = $('tr.removableRow:last');
+                                    defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
+                                    defaultRow.find('select.ISSURE_ID').prop('disabled', false);
+
+//            For Ignore array Conflict
+                                    defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
+                                    defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
+                                    defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
+                                    defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
+                                    defaultRow.find('input.REMARKS').attr('disabled', false);
+                                    defaultRow.find('span.budget_against_code').text('');
+                                    defaultRow.find('span.errorMsg').text('');
+                                    $('.chosen-select').chosen(0);
+                                });
+                            });
+                            // Fore Remove Row By Click
+                            $(document).on("click", "span.rowRemove ", function () {
+                                $(this).closest("tr.removableRow").remove();
+                            });
+
+                        </script>
+                        {{--/-Certificate Info--}}
                         {{--/-Certificate Info--}}
 
                         {{--QC Info--}}
-                        @include('profile.miller.qcInformation')
+                        <div id="qc" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
+                                        @csrf
+                                        @if(isset($millerInfoId))
+                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                        @endif
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
+                                                <div class="col-sm-7">
+                                                    <label>
+                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <span class="lbl"> Yes</span>
+                                                    </label>
+                                                    <label>
+                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <span class="lbl"> No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> </label>
+                                                <div class="col-sm-7">
+                                                    <label>
+                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <span class="lbl"> Yes</span>
+                                                    </label>
+                                                    <label>
+                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <span class="lbl"> No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b> </label>
+                                                <div class="col-sm-7">
+                                                    <label>
+                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <span class="lbl"> Yes</span>
+                                                    </label>
+                                                    <label>
+                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <span class="lbl"> No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
+                                                <div class="col-sm-7">
+                                                    <label>
+                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <span class="lbl"> Yes</span>
+                                                    </label>
+                                                    <label>
+                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <span class="lbl"> No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Standard Operation Procedure (SOP)</b></label>
+                                                <div class="col-sm-7">
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="SOP_DESC" class="chosen-container">
+                            </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
+                                                <div class="col-sm-7">
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="LAB_PERSON" class="chosen-container">
+                            </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
+                                                <div class="col-sm-7">
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="REMARKS" class="chosen-container">
+                            </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <hr>
+                                        <div class="clearfix">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
+                                                <button type="reset" class="btn">
+                                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                    {{ trans('dashboard.reset') }}
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                                    {{ trans('dashboard.submit') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         {{--/- QC Info--}}
 
                         {{--Employee Info--}}

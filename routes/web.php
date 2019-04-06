@@ -90,7 +90,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('certificate-info', 'CertificateController'); //Azharul
     Route::get('certificate-info/createCertificate/{millInfoId}', 'CertificateController@createCertificate'); //Azharul
     Route::resource('qc-info', 'QcController'); //Azharul
+    Route::get('qc-info/createQc/{millInfoId}', 'QcController@createQc'); //Azharul
     Route::resource('employee-info', 'EmployeeController'); //Azharul
+    Route::get('employee-info/createEmployee/{millInfoId}', 'EmployeeController@createEmployee'); //Azharul
 
     //transaction
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
