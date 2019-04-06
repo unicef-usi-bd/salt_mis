@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LookupGroupData;
-use App\Entrepreneur;
+use App\Employee;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
-class EntrepreneurController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +46,8 @@ class EntrepreneurController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'OWNER_NAME' => 'required',
+            'TOTMALE_EMP' => 'required',
+            'TOTFEM_EMP' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -54,13 +55,10 @@ class EntrepreneurController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $millerInfoId = $request->input('MILL_ID'); $this->pr($millerInfoId);
-            $insert = Entrepreneur::insertMillerProfile($request);
-            //$millerInfoId = $request->input('MILL_ID');
+            $QcInfoId = Employee::insertMillerEmployeeInfo($request);
 
-            if($insert){
-                //return redirect('/mill-info')->with('success', 'Entrepreneur Has been Created !');
-                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('success', 'Entrepreneur Has been Created !');
+            if($QcInfoId){
+                return redirect('/mill-info')->with('success', 'Employee Information Has been Added !');
             }
         }
     }
@@ -127,35 +125,25 @@ class EntrepreneurController extends Controller
      */
     public function destroy($id)
     {
-//        $delete = Monitoring::deleteMonitorData($id);
-//        if($delete){
-//            echo json_encode([
-//                'type' => 'tr',
-//                'id' => $id,
-//                'flag' => true,
-//                'message' => 'Monitor Data Successfully Deleted.',
-//            ]);
-//        } else{
-//            echo json_encode([
-//                'message' => 'Error Founded Here!',
-//            ]);
-//        }
+        $delete = Monitoring::deleteMonitorData($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Monitor Data Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
 
 
     }
 
-    public function createEntrepreneur($millerInfoId){
-        $getDivision = SupplierProfile::getDivision();
-        $getZone = SupplierProfile::getZone();
-        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
-        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
-
-        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
-        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view('profile.miller.entrepreneurInformationNew',compact('$millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy'));
-    }
+//    public function test($millerInfoId){
+//        return view('profile.miller.EnterpreneurInformation',compact('millerInfoId'));
+//    }
 
 }

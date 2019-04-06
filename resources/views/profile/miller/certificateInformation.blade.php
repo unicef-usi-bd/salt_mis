@@ -58,7 +58,7 @@
                         <td>
                             <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                             <span class="block input-icon input-icon-right">
-                                <input type="file" name="TRADE_LICENSE" class="chosen-container TRADE_LICENSE" multiple>
+                                <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
                             </span>
                         </td>
                         <td>
@@ -80,7 +80,7 @@
                 </table>
                 <hr>
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9">
+                    <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
