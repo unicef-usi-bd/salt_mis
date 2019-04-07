@@ -10,13 +10,21 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th class=" ">Item Type</th>
+                    <th class=" ">Chemical Type</th>
                     <th> :</th>
-                    <td>{{ $showRequireChemical->LOOKUPCHD_NAME }} </td>
+                    <td>{{ $showRequireChemicalPerKgchd->ITEM_NAME}} </td>
+                    <th class=" ">Amount</th>
+                    <th> :</th>
+                    <td>{{ $showRequireChemicalPerKgchd->USE_QTY}} </td>
+                </tr>
+                <tr>
+                    <th class=" ">Wastage</th>
+                    <th> :</th>
+                    <td>{{ $showRequireChemicalPerKgchd->WAST_PER}} </td>
                     <th>Status</th>
                     <th> :</th>
                     <td>
-                        @if($showRequireChemical->ACTIVE_FLG==1)
+                        @if($showRequireChemicalPerKgchd->ACTIVE_FLG==1)
                             <span class="label label-md label-info arrowed arrowed-righ"> Active </span>
                         @else
                             <span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>

@@ -22,6 +22,12 @@ class Item extends Model
             ->get();
     }
 
+    public static function getItemName(){
+        return DB::table('smm_item')
+            ->select('smm_item.*')
+            ->get();
+    }
+
     public static function insertItemData($data){
         return DB::table('smm_item')->insert($data);
     }
