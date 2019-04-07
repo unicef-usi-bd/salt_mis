@@ -76,9 +76,9 @@
 
                                             <th class="fixedWidth" >{{ trans('lookupGroupIndex.sl') }}</th>
                                             <th>{{ trans('lookupGroupIndex.name') }}</th>
-                                            <th class="hidden-480">User Define ID</th>
-                                            <th class="hidden-480">Description</th>
-                                            <th class="hidden-480">Status</th>
+                                            <th class="hidden-480">Chemical Type</th>
+                                            <th class="hidden-480">Amount</th>
+                                            
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
                                         </tr>
                                         </thead>
@@ -107,14 +107,7 @@
     <?php echo $chemicalData->WAST_PER; ?>
 
     </td>
-    <td class="hidden-480">
-    <?php  if($chemicalData->ACTIVE_FLG == 0){ ?>
-    <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
-    <?php }else{ ?>
-    <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
-    <?php } ?>
 
-    </td>
 
     <td class="row{{ $chemicalData->RMALLOCHD_ID }}">
     <div class="hidden-sm hidden-xs action-buttons">
