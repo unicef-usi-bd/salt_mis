@@ -15,6 +15,9 @@
         .select2{
             width:100% !important;
         }
+        .disabledTab{
+            pointer-events: none;
+        }
 
     </style>
 
@@ -40,7 +43,7 @@
                         <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
                         <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                         <li class="active"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                        <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">
@@ -285,6 +288,7 @@
                                             </tr>
                                             </thead>
                                             <tbody class="newRow">
+                                            @foreach($getEntrepreneurRowData as $editEntrepData)
                                             <tr class="rowFirst">
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
@@ -355,6 +359,7 @@
                                                 </td>
                                                 <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                                             </tr>
+                                             @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
@@ -366,7 +371,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -400,6 +405,7 @@
                                             </tr>
                                             </thead>
                                             <tbody class="newRow2">
+                                            @foreach($editCertificateData as $editCertData)
                                             <tr class="rowFirst2">
 
                                                 <td>
@@ -456,6 +462,7 @@
                                                 </td>
                                                 <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                                             </tr>
+                                             @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
@@ -467,7 +474,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -614,7 +621,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>

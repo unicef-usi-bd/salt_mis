@@ -15,6 +15,12 @@
         .select2{
             width:100% !important;
         }
+        .disabledTab{
+            pointer-events: none;
+        }
+        /*.nav-tabs>li.active>a{*/
+            /*background-color: #1CABE2;*/
+        /*}*/
 
         </style>
 
@@ -37,10 +43,10 @@
                     <ul class="nav nav-tabs" id="myTab">
 
                             <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                            <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                            <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                            <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                            <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">

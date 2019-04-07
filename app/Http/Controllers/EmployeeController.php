@@ -63,7 +63,7 @@ class EmployeeController extends Controller
             $employeeInfoId = Employee::insertMillerEmployeeInfo($request);
 
             if($employeeInfoId){
-                return redirect('/employee-info/createEmployee/'.$millerInfoId)->with('success', 'Employee Information Has been Added !');
+                return redirect('/mill-info')->with('success', 'Employee Information Has been Added !');
             }
         }
     }
@@ -160,9 +160,10 @@ public function createEmployee($millerInfoId){
     $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
     $editMillData = MillerInfo::getMillData($millerInfoId);
     $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
-    $editCertData = Certificate::getCertificateData($millerInfoId);
+    $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
+    $editCertificateData = Certificate::getCertificateData($millerInfoId);
     $editQcData = Qc::getQcData($millerInfoId);
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','editCertData','editQcData'));
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData'));
 }
 
 }

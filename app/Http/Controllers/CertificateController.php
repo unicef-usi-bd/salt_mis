@@ -193,7 +193,8 @@ class CertificateController extends Controller
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData'));
+        $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData'));
     }
 
 }

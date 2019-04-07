@@ -49,5 +49,15 @@ class Entrepreneur extends Model
             ->first();
 
     }
+    public static function getEntrepreneurRowData($millerInfoId){
+        return DB::table('ssm_entrepreneur_info')
+            ->select('ssm_entrepreneur_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
+            ->leftJoin('ssc_districts','ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
+            ->leftJoin('ssc_upazilas','ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
+            ->leftJoin('ssc_unions','ssm_entrepreneur_info.UNION_ID','=','ssc_unions.UNION_ID')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->get();
+
+    }
 
 }

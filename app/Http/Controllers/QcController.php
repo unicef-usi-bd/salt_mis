@@ -158,8 +158,9 @@ class QcController extends Controller
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
-        $editCertData = Certificate::getCertificateData($millerInfoId);
-        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','editCertData'));
+        $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
+        $editCertificateData = Certificate::getCertificateData($millerInfoId);
+        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData'));
     }
 
 }

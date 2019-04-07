@@ -41,6 +41,25 @@ class MillerInfo extends Model
 
     }
 
+    public static function updateMillData($request,$id){
+        $update = DB::table('ssm_mill_info')->where('SUPP_ID_AUTO', '=' , $id)->update([
+            'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
+            'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
+            'CAPACITY_ID' => $request->input('CAPACITY_ID'),
+            'ZONE_ID' => $request->input('ZONE_ID'),
+            'MILLERS_ID' => $request->input('MILLERS_ID'),
+            'DIVISION_ID' => $request->input('DIVISION_ID'),
+            'DISTRICT_ID' => $request->input('DISTRICT_ID'),
+            'UPAZILA_ID' => $request->input('UPAZILA_ID'),
+            'UNION_ID' => $request->input('UNION_ID'),
+            'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+            'REMARKS' => $request->input('REMARKS'),
+            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+            'UPDATE_BY' => Auth::user()->id
+        ]);
+
+        return $update;
+    }
 
 
 }

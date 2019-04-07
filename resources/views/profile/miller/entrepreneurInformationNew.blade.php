@@ -15,6 +15,12 @@
         .select2{
             width:100% !important;
         }
+        .disabledTab{
+            pointer-events: none;
+        }
+        /*.nav-tabs>li.active>a{*/
+            /*background-color: #1CABE2;*/
+        /*}*/
 
     </style>
 
@@ -35,12 +41,11 @@
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
-
                         <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
                         <li class="active"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                        <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                        <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                        <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">
@@ -51,6 +56,9 @@
 
                                     <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" >
                                         @csrf
+                                        @if(isset($millerInfoId))
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
+                                        @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
@@ -141,7 +149,6 @@
                                                             @foreach($getDivision as $row)
                                                                 <option value="{{ $row->DIVISION_ID }}" @if($editMillData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
                                                             @endforeach
-
                                                         </select>
                                                     </span>
                                                 </div>
@@ -366,7 +373,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -403,6 +410,7 @@
     @include('masterGlobal.getDistrict')
     @include('masterGlobal.getUpazila')
     @include('masterGlobal.getUnion')
+    @include('masterGlobal.getDistrictUpazilaUnion')
     @include('masterGlobal.getMillersId')
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -448,6 +456,6 @@
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
-    @include('masterGlobal.getDistrictUpazilaUnion')
+
 
 @endsection

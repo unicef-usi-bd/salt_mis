@@ -93,7 +93,6 @@ class MillerInfoController extends Controller
             if($millerInfoId){
                 return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
 
-
              }
         }
     }
@@ -129,7 +128,21 @@ class MillerInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = array(
+            'MILL_NAME' => 'required',
+        );
 
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $millerInfoId = $request->input('MILL_ID');
+            $updateMillData = MillerInfo::updateMillData($request, $millerInfoId);
+            if($updateMillData){
+                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
+            }
+        }
 
     }
 
