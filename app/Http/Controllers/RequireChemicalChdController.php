@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Item;
+use App\RequireChemicalChd;
 
 class RequireChemicalChdController extends Controller
 {
@@ -14,7 +20,13 @@ class RequireChemicalChdController extends Controller
      */
     public function index()
     {
-        //
+        $heading=array(
+            'title'=>'Require Chemical Per KG',
+            'library'=>'datatable',
+            'modalSize'=>'modal-md',
+            'action'=>'require-chemical-chd/create'
+        );
+        return view('setup.requireChemicalPerKg.requireChemicalPerKgIndex', compact('heading'));
     }
 
     /**
@@ -22,9 +34,10 @@ class RequireChemicalChdController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createData($id)
     {
-        //
+        $chemicleType = Item::getItemName();
+        return view('setup.requireChemicalPerKg.modals.createRequireChemicalPerKgChd',compact('id','chemicleType'));
     }
 
     /**
@@ -35,7 +48,31 @@ class RequireChemicalChdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'ITEM_ID' => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $data = array([
+                'RMALLOMST_ID' => $request->input('RMALLOMST_ID'),
+                'ITEM_ID' => $request->input('ITEM_ID'),
+                'USE_QTY' => $request->input('USE_QTY'),
+                'WAST_PER' => $request->input('WAST_PER'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            ]);
+
+            $requirePerKgChd = RequireChemicalChd::insertRequireChemicalPerKgchd($data);
+
+            if($requirePerKgChd){
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg  Created !');
+            }
+        }
     }
 
     /**
@@ -46,7 +83,8 @@ class RequireChemicalChdController extends Controller
      */
     public function show($id)
     {
-        //
+        $showRequireChemicalPerKgchd = RequireChemicalChd::showRequireChemicalPerKgchd($id);
+        return view('setup.requireChemicalPerKg.modals.viewRequireChemicalPerKgChd',compact('showRequireChemicalPerKgchd'));
     }
 
     /**
@@ -57,7 +95,9 @@ class RequireChemicalChdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editRequireChemicalPerKgchd = RequireChemicalChd::editRequirChemicalPerKgchd($id);
+        $chemicleType = Item::getItemName();
+        return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgChd',compact('editRequireChemicalPerKgchd','chemicleType'));
     }
 
     /**
@@ -69,7 +109,23 @@ class RequireChemicalChdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'ITEM_ID' => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            $updateRequirePerKgChd = RequireChemicalChd::updateRequireChemicalPerKgchd($request,$id);
+
+            if($updateRequirePerKgChd){
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg  Updated !');
+            }
+        }
     }
 
     /**
@@ -80,6 +136,19 @@ class RequireChemicalChdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = RequireChemicalChd::deleteRequireChemicalPerKgchd($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Require per kg level  Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
+
     }
 }

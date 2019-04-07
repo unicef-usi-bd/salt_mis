@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Item;
+use App\RequireChemicalMst;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use App\LookupGroupData;
 
 class RequireChemicalMstController extends Controller
 {
@@ -26,13 +33,17 @@ class RequireChemicalMstController extends Controller
             'title'=> 'Require Chemical Per Kg',
             'library'=>'datatable',
             'modalSize'=>'modal-md',
-            'action'=>'lookup-groups/create',
+            'action'=>'require-chemical-mst/create',
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $lookupGroups = LookupGroup::getSSCLookupData();
+        //$lookupGroups = LookupGroup::getSSCLookupData();
         //print_r($lookupGroups);exit;
-        return view('setup.generalSetup.lookupGroups.lookupGroupIndex', compact( 'heading','previllage','lookupGroups'));
+        $requireChemical = RequireChemicalMst::getRequireChemicalData();
+
+
+        //$this->pr($requireChemical);
+        return view('setup.requireChemicalPerKg.requireChemicalPerKgIndex', compact( 'heading','previllage','requireChemical'));
     }
 
     /**
@@ -42,7 +53,11 @@ class RequireChemicalMstController extends Controller
      */
     public function create()
     {
-        //
+        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+
+       // $this->pr($itemTypes);
+
+        return view('setup.requireChemicalPerKg.modals.createRequireChemicalPerKgMst',compact('itemTypes'));
     }
 
     /**
@@ -53,7 +68,28 @@ class RequireChemicalMstController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'PRODUCT_ID' => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $data = array([
+                'PRODUCT_ID' => $request->input('PRODUCT_ID'),
+                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            ]);
+
+            $requirePerKg = RequireChemicalMst::insertRequireChemicalPerKg($data);
+
+            if($requirePerKg){
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg Level Created !');
+            }
+        }
     }
 
     /**
@@ -64,7 +100,9 @@ class RequireChemicalMstController extends Controller
      */
     public function show($id)
     {
-        //
+        $showRequireChemical = RequireChemicalMst::showRequireChemicalPerKg($id);
+
+        return view('setup.requireChemicalPerKg.modals.viewRequireChemicalPerKgMst',compact('showRequireChemical'));
     }
 
     /**
@@ -75,7 +113,10 @@ class RequireChemicalMstController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editRequireChemicalPerKg = RequireChemicalMst::editRequireChemicalPerKg($id);
+        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+
+        return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgMst',compact('editRequireChemicalPerKg','itemTypes'));
     }
 
     /**
@@ -87,7 +128,23 @@ class RequireChemicalMstController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'PRODUCT_ID' => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            $updateRequirePerKg = RequireChemicalMst::updateRequireChemicalPerKg($request,$id);
+
+            if($updateRequirePerKg){
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg Level Update !');
+            }
+        }
     }
 
     /**
@@ -98,6 +155,20 @@ class RequireChemicalMstController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = RequireChemicalMst::deleteRequireChemicalPerKg($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Require per kg level  Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
+
+
     }
 }
