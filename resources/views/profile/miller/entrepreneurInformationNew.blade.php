@@ -56,7 +56,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editData->MILL_NAME }}">
+                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editMillData->MILL_NAME }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -68,7 +68,7 @@
                                                            <option value=""></option>
                                                             @foreach($processType as $row)
                                                                {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -82,7 +82,7 @@
                                                        <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($millType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -96,7 +96,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($capacity as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -110,7 +110,7 @@
                                                        <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($getZone as $row)
-                                                               <option value="{{ $row->ZONE_CODE }}" @if($editData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
+                                                               <option value="{{ $row->ZONE_CODE }}" @if($editMillData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -121,7 +121,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Millers ID</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editData->MILLERS_ID }}">
+                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editMillData->MILLERS_ID }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -139,7 +139,7 @@
                                                         <select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
                                                             <option value=""></option>
                                                             @foreach($getDivision as $row)
-                                                                <option value="{{ $row->DIVISION_ID }}" @if($editData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
+                                                                <option value="{{ $row->DIVISION_ID }}" @if($editMillData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
                                                             @endforeach
 
                                                         </select>
@@ -151,8 +151,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
-
+                                                           <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
                                                        </select>
                                                     </span>
                                                 </div>
@@ -162,7 +161,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
+                                                           <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
                                                        </select>
                                                     </span>
                                                 </div>
@@ -172,7 +171,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UNION_ID" class="chosen-select chosen-container union" name="UNION_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
+                                                           <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
                                                         </select>
                                                     </span>
                                                 </div>
@@ -182,9 +181,9 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
-                                                               @if(isset($editData))
-                                                                   <option value="1" @if($editData->ACTIVE_FLG=='1') selected  @endif >Active</option>
-                                                                    <option value="0" @if($editData->ACTIVE_FLG=='0') selected  @endif >Inactive</option>
+                                                               @if(isset($editMillData))
+                                                                   <option value="1" @if($editMillData->ACTIVE_FLG=='1') selected  @endif >Active</option>
+                                                                    <option value="0" @if($editMillData->ACTIVE_FLG=='0') selected  @endif >Inactive</option>
                                                                @else
                                                                    <option value="1">Active</option>
                                                                    <option value="0">Inactive</option>
@@ -197,7 +196,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" value="{{ $editData->REMARKS }}" class="chosen-container">
+                                                       <input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
@@ -229,7 +228,7 @@
                                     <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
                                         @csrf
                                         @if(isset($millerInfoId))
-                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <div class="col-md-6">
                                             <div class="form-group">

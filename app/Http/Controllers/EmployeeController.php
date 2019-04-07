@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\LookupGroupData;
 use App\Employee;
 use App\Qc;
+use App\MillerInfo;
+use App\Entrepreneur;
+use App\Certificate;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -155,8 +158,11 @@ public function createEmployee($millerInfoId){
     $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
     $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
     $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-    $editData = Qc::getQcData($millerInfoId);
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
+    $editMillData = MillerInfo::getMillData($millerInfoId);
+    $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
+    $editCertData = Certificate::getCertificateData($millerInfoId);
+    $editQcData = Qc::getQcData($millerInfoId);
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','editCertData','editQcData'));
 }
 
 }

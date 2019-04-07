@@ -44,7 +44,7 @@ class MillerInfoController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $monitoring = Entrepreneur::getMonitorData();
+        //$monitoring = Entrepreneur::getMonitorData();
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
 
@@ -58,7 +58,7 @@ class MillerInfoController extends Controller
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
 
-        return view('profile.miller.millerIndex', compact( 'heading','previllage','monitoring','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
+        return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
     }
 
     /**
