@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LookupGroupData;
 use App\Employee;
+use App\Qc;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -55,10 +56,11 @@ class EmployeeController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $QcInfoId = Employee::insertMillerEmployeeInfo($request);
+            $millerInfoId = $request->input('MILL_ID');
+            $employeeInfoId = Employee::insertMillerEmployeeInfo($request);
 
-            if($QcInfoId){
-                return redirect('/mill-info')->with('success', 'Employee Information Has been Added !');
+            if($employeeInfoId){
+                return redirect('/employee-info/createEmployee/'.$millerInfoId)->with('success', 'Employee Information Has been Added !');
             }
         }
     }
@@ -142,8 +144,19 @@ class EmployeeController extends Controller
 
     }
 
-//    public function test($millerInfoId){
-//        return view('profile.miller.EnterpreneurInformation',compact('millerInfoId'));
-//    }
+public function createEmployee($millerInfoId){
+    $getDivision = SupplierProfile::getDivision();
+    $getZone = SupplierProfile::getZone();
+    $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+    $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+    $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+    $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+    $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+    $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+    $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+    $editData = Qc::getQcData($millerInfoId);
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
+}
 
 }

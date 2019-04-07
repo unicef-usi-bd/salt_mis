@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LookupGroupData;
 use App\Entrepreneur;
+use App\MillerInfo;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -54,7 +55,7 @@ class EntrepreneurController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
-            $millerInfoId = $request->input('MILL_ID'); $this->pr($millerInfoId);
+            $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
             $insert = Entrepreneur::insertMillerProfile($request);
             //$millerInfoId = $request->input('MILL_ID');
 
@@ -155,7 +156,10 @@ class EntrepreneurController extends Controller
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view('profile.miller.entrepreneurInformationNew',compact('$millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy'));
+        $editData = MillerInfo::getMillData($millerInfoId);
+        //$this->pr($editData);
+        return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
     }
+
 
 }

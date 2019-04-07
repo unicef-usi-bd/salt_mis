@@ -32,6 +32,11 @@ class Certificate extends Model
          return $insert;
      }
 
+    public static function getCertificateData($millerInfoId){
+        return DB::table('ssm_certificate_info')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->first();
 
+    }
 
 }

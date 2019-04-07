@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Certificate;
 use App\LookupGroupData;
 use App\Qc;
 use App\SupplierProfile;
@@ -54,10 +55,11 @@ class QcController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             //$this->pr($request->input());
+            $millerInfoId = $request->input('MILL_ID');
             $QcInfoId = Qc::insertMillerQc($request);
 
             if($QcInfoId){
-                return redirect('/mill-info')->with('success', 'QC Information Has been Added !');
+                return redirect('/employee-info/createEmployee/'.$millerInfoId)->with('success', 'QC Information Has been Added !');
             }
         }
     }
@@ -141,8 +143,19 @@ class QcController extends Controller
 
     }
 
-//    public function test($millerInfoId){
-//        return view('profile.miller.EnterpreneurInformation',compact('millerInfoId'));
-//    }
+    public function createQc($millerInfoId){
+        $getDivision = SupplierProfile::getDivision();
+        $getZone = SupplierProfile::getZone();
+        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        $editData = Certificate::getCertificateData($millerInfoId);
+        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
+    }
 
 }

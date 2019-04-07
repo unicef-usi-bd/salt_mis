@@ -3,6 +3,9 @@
         <div class="col-md-12">
             <form action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >
                 @csrf
+                @if(isset($millerInfoId))
+                    <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                @endif
                 <div class="col-md-6">
                     <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
                     <div class="form-group">

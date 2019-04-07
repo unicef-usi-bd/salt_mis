@@ -27,7 +27,12 @@ class Qc extends Model
 
         return $QcInfoId;
     }
+    public static function getQcData($millerInfoId){
+        return DB::table('tsm_qc_info')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->first();
 
+    }
 
 
 }

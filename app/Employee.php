@@ -12,16 +12,18 @@ class Employee extends Model
 
 
     public static function insertMillerEmployeeInfo($request){
-        $EmployeeInfoId = DB::table('tsm_qc_info')->insertGetId([
+        $EmployeeInfoId = DB::table('ssm_millemp_info')->insertGetId([
             'MILL_ID' => $request->input('MILL_ID'),
-            'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
-            'SOP_DESC' => $request->input('SOP_DESC'),
-            'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
-            'MONITORING_FLG' => $request->input('MONITORING_FLG'),
-            'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
-            'LAB_PERSON' => $request->input('LAB_PERSON'),
+            'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
+            'TOTFEM_EMP' => $request->input('TOTFEM_EMP'),
+            'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
+            'FULLTIMEFEM_EMP' => $request->input('FULLTIMEFEM_EMP'),
+            'PARTTIMEMALE_EMP' => $request->input('PARTTIMEMALE_EMP'),
+            'PARTTIMEFEM_EMP' => $request->input('PARTTIMEFEM_EMP'),
+            'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
+            'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
             'REMARKS' => $request->input('REMARKS'),
-             'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
 

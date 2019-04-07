@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entrepreneur;
 use App\LookupGroupData;
 use App\Certificate;
 use App\SupplierProfile;
@@ -53,10 +54,12 @@ class CertificateController extends Controller
         if($validator->fails()){
             return Redirect::back()->withErrors($validator);
         }else {
+            $millerInfoId = $request->input('MILL_ID');
             //$this->pr($request->input());
             $reqTime = count($_POST['CERTIFICATE_TYPE_ID']); //$this->pr($request->file('user_image'));
             for($i=0; $i<$reqTime; $i++){
                 // file upload
+                $userImageName[$i] = '';
                 if($request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
                     try {
                         $file = $request->file('user_image')[$i];
@@ -70,7 +73,7 @@ class CertificateController extends Controller
                     }
                 }
                 $data = ([
-                    //'MILL_ID' => $request->input('MILL_ID'),
+                    'MILL_ID' => $request->input('MILL_ID'),
                     'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
                     'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
                     'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
@@ -91,7 +94,7 @@ class CertificateController extends Controller
             }
 
             if($insert){
-                return redirect('/mill-info')->with('success', 'Certificate Has been Added !');
+                return redirect('/qc-info/createQc/'.$millerInfoId)->with('success', 'Certificate Has been Added !');
             }
         }
     }
@@ -187,7 +190,8 @@ class CertificateController extends Controller
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy'));
+        $editData = Entrepreneur::getEntrepreneurData($millerInfoId);
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
     }
 
 }

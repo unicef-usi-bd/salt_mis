@@ -85,5 +85,11 @@ class Entrepreneur extends Model
      public static function deleteMonitorData($id){
         return DB::table('tsm_millmonitore')->where('MILLMONITORE_ID', $id)->delete();
      }
+    public static function getEntrepreneurData($millerInfoId){
+        return DB::table('ssm_entrepreneur_info')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->first();
+
+    }
 
 }

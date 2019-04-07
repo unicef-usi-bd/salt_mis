@@ -30,6 +30,23 @@ class MillerInfo extends Model
 
          return $millInfoId;
      }
+    public static function getMillData($millerInfoId){
+        return DB::table('ssm_mill_info')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->first();
+
+    }
+//    public static function getAllData($millerInfoId){
+//        return DB::table('ssm_mill_info')
+//            ->select('ssm_mill_info.*','ssm_entrepreneur_info.MILL_ID','ssm_certificate_info.MILL_ID','tsm_qc_info.MILL_ID','ssm_millemp_info.MILL_ID')
+//            ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
+//            ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
+//            ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
+//            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+//            ->where('MILL_ID','=',$millerInfoId)
+//            ->first();
+//
+//    }
 
 
 
