@@ -55,6 +55,7 @@
                                 <div class="col-md-12">
 
                                     <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" >
+                                    {{--<form action="{{ url('/mill-info/'.$editMillData->MILL_ID) }}" method="post" class="form-horizontal" role="form" >--}}
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -280,14 +281,14 @@
                                             <tr>
                                                 <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
                                                 <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                                                <th style="width: ;">District</th>
-                                                <th style="width: ;">Upazila</th>
+                                                <th style="">District</th>
+                                                <th style="">Upazila</th>
                                                 <th style="width: 100px;">Union</th>
-                                                <th style="width: ;" >NID</th>
-                                                <th style="width: ;">Mobile 1</th>
-                                                <th  style="width: ;">Mobile 2</th>
-                                                <th  style="width: ;">Email</th>
-                                                <th  style="width: ;">Remarks</th>
+                                                <th style="" >NID</th>
+                                                <th style="">Mobile 1</th>
+                                                <th  style="">Mobile 2</th>
+                                                <th  style="">Email</th>
+                                                <th  style="">Remarks</th>
                                                 <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                                             </tr>
                                             </thead>
@@ -375,6 +376,7 @@
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                                     Save & Next
                                                 </button>
+
                                             </div>
                                         </div>
                                     </form>
@@ -410,7 +412,6 @@
     @include('masterGlobal.getDistrict')
     @include('masterGlobal.getUpazila')
     @include('masterGlobal.getUnion')
-    @include('masterGlobal.getDistrictUpazilaUnion')
     @include('masterGlobal.getMillersId')
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -456,6 +457,7 @@
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
+    @include('masterGlobal.getDistrictUpazilaUnion')
 
 
 @endsection

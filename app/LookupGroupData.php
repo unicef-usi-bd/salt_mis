@@ -10,7 +10,7 @@ class LookupGroupData extends Model
 {
     public static function getActiveGroupDataByLookupGroup($id){
         return DB::table('ssc_lookupchd')
-            ->select('LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION')
+            ->select('LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID')
             ->where('LOOKUPMST_ID', '=', $id)
             ->where('ACTIVE_FLG', '=', 1)
             ->get();
