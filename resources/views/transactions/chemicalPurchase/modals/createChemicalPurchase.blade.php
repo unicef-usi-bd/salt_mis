@@ -58,7 +58,7 @@
                                 @foreach($supplierName as $name)
                                 <option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>
                                 @endforeach
-                                <option value="1" >Other</option>
+                                <option value="10.01" >Other</option>
                             </select>
                         </span>
                     </div>
@@ -127,7 +127,7 @@
     var Privileges = jQuery('#privileges');
     var select = this.value;
     Privileges.change(function () {
-        if ($(this).val() == 1) {
+        if ($(this).val() == 10.01) {
             $('.resources').show();
         }
         else $('.resources').hide();
