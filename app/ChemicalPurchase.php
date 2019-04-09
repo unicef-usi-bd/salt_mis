@@ -63,10 +63,11 @@ class ChemicalPurchase extends Model
         }
         if($chemicalPurchaseChdId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
+                'TRAN_TYPE' => 'C', //C  = Chemical
                 'TRAN_NO' => $chemicalPurchaseChdId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'CP', //chemical receive
+                'TRAN_FLAG' => 'CP', // CP = chemical receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO')
             ]);
         }
@@ -119,9 +120,10 @@ class ChemicalPurchase extends Model
         if($chemicalPurchaseChdId){
             $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.STOCK_NO',$id)->update([
                 'TRAN_NO' => $id,
+                'TRAN_TYPE' => 'C', // C = Chemical
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'CP', //chemical receive
+                'TRAN_FLAG' => 'CP', //CP = chemical receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
