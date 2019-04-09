@@ -46,6 +46,7 @@ class RequireChemicalMst extends Model
 
         return $update;
     }
+
     public static function deleteRequireChemicalPerKg($id){
         return DB::table('smm_rmallocationmst')->where('RMALLOMST_ID', $id)->delete();
     }
