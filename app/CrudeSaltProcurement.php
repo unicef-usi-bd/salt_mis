@@ -54,7 +54,7 @@ class CrudeSaltProcurement extends Model
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
                 'TRAN_DATE' => date("Y-m-d h:i:s"),
                 'TRAN_TYPE' => 'S', //S  = Salt
-                'TRAN_NO' => $crudeSaltChdId,
+                'TRAN_NO' => $crudeSaltMstId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
                 'TRAN_FLAG' => 'SP', // SP = Salt Purchase
@@ -101,8 +101,8 @@ class CrudeSaltProcurement extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
         if ($crudeSaltMstId){
-            $crudeSaltChdId = DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVECHD_ID',$id)->update([
-                'RECEIVEMST_ID' => $id,
+            $crudeSaltChdId = DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
+                //'RECEIVEMST_ID' => $id,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
                 'UPDATE_BY' => Auth::user()->id,
@@ -110,8 +110,8 @@ class CrudeSaltProcurement extends Model
             ]);
         }
         if($crudeSaltChdId){
-            $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.STOCK_NO',$id)->update([
-                'TRAN_NO' => $id,
+            $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
+                //'TRAN_NO' => $id,
                 'TRAN_DATE' => date("Y-m-d h:i:s"),
                 'TRAN_TYPE' => 'S', //S  = Salt
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
@@ -125,9 +125,9 @@ class CrudeSaltProcurement extends Model
     }
 
     public  static function deleteCrudeSaltPurchase($id){
-        $deleteStock = DB::table('tmm_itemstock')->where('STOCK_NO',$id)->delete();
+        $deleteStock = DB::table('tmm_itemstock')->where('TRAN_NO',$id)->delete();
         if($deleteStock){
-            $deleteChd = DB::table('tmm_receivechd')->where('RECEIVECHD_ID', $id)->delete();
+            $deleteChd = DB::table('tmm_receivechd')->where('RECEIVEMST_ID', $id)->delete();
             //return $deleteChd;
         }
 
