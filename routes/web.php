@@ -64,24 +64,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
 
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
-    Route::resource('require-chemical-per-kg','RequireChemicalPerKgController');//jalal
-    Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
-    Route::resource('require-chemical-mst','RequireChemicalMstController');//jalal
-    Route::resource('require-chemical-chd','RequireChemicalChdController');//
-    Route::get('require-chemical-chd/create-data/{id}', 'RequireChemicalChdController@createData'); //jalal
 
 
 
-    Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
 
-    Route::resource('monitoring', 'MonitoringController'); //Azharul
-
-    Route::resource('supplier-profile', 'SupplierProfileController'); //Azharul
-    Route::get('supplier-profile/get-district/{id}', 'SupplierProfileController@getDistrictByAjax'); //Azharul
-    Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
-    Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
-
-    Route::resource('mill-info', 'MillerInfoController'); //Azharul
     Route::resource('entrepreneur-info', 'EntrepreneurController'); //Azharul
     Route::get('entrepreneur-info/createEntrepreneur/{millInfoId}', 'EntrepreneurController@createEntrepreneur'); //Azharul
 
@@ -97,8 +83,29 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('employee-info', 'EmployeeController'); //Azharul
     Route::get('employee-info/createEmployee/{millInfoId}', 'EmployeeController@createEmployee'); //Azharul
 
+
+
     //transaction
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
     Route::resource('washing-crushing','WashingAndCrushingController');//Rubiyat
+
+    //Profile
+    Route::resource('mill-info', 'MillerInfoController'); //Azharul
+    Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
+    Route::resource('supplier-profile', 'SupplierProfileController'); //Azharul
+    Route::get('supplier-profile/get-district/{id}', 'SupplierProfileController@getDistrictByAjax'); //Azharul
+    Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
+    Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
+
+
+    //chemical setup
+    Route::resource('crude-salt-details', 'CrudeSaltDetailsController'); //Azharul
+    Route::resource('require-chemical-per-kg','RequireChemicalPerKgController');//jalal
+    Route::resource('require-chemical-mst','RequireChemicalMstController');//jalal
+    Route::resource('require-chemical-chd','RequireChemicalChdController');//
+    Route::get('require-chemical-chd/create-data/{id}', 'RequireChemicalChdController@createData'); //jalal
+
+    //monitor
+    Route::resource('monitoring', 'MonitoringController'); //Azharul
 });
 
