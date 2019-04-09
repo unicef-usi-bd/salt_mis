@@ -51,7 +51,6 @@
                             <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($supplierName as $name)
-                                    {{--<option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>--}}
                                     <option value="{{ $name->SUPP_ID_AUTO }}" @if($name->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $name->TRADING_NAME }}</option>
                                 @endforeach
                             </select>

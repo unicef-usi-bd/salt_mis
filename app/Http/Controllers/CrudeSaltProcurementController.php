@@ -35,12 +35,12 @@ class CrudeSaltProcurementController extends Controller
         $heading=array(
             'title'=> $title,
             'library'=>'datatable',
-            'modalSize'=>'modal-md',
+            'modalSize'=>'modal-lg',
             'action'=>'crude-salt-procurement/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-
-        return view('transactions.crudeSaltProcurement.crudeSaltProcurementIndex', compact( 'heading','previllage'));
+        $crudeSalt = CrudeSaltProcurement::crudeSaltePurchase();
+        return view('transactions.crudeSaltProcurement.crudeSaltProcurementIndex', compact( 'heading','previllage','crudeSalt'));
     }
 
     /**
@@ -53,7 +53,9 @@ class CrudeSaltProcurementController extends Controller
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
         $crudeSaltSuppliers = SupplierProfile::getCrudeSaltSupllier($this->crudeSaltSupplierTypeId);
         $crudeSaltSources = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudeSaltSourceId);
-        return view('transactions.crudeSaltProcurement.modals.createCrudeSaltProcurement',compact('crudeSaltTypes','crudeSaltSuppliers','crudeSaltSources'));
+        $importedId = LookupGroupData::viewSSCLookGroupData($this->importerId);
+        $importedCrudeSaltCountry = CrudeSaltProcurement::getCountryName();
+        return view('transactions.crudeSaltProcurement.modals.createCrudeSaltProcurement',compact('crudeSaltTypes','crudeSaltSuppliers','crudeSaltSources','importedId','importedCrudeSaltCountry'));
     }
 
     /**
@@ -64,7 +66,28 @@ class CrudeSaltProcurementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'RCV_QTY' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            //$this->pr($request->input());
+            $crudeSalte = CrudeSaltProcurement::insertCrudeSaltData($request);
+
+            if($crudeSalte){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/crude-salt-procurement')->with('success', 'Crude Salt Has been Created !');
+            }
+        }
     }
 
     /**
@@ -73,9 +96,10 @@ class CrudeSaltProcurementController extends Controller
      * @param  \App\CrudeSaltProcurement  $crudeSaltProcurement
      * @return \Illuminate\Http\Response
      */
-    public function show(CrudeSaltProcurement $crudeSaltProcurement)
+    public function show($id)
     {
-        //
+        $crudeSaltShow = CrudeSaltProcurement::crudeSaltPurchaseShow($id);
+        return view('transactions.crudeSaltProcurement.modals.viewCrudeSaltProcurement',compact('crudeSaltShow'));
     }
 
     /**
@@ -84,9 +108,13 @@ class CrudeSaltProcurementController extends Controller
      * @param  \App\CrudeSaltProcurement  $crudeSaltProcurement
      * @return \Illuminate\Http\Response
      */
-    public function edit(CrudeSaltProcurement $crudeSaltProcurement)
+    public function edit($id)
     {
-        //
+        $editCrudeSalt = CrudeSaltProcurement::editCrudeSaltPurchase($id);
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        $crudeSaltSuppliers = SupplierProfile::getCrudeSaltSupllier($this->crudeSaltSupplierTypeId);
+        $crudeSaltSources = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudeSaltSourceId);
+        return view('transactions.crudeSaltProcurement.modals.editCrudeSaltProcurement',compact('editCrudeSalt','crudeSaltSources','crudeSaltTypes','crudeSaltSuppliers'));
     }
 
     /**
@@ -96,9 +124,30 @@ class CrudeSaltProcurementController extends Controller
      * @param  \App\CrudeSaltProcurement  $crudeSaltProcurement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CrudeSaltProcurement $crudeSaltProcurement)
+    public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'RCV_QTY' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            //$this->pr($request->input());
+            $crudeSalteUpdate = CrudeSaltProcurement::updateCrudeSaltPurchase($request,$id);
+
+            if($crudeSalteUpdate){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/crude-salt-procurement')->with('success', 'Crude Salt Has been Updated !');
+            }
+        }
     }
 
     /**
@@ -107,8 +156,22 @@ class CrudeSaltProcurementController extends Controller
      * @param  \App\CrudeSaltProcurement  $crudeSaltProcurement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CrudeSaltProcurement $crudeSaltProcurement)
+    public function destroy($id)
     {
-        //
+        $delete = CrudeSaltProcurement::deleteCrudeSaltPurchase($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
+
 }

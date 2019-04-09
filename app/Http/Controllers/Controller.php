@@ -35,6 +35,8 @@ class Controller extends BaseController
     public $crudeSaltSupplierTypeId = 41;
     public $chemicalSupplierTypeId = 42;
 
+    public $importerId = 44;
+
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
