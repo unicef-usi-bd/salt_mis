@@ -5,7 +5,7 @@
             <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
                 @csrf
                 @if(isset($createMillerInfo))
-                    <input type="text" value="{{ $millerInfoId }}">
+                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
                 <div class="col-md-6">
                     <div class="form-group">

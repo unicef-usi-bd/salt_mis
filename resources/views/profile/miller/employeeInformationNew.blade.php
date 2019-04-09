@@ -56,7 +56,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="MILL_NAME" class="chosen-container">
+                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editMillData->MILL_NAME }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -67,7 +67,8 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($processType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -81,7 +82,7 @@
                                                        <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($millType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -95,7 +96,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($capacity as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -109,7 +110,7 @@
                                                        <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($getZone as $row)
-                                                               <option value="{{ $row->ZONE_CODE }}">{{ $row->ZONE_NAME }}</option>
+                                                               <option value="{{ $row->ZONE_CODE }}" @if($editMillData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -120,7 +121,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Millers ID</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId">
+                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editMillData->MILLERS_ID }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -138,7 +139,7 @@
                                                         <select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
                                                             <option value=""></option>
                                                             @foreach($getDivision as $row)
-                                                                <option value="{{ $row->DIVISION_ID }}">{{ $row->DIVISION_NAME }}</option>
+                                                                <option value="{{ $row->DIVISION_ID }}" @if($editMillData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
                                                             @endforeach
 
                                                         </select>
@@ -150,8 +151,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
-
+                                                           <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
                                                        </select>
                                                     </span>
                                                 </div>
@@ -161,7 +161,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
+                                                           <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
                                                        </select>
                                                     </span>
                                                 </div>
@@ -171,7 +171,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UNION_ID" class="chosen-select chosen-container union" name="UNION_ID" data-placeholder="Select">
-                                                           <option value="">Select</option>
+                                                           <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
                                                         </select>
                                                     </span>
                                                 </div>
@@ -181,8 +181,13 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
-                                                           <option value="1">Active</option>
-                                                           <option value="0">Inactive</option>
+                                                               @if(isset($editMillData))
+                                                               <option value="1" @if($editMillData->ACTIVE_FLG=='1') selected  @endif >Active</option>
+                                                               <option value="0" @if($editMillData->ACTIVE_FLG=='0') selected  @endif >Inactive</option>
+                                                           @else
+                                                               <option value="1">Active</option>
+                                                               <option value="0">Inactive</option>
+                                                           @endif
                                                        </select>
                                                     </span>
                                                 </div>
@@ -191,7 +196,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" class="chosen-container">
+                                                       <input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
@@ -216,14 +221,14 @@
                         </div>
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
-                        <div id="entrepreneur" class="tab-pane fade ">
+                        <div id="entrepreneur" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-md-12">
 
                                     <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
                                         @csrf
                                         @if(isset($millerInfoId))
-                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -233,7 +238,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">
                                                            <option value=""></option>
                                                             @foreach($registrationType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->REG_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -252,7 +257,7 @@
                                                         <select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">
                                                             <option value=""></option>
                                                             @foreach($ownerType as $row)
-                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                                <option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                             @endforeach
 
                                                         </select>
@@ -280,11 +285,12 @@
                                             </tr>
                                             </thead>
                                             <tbody class="newRow">
+                                            @foreach($getEntrepreneurRowData as $editEntrepData)
                                             <tr class="rowFirst">
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />
+                                                        <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="{{ $editEntrepData->OWNER_NAME }}" class="width-100 OWNER_NAME"  />
                                                     </span>
                                                 </td>
                                                 <td>
@@ -292,7 +298,7 @@
                                                         <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($getDivision as $row)
-                                                                <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                                                <option value="{{$row->DIVISION_ID}}" @if($editEntrepData->DIVISION_ID==$row->DIVISION_ID) selected @endif> {{$row->DIVISION_NAME}}</option>
                                                             @endforeach
                                                         </select>
                                                     </span>
@@ -300,56 +306,57 @@
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
-                                                            <option value="">Select</option>
+                                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                          </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
-                                                            <option value=""> Select </option>
+                                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                         </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
-                                                            <option value="">Select</option>
+                                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                         </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="NID[]" id="inputSuccess total_amount" value="" class="width-100 NID"  />
+                                                        <input type="text" name="NID[]" id="inputSuccess total_amount" value="{{ $editEntrepData->NID }}" class="width-100 NID"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_1"  />
+                                                        <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_1 }}" class="width-100 MOBILE_1"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_2"  />
+                                                        <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_2 }}" class="width-100 MOBILE_2"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
-                                                        <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
+                                                        <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="width-100 EMAIL"  />
+                                                        {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editEntrepData->REMARKS }}" class="width-100 REMARKS"  />
                                                     </span>
                                                 </td>
                                                 <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                                             </tr>
+                                             @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
@@ -361,7 +368,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -379,7 +386,7 @@
                                     <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                                         @csrf
                                         @if(isset($millerInfoId))
-                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                                             <thead>
@@ -395,6 +402,7 @@
                                             </tr>
                                             </thead>
                                             <tbody class="newRow2">
+                                            @foreach($editCertificateData as $editCertData)
                                             <tr class="rowFirst2">
 
                                                 <td>
@@ -402,7 +410,7 @@
                                                         <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($certificate as $row)
-                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                                <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                             @endforeach
                                                         </select>
                                                     </span>
@@ -412,44 +420,46 @@
                                                         <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($issueBy as $row)
-                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                                <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                             @endforeach
                                                          </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="date" name="ISSUING_DATE" class="chosen-container ISSUING_DATE">
+                                                        <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
                                                     </span>
                                                 </td>
 
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
+                                                        <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
                                                         <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE">
+                                                       <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
                                                     </span>
                                                 </td>
 
                                                 <td>
                                                     <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                                     </span>
                                                 </td>
                                                 <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                                             </tr>
+                                             @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
@@ -461,7 +471,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -508,18 +518,18 @@
                                     <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
                                         @csrf
                                         @if(isset($millerInfoId))
-                                            <input type="text" value="{{ $millerInfoId }}">
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
                                                 <div class="col-sm-7">
                                                     <label>
-                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1" @if ($editQcData->LABORATORY_FLG==1) checked @endif/>
                                                         <span class="lbl"> Yes</span>
                                                     </label>
                                                     <label>
-                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LABORATORY_FLG==0) checked @endif/>
                                                         <span class="lbl"> No</span>
                                                     </label>
                                                 </div>
@@ -529,11 +539,11 @@
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> </label>
                                                 <div class="col-sm-7">
                                                     <label>
-                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"   value="1" @if ($editQcData->IODINE_CHECK_FLG==1) checked @endif/>
                                                         <span class="lbl"> Yes</span>
                                                     </label>
                                                     <label>
-                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"  @if ($editQcData->IODINE_CHECK_FLG==0) checked @endif/>
                                                         <span class="lbl"> No</span>
                                                     </label>
                                                 </div>
@@ -542,11 +552,11 @@
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b> </label>
                                                 <div class="col-sm-7">
                                                     <label>
-                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1" @if ($editQcData->LAB_MAN_FLG==1) checked @endif/>
                                                         <span class="lbl"> Yes</span>
                                                     </label>
                                                     <label>
-                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LAB_MAN_FLG==0) checked @endif/>
                                                         <span class="lbl"> No</span>
                                                     </label>
                                                 </div>
@@ -555,11 +565,11 @@
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
                                                 <div class="col-sm-7">
                                                     <label>
-                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
+                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1" @if ($editQcData->MONITORING_FLG==1) checked @endif/>
                                                         <span class="lbl"> Yes</span>
                                                     </label>
                                                     <label>
-                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
+                                                        <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->MONITORING_FLG==0) checked @endif/>
                                                         <span class="lbl"> No</span>
                                                     </label>
                                                 </div>
@@ -574,7 +584,7 @@
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Standard Operation Procedure (SOP)</b></label>
                                                 <div class="col-sm-7">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="SOP_DESC" class="chosen-container">
+                                                       <input type="text" name="SOP_DESC" class="chosen-container" value="{{ $editQcData->SOP_DESC }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -582,7 +592,7 @@
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                                                 <div class="col-sm-7">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="LAB_PERSON" class="chosen-container">
+                                                       <input type="text" name="LAB_PERSON" class="chosen-container" value="{{ $editQcData->LAB_PERSON }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -590,7 +600,7 @@
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-7">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" class="chosen-container" value="{{ $editData->REMARKS }}">
+                                                       <input type="text" name="REMARKS" class="chosen-container" value="{{ $editQcData->REMARKS }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -608,7 +618,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -625,7 +635,7 @@
                                     <form action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >
                                         @csrf
                                         @if(isset($millerInfoId))
-                                            <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <div class="col-md-6">
                                             <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
@@ -706,7 +716,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Submit
                                                 </button>
                                             </div>
                                         </div>

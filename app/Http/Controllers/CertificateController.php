@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entrepreneur;
 use App\LookupGroupData;
+use App\MillerInfo;
 use App\Certificate;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
@@ -190,8 +191,10 @@ class CertificateController extends Controller
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        $editData = Entrepreneur::getEntrepreneurData($millerInfoId);
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editData'));
+        $editMillData = MillerInfo::getMillData($millerInfoId);
+        $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
+        $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData'));
     }
 
 }

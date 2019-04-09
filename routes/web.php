@@ -99,5 +99,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     //transaction
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
+    Route::resource('washing-crushing','WashingAndCrushingController');//Rubiyat
 });
 

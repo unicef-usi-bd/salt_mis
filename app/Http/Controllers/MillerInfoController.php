@@ -44,7 +44,7 @@ class MillerInfoController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $monitoring = Entrepreneur::getMonitorData();
+        //$monitoring = Entrepreneur::getMonitorData();
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
 
@@ -57,8 +57,12 @@ class MillerInfoController extends Controller
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        $millerList = MillerInfo::getAllMillDataList();
 
-        return view('profile.miller.millerIndex', compact( 'heading','previllage','monitoring','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy'));
+
+        //$this->pr($millerList);
+
+        return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','millerList'));
     }
 
     /**
@@ -93,7 +97,6 @@ class MillerInfoController extends Controller
             if($millerInfoId){
                 return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
 
-
              }
         }
     }
@@ -106,7 +109,9 @@ class MillerInfoController extends Controller
      */
     public function show($id)
     {
-
+        $viewMillerData = MillerInfo::showMillereProfile($id);
+        $millerListForEntrepreneur = MillerInfo::showMillereEntreprepProfile($id);
+        return view('profile.miller.modal.viewMillerIndex', compact('viewMillerData','millerListForEntrepreneur'));
     }
 
     /**
@@ -129,7 +134,22 @@ class MillerInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = array(
+            'MILL_NAME' => 'required',
+        );
 
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $millerInfoId = $request->input('MILL_ID');
+            $updateMillData = MillerInfo::updateMillData($request, $id);
+            if($updateMillData){
+//                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
+                return "Mill informatin has been updated!";
+            }
+        }
 
     }
 
@@ -141,7 +161,20 @@ class MillerInfoController extends Controller
      */
     public function destroy($id)
     {
-
+        //$this->pr($id);
+        $delete = MillerInfo::deleteMillerProfile($id);
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Miller Profile Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 
 }

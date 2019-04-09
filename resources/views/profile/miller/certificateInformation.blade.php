@@ -5,7 +5,7 @@
             <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
                 @if(isset($millerInfoId))
-                    <input type="text" value="{{ $millerInfoId }}" name="MILL_ID">
+                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>

@@ -10,17 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entrepreneur extends Model
 {
 
-
-
-     public static function getMonitorData(){
-        return DB::table('tsm_millmonitore')
-            ->select('tsm_millmonitore.*', 'ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftjoin('ssc_lookupchd','tsm_millmonitore.agency_id', '=', 'ssc_lookupchd.LOOKUPCHD_ID')
-            ->orderByRaw('ssc_lookupchd.LOOKUPCHD_ID ASC')
-            ->get();
-    }
-
-     public static function insertMillerProfile($request){
+    public static function insertMillerProfile($request){
          $reqTime = count($_POST['OWNER_NAME']);
          for($i=0; $i<$reqTime; $i++){
              $data = ([
@@ -49,46 +39,24 @@ class Entrepreneur extends Model
          return $insert;
      }
 
-     public static function showMonitorData($id){
-         return DB::table('tsm_millmonitore')
-             ->select('tsm_millmonitore.*', 'ssc_lookupchd.LOOKUPCHD_NAME')
-             ->leftjoin('ssc_lookupchd','tsm_millmonitore.agency_id', '=', 'ssc_lookupchd.LOOKUPCHD_ID')
-             ->orderByRaw('ssc_lookupchd.LOOKUPCHD_ID ASC')
-             ->where('MILLMONITORE_ID', '=', $id)
-             ->first();
-     }
-    public static function agencyName ()
-    {
-        return DB::table('ssc_lookupchd')->where('LOOKUPMST_ID', '=', 1)->get();
-    }
-     public static function editMonitorData($id){
-         return DB::table('tsm_millmonitore')
-             ->select('tsm_millmonitore.*', 'ssc_lookupchd.LOOKUPCHD_NAME')
-             ->leftjoin('ssc_lookupchd','tsm_millmonitore.agency_id', '=', 'ssc_lookupchd.LOOKUPCHD_ID')
-             ->orderByRaw('ssc_lookupchd.LOOKUPCHD_ID ASC')
-             ->where('MILLMONITORE_ID', '=', $id)
-             ->first();
-     }
-
-     public static function updateMonitorData($request,$id){
-        $update = DB::table('tsm_millmonitore')->where('MILLMONITORE_ID', '=' , $id)->update([
-            'AGENCY_ID' => $request->input('AGENCY_ID'),
-            'MOMITOR_DATE' =>date('Y-m-d', strtotime($request->input('MOMITOR_DATE'))),
-            'REMARKS' => $request->input('REMARKS'),
-             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-             'UPDATE_BY' => Auth::user()->id
-         ]);
-
-       return $update;
-     }
-
-     public static function deleteMonitorData($id){
-        return DB::table('tsm_millmonitore')->where('MILLMONITORE_ID', $id)->delete();
-     }
     public static function getEntrepreneurData($millerInfoId){
         return DB::table('ssm_entrepreneur_info')
+            ->select('ssm_entrepreneur_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
+            ->leftJoin('ssc_districts','ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
+            ->leftJoin('ssc_upazilas','ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
+            ->leftJoin('ssc_unions','ssm_entrepreneur_info.UNION_ID','=','ssc_unions.UNION_ID')
             ->where('MILL_ID','=',$millerInfoId)
             ->first();
+
+    }
+    public static function getEntrepreneurRowData($millerInfoId){
+        return DB::table('ssm_entrepreneur_info')
+            ->select('ssm_entrepreneur_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
+            ->leftJoin('ssc_districts','ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
+            ->leftJoin('ssc_upazilas','ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
+            ->leftJoin('ssc_unions','ssm_entrepreneur_info.UNION_ID','=','ssc_unions.UNION_ID')
+            ->where('MILL_ID','=',$millerInfoId)
+            ->get();
 
     }
 

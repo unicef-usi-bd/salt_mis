@@ -15,6 +15,12 @@
         .select2{
             width:100% !important;
         }
+        .disabledTab{
+            pointer-events: none;
+        }
+        /*.nav-tabs>li.active>a{*/
+            /*background-color: #1CABE2;*/
+        /*}*/
 
         </style>
 
@@ -37,10 +43,10 @@
                     <ul class="nav nav-tabs" id="myTab">
 
                             <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                            <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                            <li> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                            <li> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                            <li> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">
@@ -66,6 +72,91 @@
 
                     </div>
                 </div>
+
+                <br><br>
+                <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('module.module_list') }}">
+                    <thead>
+                    <tr>
+                        <th class="fixedWidth" style="width: 5px;">Sl</th>
+                        <th class="center fixedWidth">Entrepreneur Name</th>
+                        <th class="center fixedWidth">Mill Name</th>
+                        <th class="center fixedWidth">Type</th>
+                        <th class="center fixedWidth">Certificate Renewing Date</th>
+                        <th class="center fixedWidth">Full Time Employee</th>
+                        <th class="center fixedWidth">Active Status</th>
+                        <th class="center fixedWidth">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $sl=0;?>
+                    @foreach( $millerList as $row)
+                        <tr>
+                            <td class="center" >  {{ ++$sl }} </td>
+                            <td> {{ $row->OWNER_NAME }} </td>
+                            <td> {{ $row->MILL_NAME }} </td>
+                            <td> {{ $row->LOOKUPCHD_NAME }} </td>
+                            <td> {{ $row->RENEWING_DATE }} </td>
+                            <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
+                            <td class="hidden-480">
+                                <?php  if($row->ACTIVE_FLG == 0){ ?>
+                                <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
+                                <?php }else{ ?>
+                                <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                                <?php } ?>
+
+                            </td>
+
+                            <td class="">
+                                <div class="hidden-sm hidden-xs action-buttons">
+                                    {{--<a class="blue showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID" }}' data-target=".modal" role="button"  data-toggle="modal" title="View Modules">--}}
+                                    {{--<i class="ace-icon fa fa fa-eye bigger-130"></i>--}}
+                                    {{--</a>--}}
+
+                                    @php
+                                        $editPermissionLevel = $previllage->UPDATE;
+                                        $viewPermissionLevel = $previllage->READ;
+                                    @endphp
+                                    @if($viewPermissionLevel == 1)
+                                        <a href="#" id='{{ "mill-info/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Details">
+                                                        <span class="blue">
+                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
+                                                        </span>
+                                        </a>
+                                    @else
+                                        <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Miller Profile Details" style="display: none;">
+                                                        <span class="blue">
+                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
+                                                        </span>
+                                        </a>
+                                    @endif
+                                    @if($editPermissionLevel == 1)
+                                        <a class="green showModalGlobal" id='{{ "mill-info/1/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
+                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                        </a>
+
+
+                                    @else
+                                        <a class="green showModalGlobal" id='{{ "mill-info/1/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
+                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                        </a>
+
+                                    @endif
+                                    @if($previllage->DELETE == 1)
+
+                                        <a class="red clickForDelete row{{ $row->MILL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'mill-info/'.$row->MILL_ID }}"  role="button" title="Delete Miller Profile Details">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
+
+                                    @endif
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div><!-- /.col -->
 
             <div class="space"></div>
@@ -124,5 +215,6 @@
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
     @include('masterGlobal.getDistrictUpazilaUnion')
+    @include('masterGlobal.ajaxFormSubmit')
 
 @endsection
