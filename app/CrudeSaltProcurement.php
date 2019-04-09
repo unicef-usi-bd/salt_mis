@@ -46,15 +46,21 @@ class CrudeSaltProcurement extends Model
                 'RECEIVEMST_ID' => $crudeSaltMstId,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
         if($crudeSaltChdId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
+                'TRAN_DATE' => date("Y-m-d h:i:s"),
+                'TRAN_TYPE' => 'S', //S  = Salt
                 'TRAN_NO' => $crudeSaltChdId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'SP', // Salt Purchase
-                'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO')
+                'TRAN_FLAG' => 'SP', // SP = Salt Purchase
+                'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
         return $itemStokId;
@@ -99,15 +105,18 @@ class CrudeSaltProcurement extends Model
                 'RECEIVEMST_ID' => $id,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
+                'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
         if($crudeSaltChdId){
             $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.STOCK_NO',$id)->update([
                 'TRAN_NO' => $id,
+                'TRAN_DATE' => date("Y-m-d h:i:s"),
+                'TRAN_TYPE' => 'S', //S  = Salt
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'SP', // Salt Purchase
+                'TRAN_FLAG' => 'SP', // SP = alt Purchase
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
