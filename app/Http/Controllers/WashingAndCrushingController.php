@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use App\WashingAndCrushing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class WashingAndCrushingController extends Controller
 {
@@ -15,7 +21,23 @@ class WashingAndCrushingController extends Controller
      */
     public function index()
     {
-        //
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
+
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+
+//        $title = trans('lookupGroupIndex.create_lookup');
+        $title = trans('Crude Salt Create');
+
+        $heading=array(
+            'title'=> $title,
+            'library'=>'datatable',
+            'modalSize'=>'modal-md',
+            'action'=>'washing-crushing/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+        return view('transactions.washingAndCrushing.washingAndCrushingIndex',compact('heading','previllage'));
     }
 
     /**
@@ -25,7 +47,10 @@ class WashingAndCrushingController extends Controller
      */
     public function create()
     {
-        //
+        $digits = 4;
+        $batch = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));
     }
 
     /**
