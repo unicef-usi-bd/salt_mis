@@ -16,21 +16,40 @@ class WashingAndCrushing extends Model
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
         if ($washingCrushingMstId){
-            $chemicalPurchaseChdId = DB::table('tmm_washcrashchd')->insertGetId([
+            $washingCrushingChdId = DB::table('tmm_washcrashchd')->insertGetId([
                 'WASHCRASHMST_ID' => $washingCrushingMstId,
                 'ITEM_ID' => $request->input('ITEM_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
-        if($chemicalPurchaseChdId){
-            $itemStokId = DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_NO' => $chemicalPurchaseChdId,
+        if($washingCrushingChdId){
+
+            $reduceRawSaltStock = DB::table('tmm_itemstock')->insertGetId([
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
+                'TRAN_TYPE' => 'S', //S  = Salt
+                'TRAN_NO' => $washingCrushingChdId,
                 'ITEM_NO' => $request->input('ITEM_ID'),
-                'QTY' => $request->input('REQ_QTY'),
-                'TRAN_FLAG' => 'CP', //chemical receive
+                'QTY' => '-'.$request->input('REQ_QTY'),
+                'TRAN_FLAG' => 'SP', //SP = Salt Purchase
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO')
             ]);
+
+
+            if($reduceRawSaltStock){
+                $itemStokId = DB::table('tmm_itemstock')->insertGetId([
+                    'TRAN_NO' => $chemicalPurchaseChdId,
+                    'ITEM_NO' => $request->input('ITEM_ID'),
+                    'QTY' => $request->input('REQ_QTY'),
+                    'TRAN_FLAG' => 'CP', //chemical receive
+                    'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO')
+                ]);
+            }
+
+
+
         }
         return $itemStokId;
 
