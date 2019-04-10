@@ -28,7 +28,7 @@ class WashingAndCrushingController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Crude Salt Create');
+        $title = trans('Washing and Crashing');
 
         $heading=array(
             'title'=> $title,
@@ -61,7 +61,28 @@ class WashingAndCrushingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'REQ_QTY' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            //$this->pr($request->input());
+            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request);
+
+            if($washingAndCrashing){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
+            }
+        }
     }
 
     /**
