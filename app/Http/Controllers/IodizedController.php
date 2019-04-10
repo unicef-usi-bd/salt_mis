@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use App\Iodized;
+use App\Item;
 
 class IodizedController extends Controller
 {
@@ -14,7 +21,21 @@ class IodizedController extends Controller
      */
     public function index()
     {
-        //
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
+
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+        $heading=array(
+            'title'=>'Iodize',
+            'library'=>'datatable',
+            'modalSize'=>'modal-lg',
+            'action'=>'iodized/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+
+        //$chemicalPuchase = ChemicalPurchase::chemicalPurchase();
+        return view('transactions.iodize.iodizeIndex',compact('heading','previllage'));
     }
 
     /**
@@ -24,7 +45,14 @@ class IodizedController extends Controller
      */
     public function create()
     {
-        //
+        $digits = 4;
+        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+        $totalReduceSalt = Iodized::getTotalReduceSalt();
+        $totalSaltStock = Iodized::getSaltStock();
+        $totalSalt = $totalSaltStock - abs($totalReduceSalt);
+        //$this->pr($test);
+        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt'));
     }
 
     /**
@@ -35,7 +63,27 @@ class IodizedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'REQ_QTY' => 'required',
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+
+            $iodizeInsert = Iodized::insertIodizeData($request);
+        }
+
+
+        if ($iodizeInsert) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/iodized')->with('success', 'Iodize Created!');
+        }
     }
 
     /**

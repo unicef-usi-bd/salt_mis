@@ -32,11 +32,11 @@ class WashingAndCrushing extends Model
 
             $reduceRawSaltStock = DB::table('tmm_itemstock')->insertGetId([
                 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
-                'TRAN_TYPE' => 'WC', //S  = Salt
+                'TRAN_TYPE' => 'S', //S  = Salt
                 'TRAN_NO' => $washingCrushingMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
-                'TRAN_FLAG' => 'WS', //WS = Wash Save
+                'TRAN_FLAG' => 'WS', //WS = Wash Salt
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -46,11 +46,11 @@ class WashingAndCrushing extends Model
             if($reduceRawSaltStock){
                 $itemStokId = DB::table('tmm_itemstock')->insertGetId([
                     'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
-                    'TRAN_TYPE' => 'WC', //S  = Salt
+                    'TRAN_TYPE' => 'W', //W  = Washing
                     'TRAN_NO' => $washingCrushingMstId,
                     'ITEM_NO' => $request->input('PRODUCT_ID'),
                     'QTY' => $request->input('REQ_QTY'),
-                    'TRAN_FLAG' => 'WR', //WR = Wash Reduce
+                    'TRAN_FLAG' => 'WI', //WR = Wash Increase
                     //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                     'ENTRY_BY' => Auth::user()->id,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
