@@ -1,3 +1,8 @@
+<style>
+    .percentageSize {
+        font-size: 22px;
+    }
+</style>
 <div class="col-md-12">
     <form action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
 
@@ -34,15 +39,24 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
+                <span class="col-sm-8" style="padding: 0;">
+                     <input type="text" id="inputSuccess QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
+                </span>
+
+                <span class="col-sm-4" style="margin-top: 6px;">(Stock have: )</span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
+            <span class="col-sm-7">
                 <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
-            </div>
+            </span>
+            <span class="col-sm-1">
+                <span class="group-addon percentageSize">
+                    <i class="ace-icon fa fa-percent"></i>
+                </span>
+            </span>
         </div>
 
         <div class="form-group">
