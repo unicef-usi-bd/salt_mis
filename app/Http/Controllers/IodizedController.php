@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Iodized;
 use App\Item;
+use App\Stock;
 
 class IodizedController extends Controller
 {
@@ -48,8 +49,8 @@ class IodizedController extends Controller
         $digits = 4;
         $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $totalReduceSalt = Iodized::getTotalReduceSalt();
-        $totalSaltStock = Iodized::getSaltStock();
+        $totalReduceSalt = Stock::getTotalReduceSalt();
+        $totalSaltStock = Stock::getSaltStock();
         $totalSalt = $totalSaltStock - abs($totalReduceSalt);
         //$this->pr($test);
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt'));

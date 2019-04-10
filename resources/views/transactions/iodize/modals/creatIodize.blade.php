@@ -36,8 +36,8 @@
                         <input type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock</b><span> {{ $totalSalt }} </span></label>
+                <div class="form-group" style="margin-left: -60px; margin-top: 40px;">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span> ( Stock have {{ $totalSalt }} Kg ) </span></label>
             </div>
 
 
