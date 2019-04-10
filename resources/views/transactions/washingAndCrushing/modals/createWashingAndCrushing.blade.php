@@ -26,7 +26,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> </span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control" name="ITEM_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -42,7 +42,6 @@
                 <span class="col-sm-8" style="padding: 0;">
                      <input type="text" id="inputSuccess QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
                 </span>
-
                 <span class="col-sm-4" style="margin-top: 6px;">(Stock have: )</span>
             </div>
         </div>

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Item;
-use App\WashingAndCrushing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Iodized;
+use App\Item;
+use App\Stock;
 
-class WashingAndCrushingController extends Controller
+class IodizedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,18 +27,16 @@ class WashingAndCrushingController extends Controller
         $url = Route::getFacadeRoot()->current()->uri();
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
-
-//        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Washing and Crashing');
-
         $heading=array(
-            'title'=> $title,
+            'title'=>'Iodize',
             'library'=>'datatable',
-            'modalSize'=>'modal-md',
-            'action'=>'washing-crushing/create',
+            'modalSize'=>'modal-lg',
+            'action'=>'iodized/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-        return view('transactions.washingAndCrushing.washingAndCrushingIndex',compact('heading','previllage'));
+
+        //$chemicalPuchase = ChemicalPurchase::chemicalPurchase();
+        return view('transactions.iodize.iodizeIndex',compact('heading','previllage'));
     }
 
     /**
@@ -48,9 +47,13 @@ class WashingAndCrushingController extends Controller
     public function create()
     {
         $digits = 4;
-        $batch = rand(pow(10, $digits-1), pow(10, $digits)-1);
-        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));
+        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+        $totalReduceSalt = Stock::getTotalReduceSalt();
+        $totalSaltStock = Stock::getSaltStock();
+        $totalSalt = $totalSaltStock - abs($totalReduceSalt);
+        //$this->pr($test);
+        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt'));
     }
 
     /**
@@ -64,34 +67,33 @@ class WashingAndCrushingController extends Controller
         $rules = array(
             'REQ_QTY' => 'required',
 
-
         );
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
+        if ($validator->fails()) {
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
-        }else {
+        } else {
 
 
-            //$this->pr($request->input());
-            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request);
+            $iodizeInsert = Iodized::insertIodizeData($request);
+        }
 
-            if($washingAndCrashing){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
-            }
+
+        if ($iodizeInsert) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/iodized')->with('success', 'Iodize Created!');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\WashingAndCrushing  $washingAndCrushing
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(WashingAndCrushing $washingAndCrushing)
+    public function show($id)
     {
         //
     }
@@ -99,10 +101,10 @@ class WashingAndCrushingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\WashingAndCrushing  $washingAndCrushing
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(WashingAndCrushing $washingAndCrushing)
+    public function edit($id)
     {
         //
     }
@@ -111,10 +113,10 @@ class WashingAndCrushingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\WashingAndCrushing  $washingAndCrushing
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WashingAndCrushing $washingAndCrushing)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -122,10 +124,10 @@ class WashingAndCrushingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\WashingAndCrushing  $washingAndCrushing
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WashingAndCrushing $washingAndCrushing)
+    public function destroy($id)
     {
         //
     }
