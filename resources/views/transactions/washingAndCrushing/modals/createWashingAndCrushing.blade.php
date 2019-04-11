@@ -29,7 +29,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> </span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control salt" name="PRODUCT_ID" data-placeholder="Select or search data">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -46,7 +46,7 @@
                      <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
                 </span>
 
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $saltStock }}</span><span class="result"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt"></span><span class="result"></span>)</span>
             </div>
         </div>
 
@@ -88,27 +88,44 @@
 @include('masterGlobal.datePicker')
 
 <script>
-    $('.stockSalt').show();
-    $(document).on('keyup','.crudeSaltAmount',function () {
-        var amount = parseInt($(this).val()) || 0;
-        var saltStock = parseInt($('.stockSalt').text());
-        var remainStock = saltStock - amount;
-        var stockAmount = '<?php echo $saltStock ?>';
+    $('.stockSalt').hide();
+    $(document).on('change','.salt',function(){
+        var saltId = $(this).val();
+        $.ajax({
+            type : 'GET',
+            url : 'crude-salt-stock',
+            data : {'saltId':saltId},
+            success: function (data) {
+                console.log(data);
+                $('.stockSalt').html(data).show();
 
-        if(saltStock < amount){
-            $('.stockSalt').hide();
-            $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
-            $('.result').text(0);
-            if(amount === 0){
-                $('.stockSalt').show();
             }
-        }else{
-            $('.stockSalt').hide();
-            $('.result').text(remainStock);
-        }
+        })
+    });
+
+    //$('.stockSalt').show();
+    {{--$(document).on('keyup','.crudeSaltAmount',function () {--}}
+    {{--var amount = parseInt($(this).val()) || 0;--}}
+    {{--var saltStock = parseInt($('.stockSalt').text());--}}
+    {{--var remainStock = saltStock - amount;--}}
+    {{--var stockAmount = '<?php echo $saltStock ?>';--}}
+
+    {{--if(saltStock < amount){--}}
+    {{--$('.stockSalt').hide();--}}
+    {{--$('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();--}}
+    {{--$('.result').text(0);--}}
+    {{--if(amount === 0){--}}
+    {{--$('.stockSalt').show();--}}
+    {{--}--}}
+    {{--}else{--}}
+    {{--$('.stockSalt').hide();--}}
+    {{--$('.result').text(remainStock);--}}
+    {{--}--}}
 
 
-    })
+    {{--})--}}
+
+
 </script>
 
 

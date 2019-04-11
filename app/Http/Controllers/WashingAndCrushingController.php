@@ -54,11 +54,8 @@ class WashingAndCrushingController extends Controller
         $digits = 4;
         $batch = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        $saltStock = Stock::getSaltStock();
-        $totalReduceSalt = Stock::getTotalReduceSalt();
 
-        $saltStock = $saltStock - abs($totalReduceSalt);
-        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch','saltStock'));
+        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));
     }
 
     /**
@@ -167,5 +164,15 @@ class WashingAndCrushingController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
+    }
+
+    public function getCrudeSaltStock(Request $request){
+        $saltId = $request->input('saltId');
+        $saltStock = Stock::getSaltStock($saltId);
+        $totalReduceSalt = Stock::getTotalReduceSalt($saltId);
+
+        $saltStock = $saltStock - abs($totalReduceSalt);
+
+        return $saltStock;
     }
 }
