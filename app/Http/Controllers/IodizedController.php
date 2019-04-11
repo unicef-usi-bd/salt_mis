@@ -35,8 +35,8 @@ class IodizedController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        //$chemicalPuchase = ChemicalPurchase::chemicalPurchase();
-        return view('transactions.iodize.iodizeIndex',compact('heading','previllage'));
+        $iodizeIndex = Iodized::getIodizeData();
+        return view('transactions.iodize.iodizeIndex',compact('heading','previllage','iodizeIndex'));
     }
 
     /**
@@ -52,8 +52,11 @@ class IodizedController extends Controller
         $totalReduceSalt = Stock::getTotalReduceSalt();
         $totalSaltStock = Stock::getSaltStock();
         $totalSalt = $totalSaltStock - abs($totalReduceSalt);
+        $totalReduceChemical = Stock::getTotalReduceChemical();
+        $totalChemicalStock = Stock::getChemicalStock();
+        $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
         //$this->pr($test);
-        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt'));
+        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalChemical'));
     }
 
     /**
@@ -95,7 +98,8 @@ class IodizedController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewIodize = Iodized::showIodizeData($id);
+        return view('transactions.iodize.modals.viewIodize',compact('viewIodize'));
     }
 
     /**
@@ -106,7 +110,17 @@ class IodizedController extends Controller
      */
     public function edit($id)
     {
-        //
+       $editIodize = Iodized::editIodizeData($id);
+        $digits = 4;
+        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+        $totalReduceSalt = Stock::getTotalReduceSalt();
+        $totalSaltStock = Stock::getSaltStock();
+        $totalSalt = $totalSaltStock - abs($totalReduceSalt);
+        $totalReduceChemical = Stock::getTotalReduceChemical();
+        $totalChemicalStock = Stock::getChemicalStock();
+        $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
+       return view('transactions.iodize.modals.editIodize',compact('editIodize','batchNo','chemicleType','totalSalt','totalChemical'));
     }
 
     /**
@@ -118,7 +132,27 @@ class IodizedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'REQ_QTY' => 'required',
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+
+            $iodizeUpdate = Iodized::updateIodizeData($request,$id);
+        }
+
+
+        if ($iodizeUpdate) {
+            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+            //return json_encode('Success');
+            return redirect('/iodized')->with('success', 'Iodize Update!');
+        }
     }
 
     /**
@@ -129,6 +163,19 @@ class IodizedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Iodized::deleteIodizeData($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }

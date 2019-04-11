@@ -43,6 +43,7 @@ class MillerInfo extends Model
 
     public static function updateMillData($request,$id){
         $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
+            'MILL_NAME' => $request->input('MILL_NAME'),
             'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
             'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
             'CAPACITY_ID' => $request->input('CAPACITY_ID'),

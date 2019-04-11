@@ -24,4 +24,20 @@ class Stock extends Model
             ->where('TRAN_FLAG','=','SP')
             ->sum('tmm_itemstock.QTY');
     }
+
+    public static function getTotalReduceChemical(){
+        return DB::table('tmm_itemstock')
+            ->select('tmm_itemstock.QTY')
+            ->where('TRAN_TYPE','=','C')
+            ->where('TRAN_FLAG','=','CR')
+            ->sum('tmm_itemstock.QTY');
+    }
+
+    public static function getChemicalStock(){
+        return DB::table('tmm_itemstock')
+            ->select('tmm_itemstock.QTY')
+            ->where('TRAN_TYPE','=','C')
+            ->where('TRAN_FLAG','=','CP')
+            ->sum('tmm_itemstock.QTY');
+    }
 }

@@ -13,6 +13,12 @@ class BstiTestStandard extends Model
             ->first();
     }
 
+    public static function getBstiChemicalData(){
+        return DB::table('ssm_bsti_test')
+            ->select('ssm_bsti_test.*')
+            ->first();
+    }
+
     public static function insertBstiTestData($request){
         return DB::table('ssm_bsti_test')->insertGetId([
             'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
