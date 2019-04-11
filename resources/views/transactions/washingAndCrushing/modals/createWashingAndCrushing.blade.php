@@ -4,6 +4,9 @@
     }
 </style>
 <div class="col-md-12">
+    <div class="alert alert-danger msg" style="display: none;">
+
+    </div>
     <form action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
 
         @csrf
@@ -16,7 +19,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input type="text" name="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
             </div>
@@ -39,10 +42,11 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <span class="col-sm-8" style="padding: 0;">
-                     <input type="text" id="inputSuccess QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
+                <span class="col-sm-6" style="padding: 0;">
+                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
                 </span>
-                <span class="col-sm-4" style="margin-top: 6px;">(Stock have: )</span>
+
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $saltStock }}</span><span class="result"></span>)</span>
             </div>
         </div>
 
@@ -82,6 +86,30 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
+
+<script>
+    $('.stockSalt').show();
+    $(document).on('keyup','.crudeSaltAmount',function () {
+        var amount = parseInt($(this).val()) || 0;
+        var saltStock = parseInt($('.stockSalt').text());
+        var remainStock = saltStock - amount;
+        var stockAmount = '<?php echo $saltStock ?>';
+
+        if(saltStock < amount){
+            $('.stockSalt').hide();
+            $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+            $('.result').text(0);
+            if(amount === 0){
+                $('.stockSalt').show();
+            }
+        }else{
+            $('.stockSalt').hide();
+            $('.result').text(remainStock);
+        }
+
+
+    })
+</script>
 
 
 
