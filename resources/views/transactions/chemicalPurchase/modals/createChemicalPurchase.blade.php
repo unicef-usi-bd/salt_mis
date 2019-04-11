@@ -35,6 +35,12 @@
                         </span>
                     </div>
                 </div>
+                <div class="form-group resources"  style=" display: none;">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Name</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Seller Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
@@ -47,13 +53,26 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Source</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
+                            <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($supplierName as $name)
                                 <option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>
                                 @endforeach
+                                <option value="1001" >Other</option>
                             </select>
                         </span>
+                    </div>
+                </div>
+                <div class="form-group resources"  style=" display: none;">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Address</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="inputSuccess ADDRESS" placeholder="Example: Address here" name="ADDRESS" class="form-control col-xs-10 col-sm-5" value=""/>
+                    </div>
+                </div>
+                <div class="form-group resources"  style=" display: none;">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Address here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>
@@ -104,6 +123,16 @@
 @include('masterGlobal.datePicker')
 
 {{--@include('masterGlobal.formValidation')--}}
+<script>
+    var Privileges = jQuery('#privileges');
+    var select = this.value;
+    Privileges.change(function () {
+        if ($(this).val() == 1001) {
+            $('.resources').show();
+        }
+        else $('.resources').hide();
+    });
 
+</script>
 
 

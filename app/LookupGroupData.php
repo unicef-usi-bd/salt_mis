@@ -16,6 +16,12 @@ class LookupGroupData extends Model
             ->get();
     }
 
+//    public static function getAgencyData(){
+//        return DB::table('ssc_lookupchd')
+//            ->select('LOOKUPCHD_ID','LOOKUPCHD_NAME')
+//            ->where('')
+//}
+
     public static function insertSSCLookGroupData($data){
         return DB::table('ssc_lookupchd')->insert($data);
     }
