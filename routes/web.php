@@ -92,11 +92,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-entrepreneur-info', 'EntrepreneurController@updateEntrepreneurInfo'); //Azharul
     // modal edit mill information
 
-    Route::post('update-mill-information', 'MillerInfoController@updateMillInformation'); //Azharul
-
-
-
-
     //transaction
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
     Route::resource('washing-crushing','WashingAndCrushingController');//Rubiyat
