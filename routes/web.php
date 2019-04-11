@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal
     Route::resource('washing-crushing','WashingAndCrushingController');//Rubiyat
     Route::resource('iodized','IodizedController');//jalal
+    Route::resource('quality-control-testing','QulityControlTestingController');//jalal
 
     //Profile
     Route::resource('mill-info', 'MillerInfoController'); //Azharul

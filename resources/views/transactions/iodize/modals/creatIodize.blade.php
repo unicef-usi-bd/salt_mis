@@ -24,9 +24,13 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
-                    </div>
+
+                    <span class="block input-icon input-icon-right">
+                          <div class="col-sm-4">
+                        <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
+                        </div>
+                    </span>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -36,82 +40,65 @@
                         <input type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
                     </div>
                 </div>
-                <div class="form-group" style="margin-left: -60px; margin-top: 40px;">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span> ( Stock have {{ $totalSalt }} Kg ) </span></label>
+                <div class="form-group" style="margin-left: -200px; margin-top: 40px;">
+                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span>  {{ $totalSalt }}  </span></label>--}}
+                    <span class="col-sm-6" ><span class="stockSalt"> ( Stock have : <strong>{{ $totalSalt }}</strong> Kg )</span> </span>
             </div>
 
 
         </div>
-            {{--<div class="col-md-6">--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        </div>
-        <div class="col-md-12" style="margin-top: 15px;">
-            <h4  style="color: #1B6AAA;">Chemical Dozing</h4>
-            <hr>
-            <table class="table table-bordered fundAllocation">
-                <thead>
-                <tr>
-                    <th style="width: 255px;">Chemical Type<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Amount<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Stock</th>
 
-                    <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
-                </tr>
-                </thead>
-                <tbody class="newRow">
-                <tr class="rowFirst">
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
-                                        <option value=""></option>
-                                            @foreach($chemicleType as $chemical)
-                                                <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
-                                            @endforeach
-                                    </select>
-                                </span>
-                    </td>
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value=""/>
-                                </span>
-                    </td>
-                    <td>
-                        <span class="block input-icon input-icon-right">
-                        <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value=""/>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"></span></label>
+                <div class="col-sm-8">
+                <span class="block input-icon input-icon-right">
+                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
+                        <option value=""></option>
+                        @foreach($chemicleType as $chemical)
+                            <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                        @endforeach
+                   </select>
+                </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Chemical</b><span style="color: red;"> </span> </label>
+
+                <span class="block input-icon input-icon-right">
+                          <div class="col-sm-4">
+                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
+                        </div>
                     </span>
-                    </td>
-
-                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
-                </tr>
-                </tbody>
-            </table>
+            </div>
         </div>
+
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Auto Generate" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
+
                 </div>
+                <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+            </div>
+
+            <div class="form-group" style="margin-left: -200px; margin-top: 25px;">
+                {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span>  {{ $totalSalt }}  </span></label>--}}
+                <span class="col-sm-6"><span class="stockSalt"> ( Stock have : <strong>{{ $totalChemical }}</strong> Kg )</span> </span>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
-                </div>
-            </div>
-        </div>
-
-
-
-
+       <div class="col-md-12">
+           <div class="form-group" style="margin-left: -160px;">
+               <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+               <div class="col-sm-9">
+                   <textarea style="width:95.5%;"   rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+               </div>
+           </div>
+       </div>
 
     <!-- <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
@@ -147,20 +134,12 @@
 
 {{--@include('masterGlobal.formValidation')--}}
 <script>
-    $(document).ready(function(){
-        $('.rowAdd').click(function(){
-            var getTr = $('tr.rowFirst:first');
-            //alert(getTr.html());
-            $("select.chosen-select").chosen('destroy');
-            $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            var defaultRow = $('tr.removableRow:last');
+    $(document).on('keyup','.saltAmount',function () {
+        alert('hi');
+//        var  REQ_QTY = $(this).val();
+//        var stockSalt = $(this).text();
 
-            $('.chosen-select').chosen(0);
-        });
-    });
-    // Fore Remove Row By Click
-    $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
+
     });
 </script>
 
