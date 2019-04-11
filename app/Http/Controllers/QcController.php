@@ -163,4 +163,10 @@ class QcController extends Controller
         return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData'));
     }
 
+    public function updateQcInfo(Request $request){
+        $millerInfoId = $request->input('MILL_ID');
+        $updateEmpData = Qc::updateMillQcData($request, $millerInfoId);
+        return "QC Information has been updated";
+    }
+
 }

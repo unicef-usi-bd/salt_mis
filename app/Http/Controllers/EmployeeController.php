@@ -14,6 +14,7 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\LookupGroup;
+use App\Http\Controllers\Session;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -103,21 +104,21 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //print_r($request->input());exit();
+        //$this->pr($request->input());
 
         $rules = array(
-            'AGENCY_ID' => 'required'
+            'TOTMALE_EMP' => 'required',
+            'TOTFEM_EMP' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
         if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-//        $updateMonitoringData = Monitoring::updateMonitorData($request, $id);
-//            if($updateMonitoringData){
-//                return redirect('/monitoring')->with('success', 'Monitoring Data Updated !');
-//            }
+            $updateMillEmployeeData = Employee::updateMillEmployeeData($request, $id);
+            if($updateMillEmployeeData){
+                return response()->json(['success'=> 'Employee Information has been updated!']);
+            }
         }
 
     }
@@ -165,5 +166,11 @@ public function createEmployee($millerInfoId){
     $editQcData = Qc::getQcData($millerInfoId);
     return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData'));
 }
+
+    public function updateEmployeeInfo(Request $request){
+        $millerInfoId = $request->input('MILL_ID');
+        $updateEmpData = Employee::updateMillEmployeeData($request, $millerInfoId);
+        return "Employee Information has been updated";
+    }
 
 }

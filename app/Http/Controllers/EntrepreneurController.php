@@ -157,9 +157,16 @@ class EntrepreneurController extends Controller
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $editMillData = MillerInfo::getMillData($millerInfoId);
-        //$this->pr($editData);
+       // $this->pr($editMillData);
         return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData'));
     }
+
+    public function updateEntrepreneurInfo(Request $request){
+        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
+        $updateEmpData = Entrepreneur::updateMillEntrepData($request, $millerInfoId);
+        return "Entrepreneur Information has been updated";
+    }
+
 
 
 }

@@ -78,7 +78,6 @@
                     <thead>
                     <tr>
                         <th class="fixedWidth" style="width: 5px;">Sl</th>
-                        <th class="center fixedWidth">Entrepreneur Name</th>
                         <th class="center fixedWidth">Mill Name</th>
                         <th class="center fixedWidth">Type</th>
                         <th class="center fixedWidth">Certificate Renewing Date</th>
@@ -93,7 +92,6 @@
                     @foreach( $millerList as $row)
                         <tr>
                             <td class="center" >  {{ ++$sl }} </td>
-                            <td> {{ $row->OWNER_NAME }} </td>
                             <td> {{ $row->MILL_NAME }} </td>
                             <td> {{ $row->LOOKUPCHD_NAME }} </td>
                             <td> {{ $row->RENEWING_DATE }} </td>
@@ -131,13 +129,13 @@
                                         </a>
                                     @endif
                                     @if($editPermissionLevel == 1)
-                                        <a class="green showModalGlobal" id='{{ "mill-info/1/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
+                                        <a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
 
 
                                     @else
-                                        <a class="green showModalGlobal" id='{{ "mill-info/1/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
+                                        <a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
 

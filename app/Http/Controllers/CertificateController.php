@@ -196,5 +196,11 @@ class CertificateController extends Controller
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
         return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData'));
     }
+    public function updateCertificateInfo(Request $request)
+    {
+        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
+        $updateCertificateData = Certificate::updateMillCertificateData($request, $millerInfoId);
+        return "Certificate Information has been updated";
+    }
 
-}
+} // END CLASS
