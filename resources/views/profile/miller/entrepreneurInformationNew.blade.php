@@ -515,27 +515,7 @@
 
 
     </script>
-    <script>
-        $('.millInfo_msg').hide();
-        $(document).on('click','.btnUpdateMillInfo',function (){
-            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-            var url = $(this).closest('form').attr('action');
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : $('#millId').serialize(),
-                success: function (data) {
-                     console.log(data);
-                    $('.millInfo_msg').html('<span>'+ data +'</span>').show();
-
-                }
-            })
-        })
-
-        function millTab(){
-            $('[href="#entrepreneur"]').tab('show');
-        }
-    </script>
+    @include('profile.miller.ajaxUpdateScriptForAllInfo')
     <script>  // millers Id
         $(document).ready(function () {
             $('#ZONE_IDD').on('change',function(){
