@@ -12,4 +12,12 @@ class QulityControlTesting extends Model
     public static function insertQualityControlTestingData($data){
        return DB::table('tmm_qualitycontrol')->insert($data);
     }
+
+    public static function showQualityConteolTestingDatya($id){
+
+    }
+
+    public static function editQualityConteolTestingDatya($id){
+
+    }
 }
