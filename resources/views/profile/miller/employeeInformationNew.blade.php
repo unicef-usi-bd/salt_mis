@@ -528,8 +528,9 @@
                         <div id="qc" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="alert alert-info qc_msg"></div>
 
-                                    <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
+                                    <form id="qcId"  class="form-horizontal" role="form" action="{{ url('edit-qc-info') }}" >
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -625,14 +626,14 @@
 
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary btnUpdateQcInfo" onclick="qcTab()">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    Save & Next
+                                                    Update & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -797,66 +798,7 @@
 
 
     </script>
-    <script>
-        $('.millInfo_msg').hide();
-        $(document).on('click','.btnUpdateMillInfo',function (){
-            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-            var url = $(this).closest('form').attr('action');
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : $('#millId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.millInfo_msg').html('<span>'+ data +'</span>').show();
-
-                }
-            })
-        });
-        $('.entrepreneur_msg').hide();
-        $(document).on('click','.btnUpdateEntrepInfo',function (){
-            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-            var url = $(this).closest('form').attr('action');
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : $('#entrepreneurId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
-
-                }
-            })
-        });
-        $('.certificate_msg').hide();
-        $(document).on('click','.btnUpdateCertificateInfo',function (){
-            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-            var url = $(this).closest('form').attr('action');
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : $('#certtificateId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.certificate_msg').html('<span>'+ data +'</span>').show();
-
-                }
-            })
-        });
-
-        function millTab(){
-            $('[href="#entrepreneur"]').tab('show');
-        }
-        function entrepreneurTab(){
-            $('[href="#certificate"]').tab('show');
-        }
-        function certificateTab(){
-            $('[href="#qc"]').tab('show');
-        }
-        function qcTab(){
-            $('[href="#employee"]').tab('show');
-        }
-    </script>
+    @include('profile.miller.ajaxUpdateScriptForAllInfo')
 
 
     <!--Add New Group Modal Start-->

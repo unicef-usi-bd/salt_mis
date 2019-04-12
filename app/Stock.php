@@ -9,19 +9,21 @@ use Illuminate\Support\Facades\Input;
 
 class Stock extends Model
 {
-    public static function getTotalReduceSalt(){
+    public static function getTotalReduceSalt($saltId){
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
-            ->where('TRAN_TYPE','=','S')
-            ->where('TRAN_FLAG','=','WS')
+            ->where('tmm_itemstock.ITEM_NO','=',$saltId)
+            ->where('tmm_itemstock.TRAN_TYPE','=','S')
+            ->where('tmm_itemstock.TRAN_FLAG','=','WS')
             ->sum('tmm_itemstock.QTY');
 
     }
-    public static function getSaltStock(){
+    public static function getSaltStock($saltId){
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
-            ->where('TRAN_TYPE','=','S')
-            ->where('TRAN_FLAG','=','SP')
+            ->where('tmm_itemstock.ITEM_NO','=',$saltId)
+            ->where('tmm_itemstock.TRAN_TYPE','=','S')
+            ->where('tmm_itemstock.TRAN_FLAG','=','SP')
             ->sum('tmm_itemstock.QTY');
     }
 

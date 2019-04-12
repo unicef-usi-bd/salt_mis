@@ -164,7 +164,7 @@ class QcController extends Controller
     }
 
     public function updateQcInfo(Request $request){
-        $millerInfoId = $request->input('MILL_ID');
+        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
         $updateEmpData = Qc::updateMillQcData($request, $millerInfoId);
         return "QC Information has been updated";
     }
