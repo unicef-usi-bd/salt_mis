@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Input;
 
 class WashingAndCrushing extends Model
 {
+    public static function getWashingAndCrushingData(){
+        return DB::table('tmm_washcrashmst')
+            ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')
+            ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
+            ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
+            ->get();
+    }
+
     public static function insertWashingAndCrushingData($request){
         $washingCrushingMstId = DB::table('tmm_washcrashmst')->insertGetId([
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
@@ -21,7 +29,7 @@ class WashingAndCrushing extends Model
         if ($washingCrushingMstId){
             $washingCrushingChdId = DB::table('tmm_washcrashchd')->insertGetId([
                 'WASHCRASHMST_ID' => $washingCrushingMstId,
-                'ITEM_ID' => $request->input('ITEM_ID'),
+                'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
                 'ENTRY_BY' => Auth::user()->id,
@@ -56,11 +64,74 @@ class WashingAndCrushing extends Model
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
             }
-
-
-
         }
         return $itemStokId;
 
+    }
+
+    public static function viewWashingAndCrushingData($id){
+        return DB::table('tmm_washcrashmst')
+            ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')
+            ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
+            ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
+            ->where('tmm_washcrashmst.WASHCRASHMST_ID','=',$id)
+            ->first();
+    }
+
+    public static function editWashingAndCrushingData($id){
+        return DB::table('tmm_washcrashmst')
+            ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.ITEM_ID','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')
+            ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
+            ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
+            ->where('tmm_washcrashmst.WASHCRASHMST_ID','=',$id)
+            ->first();
+    }
+
+    public static function updateWashingAndCrushingData($request,$id){
+             $washCrushMst = DB::table('tmm_washcrashmst')->where('tmm_washcrashmst.WASHCRASHMST_ID', '=' , $id)->update([
+                 'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
+                 'BATCH_NO' => $request->input('BATCH_NO'),
+                 'PRODUCT_ID' => $request->input('PRODUCT_ID'),
+                 'REMARKS' => $request->input('REMARKS'),
+                 'ENTRY_BY' => Auth::user()->id,
+                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+             ]);
+
+        if ($washCrushMst){
+            $washingCrushingChd = DB::table('tmm_washcrashchd')->where('tmm_washcrashchd.WASHCRASHMST_ID', '=' , $id)->update([
+                'ITEM_ID' => $request->input('ITEM_ID'),
+                'REQ_QTY' => $request->input('REQ_QTY'),
+                'WASTAGE' => $request->input('WASTAGE'),
+                'UPDATE_BY' => Auth::user()->id,
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
+            ]);
+        }
+        if($washingCrushingChd){
+
+            $update = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO', '=' , $id)->update([
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
+                'TRAN_TYPE' => 'S', //S  = Salt
+                'ITEM_NO' => $request->input('PRODUCT_ID'),
+                'QTY' => '-'.$request->input('REQ_QTY'),
+                'TRAN_FLAG' => 'WS', //WS = Wash Salt
+                'UPDATE_BY' => Auth::user()->id,
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
+            ]);
+
+        }
+
+        return $update;
+    }
+
+
+    public static function deleteWashingAndCrushingData($id){
+        $deleteStock = DB::table('tmm_itemstock')->where('TRAN_NO',$id)->delete();
+        if($deleteStock){
+            $deleteChd = DB::table('tmm_washcrashchd')->where('WASHCRASHMST_ID', $id)->delete();
+        }
+        if($deleteChd){
+            $deletePr = DB::table('tmm_washcrashmst')->where('WASHCRASHMST_ID', $id)->delete();
+            return $deletePr;
+        }
     }
 }

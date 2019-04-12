@@ -49,15 +49,20 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" >
+                                    <div class="alert alert-info millInfo_msg"></div>
+
+                                    <form id="millId"  class="form-horizontal" role="form" action="{{ url('edit-mill-info') }}" >
+                                        {{--<form id="millId"  class="form-horizontal" role="form" action="{{ url('update-mill-information') }}" >--}}
+                                        <input type="text" value="{{ $millerInfoId }}" name="MILL_ID" class="millerInfoId" >
                                         @csrf
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
                                                 <div class="col-sm-8">
-                                                    <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editMillData->MILL_NAME }}">
-                                                    </span>
+                                                <span class="block input-icon input-icon-right">
+                                                   <input type="text" name="MILL_NAME" class="chosen-container mill" value="{{ $editMillData->MILL_NAME }}">
+                                                </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -67,7 +72,6 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($processType as $row)
-                                                               {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
                                                                <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
@@ -79,10 +83,10 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
+                                                       <select id="MILL_TYPE_IDD" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($millType as $row)
-                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->UD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->UD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -107,7 +111,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
+                                                       <select id="ZONE_IDD" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($getZone as $row)
                                                                <option value="{{ $row->ZONE_CODE }}" @if($editMillData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
@@ -121,7 +125,8 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Millers ID</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editMillData->MILLERS_ID }}">
+
+                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersIdd" value="{{ $editMillData->MILLERS_ID }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -151,6 +156,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
+
                                                            <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
                                                        </select>
                                                     </span>
@@ -161,6 +167,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID" data-placeholder="Select">
+
                                                            <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
                                                        </select>
                                                     </span>
@@ -171,6 +178,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UNION_ID" class="chosen-select chosen-container union" name="UNION_ID" data-placeholder="Select">
+
                                                            <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
                                                         </select>
                                                     </span>
@@ -196,27 +204,29 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
+
                                                        <input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
 
                                         </div>
+
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary btnUpdateMillInfo" onclick="millTab()">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    {{ trans('dashboard.submit') }}
+                                                    Update & Next
                                                 </button>
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> {{--col-md-12--}}
                             </div>
                         </div>
                         {{--/-Miller Info--}}
@@ -224,8 +234,10 @@
                         <div id="entrepreneur" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="alert alert-info entrepreneur_msg"></div>
 
-                                    <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
+                                    {{--<form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">--}}
+                                    <form id="entrepreneurId"  class="form-horizontal" role="form" action="{{ url('edit-entrepreneur-info') }}" >
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -286,14 +298,14 @@
                                             </thead>
                                             <tbody class="newRow">
                                             @foreach($getEntrepreneurRowData as $editEntrepData)
-                                            <tr class="rowFirst">
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                <tr class="rowFirst">
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="{{ $editEntrepData->OWNER_NAME }}" class="width-100 OWNER_NAME"  />
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
                                                             <option value="">Select</option>
@@ -302,73 +314,73 @@
                                                             @endforeach
                                                         </select>
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
                                                             <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                          </select>
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
                                                             <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                         </select>
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
                                                             <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                                         </select>
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="NID[]" id="inputSuccess total_amount" value="{{ $editEntrepData->NID }}" class="width-100 NID"  />
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_1 }}" class="width-100 MOBILE_1"  />
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_2 }}" class="width-100 MOBILE_2"  />
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="width-100 EMAIL"  />
                                                         {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editEntrepData->REMARKS }}" class="width-100 REMARKS"  />
                                                     </span>
-                                                </td>
-                                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
-                                            </tr>
-                                             @endforeach
+                                                    </td>
+                                                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary btnUpdateEntrepInfo" onclick="entrepreneurTab()">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    Save & Next
+                                                    Update & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -382,8 +394,10 @@
                         <div id="certificate" class="tab-pane fade ">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="alert alert-info certificate_msg"></div>
 
-                                    <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                                    <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">
+
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -403,9 +417,9 @@
                                             </thead>
                                             <tbody class="newRow2">
                                             @foreach($editCertificateData as $editCertData)
-                                            <tr class="rowFirst2">
+                                                <tr class="rowFirst2">
 
-                                                <td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                                             <option value="">Select</option>
@@ -414,8 +428,8 @@
                                                             @endforeach
                                                         </select>
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                                             <option value="">Select</option>
@@ -424,54 +438,54 @@
                                                             @endforeach
                                                          </select>
                                                     </span>
-                                                </td>
-                                                <td>
+                                                    </td>
+                                                    <td>
                                                     <span class="block input-icon input-icon-right">
                                                         <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
                                                     </span>
-                                                </td>
+                                                    </td>
 
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"  />
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
 
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                        <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
                                                     </span>
-                                                </td>
+                                                    </td>
 
-                                                <td>
-                                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
+                                                    <td>
+                                                        <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
                                                         <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                                     </span>
-                                                </td>
-                                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
-                                            </tr>
-                                             @endforeach
+                                                    </td>
+                                                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    Save & Next
+                                                    Update & Next
                                                 </button>
                                             </div>
                                         </div>
@@ -783,7 +797,66 @@
 
 
     </script>
+    <script>
+        $('.millInfo_msg').hide();
+        $(document).on('click','.btnUpdateMillInfo',function (){
+            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
+            var url = $(this).closest('form').attr('action');
+            $.ajax({
+                type : 'POST',
+                url : url,
+                data : $('#millId').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('.millInfo_msg').html('<span>'+ data +'</span>').show();
 
+                }
+            })
+        });
+        $('.entrepreneur_msg').hide();
+        $(document).on('click','.btnUpdateEntrepInfo',function (){
+            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
+            var url = $(this).closest('form').attr('action');
+            $.ajax({
+                type : 'POST',
+                url : url,
+                data : $('#entrepreneurId').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+
+                }
+            })
+        });
+        $('.certificate_msg').hide();
+        $(document).on('click','.btnUpdateCertificateInfo',function (){
+            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
+            var url = $(this).closest('form').attr('action');
+            $.ajax({
+                type : 'POST',
+                url : url,
+                data : $('#certtificateId').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('.certificate_msg').html('<span>'+ data +'</span>').show();
+
+                }
+            })
+        });
+
+        function millTab(){
+            $('[href="#entrepreneur"]').tab('show');
+        }
+        function entrepreneurTab(){
+            $('[href="#certificate"]').tab('show');
+        }
+        function certificateTab(){
+            $('[href="#qc"]').tab('show');
+        }
+        function qcTab(){
+            $('[href="#employee"]').tab('show');
+        }
+    </script>
 
 
     <!--Add New Group Modal Start-->

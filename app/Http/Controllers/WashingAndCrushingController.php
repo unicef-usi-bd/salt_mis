@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Stock;
 use App\WashingAndCrushing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,7 +38,10 @@ class WashingAndCrushingController extends Controller
             'action'=>'washing-crushing/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-        return view('transactions.washingAndCrushing.washingAndCrushingIndex',compact('heading','previllage'));
+
+        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData();
+
+        return view('transactions.washingAndCrushing.washingAndCrushingIndex',compact('heading','previllage','washingAndCrushingData'));
     }
 
     /**
@@ -50,7 +54,11 @@ class WashingAndCrushingController extends Controller
         $digits = 4;
         $batch = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));
+        $saltStock = Stock::getSaltStock();
+        $totalReduceSalt = Stock::getTotalReduceSalt();
+
+        $saltStock = $saltStock - abs($totalReduceSalt);
+        return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch','saltStock'));
     }
 
     /**
@@ -63,10 +71,7 @@ class WashingAndCrushingController extends Controller
     {
         $rules = array(
             'REQ_QTY' => 'required',
-
-
         );
-
         $validator = Validator::make(Input::all(), $rules);
         if($validator->fails()){
             //SweetAlert::error('Error','Something is Wrong !');
@@ -78,8 +83,6 @@ class WashingAndCrushingController extends Controller
             $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request);
 
             if($washingAndCrashing){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
                 return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
             }
         }
@@ -91,9 +94,10 @@ class WashingAndCrushingController extends Controller
      * @param  \App\WashingAndCrushing  $washingAndCrushing
      * @return \Illuminate\Http\Response
      */
-    public function show(WashingAndCrushing $washingAndCrushing)
+    public function show($id)
     {
-        //
+        $viewWashingAndCrushing = WashingAndCrushing::viewWashingAndCrushingData($id);
+        return view('transactions.washingAndCrushing.modals.viewWashingAndCrushing',compact('viewWashingAndCrushing'));
     }
 
     /**
@@ -102,9 +106,15 @@ class WashingAndCrushingController extends Controller
      * @param  \App\WashingAndCrushing  $washingAndCrushing
      * @return \Illuminate\Http\Response
      */
-    public function edit(WashingAndCrushing $washingAndCrushing)
+    public function edit($id)
     {
-        //
+        $editWashingAndCrushingData = WashingAndCrushing::editWashingAndCrushingData($id);
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        $saltStock = Stock::getSaltStock();
+        $totalReduceSalt = Stock::getTotalReduceSalt();
+        $saltStock = $saltStock - abs($totalReduceSalt);
+
+        return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editWashingAndCrushingData','crudeSaltTypes','saltStock'));
     }
 
     /**
@@ -114,9 +124,25 @@ class WashingAndCrushingController extends Controller
      * @param  \App\WashingAndCrushing  $washingAndCrushing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WashingAndCrushing $washingAndCrushing)
+    public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'REQ_QTY' => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+
+            //$this->pr($request->input());
+            $washingAndCrashing = WashingAndCrushing::updateWashingAndCrushingData($request,$id);
+
+            if($washingAndCrashing){
+                return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Updated !');
+            }
+        }
     }
 
     /**
@@ -125,8 +151,21 @@ class WashingAndCrushingController extends Controller
      * @param  \App\WashingAndCrushing  $washingAndCrushing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WashingAndCrushing $washingAndCrushing)
+    public function destroy($id)
     {
-        //
+        $delete = WashingAndCrushing::deleteWashingAndCrushingData($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }

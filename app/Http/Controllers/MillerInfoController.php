@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\LookupGroupData;
+use App\Employee;
+use App\Qc;
 use App\MillerInfo;
 use App\Entrepreneur;
+use App\Certificate;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -122,7 +125,25 @@ class MillerInfoController extends Controller
      */
     public function edit($id)
      {
+         $millerInfoId = $id;
+         $getDivision = SupplierProfile::getDivision();
+         $getZone = SupplierProfile::getZone();
 
+         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+
+         $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+         $editMillData = MillerInfo::getMillData($id);
+         $editEntrepData = Entrepreneur::getEntrepreneurData($id);
+         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($id);
+         $editCertificateData = Certificate::getCertificateData($id);
+         $editQcData = Qc::getQcData($id);
+         $editEmployeeData = Employee::getEmployeeData($id);
+         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData'));
     }
 
     /**
@@ -176,5 +197,14 @@ class MillerInfoController extends Controller
             ]);
         }
     }
+
+    public function updateMillInfo(Request $request){
+        $millerInfoId = $request->input('MILL_ID');
+        //$this->pr($request->input('MILL_NAME'));
+        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId);
+        return "Miller Information has been updated";
+    }
+
+
 
 }

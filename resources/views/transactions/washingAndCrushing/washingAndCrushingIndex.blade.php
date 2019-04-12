@@ -25,68 +25,60 @@
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Chemical Type Name</th>
+                    <th>Batch No</th>
+                    <th>Salt Name</th>
                     <th>Salt Amount</th>
-                    <th>Chemical Amount</th>
                     <th>Wastage Amount</th>
-                    <th>Status</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                {{--<?php $sl=0;?>--}}
-                {{--@foreach($requiredPerkgs as $row)--}}
-                {{--<tr>--}}
-                {{--<td class="center">{{ ++$sl }}</td>--}}
-                {{--<td>{{$row->ITEM_NAME}}</td>--}}
-                {{--<td>{{$row->SALT_AMOUNT}}</td>--}}
-                {{--<td>{{$row->CHEMICAL_AMOUNT}}</td>--}}
-                {{--<td>{{$row->WASTAGE_AMOUNT}}</td>--}}
-                {{--<td>--}}
-                {{--@if($row->ACTIVE_FLG == 1)--}}
-                {{--<span class="label label-sm label-info arrowed arrowed-righ">Active</span>--}}
-                {{--@else--}}
-                {{--<span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>--}}
-                {{--@endif--}}
-                {{--</td>--}}
-                {{--<td class="row{{ $row->REQUIRE_CHEMICAL_ID }}">--}}
-                {{--<div class="hidden-sm hidden-xs action-buttons">--}}
-                {{--@php--}}
-                {{--$editPermissionLevel = $previllage->UPDATE;--}}
-                {{--$viewPermissionLevel = $previllage->READ;--}}
-                {{--@endphp--}}
-                {{--@if($viewPermissionLevel == 1)--}}
-                {{--<a href="#" id="{{ 'require-chemical-per-kg/'.$row->REQUIRE_CHEMICAL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="{{ trans('bank.view_bank') }}">--}}
-                {{--<span class="blue">--}}
-                {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                {{--</span>--}}
-                {{--</a>--}}
-                {{--@else--}}
-                {{--<a href="#" id="{{ 'require-chemical-per-kg/'.$row->REQUIRE_CHEMICAL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="{{ trans('bank.view_bank') }}" style="display: none;">--}}
-                {{--<span class="blue">--}}
-                {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                {{--</span>--}}
-                {{--</a>--}}
-                {{--@endif--}}
-                {{--@if($editPermissionLevel == 1)--}}
-                {{--<a class="green showModalGlobal" id="{{ 'require-chemical-per-kg/'.$row->REQUIRE_CHEMICAL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('bank.edit_bank') }}">--}}
-                {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                {{--</a>--}}
-                {{--@else--}}
-                {{--<a class="green showModalGlobal" id="{{ 'require-chemical-per-kg/'.$row->REQUIRE_CHEMICAL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('bank.edit_bank') }}" style="display: none;">--}}
-                {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                {{--</a>--}}
-                {{--@endif--}}
-                {{--@if($previllage->DELETE == 1)--}}
-                {{--<a class="red clickForDelete row{{ $row->REQUIRE_CHEMICAL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'require-chemical-per-kg/'.$row->REQUIRE_CHEMICAL_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">--}}
-                {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
-                {{--</a>--}}
-                {{--@endif--}}
-                {{--</div>--}}
-                {{--</td>--}}
-                {{--</tr>--}}
-                {{--@endforeach--}}
+                <?php $sl=0;?>
+                @foreach($washingAndCrushingData as $row)
+                <tr>
+                    <td class="center">{{ ++$sl }}</td>
+                    <td>{{$row->BATCH_NO}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->REQ_QTY}}</td>
+                    <td>{{$row->WASTAGE}}</td>
+                    <td class="row{{ $row->WASHCRASHMST_ID }}">
+                    <div class="hidden-sm hidden-xs action-buttons">
+                    @php
+                    $editPermissionLevel = $previllage->UPDATE;
+                    $viewPermissionLevel = $previllage->READ;
+                    @endphp
+                    @if($viewPermissionLevel == 1)
+                    <a href="#" id="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Washing And Crushing">
+                    <span class="blue">
+                    <i class="ace-icon fa fa-eye bigger-130"></i>
+                    </span>
+                    </a>
+                    @else
+                    <a href="#" id="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Washing And Crushing" style="display: none;">
+                    <span class="blue">
+                    <i class="ace-icon fa fa-eye bigger-130"></i>
+                    </span>
+                    </a>
+                    @endif
+                    @if($editPermissionLevel == 1)
+                    <a class="green showModalGlobal" id="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Washing And Crushing">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                    </a>
+                    @else
+                    <a class="green showModalGlobal" id="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Washing And Crushing" style="display: none;">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                    </a>
+                    @endif
+                    @if($previllage->DELETE == 1)
+                    <a class="red clickForDelete row{{ $row->WASHCRASHMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                    </a>
+                    @endif
+                    </div>
+                    </td>
+                </tr>
+                @endforeach
 
                 </tbody>
             </table>

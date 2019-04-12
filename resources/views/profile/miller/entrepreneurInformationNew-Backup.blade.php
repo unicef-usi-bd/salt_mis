@@ -41,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
-                        <li> <a data-toggle="tab" href="#mill_tab"> Mill Information </a> </li>
+                        <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
                         <li class="active"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
@@ -50,24 +50,23 @@
 
                     <div class="tab-content">
                         {{--Mill Info--}}
-                        <div id="mill_tab" class="tab-pane fade ">
+                        <div id="mill" class="tab-pane fade ">
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <div class="alert alert-info millInfo_msg"></div>
-
-                                    <form id="millId"  class="form-horizontal" role="form" action="{{ url('edit-mill-info') }}" >
-                                    {{--<form id="millId"  class="form-horizontal" role="form" action="{{ url('update-mill-information') }}" >--}}
-                                        <input type="text" value="{{ $millerInfoId }}" name="MILL_ID" class="millerInfoId" >
+                                    <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" >
+                                        {{--<form action="{{ url('/mill-info/'.$editMillData->MILL_ID) }}" method="post" class="form-horizontal" role="form" >--}}
                                         @csrf
-
+                                        @if(isset($millerInfoId))
+                                            <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
+                                        @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
                                                 <div class="col-sm-8">
-                                                <span class="block input-icon input-icon-right">
-                                                   <input type="text" name="MILL_NAME" class="chosen-container mill" value="{{ $editMillData->MILL_NAME }}">
-                                                </span>
+                                                    <span class="block input-icon input-icon-right">
+                                                       <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $editMillData->MILL_NAME }}">
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -77,6 +76,7 @@
                                                        <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($processType as $row)
+                                                               {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
                                                                <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
@@ -88,10 +88,10 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <select id="MILL_TYPE_IDD" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
+                                                       <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($millType as $row)
-                                                               <option value="{{ $row->UD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->UD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                                               <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                                            @endforeach
 
                                                        </select>
@@ -116,7 +116,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <select id="ZONE_IDD" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
+                                                       <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
                                                            <option value=""></option>
                                                             @foreach($getZone as $row)
                                                                <option value="{{ $row->ZONE_CODE }}" @if($editMillData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
@@ -130,8 +130,7 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Millers ID</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-
-                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersIdd" value="{{ $editMillData->MILLERS_ID }}">
+                                                       <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $editMillData->MILLERS_ID }}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -151,7 +150,6 @@
                                                             @foreach($getDivision as $row)
                                                                 <option value="{{ $row->DIVISION_ID }}" @if($editMillData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
                                                             @endforeach
-
                                                         </select>
                                                     </span>
                                                 </div>
@@ -161,7 +159,6 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-
                                                            <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
                                                        </select>
                                                     </span>
@@ -172,7 +169,6 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID" data-placeholder="Select">
-
                                                            <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
                                                        </select>
                                                     </span>
@@ -183,7 +179,6 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        <select id="UNION_ID" class="chosen-select chosen-container union" name="UNION_ID" data-placeholder="Select">
-
                                                            <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
                                                         </select>
                                                     </span>
@@ -209,32 +204,29 @@
                                                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-
                                                        <input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">
                                                     </span>
                                                 </div>
                                             </div>
 
                                         </div>
-
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="button" class="btn btn-primary btnUpdateMillInfo" onclick="millTab()">
+                                                <button type="submit" class="btn btn-primary">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                                    Update & Next
+                                                    {{ trans('dashboard.submit') }}
                                                 </button>
                                             </div>
                                         </div>
                                     </form>
-                                </div> {{--col-md-12--}}
+                                </div>
                             </div>
                         </div>
-
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
                         <div id="entrepreneur" class="tab-pane fade in active">
@@ -417,64 +409,9 @@
 
 
     @include('masterGlobal.chosenSelect')
-    <script>
-        $(document).ready(function () {
-            $('#DIVISION_ID').on('change',function(){
-                var divisionId = $(this).val(); //alert(divisionId);exit();
-                var option = '<option value="">Select District</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-district/{id}",
-                    data : {'divisionId': divisionId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-                        }
-                        $('.district').html(option);
-                        $('.district').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('select#DISTRICT_ID').on('change',function(){
-                var districtId = $(this).val(); //alert(districtId); exit();
-                var option = '<option value="">Select Upazila</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-upazila/{id}",
-                    data : {'districtId': districtId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
-                        }
-                        $('.upazila').html(option);
-                        $('.upazila').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('#UPAZILA_ID').on('change',function(){
-                var upazilaId = $(this).val(); //alert(upazilaId);exit();
-                var option = '<option value="">Select Union</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-union/{id}",
-                    data : {'upazilaId': upazilaId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-                        }
-                        $('.union').html(option);
-                        $('.union').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-    </script>
+    @include('masterGlobal.getDistrict')
+    @include('masterGlobal.getUpazila')
+    @include('masterGlobal.getUnion')
     @include('masterGlobal.getMillersId')
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -515,103 +452,12 @@
 
 
     </script>
-    <script>
-        $('.millInfo_msg').hide();
-        $(document).on('click','.btnUpdateMillInfo',function (){
-            //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-            var url = $(this).closest('form').attr('action');
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : $('#millId').serialize(),
-                success: function (data) {
-                     console.log(data);
-                    $('.millInfo_msg').html('<span>'+ data +'</span>').show();
-
-                }
-            })
-        })
-
-        function millTab(){
-            $('[href="#entrepreneur"]').tab('show');
-        }
-    </script>
-    <script>  // millers Id
-        $(document).ready(function () {
-            $('#ZONE_IDD').on('change',function(){
-                var millTypeId = $("#MILL_TYPE_IDD").val();
-                var zoneId = $("#ZONE_IDD").val();
-                var key = Math.floor(10000 + Math.random() * 90000);
-                var millersIdd = millTypeId+'-'+zoneId+'-'+key;
-                $('.millersIdd').val(millersIdd); //alert(millersId);exit();
-
-            });
-        });
-    </script>
-
 
 
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
-    <script>
-        $(document).ready(function () {
-            $('select#ENT_DIVISION_ID').on('change',function(){
-                var divisionId = $(this).val(); //alert(divisionId);exit();
-                var option = '<option value="">Select District</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-district/{id}",
-                    data : {'divisionId': divisionId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-                        }
-                        $('.ent_district').html(option);
-                        $('.ent_district').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('select#ENT_DISTRICT_ID').on('change',function(){
-                var districtId = $(this).val(); //alert(districtId); exit();
-                var option = '<option value="">Select Upazila</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-upazila/{id}",
-                    data : {'districtId': districtId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
-                        }
-                        $('.ent_upazila').html(option);
-                        $('.ent_upazila').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('#ENT_UPAZILA_ID').on('change',function(){
-                var upazilaId = $(this).val(); //alert(upazilaId);exit();
-                var option = '<option value="">Select Union</option>';
-                $.ajax({
-                    type : "get",
-                    url  : "supplier-profile/get-union/{id}",
-                    data : {'upazilaId': upazilaId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-                        }
-                        $('.ent_union').html(option);
-                        $('.ent_union').trigger("chosen:updated");
-                    }
-                });
-            });
-        });
-    </script>
+    @include('masterGlobal.getDistrictUpazilaUnion')
 
 
 @endsection
