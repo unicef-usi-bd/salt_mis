@@ -11,9 +11,10 @@ class RequireChemicalMst extends Model
 {
     public static function getRequireChemicalData(){
      return DB::table('smm_rmallocationmst')
-         ->select('smm_rmallocationmst.*','ssc_lookupchd.LOOKUPCHD_NAME')
-         ->leftJoin('ssc_lookupchd','smm_rmallocationmst.PRODUCT_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+         ->select('smm_rmallocationmst.*','smm_item.ITEM_NAME')
+         ->leftJoin('smm_item','smm_rmallocationmst.PRODUCT_ID','=','smm_item.ITEM_NO')
          ->get();
+
     }
 
     public static function insertRequireChemicalPerKg($data){
@@ -22,16 +23,16 @@ class RequireChemicalMst extends Model
 
     public static function showRequireChemicalPerKg($id){
         return DB::table('smm_rmallocationmst')
-            ->select('smm_rmallocationmst.*','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('ssc_lookupchd','smm_rmallocationmst.PRODUCT_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->select('smm_rmallocationmst.*','smm_item.ITEM_NAME')
+            ->leftJoin('smm_item','smm_rmallocationmst.PRODUCT_ID','=','smm_item.ITEM_NO')
             ->where('RMALLOMST_ID', '=', $id)
             ->first();
     }
 
     public static function editRequireChemicalPerKg($id){
         return DB::table('smm_rmallocationmst')
-            ->select('smm_rmallocationmst.*','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('ssc_lookupchd','smm_rmallocationmst.PRODUCT_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->select('smm_rmallocationmst.*','smm_item.ITEM_NO','smm_item.ITEM_NAME')
+            ->leftJoin('smm_item','smm_rmallocationmst.PRODUCT_ID','=','smm_item.ITEM_NO')
             ->where('RMALLOMST_ID', '=', $id)
             ->first();
     }
@@ -48,7 +49,7 @@ class RequireChemicalMst extends Model
     }
 
     public static function deleteRequireChemicalPerKg($id){
-        return DB::table('smm_rmallocationmst')->where('RMALLOMST_ID', $id)->delete();
+        return DB::table('smm_rmallocationmst')->where('RMALLOMST_ID','=' ,$id)->delete();
     }
 
 }

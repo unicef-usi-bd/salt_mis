@@ -1,28 +1,25 @@
 <div class="col-md-12">
-    {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
-    {{--<span id="successMessage"></span>--}}
-    {{--<button type="button" class="close" data-dismiss="alert">--}}
-    {{--<i class="ace-icon fa fa-times"></i>--}}
-    {{--</button>--}}
-    {{--</div>--}}
+
     <form action="{{ url('/require-chemical-chd') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <input type="hidden" id="inputSuccess RMALLOMST_ID"  name="RMALLOMST_ID" value="{{ $id }}" />
         <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b><span style="color: red;"> *</span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
                     <select id="form-field-select-3 inputSuccess ITEM_ID" class="chosen-select form-control" name="ITEM_ID" data-placeholder="Select or search data">
                        <option value="">Select Chemical Type</option>
                         @foreach($chemicleType as $chemical)
+                            @if($chemical->ITEM_TYPE != $productionType)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </span>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input type="text" id="inputSuccess USE_QTY" placeholder="Example: Chemical Amount here" name="USE_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
@@ -55,7 +52,6 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'lookup-groups' }}">--}}
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
@@ -64,6 +60,3 @@
         </div>
     </form>
 </div>
-
-
-{{--@include('masterGlobal.formValidation')--}}
