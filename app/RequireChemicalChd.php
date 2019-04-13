@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Input;
 
 class RequireChemicalChd extends Model
 {
+    public static function getWastagePercentage($itemNo){
+        return DB::table('smm_rmallocationchd')
+            ->select('smm_rmallocationchd.WAST_PER')
+            ->where('ITEM_ID','=',$itemNo)
+            ->first();
+    }
+
     public static function insertRequireChemicalPerKgchd($data){
         return DB::table('smm_rmallocationchd')->insert($data);
     }

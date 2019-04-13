@@ -53,7 +53,8 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <span class="col-sm-7">
-                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
+                {{--<input type="text" class="wastageAmount" value="">--}}
+                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageCal" value=""/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -96,36 +97,30 @@
             url : 'crude-salt-stock',
             data : {'saltId':saltId},
             success: function (data) {
-                console.log(data);
-                $('.stockSalt').html(data).show();
-
+                var data = JSON.parse(data);
+                $('.stockSalt').html(data.saltStock).show();
+//                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
             }
         })
     });
 
-    //$('.stockSalt').show();
-    {{--$(document).on('keyup','.crudeSaltAmount',function () {--}}
-    {{--var amount = parseInt($(this).val()) || 0;--}}
-    {{--var saltStock = parseInt($('.stockSalt').text());--}}
-    {{--var remainStock = saltStock - amount;--}}
-    {{--var stockAmount = '<?php echo $saltStock ?>';--}}
+    $(document).on('keyup','.crudeSaltAmount',function () {
+        var amount = parseInt($(this).val()) || 0;
+        var saltStock = parseInt($('.stockSalt').text());
+        var remainStock = saltStock - amount;
 
-    {{--if(saltStock < amount){--}}
-    {{--$('.stockSalt').hide();--}}
-    {{--$('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();--}}
-    {{--$('.result').text(0);--}}
-    {{--if(amount === 0){--}}
-    {{--$('.stockSalt').show();--}}
-    {{--}--}}
-    {{--}else{--}}
-    {{--$('.stockSalt').hide();--}}
-    {{--$('.result').text(remainStock);--}}
-    {{--}--}}
-
-
-    {{--})--}}
-
-
+        if(saltStock < amount){
+            $('.stockSalt').hide();
+            $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+            $('.result').text(0);
+            if(amount === 0){
+                $('.stockSalt').show();
+            }
+        }else{
+            $('.stockSalt').hide();
+            $('.result').text(remainStock);
+        }
+    });
 </script>
 
 

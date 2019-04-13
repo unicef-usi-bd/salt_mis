@@ -10,9 +10,7 @@
                     <select id="form-field-select-3 inputSuccess ITEM_ID" class="chosen-select form-control" name="ITEM_ID" data-placeholder="Select or search data">
                        <option value="">Select Chemical Type</option>
                         @foreach($chemicleType as $chemical)
-                            @if($chemical->ITEM_TYPE != $productionType)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
-                            @endif
                         @endforeach
                     </select>
                 </span>
