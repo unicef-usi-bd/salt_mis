@@ -31,7 +31,7 @@ class Controller extends BaseController
 //############## Look Up Group Data Static Id For Get Lookup Group Data ###############
     public $chemicalId = 25;
     public $crudSaltId = 26;
-    public $finishedSaltId= 27;
+    public $finishedSaltId= 29;
 
     public $crudeSaltSupplierTypeId = 41;
     public $chemicalSupplierTypeId = 42;

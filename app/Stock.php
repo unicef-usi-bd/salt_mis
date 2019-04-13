@@ -22,8 +22,8 @@ class Stock extends Model
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
             ->where('tmm_itemstock.ITEM_NO','=',$saltId)
-            ->where('tmm_itemstock.TRAN_TYPE','=','S')
-            ->where('tmm_itemstock.TRAN_FLAG','=','SP')
+            ->where('tmm_itemstock.TRAN_TYPE','=','SP')
+            ->where('tmm_itemstock.TRAN_FLAG','=','PR')
             ->sum('tmm_itemstock.QTY');
     }
 

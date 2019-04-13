@@ -33,14 +33,15 @@
                                 $editPermissionLevel = $previllage->UPDATE;
                                 $viewPermissionLevel = $previllage->READ;
                             @endphp
-                            <h3 class="accordion-header action-buttons"> {{ ++$key }}.   {{$chemical->LOOKUPCHD_NAME}}
-                                @if($previllage->DELETE == 1)
-                                    {{--@if( $chemical->checkDelete==0)--}}
-                                        <a class="red pull-right clickForDelete row{{ $chemical->RMALLOMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" role="button">
-                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                        </a>
-                                    {{--@endif--}}
-                                @endif
+{{--                            <h3 class="accordion-header action-buttons"> {{ ++$key }}.   {{$chemical->LOOKUPCHD_NAME}}--}}
+                            <h3 class="accordion-header action-buttons"> {{ ++$key }}.   {{$chemical->ITEM_NAME}}
+                                {{--@if($previllage->DELETE == 1)--}}
+
+                                    {{--<a class="red pull-right clickForDelete row{{ $chemical->RMALLOMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" role="button">--}}
+                                        {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
+                                    {{--</a>--}}
+
+                                {{--@endif--}}
                                 @if($editPermissionLevel == 1)
                                     <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Chemical Per kg">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>

@@ -53,11 +53,9 @@ class RequireChemicalMstController extends Controller
      */
     public function create()
     {
-        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+        $productionTypes = Item::itemTypeWiseItemList($this->finishedSaltId);
 
-       // $this->pr($itemTypes);
-
-        return view('setup.requireChemicalPerKg.modals.createRequireChemicalPerKgMst',compact('itemTypes'));
+        return view('setup.requireChemicalPerKg.modals.createRequireChemicalPerKgMst',compact('productionTypes'));
     }
 
     /**
@@ -114,9 +112,9 @@ class RequireChemicalMstController extends Controller
     public function edit($id)
     {
         $editRequireChemicalPerKg = RequireChemicalMst::editRequireChemicalPerKg($id);
-        $itemTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->itemTypeId);
+        $productionTypes = Item::itemTypeWiseItemList($this->finishedSaltId);
 
-        return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgMst',compact('editRequireChemicalPerKg','itemTypes'));
+        return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgMst',compact('editRequireChemicalPerKg','productionTypes'));
     }
 
     /**
@@ -158,7 +156,7 @@ class RequireChemicalMstController extends Controller
         $delete = RequireChemicalMst::deleteRequireChemicalPerKg($id);
         if($delete){
             echo json_encode([
-                'type' => 'tr',
+                'type' => 'div',
                 'id' => $id,
                 'flag' => true,
                 'message' => 'Require per kg level  Successfully Deleted.',

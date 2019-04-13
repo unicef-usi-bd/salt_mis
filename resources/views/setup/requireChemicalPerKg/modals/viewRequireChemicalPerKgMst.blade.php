@@ -10,9 +10,9 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th class=" ">Item Type</th>
+                    <th class=" ">Production Type</th>
                     <th> :</th>
-                    <td>{{ $showRequireChemical->LOOKUPCHD_NAME }} </td>
+                    <td>{{ $showRequireChemical->ITEM_NAME }} </td>
                     <th>Status</th>
                     <th> :</th>
                     <td>
