@@ -78,11 +78,11 @@ class ChemicalPurchase extends Model
         if($chemicalPurchaseChdId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
                 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
-                'TRAN_TYPE' => 'C', //C  = Chemical
+                'TRAN_TYPE' => 'CP', //CP  = Chemical Purchase
                 'TRAN_NO' => $chemicalPurchaseMstId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'CP', // CP = chemical Purchase
+                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -138,10 +138,10 @@ class ChemicalPurchase extends Model
         if($chemicalPurchaseChdId){
             $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
                 //'TRAN_NO' => $chemicalPurchaseMstId,
-               // 'TRAN_TYPE' => 'C', // C = Chemical
+                'TRAN_TYPE' => 'CP', // CP = Chemical Purchase
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                //'TRAN_FLAG' => 'CP', //CP = chemical receive
+                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
