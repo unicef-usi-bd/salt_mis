@@ -37,8 +37,10 @@ class QulityControlTestingController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        //$chemicalPuchase = ChemicalPurchase::chemicalPurchase();
-        return view('transactions.qualityControlAndTesting.qualityControlTestingIndex',compact('heading','previllage'));
+       $qualityControl = QulityControlTesting::getQualityControlData();
+
+//       $this->pr($qualityControl);
+        return view('transactions.qualityControlAndTesting.qualityControlTestingIndex',compact('heading','previllage','qualityControl'));
     }
 
     /**
@@ -63,6 +65,8 @@ class QulityControlTestingController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $rules = array(
             'QC_TESTNAME' => 'required',
 
@@ -74,14 +78,15 @@ class QulityControlTestingController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-            $qulityControlImge = '';
-            if($request->file('testimage')!=null && $request->file('testimage')->isValid()) {
+           // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
+            //$qulityControlImge = '';
+            if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
                 try {
-                    $file = $request->file('testimage');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('testimage')));
+                    $file = $request->file('QUALITY_CONTROL_IMAGE');
+                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
                     $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 
-                    $request->file('testimage')->move("image/testimage/", $qulityControlImge);
+                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
                 }
@@ -110,7 +115,7 @@ class QulityControlTestingController extends Controller
             if($qualityControlTestingInsert){
                 //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
                 //return json_encode('Success');
-                return redirect('/testimage')->with('success', 'Quality  Purchase Has been Created !');
+                return redirect('/quality-control-testing')->with('success', 'Quality  Control & Testing Has been Created !');
             }
         }
     }
@@ -136,7 +141,12 @@ class QulityControlTestingController extends Controller
     public function edit($id)
     {
         $editQualityControl = QulityControlTesting::editQualityConteolTestingDatya($id);
-        return view('transactions.qualityControlAndTesting.modals.editQualityControlTesting',compact('editQualityControl'));
+        $agencyId = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
+        $qulityControlId = LookupGroupData::getActiveGroupDataByLookupGroup($this->qualityControlId);
+        $iodizeBatch = Iodized::getIodizeBatchId();
+        $bstiChemicalData = BstiTestStandard::getBstiChemicalData();
+        //$this->pr($editQualityControl);
+        return view('transactions.qualityControlAndTesting.modals.editQualityControlTesting',compact('editQualityControl','agencyId','qulityControlId','iodizeBatch','bstiChemicalData'));
     }
 
     /**
@@ -148,7 +158,43 @@ class QulityControlTestingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'QC_TESTNAME' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
+//            $qulityControlImge = '';
+//            if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
+//                try {
+//                    $file = $request->file('QUALITY_CONTROL_IMAGE');
+//                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
+//                    $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//
+//                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
+//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+//
+//                }
+//            }
+
+
+
+
+            //$this->pr($request->input());
+            $qualityControlTestingUpdate = QulityControlTesting::updateQualityControlTestingData($request,$id);
+
+            if($qualityControlTestingUpdate){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/quality-control-testing')->with('success', 'Quality  Control & Testing Has been Updated !');
+            }
+        }
     }
 
     /**
@@ -159,6 +205,19 @@ class QulityControlTestingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = QulityControlTesting::deleteQualityControlTestingData($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Level Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 }

@@ -11,15 +11,16 @@
     {{--</div>--}}
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/quality-control-testing') }}" method="post" class="form-horizontal" role="form">
-        <div class="col-md-12">
+    <form action="{{ url('/quality-control-testing/'.$editQualityControl->QUALITYCONTROL_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+
             @csrf
+            @method('PUT')
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +30,7 @@
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($agencyId as $agency)
-                                    <option value="{{$agency->LOOKUPCHD_ID}}"> {{$agency->LOOKUPCHD_NAME}}</option>
+                                    <option value="{{ $agency->LOOKUPCHD_ID }}" @if($agency->LOOKUPCHD_ID==$editQualityControl->AGENCY_ID) selected @endif>{{ $agency->LOOKUPCHD_NAME }}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -38,7 +39,7 @@
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Attached Test Document</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" placeholder=""  value="" class="form-control col-xs-5 col-sm-5" />
+                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder=""  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                 </div>
             </div>
@@ -50,7 +51,7 @@
                             <select id="privileges"  class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($qulityControlId as $name)
-                                    <option value="{{$name->LOOKUPCHD_ID}}"> {{$name->LOOKUPCHD_NAME}}</option>
+                                    <option value="{{ $name->LOOKUPCHD_ID }}" @if($name->LOOKUPCHD_ID==$editQualityControl->QC_BY) selected @endif>{{ $name->LOOKUPCHD_NAME }}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -60,10 +61,10 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="privileges"  class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
+                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($iodizeBatch as $iodize)
-                                    <option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>
+                                    <option value="{{ $iodize->IODIZEDMST_ID }}" @if($iodize->IODIZEDMST_ID==$editQualityControl->BATCH_NO) selected @endif>{{ $iodize->BATCH_NO }}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -81,13 +82,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editQualityControl->REMARKS }}</textarea>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-12" style="margin-top: 15px;">
+
+        <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">
             <h4  style="color: #1B6AAA; margin-left: 450px;">Test Result</h4>
             <div class="col-md-6">
                 <h4 style="margin-left: 150px;">BSTI Standard</h4>
@@ -129,25 +130,25 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="" class="form-control col-xs-5 col-sm-5"  />
+                        <input type="text" name="SODIUM_CHLORIDE" id="SODIUM_CHLORIDE" placeholder=""  value="{{ $editQualityControl->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="" class="form-control col-xs-5 col-sm-5" />
+                        <input type="text" name="MOISTURIZER" id="" placeholder="MOISTURIZER"  value="{{ $editQualityControl->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="" class="form-control col-xs-5 col-sm-5" />
+                        <input type="text" name="IODINE_CONTENT" id="IODINE_CONTENT" placeholder=""  value="{{ $editQualityControl->IODINE_CONTENT }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="" class="form-control col-xs-5 col-sm-5"  />
+                        <input type="text" name="PH" id="PH" placeholder=""  value="{{ $editQualityControl->PH }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
