@@ -120,7 +120,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazila</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="UPAZILA_ID_MILL" class="chosen-select chosen-container upazila_mill" name="UPAZILA_ID" data-placeholder="Select">
+                               <select id="UPAZILA_ID_MILL" class="chosen-select chosen-container upazila_mill" name="UPAZILA_ID" url="{{ url('supplier-profile/get-union') }}" data-placeholder="Select">
                                    <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
                                </select>
                             </span>
@@ -186,7 +186,7 @@
 <script>
     $(document).ready(function () {
         $('select#DIVISION_ID_MILL').on('change',function(){
-            var divisionId = $(this).val(); alert(divisionId);//exit();
+            var divisionId = $(this).val(); //alert(divisionId);//exit();
             var option = '<option value="">Select District</option>';
             var url = $(this).attr('url');
             var url = url+'/'+divisionId;
@@ -230,9 +230,10 @@
         $('#UPAZILA_ID_MILL').on('change',function(){
             var upazilaId = $(this).val(); //alert(upazilaId);exit();
             var option = '<option value="">Select Union</option>';
+            var url = $(this).attr('url');
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-union/{id}",
+                url  : url+'/'+upazilaId,
                 data : {'upazilaId': upazilaId},
                 success:function (data) {
                     for (var i = 0; i < data.length; i++){

@@ -127,7 +127,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                                        <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
                                                             <option value="">Select</option>
                                                             @foreach($getDivision as $row)
                                                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -137,14 +137,14 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                                        <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
                                                             <option value="">Select</option>
                                                          </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
+                                                        <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
                                                             <option value=""> Select </option>
                                                         </select>
                                                     </span>
@@ -290,11 +290,13 @@
     <script>
         $(document).ready(function () {
             $('select#ENT_DIVISION_ID').on('change',function(){
-                var divisionId = $(this).val(); //alert(divisionId);exit();
+                var divisionId = $(this).val(); //alert(divisionId); //exit();
                 var option = '<option value="">Select District</option>';
+                var url  = $(this).attr('url');
+                var url = url+'/'+divisionId;
                 $.ajax({
                     type : "get",
-                    url  : "supplier-profile/get-district/{id}",
+                    url  : url,
                     data : {'divisionId': divisionId},
                     success:function (data) {
                         for (var i = 0; i < data.length; i++){
@@ -311,9 +313,11 @@
             $('select#ENT_DISTRICT_ID').on('change',function(){
                 var districtId = $(this).val(); //alert(districtId); exit();
                 var option = '<option value="">Select Upazila</option>';
+                var url = $(this).attr('url');
+                var url = url+'/'+districtId;
                 $.ajax({
                     type : "get",
-                    url  : "supplier-profile/get-upazila/{id}",
+                    url  : url,
                     data : {'districtId': districtId},
                     success:function (data) {
                         for (var i = 0; i < data.length; i++){
@@ -330,9 +334,11 @@
             $('#ENT_UPAZILA_ID').on('change',function(){
                 var upazilaId = $(this).val(); //alert(upazilaId);exit();
                 var option = '<option value="">Select Union</option>';
+                var url = $(this).attr('url');
+                var url = url+'/'+upazilaId;
                 $.ajax({
                     type : "get",
-                    url  : "supplier-profile/get-union/{id}",
+                    url  : url,
                     data : {'upazilaId': upazilaId},
                     success:function (data) {
                         for (var i = 0; i < data.length; i++){

@@ -17,7 +17,12 @@
         }
         .disabledTab{
             pointer-events: none;
+
         }
+        li .disabledTab:hover{
+           cursor:not-allowed
+        }
+
         /*.nav-tabs>li.active>a{*/
             /*background-color: #1CABE2;*/
         /*}*/
@@ -43,7 +48,7 @@
                     <ul class="nav nav-tabs" id="myTab">
 
                             <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                            <li class="disabled disabledTab"> <a class="disabled" data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
                             <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                             <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
                             <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>

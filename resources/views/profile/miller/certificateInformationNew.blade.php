@@ -102,7 +102,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="date" name="ISSUING_DATE" class="chosen-container ISSUING_DATE">
+                                                        <input type="date" name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
                                                     </span>
                                                 </td>
 
@@ -121,7 +121,7 @@
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE">
+                                                       <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
                                                     </span>
                                                 </td>
 
@@ -252,6 +252,6 @@
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
-    @include('masterGlobal.getDistrictUpazilaUnion')
+
 
 @endsection
