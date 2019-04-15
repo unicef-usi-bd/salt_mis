@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\RequireChemicalChd;
 use App\Stock;
 use App\WashingAndCrushing;
 use Illuminate\Http\Request;
@@ -107,8 +108,8 @@ class WashingAndCrushingController extends Controller
     {
         $editWashingAndCrushingData = WashingAndCrushing::editWashingAndCrushingData($id);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        $saltStock = Stock::getSaltStock();
-        $totalReduceSalt = Stock::getTotalReduceSalt();
+        $saltStock = Stock::getSaltStock($editWashingAndCrushingData->ITEM_NO);
+        $totalReduceSalt = Stock::getTotalReduceSalt($editWashingAndCrushingData->ITEM_NO);
         $saltStock = $saltStock - abs($totalReduceSalt);
 
         return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editWashingAndCrushingData','crudeSaltTypes','saltStock'));
@@ -169,10 +170,11 @@ class WashingAndCrushingController extends Controller
     public function getCrudeSaltStock(Request $request){
         $saltId = $request->input('saltId');
         $saltStock = Stock::getSaltStock($saltId);
+        $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($saltId);
         $totalReduceSalt = Stock::getTotalReduceSalt($saltId);
 
         $saltStock = $saltStock - abs($totalReduceSalt);
 
-        return $saltStock;
+        return json_encode(array("saltStock" => $saltStock, "wastageAmount" => $showRequireChemicalPerKgchd));
     }
 }

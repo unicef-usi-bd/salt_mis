@@ -53,11 +53,11 @@ class CrudeSaltProcurement extends Model
         if($crudeSaltChdId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
                 'TRAN_DATE' => date("Y-m-d h:i:s"),
-                'TRAN_TYPE' => 'S', //S  = Salt
+                'TRAN_TYPE' => 'SP', //S  = Salt Purchase
                 'TRAN_NO' => $crudeSaltMstId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'SP', // SP = Salt Purchase
+                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -113,10 +113,10 @@ class CrudeSaltProcurement extends Model
             $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
                 //'TRAN_NO' => $id,
                 'TRAN_DATE' => date("Y-m-d h:i:s"),
-                'TRAN_TYPE' => 'S', //S  = Salt
+                'TRAN_TYPE' => 'SP', //S  = Salt Purchase
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'SP', // SP = alt Purchase
+                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);

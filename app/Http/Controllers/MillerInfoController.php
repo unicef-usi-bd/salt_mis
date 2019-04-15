@@ -113,8 +113,12 @@ class MillerInfoController extends Controller
     public function show($id)
     {
         $viewMillerData = MillerInfo::showMillereProfile($id);
-        $millerListForEntrepreneur = MillerInfo::showMillereEntreprepProfile($id);
-        return view('profile.miller.modal.viewMillerIndex', compact('viewMillerData','millerListForEntrepreneur'));
+        $millerListForEntrepreneur = Entrepreneur::showEntrepreneurProfile($id);
+        $lookUpDataMill = MillerInfo::getAllMillLookUpData($id);
+        $lookUpDataEntp = MillerInfo::getAllEntrepLookUpData($id);
+        $lookUpDataCertificate = MillerInfo::getAllCertificateLookUpData($id);
+        $remarks = MillerInfo::allRemarks($id);
+        return view('profile.miller.modal.viewMillerIndex', compact('viewMillerData','millerListForEntrepreneur','lookUpDataMill','lookUpDataEntp','lookUpDataCertificate','remarks'));
     }
 
     /**

@@ -45,10 +45,10 @@ class MillerInfo extends Model
         $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
             'MILL_NAME' => $request->input('MILL_NAME'),
             'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
-            'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
+            //'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
             'CAPACITY_ID' => $request->input('CAPACITY_ID'),
-            'ZONE_ID' => $request->input('ZONE_ID'),
-            'MILLERS_ID' => $request->input('MILLERS_ID'),
+            //'ZONE_ID' => $request->input('ZONE_ID'),
+            //'MILLERS_ID' => $request->input('MILLERS_ID'),
             'DIVISION_ID' => $request->input('DIVISION_ID'),
             'DISTRICT_ID' => $request->input('DISTRICT_ID'),
             'UPAZILA_ID' => $request->input('UPAZILA_ID'),
@@ -75,14 +75,14 @@ class MillerInfo extends Model
 
     }
 
+    //    for view modal
     public static function showMillereProfile($id){
         return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*','ssm_zonesetup.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
+            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssm_zonesetup.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
             ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
             ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
             ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->leftJoin('ssm_zonesetup','ssm_mill_info.ZONE_ID','=','ssm_zonesetup.ZONE_CODE')
             ->leftJoin('ssc_divisions','ssm_mill_info.DIVISION_ID','=','ssc_divisions.DIVISION_ID')
             ->leftJoin('ssc_districts','ssm_mill_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
@@ -92,18 +92,45 @@ class MillerInfo extends Model
             ->first();
 
     }
-    public static function showMillereEntreprepProfile($id){
+    public static function getAllMillLookUpData($id){
         return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*','ssc_lookupchd.*')
-            ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
-            ->leftJoin('ssc_divisions','ssm_entrepreneur_info.DIVISION_ID','=','ssc_divisions.DIVISION_ID')
-            ->leftJoin('ssc_districts','ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
-            ->leftJoin('ssc_upazilas','ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
-            ->leftJoin('ssc_unions','ssm_entrepreneur_info.UNION_ID','=','ssc_unions.UNION_ID')
-            ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.REG_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->select('ssm_mill_info.*','process.LOOKUPCHD_NAME as process_name','mill.LOOKUPCHD_NAME as mill_name','capacity.LOOKUPCHD_NAME as capacity_type')
+            ->leftJoin('ssc_lookupchd as process','ssm_mill_info.PROCESS_TYPE_ID','=','process.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as mill','ssm_mill_info.MILL_TYPE_ID','=','mill.UD_ID')
+            ->leftJoin('ssc_lookupchd as capacity','ssm_mill_info.CAPACITY_ID','=','capacity.LOOKUPCHD_ID')
             ->where('ssm_mill_info.MILL_ID','=',$id)
             ->first();
-     }
+
+    }
+    public static function getAllEntrepLookUpData($id){
+        return DB::table('ssm_entrepreneur_info')
+            ->select('ssm_entrepreneur_info.*','regi.LOOKUPCHD_NAME as registration_type','owner.LOOKUPCHD_NAME as owner_type')
+            ->leftJoin('ssc_lookupchd as regi','ssm_entrepreneur_info.REG_TYPE_ID','=','regi.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as owner','ssm_entrepreneur_info.OWNER_TYPE_ID','=','owner.LOOKUPCHD_ID')
+            ->where('ssm_entrepreneur_info.MILL_ID','=',$id)
+            ->first();
+
+    }
+    public static function getAllCertificateLookUpData($id){
+        return DB::table('ssm_certificate_info')
+            ->select('ssm_certificate_info.*','certificate.LOOKUPCHD_NAME as certificate_type','issue.LOOKUPCHD_NAME as issure_name')
+            ->leftJoin('ssc_lookupchd as certificate','ssm_certificate_info.CERTIFICATE_TYPE_ID','=','certificate.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as issue','ssm_certificate_info.ISSURE_ID','=','issue.LOOKUPCHD_ID')
+            ->where('ssm_certificate_info.MILL_ID','=',$id)
+            ->first();
+
+    }
+    public static  function allRemarks($id){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.*','ssm_entrepreneur_info.REMARKS as entrep_remarks','ssm_certificate_info.REMARKS as certificate_remarks','tsm_qc_info.REMARKS as qc_remarks','ssm_millemp_info.REMARKS as employee_remarks')
+            ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
+            ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
+            ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
+            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->where('ssm_mill_info.MILL_ID','=',$id)
+            ->first();
+    }
+    //    for view modal
     public static function deleteMillerProfile($id){
          $empInfo = DB::table('ssm_millemp_info')->where('MILL_ID', $id)->delete();
          if($empInfo){

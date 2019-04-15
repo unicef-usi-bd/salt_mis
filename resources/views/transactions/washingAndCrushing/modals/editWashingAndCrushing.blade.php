@@ -49,7 +49,6 @@
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $saltStock }}</span><span class="result"></span>)</span>
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <span class="col-sm-7">
@@ -86,14 +85,26 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-
 <script>
-    $('.stockSalt').show();
+
+    $(document).on('change','.salt',function(){
+        var saltId = $(this).val();
+        $.ajax({
+            type : 'GET',
+            url : 'crude-salt-stock',
+            data : {'saltId':saltId},
+            success: function (data) {
+                var data = JSON.parse(data);
+                $('.stockSalt').html(data.saltStock).show();
+//                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
+            }
+        })
+    });
+
     $(document).on('keyup','.crudeSaltAmount',function () {
         var amount = parseInt($(this).val()) || 0;
         var saltStock = parseInt($('.stockSalt').text());
         var remainStock = saltStock - amount;
-        var stockAmount = '<?php echo $saltStock ?>';
 
         if(saltStock < amount){
             $('.stockSalt').hide();
@@ -106,10 +117,9 @@
             $('.stockSalt').hide();
             $('.result').text(remainStock);
         }
-
-
-    })
+    });
 </script>
+
 
 
 

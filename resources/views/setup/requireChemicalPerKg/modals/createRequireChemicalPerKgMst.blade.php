@@ -9,13 +9,13 @@
         {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
         @csrf
         <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item Type</b><span style="color: red;"> *</span></label>
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Production Type</b><span style="color: red;"> *</span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
                     <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
-                       <option value=""></option>
-                        @foreach($itemTypes as $item)
-                            <option value="{{$item->LOOKUPCHD_ID}}"> {{$item->LOOKUPCHD_NAME}}</option>
+                       <option value="">-Select-</option>
+                        @foreach($productionTypes as $productionType)
+                            <option value="{{$productionType->ITEM_NO}}"> {{$productionType->ITEM_NAME}}</option>
                         @endforeach
                     </select>
                 </span>

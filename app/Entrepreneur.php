@@ -94,4 +94,17 @@ class Entrepreneur extends Model
 
     }
 
+    public static function showEntrepreneurProfile($id){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*','ssc_lookupchd.*')
+            ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
+            ->leftJoin('ssc_divisions','ssm_entrepreneur_info.DIVISION_ID','=','ssc_divisions.DIVISION_ID')
+            ->leftJoin('ssc_districts','ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
+            ->leftJoin('ssc_upazilas','ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
+            ->leftJoin('ssc_unions','ssm_entrepreneur_info.UNION_ID','=','ssc_unions.UNION_ID')
+            ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.REG_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('ssm_mill_info.MILL_ID','=',$id)
+            ->first();
+    }
+
 }
