@@ -1,3 +1,4 @@
+@php $districtUrl = url('supplier-profile/get-district/{id}'); @endphp
 <div id="mill" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
@@ -95,7 +96,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID_MILL" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
+                                <select id="DIVISION_ID_MILL" name="DIVISION_ID" class="chosen-select chosen-container division" url="{{ url('supplier-profile/get-district') }}" data-placeholder="Select">
                                     <option value=""></option>
                                     @foreach($getDivision as $row)
                                         <option value="{{ $row->DIVISION_ID }}" @if($editMillData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
@@ -109,7 +110,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID_MILL" class="chosen-select chosen-container district_mill" name="DISTRICT_ID" data-placeholder="Select">
+                               <select id="DISTRICT_ID_MILL" class="chosen-select chosen-container district_mill" name="DISTRICT_ID" url="{{ url('supplier-profile/get-upazila') }}" data-placeholder="Select">
                                    <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
                                </select>
                             </span>
@@ -130,7 +131,6 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UNION_ID_MILL" class="chosen-select chosen-container union_mill" name="UNION_ID" data-placeholder="Select">
-
                                    <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
                                 </select>
                             </span>
@@ -188,9 +188,11 @@
         $('select#DIVISION_ID_MILL').on('change',function(){
             var divisionId = $(this).val(); alert(divisionId);//exit();
             var option = '<option value="">Select District</option>';
-            var url = 'supplier-profile/get-district/{id}';
+            var url = $(this).attr('url');
+            var url = url+'/'+divisionId;
+
             $.ajax({
-                type : "get",
+                type : "GET",
                 url  : url,
                 data : {'divisionId': divisionId},
                 success:function (data) {
@@ -208,9 +210,10 @@
         $('select#DISTRICT_ID_MILL').on('change',function(){
             var districtId = $(this).val(); //alert(districtId); exit();
             var option = '<option value="">Select Upazila</option>';
+            var url = $(this).attr('url');
             $.ajax({
-                type : "get",
-                url  : "supplier-profile/get-upazila/{id}",
+                type : "GET",
+                url  : url+'/'+districtId,
                 data : {'districtId': districtId},
                 success:function (data) {
                     for (var i = 0; i < data.length; i++){
