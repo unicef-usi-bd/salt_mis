@@ -62,7 +62,7 @@ class RequireChemicalChdController extends Controller
                 'RMALLOMST_ID' => $request->input('RMALLOMST_ID'),
                 'ITEM_ID' => $request->input('ITEM_ID'),
                 'USE_QTY' => $request->input('USE_QTY'),
-                'WAST_PER' => $request->input('WAST_PER'),
+                'CRUDE_SALT' => $request->input('CRUDE_SALT'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -97,6 +97,7 @@ class RequireChemicalChdController extends Controller
     public function edit($id)
     {
         $editRequireChemicalPerKgchd = RequireChemicalChd::editRequirChemicalPerKgchd($id);
+       // $this->pr($editRequireChemicalPerKgchd);
         $chemicleType = Item::getItemName();
         $productionType = $this->finishedSaltId;
         return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgChd',compact('editRequireChemicalPerKgchd','chemicleType','productionType'));

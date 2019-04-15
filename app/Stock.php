@@ -27,19 +27,37 @@ class Stock extends Model
             ->sum('tmm_itemstock.QTY');
     }
 
-    public static function getTotalReduceChemical(){
+    public static function getTotalReduceChemical($chemicalId){
         return DB::table('tmm_itemstock')
             ->select('tmm_itemstock.QTY')
+            ->where('tmm_itemstock.ITEM_NO','=',$chemicalId)
             ->where('TRAN_TYPE','=','C')
-            ->where('TRAN_FLAG','=','CR')
+            ->where('TRAN_FLAG','=','IC')
             ->sum('tmm_itemstock.QTY');
     }
 
-    public static function getChemicalStock(){
+    public static function getChemicalStock($chemicalId){
         return DB::table('tmm_itemstock')
             ->select('tmm_itemstock.QTY')
-            ->where('TRAN_TYPE','=','C')
-            ->where('TRAN_FLAG','=','CP')
+            ->where('tmm_itemstock.ITEM_NO','=',$chemicalId)
+            ->where('TRAN_TYPE','=','CP')
+            ->where('TRAN_FLAG','=','PR')
+            ->sum('tmm_itemstock.QTY');
+    }
+
+    public static function getTotalWashingSalt(){
+        return DB::table('tmm_itemstock')
+            ->select(('tmm_itemstock.QTY'))
+            ->where('tmm_itemstock.TRAN_TYPE','=','W')
+            ->where('tmm_itemstock.TRAN_FLAG','=','WI')
+            ->sum('tmm_itemstock.QTY');
+    }
+
+    public static function getTotalReduceWashingSalt(){
+        return DB::table('tmm_itemstock')
+            ->select(('tmm_itemstock.QTY'))
+            ->where('tmm_itemstock.TRAN_TYPE','=','W')
+            ->where('tmm_itemstock.TRAN_FLAG','=','WR')
             ->sum('tmm_itemstock.QTY');
     }
 }

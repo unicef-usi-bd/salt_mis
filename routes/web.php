@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('washing-crushing','WashingAndCrushingController');//Rubiyat
     Route::get('crude-salt-stock','WashingAndCrushingController@getCrudeSaltStock');//Rubiyat
     Route::resource('iodized','IodizedController');//jalal
+    Route::get('chemical-stock','IodizedController@getChemicalStock');//Rubiyat
     Route::resource('quality-control-testing','QulityControlTestingController');//jalal
 
     //Profile
