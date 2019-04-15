@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('crude-salt-stock','WashingAndCrushingController@getCrudeSaltStock');//Rubiyat
     Route::resource('iodized','IodizedController');//jalal
     Route::resource('quality-control-testing','QulityControlTestingController');//jalal
+    Route::resource('sales-distribution','SalesDistributionController');//jalal
 
     //Profile
     Route::resource('mill-info', 'MillerInfoController'); //Azharul
