@@ -23,6 +23,7 @@ class Employee extends Model
             'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
             'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
             'REMARKS' => $request->input('REMARKS'),
+            'FINAL_SUBMIT_FLG' => 1,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);

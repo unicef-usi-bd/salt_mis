@@ -11,8 +11,8 @@
     {{--</div>--}}
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/quality-control-testing') }}" method="post" class="form-horizontal" role="form">
-        <div class="col-md-12">
+    <form action="{{ url('/quality-control-testing') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+        {{--<div class="col-md-12">--}}
             @csrf
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
             <div class="col-md-6">
@@ -81,13 +81,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+                        <textarea   rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
                     </div>
                 </div>
             </div>
-        </div>
+        {{--</div>--}}
 
-        <div class="col-md-12" style="margin-top: 15px;">
+        <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">
             <h4  style="color: #1B6AAA; margin-left: 450px;">Test Result</h4>
             <div class="col-md-6">
                 <h4 style="margin-left: 150px;">BSTI Standard</h4>
@@ -189,7 +189,4 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-
-{{--@include('masterGlobal.formValidation')--}}
-
 

@@ -99,12 +99,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('iodized','IodizedController');//jalal
     Route::get('chemical-stock','IodizedController@getChemicalStock');//Rubiyat
     Route::resource('quality-control-testing','QulityControlTestingController');//jalal
+    Route::resource('sales-distribution','SalesDistributionController');//jalal
 
     //Profile
     Route::resource('mill-info', 'MillerInfoController'); //Azharul
     Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
     Route::resource('supplier-profile', 'SupplierProfileController'); //Azharul
     Route::get('supplier-profile/get-district/{id}', 'SupplierProfileController@getDistrictByAjax'); //Azharul
+
+    //Route::get('supplier-profile/get-district', 'SupplierProfileController@getDistrictByAjax'); //Azharul
+
     Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
     Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
 

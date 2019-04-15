@@ -15,16 +15,16 @@
                     <td> {{ $viewMillerData->MILL_NAME }} </td>
                     <th class=" ">Process Type</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->LOOKUPCHD_NAME }} </td>
+                    <td> {{ $lookUpDataMill->process_name }} </td>
 
                 </tr>
                 <tr>
                     <th class=" ">Mill Type</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->MILL_TYPE_ID }}</td>
+                    <td> {{ $lookUpDataMill->mill_name }} </td>
                     <th class=" ">Capacity</th>
                     <th> :</th>
-                    <td>{{ $viewMillerData->CAPACITY_ID }} </td>
+                    <td>{{ $lookUpDataMill->capacity_type }}</td>
 
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
                     </td>
                     <th class=" ">Remarks</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->REMARKS }}</td>
+                    <td> {{ $remarks->REMARKS }}</td>
 
                 </tr>
             </table>
@@ -78,10 +78,10 @@
                 <tr>
                     <th class=" ">Registration Type</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->LOOKUPCHD_NAME }} </td>
+                    <td> {{ $lookUpDataEntp->registration_type }} </td>
                     <th class=" ">Type of Owner</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->OWNER_TYPE_ID }} </td>
+                    <td> {{ $lookUpDataEntp->owner_type }} </td>
 
                 </tr>
                 <tr>
@@ -126,7 +126,7 @@
                     <td> {{ $viewMillerData->EMAIL }}</td>
                     <th class=" ">Remarks</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->REMARKS }}</td>
+                    <td> {{ $remarks->entrep_remarks }}</td>
 
                 </tr>
             </table>
@@ -138,10 +138,10 @@
                 <tr>
                     <th class=" ">Type of Certificate </th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->CERTIFICATE_TYPE_ID }} </td>
+                    <td> {{ $lookUpDataCertificate->certificate_type }} </td>
                     <th class=" ">Issure Name</th>
                     <th> :</th>
-                    <td> {{ $viewMillerData->ISSURE_ID }} </td>
+                    <td> {{ $lookUpDataCertificate->issure_name }} </td>
 
                 </tr>
                 <tr>
@@ -165,7 +165,7 @@
                 <tr>
                     <th class=" ">Remarks</th>
                     <th> :</th>
-                    <td>{{ $viewMillerData->REMARKS }} </td>
+                    <td>{{ $remarks->certificate_remarks }} </td>
 
                 </tr>
 
@@ -228,7 +228,7 @@
                 <tr>
                     <th class=" ">Remarks</th>
                     <th> :</th>
-                    <td>{{ $viewMillerData->REMARKS }} </td>
+                    <td>{{ $remarks->qc_remarks }}</td>
 
                 </tr>
 
@@ -277,7 +277,7 @@
                 <tr>
                     <th class=" ">Remarks</th>
                     <th> :</th>
-                    <td>{{ $viewMillerData->REMARKS }} </td>
+                    <td>{{ $remarks->employee_remarks }} </td>
 
                 </tr>
 
