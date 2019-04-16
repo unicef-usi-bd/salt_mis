@@ -87,7 +87,7 @@
                         </button>
                         <button type="button" class="btn btn-primary btnUpdateEmp">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update
+                            Submit
                         </button>
                     </div>
                 </div>

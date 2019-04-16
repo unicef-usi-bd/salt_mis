@@ -170,24 +170,25 @@ class QulityControlTestingController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
-//            $qulityControlImge = '';
-//            if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
-//                try {
-//                    $file = $request->file('QUALITY_CONTROL_IMAGE');
-//                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
-//                    $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-//
-//                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
-//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-//
-//                }
-//            }
+            $qulityControlImge = '';
+            if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
+                try {
+                    $file = $request->file('QUALITY_CONTROL_IMAGE');
+                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
+                    $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+
+                    //$file->move("image/testimage/", $qulityControlImge);
+                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
+                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
+                }
+            }
 
 
 
 
             //$this->pr($request->input());
-            $qualityControlTestingUpdate = QulityControlTesting::updateQualityControlTestingData($request,$id);
+            $qualityControlTestingUpdate = QulityControlTesting::updateQualityControlTestingData($request,$id,$qulityControlImge);
 
             if($qualityControlTestingUpdate){
                 //            return response()->json(['success'=>'Lookup Group Successfully Saved']);

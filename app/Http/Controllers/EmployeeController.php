@@ -171,6 +171,7 @@ public function createEmployee($millerInfoId){
         $millerInfoId = $request->input('MILL_ID');
         $updateEmpData = Employee::updateMillEmployeeData($request, $millerInfoId);
         return "Employee Information has been updated";
+
     }
 
 }

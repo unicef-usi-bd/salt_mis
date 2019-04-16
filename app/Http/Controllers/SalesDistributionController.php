@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use App\LookupGroupData;
+use App\SalesDistribution;
+use App\Item;
 
 class SalesDistributionController extends Controller
 {
@@ -14,7 +22,21 @@ class SalesDistributionController extends Controller
      */
     public function index()
     {
-        //
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
+
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+        $heading=array(
+            'title'=>'Sales & Distribution',
+            'library'=>'datatable',
+            'modalSize'=>'modal-bg',
+            'action'=>'sales-distribution/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+
+        $salesDitributionIndex = SalesDistribution::getSalesDistributionData();
+        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDitributionIndex'));
     }
 
     /**
@@ -24,7 +46,11 @@ class SalesDistributionController extends Controller
      */
     public function create()
     {
-        //
+        $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
+        $tradingId = SalesDistribution::getTradingName();
+        $saltId = Item::itemTypeWiseItemList($this->finishedSaltId);
+        $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId'));
     }
 
     /**
@@ -35,7 +61,27 @@ class SalesDistributionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'DRIVER_NAME' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+            $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId);
+
+
+            if($salesDistributionInsert){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/sales-distribution')->with('success', 'Sales Distribution Has been Created !');
+            }
+        }
     }
 
     /**
@@ -46,7 +92,8 @@ class SalesDistributionController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewSalersDistributor = SalesDistribution::showSalesDistributionData($id);
+        return view('transactions.salesDistribution.modals.viewSalesDistribution',compact('viewSalersDistributor'));
     }
 
     /**
