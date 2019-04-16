@@ -35,8 +35,8 @@ class SalesDistributionController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        //$sellerDitributorProfile = SellerDistributorProfile::sellerDistributorProfile();
-        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage'));
+        $salesDitributionIndex = SalesDistribution::getSalesDistributionData();
+        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDitributionIndex'));
     }
 
     /**
@@ -48,8 +48,9 @@ class SalesDistributionController extends Controller
     {
         $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
         $tradingId = SalesDistribution::getTradingName();
-        $saltId = Item::itemTypeWiseItemList($this->itemTypeId);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId'));
+        $saltId = Item::itemTypeWiseItemList($this->finishedSaltId);
+        $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId'));
     }
 
     /**
@@ -60,7 +61,27 @@ class SalesDistributionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'DRIVER_NAME' => 'required',
+
+
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+
+            $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId);
+
+
+            if($salesDistributionInsert){
+                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
+                //return json_encode('Success');
+                return redirect('/sales-distribution')->with('success', 'Sales Distribution Has been Created !');
+            }
+        }
     }
 
     /**
@@ -71,7 +92,8 @@ class SalesDistributionController extends Controller
      */
     public function show($id)
     {
-        //
+        $viewSalersDistributor = SalesDistribution::showSalesDistributionData($id);
+        return view('transactions.salesDistribution.modals.viewSalesDistribution',compact('viewSalersDistributor'));
     }
 
     /**
