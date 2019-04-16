@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RequireChemicalChd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class IodizedController extends Controller
         $heading=array(
             'title'=>'Iodize',
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-md',
             'action'=>'iodized/create',
             'createPermissionLevel' => $previllage->CREATE
         );
@@ -49,14 +50,9 @@ class IodizedController extends Controller
         $digits = 4;
         $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $totalReduceSalt = Stock::getTotalReduceSalt();
-        $totalSaltStock = Stock::getSaltStock();
-        $totalSalt = $totalSaltStock - abs($totalReduceSalt);
-        $totalReduceChemical = Stock::getTotalReduceChemical();
-        $totalChemicalStock = Stock::getChemicalStock();
-        $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
+        $totalWashing = Stock::getTotalWashingSalt();
         //$this->pr($test);
-        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalChemical'));
+        return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
     }
 
     /**
@@ -110,15 +106,17 @@ class IodizedController extends Controller
      */
     public function edit($id)
     {
-       $editIodize = Iodized::editIodizeData($id);
+        $editIodize = Iodized::editIodizeData($id);
         $digits = 4;
         $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $totalReduceSalt = Stock::getTotalReduceSalt();
-        $totalSaltStock = Stock::getSaltStock();
-        $totalSalt = $totalSaltStock - abs($totalReduceSalt);
-        $totalReduceChemical = Stock::getTotalReduceChemical();
-        $totalChemicalStock = Stock::getChemicalStock();
+
+        $totalWashingSalt = Stock::getTotalWashingSalt();
+        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt();
+        $totalSalt = $totalWashingSalt - abs($totalReduceWashingSalt);
+
+        $totalReduceChemical = Stock::getTotalReduceChemical($editIodize->ITEM_NO);
+        $totalChemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO);
         $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
        return view('transactions.iodize.modals.editIodize',compact('editIodize','batchNo','chemicleType','totalSalt','totalChemical'));
     }
@@ -177,5 +175,15 @@ class IodizedController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
+    }
+
+    public function getChemicalStock(Request $request){
+        $chemicalId = $request->input('chemicalId');
+        $chemicalStock = Stock::getChemicalStock($chemicalId);
+        $totalReduceChemical = Stock::getTotalReduceChemical($chemicalId);
+
+        $chemicalStock = $chemicalStock - abs($totalReduceChemical);
+        $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($chemicalId);
+        return json_encode(array("chemicalStock" => $chemicalStock, "chemicalPerKg" => $showRequireChemicalPerKgchd));
     }
 }

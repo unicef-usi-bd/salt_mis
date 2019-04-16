@@ -63,7 +63,7 @@
                                     </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodize">
+                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-md" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodize">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @else

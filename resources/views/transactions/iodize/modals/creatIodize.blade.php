@@ -1,61 +1,37 @@
 <div class="col-md-12">
-    {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
-    {{--<span id="successMessage"></span>--}}
-    {{--<button type="button" class="close" data-dismiss="alert">--}}
-    {{--<i class="ace-icon fa fa-times"></i>--}}
-    {{--</button>--}}
-    {{--</div>--}}
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
+    <div class="alert alert-danger msg" style="display: none;">
 
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
+    </div>
+
     <form action="{{ url('/iodized') }}" method="post" class="form-horizontal" role="form">
-        <div class="col-md-12">
             @csrf
-            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch Number</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess BATCH_NO" placeholder="Example: Auto Generate" name="BATCH_NO" class="form-control col-xs-10 col-sm-5" value="{{ $batchNo }}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
-
-                    <span class="block input-icon input-icon-right">
-                          <div class="col-sm-4">
-                        <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
-                        </div>
-                    </span>
-
-                </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
-                    </div>
-                </div>
-                <div class="form-group" style="margin-left: -200px; margin-top: 40px;">
-                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span>  {{ $totalSalt }}  </span></label>--}}
-                    <span class="col-sm-6" ><span class="stockSalt"> ( Stock have : <strong>{{ $totalSalt }}</strong> Kg )</span> </span>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch Number</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess BATCH_NO" placeholder="Example: Auto Generate" name="BATCH_NO" readonly class="form-control col-xs-10 col-sm-5" value="{{ $batchNo }}"/>
             </div>
-
-
         </div>
-
-
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <span class="col-sm-6" style="padding: 0;">
+                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
+                </span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }}</span><span class="result"></span>)</span>
+            </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"></span></label>
+        <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control chemical" name="PRODUCT_ID" data-placeholder="Select or search data">
                         <option value=""></option>
                         @foreach($chemicleType as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -64,62 +40,37 @@
                 </span>
                 </div>
             </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Chemical</b><span style="color: red;"> </span> </label>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Chemical</b><span style="color: red;"> </span> </label>
-
-                <span class="block input-icon input-icon-right">
-                          <div class="col-sm-4">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
-                        </div>
+            <div class="col-sm-8">
+                    <span class="col-sm-6" style="padding: 0;">
+                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
                     </span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical"></span><span class="resultChemical"></span>)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-7">
+                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Auto Generate" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
+
+            </div>
+            <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <textarea rows="3" cols ="2" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-7">
-                    <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Auto Generate" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
-
-                </div>
-                <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
-            </div>
-
-            <div class="form-group" style="margin-left: -200px; margin-top: 25px;">
-                {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Stock :</b><span>  {{ $totalSalt }}  </span></label>--}}
-                <span class="col-sm-6"><span class="stockSalt"> ( Stock have : <strong>{{ $totalChemical }}</strong> Kg )</span> </span>
-            </div>
-        </div>
-       <div class="col-md-12">
-           <div class="form-group" style="margin-left: -160px;">
-               <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-               <div class="col-sm-9">
-                   <textarea style="width:95.5%;"   rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
-               </div>
-           </div>
-       </div>
-
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
-
-        <div class="clearfix" style="margin-left: 150px;">
+        <div class="clearfix">
             <div class="col-md-offset-3 col-md-9">
                 <button type="reset" class="btn test">
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
@@ -134,12 +85,76 @@
 
 {{--@include('masterGlobal.formValidation')--}}
 <script>
+    $('.chemicalAmount').attr('readonly', true);
+    $(document).on('change','.chemical',function(){
+        var washSaltAmount = $('.saltAmount').val();
+        var chemicalId = $(this).val();
+        if(washSaltAmount === ''){
+            $('.msg').html('<strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn().delay(1000).fadeOut();
+        }
+
+        $.ajax({
+            type : 'GET',
+            url : 'chemical-stock',
+            data : {'chemicalId':chemicalId},
+            success: function (data) {
+               // alert(data)
+                var data = JSON.parse(data);
+                console.log(data);
+                $('.stockChemical').html(data.chemicalStock).show();
+
+                var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
+
+              //  alert(chemicalNeed);
+
+                if(parseInt(data.chemicalStock) > chemicalNeed){
+                  //  alert("hi");
+                    $('.chemicalAmount').attr('readonly', false);
+                }else{
+                    //alert("hlw");
+                    $('.chemicalAmount').attr('readonly', true);
+                    $('.msg').html('<strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn().delay(1000).fadeOut();
+                    $('.saltAmount').val("");
+                }
+
+                $(document).on('keyup','.chemicalAmount',function () {
+                    var amount = parseInt($(this).val()) || 0;
+                    var chemicalStock = parseInt($('.stockChemical').text());
+                    var remainStock = chemicalStock - amount;
+
+                    if(chemicalStock < amount){
+                        $('.stockChemical').hide();
+                        $('.msg').html('<strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+                        $('.resultChemical').text(0);
+                        if(amount === 0){
+                            $('.stockChemical').show();
+                        }
+                    }else{
+                        $('.stockChemical').hide();
+                        $('.resultChemical').text(remainStock);
+                    }
+                });
+            }
+        })
+
+    });
+
     $(document).on('keyup','.saltAmount',function () {
-        alert('hi');
-//        var  REQ_QTY = $(this).val();
-//        var stockSalt = $(this).text();
+        var amount = parseInt($(this).val()) || 0;
+        var saltStock = parseInt($('.stockSalt').text());
+        var remainStock = saltStock - amount;
 
-
+        if(saltStock < amount){
+            $('.stockSalt').hide();
+            $('.msg').html('<strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+            $('.result').text(0);
+            if(amount === 0){
+                $('.stockSalt').show();
+            }
+        }else{
+            $('.stockSalt').hide();
+            $('.result').text(remainStock);
+        }
     });
 </script>
 
