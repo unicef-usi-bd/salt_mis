@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-employee-info', 'EmployeeController@updateEmployeeInfo'); //Azharul
     Route::post('edit-qc-info', 'QcController@updateQcInfo'); //Azharul
     Route::post('edit-certificate-info', 'CertificateController@updateCertificateInfo'); //Azharul
+    Route::post('edit-certificate-info-normal', 'CertificateController@updateCertificateInfoNormal'); //Azharul
     Route::post('edit-entrepreneur-info', 'EntrepreneurController@updateEntrepreneurInfo'); //Azharul
     // modal edit mill information
 
@@ -120,5 +121,21 @@ Route::group(['middleware' => ['auth']], function() {
 
     //monitor
     Route::resource('monitoring', 'MonitoringController'); //Azharul
+
+    //Report
+    Route::resource('report-dashboard', 'ReportController');
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 

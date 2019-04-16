@@ -32,7 +32,8 @@
                     {{--/-Entrepreneur Information--}}
 
                     {{--Certificate Info--}}
-                    @include('profile.miller.modal.editCertificateInformation')
+{{--                    @include('profile.miller.modal.editCertificateInformation')--}}
+                    @include('profile.miller.modal.editCertificateInformationNormalSubmit')
                     {{--/-Certificate Info--}}
 
                     {{--QC Info--}}

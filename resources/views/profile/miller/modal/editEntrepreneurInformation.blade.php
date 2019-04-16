@@ -147,7 +147,7 @@
                         </button>
                         <button type="button" class="btn btn-primary btnUpdateEntrepreneur" onclick="entrepreneurTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update
+                            Update & Next
                         </button>
                     </div>
                 </div>

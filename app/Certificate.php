@@ -41,11 +41,12 @@ class Certificate extends Model
     }
     public static function updateMillCertificateData($request,$id){
         $certificateId = DB::table('ssm_certificate_info')->where('MILL_ID', $id)->delete();
+
         if ($certificateId) {
             $reqTime = count($_POST['CERTIFICATE_TYPE_ID']);
             for($i=0; $i<$reqTime; $i++){
                  //file upload
-                $userImageName[$i] = '';
+                //$userImageName[$i] = '';
                 if ($request->file('user_image')[$i] != null && $request->file('user_image')[$i]->isValid()) {
                     try {
                         $file = $request->file('user_image')[$i];
@@ -73,7 +74,7 @@ class Certificate extends Model
                 ]);
                 $insert = DB::table('ssm_certificate_info')->insert($data);
 
-            }
+            } //end for  loop
             return $insert;
         }
 
