@@ -26,9 +26,10 @@
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Purchase Date</th>
-                    <th class="hidden-480">Quality Control BY</th>
-                    <th class="hidden-480">Agency</th>
                     <th class="hidden-480">Batch No</th>
+                    <th class="hidden-480">Test Name</th>
+                    <th class="hidden-480">Result</th>
+                    <th class="hidden-480">Result Download</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -40,9 +41,12 @@
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->QC_DATE}}</td>
-                        <td class="hidden-480">{{$row->qc}}</td>
-                        <td class="hidden-480">{{ $row->agency }}</td>
+                        {{--<td class="hidden-480">{{$row->qc}}</td>--}}
+                        {{--<td class="hidden-480">{{ $row->agency }}</td>--}}
                         <td class="hidden-480">{{$row->BATCH_NO}}</td>
+                        <td class="hidden-480">{{$row->QC_TESTNAME}}</td>
+                        <td></td>
+                        <td class="hidden-480"><a href="{{ $row->QUALITY_CONTROL_IMAGE }}"  role="button" class="btn btn-primary" download="download">Download</a> </td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

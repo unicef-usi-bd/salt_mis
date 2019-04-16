@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use App\LookupGroupData;
+use App\SalesDistribution;
+use App\Item;
 
 class SalesDistributionController extends Controller
 {
@@ -14,7 +22,21 @@ class SalesDistributionController extends Controller
      */
     public function index()
     {
-        //
+        $userGroupId = Auth::user()->user_group_id;
+        $userGroupLevelId = Auth::user()->user_group_level_id;
+        $url = Route::getFacadeRoot()->current()->uri();
+
+        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+        $heading=array(
+            'title'=>'Sales & Distribution',
+            'library'=>'datatable',
+            'modalSize'=>'modal-bg',
+            'action'=>'sales-distribution/create',
+            'createPermissionLevel' => $previllage->CREATE
+        );
+
+        //$sellerDitributorProfile = SellerDistributorProfile::sellerDistributorProfile();
+        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage'));
     }
 
     /**
@@ -24,7 +46,10 @@ class SalesDistributionController extends Controller
      */
     public function create()
     {
-        //
+        $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
+        $tradingId = SalesDistribution::getTradingName();
+        $saltId = Item::itemTypeWiseItemList($this->itemTypeId);
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId'));
     }
 
     /**

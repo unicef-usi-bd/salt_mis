@@ -20,14 +20,14 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
+                        <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Agency</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($agencyId as $agency)
                                     <option value="{{ $agency->LOOKUPCHD_ID }}" @if($agency->LOOKUPCHD_ID==$editQualityControl->AGENCY_ID) selected @endif>{{ $agency->LOOKUPCHD_NAME }}</option>
@@ -48,7 +48,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Quality Control BY</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="privileges"  class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
+                            <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select or search data">
                                <option value=""></option>
                                 @foreach($qulityControlId as $name)
                                     <option value="{{ $name->LOOKUPCHD_ID }}" @if($name->LOOKUPCHD_ID==$editQualityControl->QC_BY) selected @endif>{{ $name->LOOKUPCHD_NAME }}</option>
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Attachment</b><span style="color: red;"> </span> </label>
                     <div class="col-md-8">
-                        <input type="file" value="" class="form-control col-xs-5 col-sm-5">
+                        <input type="file" name="QUALITY_CONTROL_IMAGE" class="form-control col-xs-5 col-sm-5">
                     </div>
 
                 </div>
