@@ -11,7 +11,7 @@ class RequireChemicalChd extends Model
 {
     public static function getWastagePercentage($itemNo){
         return DB::table('smm_rmallocationchd')
-            ->select('smm_rmallocationchd.WAST_PER')
+            ->select('smm_rmallocationchd.USE_QTY','smm_rmallocationchd.CRUDE_SALT')
             ->where('ITEM_ID','=',$itemNo)
             ->first();
     }
@@ -42,7 +42,7 @@ class RequireChemicalChd extends Model
 //           'RMALLOMST_ID' => $request->input('RMALLOMST_ID'),
            'ITEM_ID' => $request->input('ITEM_ID'),
            'USE_QTY' => $request->input('USE_QTY'),
-           'WAST_PER' => $request->input('WAST_PER'),
+           'CRUDE_SALT' => $request->input('CRUDE_SALT'),
            'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
            'UPDATE_BY' => Auth::user()->id,
            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")

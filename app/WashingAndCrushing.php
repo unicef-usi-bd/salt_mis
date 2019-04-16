@@ -96,8 +96,6 @@ class WashingAndCrushing extends Model
                  'ENTRY_BY' => Auth::user()->id,
                  'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
              ]);
-
-        if ($washCrushMst){
             $washingCrushingChd = DB::table('tmm_washcrashchd')->where('tmm_washcrashchd.WASHCRASHMST_ID', '=' , $id)->update([
                 'ITEM_ID' => $request->input('ITEM_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
@@ -105,10 +103,11 @@ class WashingAndCrushing extends Model
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
             ]);
-        }
-        if($washingCrushingChd){
 
-            $update = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO', '=' , $id)->update([
+            $washSaltReduceUpdate = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO', '=' , $id)
+                ->where('tmm_itemstock.TRAN_TYPE', '=' , 'S')
+                ->where('tmm_itemstock.TRAN_FLAG', '=' , 'WS')
+                ->update([
                 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                 'TRAN_TYPE' => 'S', //S  = Salt
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
@@ -117,10 +116,21 @@ class WashingAndCrushing extends Model
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
             ]);
+            $fianUpdate = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO', '=' , $id)
+                ->where('tmm_itemstock.TRAN_TYPE', '=' , 'W')
+                ->where('tmm_itemstock.TRAN_FLAG', '=' , 'WI')
+                ->update([
+                    'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
+                    'TRAN_TYPE' => 'W', //S  = Salt
+                    'ITEM_NO' => $request->input('PRODUCT_ID'),
+                    'QTY' => $request->input('REQ_QTY'),
+                    'TRAN_FLAG' => 'WI', //WS = Wash Salt
+                    'UPDATE_BY' => Auth::user()->id,
+                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
+                ]);
 
-        }
 
-        return $update;
+        return $washCrushMst;
     }
 
 

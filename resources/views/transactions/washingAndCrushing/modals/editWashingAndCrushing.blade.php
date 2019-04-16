@@ -32,7 +32,7 @@
                     <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
-                            <option value="{{$chemical->ITEM_NO}}" @if($chemical->ITEM_NO == $editWashingAndCrushingData->ITEM_ID) selected @endif> {{$chemical->ITEM_NAME}}</option>
+                            <option value="{{$chemical->ITEM_NO}}" @if($chemical->ITEM_NO == $editWashingAndCrushingData->ITEM_NO) selected @endif> {{$chemical->ITEM_NAME}}</option>
                         @endforeach
                     </select>
                 </span>

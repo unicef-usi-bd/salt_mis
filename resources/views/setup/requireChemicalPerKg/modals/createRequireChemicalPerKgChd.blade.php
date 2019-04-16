@@ -17,20 +17,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess WAST_PER" placeholder="Example: Wastage Amount here" name="CRUDE_SALT" class="form-control col-xs-10 col-sm-5" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input type="text" id="inputSuccess USE_QTY" placeholder="Example: Chemical Amount here" name="USE_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
-                <input type="text" id="inputSuccess WAST_PER" placeholder="Example: Wastage Amount here" name="WAST_PER" class="form-control col-xs-10 col-sm-5" value=""/>
-            </div>
-        </div>
-
-
         <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('lookupGroupIndex.active_status') }} </b></label>
             <div class="col-sm-8">
