@@ -61,11 +61,9 @@ class MillerInfoController extends Controller
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $millerList = MillerInfo::getAllMillDataList();
-
-
-        //$this->pr($millerList);
-
-        return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','millerList'));
+        $millerToMerge = MillerInfo::getMillerToMerge();
+        //$this->pr($millerToMerge);
+        return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','millerList','millerToMerge'));
     }
 
     /**
@@ -209,6 +207,15 @@ class MillerInfoController extends Controller
         return "Miller Information has been updated";
     }
 
+    public function deactivateMillProfile(Request $request){
+        $values = 0;
+        $checkType =  $request->input("is_checked");
+        $millerInfoId =  $request->input("millId");
+        //$this->pr($millId);
+        $updateMillStatusFromMillTable = MillerInfo::deactivateMillTable($request, $millerInfoId);
+        $updateMillStatusFromEmpTable = MillerInfo::deactivateMillEmpTable($request, $millerInfoId);
+
+    }
 
 
 }
