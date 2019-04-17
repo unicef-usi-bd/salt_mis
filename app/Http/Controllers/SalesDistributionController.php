@@ -130,4 +130,8 @@ class SalesDistributionController extends Controller
     {
         //
     }
+
+    public function getWashingCrashingSalt(Request $request){
+
+    }
 }
