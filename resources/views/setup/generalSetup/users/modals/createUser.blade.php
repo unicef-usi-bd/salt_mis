@@ -127,32 +127,32 @@
             </div>
 
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.cost_center') }}</b><span style="color: red;"> *</span></label>
-                <div class="col-sm-8">
-                    <span class="block input-icon input-icon-right">
-                        <select id="form-field-select-3 inputSuccess cost_center_id" class="chosen-select form-control" name="cost_center_id" data-placeholder="Select or search data">
-                            <option value=""> </option>
-                            @foreach($costCenters as $costCenter)
-                                <option value="{{$costCenter->cost_center_id}}"> {{$costCenter->cost_center_name}}</option>
-                            @endforeach
-                        </select>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.designation') }}</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
-                    <span class="block input-icon input-icon-right">
-                        <select id="form-field-select-3 inputSuccess designation_id" class="chosen-select form-control" name="designation_id" data-placeholder="Select or search data">
-                            <option value=""> </option>
-                            @foreach($designations as $designation)
-                            <option value="{{$designation->lookup_group_data_id}}"> {{$designation->group_data_name}}</option>
-                            @endforeach
-                        </select>
-                    </span>
-                </div>
-            </div>
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.cost_center') }}</b><span style="color: red;"> *</span></label>--}}
+                {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select id="form-field-select-3 inputSuccess cost_center_id" class="chosen-select form-control" name="cost_center_id" data-placeholder="Select or search data">--}}
+                            {{--<option value=""> </option>--}}
+                            {{--@foreach($costCenters as $costCenter)--}}
+                                {{--<option value="{{$costCenter->cost_center_id}}"> {{$costCenter->cost_center_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.designation') }}</b><span style="color: red;"> </span></label>--}}
+                {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select id="form-field-select-3 inputSuccess designation_id" class="chosen-select form-control" name="designation_id" data-placeholder="Select or search data">--}}
+                            {{--<option value=""> </option>--}}
+                            {{--@foreach($designations as $designation)--}}
+                            {{--<option value="{{$designation->lookup_group_data_id}}"> {{$designation->group_data_name}}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <!-- <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status </b></label>

@@ -14,7 +14,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('module.group_level_name') }}</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess group_level_name" placeholder="{{ trans('module.example_group_name_here') }} name="group_level_name" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input type="text" id="inputSuccess group_level_name" placeholder="{{ trans('module.example_group_name_here') }}" name="group_level_name" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
         <!-- <div class="form-group">

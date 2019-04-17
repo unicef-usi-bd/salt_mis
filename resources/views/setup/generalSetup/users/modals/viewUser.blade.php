@@ -20,7 +20,7 @@
                 <tr>
                     <th>{{ trans('user.designation') }} </th>
                     <th> :</th>
-                    <td>{{$userView->group_data_name}}</td>
+                    {{--<td>{{$userView->group_data_name}}</td>--}}
                     <th>{{ trans('user.email') }} </th>
                     <th> :</th>
                     <td>{{$userView->email}}</td>
@@ -44,7 +44,7 @@
                     <th>{{ trans('user.cost_center') }}</th>
                     <th> :</th>
                     <td>
-                        {{$userView->cost_center_name}}
+                        {{--{{$userView->cost_center_name}}--}}
                     </td>
                     <th>{{ trans('user.remark') }}</th>
                     <th> :</th>

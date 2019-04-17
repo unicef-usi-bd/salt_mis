@@ -34,10 +34,10 @@
         <p><b>{{ trans('organization.website') }}</b> : {{ $organization->website }}</p>
     </div>
     <div class="col-md-5 col-md-offset-1 viewInfo">
-        <p><b>{{ trans('organization.bank_name') }}</b> : {{ $organization->bank_name }}</p>
-        <p><b>{{ trans('organization.branch_name') }}</b> : {{ $organization->bank_branch_name }}</p>
-        <p><b>{{ trans('organization.account_no') }}</b> : {{ $organization->account_no }}</p>
-        <p><b>{{ trans('organization.route_no') }}</b> : {{ $organization->route_no }}</p>
+        {{--<p><b>{{ trans('organization.bank_name') }}</b> : {{ $organization->bank_name }}</p>--}}
+        {{--<p><b>{{ trans('organization.branch_name') }}</b> : {{ $organization->bank_branch_name }}</p>--}}
+        {{--<p><b>{{ trans('organization.account_no') }}</b> : {{ $organization->account_no }}</p>--}}
+        {{--<p><b>{{ trans('organization.route_no') }}</b> : {{ $organization->route_no }}</p>--}}
         <p><b>{{ trans('cigGroup.active_status') }}</b> :
             @if($organization->active_status==1)
                 <span class="label label-md label-info arrowed arrowed-righ"> Active </span>

@@ -82,11 +82,11 @@ class User extends Authenticatable
 
     public static function viewData($id){
         return DB::table('users')
-            ->leftJoin('cost_center', 'users.cost_center_id', '=', 'cost_center.cost_center_id')
-            ->leftJoin('cost_center_type', 'users.cost_center_type', '=', 'cost_center_type.cost_center_type_id')
-            ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
+          //  ->leftJoin('cost_center', 'users.cost_center_id', '=', 'cost_center.cost_center_id')
+          //  ->leftJoin('cost_center_type', 'users.cost_center_type', '=', 'cost_center_type.cost_center_type_id')
+         //   ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
             ->where('id', '=', $id)
-            ->select('users.*','lookup_group_data.lookup_group_data_id','lookup_group_data.group_data_name','cost_center.cost_center_id','cost_center.cost_center_name','cost_center_type.cost_center_type_id','cost_center_type.cost_center_type_name')
+            ->select('users.*')
             ->first();
     }
 
@@ -96,11 +96,11 @@ class User extends Authenticatable
 
     public static function editData($id){
         return DB::table('users')
-            ->leftJoin('bank_branch', 'users.branch_id', '=', 'bank_branch.bank_branch_id')
-            ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
+           // ->leftJoin('bank_branch', 'users.branch_id', '=', 'bank_branch.bank_branch_id')
+          //  ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
             ->leftJoin('sa_ug_level', 'users.user_group_level_id', '=', 'sa_ug_level.UG_LEVEL_ID')
             ->where('id', '=', $id)
-            ->select('users.*','bank_branch.bank_branch_id','bank_branch.bank_branch_name','lookup_group_data.lookup_group_data_id','lookup_group_data.group_data_name','sa_ug_level.UG_LEVEL_ID','sa_ug_level.UGLEVE_NAME')
+            ->select('users.*','sa_ug_level.UG_LEVEL_ID','sa_ug_level.UGLEVE_NAME')
             ->first();
     }
 
@@ -115,12 +115,12 @@ class User extends Authenticatable
             'remarks' => $request->input('remarks'),
             'user_group_id' => $request->input('user_group_id'),
             'user_group_level_id' => $request->input('user_group_level_id'),
-            'cost_center_id' => $request->input('cost_center_id'),
-            'cost_center_type' => $costCenter->cost_center_type,
-            'designation_id' => $request->input('designation_id'),
-            'bank_id' => $request->input('bank_id'),
-            'branch_id' => $request->input('branch_id'),
-            'account_no' => $request->input('account_no'), 
+//            'cost_center_id' => $request->input('cost_center_id'),
+//            'cost_center_type' => $costCenter->cost_center_type,
+//            'designation_id' => $request->input('designation_id'),
+//            'bank_id' => $request->input('bank_id'),
+//            'branch_id' => $request->input('branch_id'),
+//            'account_no' => $request->input('account_no'),
             'address' => $request->input('address'),
             'contact_no' => $request->input('contact_no'),
             'active_status' => $request->input('active_status'), 
