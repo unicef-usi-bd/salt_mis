@@ -29,6 +29,12 @@
             </span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="inputSuccess SALES_DATE" placeholder=" " name="SALES_DATE" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -111,8 +117,8 @@
                 <thead>
                 <tr>
                     <th style="width: 255px;">Salt Type<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Date<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Amount</th>
+                    {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
+                    <th style="width: 255px;">Salt Amount</th>
                     <th style="width: 255px;">Quantity</th>
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
@@ -121,33 +127,36 @@
                 <tbody class="newRow">
                 <tr class="rowFirst">
                     <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select " id="" name="[]">
+                                <span class="block input-icon input-icon-right" style="width: 255px;">
+                                    <select class="form-control chosen-select" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
-                                            <option value="{{$row->LOOKUPCHD_ID}}"> {{$row->LOOKUPCHD_NAME}}</option>
+                                            <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
                                         @endforeach
                                     </select>
                                 </span>
                     </td>
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select id="COV_DISTRICT_ID" class="chosen-select form-control districttable" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
+                    {{--<td>--}}
+                                {{--<span class="block input-icon input-icon-right">--}}
+                                    {{--<input type="text" id="inputSuccess SALES_DATE" placeholder=" " name="SALES_DATE[]" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>--}}
 
-                                    </select>
-                                </span>
-                    </td>
+                                    {{--</select>--}}
+                                {{--</span>--}}
+                    {{--</td>--}}
                     <td>
-                        <span class="block input-icon input-icon-right">
-                        <select id="COV_UPAZILA_ID" class="form-control chosen-select upazilatable" name="COV_UPAZILA_ID[]" data-placeholder="Select or search data">
-                            <option value="">Select Upazila/Thana</option>
+                        <span class="block input-icon input-icon-right" style="width: 255px;">
+                        <select class="form-control chosen-select " id="PACK_TYPE" name="PACK_TYPE[]">
+                            <option value="">Select</option>
+                            @foreach($saltPackId as $row)
+                                <option value="{{$row->LOOKUPCHD_ID}}"> {{$row->LOOKUPCHD_NAME}}</option>
+                            @endforeach
                          </select>
                     </span>
                     </td>
                     <td>
                         <span class="block input-icon input-icon-right">
 
-                                <input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value=""/>
+                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]" class="form-control col-xs-10 col-sm-5" value=""/>
 
                         </span>
                     </td>
@@ -200,6 +209,7 @@
 @include('masterGlobal.getDistrict')
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
+@include('masterGlobal.datePicker')
 {{--@include('masterGlobal.formValidation')--}}
 <script>
     //    Add For Multiple Row Dynamically

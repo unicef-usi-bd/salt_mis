@@ -25,61 +25,61 @@
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Purchase Date</th>
-                    <th class="hidden-480">Quality Control BY</th>
-                    <th class="hidden-480">Agency</th>
-                    <th class="hidden-480">Batch No</th>
+                    <th>Salt Type</th>
+                    <th class="hidden-480">Date</th>
+                    <th class="hidden-480">Amount</th>
+                    <th class="hidden-480">Quantity</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
 
 
                 <tbody>
-                {{--<?php $sl=0;?>--}}
-                {{--@foreach($qualityControl as $row)--}}
-                    {{--<tr>--}}
-                        {{--<td class="center">{{ ++$sl }}</td>--}}
-                        {{--<td>{{$row->QC_DATE}}</td>--}}
-                        {{--<td class="hidden-480">{{$row->qc}}</td>--}}
-                        {{--<td class="hidden-480">{{ $row->agency }}</td>--}}
-                        {{--<td class="hidden-480">{{$row->BATCH_NO}}</td>--}}
-                        {{--<td class="">--}}
-                            {{--<div class="hidden-sm hidden-xs action-buttons">--}}
-                                {{--@php--}}
-                                    {{--$editPermissionLevel = $previllage->UPDATE;--}}
-                                    {{--$viewPermissionLevel = $previllage->READ;--}}
-                                {{--@endphp--}}
-                                {{--@if($viewPermissionLevel == 1)--}}
-                                    {{--<a href="#" id="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Quality Control & Testing">--}}
-                                {{--<span class="blue">--}}
-                                {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                                {{--</span>--}}
-                                    {{--</a>--}}
-                                {{--@else--}}
-                                    {{--<a href="#" id="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Quality Control & Testing" style="display: none;">--}}
-                                {{--<span class="blue">--}}
-                                {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                                {{--</span>--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
-                                {{--@if($editPermissionLevel == 1)--}}
-                                    {{--<a class="green showModalGlobal" id="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID.'/edit' }}" data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Quality Control & Testing">--}}
-                                        {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@else--}}
-                                    {{--<a class="green showModalGlobal" id="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Quality Control & Testing" style="display: none;">--}}
-                                        {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
-                                {{--@if($previllage->DELETE == 1)--}}
-                                    {{--<a class="red clickForDelete row{{ $row->QUALITYCONTROL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">--}}
-                                        {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
-                {{--@endforeach--}}
+                <?php $sl=0;?>
+                @foreach($salesDitributionIndex as $row)
+                    <tr>
+                        <td class="center">{{ ++$sl }}</td>
+                        <td>{{$row->ITEM_NAME}}</td>
+                        <td class="hidden-480">{{$row->SALES_DATE}}</td>
+                        <td class="hidden-480">{{ $row->LOOKUPCHD_NAME }}</td>
+                        <td class="hidden-480">{{$row->PACK_QTY}} pcs</td>
+                        <td class="">
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                @php
+                                    $editPermissionLevel = $previllage->UPDATE;
+                                    $viewPermissionLevel = $previllage->READ;
+                                @endphp
+                                @if($viewPermissionLevel == 1)
+                                    <a href="#" id="{{ 'sales-distribution/'.$row->SALESMST_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Sales & Distribution">
+                                <span class="blue">
+                                <i class="ace-icon fa fa-eye bigger-130"></i>
+                                </span>
+                                    </a>
+                                @else
+                                    <a href="#" id="{{ 'sales-distribution/'.$row->SALESMST_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Sales & Distribution" style="display: none;">
+                                <span class="blue">
+                                <i class="ace-icon fa fa-eye bigger-130"></i>
+                                </span>
+                                    </a>
+                                @endif
+                                @if($editPermissionLevel == 1)
+                                    <a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                @else
+                                    <a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution" style="display: none;">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                @endif
+                                @if($previllage->DELETE == 1)
+                                    <a class="red clickForDelete row{{ $row->SALESMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'sales-distribution/'.$row->SALESMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div><!-- /.col -->
