@@ -8,29 +8,76 @@
         <h4 class="center text-success">{{ trans('dashboard.details') }}</h4>
         <div class="row table-responsive">
             <table class="table">
+
                 <tr>
-                    <th>Item Nmae</th>
+                    <th>Seller Type</th>
                     <th> :</th>
-                    <td>{{$viewSalersDistributor->ITEM_NAME}}</td>
-                    {{--<th>Date</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$viewSalersDistributor->SALES_DATE}}</td>--}}
+                    <td>{{$viewSalersDistributor->LOOKUPCHD_NAME}}</td>
+                    <th>Trading Name
+                    </th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->TRADING_NAME}}</td>
                 </tr>
-                {{--<tr>--}}
-                    {{--<th>Amount </th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$viewSalersDistributor->LOOKUPCHD_NAME}}</td>--}}
-                    {{--<th>Quantity</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$viewSalersDistributor->PACK_QTY}} pcs</td>--}}
+                <tr>
+                    <th>Date</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->SALES_DATE}}</td>
+                </tr>
+                <tr>
+                    <th>Driver Name</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->DRIVER_NAME}}</td>
+                    <th>Vehicle No</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->VEHICLE_NO}}</td>
+                </tr>
+                <tr>
+                    <th>Vehicle License</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->VEHICLE_LICENSE}}</td>
+                    <th>Transport Name</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->TRANSPORT_NAME}}</td>
+                </tr>
+                <tr>
+                    <th>Mobile Number</th>
+                    <th> :</th>
+                    <td>{{$viewSalersDistributor->MOBILE_NO}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th >Salt Type</th>
+                    <th>Salt Amount</th>
+                    <th >Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($viewSalersDistributorChd as $saler)
+                    <tr>
+                        <td>
+                                <span class="block input-icon input-icon-right">
+                                    {{ $saler->ITEM_NAME }}
+                                </span>
+                        </td>
+                        <td>
+                                <span class="block input-icon input-icon-right">
+                                    {{ $saler->LOOKUPCHD_NAME }}
 
-                {{--</tr>--}}
-                {{--<tr>--}}
-                    {{--<th>Remarks</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$viewWashingAndCrushing->REMARKS}}</td>--}}
+                                </span>
+                        </td>
 
-                {{--</tr>--}}
+                        <td>
+                                <span class="block input-icon input-icon-right">
+                                    {{ $saler->PACK_QTY }} pcs
+                                </span>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
             </table>
         </div>
 
