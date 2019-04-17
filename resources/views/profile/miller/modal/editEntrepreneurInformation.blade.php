@@ -9,42 +9,42 @@
                 @if(isset($millerInfoId))
                     <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">
-                                   <option value=""></option>
-                                    @foreach($registrationType as $row)
-                                       <option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->REG_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
-                                   @endforeach
+                {{--<div class="col-md-6">--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">--}}
+                                   {{--<option value=""></option>--}}
+                                    {{--@foreach($registrationType as $row)--}}
+                                       {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->REG_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                   {{--@endforeach--}}
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                </div>
+                {{--</div>--}}
 
-                <div class="col-md-6">
+                {{--<div class="col-md-6">--}}
 
-                    <div class="form-group" >
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Owner</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">
-                                    <option value=""></option>
-                                    @foreach($ownerType as $row)
-                                        <option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
-                                    @endforeach
+                    {{--<div class="form-group" >--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Owner</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                                {{--<select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">--}}
+                                    {{--<option value=""></option>--}}
+                                    {{--@foreach($ownerType as $row)--}}
+                                        {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                    {{--@endforeach--}}
 
-                                </select>
-                            </span>
-                        </div>
-                    </div>
+                                {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                </div>
+                {{--</div>--}}
 
 
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">

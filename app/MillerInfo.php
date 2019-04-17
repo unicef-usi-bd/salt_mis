@@ -12,6 +12,9 @@ class MillerInfo extends Model
 
      public static function insertMillerInfoData($request){
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
+             'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
+             'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
+
              'MILL_NAME' => $request->input('MILL_NAME'),
              'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
              'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
@@ -147,6 +150,29 @@ class MillerInfo extends Model
              $millInfoId = DB::table('ssm_mill_info')->where('MILL_ID', $id)->delete();
          }
          return $millInfoId;
+    }
+
+    public  static function getMillerToMerge(){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.*','ssm_millemp_info.*')
+            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+            ->where('ssm_mill_info.REG_TYPE_ID','=', 10)
+            ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
+            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
+            ->get();
+    }
+    public static function deactivateMillTable($request,$id){
+        $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
+            'ACTIVE_FLG' => 0,
+        ]);
+        return $update;
+    }
+    public static function deactivateMillEmpTable($request,$id){
+        $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
+            'FINAL_SUBMIT_FLG' => 0,
+        ]);
+        return $update;
     }
 
 
