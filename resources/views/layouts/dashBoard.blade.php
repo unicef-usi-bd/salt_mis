@@ -135,7 +135,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Production And Sales Report
+                        Stock And Sales Report
                     </h5>
 
                 </div>
@@ -371,63 +371,6 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
-    <div class="hr hr32 hr-dotted"></div>
-    <div class="row">
-        <div class="col-md-12 infobox-container">
-            <div class="infobox infobox-pink infobox-medium infobox-dark">
-                <div class="infobox-icon">
-                    <i class="ace-icon fa fa-get-pocket"></i>
-                </div>
-
-                <div class="infobox-data">
-                    <div class="infobox-content">Total Unions</div>
-                    <div class="infobox-content">7</div>
-                </div>
-            </div>
-
-            <div class="infobox infobox-blue infobox-medium infobox-dark">
-                <div class="infobox-chart">
-                    <span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-                </div>
-
-                <div class="infobox-data">
-                    <div class="infobox-content">Total CIG</div>
-                    <div class="infobox-content">70</div>
-                </div>
-            </div>
-
-            <div class="infobox infobox-black infobox-medium infobox-dark">
-                <div class="infobox-icon">
-                    <i class="ace-icon fa fa-users"></i>
-                </div>
-
-                <div class="infobox-data">
-                    <div class="infobox-content">CIG Farmers</div>
-                    <div class="infobox-content">50,000</div>
-                </div>
-            </div>
-            <div class="infobox infobox-green infobox-medium infobox-dark">
-                <div class="infobox-icon">
-                    <i class="ace-icon fa fa-users"></i>
-                </div>
-
-                <div class="infobox-data">
-                    <div class="infobox-content">Male CIG Farmers</div>
-                    <div class="infobox-content">40,000</div>
-                </div>
-            </div>
-            <div class="infobox infobox-red infobox-medium infobox-dark">
-                <div class="infobox-icon">
-                    <i class="ace-icon fa fa-users"></i>
-                </div>
-
-                <div class="infobox-data">
-                    <div class="infobox-content">Female CIG Farmers</div>
-                    <div class="infobox-content">10,000</div>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -502,14 +445,13 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Red',
-                    'Yellow',
-                    'Blue'
+                    'Washing and Crushing',
+                    'Idonaize'
                 ],
                 datasets: [{
-                    backgroundColor: 'rgb(135, 206, 250)',
-                    borderColor: 'rgb(135, 206, 250)',
-                    data: [10, 20, 30],
+                    backgroundColor: ['#3498DB','#900C3F'],
+                    borderColor: '#ffffff',
+                    data: [40, 10],
 
 
                 }],
@@ -517,8 +459,10 @@
             },
 
             options: {
-                pointHoverBackgroundColor: 'rgb(255,0,0)'
-
+                animation:{
+                    animateScale:true,
+                    animateRotate:true
+                }
             }
 
         });
@@ -560,7 +504,7 @@
 
             var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
             var data = [
-                { label: "Production",  data: 60.7, color: "#68BC31"},
+                { label: "Stock",  data: 60.7, color: "#68BC31"},
                 { label: "Sales",  data: 30.3, color: "#2091CF"}
             ]
             function drawPieChart(placeholder, data, position) {
