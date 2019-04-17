@@ -35,7 +35,7 @@ class OrganizationController extends Controller
                 'title'=>$createOrganisation,
                 'library'=>'datatable',
                 'modalSize'=>'modal-lg',
-                'action'=>'organizations/create',
+                'action'=>'organization/create',
                 'createPermissionLevel' => $previllage->CREATE
             );
 
@@ -51,7 +51,7 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        $banks = Bank::getActiveBanks();
+       // $banks = Bank::getActiveBanks();
 //        $this->pr($banks);
         return view("setup.generalSetup.organization.modals.createOrganization", compact('banks'));
     }
@@ -111,10 +111,10 @@ class OrganizationController extends Controller
                 'fax' => $request->input('fax'),
                 //'active_status' => $request->input('active_status'),
                 'active_status' => 1,
-                'bank_id' => $request->input('bank_id'),
-                'branch_id' => $request->input('branch_id'),
-                'account_no' => $request->input('account_no'),
-                'route_no' => $request->input('route_no'),
+//                'bank_id' => $request->input('bank_id'),
+//                'branch_id' => $request->input('branch_id'),
+//                'account_no' => $request->input('account_no'),
+//                'route_no' => $request->input('route_no'),
                 'create_by' => Auth::user()->id,
             ]);
 
@@ -152,7 +152,7 @@ class OrganizationController extends Controller
      */
     public function edit($id)
     {
-        $banks = Bank::getActiveBanks();
+      //  $banks = Bank::getActiveBanks();
         $editData = Organization::editData($id);
 
         return view('setup.generalSetup.organization.modals.editOrganization', compact('editData','banks'));
@@ -225,7 +225,7 @@ class OrganizationController extends Controller
 
             session()->flash('message','Organization Successfully Updated');
             //return json_encode('Success');
-
+            return redirect()->back();
     }
 
     /**

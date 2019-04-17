@@ -184,10 +184,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $userGroups = UserGroup::getActiveData();
-        $banks = Bank::getActiveBanks();
+      //  $banks = Bank::getActiveBanks();
         $editData = User::editData($id);
-        $costCenters = CostCenter::getActiveCostCenter();
-        $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
+      //  $costCenters = CostCenter::getActiveCostCenter();
+     //   $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
         $userGroupLevels = UserGroupLevel::getActiveUGL($editData->user_group_id);
 //        $this->pr($userGroupLevels);
         return view('setup.generalSetup.users.modals.editUser ', compact('editData','costCenters','designations', 'banks', 'userGroups', 'userGroupLevels'));

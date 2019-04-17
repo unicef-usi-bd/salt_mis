@@ -50,8 +50,8 @@ class Organization extends Model
 
     public  static function getData(){
         return DB::table('organizations')
-            ->leftJoin('bank', 'organizations.bank_id', '=', 'bank.bank_id')
-            ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
+           // ->leftJoin('bank', 'organizations.bank_id', '=', 'bank.bank_id')
+           // ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
             ->select('organizations.*')
             ->orderBy('organizations.org_id','DESC')
             ->get();
@@ -63,15 +63,15 @@ class Organization extends Model
 
     public  static function viewData($id){
         return DB::table('organizations')
-            ->leftJoin('bank', 'organizations.bank_id', '=', 'bank.bank_id')
-            ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
+//            ->leftJoin('bank', 'organizations.bank_id', '=', 'bank.bank_id')
+//            ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
             ->where('org_id', '=', $id)
             ->first();
     }
 
     public  static function editData($id){
         return DB::table('organizations')
-            ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
+          //  ->leftJoin('bank_branch', 'organizations.branch_id', '=', 'bank_branch.bank_branch_id')
             ->where('org_id', '=', $id)
             ->first();
     }
@@ -87,10 +87,10 @@ class Organization extends Model
             'phone' => $request->input('phone'),
             'website' => $request->input('website'),
             'fax' => $request->input('fax'),
-            'bank_id' => $request->input('bank_id'),
-            'branch_id' => $request->input('branch_id'),
-            'account_no' => $request->input('account_no'),
-            'route_no' => $request->input('route_no'),
+//            'bank_id' => $request->input('bank_id'),
+//            'branch_id' => $request->input('branch_id'),
+//            'account_no' => $request->input('account_no'),
+//            'route_no' => $request->input('route_no'),
             'active_status' => $request->input('active_status'),
             //'active_status' => 1,
             'update_by' => Auth::user()->id,

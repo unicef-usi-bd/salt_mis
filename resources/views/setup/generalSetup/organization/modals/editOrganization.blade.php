@@ -1,6 +1,6 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="col-md-12">
-    <form action="{{ url('/organizations/'.$editData->org_id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+    <form action="{{ url('/organization/'.$editData->org_id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
         @csrf
         @method('PUT')
 
@@ -15,18 +15,18 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.org_type') }}</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control" name="lender_status">
-                            <option value="">{{ trans('organization.select_one') }}</option>
-                            <option value="1" @if($editData->lender_status=1) selected @endif>Lender</option>
-                            <option value="0" @if($editData->lender_status=0) selected @endif>General</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.org_type') }}</b></label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select class="form-control" name="lender_status">--}}
+                            {{--<option value="">{{ trans('organization.select_one') }}</option>--}}
+                            {{--<option value="1" @if($editData->lender_status=1) selected @endif>Lender</option>--}}
+                            {{--<option value="0" @if($editData->lender_status=0) selected @endif>General</option>--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <div class="form-group">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.address') }}</b><span style="color: red;"> </span> </label>
@@ -46,23 +46,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.website') }}</b><span style="color: red;"> </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="website" id="inputSuccess website" value="{{ $editData->website }}" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.fax') }}</b><span style="color: red;"> </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="fax" id="inputSuccess fax" value="{{ $editData->fax }}" class="width-100" />
-                    </span>
-                </div>
-            </div>
 
             <div class="form-group">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.logo') }}</b></label>
@@ -106,50 +89,68 @@
                 </div>
             </div>
 
-            <h4 class="text-center text-info" style="margin-top: 25px;font-weight: bold;">{{ trans('organization.bank_info') }}</h4>
-
-            <div class="form-group" style="margin-top: 15px;">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.bank_name') }}</b></label>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.website') }}</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control bank" id="bank_id" name="bank_id">
-                            <option value="">{{ trans('organization.select_one') }}</option>
-                            @foreach($banks as $bank)
-                                <option value="{{ $bank->bank_id }}" @if($editData->bank_id==$bank->bank_id) selected @endif>{{ $bank->bank_name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="website" id="inputSuccess website" value="{{ $editData->website }}" class="width-100"  />
                     </span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.branch_name') }}</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.fax') }}</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control branch" id="branch_id" name="branch_id" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->branch_id }}">{{ $editData->bank_branch_name }}</option>
-                        </select>
+                        <input type="text" name="fax" id="inputSuccess fax" value="{{ $editData->fax }}" class="width-100" />
                     </span>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.account_no') }}</b> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="account_no" value="{{ $editData->account_no }}" id="inputSuccess account_no" class="width-100"  />
-                    </span>
-                </div>
-            </div>
+            {{--<h4 class="text-center text-info" style="margin-top: 25px;font-weight: bold;">{{ trans('organization.bank_info') }}</h4>--}}
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.route_no') }}</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="route_no" id="inputSuccess route_no" value="{{ $editData->route_no }}" class="width-100"  />
-                    </span>
-                </div>
-            </div>
+            {{--<div class="form-group" style="margin-top: 15px;">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.bank_name') }}</b></label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select class="form-control bank" id="bank_id" name="bank_id">--}}
+                            {{--<option value="">{{ trans('organization.select_one') }}</option>--}}
+                            {{--@foreach($banks as $bank)--}}
+                                {{--<option value="{{ $bank->bank_id }}" @if($editData->bank_id==$bank->bank_id) selected @endif>{{ $bank->bank_name }}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.branch_name') }}</b></label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select class="form-control branch" id="branch_id" name="branch_id" data-placeholder="{{ trans('organization.select_one') }}">--}}
+                            {{--<option value="{{ $editData->branch_id }}">{{ $editData->bank_branch_name }}</option>--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.account_no') }}</b> </label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<input type="text" name="account_no" value="{{ $editData->account_no }}" id="inputSuccess account_no" class="width-100"  />--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('organization.route_no') }}</b></label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<input type="text" name="route_no" id="inputSuccess route_no" value="{{ $editData->route_no }}" class="width-100"  />--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
         </div>
 
