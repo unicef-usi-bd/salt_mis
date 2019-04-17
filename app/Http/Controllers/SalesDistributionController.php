@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Stock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,9 @@ class SalesDistributionController extends Controller
         $tradingId = SalesDistribution::getTradingName();
         $saltId = Item::itemTypeWiseItemList($this->finishedSaltId);
         $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId'));
+        $washAndCrushId = $this->washAndCrushId;
+        $iodizeId = $this->iodizeId;
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId'));
     }
 
     /**
@@ -132,6 +135,24 @@ class SalesDistributionController extends Controller
     }
 
     public function getWashingCrashingSalt(Request $request){
+     $washCrashId = $request->input('washAndCrushId');
+     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
+     $totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
+
+     $stock = $washCrashStock - abs($totalReduceWashCrashSalt);
+
+     return $stock;
+
+    }
+
+    public function getIodizeSalt(Request $request){
+        $iodizeId = $request->input('iodizeId');
+        $iodizeStock = Stock::getTotalIodizeSaltForSale($iodizeId);
+        $totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+
+        $idizeStock = $iodizeStock - abs($totalReduceIodizeSalt);
+
+        return $idizeStock;
 
     }
 }

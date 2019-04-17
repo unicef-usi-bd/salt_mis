@@ -39,6 +39,12 @@ class Controller extends BaseController
 
     public $importerId = 44;
 
+    //############## Static Item Id  ###############
+
+    public $washAndCrushId = 7;
+    public $iodizeId = 8;
+
+
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 

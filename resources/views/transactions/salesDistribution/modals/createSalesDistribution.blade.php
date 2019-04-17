@@ -135,7 +135,7 @@
                 <tr class="rowFirst">
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
-                                    <select class="form-control chosen-select" id="ITEM_ID" name="ITEM_ID[]">
+                                    <select class="form-control chosen-select saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
                                             <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
@@ -171,7 +171,8 @@
                     <td>
                         <span class="block input-icon input-icon-right">
 
-                                <input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>
+                                {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash"></span><span class="result"></span>)</span>
 
                         </span>
                     </td>
@@ -235,58 +236,43 @@
         $(this).closest("tr.removableRow").remove();
     });
 
-    $(document).on('change', '.COV_DIVISION_ID', function () {
-        var thisRow = $(this).closest('tr');
-        var divisionId = thisRow.find('.COV_DIVISION_ID').val(); //alert(divisionId);exit();
-        //alert(divisionId);
-        var option = '<option value="">Select District</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-district/{id}",
-            data : {'divisionId': divisionId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
+
+//for showing amount of salt in database using on change
+    $('.stockWashCrash').hide();
+    $(document).on('change','.saltType',function(){
+        var saltTypeId = $(this).val();
+        var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
+        var $iodizeId = '<?php echo $iodizeId; ?>';
+       // alert($washAndCrushId);
+
+        if(saltTypeId == $washAndCrushId){
+            $.ajax({
+                type : 'GET',
+                url : 'washing-crashing-stock',
+                data : {'washAndCrushId':$washAndCrushId},
+                success: function (data) {
+                    console.log(data);
+//                    var data = JSON.parse(data);
+                    $('.stockWashCrash').html(data).show();
                 }
-                thisRow.find('.districttable').html(option);
-                thisRow.find('.districttable').trigger("chosen:updated");
-            }
-        });
-    });
+            })
+        }
 
-
-    $(document).on('change', '.districttable', function () {
-        var thisRow = $(this).closest('tr');
-        var districtId = thisRow.find('.districttable').val();
-        var option = '<option value="">Select Upazila</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-upazila/{id}",
-            data : {'districtId': districtId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+        if(saltTypeId == $iodizeId){
+            $.ajax({
+                type : 'GET',
+                url : 'iodize-stock',
+                data : {'iodizeId':$iodizeId},
+                success: function (data) {
+                    var data = JSON.parse(data);
+                    $('.stockWashCrash').html(data).show();
                 }
-                thisRow.find('.upazilatable').html(option);
-                thisRow.find('.upazilatable').trigger("chosen:updated");
-            }
-        });
+            })
+        }
+
     });
 
-    $('.stockSalt').hide();
-    $(document).on('change','.salt',function(){
-        var saltId = $(this).val();
-        $.ajax({
-            type : 'GET',
-            url : 'crude-salt-stock',
-            data : {'saltId':saltId},
-            success: function (data) {
-                var data = JSON.parse(data);
-                $('.stockSalt').html(data.saltStock).show();
-//                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
-            }
-        })
-    });
+
 </script>
 
 

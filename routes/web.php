@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-stock','IodizedController@getChemicalStock');//Rubiyat
     Route::resource('quality-control-testing','QulityControlTestingController');//jalal
     Route::resource('sales-distribution','SalesDistributionController');//jalal
+    Route::get('washing-crashing-stock','SalesDistributionController@getWashingCrashingSalt');//jalal
+    Route::get('iodize-stock','SalesDistributionController@getIodizeSalt');//jalal
 
     //Profile
     Route::resource('mill-info', 'MillerInfoController'); //Azharul
