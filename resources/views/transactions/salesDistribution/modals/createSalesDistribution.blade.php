@@ -63,7 +63,7 @@
             <hr>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess DRIVER_NAME" placeholder=" " name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
@@ -94,6 +94,12 @@
                         <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder=" " name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <textarea rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-10 col-sm-5" /></textarea>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -120,6 +126,7 @@
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">Salt Amount</th>
                     <th style="width: 255px;">Quantity</th>
+                    <th style="width: 255px;">Stock</th>
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                 </tr>
@@ -161,20 +168,19 @@
                         </span>
                     </td>
 
+                    <td>
+                        <span class="block input-icon input-icon-right">
+
+                                <input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>
+
+                        </span>
+                    </td>
+
                     <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label class="col-sm-1 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <textarea style="width: 139%"   rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-10 col-sm-5" /></textarea>
-                </div>
-            </div>
-        </div>
-
 
     <!-- <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
@@ -265,6 +271,21 @@
                 thisRow.find('.upazilatable').trigger("chosen:updated");
             }
         });
+    });
+
+    $('.stockSalt').hide();
+    $(document).on('change','.salt',function(){
+        var saltId = $(this).val();
+        $.ajax({
+            type : 'GET',
+            url : 'crude-salt-stock',
+            data : {'saltId':saltId},
+            success: function (data) {
+                var data = JSON.parse(data);
+                $('.stockSalt').html(data.saltStock).show();
+//                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
+            }
+        })
     });
 </script>
 

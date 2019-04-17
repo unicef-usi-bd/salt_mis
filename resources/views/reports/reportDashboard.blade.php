@@ -2,8 +2,8 @@
 
 @section('mainContent')
     {{--@include('masterGlobal.datePicker')--}}
-    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    {{--<link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}" />--}}
+    {{--<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />--}}
 
     <style>
         .table th{
@@ -91,22 +91,22 @@
 
 
 
-    @include('masterGlobal.chosenSelect')
+    {{--@include('masterGlobal.chosenSelect')--}}
     @include('masterGlobal.getDistrict')
     @include('masterGlobal.getUpazila')
     @include('masterGlobal.getUnion')
     @include('masterGlobal.getMillersId')
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    {{--<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>--}}
+    {{--<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>--}}
     {{--<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>--}}
 
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script>
+    {{--<script src="{{ asset('assets/js/select2.min.js') }}"></script>--}}
+    {{--<script>--}}
 
 
 
 
-    </script>
+    {{--</script>--}}
 
 
 

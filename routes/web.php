@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('lookup-groups-data/create-data/{id}', 'LookupGroupDataController@createData'); //Rubiyat
 
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
+    Route::resource('organization','OrganizationController');//Rubiyat
 
 
 

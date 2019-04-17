@@ -92,8 +92,9 @@ class SalesDistributionController extends Controller
      */
     public function show($id)
     {
-        $viewSalersDistributor = SalesDistribution::showSalesDistributionData($id);
-        return view('transactions.salesDistribution.modals.viewSalesDistribution',compact('viewSalersDistributor'));
+        $viewSalersDistributor = SalesDistribution::showSalesDistributionDataMst($id);
+        $viewSalersDistributorChd = SalesDistribution::showSalesDistributionDataChd($id);
+        return view('transactions.salesDistribution.modals.viewSalesDistribution',compact('viewSalersDistributor','viewSalersDistributorChd'));
     }
 
     /**
@@ -128,5 +129,9 @@ class SalesDistributionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getWashingCrashingSalt(Request $request){
+
     }
 }

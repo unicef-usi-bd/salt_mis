@@ -60,4 +60,20 @@ class Stock extends Model
             ->where('tmm_itemstock.TRAN_FLAG','=','WR')
             ->sum('tmm_itemstock.QTY');
     }
+
+    public static function getTotalWashingSaltForSale(){
+        return DB::table('tmm_itemstock')
+            ->select(('tmm_itemstock.QTY'))
+            ->where('tmm_itemstock.TRAN_TYPE','=','W')
+            ->where('tmm_itemstock.TRAN_FLAG','=','SD')
+            ->sum('tmm_itemstock.QTY');
+    }
+
+    public static function getTotalIodizeSaltForSale(){
+        return DB::table('tmm_itemstock')
+            ->select(('tmm_itemstock.QTY'))
+            ->where('tmm_itemstock.TRAN_TYPE','=','I')
+            ->where('tmm_itemstock.TRAN_FLAG','=','SD')
+            ->sum('tmm_itemstock.QTY');
+    }
 }

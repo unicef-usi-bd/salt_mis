@@ -96,13 +96,21 @@ class SalesDistribution extends Model
 
     }
 
-    public static function showSalesDistributionData($id){
-        return DB::table('tmm_saleschd')
-            ->select('tmm_saleschd.*','smm_item.ITEM_NAME','tmm_salesmst.SALES_DATE','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
-            ->leftJoin('tmm_salesmst','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
-            ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
-            ->where('tmm_saleschd.SALESMST_ID','=',$id)
+    public static function showSalesDistributionDataMst($id){
+        return DB::table('tmm_salesmst')
+            ->select('tmm_salesmst.*','ssc_lookupchd.LOOKUPCHD_NAME','ssm_customer_info.TRADING_NAME')
+            ->leftJoin('ssc_lookupchd','tmm_salesmst.SELLER_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->leftJoin('ssm_customer_info','tmm_salesmst.CUSTOMER_ID','=','ssm_customer_info.CUSTOMER_ID')
+            ->where('SALESMST_ID','=',$id)
             ->first();
+    }
+
+    public static function showSalesDistributionDataChd($id){
+      return DB::table('tmm_saleschd')
+          ->select('tmm_saleschd.*','smm_item.ITEM_NAME','ssc_lookupchd.LOOKUPCHD_NAME')
+          ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
+          ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
+          ->where('tmm_saleschd.SALESMST_ID','=',$id)
+          ->get();
     }
 }
