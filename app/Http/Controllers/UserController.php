@@ -59,10 +59,10 @@ class UserController extends Controller
     {
         $userGroups = UserGroup::getActiveData();
 //        $this->pr($userGroups);
-        $banks = Bank::getActiveBanks();
-        $costCenters = CostCenter::getActiveCostCenter();
+        //$banks = Bank::getActiveBanks();
+//        $costCenters = CostCenter::getActiveCostCenter();
 //        $this->pr($costCenters);
-        $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
+//        $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
         return view('setup.generalSetup.users.modals.createUser ',compact('costCenters','designations','banks', 'userGroups'));
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
             //'email' => 'required|string|email|max:255|unique:users',
             'email' => 'nullable|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'cost_center_id' => 'required',
+          //  'cost_center_id' => 'required',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'contact_no' => 'nullable|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
@@ -94,7 +94,7 @@ class UserController extends Controller
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
         }else {
-           $costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
+         //  $costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
             //for user image*************
             $userImageName = 'defaultUserImage.png';
@@ -135,13 +135,13 @@ class UserController extends Controller
                 'remarks' => $request->input('remarks'),
                 'user_group_id' => $request->input('user_group_id'),
                 'user_group_level_id' => $request->input('user_group_level_id'),
-                'cost_center_id' => $request->input('cost_center_id'),
-                'cost_center_type' => $costCenter->cost_center_type,
-                'designation_id' => $request->input('designation_id'),
-                'bank_id' => $request->input('bank_id'),
-                'branch_id' => $request->input('branch_id'),
-                'account_no' => $request->input('account_no'),
-               //'route_no' => $request->input('route_no'),
+              //  'cost_center_id' => $request->input('cost_center_id'),
+              //  'cost_center_type' => $costCenter->cost_center_type,
+              //  'designation_id' => $request->input('designation_id'),
+             //   'bank_id' => $request->input('bank_id'),
+              //  'branch_id' => $request->input('branch_id'),
+             //   'account_no' => $request->input('account_no'),
+             //  //'route_no' => $request->input('route_no'),
                 'address' => $request->input('address'),
                 'contact_no' => $request->input('contact_no'),
                 //'active_status' => $request->input('active_status'),
