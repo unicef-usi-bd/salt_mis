@@ -1,11 +1,11 @@
-<div id="certificate" class="tab-pane fade ">
+<div id="certificate_tab" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info certificate_msg"></div>
 
-            <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">
+            <form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 
-                @csrf
+               @csrf
                 @if(isset($millerInfoId))
                     <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
@@ -19,12 +19,12 @@
                         <th style="width: 260px;">Trade License</th>
                         <th style="width:140px;" >Renewing Date</th>
                         <th  style="width:140px ;">Remarks</th>
-                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd2"><i class="fa fa-plus"></i></span></th>
+                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAddCert"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
-                    <tbody class="newRow2">
+                    <tbody class="newRowCert">
                     @foreach($editCertificateData as $editCertData)
-                        <tr class="rowFirst2">
+                        <tr class="rowFirstCert">
 
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
+                                    <input type="date" name="ISSUING_DATE[]" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
                                 </span>
                             </td>
 
@@ -61,21 +61,21 @@
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
-
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" value="" >
+                                    <a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
                                 </span>
                             </td>
 
                             <td>
                                 <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
+                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editCertData->REMARKS }}" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                 </span>
                             </td>
                             <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
@@ -85,14 +85,14 @@
                 </table>
                 <hr>
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
+                    <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
+                        <button type="submit" class="btn btn-primary">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
+                            {{ trans('dashboard.submit') }}
                         </button>
                     </div>
                 </div>
@@ -102,11 +102,11 @@
 </div>
 <script>
     $(document).ready(function(){
-        $('.rowAdd2').click(function(){
-            var getTr = $('tr.rowFirst2:first');
+        $('.rowAddCert').click(function(){
+            var getTr = $('tr.rowFirstCert:first');
 //            alert(getTr.html());
             $("select.chosen-select").chosen('destroy');
-            $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            $('tbody.newRowCert').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
             defaultRow.find('select.ISSURE_ID').prop('disabled', false);
@@ -126,5 +126,22 @@
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
+
+</script>
+<script>
+    // $('.certificate_msg').hide();
+    // $(document).on('click','.btnUpdateCertificate',function () {
+    //     $.ajax({
+    //         type : 'POST',
+    //         url : 'edit-certificate-info',
+    //         data : $('#certificateId').serialize(),
+    //         success: function (data) {
+    //             console.log(data);
+    //             $('.certificate_msg').html('<span>'+ data +'</span>').show();
+    //
+    //         }
+    //     })
+    //
+    // })
 
 </script>

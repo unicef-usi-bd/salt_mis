@@ -92,7 +92,7 @@ class CertificateController extends Controller
 
                 $insert = DB::table('ssm_certificate_info')->insert($data);
 
-            }
+            } //end for
 
             if($insert){
                 return redirect('/qc-info/createQc/'.$millerInfoId)->with('success', 'Certificate Has been Added !');
@@ -196,11 +196,58 @@ class CertificateController extends Controller
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
         return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData'));
     }
-    public function updateCertificateInfo(Request $request)
+//    public function updateCertificateInfo(Request $request)
+//    {
+//        $millerInfoId = $request->input('MILL_ID'); //$this->pr( count($_POST['CERTIFICATE_TYPE_ID']));
+//        $updateCertificateData = Certificate::updateMillCertificateData($request, $millerInfoId);
+//        return "Certificate Information has been updated";
+//    }
+
+    public function updateCertificateInfoNormal(Request $request)
+//    public function updateCertificateInfo(Request $request)
     {
-        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
-        $updateCertificateData = Certificate::updateMillCertificateData($request, $millerInfoId);
-        return "Certificate Information has been updated";
+        //$this->pr($request->file('user_image'));
+        $millerInfoId = $request->input('MILL_ID');//$this->pr($millerInfoId);
+        $certificateId = DB::table('ssm_certificate_info')->where('MILL_ID', $millerInfoId)->delete();
+        if ($certificateId) {
+            //$this->pr($request->input());
+            $reqTime = count($_POST['CERTIFICATE_TYPE_ID']);
+            for ($i = 0; $i < $reqTime; $i++) {
+                // file upload
+                $userImageName[$i] = 'defaultImage.jpg';
+                if ($request->file('user_image')[$i] != null && $request->file('user_image')[$i]->isValid()) {
+                    try {
+                        $file = $request->file('user_image')[$i];
+                        $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
+                        $userImageName[$i] = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
+
+
+                        $request->file('user_image')[$i]->move("image/user-image", $userImageName[$i]);
+
+                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
+                    }
+                }
+                $data = ([
+                    'MILL_ID' => $millerInfoId,
+                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
+                    'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+                    'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
+                    'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
+                    'TRADE_LICENSE' => 'image/user-image/' . $userImageName[$i],
+                    'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
+                    'REMARKS' => $request->input('REMARKS')[$i],
+                    'UPDATE_BY' => Auth::user()->id,
+                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+                //$this->pr($data);
+                //  file upload
+                $insert = DB::table('ssm_certificate_info')->insert($data);
+
+            } //end for
+        }
+//        return "Certificate Updated Successful";
+        return Redirect::back()->with('message','Certificate Updated Successful !');
     }
 
 } // END CLASS
