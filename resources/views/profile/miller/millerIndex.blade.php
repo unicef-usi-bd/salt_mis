@@ -102,10 +102,10 @@
                             <td> {{ $row->RENEWING_DATE }} </td>
                             <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
                             <td class="hidden-480">
-                                <?php  if($row->ACTIVE_FLG == 0){ ?>
-                                <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
-                                <?php }else{ ?>
+                                <?php  if($row->ACTIVE_FLG == 1){ ?>
                                 <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                                <?php }else{ ?>
+                                <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
                                 <?php } ?>
 
                             </td>

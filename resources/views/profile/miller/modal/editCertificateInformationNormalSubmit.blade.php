@@ -1,7 +1,7 @@
 <div id="certificate_tab" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-info certificate_msg"></div>
+            {{--<div class="alert alert-info certificate_msg"></div>--}}
 
             <form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 

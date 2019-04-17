@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('qc-info/createQc/{millInfoId}', 'QcController@createQc'); //Azharul
     Route::resource('employee-info', 'EmployeeController'); //Azharul
     Route::get('employee-info/createEmployee/{millInfoId}', 'EmployeeController@createEmployee'); //Azharul
+    Route::get('deactivate-mill-profile','MillerInfoController@deactivateMillProfile');
 
 
     // modal edit mill information
