@@ -84,8 +84,8 @@ class UserGroupController extends Controller
             $role = UserGroup::insertData($data);
 
             if ($role) {
-                //return response()->json(['success'=>'User Group Successfully Saved']);
-                return redirect('/user-groups')->with('success', 'User Group Successfully Saved!');
+                return response()->json(['success'=>'User Group Successfully Saved']);
+                //return redirect('/user-groups')->with('success', 'User Group Successfully Saved!');
                 //return json_encode('Success');
             }
         }

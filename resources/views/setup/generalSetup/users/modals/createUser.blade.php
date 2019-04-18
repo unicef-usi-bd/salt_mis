@@ -5,8 +5,8 @@
             <i class="ace-icon fa fa-times"></i>
         </button>
     </div>
-    {{--<form action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
-    <form class="form-horizontal frmContent" name="formData" method="POST">
+    <form action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
         @csrf
 
         <div class="col-md-6">
@@ -242,7 +242,11 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'users' }}">
+                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'users' }}">--}}
+                    {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                    {{--{{ trans('dashboard.submit') }}--}}
+                {{--</button>--}}
+                <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
