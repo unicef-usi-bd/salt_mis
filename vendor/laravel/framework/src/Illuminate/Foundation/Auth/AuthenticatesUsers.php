@@ -133,6 +133,7 @@ trait AuthenticatesUsers
             'user_cc_name' => $userInfo->cost_center_name,
             'user_group_name' => $userInfo->USERGRP_NAME,
             'user_level_name' => $userInfo->UGLEVE_NAME,
+            'association_name' => $userInfo->ASSOCIATION_NAME
           //  'startDate' => $financialYear->start_date,
           //  'endDate' => $financialYear->end_date
         ]);

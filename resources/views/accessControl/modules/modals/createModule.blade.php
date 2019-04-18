@@ -15,7 +15,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="inputSuccess module_name" name="module_name" value="{{ old('module_name') }}" class="width-100" />
+                <input type="text" id="inputSuccess module_name" name="module_name" placeholder="Example:Module Name Here" value="{{ old('module_name') }}" class="width-100" />
             </span>
 
                 </div>
@@ -25,7 +25,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="module_icon" value="{{ old('module_icon') }}" id="inputSuccess module_icon" class="width-100"  />
+                        <input type="text" name="module_icon" value="{{ old('module_icon') }}" placeholder="Example:Module Icon Here" id="inputSuccess module_icon" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.sl_no') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="sl_no" value="{{ old('sl_no') }}" id="inputSuccess sl_no" class="width-100"  />
+                        <input type="text" name="sl_no" value="{{ old('sl_no') }}" placeholder="Example:Module SL NO Here" id="inputSuccess sl_no" class="width-100"  />
                     </span>
                 </div>
             </div>

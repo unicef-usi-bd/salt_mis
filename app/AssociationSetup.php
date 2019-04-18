@@ -14,6 +14,13 @@ class AssociationSetup extends Model
         return DB::table('ssm_associationsetup')->get();
     }
 
+    public static function getAssociationCenterData(){
+        return DB::table('ssm_associationsetup')
+            ->select('ssm_associationsetup.*')
+            ->where('ssm_associationsetup.PARENT_ID','!=',0)
+            ->get();
+    }
+
 
     public  static function insertAssociationData($data){
         return DB::table('ssm_associationsetup')->insert($data);

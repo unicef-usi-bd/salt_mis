@@ -18,6 +18,7 @@ use App\Mail\SendMailable;
 use App\User;
 use File;
 use Illuminate\Support\Facades\Route;
+use App\AssociationSetup;
 
 
 class UserController extends Controller
@@ -43,7 +44,7 @@ class UserController extends Controller
             'action'=>'users/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-
+//        dd(session()->all());
         $users = User::getData();
 //        $this->pr($users);
 
@@ -58,12 +59,13 @@ class UserController extends Controller
     public function create()
     {
         $userGroups = UserGroup::getActiveData();
+        $associationCenter = AssociationSetup::getAssociationCenterData();
 //        $this->pr($userGroups);
         //$banks = Bank::getActiveBanks();
 //        $costCenters = CostCenter::getActiveCostCenter();
 //        $this->pr($costCenters);
 //        $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
-        return view('setup.generalSetup.users.modals.createUser ',compact('costCenters','designations','banks', 'userGroups'));
+        return view('setup.generalSetup.users.modals.createUser ',compact('costCenters','designations','banks', 'userGroups','associationCenter'));
     }
 
     /**
@@ -148,6 +150,7 @@ class UserController extends Controller
                 'active_status' => 1,
                 'user_image' => 'image/user-image/'.$userImageName,
                 'user_signature' => 'image/user-signature/'.$userSignatureName,
+                'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
             ]);
 
