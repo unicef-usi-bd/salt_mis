@@ -24,7 +24,7 @@
                 <span class="col-sm-6" style="padding: 0;">
                     <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
                 </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }}</span><span class="result"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }} KG</span><span class="result"></span>)</span>
             </div>
         </div>
         <div class="form-group">
@@ -47,7 +47,7 @@
                     <span class="col-sm-6" style="padding: 0;">
                         <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
                     </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical"></span><span class="resultChemical"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical"></span>KG<span class="resultChemical"></span>)</span>
             </div>
         </div>
         <div class="form-group">

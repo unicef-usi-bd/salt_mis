@@ -22,7 +22,7 @@
                     <td>{{$viewWashingAndCrushing->ITEM_NAME}}</td>
                     <th>Amount</th>
                     <th> :</th>
-                    <td>{{$viewWashingAndCrushing->REQ_QTY}}</td>
+                    <td>{{$viewWashingAndCrushing->REQ_QTY}} KG</td>
 
                 </tr>
                 <tr>

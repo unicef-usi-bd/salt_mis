@@ -19,10 +19,10 @@
                 <tr>
                     <th>Salt Amount</th>
                     <th> :</th>
-                    <td>{{$viewIodize->WASH_CRASH_QTY}}</td>
+                    <td>{{$viewIodize->WASH_CRASH_QTY}} KG</td>
                     <th>Chemical Amount</th>
                     <th> :</th>
-                    <td>{{$viewIodize->REQ_QTY}}</td>
+                    <td>{{$viewIodize->REQ_QTY}} KG</td>
                 </tr>
             </table>
         </div>

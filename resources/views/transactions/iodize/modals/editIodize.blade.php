@@ -25,7 +25,7 @@
                 <span class="col-sm-6" style="padding: 0;">
                     <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value="{{ $editIodize->WASH_CRASH_QTY }}"/>
                 </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalSalt }}</span><span class="result"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalSalt }} KG</span><span class="result"></span>)</span>
             </div>
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@
                     <span class="col-sm-6" style="padding: 0;">
                         <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value="{{ $editIodize->REQ_QTY }}"/>
                     </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }}</span><span class="resultChemical"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} KG</span><span class="resultChemical"></span>)</span>
             </div>
         </div>
         <div class="form-group">
@@ -67,14 +67,14 @@
         </div>
 
         <div class="clearfix">
-            <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-offset-3 col-md-9" style="    margin-left: 215px;">
                 <button type="reset" class="btn test">
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{ trans('dashboard.submit') }}
+                    {{ trans('dashboard.update') }}
                 </button>
             </div>
         </div>

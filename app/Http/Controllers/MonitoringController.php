@@ -31,7 +31,7 @@ class MonitoringController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Monitoring Create');
+        $title = trans('Create Monitoring ');
 
         $heading=array(
             'title'=> $title,

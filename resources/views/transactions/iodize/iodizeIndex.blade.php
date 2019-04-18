@@ -7,7 +7,7 @@
             Transaction
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Iodize
+                Iodized
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -27,8 +27,8 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Batch Number</th>
                     <th class="hidden-480">Date</th>
-                    <th class="hidden-480">Salt Amount</th>
-                    <th class="hidden-480">Chemical Amount</th>
+                    <th class="hidden-480">Salt Amount (KG)</th>
+                    <th class="hidden-480">Chemical Amount (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>

@@ -28,7 +28,7 @@
                     <th>Crude Salt Type</th>
                     <th class="hidden-480">Source</th>
                     <th class="hidden-480">Trading Name</th>
-                    <th class="hidden-480">Amount</th>
+                    <th class="hidden-480">Amount (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
