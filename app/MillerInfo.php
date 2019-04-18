@@ -30,8 +30,15 @@ class MillerInfo extends Model
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
-
          return $millInfoId;
+     }
+     public static function insertIntoAssociation($request){
+         $association =  DB::table('ssm_associationsetup')->insertGetId([
+             'ASSOCIATION_NAME'=> $request->input('MILL_NAME'),
+             'PARENT_ID' => Auth::user()->center_id,
+             'ACTIVE_FLG' => $request->input('ACTIVE_FLG')
+         ]);
+         return $association;
      }
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
