@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public static function userDetails($id){
         return DB::table('users as u')
-            ->select('cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME')
+            ->select('cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID')
             ->leftjoin('cost_center as cc', 'u.cost_center_id', '=', 'cc.cost_center_id')
             ->leftjoin('sa_user_group as ug', 'u.user_group_id', '=', 'ug.USERGRP_ID')
             ->leftjoin('sa_ug_level as ugl', 'u.user_group_level_id', '=', 'ugl.UG_LEVEL_ID')
