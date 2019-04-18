@@ -172,8 +172,8 @@
                 </div>
             </div> -->
 
-        <div class="clearfix" style="margin-left: 150px;">
-            <div class="col-md-offset-3 col-md-9">
+        <div class="clearfix" >
+            <div class="col-md-offset-3 col-md-9" style="margin-left: 510px;">
                 <button type="reset" class="btn test">
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
@@ -181,7 +181,7 @@
                 {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{ trans('dashboard.submit') }}
+                    {{ trans('dashboard.update') }}
                 </button>
             </div>
         </div>

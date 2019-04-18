@@ -27,7 +27,7 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Purchase Date</th>
                     <th class="hidden-480">Procurement Chemical</th>
-                    <th class="hidden-480">Amount</th>
+                    <th class="hidden-480">Amount (KG)</th>
                     <th class="hidden-480">Chemical Source</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>

@@ -76,7 +76,7 @@
                 </button>
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{ trans('dashboard.submit') }}
+                    {{ trans('dashboard.update') }}
                 </button>
             </div>
         </div>

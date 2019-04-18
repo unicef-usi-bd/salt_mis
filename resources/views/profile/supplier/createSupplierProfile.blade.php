@@ -127,7 +127,7 @@
 
             <hr>
             <div class="clearfix">
-                <div class="col-md-offset-3 col-md-9">
+                <div class="col-md-offset-3 col-md-9" style="    margin-left: 500px;">
                     <button type="reset" class="btn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
