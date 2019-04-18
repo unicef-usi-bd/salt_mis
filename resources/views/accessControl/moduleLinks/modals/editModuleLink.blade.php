@@ -28,7 +28,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('moduleLinks.module_link') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" id="inputSuccess link_name" name="link_name" value="{{ $editData->LINK_NAME }}" class="width-100" />
+                        <input type="text" id="inputSuccess link_name" placeholder="Example:Module Link Name Here" name="link_name" value="{{ $editData->LINK_NAME }}" class="width-100" />
                     </span>
 
                 </div>
@@ -38,7 +38,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('moduleLinks.link_url') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="link_url" value="{{ $editData->LINK_URI }}" id="inputSuccess link_url" class="width-100"  />
+                        <input type="text" name="link_url" placeholder="Example:Module SL NO Here" value="{{ $editData->LINK_URI }}" id="inputSuccess link_url" class="width-100"  />
                     </span>
                 </div>
             </div>

@@ -126,6 +126,20 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>
+                <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess center_id" class="chosen-select form-control" name="center_id" data-placeholder="Select or search data">
+                                <option value=""> </option>
+                                @foreach($associationCenter as $center)
+                                    <option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                </div>
+            </div>
+
 
             {{--<div class="form-group">--}}
                 {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.cost_center') }}</b><span style="color: red;"> *</span></label>--}}
