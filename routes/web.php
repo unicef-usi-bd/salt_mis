@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('user-group-level-permission', 'UserModuleController@userGroupLevelPermissionAjax');
     Route::get('action-user-permission', 'UserModuleController@addRemovePermissionByAjax');
 
+
     // Setup
     Route::resource('lookup-groups', 'LookupGroupController'); //Rubiyat
     Route::resource('lookup-groups-data', 'LookupGroupDataController'); //Rubiyat
