@@ -9,7 +9,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">
+                               <select id="REG_TYPE_ID" class="chosen-select chosen-container regTypeId" name="REG_TYPE_ID" data-placeholder="Select or search data">
                                        <option value="" ></option>
                                    @foreach($registrationType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -241,7 +241,7 @@
 
 
 <script>
-    $(document).on('change','#REG_TYPE_ID',function () {
+    $(document).on('change','.regTypeId',function () {
        var registrationId = $(this).val();
        if (registrationId==11){
            $('#mergeMillModal').modal('show');
