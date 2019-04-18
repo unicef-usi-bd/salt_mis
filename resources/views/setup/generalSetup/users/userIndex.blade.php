@@ -29,7 +29,7 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>{{ trans('user.user_full_name') }}</th>
                     <th>{{ trans('user.user_name') }}</th>
-                    <th>{{ trans('user.cost_center') }}</th>
+                    <th>Center</th>
                     <th>{{ trans('user.user_group') }}</th>
                     <th>{{ trans('user.group_level') }}</th>
                     <th>{{ trans('user.email') }}</th>
@@ -47,7 +47,7 @@
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$user->user_full_name}}</td>
                         <td>{{$user->username}}</td>
-                        <td>{{$user->cost_center_name}}</td>
+                        <td>{{$user->ASSOCIATION_NAME}}</td>
                         <td>{{$user->USERGRP_NAME}}</td>
                         <td>{{$user->UGLEVE_NAME}}</td>
                         <td>{{$user->email}}</td>

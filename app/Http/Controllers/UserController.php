@@ -159,7 +159,8 @@ class UserController extends Controller
             $userCreate = User::insertData($data);
 
             if ($userCreate) {
-                return response()->json(['success'=>'User Successfully Saved']);
+                //return response()->json(['success'=>'User Successfully Saved']);
+                return redirect('/users')->with('success', 'User Successfully Saved');
                //return json_encode('Success');
             }
         }
@@ -192,8 +193,9 @@ class UserController extends Controller
       //  $costCenters = CostCenter::getActiveCostCenter();
      //   $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
         $userGroupLevels = UserGroupLevel::getActiveUGL($editData->user_group_id);
+        $associationCenter = AssociationSetup::getAssociationCenterData();
 //        $this->pr($userGroupLevels);
-        return view('setup.generalSetup.users.modals.editUser ', compact('editData','costCenters','designations', 'banks', 'userGroups', 'userGroupLevels'));
+        return view('setup.generalSetup.users.modals.editUser ', compact('editData','costCenters','designations', 'banks', 'userGroups', 'userGroupLevels','associationCenter'));
     }
 
     /**
@@ -214,7 +216,7 @@ class UserController extends Controller
 //            'email' => 'required|string|email|max:255',
               'email' => 'nullable|string|email|max:255',
               
-              'cost_center_id' => 'required',
+              //'cost_center_id' => 'required',
 //            'designation_id' => 'required',
              'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
@@ -284,8 +286,9 @@ class UserController extends Controller
 
         }
 
-            session()->flash('message','User Successfully Updated');
+            //session()->flash('message','User Successfully Updated');
             //return json_encode('Success');
+        return redirect('/users')->with('success', 'User Successfully Saved');
 
     }
 

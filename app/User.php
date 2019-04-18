@@ -73,10 +73,11 @@ class User extends Authenticatable
 
     public static function getData() {
         return DB::table('users as u')
-            ->select('u.*', 'cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME')
+            ->select('u.*', 'cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID')
             ->leftjoin('cost_center as cc', 'u.cost_center_id', '=', 'cc.cost_center_id')
             ->leftjoin('sa_user_group as ug', 'u.user_group_id', '=', 'ug.USERGRP_ID')
             ->leftjoin('sa_ug_level as ugl', 'u.user_group_level_id', '=', 'ugl.UG_LEVEL_ID')
+            ->leftjoin('ssm_associationsetup as a', 'u.center_id', '=', 'a.ASSOCIATION_ID')
             ->orderBy('u.id','DESC')
             ->get();
     }
@@ -100,13 +101,14 @@ class User extends Authenticatable
            // ->leftJoin('bank_branch', 'users.branch_id', '=', 'bank_branch.bank_branch_id')
           //  ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
             ->leftJoin('sa_ug_level', 'users.user_group_level_id', '=', 'sa_ug_level.UG_LEVEL_ID')
+            ->leftjoin('ssm_associationsetup', 'users.center_id', '=', 'ssm_associationsetup.ASSOCIATION_ID')
             ->where('id', '=', $id)
-            ->select('users.*','sa_ug_level.UG_LEVEL_ID','sa_ug_level.UGLEVE_NAME')
+            ->select('users.*','sa_ug_level.UG_LEVEL_ID','sa_ug_level.UGLEVE_NAME','ssm_associationsetup.ASSOCIATION_NAME','ssm_associationsetup.ASSOCIATION_ID')
             ->first();
     }
 
     public static function updateData($request,$id,$userImageName,$userSignatureName){
-        $costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));        
+        //$costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
         $userUpdateData=array(
             'user_full_name' => $request['user_full_name'],
@@ -127,6 +129,7 @@ class User extends Authenticatable
             'active_status' => $request->input('active_status'), 
             'user_image' => 'image/user-image/'.$userImageName,
             'user_signature' => 'image/user-signature/'.$userSignatureName,
+            'center_id' => $request->input('center_id'),
             'update_by' => Auth::user()->id,
             'update_at' => date("Y-m-d h:i:s")
         );
