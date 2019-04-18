@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+session_start();
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +18,4 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('get-monitor-data', 'API\ServiceController@getMonitorData');
+Route::get('/get-monitor-data', 'API\ServiceController@getMonitorData');
