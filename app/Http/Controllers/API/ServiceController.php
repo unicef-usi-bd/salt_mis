@@ -8,18 +8,19 @@ use Session;
 
 class ServiceController extends Controller{
     public function getMonitorData(Request $request){
-        $monitorData = DB::select(DB::raw("SELECT * FROM tsm_millmonitore"));
-        if (!empty($monitorData)){
-            return response()->json([
-                'status' => true,
-                'monitoring_data' => $monitorData
-            ]);
-        }else{
-            $monitorData = array();
-            return response()->json([
-                'monitoring_data' => $monitorData
-            ]);
-        }
+//        $monitorData = DB::select(DB::raw("SELECT * FROM tsm_millmonitore"));
+//        if (!empty($monitorData)){
+//            return response()->json([
+//                'status' => true,
+//                'monitoring_data' => $monitorData
+//            ]);
+//        }else{
+//            $monitorData = array();
+//            return response()->json([
+//                'monitoring_data' => $monitorData
+//            ]);
+//        }
+        return "Ok";
     }
 
 
