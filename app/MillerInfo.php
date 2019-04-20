@@ -26,18 +26,26 @@ class MillerInfo extends Model
              'UPAZILA_ID' => $request->input('UPAZILA_ID'),
              'UNION_ID' => $request->input('UNION_ID'),
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+             'center_id' => Auth::user()->center_id,
              'REMARKS' => $request->input('REMARKS'),
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
-         return $millInfoId;
-     }
-     public static function insertIntoAssociation($request){
+        //return $millInfoId;
+     //}
+    //public static function insertIntoAssociation($request){
+         if($millInfoId){
          $association =  DB::table('ssm_associationsetup')->insertGetId([
+             'MILL_ID' => $millInfoId,
              'ASSOCIATION_NAME'=> $request->input('MILL_NAME'),
              'PARENT_ID' => Auth::user()->center_id,
-             'ACTIVE_FLG' => $request->input('ACTIVE_FLG')
+             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+             'center_id' => Auth::user()->center_id,
+             'ENTRY_BY' => Auth::user()->id,
+             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
+
+         }
          return $association;
      }
     public static function getMillData($millerInfoId){

@@ -70,6 +70,7 @@ class LookupGroupDataController extends Controller
                 'UD_ID' => $request->input('UD_ID'),
                 'DESCRIPTION' => $request->input('DESCRIPTION'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id
             ]);
 

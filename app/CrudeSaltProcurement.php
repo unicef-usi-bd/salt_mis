@@ -17,6 +17,7 @@ class CrudeSaltProcurement extends Model
             ->leftJoin('ssm_supplier_info','tmm_receivemst.SUPP_ID_AUTO', '=','ssm_supplier_info.SUPP_ID_AUTO')
             ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
             ->leftJoin('ssc_lookupchd','tmm_receivemst.SOURCE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('tmm_receivemst.center_id','=',Auth::user()->center_id)
             ->where('tmm_receivemst.RECEIVE_TYPE','=','SR')
             ->get();
     }
@@ -38,6 +39,7 @@ class CrudeSaltProcurement extends Model
             'SOURCE_ID' => $request->input('SOURCE_ID'),
             'COUNTRY_ID' => $request->input('COUNTRY_ID'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -46,6 +48,7 @@ class CrudeSaltProcurement extends Model
                 'RECEIVEMST_ID' => $crudeSaltMstId,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
@@ -59,6 +62,7 @@ class CrudeSaltProcurement extends Model
                 'QTY' => $request->input('RCV_QTY'),
                 'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);

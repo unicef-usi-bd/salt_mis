@@ -94,7 +94,7 @@ class MillerInfoController extends Controller
         }else {
 
             $millerInfoId = MillerInfo::insertMillerInfoData($request);
-            $association = MillerInfo::insertIntoAssociation($request);
+            //$association = MillerInfo::insertIntoAssociation($request);
             //$this->pr($association);
             if($millerInfoId){
                 return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');

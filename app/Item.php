@@ -53,6 +53,7 @@ class Item extends Model
             'ITEM_TYPE' => $request->input('ITEM_TYPE'),
             'ITEM_NAME' => $request->input('ITEM_NAME'),
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+            'center_id' => Auth::user()->center_id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
         ]);

@@ -104,6 +104,7 @@ class QulityControlTestingController extends Controller
                 'MOISTURIZER' =>$request->input('MOISTURIZER'),
                 'IODINE_CONTENT' =>$request->input('IODINE_CONTENT'),
                 'PH' =>$request->input('PH'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);

@@ -41,6 +41,7 @@ class ChemicalPurchase extends Model
             ->leftJoin('smm_item','tmm_receivemst.RECEIVE_NO', '=','smm_item.ITEM_NO')
             ->leftJoin('ssm_supplier_info','tmm_receivemst.SUPP_ID_AUTO', '=','ssm_supplier_info.SUPP_ID_AUTO')
             ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
+            ->where('tmm_receivemst.center_id','=',Auth::user()->center_id)
             ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }
@@ -52,6 +53,7 @@ class ChemicalPurchase extends Model
                 'TRADING_NAME' => $request->input('TRADING_NAME'),
                 'PHONE' => $request->input('PHONE'),
                 'ADDRESS' => $request->input('ADDRESS'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
@@ -63,6 +65,7 @@ class ChemicalPurchase extends Model
             'SUPP_ID_AUTO' => $supplierId,
             'RECEIVE_TYPE' => 'CR',//chemical receive
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -71,6 +74,7 @@ class ChemicalPurchase extends Model
                 'RECEIVEMST_ID' => $chemicalPurchaseMstId,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
@@ -84,6 +88,7 @@ class ChemicalPurchase extends Model
                 'QTY' => $request->input('RCV_QTY'),
                 'TRAN_FLAG' => 'PR', // PR = Purchase Receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
