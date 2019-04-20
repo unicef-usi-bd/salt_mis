@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Input;
 
 class WashingAndCrushing extends Model
 {
+
+    public static function getCenterWiseMiller(){
+        return DB::table('tmm_washcrashmst')
+            ->select('tmm_washcrashmst.*')
+            ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
+            ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
+            ->where()
+            ->get();
+    }
+
     public static function getWashingAndCrushingData(){
         return DB::table('tmm_washcrashmst')
             ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')

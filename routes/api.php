@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/get-monitor-data', 'API\ServiceController@getMonitorData');
+Route::post('/get-wash-crush-batch', 'API\WashCrushService@getWashCrushBatchData');
