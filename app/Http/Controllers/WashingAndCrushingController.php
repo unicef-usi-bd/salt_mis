@@ -52,10 +52,8 @@ class WashingAndCrushingController extends Controller
      */
     public function create()
     {
-        $wahingCrushingBatch = 'WC' . '-' . date("y") . '-' . date("m") . '-' . date("d");
-        $this->pr($wahingCrushingBatch);
-        $digits = 4;
-        $batch = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $batch = 'WC' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
+
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
 
         return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));

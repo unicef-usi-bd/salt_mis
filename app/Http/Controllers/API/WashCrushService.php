@@ -9,23 +9,16 @@ use DB;
 class WashCrushService extends Controller
 {
     public function getWashCrushBatchData(Request $request){
-        $entryBy = $request->input('entryBy');
+        $millerId = $request->input('millerId');
 
-        $batchList = DB::table('tmm_washcrashmst')
-            ->select('tmm_washcrashmst.*')
-            ->where('tmm_washcrashmst.ENTRY_BY','=',$entryBy)
-            ->get();
+        $batch = 'WC' . '-' . $millerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
 
-        if (!empty($batchList)){
+        if (!empty($millerId)){
             return response()->json([
-                'status' => true,
-                'batchList' => $batchList
+                'batch' => $batch
             ]);
         }else{
-            return response()->json([
-                'status' => false,
-                'batchList' => 'Batch List Not Found'
-            ]);
+            return response()->json([]);
         }
     }
 }
