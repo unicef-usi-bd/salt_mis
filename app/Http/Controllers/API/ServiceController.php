@@ -39,15 +39,29 @@ class ServiceController extends Controller
         $checkResult = DB::table('users')
             ->where('username', '=', $user_name)
             ->first();
+
+        //$this->pr($millId);
         if($checkResult){
             $result = Hash::check($password, $checkResult->password);
             if ($result){
-                //echo "successful";
-                $millerInfo = MillerInfo::millInformation();
+                $center_id = DB::table('users')
+                    ->select('users.center_id')
+                    ->where('username', '=', $user_name)
+                    ->where('password', '=', $checkResult->password)
+                    ->first();
+
+                //$this->pr($center_id);
+                $millInfo = DB::table('ssm_associationsetup')
+                    ->select('ssm_associationsetup.MILL_ID')
+                    ->where('ASSOCIATION_ID', '=', $center_id->center_id)
+                    ->first();
+                $millId = $millInfo->MILL_ID;
+                //echo $millId;exit();
+                $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
                 $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
                 $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
                 return response()->json([
-                    'status' => true,
+
                     'message'=> 'Information are given below',
                     'crude_salt_types' => $crudeSaltTypes,
                     'chemical_types' => $chemicleType,
@@ -55,13 +69,13 @@ class ServiceController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    'status' => false,
+
                     'message'=> 'Please, check your password!'
                 ]);
             }
         }else{
             return response()->json([
-                'status' => false,
+
                 'message'=> 'Please, check your user name!'
             ]);
         }
