@@ -94,6 +94,7 @@ class SupplierProfileController extends Controller
                 'PHONE' => $request->input('PHONE'),
                 'EMAIL' => $request->input('EMAIL'),
                 'REMARKS' => $request->input('REMARKS'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
            ]);

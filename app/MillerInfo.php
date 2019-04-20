@@ -26,18 +26,26 @@ class MillerInfo extends Model
              'UPAZILA_ID' => $request->input('UPAZILA_ID'),
              'UNION_ID' => $request->input('UNION_ID'),
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+             'center_id' => Auth::user()->center_id,
              'REMARKS' => $request->input('REMARKS'),
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
-         return $millInfoId;
-     }
-     public static function insertIntoAssociation($request){
+        //return $millInfoId;
+     //}
+    //public static function insertIntoAssociation($request){
+         if($millInfoId){
          $association =  DB::table('ssm_associationsetup')->insertGetId([
+             'MILL_ID' => $millInfoId,
              'ASSOCIATION_NAME'=> $request->input('MILL_NAME'),
              'PARENT_ID' => Auth::user()->center_id,
-             'ACTIVE_FLG' => $request->input('ACTIVE_FLG')
+             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+             'center_id' => Auth::user()->center_id,
+             'ENTRY_BY' => Auth::user()->id,
+             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
+
+         }
          return $association;
      }
     public static function getMillData($millerInfoId){
@@ -81,6 +89,7 @@ class MillerInfo extends Model
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
             ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+            ->where('ssm_millemp_info.ENTRY_BY','=',Auth::user()->center_id)
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->get();
 
@@ -180,6 +189,16 @@ class MillerInfo extends Model
             'FINAL_SUBMIT_FLG' => 0,
         ]);
         return $update;
+    }
+
+    // for login web service
+    public static function millInformation(){
+         $getMillInfo =  DB::table('ssm_mill_info')
+                         ->select('ssm_mill_info.*','ssm_entrepreneur_info.MOBILE_1','ssm_entrepreneur_info.MOBILE_2','ssm_entrepreneur_info.EMAIL')
+                         ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_mill_info.MILL_ID')
+                         ->where('center_id','=', 12)
+                         ->first();
+         return $getMillInfo;
     }
 
 

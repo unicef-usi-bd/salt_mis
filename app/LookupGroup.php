@@ -43,6 +43,7 @@ class LookupGroup extends Model
              'UD_SL' => $request->input('UD_SL'),
              'DESCRIPTION' => $request->input('DESCRIPTION'),
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+             'center_id' => Auth::user()->center_id,
              'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
              'UPDATE_BY' => Auth::user()->id
          ]);

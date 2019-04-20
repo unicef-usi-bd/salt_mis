@@ -46,6 +46,7 @@ class SupplierProfile extends Model
         return DB::table('ssm_supplier_info')
             ->select('*','ssc_lookupchd.LOOKUPCHD_NAME')
             ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
             ->get();
     }
     public static function getDistrictByAjax($id){
@@ -114,6 +115,7 @@ class SupplierProfile extends Model
             'PHONE' => $request->input('PHONE'),
             'EMAIL' => $request->input('EMAIL'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s"),
              'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),

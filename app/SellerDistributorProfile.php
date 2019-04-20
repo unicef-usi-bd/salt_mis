@@ -45,6 +45,7 @@ protected $fillable = [
             'PHONE' => $request->input('PHONE'),
             'EMAIL' => $request->input('EMAIL'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -56,6 +57,9 @@ protected $fillable = [
                     'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                     'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
                     'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
 
             }
@@ -66,6 +70,7 @@ protected $fillable = [
     public static function sellerDistributorProfile(){
         return DB::table('ssm_customer_info')
             ->select('*')
+            ->where('ssm_customer_info.center_id','=',Auth::user()->center_id)
             ->get();
     }
 
@@ -119,6 +124,7 @@ protected $fillable = [
             'PHONE' => $request->input('PHONE'),
             'EMAIL' => $request->input('EMAIL'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -133,6 +139,7 @@ protected $fillable = [
                     'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                     'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
                     'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
+                     'center_id' => Auth::user()->center_id,
                     'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
                 }else{
@@ -141,6 +148,7 @@ protected $fillable = [
                         'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                         'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
                         'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
+                        'center_id' => Auth::user()->center_id,
                     ]);
                 }
             }

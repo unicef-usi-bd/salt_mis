@@ -23,6 +23,7 @@ class Monitoring extends Model
         return DB::table('tsm_millmonitore')
             ->select('tsm_millmonitore.*', 'ssc_lookupchd.LOOKUPCHD_NAME')
             ->leftjoin('ssc_lookupchd','tsm_millmonitore.agency_id', '=', 'ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('tsm_millmonitore.center_id','=',Auth::user()->center_id)
             ->orderByRaw('ssc_lookupchd.LOOKUPCHD_ID ASC')
             ->get();
     }
@@ -57,8 +58,9 @@ class Monitoring extends Model
             'AGENCY_ID' => $request->input('AGENCY_ID'),
             'MOMITOR_DATE' =>date('Y-m-d', strtotime($request->input('MOMITOR_DATE'))),
             'REMARKS' => $request->input('REMARKS'),
-             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-             'UPDATE_BY' => Auth::user()->id
+            'center_id' => Auth::user()->center_id,
+            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+            'UPDATE_BY' => Auth::user()->id
          ]);
 
        return $update;
