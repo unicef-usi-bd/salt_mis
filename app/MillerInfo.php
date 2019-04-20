@@ -81,6 +81,7 @@ class MillerInfo extends Model
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
             ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+            ->where('ssm_millemp_info.ENTRY_BY','=',Auth::user()->center_id)
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->get();
 
