@@ -83,6 +83,7 @@ class MonitoringController extends Controller
                 'REMARKS' => $request->input('REMARKS'),
                 //'active_status' => $request->input('active_status'),
                 //'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
            ]);
