@@ -26,8 +26,9 @@ class WashCrushService extends Controller
     public function getCrudeSaltStock(Request $request){
 
         $saltId = $request->input('saltId');
-        $saltStock = Stock::getSaltStock($saltId);
-        $totalReduceSalt = Stock::getTotalReduceSalt($saltId);
+        $centerId = $request->input('centerId');
+        $saltStock = Stock::getSaltStock($saltId,$centerId);
+        $totalReduceSalt = Stock::getTotalReduceSalt($saltId,$centerId);
         $saltStock = $saltStock - abs($totalReduceSalt);
 
         if (!empty($saltStock)){

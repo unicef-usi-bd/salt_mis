@@ -169,9 +169,10 @@ class WashingAndCrushingController extends Controller
 
     public function getCrudeSaltStock(Request $request){
         $saltId = $request->input('saltId');
-        $saltStock = Stock::getSaltStock($saltId);
+        $centerId = Auth::user()->center_id;
         $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($saltId);
-        $totalReduceSalt = Stock::getTotalReduceSalt($saltId);
+        $saltStock = Stock::getSaltStock($saltId,$centerId);
+        $totalReduceSalt = Stock::getTotalReduceSalt($saltId,$centerId);
 
         $saltStock = $saltStock - abs($totalReduceSalt);
 
