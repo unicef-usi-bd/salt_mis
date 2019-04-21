@@ -21,4 +21,5 @@ session_start();
 Route::get('/get-monitor-data', 'API\ServiceController@getMonitorData');
 Route::post('user-login', 'API\ServiceController@userLogin');
 Route::post('/get-wash-crush-batch', 'API\WashCrushService@getWashCrushBatchData');
+Route::post('/post-iodize-data','API\ServiceIodizeController@getIodizeBatchData');//jalal
 
