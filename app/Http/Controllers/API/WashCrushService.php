@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Stock;
+use App\WashingAndCrushing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -34,6 +35,22 @@ class WashCrushService extends Controller
         if (!empty($saltStock)){
             return response()->json([
                 'saltStock' => $saltStock
+            ]);
+        }else{
+            return response()->json([]);
+        }
+    }
+
+    public function storeWashCrashData(Request $request){
+        $centerId = $request->input('centerId');
+        $entryBy = $request->input('entryBy');
+
+        //$this->pr($entryBy);
+        $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
+
+        if (!empty($washingAndCrashing)){
+            return response()->json([
+                'washingAndCrashing' => 'Success'
             ]);
         }else{
             return response()->json([]);

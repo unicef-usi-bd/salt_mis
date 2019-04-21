@@ -28,14 +28,14 @@ class WashingAndCrushing extends Model
             ->get();
     }
 
-    public static function insertWashingAndCrushingData($request){
+    public static function insertWashingAndCrushingData($request,$entryBy,$centerId){
         $washingCrushingMstId = DB::table('tmm_washcrashmst')->insertGetId([
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
             'BATCH_NO' => $request->input('BATCH_NO'),
             'PRODUCT_ID' => $request->input('PRODUCT_ID'),
             'REMARKS' => $request->input('REMARKS'),
-            'center_id' => Auth::user()->center_id,
-            'ENTRY_BY' => Auth::user()->id,
+            'center_id' => $centerId,
+            'ENTRY_BY' => $entryBy,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
         if ($washingCrushingMstId){
@@ -44,8 +44,8 @@ class WashingAndCrushing extends Model
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
+                'center_id' => $centerId,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
@@ -58,9 +58,9 @@ class WashingAndCrushing extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
                 'TRAN_FLAG' => 'WS', //WS = Wash Salt
-                'center_id' => Auth::user()->center_id,
+                'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
 
@@ -74,7 +74,8 @@ class WashingAndCrushing extends Model
                     'QTY' => $request->input('REQ_QTY'),
                     'TRAN_FLAG' => 'WI', //WR = Wash Increase
                     //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                    'ENTRY_BY' => Auth::user()->id,
+                    'center_id' => $centerId,
+                    'ENTRY_BY' => $entryBy,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
             }

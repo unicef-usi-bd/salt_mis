@@ -24,7 +24,8 @@ class Iodized extends Model
             ->get();
     }
 
-    public static function insertIodizeData($request){
+    public static function insertIodizeData($request,$centerId,$entryBy){
+
         $iodizeMstId = DB::table('tmm_iodizedmst')->insertGetId([
             'BATCH_NO' => $request->input('BATCH_NO'),
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
@@ -32,8 +33,8 @@ class Iodized extends Model
             //'SUPP_ID_AUTO' => $supplierId,
             //'RECEIVE_TYPE' => 'CR',//chemical receive
             'REMARKS' => $request->input('REMARKS'),
-            'center_id' => Auth::user()->center_id,
-            'ENTRY_BY' => Auth::user()->id,
+            'center_id' => $centerId,
+            'ENTRY_BY' => $entryBy,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
         if ($iodizeMstId){
@@ -44,8 +45,8 @@ class Iodized extends Model
                 'WASTAGE' => $request->input('WASTAGE'),
                 'WASH_CRASH_QTY' => $request->input('WASH_CRASH_QTY'),
                 'ITEM_TYPE' => 'I',//I=Iodized
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
+                'center_id' => $centerId,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
@@ -57,9 +58,9 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('WASH_CRASH_QTY'),
                 'TRAN_FLAG' => 'WR', // WR = Washing Reduce
-                'center_id' => Auth::user()->center_id,
+                'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
@@ -71,9 +72,9 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
                 'TRAN_FLAG' => 'IC', // IC = Idonaize Chemical
-                'center_id' => Auth::user()->center_id,
+                'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
@@ -85,9 +86,9 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => $request->input('WASH_CRASH_QTY'),
                 'TRAN_FLAG' => 'II', // II = Idonize Increase
-                'center_id' => Auth::user()->center_id,
+                'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_BY' => $entryBy,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
