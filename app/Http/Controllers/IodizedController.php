@@ -51,7 +51,8 @@ class IodizedController extends Controller
 //        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $totalWashing = Stock::getTotalWashingSalt();
+        $centerId = Auth::user()->center_id;
+        $totalWashing = Stock::getTotalWashingSalt($centerId);
         //$this->pr($test);
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
     }
@@ -112,12 +113,13 @@ class IodizedController extends Controller
         $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
 
-        $totalWashingSalt = Stock::getTotalWashingSalt();
-        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt();
+        $centerId = Auth::user()->center_id;
+        $totalWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
         $totalSalt = $totalWashingSalt - abs($totalReduceWashingSalt);
 
-        $totalReduceChemical = Stock::getTotalReduceChemical($editIodize->ITEM_NO);
-        $totalChemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO);
+        $totalReduceChemical = Stock::getTotalReduceChemical($editIodize->ITEM_NO,$centerId);
+        $totalChemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO,$centerId);
         $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
        return view('transactions.iodize.modals.editIodize',compact('editIodize','batchNo','chemicleType','totalSalt','totalChemical'));
     }
@@ -180,8 +182,9 @@ class IodizedController extends Controller
 
     public function getChemicalStock(Request $request){
         $chemicalId = $request->input('chemicalId');
-        $chemicalStock = Stock::getChemicalStock($chemicalId);
-        $totalReduceChemical = Stock::getTotalReduceChemical($chemicalId);
+        $centerId = Auth::user()->center_id;
+        $chemicalStock = Stock::getChemicalStock($chemicalId,$centerId);
+        $totalReduceChemical = Stock::getTotalReduceChemical($chemicalId,$centerId);
 
         $chemicalStock = $chemicalStock - abs($totalReduceChemical);
         $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($chemicalId);
