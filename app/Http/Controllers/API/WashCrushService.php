@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Stock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -16,6 +17,22 @@ class WashCrushService extends Controller
         if (!empty($millerId)){
             return response()->json([
                 'batch' => $batch
+            ]);
+        }else{
+            return response()->json([]);
+        }
+    }
+
+    public function getCrudeSaltStock(Request $request){
+
+        $saltId = $request->input('saltId');
+        $saltStock = Stock::getSaltStock($saltId);
+        $totalReduceSalt = Stock::getTotalReduceSalt($saltId);
+        $saltStock = $saltStock - abs($totalReduceSalt);
+
+        if (!empty($saltStock)){
+            return response()->json([
+                'saltStock' => $saltStock
             ]);
         }else{
             return response()->json([]);
