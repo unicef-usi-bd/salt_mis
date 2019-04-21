@@ -201,6 +201,30 @@ class MillerInfo extends Model
                          ->first();
          return $getMillInfo;
     }
+    ///-----------------------Counting Miller
+    public  static function countMillersUnderAdmin(){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.MILL_ID')
+            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->get();
+    }
+    public  static function countActiveMillersUnderAdmin(){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.MILL_ID')
+            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
+            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
+            ->get();
+    }
+    public  static function countDeactiveMillersUnderAdmin(){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.MILL_ID')
+            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->where('ssm_mill_info.ACTIVE_FLG','=', 0)
+            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 0)
+            ->get();
+    }
+    ///-----------------------Counting Miller
 
 
 }

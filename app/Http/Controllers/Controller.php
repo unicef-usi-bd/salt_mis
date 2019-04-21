@@ -45,6 +45,18 @@ class Controller extends BaseController
     public $iodizeId = 8;
 
 
+    //-----dynamic dashboard for separate user group
+    public $adminId = 1;
+    public $bstiId = 18;
+    public $bscicId = 19;
+    public $unicefId = 20;
+    public $associationId = 21;
+    public $millerId = 22;
+
+    //---------- association Id
+    public $coxAssoId = 2;
+
+
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 

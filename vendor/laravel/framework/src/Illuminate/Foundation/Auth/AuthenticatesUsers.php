@@ -134,9 +134,10 @@ trait AuthenticatesUsers
             'user_group_name' => $userInfo->USERGRP_NAME,
             'user_level_name' => $userInfo->UGLEVE_NAME,
             'center_name' => $userInfo->ASSOCIATION_NAME,
-            'center_id' => $userInfo->ASSOCIATION_ID
+            'center_id' => $userInfo->ASSOCIATION_ID,
           //  'startDate' => $financialYear->start_date,
-          //  'endDate' => $financialYear->end_date
+          //  'endDate' => $financialYear->end_date,
+            'user_group_id' => $userInfo->user_group_id
         ]);
     }
 
