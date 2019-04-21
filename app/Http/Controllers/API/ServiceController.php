@@ -56,7 +56,7 @@ class ServiceController extends Controller
                     ->where('ASSOCIATION_ID', '=', $center_id->center_id)
                     ->first();
                 $millId = $millInfo->MILL_ID;
-                //echo $millId;exit();
+
                 $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
                 $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
                 $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);

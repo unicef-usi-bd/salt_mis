@@ -196,7 +196,7 @@ class MillerInfo extends Model
 
          $getMillInfo =  DB::table('ssm_mill_info')
                          ->select('ssm_mill_info.*','ssm_entrepreneur_info.MOBILE_1','ssm_entrepreneur_info.MOBILE_2','ssm_entrepreneur_info.EMAIL')
-                         ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_mill_info.MILL_ID')
+                         ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
                          ->where('ssm_mill_info.MILL_ID','=', $id)
                          ->first();
          return $getMillInfo;
