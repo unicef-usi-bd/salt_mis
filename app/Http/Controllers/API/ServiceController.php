@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Item;
+use App\MillerInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +42,17 @@ class ServiceController extends Controller
         if($checkResult){
             $result = Hash::check($password, $checkResult->password);
             if ($result){
-                echo "successful";
+                //echo "successful";
+                $millerInfo = MillerInfo::millInformation();
+                $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+                $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+                return response()->json([
+                    'status' => true,
+                    'message'=> 'Information are given below',
+                    'crude_salt_types' => $crudeSaltTypes,
+                    'chemical_types' => $chemicleType,
+                    'mill_information' => $millerInfo
+                ]);
             }else{
                 return response()->json([
                     'status' => false,

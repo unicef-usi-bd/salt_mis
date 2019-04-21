@@ -191,5 +191,15 @@ class MillerInfo extends Model
         return $update;
     }
 
+    // for login web service
+    public static function millInformation(){
+         $getMillInfo =  DB::table('ssm_mill_info')
+                         ->select('ssm_mill_info.*','ssm_entrepreneur_info.MOBILE_1','ssm_entrepreneur_info.MOBILE_2','ssm_entrepreneur_info.EMAIL')
+                         ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_mill_info.MILL_ID')
+                         ->where('center_id','=', 12)
+                         ->first();
+         return $getMillInfo;
+    }
+
 
 }
