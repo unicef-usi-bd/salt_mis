@@ -76,8 +76,9 @@ class IodizedController extends Controller
             return Redirect::back()->withErrors($validator);
         } else {
 
-
-            $iodizeInsert = Iodized::insertIodizeData($request);
+            $entryBy = Auth::user()->id;
+            $centerId = Auth::user()->center_id;
+            $iodizeInsert = Iodized::insertIodizeData($request,$centerId,$entryBy);
         }
 
 

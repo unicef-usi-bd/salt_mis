@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Stock;
+use App\Iodized;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class ServiceIodizeController extends Controller
@@ -47,6 +49,22 @@ class ServiceIodizeController extends Controller
         if (!empty($chemicalStock)){
             return response()->json([
                 'totalChemicalStock' => $totalChemicalStock
+            ]);
+        }else{
+            return response()->json([]);
+        }
+    }
+
+    public function storeIodizeData(Request $request){
+        $centerId = $request->input('centerId');
+        $entryBy = $request->input('entryBy');
+
+        //$this->pr($entryBy);
+        $iodizeInsert = Iodized::insertIodizeData($request,$centerId,$entryBy);
+
+        if (!empty($iodizeInsert)){
+            return response()->json([
+                'iodizeInsert' => 'Success'
             ]);
         }else{
             return response()->json([]);

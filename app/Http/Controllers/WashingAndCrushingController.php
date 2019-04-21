@@ -78,7 +78,9 @@ class WashingAndCrushingController extends Controller
 
 
             //$this->pr($request->input());
-            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request);
+            $entryBy = Auth::user()->id;
+            $centerId = Auth::user()->center_id;
+            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
 
             if($washingAndCrashing){
                 return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
