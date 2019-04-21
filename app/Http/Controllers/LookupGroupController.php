@@ -82,6 +82,7 @@ class LookupGroupController extends Controller
                 'DESCRIPTION' => $request->input('DESCRIPTION'),
                 //'active_status' => $request->input('active_status'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id
            ]);
 

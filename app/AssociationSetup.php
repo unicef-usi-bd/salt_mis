@@ -41,6 +41,7 @@ class AssociationSetup extends Model
                 'PARENT_ID' => $request->input('PARENT_ID'),
                 'ASSOCIATION_NAME' => $request->input('ASSOCIATION_NAME'),
                 'PARENT_ID' => $request->input('PARENT_ID'),
+                'center_id' => Auth::user()->center_id,
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id

@@ -14,6 +14,7 @@ class WashingAndCrushing extends Model
             ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')
             ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
             ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
+            ->where('tmm_washcrashmst.center_id','=',Auth::user()->center_id)
             ->get();
     }
 
@@ -23,6 +24,7 @@ class WashingAndCrushing extends Model
             'BATCH_NO' => $request->input('BATCH_NO'),
             'PRODUCT_ID' => $request->input('PRODUCT_ID'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -32,6 +34,7 @@ class WashingAndCrushing extends Model
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
@@ -45,6 +48,7 @@ class WashingAndCrushing extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
                 'TRAN_FLAG' => 'WS', //WS = Wash Salt
+                'center_id' => Auth::user()->center_id,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -93,6 +97,7 @@ class WashingAndCrushing extends Model
                  'BATCH_NO' => $request->input('BATCH_NO'),
                  'PRODUCT_ID' => $request->input('PRODUCT_ID'),
                  'REMARKS' => $request->input('REMARKS'),
+                 'center_id' => Auth::user()->center_id,
                  'ENTRY_BY' => Auth::user()->id,
                  'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
              ]);
@@ -100,6 +105,7 @@ class WashingAndCrushing extends Model
                 'ITEM_ID' => $request->input('ITEM_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
+                'center_id' => Auth::user()->center_id,
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
             ]);
@@ -113,6 +119,7 @@ class WashingAndCrushing extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
                 'TRAN_FLAG' => 'WS', //WS = Wash Salt
+                'center_id' => Auth::user()->center_id,
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
             ]);
@@ -125,6 +132,7 @@ class WashingAndCrushing extends Model
                     'ITEM_NO' => $request->input('PRODUCT_ID'),
                     'QTY' => $request->input('REQ_QTY'),
                     'TRAN_FLAG' => 'WI', //WS = Wash Salt
+                    'center_id' => Auth::user()->center_id,
                     'UPDATE_BY' => Auth::user()->id,
                     'UPDATE_TIMESTAMP' => date("Y-m-d h:i")
                 ]);

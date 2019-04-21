@@ -15,6 +15,7 @@ class QulityControlTesting extends Model
             ->leftJoin('ssc_lookupchd as a','tmm_qualitycontrol.QC_BY','=','a.LOOKUPCHD_ID')
             ->leftJoin('ssc_lookupchd as b','tmm_qualitycontrol.AGENCY_ID','=','b.LOOKUPCHD_ID')
             ->leftJoin('tmm_iodizedmst','tmm_qualitycontrol.BATCH_NO','=','tmm_iodizedmst.IODIZEDMST_ID')
+            ->where('tmm_qualitycontrol.center_id','=',Auth::user()->center_id)
             ->get();
     }
     public static function insertQualityControlTestingData($data){
@@ -76,6 +77,7 @@ class QulityControlTesting extends Model
             'MOISTURIZER' =>$request->input('MOISTURIZER'),
             'IODINE_CONTENT' =>$request->input('IODINE_CONTENT'),
             'PH' =>$request->input('PH'),
+            'center_id' => Auth::user()->center_id,
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);

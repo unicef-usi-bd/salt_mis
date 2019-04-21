@@ -15,6 +15,7 @@ class SalesDistribution extends Model
             ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
             ->leftJoin('tmm_salesmst','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
             ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('tmm_saleschd.center_id','=',Auth::user()->center_id)
             ->get();
     }
     public static function getTradingName(){
@@ -35,6 +36,7 @@ class SalesDistribution extends Model
             'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
             'MOBILE_NO'=> $request->input('MOBILE_NO'),
             'REMARKS'=> $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -57,6 +59,7 @@ class SalesDistribution extends Model
                   'ITEM_ID'=> $request->input('ITEM_ID')[$i],
                   'PACK_TYPE'=> $request->input('PACK_TYPE')[$i],
                   'PACK_QTY'=> $request->input('PACK_QTY')[$i],
+                  'center_id' => Auth::user()->center_id,
                   'QTY'=> $packageQuantity,
               ]);
 
@@ -72,6 +75,7 @@ class SalesDistribution extends Model
                     'ITEM_NO' => $request->input('ITEM_ID')[$i],
                     'QTY' => '-'.$packageQuantity,
                     'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
+                    'center_id' => Auth::user()->center_id,
                     //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                     'ENTRY_BY' => Auth::user()->id,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -85,6 +89,7 @@ class SalesDistribution extends Model
                       'ITEM_NO' => $request->input('ITEM_ID')[$i],
                       'QTY' => '-'.$packageQuantity,
                       'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
+                      'center_id' => Auth::user()->center_id,
                       //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                       'ENTRY_BY' => Auth::user()->id,
                       'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")

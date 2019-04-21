@@ -19,6 +19,7 @@ class Iodized extends Model
             ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY')
             ->leftJoin('smm_item','tmm_iodizedmst.PRODUCT_ID', '=','smm_item.ITEM_NO')
             ->leftJoin('tmm_iodizedchd','tmm_iodizedmst.IODIZEDMST_ID', '=','tmm_iodizedchd.IODIZEDMST_ID')
+            ->where('tmm_iodizedmst.center_id','=',Auth::user()->center_id)
 //            ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }
@@ -31,6 +32,7 @@ class Iodized extends Model
             //'SUPP_ID_AUTO' => $supplierId,
             //'RECEIVE_TYPE' => 'CR',//chemical receive
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -42,6 +44,7 @@ class Iodized extends Model
                 'WASTAGE' => $request->input('WASTAGE'),
                 'WASH_CRASH_QTY' => $request->input('WASH_CRASH_QTY'),
                 'ITEM_TYPE' => 'I',//I=Iodized
+                'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
@@ -54,6 +57,7 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('WASH_CRASH_QTY'),
                 'TRAN_FLAG' => 'WR', // WR = Washing Reduce
+                'center_id' => Auth::user()->center_id,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -67,6 +71,7 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => '-'.$request->input('REQ_QTY'),
                 'TRAN_FLAG' => 'IC', // IC = Idonaize Chemical
+                'center_id' => Auth::user()->center_id,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -80,6 +85,7 @@ class Iodized extends Model
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
                 'QTY' => $request->input('WASH_CRASH_QTY'),
                 'TRAN_FLAG' => 'II', // II = Idonize Increase
+                'center_id' => Auth::user()->center_id,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")

@@ -72,6 +72,7 @@ class AssociationSetupController extends Controller
             $data = array([
                 'ASSOCIATION_NAME' => $request->input('ASSOCIATION_NAME'),
                 'PARENT_ID' => $request->input('PARENT_ID'),
+                'center_id' => Auth::user()->center_id,
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id,
             ]);
