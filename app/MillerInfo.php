@@ -46,7 +46,7 @@ class MillerInfo extends Model
          ]);
 
          }
-         return $association;
+         return $millInfoId;
      }
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
@@ -192,11 +192,12 @@ class MillerInfo extends Model
     }
 
     // for login web service
-    public static function millInformation(){
+    public static function millInformation($request,$id){
+
          $getMillInfo =  DB::table('ssm_mill_info')
                          ->select('ssm_mill_info.*','ssm_entrepreneur_info.MOBILE_1','ssm_entrepreneur_info.MOBILE_2','ssm_entrepreneur_info.EMAIL')
                          ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_mill_info.MILL_ID')
-                         ->where('center_id','=', 12)
+                         ->where('ssm_mill_info.MILL_ID','=', $id)
                          ->first();
          return $getMillInfo;
     }
