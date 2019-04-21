@@ -20,6 +20,8 @@ session_start();
 //});
 Route::get('/get-monitor-data', 'API\ServiceController@getMonitorData');
 Route::post('user-login', 'API\ServiceController@userLogin');
-Route::post('/get-wash-crush-batch', 'API\WashCrushService@getWashCrushBatchData');
-Route::post('/wash-crush-crude-salt-stock', 'API\WashCrushService@getCrudeSaltStock');
+Route::post('/get-wash-crush-batch', 'API\WashCrushService@getWashCrushBatchData'); //Rubiyat
+Route::post('/wash-crush-crude-salt-stock', 'API\WashCrushService@getCrudeSaltStock'); //Rubiyat
+Route::post('/post-iodize-data','API\ServiceIodizeController@getIodizeBatchData');//jalal
+
 

@@ -47,8 +47,9 @@ class IodizedController extends Controller
      */
     public function create()
     {
-        $digits = 4;
-        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
+//        $digits = 4;
+//        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $totalWashing = Stock::getTotalWashingSalt();
         //$this->pr($test);
