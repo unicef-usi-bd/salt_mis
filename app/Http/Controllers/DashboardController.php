@@ -21,73 +21,41 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $user_group_id = Auth::user()->user_group_id; //$this->pr($user_group_id);
+        $totalMillerUnderAdmin = count(MillerInfo::countMillersUnderAdmin());
+        $totalActiveMillerUnderAdmin = count(MillerInfo::countActiveMillersUnderAdmin());
+        $totalDeactiveMillerUnderAdmin = count(MillerInfo::countDeactiveMillersUnderAdmin());
+        $coxAssoId = $this->coxAssoId;
+        //$totalMillerUnderCoxAsso = count(MillerInfo::countMillersUnderCoxAsso());
+//        $this->pr(session()->all());
+        if ($user_group_id==$this->adminId){
 
-        return view('layouts.dashBoard');
-    }
+            return view('layouts.groupWiseDashboard.adminDashboard',compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        }else if($user_group_id==$this->bstiId){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            return view('layouts.groupWiseDashboard.bstiDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        }else if($user_group_id==$this->bscicId){
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            return view('layouts.groupWiseDashboard.bscicDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        }else if($user_group_id==$this->unicefId){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            return view('layouts.groupWiseDashboard.unicefDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
+
+        }else if($user_group_id==$this->associationId){
+
+            return view('layouts.groupWiseDashboard.associationDashboard');
+
+        }else if($user_group_id==$this->millerId){
+
+            return view('layouts.groupWiseDashboard.millersDashboard');
+
+        }else{ // for super admin
+
+            return view('layouts.dashBoard');
+        }
+
     }
 }
