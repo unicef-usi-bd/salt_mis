@@ -31,7 +31,7 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="width: 1040px;">
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
