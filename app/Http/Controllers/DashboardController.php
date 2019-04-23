@@ -22,40 +22,49 @@ class DashboardController extends Controller
     public function index()
     {
         $user_group_id = Auth::user()->user_group_id; //$this->pr($user_group_id);
-        $totalMillerUnderAdmin = count(MillerInfo::countMillersUnderAdmin());
-        $totalActiveMillerUnderAdmin = count(MillerInfo::countActiveMillersUnderAdmin());
-        $totalDeactiveMillerUnderAdmin = count(MillerInfo::countDeactiveMillersUnderAdmin());
-        $coxAssoId = $this->coxAssoId;
-        //$totalMillerUnderCoxAsso = count(MillerInfo::countMillersUnderCoxAsso());
-//        $this->pr(session()->all());
-        if ($user_group_id==$this->adminId){
 
-            return view('layouts.groupWiseDashboard.adminDashboard',compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
-
-        }else if($user_group_id==$this->bstiId){
-
-            return view('layouts.groupWiseDashboard.bstiDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
-
+//        $totalActiveMillerUnderAdmin = count(MillerInfo::countActiveMillersUnderAdmin());
+//        $totalDeactiveMillerUnderAdmin = count(MillerInfo::countDeactiveMillersUnderAdmin());
+//        $coxAssoId = $this->coxAssoId;
+//        //$totalMillerUnderCoxAsso = count(MillerInfo::countMillersUnderCoxAsso());
+////        $this->pr(session()->all());
+        if($user_group_id==$this->bstiId){
+            return $this->bsti();
         }else if($user_group_id==$this->bscicId){
-
-            return view('layouts.groupWiseDashboard.bscicDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
-
+            return $this->basic();
         }else if($user_group_id==$this->unicefId){
-
-            return view('layouts.groupWiseDashboard.unicefDashboard' ,compact('totalMillerUnderAdmin','totalActiveMillerUnderAdmin','totalDeactiveMillerUnderAdmin'));
-
+            return $this->unicef();
         }else if($user_group_id==$this->associationId){
-
-            return view('layouts.groupWiseDashboard.associationDashboard');
-
+            return $this->association();
         }else if($user_group_id==$this->millerId){
-
-            return view('layouts.groupWiseDashboard.millersDashboard');
-
+            return $this->miller();
         }else{ // for super admin
-
-            return view('layouts.dashBoard');
+            return $this->admin();
         }
+    }
 
+    public function admin(){
+        $totalMillerUnderAdmin = count(MillerInfo::countMillersUnderAdmin());
+        return view('dashboards.adminDashboard');
+    }
+
+    public function unicef(){
+        return view('dashboards.unicefDashboard');
+    }
+
+    public function bsti(){
+        return view('dashboards.bstiDashboard');
+    }
+
+    public function basic(){
+        return view('dashboards.basicDashboard');
+    }
+
+    public function association(){
+        return view('dashboards.associationDashboard');
+    }
+
+    public function miller(){
+        return view('dashboards.millerDashboard');
     }
 }

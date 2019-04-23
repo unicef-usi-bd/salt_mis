@@ -206,6 +206,7 @@ class MillerInfo extends Model
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.MILL_ID')
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->where('ssm_millemp_info.center_id')
             ->get();
     }
     public  static function countActiveMillersUnderAdmin(){
