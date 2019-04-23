@@ -137,7 +137,7 @@ trait AuthenticatesUsers
             'center_id' => $userInfo->ASSOCIATION_ID,
           //  'startDate' => $financialYear->start_date,
           //  'endDate' => $financialYear->end_date,
-            'user_group_id' => $userInfo->user_group_id
+          //  'user_group_id' => $userInfo->user_group_id
         ]);
     }
 
