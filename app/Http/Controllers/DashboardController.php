@@ -44,8 +44,11 @@ class DashboardController extends Controller
     }
 
     public function admin(){
-        $totalMillerUnderAdmin = count(MillerInfo::countMillersUnderAdmin());
-        return view('dashboards.adminDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+       // $this->pr($totalMillerUnderAdmin);
+        return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller'));
     }
 
     public function unicef(){
@@ -61,7 +64,11 @@ class DashboardController extends Controller
     }
 
     public function association(){
-        return view('dashboards.associationDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+      //  $this->pr($totalMiller);
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller'));
     }
 
     public function miller(){

@@ -202,28 +202,40 @@ class MillerInfo extends Model
          return $getMillInfo;
     }
     ///-----------------------Counting Miller
-    public  static function countMillersUnderAdmin(){
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.MILL_ID')
-            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            //->where('ssm_millemp_info.center_id')
-            ->get();
+    public  static function countAllMillers(){
+            $centerId = Auth::user()->center_id;
+            $countMiller = DB::table('ssm_mill_info');
+            $countMiller->select('ssm_mill_info.MILL_ID');
+            $countMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
+            if($centerId){
+                $countMiller->where('ssm_millemp_info.center_id','=',$centerId);
+            }
+            $countMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
+            return $countMiller->get();
     }
-    public  static function countActiveMillersUnderAdmin(){
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.MILL_ID')
-            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
-            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
-            ->get();
+    public  static function countActiveMillers(){
+            $centerId = Auth::user()->center_id;
+            $countActiveMiller = DB::table('ssm_mill_info');
+            $countActiveMiller->select('ssm_mill_info.MILL_ID');
+            $countActiveMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
+            if($centerId){
+                $countActiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
+            }
+            $countActiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 1);
+            $countActiveMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
+            return $countActiveMiller->get();
     }
-    public  static function countDeactiveMillersUnderAdmin(){
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.MILL_ID')
-            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->where('ssm_mill_info.ACTIVE_FLG','=', 0)
-            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 0)
-            ->get();
+    public  static function countInactiveMillers(){
+            $centerId = Auth::user()->center_id;
+            $countInactiveMiller = DB::table('ssm_mill_info');
+            $countInactiveMiller->select('ssm_mill_info.MILL_ID');
+            $countInactiveMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
+            if($centerId){
+                $countInactiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
+            }
+            $countInactiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 0);
+            $countInactiveMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
+            return $countInactiveMiller->get();
     }
     ///-----------------------Counting Miller
 
