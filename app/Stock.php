@@ -116,4 +116,52 @@ class Stock extends Model
            // ->where('tmm_itemstock.ITEM_NO','=',$itemId)
             ->sum('tmm_itemstock.QTY');
     }
+
+    ///-----------------------Production
+    public static function totalWashCrashProductions(){
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('TRAN_FLAG','=','WI');
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeProductions(){
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','I');
+        $countProduction->where('TRAN_FLAG','=','II');
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+    /// ----------------------Production
+
+    ///-----------------------Dashboard wise production
+    public static function totalProduction(){
+        $centerId = Auth::user()->center_id;
+        $totalProductions = DB::table('tmm_itemstock');
+        $totalProductions->select('tmm_itemstock.*','smm_item.ITEM_NAME');
+        $totalProductions->leftJoin('smm_item','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        //$totalProductions->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//        $totalProductions->where('tmm_itemstock.TRAN_TYPE','=','W');
+//        $totalProductions->orwhere('tmm_itemstock.TRAN_TYPE','=','I');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','II');
+        if($centerId){
+            $totalProductions->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalProductions->get();
+    }
+    ///-----------------------Dashboard wise production
+
+
 }

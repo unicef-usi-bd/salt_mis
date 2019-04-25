@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\MillerInfo;
+use App\Stock;
+use App\SalesDistribution;
+use App\CrudeSaltProcurement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,31 +50,93 @@ class DashboardController extends Controller
         $totalMiller= count(MillerInfo::countAllMillers());
         $totalActiveMiller= count(MillerInfo::countActiveMillers());
         $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
-       // $this->pr($totalMillerUnderAdmin);
-        return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller'));
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        //$this->pr($totalproduction);
+        return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale'));
     }
 
     public function unicef(){
-        return view('dashboards.unicefDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        return view('dashboards.unicefDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale'));
     }
 
     public function bsti(){
-        return view('dashboards.bstiDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        return view('dashboards.bstiDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale'));
     }
 
     public function basic(){
-        return view('dashboards.basicDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        return view('dashboards.basicDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale'));
     }
 
     public function association(){
         $totalMiller= count(MillerInfo::countAllMillers());
         $totalActiveMiller= count(MillerInfo::countActiveMillers());
         $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
       //  $this->pr($totalMiller);
-        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller'));
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale'));
     }
 
     public function miller(){
-        return view('dashboards.millerDashboard');
+        $totalMiller= count(MillerInfo::countAllMillers());
+        $totalActiveMiller= count(MillerInfo::countActiveMillers());
+        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+        $procurementList = CrudeSaltProcurement::procurementList();
+        $totalproduction = Stock::totalProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        ///$this->pr($procurementList);
+        return view('dashboards.millerDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale'));
     }
 }

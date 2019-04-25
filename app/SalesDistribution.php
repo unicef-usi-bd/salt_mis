@@ -24,7 +24,7 @@ class SalesDistribution extends Model
             ->get();
     }
 
-    public static function insertSalesDistributionData($request,$saltPackId){
+    public static function insertSalesDistributionData($request,$saltPackId,$washAndCrushId,$iodizeId){
 
         $salesDistributionMstId = DB::table('tmm_salesmst')->insertGetId([
             'SELLER_TYPE'=> $request->input('SELLER_TYPE'),
@@ -67,7 +67,7 @@ class SalesDistribution extends Model
 
              // return $finishSaltId;
 
-              if($finishSaltId == 7){
+              if($finishSaltId == $washAndCrushId){
                 $itemStock = DB::table('tmm_itemstock')->insertGetId([
                     'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
                     'TRAN_TYPE' => 'W', //  W=Wash
@@ -81,7 +81,7 @@ class SalesDistribution extends Model
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
               }
-              if($finishSaltId == 8){
+              if($finishSaltId == $iodizeId){
                   $itemStock =  DB::table('tmm_itemstock')->insertGetId([
                       'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
                       'TRAN_TYPE' => 'I', //  I= Iodize
@@ -118,4 +118,45 @@ class SalesDistribution extends Model
           ->where('tmm_saleschd.SALESMST_ID','=',$id)
           ->get();
     }
+
+    ///-----------------------Sales
+    public static function totalWashcrashSales(){
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','W');
+        $countSales->where('TRAN_FLAG','=','SD');
+        if($centerId){
+            $countSales->where('center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeSales(){
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','I');
+        $countSales->where('TRAN_FLAG','=','SD');
+        if($centerId){
+            $countSales->where('center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+    ///-----------------------Sales
+
+    ///-----------------------Dashboard product sale
+    public static function totalproductSale(){
+        $centerId = Auth::user()->center_id;
+        $totalProductionSale = DB::table('tmm_itemstock');
+        $totalProductionSale->select('tmm_itemstock.*');
+        $totalProductionSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
+        if($centerId){
+            $totalProductionSale->where('center_id','=',$centerId);
+        }
+        return $totalProductionSale->get();
+    }
+    ///-----------------------Dashboard product sale
 }
