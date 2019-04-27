@@ -21,6 +21,7 @@ class Qc extends Model
             'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
             'LAB_PERSON' => $request->input('LAB_PERSON'),
             'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
              'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);

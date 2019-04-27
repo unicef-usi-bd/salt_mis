@@ -3,6 +3,7 @@
         <div class="col-md-12">
             <div class="alert alert-info certificate_msg"></div>
 
+
             <form id="certificateId"  class="form-horizontal" role="form" enctype="multipart/form-data" >
 
                @csrf
@@ -90,9 +91,9 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateCertificate" onclick="certificateTab()">
+                        <button type="button" class="btn btn-success btnUpdateCertificate" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next edit
+                            Submit
                         </button>
                     </div>
                 </div>
@@ -138,6 +139,7 @@
             success: function (data) {
                 console.log(data);
                 $('.certificate_msg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
 
             }
         })

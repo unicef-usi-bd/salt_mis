@@ -197,7 +197,8 @@
     </div>
 </div>
 {{--on change registration typr to merging open this modal--}}
-<div class="modal fade" id="mergeMillModal" role="dialog">
+<div class="modal fade" id="mergeMillModal" role="dialog" style="display: none">
+{{--<div class="modal fade" id="mergeMillModal" role="dialog">--}}
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -241,10 +242,12 @@
 
 
 <script>
-    $(document).on('change','.regTypeId',function () {
+    $(document).on('change','select.regTypeId',function () {
        var registrationId = $(this).val();
        if (registrationId==11){
            $('#mergeMillModal').modal('show');
+       }else{
+           $('#mergeMillModal').modal('hide');
        }
     });
 

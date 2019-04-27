@@ -90,9 +90,9 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            {{ trans('dashboard.submit') }}
+                            Submit
                         </button>
                     </div>
                 </div>

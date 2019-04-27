@@ -82,7 +82,8 @@ class MillerInfo extends Model
 
     public static function getAllMillDataList(){
         return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
+            ->select('ssm_mill_info.*','ssm_mill_info.ACTIVE_FLG','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
+//            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
             ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
             ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
             ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')

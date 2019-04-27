@@ -95,14 +95,18 @@
                     <tbody>
                     <?php $sl=0;?>
                     @foreach( $millerList as $row)
+                        <?php
+                        $activeFlg = DB::selectOne(DB::raw("SELECT ACTIVE_FLG FROM ssm_mill_info WHERE MILL_ID = '$row->MILL_ID' "));
+                        ?>
                         <tr>
-                            <td class="center" >  {{ ++$sl }} </td>
+                            <td class="center" >  {{ ++$sl }}</td>
                             <td> {{ $row->MILL_NAME }} </td>
                             <td> {{ $row->LOOKUPCHD_NAME }} </td>
                             <td> {{ $row->RENEWING_DATE }} </td>
                             <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
                             <td class="hidden-480">
-                                <?php  if($row->ACTIVE_FLG == 1){ ?>
+
+                                <?php if ($activeFlg->ACTIVE_FLG == 1){ ?>
                                 <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
                                 <?php }else{ ?>
                                 <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
@@ -134,13 +138,19 @@
                                         </a>
                                     @endif
                                     @if($editPermissionLevel == 1)
-                                        <a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
+                                        {{--<a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">--}}
+                                            {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
+                                        {{--</a>--}}
+                                        <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
 
 
                                     @else
-                                        <a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
+                                        {{--<a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">--}}
+                                            {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
+                                        {{--</a>--}}
+                                        <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
 

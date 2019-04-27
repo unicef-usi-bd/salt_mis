@@ -83,6 +83,7 @@ class CertificateController extends Controller
                     'TRADE_LICENSE' => 'image/user-image/'.$userImageName[$i],
                     'RENEWING_DATE' =>date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i])),
                     'REMARKS' => $request->input('REMARKS')[$i],
+                    'center_id' => Auth::user()->center_id,
                     'ENTRY_BY' => Auth::user()->id,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);

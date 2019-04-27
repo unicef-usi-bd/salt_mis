@@ -18,9 +18,10 @@
 
                     <li class="active"> <a data-toggle="tab" href="#mill_tab"> Mill Information </a> </li>
                     <li class=""> <a data-toggle="tab" href="#entrepreneur_tab"> Entrepreneur Information  </a> </li>
-                    <li class=""> <a data-toggle="tab" href="#certificate_tab">  Certificate Information </a> </li>
+
                     <li class=""> <a data-toggle="tab" href="#qc_tab"> QC Information </a> </li>
                     <li class=""> <a data-toggle="tab" href="#employee_tab"> Employee Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#certificate_tab">  Certificate Information </a> </li>
                 </ul>
 
                 <div class="tab-content">
@@ -239,13 +240,17 @@ function millTab(){
     $('[href="#entrepreneur_tab"]').tab('show');
 }
 function entrepreneurTab(){
-    $('[href="#certificate_tab"]').tab('show');
+    // $('[href="#certificate_tab"]').tab('show');
+    $('[href="#qc_tab"]').tab('show');
 }
 function certificateTab(){
     $('[href="#qc_tab"]').tab('show');
 }
 function qcTab(){
     $('[href="#employee_tab"]').tab('show');
+}
+function employeeTab(){
+    $('[href="#certificate_tab"]').tab('show');
 }
 </script>
 

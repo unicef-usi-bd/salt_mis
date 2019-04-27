@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info empmsg"></div>
+
             {{--<form action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >--}}
             <form id="employeeId"  class="form-horizontal" role="form" >
                 @csrf
@@ -85,9 +86,9 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateEmp">
+                        <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
+                            Update & Next
                         </button>
                     </div>
                 </div>
@@ -108,6 +109,7 @@
             success: function (data) {
                 console.log(data);
                 $('.empmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".empmsg").hide(); }, 3000);
 
             }
         })
