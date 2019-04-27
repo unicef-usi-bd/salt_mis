@@ -266,13 +266,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
-
-
         var ctx = document.getElementById('myChart1').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'horizontalBar',
-
             // The data for our dataset
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -314,7 +311,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [40, 10],
+                    data: [<?php echo $totalWashCrashSale?>, <?php echo $totalIodizeSale?>],
 
 
                 }],
@@ -367,8 +364,8 @@
 
             var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
             var data = [
-                { label: "Stock",  data: 60.7, color: "#68BC31"},
-                { label: "Sales",  data: 30.3, color: "#2091CF"}
+                { label: "Stock",  data: <?php echo $totalStock ?>, color: "#68BC31"},
+                { label: "Sales",  data: <?php echo $saleTotal ?>, color: "#2091CF"}
             ]
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {

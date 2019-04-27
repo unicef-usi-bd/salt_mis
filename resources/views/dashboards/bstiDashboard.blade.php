@@ -312,7 +312,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [40, 10],
+                    data: [<?php echo $totalWashCrashSale?>, <?php echo $totalIodizeSale?>],
 
 
                 }],
@@ -365,8 +365,8 @@
 
             var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
             var data = [
-                { label: "Stock",  data: 60.7, color: "#68BC31"},
-                { label: "Sales",  data: 30.3, color: "#2091CF"}
+                { label: "Stock",  data: <?php echo $totalStock ?>, color: "#68BC31"},
+                { label: "Sales",  data: <?php echo $saleTotal ?>, color: "#2091CF"}
             ]
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {

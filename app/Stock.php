@@ -163,5 +163,28 @@ class Stock extends Model
     }
     ///-----------------------Dashboard wise production
 
+    /// ----------------------Total Stock
+    public static function totalStocks(){
+        $centerId = Auth::user()->center_id;
+        $totalStock = DB::table('tmm_itemstock');
+        $totalStock->select('tmm_itemstock.QTY');
+        //$totalStock->where('tmm_itemstock.TRAN_TYPE','=','W');
+        //$totalStock->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        if($centerId){
+            $totalStock->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalStock->sum('tmm_itemstock.QTY');
+    }
+    /// ----------------------Total Stock
 
+    /// ----------------------Production Graph
+    public static function monthWiseProduction(){
+        //$centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                 FROM tmm_itemstock it
+                                 WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
+                                 GROUP BY month"));
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+    /// ----------------------Production Graph
 }
