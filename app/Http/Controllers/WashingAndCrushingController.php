@@ -110,8 +110,8 @@ class WashingAndCrushingController extends Controller
     {
         $editWashingAndCrushingData = WashingAndCrushing::editWashingAndCrushingData($id);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        $saltStock = Stock::getSaltStock($editWashingAndCrushingData->ITEM_NO);
-        $totalReduceSalt = Stock::getTotalReduceSalt($editWashingAndCrushingData->ITEM_NO);
+        $saltStock = Stock::getSaltStock($editWashingAndCrushingData->ITEM_NO,Auth::user()->center_id);
+        $totalReduceSalt = Stock::getTotalReduceSalt($editWashingAndCrushingData->ITEM_NO,Auth::user()->center_id);
         $saltStock = $saltStock - abs($totalReduceSalt);
 
         return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editWashingAndCrushingData','crudeSaltTypes','saltStock'));
