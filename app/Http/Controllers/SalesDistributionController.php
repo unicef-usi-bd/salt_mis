@@ -76,7 +76,7 @@ class SalesDistributionController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
 
-            $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId);
+            $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId,$this->washAndCrushId,$this->iodizeId);
 
 
             if($salesDistributionInsert){

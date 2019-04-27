@@ -41,7 +41,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
-                    <div class="infobox-content">300 MT</div>
+                    <div class="infobox-content">{{ $totalProductons }} KG</div>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
-                    <div class="infobox-content">200 MT</div>
+                    <div class="infobox-content">{{ $totalProductSales }} KG</div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
-                    <div class="infobox-content">100 MT</div>
+                    <div class="infobox-content">{{ $totalIodizeProduction }} KG</div>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
-                    <div class="infobox-content">100 MT</div>
+                    <div class="infobox-content">{{ $totalIodizeSale }} KG</div>
                 </div>
             </div>
 
@@ -108,7 +108,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
-                    <div class="infobox-content">100 MT</div>
+                    <div class="infobox-content">{{$totalWashcrashProduction}} KG</div>
                 </div>
             </div>
 
@@ -121,7 +121,7 @@
                     <div class="infobox-content">
                         INDUSTRIAL SALT
                         SALES</div>
-                    <div class="infobox-content">200 MT</div>
+                    <div class="infobox-content">{{ $totalWashCrashSale }} KG</div>
                 </div>
             </div>
 
@@ -150,78 +150,9 @@
         </div><!-- /.col -->
     </div>
 
-    <div class="hr hr32 hr-dotted"></div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="widget-box transparent">
-                <div class="widget-header widget-header-flat">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa-star orange"></i>
-                        Procurement List
-                    </h4>
 
-                    <div class="widget-toolbar">
-                        <a href="#" data-action="collapse">
-                            <i class="ace-icon fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="widget-body">
-                    <div class="widget-main no-padding">
-                        <table class="table table-bordered table-striped">
-                            <thead class="thin-border-bottom">
-                            <tr>
-                                <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Date
-                                </th>
-
-                                <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Item name
-                                </th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-
-                            <tr>
-                                <td>
-                                    <b class="blue">01-10-2018</b>
-                                </td>
-                                <td>CRUDE SALT</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-                                    <b class="blue">01-12-2018</b>
-                                </td>
-
-                                <td>KI</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <b class="blue">08-05-2018</b>
-                                </td>
-
-                                <td>KIO3</td>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div><!-- /.widget-main -->
-                </div><!-- /.widget-body -->
-            </div><!-- /.widget-box -->
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-            <canvas id="myChart"></canvas>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
 
     <div class="hr hr32 hr-dotted"></div>
 
@@ -245,7 +176,7 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="widget-main no-padding">
+                    <div class="widget-main no-padding" style="width:550px; height:250px; overflow:auto;">
                         <table class="table table-bordered table-striped">
                             <thead class="thin-border-bottom">
                             <tr>
@@ -260,34 +191,14 @@
                             </thead>
 
                             <tbody>
-
-                            <tr>
-                                <td>
-                                    <b class="blue">01-10-2018</b>
-                                </td>
-                                <td>200000</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-                                    <b class="blue">01-12-2018</b>
-                                </td>
-
-                                <td>30000000</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <b class="blue">08-05-2018</b>
-                                </td>
-
-                                <td>40000000</td>
-
-                            </tr>
-
+                            @foreach($totalproduction as $row)
+                                <tr>
+                                    <td>
+                                        <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>{{ $row->QTY }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.widget-main -->
@@ -317,7 +228,7 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="widget-main no-padding">
+                    <div class="widget-main no-padding" style="width:550px; height:200px; overflow:auto;">
                         <table class="table table-bordered table-striped">
                             <thead class="thin-border-bottom">
                             <tr>
@@ -332,34 +243,14 @@
                             </thead>
 
                             <tbody>
-
-                            <tr>
-                                <td>
-                                    <b class="blue">01-10-2018</b>
-                                </td>
-                                <td>200000</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-                                    <b class="blue">01-12-2018</b>
-                                </td>
-
-                                <td>30000000</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <b class="blue">08-05-2018</b>
-                                </td>
-
-                                <td>40000000</td>
-
-                            </tr>
-
+                            @foreach($totalSale as $row)
+                                <tr>
+                                    <td>
+                                        <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>{{ abs($row->QTY) }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.widget-main -->
@@ -373,37 +264,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'bar',
 
-            // The data for our dataset
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Procurement Chart',
-                    backgroundColor: 'rgb(135, 206, 250)',
-                    borderColor: 'rgb(135, 206, 250)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.5,
-                        barThickness: 6,
-                        maxBarThickness: 8,
-                        minBarLength: 2,
-                        gridLines: {
-                            offsetGridLines: true
-                        }
-                    }]
-                }
-            }
-        });
 
         var ctx = document.getElementById('myChart1').getContext('2d');
         var chart = new Chart(ctx, {
@@ -451,7 +312,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [40, 10],
+                    data: [<?php echo $totalWashCrashSale?>, <?php echo $totalIodizeSale?>],
 
 
                 }],
@@ -504,8 +365,8 @@
 
             var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
             var data = [
-                { label: "Stock",  data: 60.7, color: "#68BC31"},
-                { label: "Sales",  data: 30.3, color: "#2091CF"}
+                { label: "Stock",  data: <?php echo $totalStock ?>, color: "#68BC31"},
+                { label: "Sales",  data: <?php echo $saleTotal ?>, color: "#2091CF"}
             ]
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {

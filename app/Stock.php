@@ -116,4 +116,75 @@ class Stock extends Model
            // ->where('tmm_itemstock.ITEM_NO','=',$itemId)
             ->sum('tmm_itemstock.QTY');
     }
+
+    ///-----------------------Production
+    public static function totalWashCrashProductions(){
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('TRAN_FLAG','=','WI');
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeProductions(){
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','I');
+        $countProduction->where('TRAN_FLAG','=','II');
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+    /// ----------------------Production
+
+    ///-----------------------Dashboard wise production
+    public static function totalProduction(){
+        $centerId = Auth::user()->center_id;
+        $totalProductions = DB::table('tmm_itemstock');
+        $totalProductions->select('tmm_itemstock.*','smm_item.ITEM_NAME');
+        $totalProductions->leftJoin('smm_item','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        //$totalProductions->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//        $totalProductions->where('tmm_itemstock.TRAN_TYPE','=','W');
+//        $totalProductions->orwhere('tmm_itemstock.TRAN_TYPE','=','I');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','II');
+        if($centerId){
+            $totalProductions->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalProductions->get();
+    }
+    ///-----------------------Dashboard wise production
+
+    /// ----------------------Total Stock
+    public static function totalStocks(){
+        $centerId = Auth::user()->center_id;
+        $totalStock = DB::table('tmm_itemstock');
+        $totalStock->select('tmm_itemstock.QTY');
+        //$totalStock->where('tmm_itemstock.TRAN_TYPE','=','W');
+        //$totalStock->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        if($centerId){
+            $totalStock->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalStock->sum('tmm_itemstock.QTY');
+    }
+    /// ----------------------Total Stock
+
+    /// ----------------------Production Graph
+    public static function monthWiseProduction(){
+        //$centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                 FROM tmm_itemstock it
+                                 WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
+                                 GROUP BY month"));
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+    /// ----------------------Production Graph
 }
