@@ -49,7 +49,7 @@ class ServiceController extends Controller
                     ->where('username', '=', $user_name)
                     ->where('password', '=', $checkResult->password)
                     ->first();
-
+                $child_id = $center_id->center_id;
                 //$this->pr($center_id);
                 $millInfo = DB::table('ssm_associationsetup')
                     ->select('ssm_associationsetup.MILL_ID')
@@ -63,6 +63,7 @@ class ServiceController extends Controller
                 return response()->json([
 
                     'message'=> 'Information are given below',
+                    'child_id'=>$child_id,
                     'crude_salt_types' => $crudeSaltTypes,
                     'chemical_types' => $chemicleType,
                     'mill_information' => $millerInfo

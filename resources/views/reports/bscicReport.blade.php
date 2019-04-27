@@ -8,7 +8,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value=""></option>
+                                   <option value="">Select One</option>
                                    <optgroup label="Association">
                                        <option value="">List of Total Association </option>
                                        <option value="">Type of Miller</option>
