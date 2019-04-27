@@ -15,6 +15,20 @@
         </div>
 
         <div class="form-group">
+            <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Zone Name</b> <span style="color: red;"> *</span></label>
+            <div class="col-xs-12 col-sm-7">
+            <span class="block input-icon input-icon-right">
+                <select id="form-field-select-3 inputSuccess ZONE_ID" class="form-control" name="ZONE_ID" data-placeholder="Select or search data">
+                    <option value="">Select Zone Name</option>
+                    @foreach($associationList as $association)
+                        <option value="{{ $association->ZONE_ID }}" @if($association->ZONE_ID==$editData->ZONE_ID) selected @endif>{{ $association->ZONE_NAME }}</option>
+                    @endforeach
+                </select>
+             </span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('cigGroup.active_status') }}</b></label>
             <div class="col-xs-12 col-sm-7">
                 <span class="block input-icon input-icon-right">
@@ -33,7 +47,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-info" id="formSubmit">
+                <button type="submit" class="btn btn-info">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -41,6 +55,6 @@
         </div>
 
     </form>
-    @include('masterGlobal.formValidation')
-    @include('masterGlobal.getBankBranchesEvent')
+    {{--@include('masterGlobal.formValidation')--}}
+    {{--@include('masterGlobal.getBankBranchesEvent')--}}
 </div>

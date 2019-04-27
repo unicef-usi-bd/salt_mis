@@ -181,9 +181,10 @@ class Stock extends Model
     public static function monthWiseProduction(){
         //$centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
-                                 FROM tmm_itemstock it
-                                 WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
-                                 GROUP BY month"));
+                                       FROM tmm_itemstock it
+                                       WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
     }
     /// ----------------------Production Graph

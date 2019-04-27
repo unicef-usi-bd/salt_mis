@@ -88,6 +88,95 @@
             <div class="space"></div>
         </div>
     </div><!-- /.row -->
+    <div class="row" style="margin-top: 20px; width: 92%">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="tabbable resultTab">
+                    <div class="tab-content">
+                        <span id="printButton"></span>
+                        <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    {{--<br>--}}
+    {{--<div class="row " style="width: 92%">--}}
+        {{--<div class="col-md-12">--}}
+            {{--<div class="col-sm-12">--}}
+                {{--<div class="tabbable">--}}
+                    {{--<div class="tab-content">--}}
+                        {{--<span class="btnPrint pull-right"></span>--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<div class="row" style="text-align: center;"></div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<p class="center">--}}
+
+                                    {{--<br>--}}
+                                    {{--<span class="currentMonth"></span>--}}
+                                {{--</p>--}}
+
+                                {{--<div class="clearfix"></div>--}}
+
+                            {{--</div><!-- /.col -->--}}
+                        {{--</div><!-- /.row -->--}}
+                        {{--<div class="clearfix"></div>--}}
+                        {{--<table id="" class="table table-striped table-bordered table-hover" style="font-size: 9px">--}}
+                            {{--<thead>--}}
+                            {{--<tr>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                                {{--<th></th>--}}
+                            {{--</tr>--}}
+                            {{--</thead>--}}
+                            {{--<tbody id="w">--}}
+
+                            {{--</tbody>--}}
+                        {{--</table>--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--<p></p>--}}
+                                    {{--<p></p>--}}
+                                    {{--<ol>--}}
+                                    {{--<li></li>--}}
+                                    {{--<li></li>--}}
+                                    {{--</ol>--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--<div class="pull-right center" style="margin-top: 18%;">--}}
+                                        {{--<span></span><br>--}}
+                                        {{--<span></span><br>--}}
+                                        {{--<span></span><br>--}}
+                                        {{--<span></span>--}}
+                                    {{--</div>--}}
+
+                                    {{--</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+        {{--</div>--}}
+
+
+    {{--</div>--}}
 
 
 
@@ -107,6 +196,29 @@
 
 
     {{--</script>--}}
+
+    <script type="text/javascript">
+        $('.resultTab').hide();
+        $(document).on('click','.btnReport',function(){
+
+            var url = $('.reportType').val();
+            var centerId = $('.center').val();
+//alert(url);
+            $.ajax({
+                type : "get",
+                url  : url,
+                data : {'centerId':centerId},
+                success:function (data) {
+//                    console.log(data);
+                    $('.soeRowDiv').hide();
+                    $('.resultTab').show();
+                    $('.tblReport').html(data.html);
+
+                }
+            });
+
+        });
+    </script>
 
 
 

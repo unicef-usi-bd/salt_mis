@@ -21,6 +21,12 @@ class AssociationSetup extends Model
             ->get();
     }
 
+    public static function getZoneList(){
+        return DB::table('ssm_zonesetup')
+            ->select('ssm_zonesetup.*')
+            ->get();
+    }
+
 
     public  static function insertAssociationData($data){
         return DB::table('ssm_associationsetup')->insert($data);
@@ -42,6 +48,7 @@ class AssociationSetup extends Model
                 'ASSOCIATION_NAME' => $request->input('ASSOCIATION_NAME'),
                 'PARENT_ID' => $request->input('PARENT_ID'),
                 'center_id' => Auth::user()->center_id,
+                'ZONE_ID' => $request->input('ZONE_ID'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
