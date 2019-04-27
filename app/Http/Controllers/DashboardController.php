@@ -47,21 +47,26 @@ class DashboardController extends Controller
     }
 
     public function admin(){
+
         $totalMiller= count(MillerInfo::countAllMillers());
         $totalActiveMiller= count(MillerInfo::countActiveMillers());
         $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
         $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
         $totalStock = Stock::totalStocks();
+
         $monthWiseProduction = Stock::monthWiseProduction();
         $saleTotal = SalesDistribution::totalSale();
-        //$this->pr($monthWiseProduction);
+//        $this->pr($monthWiseProduction);
 
         return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock', 'monthWiseProduction','saleTotal'));
     }
@@ -74,7 +79,7 @@ class DashboardController extends Controller
         $totalIodizeProduction = Stock::totalIodizeProductions();
         $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
@@ -91,7 +96,7 @@ class DashboardController extends Controller
         $totalIodizeProduction = Stock::totalIodizeProductions();
         $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
@@ -108,7 +113,7 @@ class DashboardController extends Controller
         $totalIodizeProduction = Stock::totalIodizeProductions();
         $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
@@ -121,11 +126,12 @@ class DashboardController extends Controller
         $totalMiller= count(MillerInfo::countAllMillers());
         $totalActiveMiller= count(MillerInfo::countActiveMillers());
         $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
         $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = SalesDistribution::totalIodizeSales();
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
