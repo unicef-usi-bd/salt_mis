@@ -141,20 +141,4 @@ class CrudeSaltProcurement extends Model
             return $deletePr;
         }
     }
-
-    ///------------------Procurement List
-    public static function procurementList (){
-        //$centerId = Auth::user()->center_id;
-        $procurementLists = DB::table('ssc_lookupchd');
-        $procurementLists->select('ssc_lookupchd.*','smm_item.ITEM_NAME','tmm_itemstock.ENTRY_TIMESTAMP');
-        $procurementLists->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $procurementLists->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
-        $procurementLists->where('tmm_itemstock.TRAN_FLAG','=','PR');
-//        if($centerId){
-//            $procurementLists->where('tmm_itemstock.center_id','=',$centerId);
-//        }
-
-        return $procurementLists->get();
-    }
-    ///------------------Procurement List
 }

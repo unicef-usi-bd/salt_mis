@@ -69,7 +69,7 @@
                                 <div class="widget-main">
                                     <div class="center">
                                         {{--<img src="{{asset('/'.$orgInfo->org_logo)}}" class="img-responsive center-block">--}}
-                                        <img src="{{asset('image/salt_logo.png')}}" class="img-responsive center-block" style="border-radius: 50%;width: 100px;">
+                                        <img src="{{asset('image/unicef-bd.jpg')}}" class="img-responsive center-block" style="border-radius: 50%;width: 100px;">
                                     </div>
                                     <h4 class="header">
                                         @if (isset($errors) && count($errors) > 0)

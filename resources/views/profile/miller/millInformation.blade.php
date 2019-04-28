@@ -207,8 +207,6 @@
                 <h4 class="modal-title">Merge Mill Account</h4>
             </div>
             <div class="modal-body">
-                {{--<p><textarea id = "commentsUpload"class="form-control custom-control" rows="3" style="resize:none"></textarea></p>--}}
-
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
