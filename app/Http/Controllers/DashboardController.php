@@ -166,10 +166,11 @@ class DashboardController extends Controller
         $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
 
         $procurementList = Stock::procurementList();
-        $totalproduction = Stock::totalProduction();
+        $totalproduction = Stock::millerProduction();
         $totalSale = SalesDistribution::totalproductSale();
 
         $monthWiseProduction = Stock::monthWiseMillProduction();
+//        $this->pr($monthWiseProduction);
         $monthWiseProcurement = Stock::monthWiseProcurement();
         $totalStock = Stock::totalStocks();
         $saleTotal = SalesDistribution::totalSale();

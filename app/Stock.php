@@ -154,11 +154,11 @@ class Stock extends Model
         //$totalProductions->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
 //        $totalProductions->where('tmm_itemstock.TRAN_TYPE','=','W');
 //        $totalProductions->orwhere('tmm_itemstock.TRAN_TYPE','=','I');
-        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
-        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','II');
         if($centerId){
             $totalProductions->where('tmm_itemstock.center_id','=',$centerId);
         }
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','II');
         return $totalProductions->get();
     }
     ///-----------------------Dashboard wise production
@@ -225,9 +225,20 @@ class Stock extends Model
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
                                        FROM tmm_itemstock it
                                        WHERE it.center_id = $centerId
-                                       and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
+                                       and (it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II')
                                        and YEAR(TRAN_DATE)
                                        GROUP BY month"));
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+    /// ----------------------Production Graph
+
+    /// ----------------------Production Graph
+    public static function millerProduction(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT it.*
+                                       FROM tmm_itemstock it
+                                       WHERE it.center_id = $centerId
+                                       and (it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II')"));
         //$monthProduction = DB::table('tmm_itemstock')
     }
     /// ----------------------Production Graph

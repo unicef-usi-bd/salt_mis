@@ -183,7 +183,7 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <canvas id="myChart1"></canvas>
+            <canvas id="myChart1" height="200"></canvas>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <div class="widget-box transparent">
@@ -208,6 +208,9 @@
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Date
                                 </th>
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Type
+                                </th>
 
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Production Amount
@@ -220,6 +223,13 @@
                                 <tr>
                                     <td>
                                         <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>
+                                        @if($row->TRAN_TYPE == 'W')
+                                            Wash And Crush Salt
+                                        @else
+                                            Iodize
+                                        @endif
                                     </td>
                                     <td>{{ $row->QTY }}</td>
                                 </tr>
@@ -260,7 +270,9 @@
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Date
                                 </th>
-
+                                <td>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sales Type
+                                </td>
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
                                 </th>
@@ -272,6 +284,13 @@
                                 <tr>
                                     <td>
                                         <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>
+                                        @if($row->TRAN_TYPE == 'W')
+                                            Wash And Crush Salt
+                                        @else
+                                            Iodize
+                                        @endif
                                     </td>
                                     <td>{{ abs($row->QTY) }}</td>
                                 </tr>
