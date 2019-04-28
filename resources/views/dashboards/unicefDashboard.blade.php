@@ -10,7 +10,7 @@
     </style>
     <div class="page-header">
         <h1>
-            Dashboard unicef
+            Unicef Dashboard
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Overview
@@ -30,7 +30,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">Millers</div>
-                    <div class="infobox-content">115</div>
+                    <div class="infobox-content">{{ $totalMiller }}</div>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">Active MILLERS</div>
-                    <div class="infobox-content">100</div>
+                    <div class="infobox-content">{{ $totalActiveMiller }}</div>
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">Inactive MILLERS</div>
-                    <div class="infobox-content">15</div>
+                    <div class="infobox-content">{{ $totalInactiveMiller }}</div>
                 </div>
             </div>
 
@@ -118,9 +118,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">
-                        INDUSTRIAL SALT
-                        SALES</div>
+                    <div class="infobox-content">INDUSTRIAL SALT SALES</div>
                     <div class="infobox-content">{{ $totalWashCrashSale }} KG</div>
                 </div>
             </div>
@@ -135,14 +133,16 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Stock And Sales Report
+                        Current Year Stock And Sales Report
                     </h5>
 
                 </div>
 
                 <div class="widget-body">
                     <div class="widget-main">
-                        <div id="piechart-placeholder"></div>
+                        {{--<div id="piechart-placeholder">--}}
+                        <canvas id="myChart3"></canvas>
+                        {{--</div>--}}
 
                     </div><!-- /.widget-main -->
                 </div><!-- /.widget-body -->
@@ -158,14 +158,14 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <canvas id="myChart1"></canvas>
+            <canvas id="myChart1" height="200"></canvas>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <div class="widget-box transparent">
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Production
+                        Production List
                     </h4>
 
                     <div class="widget-toolbar">
@@ -176,12 +176,16 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="widget-main no-padding" style="width:550px; height:250px; overflow:auto;">
+                    <div class="widget-main no-padding" style="height:360px; overflow:auto;">
                         <table class="table table-bordered table-striped">
                             <thead class="thin-border-bottom">
                             <tr>
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Date
+                                </th>
+
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Type
                                 </th>
 
                                 <th>
@@ -195,6 +199,13 @@
                                 <tr>
                                     <td>
                                         <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>
+                                        @if($row->TRAN_TYPE == 'W')
+                                            Wash And Crush Salt
+                                        @else
+                                            Iodize
+                                        @endif
                                     </td>
                                     <td>{{ $row->QTY }}</td>
                                 </tr>
@@ -229,13 +240,15 @@
 
                 <div class="widget-body">
                     <div class="widget-main no-padding" style="width:550px; height:200px; overflow:auto;">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" >
                             <thead class="thin-border-bottom">
                             <tr>
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Date
                                 </th>
-
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Type
+                                </th>
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
                                 </th>
@@ -247,6 +260,13 @@
                                 <tr>
                                     <td>
                                         <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    </td>
+                                    <td>
+                                        @if($row->TRAN_TYPE == 'W')
+                                            Wash And Crush Salt
+                                        @else
+                                            Iodize
+                                        @endif
                                     </td>
                                     <td>{{ abs($row->QTY) }}</td>
                                 </tr>
@@ -264,20 +284,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
-
         var ctx = document.getElementById('myChart1').getContext('2d');
+        var datas = '<?php echo json_encode($monthWiseProduction); ?>';
+        //console.log(datas);
+        datas = JSON.parse(datas);
+        //console.log(datas);
+        let barData = [0,0,0,0,0,0,0,0,0,0,0,0];
+        datas.forEach(function (data) {
+            //barData.push(data.subtotal);
+            barData[data.month-1] = data.subtotal;
+        });
+        // console.log(barData);
+
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'horizontalBar',
-
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Production Chart',
+                    label: 'Current Year Production Chart',
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
+                    // data: [0, 10, 5, 2, 20, 30, 45]
+                    data: barData
                 }]
             },
 
@@ -305,8 +335,8 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Washing and Crushing',
-                    'Idonaize'
+                    'INDUSTRIAL SALT ',
+                    'IDONAIZE SALT'
                 ],
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
@@ -328,192 +358,39 @@
         });
 
 
-        jQuery(function($) {
-            $('.easy-pie-chart.percentage').each(function(){
-                var $box = $(this).closest('.infobox');
-                var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
-                var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-                var size = parseInt($(this).data('size')) || 50;
-                $(this).easyPieChart({
-                    barColor: barColor,
-                    trackColor: trackColor,
-                    scaleColor: false,
-                    lineCap: 'butt',
-                    lineWidth: parseInt(size/10),
-                    animate: ace.vars['old_ie'] ? false : 1000,
-                    size: size
-                });
-            })
+        var ctx = document.getElementById('myChart3').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'pie',
 
-            $('.sparkline').each(function(){
-                var $box = $(this).closest('.infobox');
-                var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
-                $(this).sparkline('html',
-                    {
-                        tagValuesAttribute:'data-values',
-                        type: 'bar',
-                        barColor: barColor ,
-                        chartRangeMin:$(this).data('min') || 0
-                    });
-            });
+            // The data for our dataset
+            data: {
+                labels: [
+                    'Stock',
+                    'Sales'
+                ],
+                datasets: [{
+                    data: [<?php echo $totalProductons; ?>, <?php echo $totalProductSales; ?>],
+                    backgroundColor: ['#3498DB','#900C3F'],
+                    borderColor: '#ffffff'
 
 
-            //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
-            //but sometimes it brings up errors with normal resize event handlers
-            $.resize.throttleWindow = null;
+                }],
 
-            var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
-            var data = [
-                { label: "Stock",  data: <?php echo $totalStock ?>, color: "#68BC31"},
-                { label: "Sales", data: <?php echo $saleTotal ?>, color: "#2091CF"}
-            ]
-            function drawPieChart(placeholder, data, position) {
-                $.plot(placeholder, data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            tilt:0.8,
-                            highlight: {
-                                opacity: 0.25
-                            },
-                            stroke: {
-                                color: '#fff',
-                                width: 2
-                            },
-                            startAngle: 2
-                        }
-                    },
-                    legend: {
-                        show: true,
-                        position: position || "ne",
-                        labelBoxBorderColor: null,
-                        margin:[-30,15]
-                    }
-                    ,
-                    grid: {
-                        hoverable: true,
-                        clickable: true
-                    }
-                })
-            }
-            drawPieChart(placeholder, data);
+            },
 
-            /**
-             we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
-             so that's not needed actually.
-             */
-            placeholder.data('chart', data);
-            placeholder.data('draw', drawPieChart);
-
-
-            //pie chart tooltip example
-            var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
-            var previousPoint = null;
-
-            placeholder.on('plothover', function (event, pos, item) {
-                if(item) {
-                    if (previousPoint != item.seriesIndex) {
-                        previousPoint = item.seriesIndex;
-                        var tip = item.series['label'] + " : " + item.series['percent']+'%';
-                        $tooltip.show().children(0).text(tip);
-                    }
-                    $tooltip.css({top:pos.pageY + 10, left:pos.pageX + 10});
-                } else {
-                    $tooltip.hide();
-                    previousPoint = null;
-                }
-
-            });
-
-            /////////////////////////////////////
-            $(document).one('ajaxloadstart.page', function(e) {
-                $tooltip.remove();
-            });
-
-
-
-
-            var d1 = [];
-            for (var i = 0; i < Math.PI * 2; i += 0.5) {
-                d1.push([i, Math.sin(i)]);
+            options: {
+                legend: {
+                    position: 'right'
+                },
+                animation:{
+                    animateScale:true,
+                    animateRotate:true
+                },
             }
 
-            var d2 = [];
-            for (var i = 0; i < Math.PI * 2; i += 0.5) {
-                d2.push([i, Math.cos(i)]);
-            }
+        });
 
-            var d3 = [];
-            for (var i = 0; i < Math.PI * 2; i += 0.2) {
-                d3.push([i, Math.tan(i)]);
-            }
-
-
-
-
-            $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-            function tooltip_placement(context, source) {
-                var $source = $(source);
-                var $parent = $source.closest('.tab-content')
-                var off1 = $parent.offset();
-                var w1 = $parent.width();
-
-                var off2 = $source.offset();
-                //var w2 = $source.width();
-
-                if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-                return 'left';
-            }
-
-
-            $('.dialogs,.comments').ace_scroll({
-                size: 300
-            });
-
-
-            //Android's default browser somehow is confused when tapping on label which will lead to dragging the task
-            //so disable dragging when clicking on label
-            var agent = navigator.userAgent.toLowerCase();
-            if(ace.vars['touch'] && ace.vars['android']) {
-                $('#tasks').on('touchstart', function(e){
-                    var li = $(e.target).closest('#tasks li');
-                    if(li.length == 0)return;
-                    var label = li.find('label.inline').get(0);
-                    if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
-                });
-            }
-
-            $('#tasks').sortable({
-                    opacity:0.8,
-                    revert:true,
-                    forceHelperSize:true,
-                    placeholder: 'draggable-placeholder',
-                    forcePlaceholderSize:true,
-                    tolerance:'pointer',
-                    stop: function( event, ui ) {
-                        //just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
-                        $(ui.item).css('z-index', 'auto');
-                    }
-                }
-            );
-            $('#tasks').disableSelection();
-            $('#tasks input:checkbox').removeAttr('checked').on('click', function(){
-                if(this.checked) $(this).closest('li').addClass('selected');
-                else $(this).closest('li').removeClass('selected');
-            });
-
-
-            //show the dropdowns on top or bottom depending on window height and menu position
-            $('#task-tab .dropdown-hover').on('mouseenter', function(e) {
-                var offset = $(this).offset();
-
-                var $w = $(window)
-                if (offset.top > $w.scrollTop() + $w.innerHeight() - 100)
-                    $(this).addClass('dropup');
-                else $(this).removeClass('dropup');
-            });
-
-        })
     </script>
 
 @endsection

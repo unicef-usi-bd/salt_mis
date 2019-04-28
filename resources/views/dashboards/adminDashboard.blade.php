@@ -10,7 +10,7 @@
     </style>
     <div class="page-header">
         <h1>
-            Dashboard admin
+            Admin Dashboard
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Overview
@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Stock And Sales Report
+                        Current Year Stock And Sales Report
                     </h5>
 
                 </div>
@@ -158,14 +158,14 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <canvas id="myChart1"></canvas>
+            <canvas id="myChart1" height="200"></canvas>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <div class="widget-box transparent">
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Production
+                        Production List
                     </h4>
 
                     <div class="widget-toolbar">
@@ -176,7 +176,7 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="widget-main no-padding" style="width:550px; height:250px; overflow:auto;">
+                    <div class="widget-main no-padding" style="height:360px; overflow:auto;">
                         <table class="table table-bordered table-striped">
                             <thead class="thin-border-bottom">
                             <tr>
@@ -247,6 +247,9 @@
                                     <i class="ace-icon fa fa-caret-right blue"></i>Date
                                 </th>
                                 <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Type
+                                </th>
+                                <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
                                 </th>
                             </tr>
@@ -257,6 +260,13 @@
                             <tr>
                                 <td>
                                     <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                </td>
+                                <td>
+                                    @if($row->TRAN_TYPE == 'W')
+                                        Wash And Crush Salt
+                                    @else
+                                        Iodize
+                                    @endif
                                 </td>
                                 <td>{{ abs($row->QTY) }}</td>
                             </tr>
@@ -293,7 +303,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Production Chart',
+                    label: 'Current Year Production Chart',
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                    // data: [0, 10, 5, 2, 20, 30, 45]
@@ -325,8 +335,8 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Washing and Crushing',
-                    'Idonaize'
+                    'INDUSTRIAL SALT ',
+                    'IDONAIZE SALT'
                 ],
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
