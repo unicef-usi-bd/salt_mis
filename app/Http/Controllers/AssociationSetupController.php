@@ -51,7 +51,8 @@ class AssociationSetupController extends Controller
     public function create($id)
     {
         $pr_id = $id;
-        return view('setup.association.modals.createAssociation', compact( 'pr_id'));
+        $associationList = AssociationSetup::getZoneList();
+        return view('setup.association.modals.createAssociation', compact( 'pr_id','associationList'));
     }
 
     /**
@@ -73,6 +74,7 @@ class AssociationSetupController extends Controller
                 'ASSOCIATION_NAME' => $request->input('ASSOCIATION_NAME'),
                 'PARENT_ID' => $request->input('PARENT_ID'),
                 'center_id' => Auth::user()->center_id,
+                'ZONE_ID' => $request->input('ZONE_ID'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id,
             ]);
@@ -105,7 +107,8 @@ class AssociationSetupController extends Controller
     public function edit($id)
     {
         $editData = AssociationSetup::editAssociationData($id);
-        return view('setup.association.modals.editAssociation', compact('editData'));
+        $associationList = AssociationSetup::getZoneList();
+        return view('setup.association.modals.editAssociation', compact('editData','associationList'));
     }
 
     /**
@@ -117,8 +120,10 @@ class AssociationSetupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //$this->pr($request->input());
+        //dd($request);
         $rules = array(
-            'ASSOCIATION_NAME' => 'required|unique:ssm_associationsetup|max:191',
+            'ASSOCIATION_NAME' => 'required|max:191',
         );
         $validator = Validator::make(Input::all(), $rules);
         if($validator->fails()){

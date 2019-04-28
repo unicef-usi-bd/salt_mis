@@ -131,6 +131,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     //Report
     Route::resource('report-dashboard', 'ReportController');
+    Route::get('association-list','ReportController@getAssociationList');
 
 
 
