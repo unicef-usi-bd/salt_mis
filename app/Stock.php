@@ -188,4 +188,49 @@ class Stock extends Model
         //$monthProduction = DB::table('tmm_itemstock')
     }
     /// ----------------------Production Graph
+
+    ///------------------Procurement List
+    public static function procurementList (){
+        $centerId = Auth::user()->center_id;
+        $procurementLists = DB::table('ssc_lookupchd');
+        $procurementLists->select('ssc_lookupchd.*','smm_item.ITEM_NAME','tmm_itemstock.ENTRY_TIMESTAMP','tmm_itemstock.QTY');
+        $procurementLists->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+        $procurementLists->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        $procurementLists->where('tmm_itemstock.TRAN_FLAG','=','PR');
+        if($centerId){
+            $procurementLists->where('tmm_itemstock.center_id','=',$centerId);
+        }
+
+        return $procurementLists->get();
+    }
+    ///------------------Procurement List
+
+
+    /// ----------------------Procurement Graph
+    public static function monthWiseProcurement(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                       FROM tmm_itemstock it
+                                       WHERE it.center_id = $centerId
+                                       and it.TRAN_FLAG = 'PR'
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+    /// ----------------------Procurement Graph
+
+    /// ----------------------Production Graph
+    public static function monthWiseMillProduction(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                       FROM tmm_itemstock it
+                                       WHERE it.center_id = $centerId
+                                       and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+    /// ----------------------Production Graph
+
 }
+

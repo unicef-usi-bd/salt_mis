@@ -10,7 +10,7 @@
     </style>
     <div class="page-header">
         <h1>
-            BASIC Dashboard
+            BSDIC Dashboard
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Overview
@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Current Year Stock And Sales Report
+                        Stock And Sales Report
                     </h5>
 
                 </div>
@@ -228,7 +228,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Sale
+                        Sale List
                     </h4>
 
                     <div class="widget-toolbar">

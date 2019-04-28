@@ -165,13 +165,15 @@ class DashboardController extends Controller
         $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
 
-        $procurementList = CrudeSaltProcurement::procurementList();
+        $procurementList = Stock::procurementList();
         $totalproduction = Stock::totalProduction();
         $totalSale = SalesDistribution::totalproductSale();
 
+        $monthWiseProduction = Stock::monthWiseMillProduction();
+        $monthWiseProcurement = Stock::monthWiseProcurement();
         $totalStock = Stock::totalStocks();
         $saleTotal = SalesDistribution::totalSale();
-        //$this->pr($saleTotal);
-        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal'));
+//        $this->pr($monthWiseProduction);
+        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction'));
     }
 }

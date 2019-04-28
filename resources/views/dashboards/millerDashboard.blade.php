@@ -96,13 +96,6 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
             <div class="space-6"></div>
         </div>
 
@@ -113,7 +106,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Current Year Stock And Sales Report
+                        Stock And Sales Report
                     </h5>
 
                 </div>
@@ -147,7 +140,7 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="widget-main no-padding" style="width:550px; height:200px; overflow:auto;">
+                    <div class="widget-main no-padding" style="height:280px; overflow:auto;">
                         <table class="table table-bordered table-striped">
                             <thead class="thin-border-bottom">
                             <tr>
@@ -157,6 +150,10 @@
 
                                 <th>
                                     <i class="ace-icon fa fa-caret-right blue"></i>Item name
+                                </th>
+
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Amount
                                 </th>
                             </tr>
                             </thead>
@@ -168,6 +165,7 @@
                                     <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
                                 </td>
                                 <td>{{ $row->ITEM_NAME }}</td>
+                                <td>{{ $row->QTY }}</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -177,7 +175,7 @@
             </div><!-- /.widget-box -->
         </div><!-- /.col -->
         <div class="col-sm-6">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart" height="200"></canvas>
         </div><!-- /.col -->
     </div><!-- /.row -->
 
@@ -292,18 +290,27 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
         var ctx = document.getElementById('myChart').getContext('2d');
+        var datas = '<?php echo json_encode($monthWiseProcurement); ?>';
+        //console.log(datas);
+        datas = JSON.parse(datas);
+        //console.log(datas);
+        let barData = [0,0,0,0,0,0,0,0,0,0,0,0];
+        datas.forEach(function (data) {
+            //barData.push(data.subtotal);
+            barData[data.month-1] = data.subtotal;
+        });
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'bar',
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Procurement Chart',
+                    label: 'Current Year Procurement Chart',
                     backgroundColor: 'rgb(135, 206, 250)',
                     borderColor: 'rgb(135, 206, 250)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
+                    data: barData
                 }]
             },
 
@@ -324,18 +331,29 @@
         });
 
         var ctx = document.getElementById('myChart1').getContext('2d');
+        var datas = '<?php echo json_encode($monthWiseProduction); ?>';
+        //console.log(datas);
+        datas = JSON.parse(datas);
+        //console.log(datas);
+        let barDataProduction = [0,0,0,0,0,0,0,0,0,0,0,0];
+        datas.forEach(function (data) {
+            //barData.push(data.subtotal);
+            barDataProduction[data.month-1] = data.subtotal;
+        });
+        // console.log(barData);
+
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'horizontalBar',
-
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Production Chart',
+                    label: 'Current Year Production Chart',
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
-                    data: [0, 10, 5, 2, 20, 30, 45]
+                    // data: [0, 10, 5, 2, 20, 30, 45]
+                    data: barDataProduction
                 }]
             },
 
@@ -418,7 +436,7 @@
 
         });
 
-        
+
     </script>
 
 @endsection
