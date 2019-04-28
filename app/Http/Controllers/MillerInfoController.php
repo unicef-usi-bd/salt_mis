@@ -62,7 +62,7 @@ class MillerInfoController extends Controller
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $millerList = MillerInfo::getAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
-        //$this->pr($millerToMerge);
+        //$this->pr($millerList);
         return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','millerList','millerToMerge'));
     }
 

@@ -4,6 +4,7 @@
 
             <div class="alert alert-info millmsg"></div>
 
+
             <form id="millId"  class="form-horizontal" role="form" >
                 <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @csrf
@@ -165,7 +166,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateMill" onclick="millTab()">
+                        <button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -185,6 +186,7 @@
             success: function (data) {
                 console.log(data);
                 $('.millmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".millmsg").hide(); }, 3000);
 
             }
         })

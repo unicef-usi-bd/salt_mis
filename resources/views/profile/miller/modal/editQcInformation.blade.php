@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info qcmsg"></div>
+
             {{--<form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">--}}
             <form id="qcInfoId"  class="form-horizontal" role="form" >
                 @csrf
@@ -105,7 +106,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateQc" onclick="qcTab()">
+                        <button type="button" class="btn btn-success btnUpdateQc" onclick="qcTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -127,6 +128,7 @@
                 console.log(data);
                 // $('.qcmsg').html('<span>'+ data +'</span>').show();
                 $('.qcmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".qcmsg").hide(); }, 3000);
 
             }
         })

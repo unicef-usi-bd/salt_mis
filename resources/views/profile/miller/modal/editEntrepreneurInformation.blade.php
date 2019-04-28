@@ -3,6 +3,7 @@
         <div class="col-md-12">
             <div class="alert alert-info entrepreneur_msg"></div>
 
+
             <form id="entrepreneurId"  class="form-horizontal" role="form" >
 
                 @csrf
@@ -145,7 +146,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateEntrepreneur" onclick="entrepreneurTab()">
+                        <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -166,6 +167,8 @@
                 success: function (data) {
                     console.log(data);
                     $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+
+                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
 
                 }
             })

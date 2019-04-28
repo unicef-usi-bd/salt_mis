@@ -197,7 +197,8 @@
     </div>
 </div>
 {{--on change registration typr to merging open this modal--}}
-<div class="modal fade" id="mergeMillModal" role="dialog">
+<div class="modal fade" id="mergeMillModal" role="dialog" style="display: none">
+{{--<div class="modal fade" id="mergeMillModal" role="dialog">--}}
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -206,8 +207,6 @@
                 <h4 class="modal-title">Merge Mill Account</h4>
             </div>
             <div class="modal-body">
-                {{--<p><textarea id = "commentsUpload"class="form-control custom-control" rows="3" style="resize:none"></textarea></p>--}}
-
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -241,10 +240,12 @@
 
 
 <script>
-    $(document).on('change','.regTypeId',function () {
+    $(document).on('change','select.regTypeId',function () {
        var registrationId = $(this).val();
        if (registrationId==11){
            $('#mergeMillModal').modal('show');
+       }else{
+           $('#mergeMillModal').modal('hide');
        }
     });
 
