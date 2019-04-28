@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 use App\Item;
 use App\MillerInfo;
+use App\RequireChemicalMst;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -60,13 +61,20 @@ class ServiceController extends Controller
                 $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
                 $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
                 $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+                $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
+                    ->select('smm_item.ITEM_NAME','smm_rmallocationchd.*')
+                    ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
+                    ->where('smm_rmallocationchd.RMALLOMST_ID','=',24)
+                    ->get();
+                //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
 
                     'message'=> 'Information are given below',
-                    'child_id'=>$child_id,
+                    //'child_id'=>$child_id,
                     'crude_salt_types' => $crudeSaltTypes,
                     'chemical_types' => $chemicleType,
-                    'mill_information' => $millerInfo
+                    'mill_information' => $millerInfo,
+                    'require_iodized_salt' => $requireChemicalIodizedSalt
                 ]);
             }else{
                 return response()->json([
