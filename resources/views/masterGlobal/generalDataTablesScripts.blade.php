@@ -42,7 +42,7 @@
             },
             {
                 extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> Pdf',
+                text: '<i class="fa fa-file-reportPdf-o"></i> Pdf',
                 className: 'btn btn-xs btn-outline btn-danger',
                 title: $('h1').text(),
                 exportOptions: {

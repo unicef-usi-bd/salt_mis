@@ -7,6 +7,11 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use DB;
+use Auth;
+use Session;
+use View;
+use PDF;
+//require '../vendor/autoload.php';
 
 class Controller extends BaseController
 {
@@ -96,5 +101,100 @@ class Controller extends BaseController
         echo '<pre>';
         print_r($data);
         exit();
+    }
+
+    protected function generatePdf($data) {
+        $html='<!doctype html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport"
+                          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                    <style>
+                        @page {
+                            header: page-header;
+                            footer: page-footer;
+                            margin-top: 30mm;
+                        }
+
+
+                        .clear{
+                            clear:both;
+                        }
+                        .header_area{
+                            vertical-align: middle;
+                        }
+                        .header{
+                            overflow: hidden;
+                            border-bottom: 1px solid black;
+                        }
+                        .header_left{
+                            text-align: left;
+                            float: left;
+                            width: 355px;
+                        }
+                        .logo{
+                            float: left;
+                            width: 50px;
+                            margin-bottom: 5px;
+                        }
+                        .slogan{
+                            float: right;
+                            width: 300px;
+                            padding-top: 15px;
+
+                        }
+
+                        .header_right{
+                            text-align: right;
+                            float: right;
+                            width: 100px;
+                        }
+
+                        /*body, p, div { font-size: 14pt; font-family: solaimanlipi;}*/
+                        body, p, div { font-size: 14pt; font-family: kalpurush;}
+
+                    </style>
+                </head>
+                <body>
+                <htmlpageheader name="page-header">
+                    <div class="header_area clear">
+                        <div class="header">
+                            <div class="header_left">
+                                <div class="logo"><img src="'. Session::get("orgLogo").'" width="50px" height="50px" alt="DAE Logo"></div>
+                                <div class="slogan">'. Session::get("orgName").'</div>
+                            </div>
+                            <div class="header_right">
+                                {DATE j-m-Y}
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+                </htmlpageheader>
+
+
+                <div style="font-family: "SolaimanLipi";"> '.$data.' </div>
+
+
+                <htmlpagefooter name="page-footer">
+                    <div  style="border-bottom: 1px solid #000;"></div>
+                    <table style="width: 100%">
+                        <tr>
+                            <td> {PAGENO}</td>
+                            <td style="text-align: right">'.Session::get("orgAddress").'</td>
+                        </tr>
+                    </table>
+                </htmlpagefooter>
+
+
+
+
+                </body>
+                </html>';
+        $mpdf = new \Mpdf\Mpdf(['tempDir' => base_path().'/tmp']);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
 }

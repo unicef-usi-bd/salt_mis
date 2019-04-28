@@ -69,7 +69,7 @@ class MimeType
         'onetoc' => 'application/onenote',
         'oxps' => 'application/oxps',
         'xer' => 'application/patch-ops-error+xml',
-        'pdf' => 'application/pdf',
+        'reportPdf' => 'application/reportPdf',
         'pgp' => 'application/pgp-encrypted',
         'asc' => 'application/pgp-signature',
         'prf' => 'application/pics-rules',

@@ -2826,7 +2826,7 @@
                 },
                 {
                     "extend": "pdf",
-                    "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
+                    "text": "<i class='fa fa-file-reportPdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
                     "className": "btn btn-white btn-primary btn-bold"
                 },
                 {
