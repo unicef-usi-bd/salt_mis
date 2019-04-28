@@ -131,21 +131,13 @@ Route::group(['middleware' => ['auth']], function() {
 
     //Report
     Route::resource('report-dashboard', 'ReportController');
-    Route::get('association-list','ReportController@getAssociationList');
+    Route::get('association-list','ReportController@getAssociationList');//jalal
+    Route::get('miller-list/{activStatus}','ReportController@getMillerList');//jalal
+    Route::get('monitor-association','ReportController@getMonitorAssociationList');//jalal
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //Report reportPdf
+    Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
+    Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
 
 });
 

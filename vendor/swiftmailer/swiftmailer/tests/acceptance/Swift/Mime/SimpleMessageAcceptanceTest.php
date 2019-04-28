@@ -673,9 +673,9 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $message->attach($part);
 
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
-        $attachment->setBody('<pdf data>');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
+        $attachment->setBody('<reportPdf data>');
 
         $message->attach($attachment);
 
@@ -703,11 +703,11 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
             '--\\1--'."\r\n".
             "\r\n\r\n".
             '--'.$boundary."\r\n".
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf'."\r\n".
+            'Content-Disposition: attachment; filename=foo.reportPdf'."\r\n".
             "\r\n".
-            preg_quote(base64_encode('<pdf data>'), '~').
+            preg_quote(base64_encode('<reportPdf data>'), '~').
             "\r\n\r\n".
             '--'.$boundary.'--'."\r\n".
             '$~D',
@@ -735,9 +735,9 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $message->attach($part);
 
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
-        $attachment->setBody('<pdf data>');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
+        $attachment->setBody('<reportPdf data>');
 
         $message->attach($attachment);
 
@@ -789,11 +789,11 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
             '--\\1--'."\r\n".
             "\r\n\r\n".
             '--'.$boundary."\r\n".
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf'."\r\n".
+            'Content-Disposition: attachment; filename=foo.reportPdf'."\r\n".
             "\r\n".
-            preg_quote(base64_encode('<pdf data>'), '~').
+            preg_quote(base64_encode('<reportPdf data>'), '~').
             "\r\n\r\n".
             '--'.$boundary.'--'."\r\n".
             '$~D',
@@ -814,9 +814,9 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $boundary = $message->getBoundary();
 
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
-        $attachment->setBody('<pdf data>');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
+        $attachment->setBody('<reportPdf data>');
 
         $message->attach($attachment);
 
@@ -866,11 +866,11 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
             '--\\1--'."\r\n".
             "\r\n\r\n".
             '--'.$boundary."\r\n".
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf'."\r\n".
+            'Content-Disposition: attachment; filename=foo.reportPdf'."\r\n".
             "\r\n".
-            preg_quote(base64_encode('<pdf data>'), '~').
+            preg_quote(base64_encode('<reportPdf data>'), '~').
             "\r\n\r\n".
             '--'.$boundary.'--'."\r\n".
             '$~D',
@@ -898,9 +898,9 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $message->attach($part);
 
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
-        $attachment->setBody('<pdf data>');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
+        $attachment->setBody('<reportPdf data>');
 
         $message->attach($attachment);
 
@@ -1068,9 +1068,9 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
         $boundary = $message->getBoundary();
 
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
-        $attachment->setBody('<pdf data>');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
+        $attachment->setBody('<reportPdf data>');
 
         $message->attach($attachment);
 
@@ -1091,11 +1091,11 @@ class Swift_Mime_SimpleMessageAcceptanceTest extends \PHPUnit\Framework\TestCase
             'foo'.
             "\r\n\r\n".
             '--'.$boundary."\r\n".
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf'."\r\n".
+            'Content-Disposition: attachment; filename=foo.reportPdf'."\r\n".
             "\r\n".
-            base64_encode('<pdf data>').
+            base64_encode('<reportPdf data>').
             "\r\n\r\n".
             '--'.$boundary.'--'."\r\n",
             $message->toString()
