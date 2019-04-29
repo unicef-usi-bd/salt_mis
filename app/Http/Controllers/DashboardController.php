@@ -138,22 +138,32 @@ class DashboardController extends Controller
     }
 
     public function association(){
-        $totalMiller= count(MillerInfo::countAllMillers());
-        $totalActiveMiller= count(MillerInfo::countActiveMillers());
-        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalMiller= count(MillerInfo::associationTotalMill());
+        $totalActiveMiller= count(MillerInfo::associationTotalActiveMill());
+        $totalInactiveMiller= count(MillerInfo::associationTotalInactiveMill());
 
-        $totalWashcrashProduction = Stock::totalWashCrashProductions();
-        $totalIodizeProduction = Stock::totalIodizeProductions();
-        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
-        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
-        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
-        $totalproduction = Stock::totalProduction();
-        $totalSale = SalesDistribution::totalproductSale();
-        $totalStock = Stock::totalStocks();
-        $saleTotal = SalesDistribution::totalSale();
-      //  $this->pr($totalMiller);
-        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal'));
+//        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+//        $totalIodizeProduction = Stock::totalIodizeProductions();
+//        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
+//        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+//        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
+//        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
+//        $totalproduction = Stock::totalProduction();
+//        $totalSale = SalesDistribution::totalproductSale();
+//        $totalStock = Stock::totalStocks();
+//        $saleTotal = SalesDistribution::totalSale();
+          //$associationTotal = Stock::associationTotal();
+        $associationWashCrash = Stock::totalAssociationWashcrash();
+        $associationIodize = Stock::totalAssociationIodize();
+        $totalAssociationproduction = Stock::totalAssociationproduction();
+        $totalAssociationIodizeSale = Stock::totalAssociationIodizeSale();
+        $totalAssociationWashCrasheSale = Stock::totalAssociationWashCrashSale();
+        $totalSales = Stock::totalSale();
+        $totlaProductionList = Stock::totalProductionList();
+        $totalSaleLists = Stock::totalSaleList();
+        $associationMonthWishProduction = Stock::monthWiseAssociationProduction();
+        //$this->pr($totalActiveMiller);
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction'));
     }
 
     public function miller(){

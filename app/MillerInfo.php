@@ -239,6 +239,35 @@ class MillerInfo extends Model
             $countInactiveMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
             return $countInactiveMiller->get();
     }
+
+    public static function associationTotalMill(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
+                 from ssm_mill_info mi
+                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
+                 where mi.center_id = $centerId
+                 Group By mi.MILL_NAME"));
+    }
+
+    public static function associationTotalActiveMill(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
+                 from ssm_mill_info mi
+                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
+                 where mi.center_id = $centerId
+                 AND mi.ACTIVE_FLG = 1
+                 Group By mi.MILL_NAME"));
+    }
+
+    public static function associationTotalInactiveMill(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
+                 from ssm_mill_info mi
+                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
+                 where mi.center_id = $centerId
+                 AND mi.ACTIVE_FLG = 0
+                 Group By mi.MILL_NAME"));
+    }
     ///-----------------------Counting Miller
 
 
