@@ -41,7 +41,7 @@
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
                     </div>
-                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >KG</i>
                 </div>
             </div>
             <div class="col-md-6">
