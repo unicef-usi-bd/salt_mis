@@ -8,7 +8,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                <option value=""></option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{ $chemical->ITEM_NO }}" @if($chemical->ITEM_NO==$editCrudeSalt->RECEIVE_NO) selected @endif>{{ $chemical->ITEM_NAME }}</option>
@@ -21,7 +21,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select Trading Name">
                                <option value=""></option>
                                 @foreach($crudeSaltSuppliers as $crudeSaltSupplier)
                                     <option value="{{ $crudeSaltSupplier->SUPP_ID_AUTO }}" @if($crudeSaltSupplier->SUPP_ID_AUTO==$editCrudeSalt->SUPP_ID_AUTO) selected @endif>{{ $crudeSaltSupplier->TRADING_NAME }}</option>
@@ -48,6 +48,7 @@
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->RCV_QTY }}"/>
                     </div>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
             </div>
 
@@ -56,7 +57,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Source from</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess SOURCE_ID" class="chosen-select form-control" name="SOURCE_ID" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess SOURCE_ID" class="chosen-select form-control" name="SOURCE_ID" data-placeholder="Select Source from">
                                <option value=""></option>
                                 @foreach($crudeSaltSources as $crudeSaltSource)
                                     <option value="{{ $crudeSaltSource->LOOKUPCHD_ID }}" @if($crudeSaltSource->LOOKUPCHD_ID==$editCrudeSalt->SOURCE_ID) selected @endif>{{ $crudeSaltSource->LOOKUPCHD_NAME }}</option>

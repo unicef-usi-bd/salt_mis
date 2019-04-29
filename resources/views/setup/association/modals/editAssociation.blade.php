@@ -49,7 +49,7 @@
                 </button>
                 <button type="submit" class="btn btn-info">
                     <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{ trans('dashboard.submit') }}
+                    Update
                 </button>
             </div>
         </div>

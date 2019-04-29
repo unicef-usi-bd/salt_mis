@@ -23,9 +23,9 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value="{{ $editIodize->WASH_CRASH_QTY }}"/>
+                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value="{{ $editIodize->WASH_CRASH_QTY }}"/>
                 </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalSalt }} KG</span><span class="result"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalSalt }}</span><span class="result"></span> KG)</span>
             </div>
         </div>
         <div class="form-group">
@@ -46,7 +46,7 @@
 
             <div class="col-sm-8">
                     <span class="col-sm-6" style="padding: 0;">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value="{{ $editIodize->REQ_QTY }}"/>
+                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value="{{ $editIodize->REQ_QTY }}"/>
                     </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} KG</span><span class="resultChemical"></span>)</span>
             </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <div class="col-sm-7">
-                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Auto Generate" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value="{{ $editIodize->WASTAGE }}"/>
+                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value="{{ $editIodize->WASTAGE }}"/>
 
             </div>
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>

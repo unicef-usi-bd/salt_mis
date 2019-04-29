@@ -46,7 +46,7 @@
                      <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
                 </span>
 
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt"></span><span class="result"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt"></span><span class="result"></span> KG)</span>
             </div>
         </div>
 
