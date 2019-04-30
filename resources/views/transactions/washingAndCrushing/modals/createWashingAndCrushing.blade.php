@@ -46,7 +46,7 @@
                      <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
                 </span>
 
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt"></span><span class="result"></span> KG)</span>
+                <span class="col-sm-6 stockInfo" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt hidden"></span><span class="result"></span> KG)</span>
             </div>
         </div>
 
@@ -89,8 +89,12 @@
 @include('masterGlobal.datePicker')
 
 <script>
-    $('.stockSalt').hide();
+    $(document).ready(function () {
+//        $('.stockInfo').addClass('hidden');
+    });
+
     $(document).on('change','.salt',function(){
+        //$('.stockSalt').empty()
         var saltId = $(this).val();
         $.ajax({
             type : 'GET',
@@ -98,8 +102,12 @@
             data : {'saltId':saltId},
             success: function (data) {
                 var data = JSON.parse(data);
+                //console.log(data);
                 $('.stockSalt').html(data.saltStock).show();
+                $('.result').html(data.saltStock);
 //                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
+                $('.crudeSaltAmount').val('');
+                //$('.stockSalt').hide('').show();
             }
         })
     });

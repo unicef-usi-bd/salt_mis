@@ -125,7 +125,7 @@
                     <th style="width: 255px;">Salt Type<span style="color:red;"> </span></th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">Salt Amount</th>
-                    <th style="width: 255px;">Quantity (PAC)</th>
+                    <th style="width: 255px;">Quantity</th>
                     <th style="width: 255px;">Stock</th>
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
@@ -136,7 +136,7 @@
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
                                     <select class="form-control chosen-select saltType" id="ITEM_ID" name="ITEM_ID[]">
-                                        <option value="">-Select one-</option>
+                                        <option value="">Select</option>
                                         @foreach($saltId as $row)
                                             <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
                                         @endforeach
@@ -153,7 +153,7 @@
                     <td>
                         <span class="block input-icon input-icon-right" style="width: 255px;">
                         <select class="form-control chosen-select " id="PACK_TYPE" name="PACK_TYPE[]">
-                            <option value="">-Select One-</option>
+                            <option value="">Select</option>
                             @foreach($saltPackId as $row)
                                 <option value="{{$row->LOOKUPCHD_ID}}"> {{$row->LOOKUPCHD_NAME}}</option>
                             @endforeach
@@ -172,7 +172,7 @@
                         <span class="block input-icon input-icon-right">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
-                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash"></span><span class="result"></span> KG)</span>
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash"></span><span class="result"></span>)</span>
 
                         </span>
                     </td>

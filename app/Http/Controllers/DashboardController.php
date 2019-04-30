@@ -141,18 +141,6 @@ class DashboardController extends Controller
         $totalMiller= count(MillerInfo::associationTotalMill());
         $totalActiveMiller= count(MillerInfo::associationTotalActiveMill());
         $totalInactiveMiller= count(MillerInfo::associationTotalInactiveMill());
-
-//        $totalWashcrashProduction = Stock::totalWashCrashProductions();
-//        $totalIodizeProduction = Stock::totalIodizeProductions();
-//        $totalProductons = abs($totalWashcrashProduction+$totalIodizeProduction);
-//        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-//        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
-//        $totalProductSales = abs($totalWashCrashSale+$totalIodizeSale);
-//        $totalproduction = Stock::totalProduction();
-//        $totalSale = SalesDistribution::totalproductSale();
-//        $totalStock = Stock::totalStocks();
-//        $saleTotal = SalesDistribution::totalSale();
-          //$associationTotal = Stock::associationTotal();
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();
         $totalAssociationproduction = Stock::totalAssociationproduction();

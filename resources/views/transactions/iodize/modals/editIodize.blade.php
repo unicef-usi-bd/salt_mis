@@ -86,77 +86,78 @@
 
 {{--@include('masterGlobal.formValidation')--}}
 <script>
-    $('.chemicalAmount').attr('readonly', true);
-    $(document).on('change','.chemical',function(){
-        var washSaltAmount = $('.saltAmount').val();
-        var chemicalId = $(this).val();
-        if(washSaltAmount === ''){
-            $('.msg').html('<strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn().delay(1000).fadeOut();
-        }
+$(document).on('change','.chemical',function(){
+    var washSaltAmount = $('.saltAmount').val();
+    var chemicalId = $(this).val();
+    if(washSaltAmount === ''){
+        $('.msg').html('<strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn().delay(1000).fadeOut();
+    }
 
-        $.ajax({
-            type : 'GET',
-            url : 'chemical-stock',
-            data : {'chemicalId':chemicalId},
-            success: function (data) {
-                // alert(data)
-                var data = JSON.parse(data);
-                console.log(data);
-                $('.stockChemical').html(data.chemicalStock).show();
+    $.ajax({
+        type : 'GET',
+        url : 'chemical-stock',
+        data : {'chemicalId':chemicalId},
+        success: function (data) {
+            // alert(data)
+            var data = JSON.parse(data);
+            //console.log(data);
+            $('.stockChemical').html(data.chemicalStock).show();
+            $('.resultChemical').html(data.chemicalStock).hide();
+            $('.chemicalAmount').val('');
 
-                var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
+            var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
 
-                //  alert(chemicalNeed);
+            //  alert(chemicalNeed);
 
-                if(parseInt(data.chemicalStock) > chemicalNeed){
-                    //  alert("hi");
-                    $('.chemicalAmount').attr('readonly', false);
-                }else{
-                    //alert("hlw");
-                    $('.chemicalAmount').attr('readonly', true);
-                    $('.msg').html('<strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn().delay(1000).fadeOut();
-                    $('.saltAmount').val("");
-                }
+            if(parseInt(data.chemicalStock) > chemicalNeed){
+                //  alert("hi");
+                $('.chemicalAmount').attr('readonly', false);
+            }else{
+                //alert("hlw");
+                $('.chemicalAmount').attr('readonly', true);
+                $('.msg').html('<strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn().delay(1000).fadeOut();
+                $('.saltAmount').val("");
+            }
 
-                $(document).on('keyup','.chemicalAmount',function () {
-                    var amount = parseInt($(this).val()) || 0;
-                    var chemicalStock = parseInt($('.stockChemical').text());
-                    var remainStock = chemicalStock - amount;
+            $(document).on('keyup','.chemicalAmount',function () {
+                var amount = parseInt($(this).val()) || 0;
+                var chemicalStock = parseInt($('.stockChemical').text());
+                var remainStock = chemicalStock - amount;
 
-                    if(chemicalStock < amount){
-                        $('.stockChemical').hide();
-                        $('.msg').html('<strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
-                        $('.resultChemical').text(0);
-                        if(amount === 0){
-                            $('.stockChemical').show();
-                        }
-                    }else{
-                        $('.stockChemical').hide();
-                        $('.resultChemical').text(remainStock);
+                if(chemicalStock < amount){
+                    $('.stockChemical').hide();
+                    $('.msg').html('<strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+                    $('.resultChemical').text(0);
+                    if(amount === 0){
+                        $('.stockChemical').show();
                     }
-                });
-            }
-        })
-
-    });
-
-    $(document).on('keyup','.saltAmount',function () {
-        var amount = parseInt($(this).val()) || 0;
-        var saltStock = parseInt($('.stockSalt').text());
-        var remainStock = saltStock - amount;
-
-        if(saltStock < amount){
-            $('.stockSalt').hide();
-            $('.msg').html('<strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
-            $('.result').text(0);
-            if(amount === 0){
-                $('.stockSalt').show();
-            }
-        }else{
-            $('.stockSalt').hide();
-            $('.result').text(remainStock);
+                }else{
+                    $('.stockChemical').hide();
+                    $('.resultChemical').text(remainStock);
+                }
+            });
         }
-    });
+    })
+
+});
+
+$(document).on('keyup','.saltAmount',function () {
+    var amount = parseInt($(this).val()) || 0;
+    var saltStock = parseInt($('.stockSalt').text());
+    var remainStock = saltStock - amount;
+
+    if(saltStock < amount){
+        $('.stockSalt').hide();
+        $('.msg').html('<strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+        $('.result').text(0);
+        if(amount === 0){
+            $('.stockSalt').show();
+        }
+    }else{
+        $('.stockSalt').hide();
+        $('.result').text(remainStock);
+    }
+});
 </script>
 
 
