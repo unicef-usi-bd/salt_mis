@@ -242,6 +242,7 @@
     $(document).on('change','.saltType',function(){
         var saltTypeId = $(this).val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
+        var centerId = '<?php echo Auth::user()->center_id; ?>';
         var $iodizeId = '<?php echo $iodizeId; ?>';
        // alert($washAndCrushId);
 
@@ -249,7 +250,7 @@
             $.ajax({
                 type : 'GET',
                 url : 'washing-crashing-stock',
-                data : {'washAndCrushId':$washAndCrushId},
+                data : {'centerId':centerId},
                 success: function (data) {
                     console.log(data);
 //                    var data = JSON.parse(data);
@@ -262,7 +263,7 @@
             $.ajax({
                 type : 'GET',
                 url : 'iodize-stock',
-                data : {'iodizeId':$iodizeId},
+                data : {'centerId':centerId},
                 success: function (data) {
                     var data = JSON.parse(data);
                     $('.stockWashCrash').html(data).show();

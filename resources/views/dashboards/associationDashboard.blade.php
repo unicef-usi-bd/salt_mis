@@ -41,10 +41,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
-                    <div class="infobox-content">
-                        @foreach($totalAssociationproduction as $row)
-                        {{ $row->stock_total }} KG
-                        @endforeach
+                    <div class="infobox-content">{{ $totalAssociationproduction[0]->stock_total }} KG
                     </div>
                 </div>
             </div>
@@ -57,9 +54,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
                     <div class="infobox-content">
-                        @foreach($totalSales as $row)
-                        {{ abs($row->Sales_total) }} KG
-                        @endforeach
+                        {{ abs($totalSales[0]->Sales_total) }} KG
                     </div>
                 </div>
             </div>
@@ -84,9 +79,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        @foreach($associationIodize as $row)
-                        {{ $row->iodize_stock }} KG
-                        @endforeach
+                        {{ $associationIodize[0]->iodize_stock }} KG
                     </div>
                 </div>
             </div>
@@ -99,9 +92,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
                     <div class="infobox-content">
-                        @foreach($totalAssociationIodizeSale as $row)
-                        {{ abs($row->iodize_sale) }} KG
-                        @endforeach
+                        {{ abs($totalAssociationIodizeSale[0]->iodize_sale) }} KG
                     </div>
                 </div>
             </div>
@@ -125,9 +116,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        @foreach($associationWashCrash as $row)
-                        {{ $row->washcrash_stock }} KG
-                        @endforeach
+                        {{ $associationWashCrash[0]->washcrash_stock }} KG
                     </div>
                 </div>
             </div>
@@ -142,9 +131,7 @@
                         INDUSTRIAL SALT
                         SALES</div>
                     <div class="infobox-content">
-                        @foreach($totalAssociationWashCrasheSale as $row)
-                        {{ abs($row->washcrash_sales) }} KG
-                        @endforeach
+                        {{ abs($totalAssociationWashCrasheSale[0]->washcrash_sales) }} KG
                     </div>
                 </div>
             </div>

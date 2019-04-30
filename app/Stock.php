@@ -93,7 +93,7 @@ class Stock extends Model
             ->select(('tmm_itemstock.QTY'))
             ->where('tmm_itemstock.center_id','=',$centerId)
             ->where('tmm_itemstock.TRAN_TYPE','=','W')
-            ->where('tmm_itemstock.TRAN_FLAG','=','WR')
+//            ->where('tmm_itemstock.TRAN_FLAG','=','WR')
             ->orWhere('tmm_itemstock.TRAN_FLAG','=','SD')
             ->sum('tmm_itemstock.QTY');
     }
