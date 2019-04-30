@@ -32,7 +32,7 @@ class ReportController extends Controller
         return view("reports.reportDashboard", compact('itemList','getDivision','issueBy'));
     }
 
-
+// test controller
     public function getAssociationList(){
 
         $asociationLists = Report::getAssociationList();
