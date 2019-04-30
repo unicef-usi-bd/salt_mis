@@ -185,7 +185,7 @@ class MillerInfo extends Model
         ]);
         return $update;
     }
-    // merge mill and deactivate mill account
+    // merge mill and deactivate mill accounts
     public static function deactivateMillEmpTable($request,$id){
         $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
             'FINAL_SUBMIT_FLG' => 0,
