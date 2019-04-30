@@ -33,10 +33,10 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testDispositionIsSetInHeader()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
+        $attachment->setContentType('application/reportPdf');
         $attachment->setDisposition('inline');
         $this->assertEquals(
-            'Content-Type: application/pdf'."\r\n".
+            'Content-Type: application/reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
             'Content-Disposition: inline'."\r\n",
             $attachment->toString()
@@ -46,9 +46,9 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testDispositionIsAttachmentByDefault()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
+        $attachment->setContentType('application/reportPdf');
         $this->assertEquals(
-            'Content-Type: application/pdf'."\r\n".
+            'Content-Type: application/reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
             'Content-Disposition: attachment'."\r\n",
             $attachment->toString()
@@ -58,12 +58,12 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testFilenameIsSetInHeader()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
         $this->assertEquals(
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf'."\r\n",
+            'Content-Disposition: attachment; filename=foo.reportPdf'."\r\n",
             $attachment->toString()
             );
     }
@@ -71,10 +71,10 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testSizeIsSetInHeader()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
+        $attachment->setContentType('application/reportPdf');
         $attachment->setSize(12340);
         $this->assertEquals(
-            'Content-Type: application/pdf'."\r\n".
+            'Content-Type: application/reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
             'Content-Disposition: attachment; size=12340'."\r\n",
             $attachment->toString()
@@ -84,13 +84,13 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testMultipleParametersInHeader()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
         $attachment->setSize(12340);
         $this->assertEquals(
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf; size=12340'."\r\n",
+            'Content-Disposition: attachment; filename=foo.reportPdf; size=12340'."\r\n",
             $attachment->toString()
             );
     }
@@ -98,14 +98,14 @@ class Swift_Mime_AttachmentAcceptanceTest extends \PHPUnit\Framework\TestCase
     public function testEndToEnd()
     {
         $attachment = $this->createAttachment();
-        $attachment->setContentType('application/pdf');
-        $attachment->setFilename('foo.pdf');
+        $attachment->setContentType('application/reportPdf');
+        $attachment->setFilename('foo.reportPdf');
         $attachment->setSize(12340);
         $attachment->setBody('abcd');
         $this->assertEquals(
-            'Content-Type: application/pdf; name=foo.pdf'."\r\n".
+            'Content-Type: application/reportPdf; name=foo.reportPdf'."\r\n".
             'Content-Transfer-Encoding: base64'."\r\n".
-            'Content-Disposition: attachment; filename=foo.pdf; size=12340'."\r\n".
+            'Content-Disposition: attachment; filename=foo.reportPdf; size=12340'."\r\n".
             "\r\n".
             base64_encode('abcd'),
             $attachment->toString()

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Psy\Util\Json;
 
 class ReportController extends Controller
 {
@@ -40,6 +41,33 @@ class ReportController extends Controller
         $view = view("reportView.associationListReport",compact('asociationLists'))->render();
         return response()->json(['html'=>$view]);
 
+    }
+
+    public function getAssociationListPdf(){
+        $asociationLists = Report::getAssociationList();
+        $data = \View::make('reportPdf.associationListReportPdf',compact('asociationLists'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerList(Request $request){
+        $activStatus = $request->input('activStatus');
+        $millerLists = Report::getMillerList($activStatus);
+        //$this->pr($millerLists);
+        $view = view("reportView.millerListReport",compact('millerLists','activStatus'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerListPdf($activStatus){
+        $millerLists = Report::getMillerList($activStatus);
+        //$this->pr($millerLists);
+        $data = \View::make('reportPdf.millerListReportPdf',compact('millerLists'));
+        $this->generatePdf($data);
+    }
+
+    public function getMonitorAssociationList(){
+        $monitorAssociationLists = Report::getMonitorAssociationList();
+        $view = view("reportView.monitorAssociationList",compact('monitorAssociationLists'))->render();
+        return response()->json(['html'=>$view]);
     }
 
 }

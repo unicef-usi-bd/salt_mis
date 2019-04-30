@@ -12,8 +12,8 @@
                                    <option value="">Select One</option>
                                    <optgroup label="Association">
                                        <option  value="association-list">List of Total Association </option>
-                                       <option value="">Type of Miller</option>
-                                       <option value="">Monitor Association</option>
+                                       <option value="miller-list/{activStatus}">Type of Miller</option>
+                                       <option value="monitor-association">Monitor Association</option>
                                        <option value="">List of Association </option>
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
@@ -268,17 +268,19 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">--}}
-                                   {{--<option value="1">Active</option>--}}
-                                   {{--<option value="0">Inactive</option>--}}
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="status" name="ACTIVE_FLG">
+                                   <option value="">--Select--</option>
+                                   <option value="0">Select All</option>
+                                   <option value="1">Active</option>
+                                   <option value="2">Inactive</option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
 
 
 

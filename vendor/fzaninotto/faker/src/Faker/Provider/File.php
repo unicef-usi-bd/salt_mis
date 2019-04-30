@@ -42,7 +42,7 @@ class File extends Base
         ),
         'application/ogg'                                                           => 'ogx',
         'application/omdoc+xml'                                                     => 'omdoc',
-        'application/pdf'                                                           => 'pdf',
+        'application/reportPdf'                                                           => 'reportPdf',
         'application/pgp-encrypted'                                                 => 'pgp',
         'application/pgp-signature'                                                 => array('asc', 'sig'),
         'application/pkix-pkipath'                                                  => 'pkipath',

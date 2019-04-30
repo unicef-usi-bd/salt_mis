@@ -45,15 +45,15 @@
 
             <div class="col-sm-8">
                     <span class="col-sm-6" style="padding: 0;">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
+                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
                     </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical"></span>KG<span class="resultChemical"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical hidden"></span><span class="resultChemical"></span> KG)</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <div class="col-sm-7">
-                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Auto Generate" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
 
             </div>
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
@@ -85,7 +85,7 @@
 
 {{--@include('masterGlobal.formValidation')--}}
 <script>
-    $('.chemicalAmount').attr('readonly', true);
+    //$('.chemicalAmount').attr('readonly', true);
     $(document).on('change','.chemical',function(){
         var washSaltAmount = $('.saltAmount').val();
         var chemicalId = $(this).val();
@@ -100,8 +100,10 @@
             success: function (data) {
                // alert(data)
                 var data = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 $('.stockChemical').html(data.chemicalStock).show();
+                $('.resultChemical').html(data.chemicalStock);
+                $('.chemicalAmount').val('');
 
                 var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
 

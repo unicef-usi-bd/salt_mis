@@ -203,11 +203,12 @@
 
             var url = $('.reportType').val();
             var centerId = $('.center').val();
-//alert(url);
+            var activStatus = $('.status').val();
+//alert(status);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId},
+                data : {'centerId':centerId,'activStatus':activStatus},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

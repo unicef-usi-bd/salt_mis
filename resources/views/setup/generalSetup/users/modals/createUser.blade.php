@@ -105,7 +105,7 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.user_group') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess user_group" class="chosen-select form-control user_group" name="user_group_id" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess user_group" class="chosen-select form-control user_group" name="user_group_id" data-placeholder="Select User Group">
                                 <option value=""> </option>
                                 @foreach($userGroups as $userGroup)
                                     <option value="{{$userGroup->USERGRP_ID}}"> {{$userGroup->USERGRP_NAME}}</option>
@@ -119,7 +119,7 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select Group Level">
                                 <option value="">Select One</option>
                             </select>
                         </span>
@@ -130,7 +130,7 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess center_id" class="chosen-select form-control" name="center_id" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess center_id" class="chosen-select form-control" name="center_id" data-placeholder="Select Center">
                                 <option value=""> </option>
                                 @foreach($associationCenter as $center)
                                     <option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>
