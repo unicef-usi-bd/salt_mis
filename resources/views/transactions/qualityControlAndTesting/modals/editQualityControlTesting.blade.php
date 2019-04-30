@@ -27,7 +27,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Agency</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select or search data">
+                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
                                <option value=""></option>
                                 @foreach($agencyId as $agency)
                                     <option value="{{ $agency->LOOKUPCHD_ID }}" @if($agency->LOOKUPCHD_ID==$editQualityControl->AGENCY_ID) selected @endif>{{ $agency->LOOKUPCHD_NAME }}</option>
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Attached Test Document</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
-                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder=""  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
+                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select or search data">
+                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
                                <option value=""></option>
                                 @foreach($iodizeBatch as $iodize)
                                     <option value="{{ $iodize->IODIZEDMST_ID }}" @if($iodize->IODIZEDMST_ID==$editQualityControl->BATCH_NO) selected @endif>{{ $iodize->BATCH_NO }}</option>

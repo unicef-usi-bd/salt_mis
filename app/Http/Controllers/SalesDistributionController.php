@@ -135,24 +135,25 @@ class SalesDistributionController extends Controller
     }
 
     public function getWashingCrashingSalt(Request $request){
-     $washCrashId = $request->input('washAndCrushId');
-     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
-     $totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
+        $centerId = $request->input('centerId');
+//     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
+        $stock = Stock::getTotalWashingSalt($centerId);
+     //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
 
-     $stock = $washCrashStock - abs($totalReduceWashCrashSalt);
+     //$stock = $washCrashStock - abs($totalReduceWashCrashSalt);
 
      return $stock;
 
     }
 
     public function getIodizeSalt(Request $request){
-        $iodizeId = $request->input('iodizeId');
-        $iodizeStock = Stock::getTotalIodizeSaltForSale($iodizeId);
-        $totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+        $centerId = $request->input('centerId');
+        $iodizeStock = Stock::getTotalIodizeSaltForSale($centerId);
+        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
 
-        $idizeStock = $iodizeStock - abs($totalReduceIodizeSalt);
+        //$idizeStock = $iodizeStock - abs($totalReduceIodizeSalt);
 
-        return $idizeStock;
+        return $iodizeStock;
 
     }
 }

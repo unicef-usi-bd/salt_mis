@@ -13,14 +13,14 @@
                     <th class=" ">Chemical Type</th>
                     <th> :</th>
                     <td>{{ $showRequireChemicalPerKgchd->ITEM_NAME}} </td>
-                    <th class=" ">Amount</th>
+                    <th class=" ">Chemical Amount</th>
                     <th> :</th>
-                    <td>{{ $showRequireChemicalPerKgchd->USE_QTY}} </td>
+                    <td>{{ $showRequireChemicalPerKgchd->USE_QTY}} KG</td>
                 </tr>
                 <tr>
-                    <th class=" ">Wastage</th>
+                    <th class=" ">Salt Amount</th>
                     <th> :</th>
-                    <td>{{ $showRequireChemicalPerKgchd->WAST_PER}} </td>
+                    <td>{{ $showRequireChemicalPerKgchd->CRUDE_SALT}} KG</td>
                     <th>Status</th>
                     <th> :</th>
                     <td>

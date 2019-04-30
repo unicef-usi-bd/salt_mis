@@ -29,7 +29,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> </span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="chosen-select form-control salt" name="PRODUCT_ID" data-placeholder="Select or search data">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
                             <option value="{{$chemical->ITEM_NO}}" @if($chemical->ITEM_NO == $editWashingAndCrushingData->ITEM_NO) selected @endif> {{$chemical->ITEM_NAME}}</option>
@@ -46,7 +46,7 @@
                      <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value="{{ $editWashingAndCrushingData->REQ_QTY }}"/>
                 </span>
 
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $saltStock }}</span><span class="result"></span>)</span>
+                <span class="col-sm-6 stockInfo" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt ">{{ $saltStock }}</span><span class="result"></span>)</span>
             </div>
         </div>
         <div class="form-group">
@@ -86,38 +86,46 @@
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
 <script>
+$(document).ready(function () {
+//        $('.stockInfo').addClass('hidden');
+});
 
-    $(document).on('change','.salt',function(){
-        var saltId = $(this).val();
-        $.ajax({
-            type : 'GET',
-            url : 'crude-salt-stock',
-            data : {'saltId':saltId},
-            success: function (data) {
-                var data = JSON.parse(data);
-                $('.stockSalt').html(data.saltStock).show();
+$(document).on('change','.salt',function(){
+    $('.stockSalt').empty()
+    var saltId = $(this).val();
+    $.ajax({
+        type : 'GET',
+        url : 'crude-salt-stock',
+        data : {'saltId':saltId},
+        success: function (data) {
+            var data = JSON.parse(data);
+            //console.log(data);
+            $('.stockSalt').html(data.saltStock).show();
+            $('.result').html(data.saltStock).hide();
 //                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
-            }
-        })
-    });
-
-    $(document).on('keyup','.crudeSaltAmount',function () {
-        var amount = parseInt($(this).val()) || 0;
-        var saltStock = parseInt($('.stockSalt').text());
-        var remainStock = saltStock - amount;
-
-        if(saltStock < amount){
-            $('.stockSalt').hide();
-            $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
-            $('.result').text(0);
-            if(amount === 0){
-                $('.stockSalt').show();
-            }
-        }else{
-            $('.stockSalt').hide();
-            $('.result').text(remainStock);
+            $('.crudeSaltAmount').val('');
+            //$('.stockSalt').hide('').show();
         }
-    });
+    })
+});
+
+$(document).on('keyup','.crudeSaltAmount',function () {
+    var amount = parseInt($(this).val()) || 0;
+    var saltStock = parseInt($('.stockSalt').text());
+    var remainStock = saltStock - amount;
+
+    if(saltStock < amount){
+        $('.stockSalt').hide();
+        $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+        $('.result').text(0);
+        if(amount === 0){
+            $('.stockSalt').show();
+        }
+    }else{
+        $('.stockSalt').hide();
+        $('.result').text(remainStock);
+    }
+});
 </script>
 
 

@@ -76,9 +76,10 @@
                                         <tr>
 
                                             <th class="fixedWidth" >{{ trans('lookupGroupIndex.sl') }}</th>
-                                            <th>{{ trans('lookupGroupIndex.name') }}</th>
-                                            <th class="hidden-480">Chemical Type</th>
-                                            <th class="hidden-480">Amount</th>
+                                            <th>Chemical Name</th>
+                                            {{--<th class="hidden-480">Chemical Type</th>--}}
+                                            <th class="hidden-480">Salt Amount (KG)</th>
+                                            <th class="hidden-480">Chemical Amount (KG)</th>
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
                                         </tr>
                                         </thead>
@@ -97,13 +98,13 @@
                                                     <?php echo $chemicalData->ITEM_NAME; ?>
 
                                                 </td>
+                                                <td >
+                                                    <?php echo $chemicalData->CRUDE_SALT; ?>
+
+                                                </td>
 
                                                 <td >
                                                     <?php echo $chemicalData->USE_QTY; ?>
-
-                                                </td>
-                                                <td >
-                                                    <?php echo $chemicalData->WAST_PER; ?>
 
                                                 </td>
 

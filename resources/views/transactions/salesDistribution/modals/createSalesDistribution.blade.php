@@ -20,7 +20,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="chosen-select form-control" name="SELLER_TYPE" data-placeholder="Select or search data">
+                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="chosen-select form-control" name="SELLER_TYPE" data-placeholder="Select Seller Type">
                    <option value=""></option>
                     @foreach($sellerType as $seller)
                         <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
@@ -41,7 +41,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="chosen-select form-control" name="CUSTOMER_ID" data-placeholder="Select or search data">
+                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="chosen-select form-control" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
                    <option value=""></option>
                     @foreach($tradingId as $trading)
                     <option value="{{$trading->CUSTOMER_ID}}"> {{$trading->TRADING_NAME}}</option>
@@ -65,19 +65,19 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess DRIVER_NAME" placeholder=" " name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here" name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle License</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder=" " name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here" name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess MOBILE_NO" placeholder=" " name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here" name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>
@@ -85,13 +85,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle No</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess VEHICLE_NO" placeholder=" " name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport Name</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder=" " name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -242,6 +242,7 @@
     $(document).on('change','.saltType',function(){
         var saltTypeId = $(this).val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
+        var centerId = '<?php echo Auth::user()->center_id; ?>';
         var $iodizeId = '<?php echo $iodizeId; ?>';
        // alert($washAndCrushId);
 
@@ -249,7 +250,7 @@
             $.ajax({
                 type : 'GET',
                 url : 'washing-crashing-stock',
-                data : {'washAndCrushId':$washAndCrushId},
+                data : {'centerId':centerId},
                 success: function (data) {
                     console.log(data);
 //                    var data = JSON.parse(data);
@@ -262,7 +263,7 @@
             $.ajax({
                 type : 'GET',
                 url : 'iodize-stock',
-                data : {'iodizeId':$iodizeId},
+                data : {'centerId':centerId},
                 success: function (data) {
                     var data = JSON.parse(data);
                     $('.stockWashCrash').html(data).show();
