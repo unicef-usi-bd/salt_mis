@@ -64,7 +64,7 @@ public static function getMonitorAssociationList(){
     return DB::select(DB::raw(" select ass.ASSOCIATION_NAME, count(mi.MILL_NAME)Mill_Number 
                       from ssm_associationsetup ass
                       left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
-                      where ass.PARENT_ID != '0' and ass.center_id= $centerId"));
+                      where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
     }
 
 

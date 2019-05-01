@@ -202,13 +202,13 @@
         $(document).on('click','.btnReport',function(){
 
             var url = $('.reportType').val();
-            var centerId = $('.center').val();
+            //var centerId = $('.center').val();
             var activStatus = $('.status').val();
 //alert(status);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus},
+                data : {'activStatus':activStatus},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();
