@@ -200,23 +200,75 @@
     <script type="text/javascript">
         $('.resultTab').hide();
         $(document).on('click','.btnReport',function(){
+            var cost_center_type=$(this).attr('cost-center-type');
+           // var url = $('.reportType').val();
+           // alert(url);
 
-            var url = $('.reportType').val();
-            //var centerId = $('.center').val();
-            var activStatus = $('.status').val();
-//alert(status);
-            $.ajax({
-                type : "get",
-                url  : url,
-                data : {'activStatus':activStatus},
-                success:function (data) {
+            if(cost_center_type == 'admin'){
+                var url = $('.reportType').val();
+                //var centerId = $('.center').val();
+                var activStatus = $('.status').val();
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'activStatus':activStatus},
+                    success:function (data) {
 //                    console.log(data);
-                    $('.soeRowDiv').hide();
-                    $('.resultTab').show();
-                    $('.tblReport').html(data.html);
+                        $('.soeRowDiv').hide();
+                        $('.resultTab').show();
+                        $('.tblReport').html(data.html);
 
-                }
-            });
+                    }
+                });
+            }else if(cost_center_type == 'unicef'){
+                var url = $('.reportType2').val();
+                //var centerId = $('.center').val();
+                var activStatus = $('.status1').val();
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'activStatus':activStatus},
+                    success:function (data) {
+//                    console.log(data);
+                        $('.soeRowDiv').hide();
+                        $('.resultTab').show();
+                        $('.tblReport').html(data.html);
+
+                    }
+                });
+            }else if(cost_center_type == 'bsti'){
+                var url = $('.reportType3').val();
+                //var centerId = $('.center').val();
+                var activStatus = $('.status2').val();
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'activStatus':activStatus},
+                    success:function (data) {
+//                    console.log(data);
+                        $('.soeRowDiv').hide();
+                        $('.resultTab').show();
+                        $('.tblReport').html(data.html);
+
+                    }
+                });
+            }else if(cost_center_type == 'basic'){
+                var url = $('.reportType4').val();
+                //var centerId = $('.center').val();
+                var activStatus = $('.status3').val();
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'activStatus':activStatus},
+                    success:function (data) {
+//                    console.log(data);
+                        $('.soeRowDiv').hide();
+                        $('.resultTab').show();
+                        $('.tblReport').html(data.html);
+
+                    }
+                });
+            }
 
         });
     </script>

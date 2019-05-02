@@ -43,6 +43,7 @@ class ReportController extends Controller
 
     }
 
+
     public function getAssociationListPdf(){
         $asociationLists = Report::getAssociationList();
         $data = \View::make('reportPdf.associationListReportPdf',compact('asociationLists'));

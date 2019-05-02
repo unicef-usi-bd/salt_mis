@@ -6,6 +6,7 @@ use App\Stock;
 use App\WashingAndCrushing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class WashCrushService extends Controller
@@ -43,9 +44,10 @@ class WashCrushService extends Controller
 
     public function storeWashCrashData(Request $request){
         $centerId = $request->input('centerId');
+        //$centerId = Auth::user()->center_id;
         $entryBy = $request->input('entryBy');
 
-        //$this->pr($entryBy);
+        $this->pr($centerId);
         $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
 
         if (!empty($washingAndCrashing)){

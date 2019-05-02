@@ -29,6 +29,7 @@ class WashingAndCrushing extends Model
     }
 
     public static function insertWashingAndCrushingData($request,$entryBy,$centerId){
+
         $washingCrushingMstId = DB::table('tmm_washcrashmst')->insertGetId([
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
             'BATCH_NO' => $request->input('BATCH_NO'),

@@ -135,6 +135,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('association-list','ReportController@getAssociationList');//jalal
     Route::get('miller-list/{activStatus}','ReportController@getMillerList');//jalal
     Route::get('monitor-association','ReportController@getMonitorAssociationList');//jalal
+    //Route::get('association-list-unicef','ReportController@getAssociationListForUnicef');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase','ReportTestController@getChemicalPurchase');//Rubiyat

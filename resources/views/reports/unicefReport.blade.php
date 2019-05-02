@@ -8,7 +8,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                               <select class="chosen-select chosen-container reportType2" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
                                    <optgroup label="Association">
                                        <option value="association-list">List of Total Association </option>
@@ -272,7 +272,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                     <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select class="status" name="ACTIVE_FLG">
+                               <select class="status1" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
                                    <option value="0">Select All</option>
                                    <option value="1">Active</option>
@@ -294,7 +294,7 @@
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
-                    <button type="submit" class="btn btn-primary btnReport">
+                    <button type="submit" cost-center-type="unicef" class="btn btn-primary btnReport">
                         <i class="ace-icon fa fa-check bigger-110"></i>
                         Show Report
                     </button>

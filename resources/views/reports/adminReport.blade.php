@@ -295,7 +295,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary btnReport">
+                        <button type="submit" cost-center-type="admin" class="btn btn-primary btnReport">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                            Show Report
                         </button>

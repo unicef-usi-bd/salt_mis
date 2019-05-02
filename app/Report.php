@@ -24,6 +24,14 @@ class Report extends Model
          ->get();
  }
 
+    public static function getAssociationListForUnicef (){
+        return DB::table('ssm_associationsetup')
+            ->select('ssm_associationsetup.*','ssm_zonesetup.ZONE_NAME')
+            ->leftJoin('ssm_zonesetup','ssm_associationsetup.ZONE_ID','=','ssm_zonesetup.ZONE_ID')
+            ->where('ssm_associationsetup.PARENT_ID','!=',0)
+            ->get();
+    }
+
     public static function getAssociationListPdf (){
         return DB::table('ssm_associationsetup')
             ->select('ssm_associationsetup.*','ssm_zonesetup.ZONE_NAME')
@@ -65,6 +73,10 @@ public static function getMonitorAssociationList(){
                       from ssm_associationsetup ass
                       left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
                       where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
+    }
+
+    public static function getSupplirerList(){
+     
     }
 
 
