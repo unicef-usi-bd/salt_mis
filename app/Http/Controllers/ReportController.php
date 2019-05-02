@@ -71,4 +71,8 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
+    public function getPurchaseSalteList(){
+
+    }
+
 }

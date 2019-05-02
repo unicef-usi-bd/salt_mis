@@ -200,14 +200,14 @@
     <script type="text/javascript">
         $('.resultTab').hide();
         $(document).on('click','.btnReport',function(){
-            var cost_center_type=$(this).attr('cost-center-type');
+            var center_type=$(this).attr('center-type');
            // var url = $('.reportType').val();
            // alert(url);
 
-            if(cost_center_type == 'admin'){
-                var url = $('.reportType').val();
+            if(center_type == 'admin'){
+                var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
-                var activStatus = $('.status').val();
+                var activStatus = $('.statusAdmin').val();
                 $.ajax({
                     type : "get",
                     url  : url,
@@ -220,10 +220,10 @@
 
                     }
                 });
-            }else if(cost_center_type == 'unicef'){
-                var url = $('.reportType2').val();
+            }else if(center_type == 'unicef'){
+                var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
-                var activStatus = $('.status1').val();
+                var activStatus = $('.statusUnicef').val();
                 $.ajax({
                     type : "get",
                     url  : url,
@@ -236,10 +236,10 @@
 
                     }
                 });
-            }else if(cost_center_type == 'bsti'){
-                var url = $('.reportType3').val();
+            }else if(center_type == 'bsti'){
+                var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
-                var activStatus = $('.status2').val();
+                var activStatus = $('.statusBsti').val();
                 $.ajax({
                     type : "get",
                     url  : url,
@@ -252,10 +252,10 @@
 
                     }
                 });
-            }else if(cost_center_type == 'basic'){
-                var url = $('.reportType4').val();
+            }else if(center_type == 'basic'){
+                var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
-                var activStatus = $('.status3').val();
+                var activStatus = $('.statusBasic').val();
                 $.ajax({
                     type : "get",
                     url  : url,

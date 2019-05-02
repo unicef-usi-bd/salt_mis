@@ -76,8 +76,18 @@ public static function getMonitorAssociationList(){
     }
 
     public static function getSupplirerList(){
-     
+    $centerId = Auth::user()->center_id;
+     $supplierList = DB::table('ssm_supplier_info as ss');
+     $supplierList->select('ss.TRADING_NAME','ssc_divisions.DIVISION_NAME','tmm_itemstock.QTY');
+     $supplierList->leftJoin('ssc_divisions','ss.DIVISION_ID','=','ssc_divisions.DIVISION_ID');
+     $supplierList->leftJoin('ssc_districts','ss.DISTRICT_ID','=','ssc_districts.DISTRICT_ID');
+     $supplierList->leftJoin('tmm_itemstock','ss.SUPP_ID_AUTO','=','tmm_itemstock.SUPP_ID_AUTO');
+        if($centerId){
+            $supplierList->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $supplierList->get();
     }
+
 
 
 }
