@@ -140,6 +140,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase','ReportTestController@getChemicalPurchase');//Rubiyat
     Route::get('chemical-purchase-stock','ReportTestController@getChemicalPurchaseStock');//Rubiyat
+    Route::get('monitor-supplier','ReportTestController@getMonitorSupplier');//Rubiyat
+    Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat
 
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
@@ -147,6 +149,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-item-list-pdf','ReportTestController@getChemicalItemListPdf');//Rubiyat
     Route::get('chemical-purchase-pdf','ReportTestController@getChemicalPurchasePdf');//Rubiyat
     Route::get('chemical-purchase-stock-pdf','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
+    Route::get('monitor-supplier-pdf','ReportTestController@getMonitorSupplierPdf');//Rubiyat
+    Route::get('supplier-list-pdf/{division}/{district}/{value}','ReportTestController@getSupplierListPdf');//Rubiyat
 
 });
 

@@ -16,8 +16,13 @@ class ReportTest extends Model
         $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
         $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
         if($centerId){
-            $chemicalItemList->Where('ts.center_id','=',$centerId);
+            $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
         }
         return $chemicalItemList->get();
     }
+
+    public static function monitorSupplierList(){
+
+    }
+
 }
