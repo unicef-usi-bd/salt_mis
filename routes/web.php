@@ -143,6 +143,9 @@ Route::group(['middleware' => ['auth']], function() {
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
+    Route::get('chemical-item-list-pdf','ReportTestController@getChemicalItemListPdf');//Rubiyat
+    Route::get('chemical-purchase-pdf','ReportTestController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
 
 });
 

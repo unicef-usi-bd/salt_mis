@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-list-reportPdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('chemical-item-list-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>List of Chemical Item Purchase</h4>
     </div><!-- /.col -->
@@ -16,11 +16,6 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
                 <th>Item Type</th>

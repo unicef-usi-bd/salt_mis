@@ -31,4 +31,11 @@ class ReportTestController extends Controller
         $view = view("reportView.purchaseChemicalList",compact('purchaseChemicalLists','centerId'))->render();
         return response()->json(['html'=>$view]);
     }
+
+    public function getChemicalItemListPdf(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalLists = ReportTest::getPurchaseChemicalList($centerId);
+        $data = \View::make('reportPdf.purchaseChemicalListPdf',compact('purchaseChemicalLists'));
+        $this->generatePdf($data);
+    }
 }
