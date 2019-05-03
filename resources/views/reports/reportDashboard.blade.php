@@ -268,6 +268,22 @@
 
                     }
                 });
+            }else if(center_type == 'miller'){
+                var url = $('.reportMiller').val();
+                var centerId = $('.center').val();
+                //var activStatus = $('.statusBasic').val();
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'centerId':centerId},
+                    success:function (data) {
+//                    console.log(data);
+                        $('.soeRowDiv').hide();
+                        $('.resultTab').show();
+                        $('.tblReport').html(data.html);
+
+                    }
+                });
             }
 
         });
