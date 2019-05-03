@@ -136,6 +136,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('miller-list/{activStatus}','ReportController@getMillerList');//jalal
     Route::get('monitor-association','ReportController@getMonitorAssociationList');//jalal
     //Route::get('association-list-unicef','ReportController@getAssociationListForUnicef');//jalal
+    //Route::get('supplier-list','ReportController@getSupplierList');//jalal
+    Route::get('purchase-salt-list','ReportController@getPurchaseSalteList');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase','ReportTestController@getChemicalPurchase');//Rubiyat
