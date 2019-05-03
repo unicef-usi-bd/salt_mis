@@ -38,4 +38,32 @@ class ReportTestController extends Controller
         $data = \View::make('reportPdf.purchaseChemicalListPdf',compact('purchaseChemicalLists'));
         $this->generatePdf($data);
     }
+
+    public function getChemicalPurchase(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalPurchasePdf(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
+        $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
+        $this->generatePdf($data);
+    }
+
+    public function getChemicalPurchaseStock(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = ReportTest::getPurchaseChemicalList($centerId);
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalPurchaseStockPdf(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = ReportTest::getPurchaseChemicalList($centerId);
+        $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
+        $this->generatePdf($data);
+    }
 }

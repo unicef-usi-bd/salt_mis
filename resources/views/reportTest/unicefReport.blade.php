@@ -1,4 +1,4 @@
-<div id="admin" class="tab-pane fade in active">
+<div id="unicef" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >
@@ -8,12 +8,12 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
-                               <select class="chosen-container reportTypeAdmin" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                               <select class="chosen-select chosen-container reportTypeUnicef" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
                                    <optgroup label="Association">
-                                       <option  value="association-list">List of Total Association </option>
+                                       <option value="association-list">List of Total Association </option>
                                        <option value="miller-list/{activStatus}">Type of Miller</option>
-                                       <option value="monitor-association">Monitor Association</option>
+                                       <option value="">Monitor Association</option>
                                        <option value="">List of Association </option>
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
@@ -28,6 +28,7 @@
                                        <option value="chemical-item-list">List of Item </option>
                                        <option value="chemical-purchase">Purchase</option>
                                        <option value="chemical-purchase-stock">Purchase Stock</option>
+
                                   </optgroup>
                                    <optgroup label="Process">
                                        <option value="">Process  Stock</option>
@@ -264,9 +265,9 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
-                        <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
+                    <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="status" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
@@ -275,39 +276,28 @@
                                    <option value="2">Inactive</option>
                                </select>
                             </span>
-                        </div>
                     </div>
+                </div>
 
 
 
 
                 {{--</div>--}}
             </form>
-
-                <br>
-                <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                        <button type="reset" class="btn">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            {{ trans('dashboard.reset') }}
-                        </button>
-                        <button type="submit" center-type="admin" class="btn btn-primary btnReport">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                           Show Report
-                        </button>
-                    </div>
+            <br>
+            <div class="clearfix">
+                <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
+                    <button type="reset" class="btn">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        {{ trans('dashboard.reset') }}
+                    </button>
+                    <button type="submit" center-type="unicef" class="btn btn-primary btnReport">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Show Report
+                    </button>
                 </div>
-
-
+            </div>
 
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
