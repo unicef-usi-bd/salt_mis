@@ -22,7 +22,13 @@ class ReportTest extends Model
     }
 
     public static function monitorSupplierList(){
+        $centerId = Auth::user()->center_id;
 
+        return DB::raw(DB::select("select si.TRADING_NAME, si.TRADER_NAME, lc.LOOKUPCHD_NAME, it.QTY
+                                          from ssm_supplier_info si
+                                          left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = si.SUPPLIER_TYPE_ID
+                                          left join tmm_itemstock it on it.SUPP_ID_AUTO = si.SUPP_ID_AUTO
+                                          where it.center_id = $centerId"));
     }
 
 }

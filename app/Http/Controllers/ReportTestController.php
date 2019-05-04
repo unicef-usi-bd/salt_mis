@@ -66,4 +66,10 @@ class ReportTestController extends Controller
         $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
         $this->generatePdf($data);
     }
+
+    public function getMonitorSupplier(){
+        $monitorSuppliers = ReportTest::monitorSupplierList();
+        $view = view("reportView.monitorSuppliers",compact('monitorSuppliers'))->render();
+        return response()->json(['html'=>$view]);
+    }
 }

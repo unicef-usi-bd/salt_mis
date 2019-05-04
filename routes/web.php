@@ -140,7 +140,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-list','ReportController@getPurchaseSalteList');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
-    Route::get('chemical-purchase','ReportTestController@getChemicalPurchase');//Rubiyat
+    Route::get('chemical-purchase-report','ReportTestController@getChemicalPurchase');//Rubiyat
     Route::get('chemical-purchase-stock','ReportTestController@getChemicalPurchaseStock');//Rubiyat
     Route::get('monitor-supplier','ReportTestController@getMonitorSupplier');//Rubiyat
     Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat

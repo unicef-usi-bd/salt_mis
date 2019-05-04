@@ -26,7 +26,7 @@
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="chemical-item-list">List of Item </option>
-                                       <option value="chemical-purchase">Purchase</option>
+                                       <option value="chemical-purchase-report">Purchase</option>
                                        <option value="chemical-purchase-stock">Purchase Stock</option>
                                   </optgroup>
                                    <optgroup label="Process">
