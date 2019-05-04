@@ -147,6 +147,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('monitor-supplier','ReportTestController@getMonitorSupplier');//Rubiyat
     Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat
 
+    Route::get('process-stock-report','ReportTestController@getProcessStockReport');//Rubiyat
+
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
