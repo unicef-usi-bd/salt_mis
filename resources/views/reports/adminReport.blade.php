@@ -17,7 +17,7 @@
                                        <option value="">List of Association </option>
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
-                                       <option value="">List of Item </option>
+                                       <option value="purchase-salt-list">List of Item </option>
                                        <option value="">Total Purchase</option>
                                        <option value="">Purchase Stock</option>
                                        <option value="">List of Association </option>

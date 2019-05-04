@@ -72,6 +72,35 @@ class ReportController extends Controller
     }
 
     public function getPurchaseSalteList(){
+        $centerId = Auth::user()->center_id;
+        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltList",compact('purchaseSaltList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getPurchaseSalteListPdf(){
+        $centerId = Auth::user()->center_id;
+        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
+        $data = \View::make('reportPdf.purchaseSalteListReportPdf',compact('purchaseSaltList'));
+        $this->generatePdf($data);
+    }
+
+    public function getPurchaseSaltAmount(){
+        $centerId = Auth::user()->center_id;
+        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseSaltList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getPurchaseSaltAmountPdf(){
+
+    }
+
+    public function getPurchaseSaltStock(){
+
+    }
+
+    public function getPurchaseSaltStockPdf(){
 
     }
 

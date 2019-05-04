@@ -88,6 +88,19 @@ public static function getMonitorAssociationList(){
         return $supplierList->get();
     }
 
+    public static function getPurchaseSalteList($centerId){
 
+        $purchaseSaltList = DB::table('ssc_lookupchd');
+        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*');
+        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
+        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
+        if($centerId){
+            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
+        }
+
+        return $purchaseSaltList->get();
+    }
 
 }

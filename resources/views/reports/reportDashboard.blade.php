@@ -208,67 +208,36 @@
                 var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'activStatus':activStatus},
-                    success:function (data) {
-//                    console.log(data);
-                        $('.soeRowDiv').hide();
-                        $('.resultTab').show();
-                        $('.tblReport').html(data.html);
-
-                    }
-                });
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusUnicef').val();
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'activStatus':activStatus},
-                    success:function (data) {
-//                    console.log(data);
-                        $('.soeRowDiv').hide();
-                        $('.resultTab').show();
-                        $('.tblReport').html(data.html);
-
-                    }
-                });
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBsti').val();
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'activStatus':activStatus},
-                    success:function (data) {
-//                    console.log(data);
-                        $('.soeRowDiv').hide();
-                        $('.resultTab').show();
-                        $('.tblReport').html(data.html);
-
-                    }
-                });
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'activStatus':activStatus},
-                    success:function (data) {
-//                    console.log(data);
-                        $('.soeRowDiv').hide();
-                        $('.resultTab').show();
-                        $('.tblReport').html(data.html);
-
-                    }
-                });
+            }else if(center_type == 'miller'){
+                var url = $('.reportMiller').val();
+                var centerId = $('.center').val();
+                //var activStatus = $('.statusBasic').val();
             }
+
+            $.ajax({
+                type : "get",
+                url  : url,
+                data : {'centerId':centerId},
+                success:function (data) {
+//                    console.log(data);
+                    $('.soeRowDiv').hide();
+                    $('.resultTab').show();
+                    $('.tblReport').html(data.html);
+
+                }
+            });
 
         });
     </script>
