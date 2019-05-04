@@ -47,7 +47,7 @@ class WashCrushService extends Controller
         //$centerId = Auth::user()->center_id;
         $entryBy = $request->input('entryBy');
 
-        $this->pr($centerId);
+//        $this->pr($centerId);
         $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
 
         if (!empty($washingAndCrashing)){
