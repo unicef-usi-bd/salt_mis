@@ -18,11 +18,8 @@
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="">Total Purchase</option>
-                                       <option value="">Purchase Stock</option>
-                                       <option value="">List of Association </option>
-                                       <option value="">List of Supplier </option>
-                                       <option value="">Monitor Supplier </option>
+                                       <option value="purchase-salt-amount">Total Purchase</option>
+                                       <option value="purchase-salt-stock">Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="">List of Item </option>
@@ -279,17 +276,29 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
+                <div class="col-md-6">
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                     <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select class="statusBasic" name="ACTIVE_FLG">
+                               <select class="statusBasic width-65" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
                                    <option value="0">Select All</option>
                                    <option value="1">Active</option>
                                    <option value="2">Inactive</option>
                                </select>
                             </span>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
+                        <div class="col-sm-8">
+                                <span class="block input-icon input-icon-right ">
+                                    {{--<input type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
+                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 reportrange " />
+
+                                </span>
+                        </div>
                     </div>
                 </div>
 
@@ -315,3 +324,33 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
+<script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
+<link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
+<script>
+    $(function() {
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('.reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('.reportrange').daterangepicker({
+
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+    });
+</script>

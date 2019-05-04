@@ -87,21 +87,30 @@ class ReportController extends Controller
 
     public function getPurchaseSaltAmount(){
         $centerId = Auth::user()->center_id;
-        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
-        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseSaltList'))->render();
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getPurchaseSaltAmountPdf(){
-
+        $centerId = Auth::user()->center_id;
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
+        $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
+        $this->generatePdf($data);
     }
 
     public function getPurchaseSaltStock(){
-
+        $centerId = Auth::user()->center_id;
+        $purchaseTotalSaltStock = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltStockReport",compact('purchaseTotalSaltStock'))->render();
+        return response()->json(['html'=>$view]);
     }
 
     public function getPurchaseSaltStockPdf(){
-
+        $centerId = Auth::user()->center_id;
+        $purchaseTotalSaltStock = Report::getPurchaseSalteList($centerId);
+        $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
+        $this->generatePdf($data);
     }
 
 }
