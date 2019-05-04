@@ -40,6 +40,8 @@ class Report extends Model
             ->get();
     }
 
+
+
  public static function getMillerList($activStatus){
         $centerId = Auth::user()->center_id;
         $miller = DB::table('ssm_mill_info');
@@ -57,23 +59,30 @@ class Report extends Model
         return $miller->get();
  }
 
-public static function getMonitorAssociationList(){
-        $centerId = Auth::user()->center_id;
-//        $associationMiller = DB::table('ssm_associationsetup');
-//        $associationMiller ->select('ssm_associationsetup.*','count(ssm_mill_info.MILL_NAME) as miller_number');
-//        $associationMiller->leftJoin('ssm_mill_info','ssm_associationsetup.MILL_ID','=','ssm_mill_info.MILL_ID');
-//        $associationMiller->where('ssm_associationsetup.PARENT_ID','!=',0);
-//       if($centerId){
-//           $associationMiller->where('ssm_mill_info.center_id','=',$centerId);
-//       }
-//
-//    return $associationMiller->get();
-
-    return DB::select(DB::raw(" select ass.ASSOCIATION_NAME, count(mi.MILL_NAME)Mill_Number 
-                      from ssm_associationsetup ass
-                      left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
-                      where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
+    public static function getMonitorAssociationList(){
+     return DB::select(DB::raw("select ass.ASSOCIATION_NAME, count(mi.center_id)Total_mill
+                from ssm_associationsetup ass
+                left join ssm_mill_info mi on mi.ZONE_ID = ass.ZONE_ID 
+                where ass.PARENT_ID = 1 group by ass.ASSOCIATION_NAME"));
     }
+
+//public static function getMonitorAssociationList(){
+//        $centerId = Auth::user()->center_id;
+////        $associationMiller = DB::table('ssm_associationsetup');
+////        $associationMiller ->select('ssm_associationsetup.*','count(ssm_mill_info.MILL_NAME) as miller_number');
+////        $associationMiller->leftJoin('ssm_mill_info','ssm_associationsetup.MILL_ID','=','ssm_mill_info.MILL_ID');
+////        $associationMiller->where('ssm_associationsetup.PARENT_ID','!=',0);
+////       if($centerId){
+////           $associationMiller->where('ssm_mill_info.center_id','=',$centerId);
+////       }
+////
+////    return $associationMiller->get();
+//
+//    return DB::select(DB::raw(" select ass.ASSOCIATION_NAME, count(mi.MILL_NAME)Mill_Number
+//                      from ssm_associationsetup ass
+//                      left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
+//                      where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
+//    }
 
     public static function getSupplirerList(){
     $centerId = Auth::user()->center_id;

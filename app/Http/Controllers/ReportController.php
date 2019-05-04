@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Psy\Util\Json;
+use App\Item;
 
 class ReportController extends Controller
 {
@@ -30,7 +31,8 @@ class ReportController extends Controller
         $itemList = Report::itemList();
         $getDivision = SupplierProfile::getDivision();
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy'));
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes'));
     }
 
 // test controller
@@ -69,6 +71,10 @@ class ReportController extends Controller
         $monitorAssociationLists = Report::getMonitorAssociationList();
         $view = view("reportView.monitorAssociationList",compact('monitorAssociationLists'))->render();
         return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorAssociationListPdf(){
+
     }
 
     public function getPurchaseSalteList(){

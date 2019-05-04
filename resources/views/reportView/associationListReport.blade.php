@@ -23,8 +23,8 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Association List</th>
                 <th>Zone Name</th>
+                <th>Association List</th>
             </tr>
 
             </thead>
@@ -34,10 +34,10 @@
             @foreach($asociationLists as $asociationList)
             <tr>
                 <td>{{ ++$sl }}</td>
-               <td>{{$asociationList->ASSOCIATION_NAME}}</td>
-               <td>{{$asociationList->ZONE_NAME}}</td>
-
+                <td>{{$asociationList->ZONE_NAME}}</td>
+                <td>{{$asociationList->ASSOCIATION_NAME}}</td>
             </tr>
+
                 @endforeach
             </tbody>
         </table>

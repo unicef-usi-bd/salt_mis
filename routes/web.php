@@ -160,6 +160,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('monitor-supplier-pdf','ReportTestController@getMonitorSupplierPdf');//Rubiyat
     Route::get('supplier-list-pdf/{division}/{district}/{value}','ReportTestController@getSupplierListPdf');//Rubiyat
+    Route::get('monitor-association-pdf','ReportController@getMonitorAssociationListPdf');//jalal
 
 
 });

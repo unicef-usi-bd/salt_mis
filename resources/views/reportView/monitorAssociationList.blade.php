@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    {{--<a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-list-pdf/'.$activStatus) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>--}}
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-list-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Association</h4>
+        <h4>Monitor Association List</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -35,7 +35,7 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$monitor->ASSOCIATION_NAME }}</td>
-                    <td>{{$monitor->Mill_Number}}</td>
+                    <td>{{$monitor->Total_mill}}</td>
                 </tr>
             @endforeach
             </tbody>
