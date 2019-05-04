@@ -85,4 +85,23 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getPurchaseSaltAmount(){
+        $centerId = Auth::user()->center_id;
+        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseSaltList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getPurchaseSaltAmountPdf(){
+
+    }
+
+    public function getPurchaseSaltStock(){
+
+    }
+
+    public function getPurchaseSaltStockPdf(){
+
+    }
+
 }
