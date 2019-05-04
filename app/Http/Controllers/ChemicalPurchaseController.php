@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -47,8 +48,9 @@ class ChemicalPurchaseController extends Controller
     public function create()
     {
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $supplierName = ChemicalPurchase::getSupplierName();
+        $supplierName = SupplierProfile::supplierProfile();
         //$chemicalSupplier = ChemicalPurchase::getChemicalSupplier();
+        //$this->pr($supplierName);
         return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName'));
     }
 
@@ -106,7 +108,8 @@ class ChemicalPurchaseController extends Controller
     public function edit($id)
     {
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $supplierName = ChemicalPurchase::getSupplierName();
+        //$supplierName = ChemicalPurchase::getSupplierName();
+        $supplierName = SupplierProfile::supplierProfile();
         $editChemicalpurchase = ChemicalPurchase::editChemicalPurchase($id);
 
         return view('transactions.chemicalPurchase.modals.editChemicalPurchase',compact('chemicleType','supplierName','editChemicalpurchase'));
