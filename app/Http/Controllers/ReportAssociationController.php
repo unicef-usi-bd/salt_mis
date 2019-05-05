@@ -63,9 +63,17 @@ class ReportAssociationController extends Controller
 // purchase chemical end
 // miller
     public function getTotalMiller(Request $request){
-        $activStatus = $request->input('statusAssociation');
+        $activStatus = $request->input('activStatus');
+        //$this->pr($activStatus);
         $totalMiller = ReportAssociation::getMillerList($activStatus);
         $view = view("reportAssociation.totalMillerReport",compact('totalMiller'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getMillerType(Request $request){
+        $activStatus = $request->input('activStatus');
+        //$this->pr($activStatus);
+        $millerType = ReportAssociation::getMillerType($activStatus);
+        $view = view("reportAssociation.millerTypeReport",compact('millerType'))->render();
         return response()->json(['html'=>$view]);
     }
 // miller end

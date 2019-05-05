@@ -38,7 +38,7 @@
                                   </optgroup>
                                    <optgroup label="Miller">
                                        <option value="association-total-miller">Total Miller </option>
-                                       <option value="">Type of Miller </option>
+                                       <option value="association-miller-type">Type of Miller </option>
                                        <option value="">Monitor Miller </option>
                                        <option value="">List Of Miller </option>
                                   </optgroup>
@@ -180,6 +180,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="statusAssociation width-65" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
+                                   <option value="2">All</option>
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>

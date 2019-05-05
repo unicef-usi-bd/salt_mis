@@ -18,20 +18,18 @@
             <thead>
             <tr>
                 <th>Sl.</th>
-                <th>Item Type</th>
-                <th>Item Name</th>
-                <th>Stock Volume </th>
+                <th>Mill Type</th>
+                <th>Mill Name</th>
             </tr>
 
             </thead>
 
             <tbody>
-            @foreach($purchaseChemicalTotalStock as $sl =>  $row)
+            @foreach($millerType as $sl =>  $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->LOOKUPCHD_NAME}}</td>
-                    <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{$row->QTY}}</td>
+                    <td>{{$row->MILL_NAME}}</td>
                 </tr>
             @endforeach
             </tbody>
