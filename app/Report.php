@@ -66,23 +66,7 @@ class Report extends Model
                 where ass.PARENT_ID = 1 group by ass.ASSOCIATION_NAME"));
     }
 
-//public static function getMonitorAssociationList(){
-//        $centerId = Auth::user()->center_id;
-////        $associationMiller = DB::table('ssm_associationsetup');
-////        $associationMiller ->select('ssm_associationsetup.*','count(ssm_mill_info.MILL_NAME) as miller_number');
-////        $associationMiller->leftJoin('ssm_mill_info','ssm_associationsetup.MILL_ID','=','ssm_mill_info.MILL_ID');
-////        $associationMiller->where('ssm_associationsetup.PARENT_ID','!=',0);
-////       if($centerId){
-////           $associationMiller->where('ssm_mill_info.center_id','=',$centerId);
-////       }
-////
-////    return $associationMiller->get();
-//
-//    return DB::select(DB::raw(" select ass.ASSOCIATION_NAME, count(mi.MILL_NAME)Mill_Number
-//                      from ssm_associationsetup ass
-//                      left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
-//                      where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
-//    }
+
 
     public static function getSupplirerList(){
     $centerId = Auth::user()->center_id;
@@ -97,7 +81,7 @@ class Report extends Model
         return $supplierList->get();
     }
 
-    public static function getPurchaseSalteList($centerId){
+    public static function getPurchaseSalteList($centerId,$itemType){
 
         $purchaseSaltList = DB::table('ssc_lookupchd');
         $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
@@ -107,6 +91,15 @@ class Report extends Model
         $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
         if($centerId){
             $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        if ($itemType == 2){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',2);
+        }
+        if ($itemType == 3){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',3);
+        }
+        if ($itemType == 4){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',4);
         }
 
         return $purchaseSaltList->get();

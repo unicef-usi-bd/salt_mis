@@ -208,6 +208,7 @@
                 var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
+                var itemType = $('.itemType').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -223,13 +224,13 @@
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
-                //var activStatus = $('.statusBasic').val();
+                var activStatus = $('.statusBasic').val();
             }
 
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

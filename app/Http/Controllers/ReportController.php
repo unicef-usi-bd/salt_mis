@@ -74,7 +74,9 @@ class ReportController extends Controller
     }
 
     public function getMonitorAssociationListPdf(){
-
+        $monitorAssociationLists = Report::getMonitorAssociationList();
+        $data = \View::make('reportPdf.purchaseSalteListReportPdf',compact('monitorAssociationLists'));
+        $this->generatePdf($data);
     }
 
     public function getPurchaseSalteList(){
@@ -91,16 +93,18 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getPurchaseSaltAmount(){
+    public function getPurchaseSaltAmount(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
+        $itemType = $request->input('itemType');
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
         $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf(){
+    public function getPurchaseSaltAmountPdf(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
+        $itemType = $request->input('itemType');
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
         $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
         $this->generatePdf($data);
     }

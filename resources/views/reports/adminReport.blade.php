@@ -293,13 +293,31 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemType chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select One-</option>
+                                <option value="0">All Purchase</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class=" width-65" name="ACTIVE_FLG">
+                                   <option value="">--Select--</option>
+                                   <option value="0">Higher Purchase</option>
+                                   <option value="1">Lower Purchase</option>
+                                   <option value="2">Higher Sale</option>
+                                   <option value="3">Lower Sale</option>
+                               </select>
+                            </span>
                         </div>
                     </div>
                 </div>
