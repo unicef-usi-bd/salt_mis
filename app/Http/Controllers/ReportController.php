@@ -123,8 +123,21 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getProcessReport(){}
+    public function getProcessReport(){
+        $centerId = Auth::user()->center_id;
+
+        $processStock = Route::getProcessStock($centerId);
+        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
+        return response()->json(['html'=>$view]);
+    }
 
     public function getProcessReportPdf(){}
+
+    public function getSalesList(){
+        $centerId = Auth::user()->center_id;
+        $salesList = Report::getSalesItem($centerId);
+        $view = view("reportView.salesListReport",compact('salesList'))->render();
+        return response()->json(['html'=>$view]);
+    }
 
 }
