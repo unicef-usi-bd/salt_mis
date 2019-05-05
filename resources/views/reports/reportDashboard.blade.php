@@ -228,7 +228,11 @@
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
-                var itemType = $('.itemTypeMiller').val();
+
+            }else if(center_type == 'association'){
+                var url = $('.reportAssociation').val();
+                var activStatus = $('.statusAssociation').val();
+
             }
 
             $.ajax({

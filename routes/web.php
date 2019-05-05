@@ -151,6 +151,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('process-stock-report','ReportTestController@getProcessStockReport');//Rubiyat
 
+    Route::get('purchase-salt-item', 'ReportAssociationController@getPurchaseSaltItem');
+    Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');
+
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
