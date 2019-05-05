@@ -97,13 +97,13 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $itemType = $request->input('itemType');
         $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
-        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt'))->render();
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf(Request $request){
+    public function getPurchaseSaltAmountPdf($itemType){
         $centerId = Auth::user()->center_id;
-        $itemType = $request->input('itemType');
+        //$itemType = $request->input('itemType');
         $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
         $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
         $this->generatePdf($data);
