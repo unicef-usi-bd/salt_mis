@@ -38,9 +38,6 @@
                                        <option value="">Total Sale</option>
                                        <option value="">List of Item</option>
                                        <option value="">Item Stock</option>
-                                       <option value="">>List of Client </option>
-                                       <option value="">Sale </option>
-                                       <option value="">Monitor  Client </option>
                                   </optgroup>
                                    <optgroup label="License">
                                        <option value="">List of Miller </option>
