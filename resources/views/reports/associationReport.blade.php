@@ -12,12 +12,12 @@
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-item">List of Item </option>
                                        <option value="purchase-salt-total">Total Purchase</option>
-                                       <option value="">Total Purchase Stock</option>
+                                       <option value="purchase-salt-total-stock">Total Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
-                                       <option value="">List of Item </option>
-                                       <option value="">Purchase</option>
-                                       <option value="">Purchase Stock</option>
+                                       <option value="purchase-chemical-item">List of Item </option>
+                                       <option value="purchase-chemical-total">Purchase</option>
+                                       <option value="purchase-chemical-total-stock">Purchase Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
                                        <option value="">Process  Stock</option>
@@ -37,7 +37,7 @@
                                        <option value="">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="Miller">
-                                       <option value="">Total Miller </option>
+                                       <option value="association-total-miller">Total Miller </option>
                                        <option value="">Type of Miller </option>
                                        <option value="">Monitor Miller </option>
                                        <option value="">List Of Miller </option>
