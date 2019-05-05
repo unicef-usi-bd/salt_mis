@@ -98,7 +98,27 @@ class ReportAssociation extends Model
         }
         return $miller->get();
     }
+    public static function getMonitorMiller(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select mi.MILL_NAME,(lc.LOOKUPCHD_NAME)MONITOR_BY,mm.MOMITOR_DATE
+              from tsm_millmonitore mm     
+              left join ssm_mill_info  mi on mm.MILL_ID = mi.MILL_ID
+              left join ssc_lookupchd lc on mm.AGENCY_ID = lc.LOOKUPCHD_ID
+              where mm.center_id = '$centerId' "));
+
+    }
 // miller end
+
+// hr
+    public static function getMillerListForHr(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
+           me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
+          from ssm_mill_info  mi
+          left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
+          where mi.center_id = 3"));
+
+    }
 
 
 
