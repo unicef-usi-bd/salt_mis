@@ -11,7 +11,7 @@
                                    <option value="">Select One</option>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-item">List of Item </option>
-                                       <option value="">Total Purchase</option>
+                                       <option value="purchase-salt-total">Total Purchase</option>
                                        <option value="">Total Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">

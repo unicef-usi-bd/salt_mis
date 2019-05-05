@@ -231,7 +231,7 @@
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
-                var activStatus = $('.statusAssociation').val(); alert(url);
+                var activStatus = $('.statusAssociation').val();
 
             }
 
