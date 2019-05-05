@@ -18,7 +18,7 @@
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="purchase-salt-amount">Total Purchase</option>
+                                       <option value="purchase-salt-amount/{itemType}">Total Purchase</option>
                                        <option value="purchase-salt-stock">Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
@@ -293,7 +293,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemType chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAdmin chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select One-</option>
                                 <option value="0">All Purchase</option>
                                 @foreach($crudeSaltTypes as $chemical)

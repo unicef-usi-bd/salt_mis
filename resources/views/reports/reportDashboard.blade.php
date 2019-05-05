@@ -208,26 +208,31 @@
                 var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
-                var itemType = $('.itemType').val();
+                var itemType = $('.itemTypeAdmin').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusUnicef').val();
+                var itemType = $('.itemTypeUnicef').val();
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBsti').val();
+                var itemType = $('.itemTypeBsti').val();
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
+                var itemType = $('.itemTypeBasic').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
+
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val(); alert(url);
+
             }
 
             $.ajax({
