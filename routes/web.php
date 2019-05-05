@@ -140,6 +140,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-list','ReportController@getPurchaseSalteList');//jalal
     Route::get('purchase-salt-amount/{itemType}','ReportController@getPurchaseSaltAmount');//jalal
     Route::get('purchase-salt-stock','ReportController@getPurchaseSaltStock');//jalal
+    Route::get('process-report','ReportController@getProcessReport');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase-report','ReportTestController@getChemicalPurchase');//Rubiyat
@@ -163,6 +164,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('monitor-supplier-pdf','ReportTestController@getMonitorSupplierPdf');//Rubiyat
     Route::get('supplier-list-pdf/{division}/{district}/{value}','ReportTestController@getSupplierListPdf');//Rubiyat
     Route::get('monitor-association-pdf','ReportController@getMonitorAssociationListPdf');//jalal
+    Route::get('process-report-pdf','ReportController@getProcessReportPdf');//jalal
 
 
 });

@@ -123,4 +123,8 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getProcessReport(){}
+
+    public function getProcessReportPdf(){}
+
 }
