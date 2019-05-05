@@ -105,4 +105,39 @@ class Report extends Model
         return $purchaseSaltList->get();
     }
 
+    public static function getProcessStock(){
+        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'W' then
+        'Wash Crash'
+      end Process_Type
+      from tmm_itemstock st 
+      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'W' and st.center_id and st.TRAN_FLAG = 'WI'
+      union
+      select i.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'I' then
+        'Iodize'
+      end Process_Type
+      from tmm_itemstock st 
+      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'I'"));
+    }
+
+    public static function getSalesItem(){
+        $centerId = Auth::user()->center_id;
+        $salesList = DB::table("smm_item");
+        $salesList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
+        $salesList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+        $salesList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+        $salesList->Where('tmm_itemstock.TRAN_TYPE','=','I');
+        $salesList->Where('tmm_itemstock.TRAN_FLAG','=','SD');
+        $salesList->orWhere('tmm_itemstock.TRAN_TYPE','=','W');
+        if($centerId){
+            $salesList->Where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $salesList->get();
+    }
+
 }
