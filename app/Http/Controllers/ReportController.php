@@ -134,10 +134,27 @@ class ReportController extends Controller
     public function getProcessReportPdf(){}
 
     public function getSalesList(){
-        $centerId = Auth::user()->center_id;
-        $salesList = Report::getSalesItem($centerId);
+        $salesList = Report::getSalesItemMiller();
         $view = view("reportView.salesListReport",compact('salesList'))->render();
         return response()->json(['html'=>$view]);
+    }
+
+    public function getSalesListPdf(){
+        $salesList = Report::getSalesItemMiller();
+        $data = \View::make('reportPdf.salesListRepoetPdf',compact('salesList'));
+        $this->generatePdf($data);
+    }
+
+    public function getSalesListAll(){
+        $salesList = Report::getSalesItem();
+        $view = view("reportView.salesListReport",compact('salesList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getSalesListAllpdf(){
+        $salesList = Report::getSalesItem();
+        $data = \View::make('reportPdf.salesListRepoetPdf',compact('salesList'));
+        $this->generatePdf($data);
     }
 
 }

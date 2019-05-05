@@ -125,19 +125,24 @@ class Report extends Model
       where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'I'"));
     }
 
-    public static function getSalesItem(){
+    public static function getSalesItemMiller(){
         $centerId = Auth::user()->center_id;
-        $salesList = DB::table("smm_item");
-        $salesList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
-        $salesList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $salesList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
-        $salesList->Where('tmm_itemstock.TRAN_TYPE','=','I');
-        $salesList->Where('tmm_itemstock.TRAN_FLAG','=','SD');
-        $salesList->orWhere('tmm_itemstock.TRAN_TYPE','=','W');
-        if($centerId){
-            $salesList->Where('tmm_itemstock.center_id','=',$centerId);
-        }
-        return $salesList->get();
+        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+            from ssc_lookupchd lc
+            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+            left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
+            where its.center_id = $centerId 
+            and (its.TRAN_TYPE = 'I' or its.TRAN_TYPE = 'W' ) 
+            and its.TRAN_FLAG = 'SD' "));
+    }
+
+    public static function getSalesItem(){
+        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+            from ssc_lookupchd lc
+            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+            left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
+            where  (its.TRAN_TYPE = 'I' or its.TRAN_TYPE = 'W' ) 
+            and its.TRAN_FLAG = 'SD' "));
     }
 
 }

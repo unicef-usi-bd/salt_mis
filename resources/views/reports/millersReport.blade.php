@@ -29,7 +29,7 @@
                                    </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">List of Client</option>
-                                       <option value="">List of Item</option>
+                                       <option value="sales-item-report">List of Item</option>
                                        <option value="">Sale</option>
                                        <option value="">Monitor Client</option>
                                        <option value="">Item Stock</option>
