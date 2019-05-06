@@ -145,7 +145,7 @@ class Report extends Model
             and its.TRAN_FLAG = 'SD' "));
     }
 
-    public static function getListofMillerLicense($centerId,$zone,$issuerId){
+    public static function getListofMillerLicense($centerId,$zone){
 
         $listMillerLicense = DB::table('tsm_qc_info as qc');
         $listMillerLicense->select('qc.*','ci.*','lc.LOOKUPCHD_NAME as license_type','lch.LOOKUPCHD_NAME as issuer_name','im.*','ass.ASSOCIATION_NAME');
@@ -155,13 +155,10 @@ class Report extends Model
         $listMillerLicense->leftJoin('ssm_mill_info as im','im.MILL_ID','=','ci.MILL_ID');
         $listMillerLicense->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','im.ZONE_ID');
         if($centerId){
-            $listMillerLicense->where('qc.center_id','=',$centerId);
+            $listMillerLicense->where('tmm_itemstock.center_id','=',$centerId);
         }
         if($zone != 0){
-            $listMillerLicense->where('ass.ZONE_ID','=',$zone);
-        }
-        if($issuerId){
-            $listMillerLicense->where('ci.ISSURE_ID','=',$issuerId);
+            $listMillerLicense->where('ass.ZONE_ID','=',1);
         }
         return $listMillerLicense->get();
     }
