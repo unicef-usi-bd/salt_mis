@@ -283,7 +283,7 @@
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right ">
                                     {{--<input type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
-                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 adminReportrange" />
+                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 adminReportrange" value=""/>
 
                                 </span>
                         </div>
@@ -325,7 +325,7 @@
         var end = moment();
 
         function cb(start, end) {
-            $('.adminReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+           $('.adminReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
 
         $('.adminReportrange').daterangepicker({
