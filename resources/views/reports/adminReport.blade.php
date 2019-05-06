@@ -35,7 +35,7 @@
                                   </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">Total Sale</option>
-                                       <option value="sales-item-report">List of Item</option>
+                                       <option value="sales-item-report-all">List of Item</option>
                                        <option value="">Item Stock</option>
                                   </optgroup>
                                    <optgroup label="License">

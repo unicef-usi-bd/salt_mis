@@ -147,14 +147,18 @@ class ReportController extends Controller
 
     public function getSalesListAll(){
         $salesList = Report::getSalesItem();
-        $view = view("reportView.salesListReport",compact('salesList'))->render();
+        $view = view("reportView.salesListReportAll",compact('salesList'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getSalesListAllpdf(){
         $salesList = Report::getSalesItem();
-        $data = \View::make('reportPdf.salesListRepoetPdf',compact('salesList'));
+        $data = \View::make('reportPdf.salesListRepoetAllPdf',compact('salesList'));
         $this->generatePdf($data);
     }
+
+    public function getListofMillerLicenses(){}
+
+    public function getListofMillerLicensesPdf(){}
 
 }

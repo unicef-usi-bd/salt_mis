@@ -145,4 +145,14 @@ class Report extends Model
             and its.TRAN_FLAG = 'SD' "));
     }
 
+    public static function getListofMillerLicense(){
+        return DB::select(DB::raw(" select ci.CERTIFICATE_TYPE_ID, lc.LOOKUPCHD_NAME, ci.ISSURE_ID, lch.LOOKUPCHD_NAME, ci.ISSUING_DATE, ci.RENEWING_DATE,im.MILL_NAME, ass.ASSOCIATION_NAME, im.ACTIVE_FLG
+          from tsm_qc_info qc
+          left join ssm_certificate_info ci on ci.MILL_ID = qc.MILL_ID
+          left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
+          left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
+          left join ssm_mill_info im on im.MILL_ID = ci.MILL_ID
+          left join ssm_associationsetup ass on ass.ZONE_ID = im.ZONE_ID"));
+    }
+
 }
