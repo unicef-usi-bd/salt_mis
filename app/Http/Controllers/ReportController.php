@@ -164,9 +164,9 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
         $issuerId = $request->input('issuerId');
-        //return $issuerId;
+//        return $zone;
         $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
-        //return $listLicenseMiller;
+//        return $listLicenseMiller;
         $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId'))->render();
         return response()->json(['html'=>$view]);
     }
