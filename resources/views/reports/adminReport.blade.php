@@ -39,7 +39,7 @@
                                        <option value="">Item Stock</option>
                                   </optgroup>
                                    <optgroup label="License">
-                                       <option value="miller-license-report/{zone}/{issuerId}">List of License </option>
+                                       <option value="miller-license-report/{zone}">List of License </option>
                                   </optgroup>
                                    <optgroup label="QC">
                                        <option value="">List of Miller </option>
@@ -333,7 +333,7 @@
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
-                                <select class="width-65 form-control chosen-select issuerAdmin" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                <select class="issuerAdmin width-65 form-control chosen-select " id="ISSURE_ID" name="ISSURE_ID"  >
                                     <option value="">Select</option>
                                     @foreach($issueBy as $row)
                                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>

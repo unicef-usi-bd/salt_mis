@@ -23,18 +23,18 @@ class ReportAssociation extends Model
     public static function getPurchaseSaltTotal(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME,it.QTY
-        from tmm_itemstock it
-        left join smm_item st on it.ITEM_NO = st.ITEM_NO
-        left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
-        where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
+            from tmm_itemstock it
+            left join smm_item st on it.ITEM_NO = st.ITEM_NO
+            left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
     }
     public static function getPurchaseSaltTotalStock(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME,it.QTY
-        from tmm_itemstock it
-        left join smm_item st on it.ITEM_NO = st.ITEM_NO
-        left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
-        where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
+            from tmm_itemstock it
+            left join smm_item st on it.ITEM_NO = st.ITEM_NO
+            left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
     }
     // purchase salt End
 // purchase chemical
@@ -113,13 +113,51 @@ class ReportAssociation extends Model
     public static function getMillerListForHr(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
-           me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
-          from ssm_mill_info  mi
-          left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
-          where mi.center_id = 3"));
+              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
+              from ssm_mill_info  mi
+              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
+              where mi.center_id = '$centerId' "));
 
     }
+    public static function getQcMillerList(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select mi.mill_name,ql.BATCH_NO, lc.LOOKUPCHD_NAME as QC_BY, lch.LOOKUPCHD_NAME as AGENCY_NAME, ql.QC_TESTNAME
+          from tmm_qualitycontrol ql
+              left join ssm_associationsetup ass on ql.center_id = ass.ASSOCIATION_ID
+              left join ssm_mill_info mi on ass.MILL_ID = mi.MILL_ID
+              left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
+              left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
+              where ql.center_id = '$centerId' "));
 
+    }
+    public static function getLicenseMillerList(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select mi.MILL_NAME,ci.CERTIFICATE_TYPE_ID, lc.LOOKUPCHD_NAME as CERT_NAME, ci.ISSURE_ID, lch.LOOKUPCHD_NAME as ISSUER, ci.ISSUING_DATE, ci.RENEWING_DATE
+          from tsm_qc_info qc
+              left join ssm_mill_info mi on mi.MILL_ID = qc.MILL_ID
+              left join ssm_certificate_info ci on qc.MILL_ID = ci.MILL_ID
+              left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
+              left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
+              where qc.center_id = '$centerId' "));
+
+    }
+    public static function getSaleItemList(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+            from smm_item  st
+            left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where st.center_id = '$centerId' "));
+
+    }
+    public static function getSaleItemStock(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME, it.QTY
+            from ssc_lookupchd lc
+            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+            left join tmm_itemstock it on it.ITEM_NO = st.ITEM_NO
+            where it.center_id = '$centerId' "));
+
+    }
 
 
 

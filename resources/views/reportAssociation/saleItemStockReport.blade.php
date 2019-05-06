@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-monitor-miller-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('sale-item-stock-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>Association</h4>
     </div><!-- /.col -->
@@ -18,20 +18,20 @@
             <thead>
             <tr>
                 <th>Sl.</th>
-                <th>Miller Name</th>
-                <th>Monitor By</th>
-                <th>Date</th>
+                <th>Item Type</th>
+                <th>Item Name</th>
+                <th>Stock Volume</th>
             </tr>
 
             </thead>
 
             <tbody>
-            @foreach($monitorMiller as $sl =>  $row)
+            @foreach($itemStock as $sl =>  $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->MILL_NAME}}</td>
-                    <td>{{$row->MONITOR_BY}}</td>
-                    <td>{{ date('Y-m-d', strtotime($row->MOMITOR_DATE))}}</td>
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach
             </tbody>

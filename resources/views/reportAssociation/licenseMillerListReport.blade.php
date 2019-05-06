@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-miller-list-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('license-miller-list-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>Association</h4>
     </div><!-- /.col -->
@@ -19,10 +19,10 @@
             <tr>
                 <th>Sl.</th>
                 <th>Millers Name</th>
-                <th>Total No of Employee</th>
-                <th>No of Full Time Employee</th>
-                <th>No of Part Time Employee</th>
-                <th>No of Technical Person</th>
+                <th>License Type</th>
+                <th>Issuer Name</th>
+                <th>Issuing Date</th>
+                <th>Renewing Date</th>
             </tr>
 
             </thead>
@@ -32,10 +32,10 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->MILL_NAME}}</td>
-                    <td>{{$row->TOTMALE_EMP + $row->TOTFEM_EMP}} </td>
-                    <td>{{$row->FULLTIMEMALE_EMP + $row->FULLTIMEFEM_EMP}} </td>
-                    <td>{{$row->PARTTIMEMALE_EMP + $row->PARTTIMEFEM_EMP}} </td>
-                    <td>{{$row->TOTMALETECH_PER + $row->TOTFEMTECH_PER}} </td>
+                    <td>{{$row->CERT_NAME}}</td>
+                    <td>{{$row->ISSUER}}</td>
+                    <td>{{$row->ISSUING_DATE}}</td>
+                    <td>{{$row->RENEWING_DATE}}</td>
                 </tr>
             @endforeach
             </tbody>

@@ -164,13 +164,28 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
         $issuerId = $request->input('issuerId');
-//        return $zone;
+
+        //echo $issuerId;die();
+
+//        $issuerId = $request->input('issuerId');
         $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
 //        return $listLicenseMiller;
         $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getListofMillerLicensesPdf(){}
+    public function getListofMillerLicensesPdf($zone,$issuerId){
+        $centerId = Auth::user()->center_id;
+//        $zone = $request->input('zone');
+//        $issuerId = $request->input('issuerId');
+
+        //echo $issuerId;die();
+
+//        $issuerId = $request->input('issuerId');
+        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
+        //echo $listLicenseMiller;die();
+        $data = \View::make('reportPdf.licenseMillerListReportPdf',compact('listLicenseMiller'));
+        $this->generatePdf($data);
+    }
 
 }

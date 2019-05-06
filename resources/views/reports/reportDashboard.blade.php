@@ -216,27 +216,35 @@
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusUnicef').val();
                 var itemType = $('.itemTypeUnicef').val();
+                var zone = $('.zoneUnicef').val();
+                var issuerId = $('.issuerUnicef').val();
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBsti').val();
                 var itemType = $('.itemTypeBsti').val();
+                var zone = $('.zoneBsti').val();
+                var issuerId = $('.issuerBsti').val();
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
                 var itemType = $('.itemTypeBasic').val();
+                var zone = $('.zoneBasic').val();
+                var issuerId = $('.issuerBasic').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
+                var zone = $('.zoneMiller').val();
+                var issuerId = $('.issuerMiller').val();
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val();
 
             }
-
+            //console.log(url);
             $.ajax({
                 type : "get",
                 url  : url,
