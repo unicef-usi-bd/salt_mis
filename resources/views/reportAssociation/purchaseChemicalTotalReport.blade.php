@@ -27,12 +27,14 @@
 
             <tbody>
             @foreach($purchaseChemicalTotal as $sl =>  $row)
+            
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->LOOKUPCHD_NAME}}</td>
-                    <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{$row->QTY}}</td>
+                    <td>{{ $row->LOOKUPCHD_NAME }}</td>
+                    <td>{{ $row->ITEM_NAME }}</td>
+                    <td>{{ $row->QTY }} </td>
                 </tr>
+
             @endforeach
             </tbody>
         </table>

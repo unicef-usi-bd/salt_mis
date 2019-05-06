@@ -182,7 +182,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sale-item-list-pdf', 'ReportAssociationController@getSaleItemListPdf');//azharul
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul
     Route::get('sale-item-stock-pdf', 'ReportAssociationController@getSaleItemStockPdf');//azharul
-
     // Report and PDF for Association End
 
     //Report reportPdf
