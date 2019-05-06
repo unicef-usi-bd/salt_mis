@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('monitor-association-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('sales-item-report-all-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Monitor Association List</h4>
+        <h4>List of Item</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -23,20 +23,21 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <td>Association Name</td>
-                <th>Number Of Miller</th>
+                <th>Items Type </th>
+                <th>Items Name</th>
             </tr>
 
             </thead>
 
             <tbody>
             <?php $sl=0;?>
-            @foreach($monitorAssociationLists as $monitor)
+            @foreach($salesList as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$monitor->ASSOCIATION_NAME }}</td>
-                    <td>{{$monitor->Total_mill}}</td>
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
                 </tr>
+
             @endforeach
             </tbody>
         </table>

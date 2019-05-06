@@ -7,17 +7,17 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                               <select id="" class="chosen-select chosen-container reportAssociation" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
                                    <optgroup label="Purchase Salt">
-                                       <option value="">List of Item </option>
-                                       <option value="">Total Purchase</option>
-                                       <option value="">Total Purchase Stock</option>
+                                       <option value="purchase-salt-item">List of Item </option>
+                                       <option value="purchase-salt-total">Total Purchase</option>
+                                       <option value="purchase-salt-total-stock">Total Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
-                                       <option value="">List of Item </option>
-                                       <option value="">Purchase</option>
-                                       <option value="">Purchase Stock</option>
+                                       <option value="purchase-chemical-item">List of Item </option>
+                                       <option value="purchase-chemical-total">Purchase</option>
+                                       <option value="purchase-chemical-total-stock">Purchase Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
                                        <option value="">Process  Stock</option>
@@ -34,12 +34,12 @@
                                        <option value="">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="HR">
-                                       <option value="">List of Miller </option>
+                                       <option value="association-miller-list">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="Miller">
-                                       <option value="">Total Miller </option>
-                                       <option value="">Type of Miller </option>
-                                       <option value="">Monitor Miller </option>
+                                       <option value="association-total-miller">Total Miller </option>
+                                       <option value="association-miller-type">Type of Miller </option>
+                                       <option value="association-monitor-miller">Monitor Miller </option>
                                        <option value="">List Of Miller </option>
                                   </optgroup>
 
@@ -47,63 +47,63 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group" >
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
+                    {{--<div class="form-group" >--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                                {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
 
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-
-
+                                {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
 
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Internal </b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group" >
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
-                                    <option value=""></option>
 
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group" >
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Internal </b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                                   {{--<option value="">Select</option>--}}
 
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group" >--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                                {{--<select id="" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
+                                    {{--<option value=""></option>--}}
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
+                                {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group" >--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                                {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
+
+                                {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                                   {{--<option value="">Select</option>--}}
+
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
 
 
@@ -111,70 +111,82 @@
 
                 <div class="col-md-6">
 
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase Range</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase Range</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                                   {{--<option value="">Select</option>--}}
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <input type="date" name="renew_date" class="chosen-select chosen-container">
-                            </span>
-                        </div>
-                    </div>
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <input type="date" name="renew_date" class="chosen-select chosen-container">
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Monitor</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Monitor</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                                   {{--<option value="">Select</option>--}}
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Self </b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Self </b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                                   {{--<option value="">Select</option>--}}
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">--}}
+                                   {{--<option value="1">Active</option>--}}
+                                   {{--<option value="0">Inactive</option>--}}
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
+                               <select class="statusAssociation width-65" name="ACTIVE_FLG">
+                                   <option value="">--Select--</option>
+                                   <option value="2">All</option>
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>
                             </span>
                         </div>
                     </div>
-
-
-
 
                 </div>
             </form>
@@ -185,7 +197,7 @@
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" center-type="association" class="btn btn-primary btnReport">
                         <i class="ace-icon fa fa-check bigger-110"></i>
                         Show Report
                     </button>

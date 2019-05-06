@@ -16,29 +16,28 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-                {{--<th rowspan="2">No. of Established FIACs </th>--}}
-                {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-                {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Zone Name</th>
-                <th>Association List</th>
+                <th>Mill Name</th>
+                <th>Active Status</th>
             </tr>
 
             </thead>
 
             <tbody>
-            <?php $sl=0;?>
-            @foreach($asociationLists as $asociationList)
-            <tr>
-                <td>{{ ++$sl }}</td>
-                <td>{{$asociationList->ZONE_NAME}}</td>
-                <td>{{$asociationList->ASSOCIATION_NAME}}</td>
-            </tr>
-
-                @endforeach
+            @foreach($totalMiller as $sl =>  $row)
+                <tr>
+                    <td>{{ ++$sl }}</td>
+                    <td>{{$row->MILL_NAME}}</td>
+                    <td>
+                        <?php if ($row->ACTIVE_FLG == 1){ ?>
+                        <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                        <?php }else{ ?>
+                        <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
+                        <?php } ?>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

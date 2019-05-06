@@ -16,29 +16,24 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-                {{--<th rowspan="2">No. of Established FIACs </th>--}}
-                {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-                {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Zone Name</th>
-                <th>Association List</th>
+                <th>Miller Name</th>
+                <th>Monitor By</th>
+                <th>Date</th>
             </tr>
 
             </thead>
 
             <tbody>
-            <?php $sl=0;?>
-            @foreach($asociationLists as $asociationList)
-            <tr>
-                <td>{{ ++$sl }}</td>
-                <td>{{$asociationList->ZONE_NAME}}</td>
-                <td>{{$asociationList->ASSOCIATION_NAME}}</td>
-            </tr>
-
-                @endforeach
+            @foreach($monitorMiller as $sl =>  $row)
+                <tr>
+                    <td>{{ ++$sl }}</td>
+                    <td>{{$row->MILL_NAME}}</td>
+                    <td>{{$row->MONITOR_BY}}</td>
+                    <td>{{ date('Y-m-d', strtotime($row->MOMITOR_DATE))}}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

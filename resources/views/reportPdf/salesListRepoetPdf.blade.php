@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Association List</p>
+    <p>List of Item</p>
 </div><!-- /.row -->
 
 
@@ -18,11 +18,11 @@
     </tr>
     <?php $sl = 0; ?>
 
-    @foreach($asociationLists as $asociationList)
+    @foreach($salesList as $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$asociationList->ZONE_NAME}}</td>
-            <td>{{$asociationList->ASSOCIATION_NAME}}</td>
+            <td>{{$row->LOOKUPCHD_NAME}}</td>
+            <td>{{$row->ITEM_NAME}}</td>
         </tr>
     @endforeach
 

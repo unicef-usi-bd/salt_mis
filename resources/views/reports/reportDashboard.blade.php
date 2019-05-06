@@ -208,28 +208,39 @@
                 var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
+                var itemType = $('.itemTypeAdmin').val();
+                var zone = $('.zoneAdmin').val();
+                var issuerId = $('.issuerAdmin').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusUnicef').val();
+                var itemType = $('.itemTypeUnicef').val();
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBsti').val();
+                var itemType = $('.itemTypeBsti').val();
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
+                var itemType = $('.itemTypeBasic').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
-                //var activStatus = $('.statusBasic').val();
+                var activStatus = $('.statusBasic').val();
+
+            }else if(center_type == 'association'){
+                var url = $('.reportAssociation').val();
+                var activStatus = $('.statusAssociation').val();
+
             }
 
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

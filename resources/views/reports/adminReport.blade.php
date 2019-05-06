@@ -18,7 +18,7 @@
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="purchase-salt-amount">Total Purchase</option>
+                                       <option value="purchase-salt-amount/{itemType}">Total Purchase</option>
                                        <option value="purchase-salt-stock">Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
@@ -31,20 +31,15 @@
 
                                   </optgroup>
                                    <optgroup label="Process">
-                                       <option value="">Process  Stock</option>
-                                       <option value="">List of  Stock</option>
+                                       <option value="process-report">Process  Stock</option>
                                   </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">Total Sale</option>
-                                       <option value="">List of Item</option>
+                                       <option value="sales-item-report-all">List of Item</option>
                                        <option value="">Item Stock</option>
-                                       <option value="">>List of Client </option>
-                                       <option value="">Sale </option>
-                                       <option value="">Monitor  Client </option>
                                   </optgroup>
                                    <optgroup label="License">
-                                       <option value="">List of Miller </option>
-                                       <option value="">List of License </option>
+                                       <option value="miller-license-report/{zone}/{issuerId}">List of License </option>
                                   </optgroup>
                                    <optgroup label="QC">
                                        <option value="">List of Miller </option>
@@ -289,6 +284,64 @@
                                 </span>
                     </div>
                 </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAdmin chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                               <option value="">-Select One-</option>
+                                <option value="0">All Purchase</option>
+                                @foreach($crudeSaltTypes as $chemical)
+                                    <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class=" width-65" name="ACTIVE_FLG">
+                                   <option value="">--Select--</option>
+                                   <option value="0">Higher Purchase</option>
+                                   <option value="1">Lower Purchase</option>
+                                   <option value="2">Higher Sale</option>
+                                   <option value="3">Lower Sale</option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Zone Name</b> <span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                                <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneAdmin form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
+                                    <option value="">Select Zone Name</option>
+                                    <option value="0">Select All</option>
+                                    @foreach($associationList as $association)
+                                        <option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>
+                                    @endforeach
+                                </select>
+                             </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
+                        <div class="col-md-8">
+                            <span class="block input-icon input-icon-right">
+                                <select class="width-65 form-control chosen-select issuerAdmin" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <option value="">Select</option>
+                                    @foreach($issueBy as $row)
+                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                    @endforeach
+                                 </select>
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
 

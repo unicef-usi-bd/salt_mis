@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Psy\Util\Json;
+use App\Item;
+use App\AssociationSetup;
 
 class ReportController extends Controller
 {
@@ -30,7 +32,10 @@ class ReportController extends Controller
         $itemList = Report::itemList();
         $getDivision = SupplierProfile::getDivision();
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy'));
+        $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        $associationList = AssociationSetup::getZoneList();
+//        $this->pr($associationList);
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList'));
     }
 
 // test controller
@@ -71,6 +76,12 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
+    public function getMonitorAssociationListPdf(){
+        $monitorAssociationLists = Report::getMonitorAssociationList();
+        $data = \View::make('reportPdf.purchaseSalteListReportPdf',compact('monitorAssociationLists'));
+        $this->generatePdf($data);
+    }
+
     public function getPurchaseSalteList(){
         $centerId = Auth::user()->center_id;
         $purchaseSaltList = Report::getPurchaseSalteList($centerId);
@@ -85,16 +96,18 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getPurchaseSaltAmount(){
+    public function getPurchaseSaltAmount(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
-        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt'))->render();
+        $itemType = $request->input('itemType');
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf(){
+    public function getPurchaseSaltAmountPdf($itemType){
         $centerId = Auth::user()->center_id;
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId);
+        //$itemType = $request->input('itemType');
+        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
         $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
         $this->generatePdf($data);
     }
@@ -112,5 +125,52 @@ class ReportController extends Controller
         $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
         $this->generatePdf($data);
     }
+
+    public function getProcessReport(){
+        $centerId = Auth::user()->center_id;
+
+        $processStock = Route::getProcessStock($centerId);
+        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getProcessReportPdf(){}
+
+    public function getSalesList(){
+        $salesList = Report::getSalesItemMiller();
+        $view = view("reportView.salesListReport",compact('salesList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getSalesListPdf(){
+        $salesList = Report::getSalesItemMiller();
+        $data = \View::make('reportPdf.salesListRepoetPdf',compact('salesList'));
+        $this->generatePdf($data);
+    }
+
+    public function getSalesListAll(){
+        $salesList = Report::getSalesItem();
+        $view = view("reportView.salesListReportAll",compact('salesList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getSalesListAllpdf(){
+        $salesList = Report::getSalesItem();
+        $data = \View::make('reportPdf.salesListRepoetAllPdf',compact('salesList'));
+        $this->generatePdf($data);
+    }
+
+    public function getListofMillerLicenses(Request $request){
+        $centerId = Auth::user()->center_id;
+        $zone = $request->input('zone');
+        $issuerId = $request->input('issuerId');
+        //return $issuerId;
+        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
+        //return $listLicenseMiller;
+        $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getListofMillerLicensesPdf(){}
 
 }

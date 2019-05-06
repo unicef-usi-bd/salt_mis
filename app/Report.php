@@ -40,6 +40,8 @@ class Report extends Model
             ->get();
     }
 
+
+
  public static function getMillerList($activStatus){
         $centerId = Auth::user()->center_id;
         $miller = DB::table('ssm_mill_info');
@@ -57,23 +59,14 @@ class Report extends Model
         return $miller->get();
  }
 
-public static function getMonitorAssociationList(){
-        $centerId = Auth::user()->center_id;
-//        $associationMiller = DB::table('ssm_associationsetup');
-//        $associationMiller ->select('ssm_associationsetup.*','count(ssm_mill_info.MILL_NAME) as miller_number');
-//        $associationMiller->leftJoin('ssm_mill_info','ssm_associationsetup.MILL_ID','=','ssm_mill_info.MILL_ID');
-//        $associationMiller->where('ssm_associationsetup.PARENT_ID','!=',0);
-//       if($centerId){
-//           $associationMiller->where('ssm_mill_info.center_id','=',$centerId);
-//       }
-//
-//    return $associationMiller->get();
-
-    return DB::select(DB::raw(" select ass.ASSOCIATION_NAME, count(mi.MILL_NAME)Mill_Number 
-                      from ssm_associationsetup ass
-                      left join ssm_mill_info mi on mi.MILL_ID = ass.MILL_ID
-                      where ass.PARENT_ID != 0 and ass.center_id= $centerId"));
+    public static function getMonitorAssociationList(){
+     return DB::select(DB::raw("select ass.ASSOCIATION_NAME, count(mi.center_id)Total_mill
+                from ssm_associationsetup ass
+                left join ssm_mill_info mi on mi.ZONE_ID = ass.ZONE_ID 
+                where ass.PARENT_ID = 1 group by ass.ASSOCIATION_NAME"));
     }
+
+
 
     public static function getSupplirerList(){
     $centerId = Auth::user()->center_id;
@@ -88,7 +81,7 @@ public static function getMonitorAssociationList(){
         return $supplierList->get();
     }
 
-    public static function getPurchaseSalteList($centerId){
+    public static function getPurchaseSalteList($centerId,$itemType){
 
         $purchaseSaltList = DB::table('ssc_lookupchd');
         $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
@@ -99,8 +92,78 @@ public static function getMonitorAssociationList(){
         if($centerId){
             $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
         }
+        if ($itemType == 2){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',2);
+        }
+        if ($itemType == 3){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',3);
+        }
+        if ($itemType == 4){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',4);
+        }
 
         return $purchaseSaltList->get();
+    }
+
+    public static function getProcessStock(){
+        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'W' then
+        'Wash Crash'
+      end Process_Type
+      from tmm_itemstock st 
+      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'W' and st.center_id and st.TRAN_FLAG = 'WI'
+      union
+      select i.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'I' then
+        'Iodize'
+      end Process_Type
+      from tmm_itemstock st 
+      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'I'"));
+    }
+
+    public static function getSalesItemMiller(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+            from ssc_lookupchd lc
+            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+            left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
+            where its.center_id = $centerId 
+            and (its.TRAN_TYPE = 'I' or its.TRAN_TYPE = 'W' ) 
+            and its.TRAN_FLAG = 'SD' "));
+    }
+
+    public static function getSalesItem(){
+        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+            from ssc_lookupchd lc
+            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+            left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
+            where  (its.TRAN_TYPE = 'I' or its.TRAN_TYPE = 'W' ) 
+            and its.TRAN_FLAG = 'SD' "));
+    }
+
+    public static function getListofMillerLicense($centerId,$zone,$issuerId){
+
+        $listMillerLicense = DB::table('tsm_qc_info as qc');
+        $listMillerLicense->select('qc.*','ci.*','lc.LOOKUPCHD_NAME as license_type','lch.LOOKUPCHD_NAME as issuer_name','im.*','ass.ASSOCIATION_NAME');
+        $listMillerLicense->leftJoin('ssm_certificate_info as ci','ci.MILL_ID','=','qc.MILL_ID');
+        $listMillerLicense->leftJoin('ssc_lookupchd as lc','lc.LOOKUPCHD_ID','=','ci.CERTIFICATE_TYPE_ID');
+        $listMillerLicense->leftJoin('ssc_lookupchd as lch','lch.LOOKUPCHD_ID','=','ci.ISSURE_ID');
+        $listMillerLicense->leftJoin('ssm_mill_info as im','im.MILL_ID','=','ci.MILL_ID');
+        $listMillerLicense->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','im.ZONE_ID');
+        if($centerId){
+            $listMillerLicense->where('qc.center_id','=',$centerId);
+        }
+        if($zone != 0){
+            $listMillerLicense->where('ass.ZONE_ID','=',$zone);
+        }
+        if($issuerId){
+            $listMillerLicense->where('ci.ISSURE_ID','=',$issuerId);
+        }
+        return $listMillerLicense->get();
     }
 
 }

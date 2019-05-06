@@ -13,7 +13,7 @@
                                    <optgroup label="Purchase Salt">
                                        <option value="">List of Supplier </option>
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="purchase-salt-amount">Purchase</option>
+                                       <option value="purchase-salt-amount/{itemType}">Purchase</option>
                                        <option value="purchase-salt-stock">Total Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
@@ -29,7 +29,7 @@
                                    </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">List of Client</option>
-                                       <option value="">List of Item</option>
+                                       <option value="sales-item-report">List of Item</option>
                                        <option value="">Sale</option>
                                        <option value="">Monitor Client</option>
                                        <option value="">Item Stock</option>
@@ -260,6 +260,20 @@
                                     <input type="text" id="reportrange"  name="reportrange" class="width-65 reportrange " />
 
                                 </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                               <option value="">-Select One-</option>
+                                <option value="0">All Purchase</option>
+                                @foreach($crudeSaltTypes as $chemical)
+                                    <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
                         </div>
                     </div>
                 </div>

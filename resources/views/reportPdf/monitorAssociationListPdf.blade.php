@@ -6,23 +6,25 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Association List</p>
+    <p>Monitor Association List</p>
 </div><!-- /.row -->
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <td>Zone Name</td>
-        <td>Association List</td>
+        <td>Association Name</td>
+        <th>Number Of Miller</th>
+
     </tr>
     <?php $sl = 0; ?>
 
-    @foreach($asociationLists as $asociationList)
+    @foreach($monitorAssociationLists as $monitor)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$asociationList->ZONE_NAME}}</td>
-            <td>{{$asociationList->ASSOCIATION_NAME}}</td>
+            <td>{{$monitor->ASSOCIATION_NAME}}</td>
+            <td>{{$monitor->Total_mill}}</td>
+
         </tr>
     @endforeach
 

@@ -16,29 +16,24 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-                {{--<th rowspan="2">No. of Established FIACs </th>--}}
-                {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-                {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Zone Name</th>
-                <th>Association List</th>
+                <th>Item Type</th>
+                <th>Item Name</th>
+                <th>Stock Volume </th>
             </tr>
 
             </thead>
 
             <tbody>
-            <?php $sl=0;?>
-            @foreach($asociationLists as $asociationList)
-            <tr>
-                <td>{{ ++$sl }}</td>
-                <td>{{$asociationList->ZONE_NAME}}</td>
-                <td>{{$asociationList->ASSOCIATION_NAME}}</td>
-            </tr>
-
-                @endforeach
+            @foreach($purchaseChemicalTotalStock as $sl =>  $row)
+                <tr>
+                    <td>{{ ++$sl }}</td>
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->QTY}}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
