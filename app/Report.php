@@ -145,14 +145,22 @@ class Report extends Model
             and its.TRAN_FLAG = 'SD' "));
     }
 
-    public static function getListofMillerLicense(){
-        return DB::select(DB::raw(" select ci.CERTIFICATE_TYPE_ID, lc.LOOKUPCHD_NAME, ci.ISSURE_ID, lch.LOOKUPCHD_NAME, ci.ISSUING_DATE, ci.RENEWING_DATE,im.MILL_NAME, ass.ASSOCIATION_NAME, im.ACTIVE_FLG
-          from tsm_qc_info qc
-          left join ssm_certificate_info ci on ci.MILL_ID = qc.MILL_ID
-          left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
-          left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
-          left join ssm_mill_info im on im.MILL_ID = ci.MILL_ID
-          left join ssm_associationsetup ass on ass.ZONE_ID = im.ZONE_ID"));
+    public static function getListofMillerLicense($centerId,$zone){
+
+        $listMillerLicense = DB::table('tsm_qc_info as qc');
+        $listMillerLicense->select('qc.*','ci.*','lc.LOOKUPCHD_NAME as license_type','lch.LOOKUPCHD_NAME as issuer_name','im.*','ass.ASSOCIATION_NAME');
+        $listMillerLicense->leftJoin('ssm_certificate_info as ci','ci.MILL_ID','=','qc.MILL_ID');
+        $listMillerLicense->leftJoin('ssc_lookupchd as lc','lc.LOOKUPCHD_ID','=','ci.CERTIFICATE_TYPE_ID');
+        $listMillerLicense->leftJoin('ssc_lookupchd as lch','lch.LOOKUPCHD_ID','=','ci.ISSURE_ID');
+        $listMillerLicense->leftJoin('ssm_mill_info as im','im.MILL_ID','=','ci.MILL_ID');
+        $listMillerLicense->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','im.ZONE_ID');
+        if($centerId){
+            $listMillerLicense->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        if($zone != 0){
+            $listMillerLicense->where('ass.ZONE_ID','=',1);
+        }
+        return $listMillerLicense->get();
     }
 
 }

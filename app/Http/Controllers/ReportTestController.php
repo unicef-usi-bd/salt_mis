@@ -6,6 +6,7 @@ use App\LookupGroupData;
 use App\Report;
 use App\ReportTest;
 use App\SupplierProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,28 +28,32 @@ class ReportTestController extends Controller
 
     public function getChemicalItemList(){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalLists = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicalLists = ReportTest::getPurchaseChemicalItemList($centerId);
         $view = view("reportView.purchaseChemicalList",compact('purchaseChemicalLists','centerId'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getChemicalItemListPdf(){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalLists = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicalLists = ReportTest::getPurchaseChemicalItemList($centerId);
         $data = \View::make('reportPdf.purchaseChemicalListPdf',compact('purchaseChemicalLists'));
         $this->generatePdf($data);
     }
 
-    public function getChemicalPurchase(){
+    public function getChemicalPurchase(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
-        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId'))->render();
+
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId,$starDate,$endDate);
+
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchasePdf(){
+    public function getChemicalPurchasePdf($starDate,$endDate){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId,$starDate,$endDate);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
         $this->generatePdf($data);
     }
