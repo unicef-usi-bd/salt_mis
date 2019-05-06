@@ -34,12 +34,12 @@
                                        <option value="">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="HR">
-                                       <option value="">List of Miller </option>
+                                       <option value="association-miller-list">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="Miller">
                                        <option value="association-total-miller">Total Miller </option>
                                        <option value="association-miller-type">Type of Miller </option>
-                                       <option value="">Monitor Miller </option>
+                                       <option value="association-monitor-miller">Monitor Miller </option>
                                        <option value="">List Of Miller </option>
                                   </optgroup>
 

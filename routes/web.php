@@ -161,6 +161,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-chemical-total-stock', 'ReportAssociationController@getPurchaseChemicalTotalStock');//azharul
     Route::get('association-total-miller', 'ReportAssociationController@getTotalMiller');//azharul
     Route::get('association-miller-type', 'ReportAssociationController@getMillerType');//azharul
+    Route::get('association-monitor-miller', 'ReportAssociationController@getMonitorMiller');//azharul
+    Route::get('association-miller-list', 'ReportAssociationController@getMillerListForHr');//azharul
 
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal

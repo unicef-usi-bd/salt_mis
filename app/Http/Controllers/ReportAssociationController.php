@@ -76,6 +76,16 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.millerTypeReport",compact('millerType'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getMonitorMiller(){
+        $monitorMiller = ReportAssociation::getMonitorMiller();
+        $view = view("reportAssociation.monitorMillerReport",compact('monitorMiller'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getMillerListForHr(){
+        $MillerList = ReportAssociation::getMillerListForHr();
+        $view = view("reportAssociation.millerListReport",compact('MillerList'))->render();
+        return response()->json(['html'=>$view]);
+    }
 // miller end
     public function abc(){
         $centerId = Auth::user()->center_id;
