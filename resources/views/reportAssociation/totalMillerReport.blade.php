@@ -27,7 +27,7 @@
             <tbody>
             @foreach($totalMiller as $sl =>  $row)
                 <tr>
-                    <td>{{ $sl++ }}</td>
+                    <td>{{ ++$sl }}</td>
                     <td>{{$row->MILL_NAME}}</td>
                     <td>
                         <?php if ($row->ACTIVE_FLG == 1){ ?>

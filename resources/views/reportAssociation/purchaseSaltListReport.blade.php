@@ -27,7 +27,7 @@
             <tbody>
             @foreach($purchaseSaltList as $sl =>  $row)
                 <tr>
-                    <td>{{ $sl++ }}</td>
+                    <td>{{ ++$sl }}</td>
                     <td>{{$row->LOOKUPCHD_NAME}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                 </tr>
