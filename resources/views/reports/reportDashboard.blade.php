@@ -209,6 +209,8 @@
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
                 var itemType = $('.itemTypeAdmin').val();
+                var zone = $('.zoneAdmin').val();
+                var issuerId = $('.issuerAdmin').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -238,7 +240,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Psy\Util\Json;
 use App\Item;
+use App\AssociationSetup;
 
 class ReportController extends Controller
 {
@@ -32,7 +33,9 @@ class ReportController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes'));
+        $associationList = AssociationSetup::getZoneList();
+//        $this->pr($associationList);
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList'));
     }
 
 // test controller
@@ -157,7 +160,16 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getListofMillerLicenses(){}
+    public function getListofMillerLicenses(Request $request){
+        $centerId = Auth::user()->center_id;
+        $zone = $request->input('zone');
+        $issuerId = $request->input('issuerId');
+        //return $issuerId;
+        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
+        //return $listLicenseMiller;
+        $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
 
     public function getListofMillerLicensesPdf(){}
 
