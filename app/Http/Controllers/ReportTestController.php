@@ -64,13 +64,13 @@ class ReportTestController extends Controller
         $endDate = $request->input('endDate');
         $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
         //return $purchaseChemicalStocks;
-        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId'))->render();
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchaseStockPdf(){
+    public function getChemicalPurchaseStockPdf($starDate,$endDate){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalStocks = ReportTest::adminChemicalStock();
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
         $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
         $this->generatePdf($data);
     }
