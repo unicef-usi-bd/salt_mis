@@ -206,6 +206,8 @@
                 var url = $('.reportTypeAdmin').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.status').val();
+                var startDate = $('.adminReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.adminReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type === 'unicef'){
                 var url = $('.reportTypeUnicef').val();
                 var centerId = $('.center').val();
@@ -228,7 +230,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus},
+                data : {'centerId':centerId,'activStatus':activStatus,'startDate':startDate,'endDate':endDate},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

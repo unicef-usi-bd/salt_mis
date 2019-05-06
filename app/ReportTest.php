@@ -7,18 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReportTest extends Model
 {
-    public static function getPurchaseChemicalList($centerId){
+    public static function getAdminPurchaseChemicalList($starDate,$endDate){
 
-        $chemicalItemList = DB::table("smm_item");
-        $chemicalItemList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
-        $chemicalItemList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $chemicalItemList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
-        $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
-        $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
-        if($centerId){
-            $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
-        }
-        return $chemicalItemList->get();
+        return DB::select(DB::raw("select ssc_lookupchd.LOOKUPCHD_NAME, smm_item.ITEM_NO, smm_item.ITEM_NAME, tmm_itemstock.*
+                                        from smm_item
+                                        left join ssc_lookupchd on ssc_lookupchd.LOOKUPCHD_ID = smm_item.ITEM_TYPE
+                                        left join tmm_itemstock on tmm_itemstock.ITEM_NO = smm_item.ITEM_NO
+                                        where tmm_itemstock.TRAN_TYPE = 'CP'
+                                        and tmm_itemstock.TRAN_FLAG = 'PR'
+                                        and tmm_itemstock.TRAN_DATE between cast('$starDate' as DATE) and cast('$endDate' as DATE)
+                                        "));
+
     }
 
     public static function monitorSupplierList(){

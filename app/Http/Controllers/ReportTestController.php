@@ -6,6 +6,7 @@ use App\LookupGroupData;
 use App\Report;
 use App\ReportTest;
 use App\SupplierProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,14 @@ class ReportTestController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getChemicalPurchase(){
+    public function getChemicalPurchase(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
+
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($starDate,$endDate);
+       // echo $purchaseChemicals;exit;
+        print_r($purchaseChemicals);exit;
         $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId'))->render();
         return response()->json(['html'=>$view]);
     }
