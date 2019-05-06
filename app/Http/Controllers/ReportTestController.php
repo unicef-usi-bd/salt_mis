@@ -58,16 +58,19 @@ class ReportTestController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getChemicalPurchaseStock(){
+    public function getChemicalPurchaseStock(Request $request){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalStocks = ReportTest::getPurchaseChemicalList($centerId);
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
+        //return $purchaseChemicalStocks;
         $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getChemicalPurchaseStockPdf(){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalStocks = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock();
         $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
         $this->generatePdf($data);
     }
