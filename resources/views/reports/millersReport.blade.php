@@ -18,7 +18,7 @@
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="">List of Supplier </option>
-                                       <option value="">List of Item </option>
+                                       <option value="chemical-item-list">List of Item </option>
                                        <option value="">Purchase</option>
                                        <option value="">Monitor Supplier</option>
                                        <option value="">Chemical Stock</option>
