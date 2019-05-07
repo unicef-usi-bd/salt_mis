@@ -150,6 +150,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase-report','ReportTestController@getChemicalPurchase');//Rubiyat
     Route::get('chemical-purchase-stock','ReportTestController@getChemicalPurchaseStock');//Rubiyat
+    Route::get('miller-chemical-purchase-stock','ReportTestController@getMillerChemicalPurchaseStock');//Rubiyat
     Route::get('monitor-supplier','ReportTestController@getMonitorSupplier');//Rubiyat
     Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat
 
@@ -190,8 +191,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
     Route::get('chemical-item-list-pdf','ReportTestController@getChemicalItemListPdf');//Rubiyat
-    Route::get('chemical-purchase-pdf/{starDate}/{$endDate}','ReportTestController@getChemicalPurchasePdf');//Rubiyat
-    Route::get('chemical-purchase-stock-pdf/{starDate}/{$endDate}','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
     Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
