@@ -38,7 +38,7 @@
                                        <option value="miller-license-report/{zone}">List of License </option>
                                   </optgroup>
                                    <optgroup label="QC">
-                                       <option value="">List of QC </option>
+                                       <option value="qc-report/{zone}">List of QC </option>
                                   </optgroup>
                                    <optgroup label="HR">
                                        <option value="">List of HR </option>
@@ -293,11 +293,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Zone Name</b> <span style="color: red;"> </span></label>
+                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                 <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneMiller form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
-                                    <option value="">Select Zone Name</option>
+                                    <option value="">Select Association Name</option>
                                     <option value="0">Select All</option>
                                     @foreach($associationList as $association)
                                         <option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>
