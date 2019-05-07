@@ -85,14 +85,16 @@ class ReportTestController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getMonitorSupplier(){
-        $monitorSuppliers = ReportTest::monitorSupplierList();
-        $view = view("reportView.monitorSuppliers",compact('monitorSuppliers'))->render();
+    public function getMonitorSupplier(Request $request){
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $monitorSuppliers = ReportTest::monitorSupplierList($starDate,$endDate);
+        $view = view("reportView.monitorSuppliers",compact('monitorSuppliers','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getMonitorSupplierPdf(){
-        $monitorSuppliers = ReportTest::monitorSupplierList();
+    public function getMonitorSupplierPdf($starDate,$endDate){
+        $monitorSuppliers = ReportTest::monitorSupplierList($starDate,$endDate);
         $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
         $this->generatePdf($data);
     }

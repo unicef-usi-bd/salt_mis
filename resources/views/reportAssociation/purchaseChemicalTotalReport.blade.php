@@ -27,7 +27,7 @@
 
             <tbody>
             @foreach($purchaseChemicalTotal as $sl =>  $row)
-            
+
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{ $row->LOOKUPCHD_NAME }}</td>
