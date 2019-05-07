@@ -28,14 +28,14 @@ class ReportTestController extends Controller
 
     public function getChemicalItemList(){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalLists = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicalLists = ReportTest::getPurchaseChemicalItemList($centerId);
         $view = view("reportView.purchaseChemicalList",compact('purchaseChemicalLists','centerId'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getChemicalItemListPdf(){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalLists = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicalLists = ReportTest::getPurchaseChemicalItemList($centerId);
         $data = \View::make('reportPdf.purchaseChemicalListPdf',compact('purchaseChemicalLists'));
         $this->generatePdf($data);
     }
@@ -45,16 +45,15 @@ class ReportTestController extends Controller
 
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseChemicals = ReportTest::getPurchaseChemicalList($starDate,$endDate);
-       // echo $purchaseChemicals;exit;
-        print_r($purchaseChemicals);exit;
-        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId'))->render();
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId,$starDate,$endDate);
+
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchasePdf(){
+    public function getChemicalPurchasePdf($starDate,$endDate){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId);
+        $purchaseChemicals = ReportTest::getPurchaseChemicalList($centerId,$starDate,$endDate);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
         $this->generatePdf($data);
     }

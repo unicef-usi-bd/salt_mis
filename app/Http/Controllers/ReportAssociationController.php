@@ -29,16 +29,31 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.purchaseSaltListReport",compact('purchaseSaltList'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getPurchaseSaltItemPdf(){
+        $purchaseSaltList = ReportAssociation::getPurchaseSaltItem();
+        $data = \View::make('reportAssociation.pdf.purchaseSaltListReportPdf',compact('purchaseSaltList'));
+        $this->generatePdf($data);
+    }
     public function getPurchaseSaltTotal(){
         $purchaseSaltTotal = ReportAssociation::getPurchaseSaltTotal();
         //$this->pr($purchaseSaltTotal);
         $view = view("reportAssociation.purchaseSaltTotalReport",compact('purchaseSaltTotal'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getPurchaseSaltTotalPdf(){
+        $purchaseSaltTotal = ReportAssociation::getPurchaseSaltTotal();
+        $data = \View::make('reportAssociation.pdf.purchaseSaltTotalReportPdf',compact('purchaseSaltTotal'));
+        $this->generatePdf($data);
+    }
     public function getPurchaseSaltTotalStock(){
         $purchaseSaltTotalStock = ReportAssociation::getPurchaseSaltTotalStock();
         $view = view("reportAssociation.purchaseSaltTotalStockReport",compact('purchaseSaltTotalStock'))->render();
         return response()->json(['html'=>$view]);
+    }
+    public function getPurchaseSaltTotalStockPdf(){
+        $purchaseSaltTotalStock = ReportAssociation::getPurchaseSaltTotalStock();
+        $data = \View::make('reportAssociation.pdf.purchaseSaltTotalStockReportPdf',compact('purchaseSaltTotalStock'));
+        $this->generatePdf($data);
     }
     // purchase salt end
     // purchase chemical
@@ -48,16 +63,34 @@ class ReportAssociationController extends Controller
         return response()->json(['html'=>$view]);
 
     }
+    public function getPurchaseChemicalItemPdf(){
+        $purchaseChemicalList = ReportAssociation::getPurchaseChemicalItem();
+        $data = \View::make('reportAssociation.pdf.purchaseChemicalListReportPdf',compact('purchaseChemicalList'));
+        $this->generatePdf($data);
+    }
+
     public function getPurchaseChemicalTotal(){
         $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal();
         $view = view("reportAssociation.purchaseChemicalTotalReport",compact('purchaseChemicalTotal'))->render();
         return response()->json(['html'=>$view]);
 
     }
+    public function getPurchaseChemicalTotalPdf(){
+        $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal();
+        $data = \View::make('reportAssociation.pdf.purchaseChemicalTotalReportPdf',compact('purchaseChemicalTotal'));
+        $this->generatePdf($data);
+
+    }
     public function getPurchaseChemicalTotalStock(){
         $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock();
         $view = view("reportAssociation.purchaseChemicalTotalStockReport",compact('purchaseChemicalTotalStock'))->render();
         return response()->json(['html'=>$view]);
+
+    }
+    public function getPurchaseChemicalTotalStockPdf(){
+        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock();
+        $data = \View::make('reportAssociation.pdf.purchaseChemicalTotalStockReportPdf',compact('purchaseChemicalTotalStock'));
+        $this->generatePdf($data);
 
     }
 // purchase chemical end
@@ -69,6 +102,12 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.totalMillerReport",compact('totalMiller'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getTotalMillerPdf(Request $request){
+        $activStatus = $request->input('activStatus');
+        $totalMiller = ReportAssociation::getMillerList($activStatus);
+        $data = \View::make('reportAssociation.pdf.totalMillerReportPdf',compact('totalMiller'));
+        $this->generatePdf($data);
+    }
     public function getMillerType(Request $request){
         $activStatus = $request->input('activStatus');
         //$this->pr($activStatus);
@@ -76,24 +115,75 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.millerTypeReport",compact('millerType'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getMillerTypePdf(Request $request){
+        $activStatus = $request->input('activStatus');
+        $millerType = ReportAssociation::getMillerType($activStatus);  //$this->pr($millerType);
+        $data = \View::make('reportAssociation.pdf.millerTypeReportPdf',compact('millerType'));
+        $this->generatePdf($data);
+    }
     public function getMonitorMiller(){
         $monitorMiller = ReportAssociation::getMonitorMiller();
         $view = view("reportAssociation.monitorMillerReport",compact('monitorMiller'))->render();
         return response()->json(['html'=>$view]);
+    }
+    public function getMonitorMillerPdf(){
+        $monitorMiller = ReportAssociation::getMonitorMiller();
+        $data = \View::make('reportAssociation.pdf.monitorMillerReportPdf',compact('monitorMiller'));
+        $this->generatePdf($data);
     }
     public function getMillerListForHr(){
         $MillerList = ReportAssociation::getMillerListForHr();
         $view = view("reportAssociation.millerListReport",compact('MillerList'))->render();
         return response()->json(['html'=>$view]);
     }
+    public function getMillerListForHrPdf(){
+        $MillerList = ReportAssociation::getMillerListForHr();
+        $data = \View::make('reportAssociation.pdf.millerListReportPdf',compact('MillerList'));
+        $this->generatePdf($data);
+    }
 // miller end
-    public function abc(){
-        $centerId = Auth::user()->center_id;
-        $purchaseTotalSaltStock = Report::getPurchaseSalteList($centerId);
-        $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
+    public function getQcMillerList(){
+        $MillerList = ReportAssociation::getQcMillerList();
+        $view = view("reportAssociation.qcMillerListReport",compact('MillerList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getQcMillerListPdf(){
+        $MillerList = ReportAssociation::getQcMillerList();
+        $data = \View::make('reportAssociation.pdf.qcMillerListReportPdf',compact('MillerList'));
+        $this->generatePdf($data);
+    }
+    public function getLicenseMillerList(){
+        $MillerList = ReportAssociation::getLicenseMillerList();
+        $view = view("reportAssociation.licenseMillerListReport",compact('MillerList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getLicenseMillerListPdf(){
+        $MillerList = ReportAssociation::getLicenseMillerList();
+        $data = \View::make('reportAssociation.pdf.licenseMillerListReportPdf',compact('MillerList'));
+        $this->generatePdf($data);
+    }
+    public function getSaleItemList(){
+        $itemList = ReportAssociation::getSaleItemList();
+        $view = view("reportAssociation.saleItemListReport",compact('itemList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getSaleItemListPdf(){
+        $itemList = ReportAssociation::getSaleItemList();
+        $data = \View::make('reportAssociation.pdf.saleItemListReportPdf',compact('itemList'));
+        $this->generatePdf($data);
+    }
+    public function getSaleItemStock(){
+        $itemStock = ReportAssociation::getSaleItemStock();
+        $view = view("reportAssociation.saleItemStockReport",compact('itemStock'))->render();
+        return response()->json(['html'=>$view]);
+    }
+    public function getSaleItemStockPdf(){
+        $itemStock = ReportAssociation::getSaleItemStock();
+        $data = \View::make('reportAssociation.pdf.saleItemStockReportPdf',compact('itemStock'));
         $this->generatePdf($data);
     }
 
 
 
-}
+
+} // class end

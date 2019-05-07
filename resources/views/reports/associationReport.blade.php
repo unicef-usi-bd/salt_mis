@@ -24,14 +24,14 @@
                                    </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">Total Sale</option>
-                                       <option value="">List of Item</option>
-                                       <option value="">Item Stock</option>
+                                       <option value="sale-item-list">List of Item</option>
+                                       <option value="sale-item-stock">Item Stock</option>
                                  </optgroup>
                                    <optgroup label="License">
-                                       <option value="">List of Miller </option>
+                                       <option value="license-miller-list">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="QC">
-                                       <option value="">List of Miller </option>
+                                       <option value="qc-miller-list">List of Miller </option>
                                   </optgroup>
                                    <optgroup label="HR">
                                        <option value="association-miller-list">List of Miller </option>
