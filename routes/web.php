@@ -144,10 +144,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sales-item-report','ReportController@getSalesList');//jalal
     Route::get('sales-item-report-all','ReportController@getSalesListAll');//jalal
     Route::get('miller-license-report/{zone}','ReportController@getListofMillerLicenses');//jalal
+    Route::get('qc-report/{zone}','ReportController@getQcreport');//jalal
+    Route::get('hr-report/{zone}','ReportController@getHrreport');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase-report','ReportTestController@getChemicalPurchase');//Rubiyat
     Route::get('chemical-purchase-stock','ReportTestController@getChemicalPurchaseStock');//Rubiyat
+    Route::get('miller-chemical-purchase-stock','ReportTestController@getMillerChemicalPurchaseStock');//Rubiyat
     Route::get('monitor-supplier','ReportTestController@getMonitorSupplier');//Rubiyat
     Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat
 
@@ -188,8 +191,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
     Route::get('chemical-item-list-pdf','ReportTestController@getChemicalItemListPdf');//Rubiyat
-    Route::get('chemical-purchase-pdf/{starDate}/{$endDate}','ReportTestController@getChemicalPurchasePdf');//Rubiyat
-    Route::get('chemical-purchase-stock-pdf','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
     Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
@@ -202,6 +205,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sales-item-report-pdf','ReportController@getSalesListPdf');//jalal
     Route::get('sales-item-report-all-pdf','ReportController@getSalesListAllpdf');//jalal
     Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal
+    Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
+    Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
 
 
 });

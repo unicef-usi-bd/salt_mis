@@ -21,7 +21,7 @@
                                        <option value="chemical-item-list">List of Item </option>
                                        <option value="chemical-purchase-report">Purchase</option>
                                        <option value="monitor-supplier">Monitor Supplier</option>
-                                       <option value="chemical-purchase-stock">Chemical Stock</option>
+                                       <option value="miller-chemical-purchase-stock">Chemical Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
                                        <option value="">List of Process </option>
@@ -248,7 +248,16 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
+                        <div class="col-sm-8">
+                                <span class="block input-icon input-icon-right ">
+                                    {{--<input type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
+                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 millerReportrange" value=""/>
 
+                                </span>
+                        </div>
+                    </div>
 
                 </div>
             </form>
@@ -269,3 +278,36 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
+<script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
+<link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
+<script>
+    $(function() {
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('.millerReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('.millerReportrange').daterangepicker({
+
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+    });
+</script>
+

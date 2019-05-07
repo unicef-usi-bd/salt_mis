@@ -92,16 +92,9 @@ class Report extends Model
         if($centerId){
             $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
         }
-        if ($itemType == 2){
-            $purchaseSaltList->where('smm_item.ITEM_NO','=',2);
+        if ($itemType != 0){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
         }
-        if ($itemType == 3){
-            $purchaseSaltList->where('smm_item.ITEM_NO','=',3);
-        }
-        if ($itemType == 4){
-            $purchaseSaltList->where('smm_item.ITEM_NO','=',4);
-        }
-
         return $purchaseSaltList->get();
     }
 
@@ -164,6 +157,23 @@ class Report extends Model
             $listMillerLicense->where('ci.ISSURE_ID','=',$issuerId);
         }
         return $listMillerLicense->get();
+    }
+
+    public static function getQcReport($centerId,$zone){
+        $qcReports = DB::table('tmm_qualitycontrol as ql');
+        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.*');
+        $qcReports->leftJoin('ssc_lookupchd as lc','ql.QC_BY','=','lc.LOOKUPCHD_ID');
+        $qcReports->leftJoin('ssc_lookupchd as lch','ql.AGENCY_ID','=','lch.LOOKUPCHD_ID');
+        $qcReports->leftJoin('ssm_mill_info as mi','ql.center_id','=','mi.center_id');
+        $qcReports->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','mi.ZONE_ID');
+        if($centerId){
+            $qcReports->where('ql.center_id','=',$centerId);
+        }
+        if($zone != 0){
+            $qcReports->where('ass.ZONE_ID','=',$zone);
+        }
+
+        return $qcReports->get();
     }
 
 }
