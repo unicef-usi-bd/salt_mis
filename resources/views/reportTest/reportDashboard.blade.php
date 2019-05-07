@@ -224,6 +224,8 @@
                 var url = $('.reportTypeMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.status').val();
+                var startDate = $('.millerReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.millerReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }
 
 //alert(status);

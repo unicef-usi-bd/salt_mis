@@ -75,6 +75,16 @@ class ReportTestController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getMillerChemicalPurchaseStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = ReportTest::millerChemicalStock($centerId,$starDate,$endDate);
+        //return $purchaseChemicalStocks;
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
     public function getMonitorSupplier(){
         $monitorSuppliers = ReportTest::monitorSupplierList();
         $view = view("reportView.monitorSuppliers",compact('monitorSuppliers'))->render();
