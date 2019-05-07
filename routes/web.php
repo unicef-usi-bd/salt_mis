@@ -144,6 +144,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sales-item-report','ReportController@getSalesList');//jalal
     Route::get('sales-item-report-all','ReportController@getSalesListAll');//jalal
     Route::get('miller-license-report/{zone}','ReportController@getListofMillerLicenses');//jalal
+    Route::get('qc-report/{zone}','ReportController@getQcreport');//jalal
+    Route::get('hr-report/{zone}','ReportController@getHrreport');//jalal
 
     Route::get('chemical-item-list','ReportTestController@getChemicalItemList');//Rubiyat
     Route::get('chemical-purchase-report','ReportTestController@getChemicalPurchase');//Rubiyat
@@ -203,6 +205,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sales-item-report-pdf','ReportController@getSalesListPdf');//jalal
     Route::get('sales-item-report-all-pdf','ReportController@getSalesListAllpdf');//jalal
     Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal
+    Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
+    Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
 
 
 });

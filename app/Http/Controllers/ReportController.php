@@ -188,4 +188,20 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getQcreport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $zone = $request->input('zone');
+        $qcReports = Report::getQcReport($centerId,$zone);
+        $view = view("reportView.qcReport",compact('qcReports','zone'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getQcreportPdf($zone){
+        $centerId = Auth::user()->center_id;
+        //$zone = $request->input('zone');
+        $qcReports = Report::getQcReport($centerId,$zone);
+        $data = \View::make('reportPdf.qcReportPdf',compact('qcReports'));
+        $this->generatePdf($data);
+    }
+
 }
