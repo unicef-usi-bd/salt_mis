@@ -14,19 +14,20 @@ class ReportAssociation extends Model
  public static function getPurchaseSaltItem(){
      $centerId = Auth::user()->center_id;
      return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME
-        from tmm_itemstock it
-        left join smm_item st on it.ITEM_NO = st.ITEM_NO
-        left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
-        where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
+          from smm_item st
+          left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = st.ITEM_TYPE
+          where st.ACTIVE_FLG and st.item_type=26 "));
 
  }
     public static function getPurchaseSaltTotal(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME,it.QTY
-            from tmm_itemstock it
-            left join smm_item st on it.ITEM_NO = st.ITEM_NO
-            left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where it.TRAN_TYPE = 'SP' and it.TRAN_FLAG = 'PR' and it.center_id = '$centerId' "));
+        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            from tmm_itemstock its
+            left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
+            from ssm_associationsetup ass
+            where ass.PARENT_ID = '$centerId') "));
     }
     public static function getPurchaseSaltTotalStock(){
         $centerId = Auth::user()->center_id;
@@ -43,7 +44,7 @@ class ReportAssociation extends Model
         return DB::select(DB::raw("select lc.LOOKUPCHD_NAME, st.ITEM_NAME 
           from smm_item st
           left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = st.ITEM_TYPE
-          where st.ACTIVE_FLG and st.item_type=25; "));
+          where st.ACTIVE_FLG and st.item_type=25 "));
 
     }
     public static function getPurchaseChemicalTotal(){
@@ -59,11 +60,37 @@ class ReportAssociation extends Model
     }
     public static function getPurchaseChemicalTotalStock(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY 
-              from tmm_itemstock its
-              left join smm_item it on its.ITEM_NO = it.ITEM_NO
-              left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-              where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and its.center_id = '$centerId' "));
+        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME,
+               b.ITEM_NO,
+               b.ITEM_NAME,
+               SUM(b.purchase) purchase,
+               SUM(b.reduce) reduce,
+               SUM(b.QTY) STOCK_QTY
+          FROM (SELECT c.LOOKUPCHD_NAME,
+                       i.ITEM_NO,
+                       i.ITEM_NAME,
+                       s.QTY,
+                       CASE
+                          WHEN s.TRAN_FLAG = 'IC' AND s.TRAN_TYPE = 'C' THEN s.QTY
+                       END
+                          reduce,
+                       CASE
+                          WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'CP' THEN s.QTY
+                       END
+                          purchase,
+                       s.TRAN_DATE,
+                       s.center_id
+                  FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                 WHERE     i.ITEM_NO = s.ITEM_NO
+                       AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                       AND i.item_type = 25
+                       AND s.TRAN_FLAG NOT IN ('WR', 'II')
+                       AND s.TRAN_TYPE NOT IN ('W', 'I')) b
+         
+         WHERE b.center_id in (select ass.ASSOCIATION_ID
+                    from ssm_associationsetup ass
+                   where ass.PARENT_ID = '$centerId')
+        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
 
     }
 // purchase chemical End
