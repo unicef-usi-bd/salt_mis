@@ -82,14 +82,16 @@ class ReportTest extends Model
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 
-    public static function monitorSupplierList(){
+    public static function monitorSupplierList($starDate,$endDate){
         $centerId = Auth::user()->center_id;
 
-        return DB::raw(DB::select("select si.TRADING_NAME, si.TRADER_NAME, lc.LOOKUPCHD_NAME, it.QTY
+        return DB::select(DB::raw("select si.TRADING_NAME, si.TRADER_NAME, lc.LOOKUPCHD_NAME, it.QTY
                                           from ssm_supplier_info si
                                           left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = si.SUPPLIER_TYPE_ID
                                           left join tmm_itemstock it on it.SUPP_ID_AUTO = si.SUPP_ID_AUTO
-                                          where it.center_id = $centerId"));
+                                          WHERE DATE(it.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                          and it.center_id = $centerId"));
+
     }
 
 }

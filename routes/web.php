@@ -194,11 +194,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-purchase-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchasePdf');//Rubiyat
     Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}','ReportTestController@getChemicalPurchaseStockPdf');//Rubiyat
 
+
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
     Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
     Route::get('purchase-salt-stock-pdf','ReportController@getPurchaseSaltStockPdf');//jalal
 
-    Route::get('monitor-supplier-pdf','ReportTestController@getMonitorSupplierPdf');//Rubiyat
+    Route::get('monitor-supplier-pdf/{starDate}/{endDate}','ReportTestController@getMonitorSupplierPdf');//Rubiyat
     Route::get('supplier-list-pdf/{division}/{district}/{value}','ReportTestController@getSupplierListPdf');//Rubiyat
     Route::get('monitor-association-pdf','ReportController@getMonitorAssociationListPdf');//jalal
     Route::get('process-report-pdf','ReportController@getProcessReportPdf');//jalal
