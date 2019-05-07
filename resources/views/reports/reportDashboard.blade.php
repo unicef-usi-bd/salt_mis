@@ -242,6 +242,8 @@
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val();
+                var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
             }
             //console.log(url);

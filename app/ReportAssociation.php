@@ -29,7 +29,7 @@ class ReportAssociation extends Model
             from ssm_associationsetup ass
             where ass.PARENT_ID = '$centerId') "));
     }
-    public static function getPurchaseSaltTotalStock(){
+    public static function getPurchaseSaltTotalStock($starDate,$endDate){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME,
                b.ITEM_NO,
@@ -61,6 +61,7 @@ class ReportAssociation extends Model
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
                    where ass.PARENT_ID = '$centerId')
+                  AND  DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
     }
     // purchase salt End
