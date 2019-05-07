@@ -218,4 +218,22 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getChemicalPurchase(Request $request){
+        $centerId = Auth::user()->center_id;
+
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalPurchasePdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+        $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
+        $this->generatePdf($data);
+    }
+
 }
