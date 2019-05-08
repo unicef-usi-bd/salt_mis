@@ -132,7 +132,7 @@ class Report extends Model
                                             AND i.item_type = 26
                                             AND s.TRAN_FLAG NOT IN ('WR','II')
                                             AND s.TRAN_TYPE NOT IN ('W','I')) b
-                                            WHERE DATE(b.TRAN_DATE) BETWEEN $starDate AND $endDate
+                                            WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 
