@@ -21,9 +21,9 @@ class ReportTestController extends Controller
     public function index()
     {
         $itemList = Report::itemList();
-        $getDivision = SupplierProfile::getDivision();
+        $getDivisions = SupplierProfile::getDivision();
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        return view("reportTest.reportDashboard", compact('itemList','getDivision','issueBy'));
+        return view("reportTest.reportDashboard", compact('itemList','getDivisions','issueBy'));
     }
 
     public function getChemicalItemList(){
@@ -97,5 +97,29 @@ class ReportTestController extends Controller
         $monitorSuppliers = ReportTest::monitorSupplierList($starDate,$endDate);
         $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
         $this->generatePdf($data);
+    }
+
+    public function getSupplierList(Request $request){
+        $centerId = Auth::user()->center_id;
+        $division = $request->input('divisionId');
+        $distict = $request->input('districtId');
+        $highLowValue = $request->input('highLowValue');
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        $purchaseChemicalSupplierLists = ReportTest::purchaseChemicalSupplierList($centerId,$division);
+
+        print_r($purchaseChemicalSupplierLists);exit;
+    }
+
+    public function getProcessReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = ReportTest::getStockSaltForAdmin($starDate,$endDate);
+        //return $purchaseTotalSaltStock;
+        $view = view("reportView.processSrockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
     }
 }
