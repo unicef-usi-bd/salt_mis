@@ -96,6 +96,13 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getTotalAmontPurchaseSalteList(){
+        $centerId = Auth::user()->center_id;
+        $purchaseSaltList = Report::getPurchaseSalteList($centerId);
+        $view = view("reportView.purchaseSaltList",compact('purchaseSaltList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
     public function getPurchaseSaltAmount(Request $request){
         $centerId = Auth::user()->center_id;
         $itemType = $request->input('itemType');
@@ -250,6 +257,30 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
         $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerChemicalPurchaseStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
+        //return $purchaseChemicalStocks;
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorSupplier(Request $request){
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
+        $view = view("reportView.monitorSuppliers",compact('monitorSuppliers','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorSupplierPdf($starDate,$endDate){
+        $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
+        $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
         $this->generatePdf($data);
     }
 

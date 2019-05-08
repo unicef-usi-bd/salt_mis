@@ -23,11 +23,11 @@
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="chemical-item-list">List of Item </option>
-                                       <option value="">List of Supplier  </option>
+                                       {{--<option value="">List of Supplier  </option>--}}
                                        <option value="chemical-purchase-report">Purchase</option>
-                                       <option value="">Purchase Stock</option>
-                                       <option value="">Monitor Supplier</option>
-                                       <option value="">Chemical Stock</option>
+                                       <option value="chemical-purchase-stock">Purchase Stock</option>
+                                       {{--<option value="">Monitor Supplier</option>--}}
+                                       {{--<option value="">Chemical Stock</option>--}}
 
                                   </optgroup>
                                    <optgroup label="Process">

@@ -20,8 +20,8 @@
                                        <option value="">List of Supplier </option>
                                        <option value="chemical-item-list">List of Item </option>
                                        <option value="chemical-purchase-report">Purchase</option>
-                                       <option value="">Monitor Supplier</option>
-                                       <option value="">Chemical Stock</option>
+                                       <option value="monitor-supplier">Monitor Supplier</option>
+                                       <option value="miller-chemical-purchase-stock">Chemical Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
                                        <option value="">List of Process </option>
