@@ -131,15 +131,19 @@ class ReportController extends Controller
     }
 
     public function getMonitorSaltsupplierList(Request $request){
-        $centerId = Auth::user()->center_id;
+        //$centerId = Auth::user()->center_id;
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseTotalSaltStock = Report::monitorSaltSupplierList($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStock = Report::monitorSaltSupplierList($starDate,$endDate);
         $view = view("reportView.monitorSaltsupplierReportList",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getMonitorSaltsupplierListPdf(){}
+    public function getMonitorSaltsupplierListPdf($starDate,$endDate){
+        $purchaseTotalSaltStock = Report::monitorSaltSupplierList($starDate,$endDate);
+        $data = \View::make('reportPdf.monitorSaltsupplierReportListPdf',compact('purchaseTotalSaltStock'));
+        $this->generatePdf($data);
+    }
 
     public function getMillerSaltStock(Request $request){
         $centerId = Auth::user()->center_id;

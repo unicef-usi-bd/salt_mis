@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    {{--<a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-purchase-salt-stock-pdf/'.$starDate.'/'.$endDate) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>--}}
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('monitor-salt-report-pdf/'.$starDate.'/'.$endDate) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Purchase Salt Stock</h4>
+        <h4>Monitor List</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -35,9 +35,9 @@
             @foreach($purchaseTotalSaltStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{$row->STOCK_QTY}}</td>
-
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->TRADER_NAME}}</td>
+                    <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach
             </tbody>

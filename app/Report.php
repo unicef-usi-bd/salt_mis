@@ -331,7 +331,7 @@ class Report extends Model
 	  left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = si.SUPPLIER_TYPE_ID
 	  left join tmm_itemstock it on it.SUPP_ID_AUTO = si.SUPP_ID_AUTO
       WHERE DATE(it.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-	  where it.center_id ='$centerId'"));
+	  AND it.center_id =$centerId"));
     }
 
 }
