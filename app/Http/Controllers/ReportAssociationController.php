@@ -104,13 +104,13 @@ class ReportAssociationController extends Controller
         $activStatus = $request->input('activStatus');
         //$this->pr($activStatus);
         $totalMiller = ReportAssociation::getMillerList($activStatus);
-        $view = view("reportAssociation.totalMillerReport",compact('totalMiller'))->render();
+        $view = view("reportAssociation.totalMillerReport",compact('totalMiller','activStatus'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function getTotalMillerPdf(Request $request){
-        $activStatus = $request->input('activStatus');
-        $totalMiller = ReportAssociation::getMillerList($activStatus);
-        $data = \View::make('reportAssociation.pdf.totalMillerReportPdf',compact('totalMiller'));
+    public function getTotalMillerPdf(Request $request, $id){
+        $activStatus = $id;
+        $totalMiller = ReportAssociation::getMillerList($activStatus);//$this->pr($activStatus);
+        $data = \View::make('reportAssociation.pdf.totalMillerReportPdf',compact('totalMiller','activStatus'));
         $this->generatePdf($data);
     }
     public function getMillerType(Request $request){

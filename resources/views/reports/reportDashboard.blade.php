@@ -254,13 +254,14 @@
                 var activStatus = $('.statusAssociation').val();
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var issueby = $('select.issueby').val();
 
             }
             //console.log(url);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();
