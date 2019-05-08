@@ -161,6 +161,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('supplier-list/{division}/{district}/{value}','ReportTestController@getSupplierList');//Rubiyat
 
     Route::get('process-stock-report','ReportTestController@getProcessStockReport');//Rubiyat
+    Route::get('miller-process-stock-report','ReportTestController@getMillerProcessStockReport');//Rubiyat
+    Route::get('miller-process-stock-pdf/{starDate}/{endDate}','ReportTestController@getMillerProcessStockPdf');//Rubiyat
+    Route::get('miller-process-list-report','ReportTestController@getMillerProcessListReport');//Rubiyat
+    Route::get('miller-process-list-pdf/{processType}/{starDate}/{endDate}','ReportTestController@getMillerProcessListPdf');//Rubiyat
 
     // Report and PDF for Association
     Route::get('purchase-salt-item', 'ReportAssociationController@getPurchaseSaltItem'); //azharul
@@ -212,7 +216,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('monitor-supplier-pdf/{starDate}/{endDate}','ReportController@getMonitorSupplierPdf');//Rubiyat
     Route::get('supplier-list-pdf/{division}/{district}/{value}','ReportTestController@getSupplierListPdf');//Rubiyat
     Route::get('monitor-association-pdf','ReportController@getMonitorAssociationListPdf');//jalal
-    Route::get('process-report-pdf','ReportController@getProcessReportPdf');//jalal
+    Route::get('process-report-pdf/{starDate}/{endDate}','ReportTestController@getProcessReportPdf');//jalal
     Route::get('sales-item-report-pdf','ReportController@getSalesListPdf');//jalal
     Route::get('sales-item-report-all-pdf','ReportController@getSalesListAllpdf');//jalal
     Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal

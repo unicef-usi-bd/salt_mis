@@ -122,4 +122,40 @@ class ReportTestController extends Controller
         $view = view("reportView.processSrockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
+
+    public function getProcessReportPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = ReportTest::getStockSaltForAdmin($starDate,$endDate);
+        $data = \View::make('reportPdf.processStockPdf',compact('purchaseChemicalStocks','purchaseTotalSaltStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerProcessStockReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = ReportTest::millerChemicalStock($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = ReportTest::getStockSaltForMiller($centerId,$starDate,$endDate);
+
+        $view = view("reportView.millerProcessStockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerProcessStockPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = ReportTest::millerChemicalStock($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = ReportTest::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $data = \View::make('reportPdf.millerProcessStockPdf',compact('purchaseChemicalStocks','purchaseTotalSaltStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerProcessListReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $processType = $request->input('processType');
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $millerProcessLists = ReportTest::millerProcessList($centerId,$processType);
+        return $millerProcessLists;
+    }
 }
