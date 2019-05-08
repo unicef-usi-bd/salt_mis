@@ -99,22 +99,25 @@ class ReportController extends Controller
     public function getPurchaseSaltAmount(Request $request){
         $centerId = Auth::user()->center_id;
         $itemType = $request->input('itemType');
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
-        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType'))->render();
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseTotalSalt = Report::getPurchaseSalteLists ($centerId,$itemType,$starDate,$endDate);
+        $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf($itemType){
+    public function getPurchaseSaltAmountPdf($itemType,$starDate,$endDate){
         $centerId = Auth::user()->center_id;
         //$itemType = $request->input('itemType');
-        $purchaseTotalSalt = Report::getPurchaseSalteList($centerId,$itemType);
+        $purchaseTotalSalt = Report::getPurchaseSalteLists($centerId,$itemType,$starDate,$endDate);
         $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
         $this->generatePdf($data);
     }
 
-    public function getPurchaseSaltStock(){
-        $centerId = Auth::user()->center_id;
-        $purchaseTotalSaltStock = Report::getPurchaseSalteList($centerId);
+    public function getAdminSaltStock(Request $request){
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
         $view = view("reportView.purchaseSaltStockReport",compact('purchaseTotalSaltStock'))->render();
         return response()->json(['html'=>$view]);
     }
@@ -201,6 +204,79 @@ class ReportController extends Controller
         //$zone = $request->input('zone');
         $qcReports = Report::getQcReport($centerId,$zone);
         $data = \View::make('reportPdf.qcReportPdf',compact('qcReports'));
+        $this->generatePdf($data);
+    }
+
+    public function getChemicalItemList(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalLists = Report::getPurchaseChemicalItemList($centerId);
+        $view = view("reportView.purchaseChemicalList",compact('purchaseChemicalLists','centerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalItemListPdf(){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalLists = Report::getPurchaseChemicalItemList($centerId);
+        $data = \View::make('reportPdf.purchaseChemicalListPdf',compact('purchaseChemicalLists'));
+        $this->generatePdf($data);
+    }
+
+    public function getChemicalPurchase(Request $request){
+        $centerId = Auth::user()->center_id;
+
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalPurchasePdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+        $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
+        $this->generatePdf($data);
+    }
+
+    public function getChemicalPurchaseStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        //return $purchaseChemicalStocks;
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getChemicalPurchaseStockPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerChemicalPurchaseStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
+        //return $purchaseChemicalStocks;
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorSupplier(Request $request){
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
+        $view = view("reportView.monitorSuppliers",compact('monitorSuppliers','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorSupplierPdf($starDate,$endDate){
+        $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
+        $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
         $this->generatePdf($data);
     }
 

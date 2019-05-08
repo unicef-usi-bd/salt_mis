@@ -29,7 +29,7 @@
             @foreach($itemStock as $sl =>  $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->IT_TYPE}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{$row->QTY}}</td>
                 </tr>

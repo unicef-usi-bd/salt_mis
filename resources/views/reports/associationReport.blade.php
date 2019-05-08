@@ -47,16 +47,14 @@
                             </span>
                         </div>
                     </div>
-                    {{--<div class="form-group" >--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                                {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
-
-                                {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group" >
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" id="reportrange"  name="reportrange" class="width-65 assReportrange" /></select>
+                            </span>
+                        </div>
+                    </div>
 
 
 
@@ -207,3 +205,34 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
+<script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
+<link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
+<script>
+    $(function() {
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('.assReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('.assReportrange').daterangepicker({
+
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+    });
+</script>

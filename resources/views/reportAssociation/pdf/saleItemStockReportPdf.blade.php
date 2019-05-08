@@ -13,7 +13,7 @@
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        th>Item Type</th>
+        <th>Item Type</th>
         <th>Item Name</th>
         <th>Stock Volume</th>
 
@@ -21,7 +21,7 @@
     @foreach($itemStock as $sl =>  $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$row->LOOKUPCHD_NAME}}</td>
+            <td>{{$row->IT_TYPE}}</td>
             <td>{{$row->ITEM_NAME}}</td>
             <td>{{$row->QTY}}</td>
         </tr>

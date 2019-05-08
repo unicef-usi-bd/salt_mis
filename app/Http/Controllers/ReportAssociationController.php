@@ -45,8 +45,11 @@ class ReportAssociationController extends Controller
         $data = \View::make('reportAssociation.pdf.purchaseSaltTotalReportPdf',compact('purchaseSaltTotal'));
         $this->generatePdf($data);
     }
-    public function getPurchaseSaltTotalStock(){
-        $purchaseSaltTotalStock = ReportAssociation::getPurchaseSaltTotalStock();
+    public function getPurchaseSaltTotalStock(Request $request){
+        $starDate = $request->input('assStartDate');
+        $endDate = $request->input('assEndDate');
+        //$this->pr($starDate);
+        $purchaseSaltTotalStock = ReportAssociation::getPurchaseSaltTotalStock($starDate,$endDate);
         $view = view("reportAssociation.purchaseSaltTotalStockReport",compact('purchaseSaltTotalStock'))->render();
         return response()->json(['html'=>$view]);
     }
@@ -81,8 +84,10 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
 
     }
-    public function getPurchaseChemicalTotalStock(){
-        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock();
+    public function getPurchaseChemicalTotalStock(Request $request){
+        $starDate = $request->input('assStartDate');
+        $endDate = $request->input('assEndDate');
+        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($starDate,$endDate);
         $view = view("reportAssociation.purchaseChemicalTotalStockReport",compact('purchaseChemicalTotalStock'))->render();
         return response()->json(['html'=>$view]);
 

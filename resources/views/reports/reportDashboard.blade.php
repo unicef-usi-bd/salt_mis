@@ -211,6 +211,8 @@
                 var itemType = $('.itemTypeAdmin').val();
                 var zone = $('.zoneAdmin').val();
                 var issuerId = $('.issuerAdmin').val();
+                var startDate = $('.adminReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.adminReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -218,6 +220,8 @@
                 var itemType = $('.itemTypeUnicef').val();
                 var zone = $('.zoneUnicef').val();
                 var issuerId = $('.issuerUnicef').val();
+                var startDate = $('.unicefReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.unicefReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
@@ -225,6 +229,8 @@
                 var itemType = $('.itemTypeBsti').val();
                 var zone = $('.zoneBsti').val();
                 var issuerId = $('.issuerBsti').val();
+                var startDate = $('.bstiReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.bstiReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
@@ -232,23 +238,29 @@
                 var itemType = $('.itemTypeBasic').val();
                 var zone = $('.zoneBasic').val();
                 var issuerId = $('.issuerBasic').val();
+                var startDate = $('.basicReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.basicReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
                 var zone = $('.zoneMiller').val();
                 var issuerId = $('.issuerMiller').val();
+                var startDate = $('.millReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.millReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val();
+                var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
             }
             //console.log(url);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

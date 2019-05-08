@@ -22,12 +22,12 @@
                                        <option value="purchase-salt-stock">Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
-                                       <option value="">List of Item </option>
-                                       <option value="">List of Supplier  </option>
-                                       <option value="">Purchase</option>
-                                       <option value="">Purchase Stock</option>
-                                       <option value="">Monitor Supplier</option>
-                                       <option value="">Chemical Stock</option>
+                                       <option value="chemical-item-list">List of Item </option>
+                                       {{--<option value="">List of Supplier  </option>--}}
+                                       <option value="chemical-purchase-report">Purchase</option>
+                                       <option value="chemical-purchase-stock">Purchase Stock</option>
+                                       {{--<option value="">Monitor Supplier</option>--}}
+                                       {{--<option value="">Chemical Stock</option>--}}
 
                                   </optgroup>
                                    <optgroup label="Process">
@@ -292,7 +292,7 @@
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right ">
                                     {{--<input type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
-                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 reportrange " />
+                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 bstiReportrange " />
 
                                 </span>
                         </div>
@@ -386,10 +386,10 @@
         var end = moment();
 
         function cb(start, end) {
-            $('.reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            $('.bstiReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
 
-        $('.reportrange').daterangepicker({
+        $('.bstiReportrange').daterangepicker({
 
             startDate: start,
             endDate: end,
