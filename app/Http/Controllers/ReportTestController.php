@@ -155,7 +155,16 @@ class ReportTestController extends Controller
         $processType = $request->input('processType');
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $millerProcessLists = ReportTest::millerProcessList($centerId,$processType);
-        return $millerProcessLists;
+        $millerProcessLists = ReportTest::millerProcessList($centerId,$processType,$starDate,$endDate);
+
+        $view = view("reportView.millerProcessListReport",compact('millerProcessLists','centerId','processType','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerProcessListPdf($processType,$starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $millerProcessLists = ReportTest::millerProcessList($centerId,$processType,$starDate,$endDate);
+        $data = \View::make('reportPdf.millerProcessListPdf',compact('millerProcessLists'));
+        $this->generatePdf($data);
     }
 }
