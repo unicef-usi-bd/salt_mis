@@ -224,6 +224,8 @@
                 var url = $('.reportTypeMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.status').val();
+                var processType = $('.processType').val();
+                var highLowValue = $('.highLowValue').val();
                 var startDate = $('.millerReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.millerReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }
@@ -232,7 +234,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'startDate':startDate,'endDate':endDate},
+                data : {'centerId':centerId,'activStatus':activStatus,'startDate':startDate,'endDate':endDate,'highLowValue':highLowValue,'processType':processType},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

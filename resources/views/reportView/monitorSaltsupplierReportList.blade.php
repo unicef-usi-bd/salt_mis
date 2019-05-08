@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('purchase-salt-amount-pdf/'.$itemType.'/'.$starDate.'/'.$endDate) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('monitor-salt-report-pdf/'.$starDate.'/'.$endDate) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Purchase Total Salt </h4>
+        <h4>Monitor List</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -23,19 +23,21 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Item Name</th>
-                <th>Total Amount Purchases</th>
+                <th>Supplier type</th>
+                <th>Supplier name</th>
+                <th>Purchases volume</th>
             </tr>
 
             </thead>
 
             <tbody>
             <?php $sl=0;?>
-            @foreach($purchaseTotalSalt as $row)
+            @foreach($purchaseTotalSaltStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{ $row->QTY }}</td>
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->TRADER_NAME}}</td>
+                    <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach
             </tbody>
