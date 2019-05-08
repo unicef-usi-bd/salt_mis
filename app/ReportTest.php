@@ -104,4 +104,26 @@ class ReportTest extends Model
                                           and tm.center_id = $centerId"));
     }
 
+    public static function getStockSaltForAdmin($starDate, $endDate){
+        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
+                                        FROM
+                                         (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN
+                                                s.QTY
+                                            END reduce,
+                                        
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 26
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
+                                            WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+    }
+
 }

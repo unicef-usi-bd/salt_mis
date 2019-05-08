@@ -140,7 +140,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-list','ReportController@getPurchaseSalteList');//jalal
     Route::get('purchase-salt-amount','ReportController@getPurchaseSaltAmount');//jalal
     Route::get('purchase-salt-stock','ReportController@getAdminSaltStock');//jalal
-    Route::get('process-report','ReportController@getProcessReport');//jalal
+    Route::get('process-report','ReportTestController@getProcessReport');//jalal
     Route::get('sales-item-report','ReportController@getSalesList');//jalal
     Route::get('sales-item-report-all','ReportController@getSalesListAll');//jalal
     Route::get('miller-license-report/{zone}','ReportController@getListofMillerLicenses');//jalal

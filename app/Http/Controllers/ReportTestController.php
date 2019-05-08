@@ -111,4 +111,15 @@ class ReportTestController extends Controller
 
         print_r($purchaseChemicalSupplierLists);exit;
     }
+
+    public function getProcessReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = ReportTest::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = ReportTest::getStockSaltForAdmin($starDate,$endDate);
+        //return $purchaseTotalSaltStock;
+        $view = view("reportView.processSrockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
 }
