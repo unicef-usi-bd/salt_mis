@@ -252,13 +252,15 @@
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val();
+                var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
             }
             //console.log(url);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

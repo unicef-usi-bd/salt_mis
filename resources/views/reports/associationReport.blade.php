@@ -51,7 +51,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <input type="text" id="reportrange"  name="reportrange" class="width-65 reportrange" /></select>
+                                <input type="text" id="reportrange"  name="reportrange" class="width-65 assReportrange" /></select>
                             </span>
                         </div>
                     </div>
@@ -206,16 +206,19 @@
     </div>
 </div>
 
+<script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
+<script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
+<link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
 <script>
     $(function() {
         var start = moment().subtract(29, 'days');
         var end = moment();
 
         function cb(start, end) {
-            $('.reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            $('.assReportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
 
-        $('.reportrange').daterangepicker({
+        $('.assReportrange').daterangepicker({
 
             startDate: start,
             endDate: end,
