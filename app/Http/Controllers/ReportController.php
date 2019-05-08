@@ -118,13 +118,14 @@ class ReportController extends Controller
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
-        $view = view("reportView.purchaseSaltStockReport",compact('purchaseTotalSaltStock'))->render();
+        //$this->pr($purchaseTotalSaltStock);
+        $view = view("reportView.purchaseSaltStockReport",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltStockPdf(){
-        $centerId = Auth::user()->center_id;
-        $purchaseTotalSaltStock = Report::getPurchaseSalteList($centerId);
+    public function getAdminSaltStockPdf($starDate,$endDate){
+
+        $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
         $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
         $this->generatePdf($data);
     }
