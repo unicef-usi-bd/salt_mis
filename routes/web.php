@@ -138,8 +138,8 @@ Route::group(['middleware' => ['auth']], function() {
     //Route::get('association-list-unicef','ReportController@getAssociationListForUnicef');//jalal
     //Route::get('supplier-list','ReportController@getSupplierList');//jalal
     Route::get('purchase-salt-list','ReportController@getPurchaseSalteList');//jalal
-    Route::get('purchase-salt-amount/{itemType}','ReportController@getTotalAmontPurchaseSalteList');//jalal
-    Route::get('purchase-salt-stock','ReportController@getPurchaseSaltStock');//jalal
+    Route::get('purchase-salt-amount','ReportController@getPurchaseSaltAmount');//jalal
+    Route::get('purchase-salt-stock','ReportController@getAdminSaltStock');//jalal
     Route::get('process-report','ReportController@getProcessReport');//jalal
     Route::get('sales-item-report','ReportController@getSalesList');//jalal
     Route::get('sales-item-report-all','ReportController@getSalesListAll');//jalal
@@ -203,7 +203,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
-    Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
+    Route::get('purchase-salt-amount-pdf/{itemType}/{starDate}/{endDate}','ReportController@getPurchaseSaltAmountPdf');//jalal
     Route::get('purchase-salt-stock-pdf','ReportController@getPurchaseSaltStockPdf');//jalal
 
     Route::get('monitor-supplier-pdf/{starDate}/{endDate}','ReportTestController@getMonitorSupplierPdf');//Rubiyat
