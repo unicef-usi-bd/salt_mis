@@ -123,7 +123,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltStockPdf($starDate,$endDate){
+    public function getAdminSaltStockPdf($starDate,$endDate){
 
         $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
         $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
