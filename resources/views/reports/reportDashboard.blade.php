@@ -254,6 +254,7 @@
                 var activStatus = $('.statusAssociation').val();
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var issueby = $('select.issueby').val();
 
             }
             //console.log(url);

@@ -185,6 +185,19 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="issueby width-65" name="">
+                                   <option value="">--Select--</option>
+                                   @foreach($issueBy as $row)
+                                       <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                       @endforeach
+                                </select>
+                            </span>
+                        </div>
+                    </div>
 
                 </div>
             </form>

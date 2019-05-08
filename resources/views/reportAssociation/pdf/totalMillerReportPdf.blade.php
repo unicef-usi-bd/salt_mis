@@ -21,10 +21,17 @@
         <tr>
             <td>{{ ++$sl }}</td>
             <td>{{$row->MILL_NAME}}</td>
+            {{--<td>{{$row->ACTIVE_FLG}}</td>--}}
             <td>
+                {{--@if($row->ACTIVE_FLG == 1)--}}
+                    {{--<span>Active</span>--}}
+                {{--@else--}}
+                    {{--<span>Inactive</span>--}}
+                {{--@endif--}}
                 @if($row->ACTIVE_FLG == 1)
                     <span>Active</span>
-                @else
+                @endif
+                @if($row->ACTIVE_FLG == 0)
                     <span>Inactive</span>
                 @endif
             </td>
