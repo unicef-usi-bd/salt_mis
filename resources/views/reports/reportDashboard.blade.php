@@ -246,6 +246,7 @@
                 var activStatus = $('.statusBasic').val();
                 var zone = $('.zoneMiller').val();
                 var issuerId = $('.issuerMiller').val();
+                var processType = $('.processType').val();
                 var startDate = $('.millReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.millReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
@@ -261,7 +262,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();
