@@ -24,8 +24,8 @@
                                        <option value="miller-chemical-purchase-stock">Chemical Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
-                                       <option value="">List of Process </option>
-                                       <option value="">Process  Stock</option>
+                                       <option value="miller-process-list-report">List of Process </option>
+                                       <option value="miller-process-stock-report">Process  Stock</option>
                                    </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">List of Client</option>
@@ -258,6 +258,17 @@
                                <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="chosen-select chosen-container processType" name="process_type" data-placeholder="Select">
+                                   <option value="0">Wash And Crush</option>
+                                   <option value="1">Iodized </option>
                                </select>
                             </span>
                         </div>
