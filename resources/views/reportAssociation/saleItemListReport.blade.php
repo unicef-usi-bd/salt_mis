@@ -28,8 +28,9 @@
             @foreach($itemList as $sl =>  $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->IT_TYPE}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
+
                 </tr>
             @endforeach
             </tbody>
