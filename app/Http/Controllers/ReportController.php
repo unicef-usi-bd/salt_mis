@@ -163,13 +163,13 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getProcessReport(){
-        $centerId = Auth::user()->center_id;
-
-        $processStock = Route::getProcessStock($centerId);
-        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
-        return response()->json(['html'=>$view]);
-    }
+//    public function getProcessReport(){
+//        $centerId = Auth::user()->center_id;
+//
+//        $processStock = Route::getProcessStock($centerId);
+//        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
+//        return response()->json(['html'=>$view]);
+//    }
 
     public function getProcessReportPdf(){}
 
@@ -312,6 +312,17 @@ class ReportController extends Controller
         $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
         $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
         $this->generatePdf($data);
+    }
+
+    public function getProcessReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getStockSaltForAdmin($starDate,$endDate);
+        //return $purchaseTotalSaltStock;
+        $view = view("reportView.processSrockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
     }
 
 }
