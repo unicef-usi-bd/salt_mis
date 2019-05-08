@@ -84,8 +84,10 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
 
     }
-    public function getPurchaseChemicalTotalStock(){
-        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock();
+    public function getPurchaseChemicalTotalStock(Request $request){
+        $starDate = $request->input('assStartDate');
+        $endDate = $request->input('assEndDate');
+        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($starDate,$endDate);
         $view = view("reportAssociation.purchaseChemicalTotalStockReport",compact('purchaseChemicalTotalStock'))->render();
         return response()->json(['html'=>$view]);
 

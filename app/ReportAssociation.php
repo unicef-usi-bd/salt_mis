@@ -85,7 +85,7 @@ class ReportAssociation extends Model
             where ass.PARENT_ID = '$centerId' )"));
 
     }
-    public static function getPurchaseChemicalTotalStock(){
+    public static function getPurchaseChemicalTotalStock($starDate,$endDate){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME,
                b.ITEM_NO,
@@ -117,6 +117,7 @@ class ReportAssociation extends Model
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
                    where ass.PARENT_ID = '$centerId')
+                   AND  DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
 
     }
@@ -199,19 +200,24 @@ class ReportAssociation extends Model
     }
     public static function getSaleItemList(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
-            from smm_item  st
-            left join ssc_lookupchd lc on st.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where st.center_id = '$centerId' "));
+        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE 
+             from tmm_saleschd sc
+             left join smm_item it on sc.ITEM_ID = it.ITEM_NO
+             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+             where sc.center_id in (select ass.ASSOCIATION_ID
+             from ssm_associationsetup ass
+             where ass.PARENT_ID = '$centerId' ) "));
 
     }
     public static function getSaleItemStock(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,st.ITEM_NAME, it.QTY
-            from ssc_lookupchd lc
-            left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
-            left join tmm_itemstock it on it.ITEM_NO = st.ITEM_NO
-            where it.center_id = '$centerId' "));
+        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE 
+             from tmm_saleschd sc
+             left join smm_item it on sc.ITEM_ID = it.ITEM_NO
+             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+             where sc.center_id in (select ass.ASSOCIATION_ID
+             from ssm_associationsetup ass
+             where ass.PARENT_ID = '$centerId' ) "));
 
     }
 
