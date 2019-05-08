@@ -261,7 +261,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();
