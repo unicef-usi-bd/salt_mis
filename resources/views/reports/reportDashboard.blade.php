@@ -238,12 +238,16 @@
                 var itemType = $('.itemTypeBasic').val();
                 var zone = $('.zoneBasic').val();
                 var issuerId = $('.issuerBasic').val();
+                var startDate = $('.basicReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.basicReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
                 var zone = $('.zoneMiller').val();
                 var issuerId = $('.issuerMiller').val();
+                var startDate = $('.millReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                var endDate = $('.millReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
