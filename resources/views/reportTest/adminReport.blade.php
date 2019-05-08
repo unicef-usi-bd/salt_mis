@@ -30,8 +30,7 @@
                                        <option value="chemical-purchase-stock">Purchase Stock</option>
                                   </optgroup>
                                    <optgroup label="Process">
-                                       <option value="">Process  Stock</option>
-                                       <option value="">List of  Stock</option>
+                                       <option value="process-report">Process  Stock</option>
                                   </optgroup>
                                    <optgroup label="Sale">
                                        <option value="">Total Sale</option>

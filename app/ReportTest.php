@@ -94,4 +94,14 @@ class ReportTest extends Model
 
     }
 
+    public static function purchaseChemicalSupplierList($centerId,$division){
+        return DB::select(DB::raw("select ss.TRADING_NAME, ss.TRADER_NAME,ss.DIVISION_ID, sd.DIVISION_NAME, sdi.DISTRICT_NAME, tm.QTY
+                                            from ssm_supplier_info ss
+                                            left join ssc_divisions sd on sd.DIVISION_ID = ss.DIVISION_ID
+                                            left join ssc_districts sdi on sdi.DISTRICT_ID = ss.DISTRICT_ID
+                                            left join tmm_itemstock tm on tm.SUPP_ID_AUTO = ss.SUPP_ID_AUTO
+                                            where ss.DIVISION_ID = $division
+                                          and tm.center_id = $centerId"));
+    }
+
 }
