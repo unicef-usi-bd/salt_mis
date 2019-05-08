@@ -130,6 +130,35 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getMonitorSaltsupplierList(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseTotalSaltStock = Report::monitorSaltSupplierList($centerId,$starDate,$endDate);
+        $view = view("reportView.monitorSaltsupplierReportList",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorSaltsupplierListPdf(){}
+
+    public function getMillerSaltStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $view = view("reportView.purchaseSaltstockMillerReport",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerSaltStockPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+//        $starDate = $request->input('startDate');
+//        $endDate = $request->input('endDate');
+        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $data = \View::make('reportPdf.purchaseSaltstockMillerReportPdf',compact('purchaseTotalSaltStock'));
+        $this->generatePdf($data);
+    }
+
     public function getProcessReport(){
         $centerId = Auth::user()->center_id;
 
