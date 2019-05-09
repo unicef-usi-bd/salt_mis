@@ -187,15 +187,14 @@ class ReportAssociation extends Model
               where ql.center_id = '$centerId' "));
 
     }
-    public static function getLicenseMillerList(){
+    public static function getLicenseMillerList($issueby){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("select mi.MILL_NAME,ci.CERTIFICATE_TYPE_ID, lc.LOOKUPCHD_NAME as CERT_NAME, ci.ISSURE_ID, lch.LOOKUPCHD_NAME as ISSUER, ci.ISSUING_DATE, ci.RENEWING_DATE
-          from tsm_qc_info qc
-              left join ssm_mill_info mi on mi.MILL_ID = qc.MILL_ID
-              left join ssm_certificate_info ci on qc.MILL_ID = ci.MILL_ID
-              left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
-              left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
-              where qc.center_id = '$centerId' "));
+          from ssm_certificate_info ci
+          left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
+          left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
+          left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
+          where ci.center_id = '$centerId' and ci.ISSURE_ID = '$issueby' "));
 
     }
     public static function getSaleItemList(){

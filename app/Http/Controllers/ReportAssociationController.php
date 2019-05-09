@@ -157,8 +157,9 @@ class ReportAssociationController extends Controller
         $data = \View::make('reportAssociation.pdf.qcMillerListReportPdf',compact('MillerList'));
         $this->generatePdf($data);
     }
-    public function getLicenseMillerList(){
-        $MillerList = ReportAssociation::getLicenseMillerList();
+    public function getLicenseMillerList(Request $request){
+        $issueby =  $request->input('issueby'); //$this->pr($issueby);
+        $MillerList = ReportAssociation::getLicenseMillerList($issueby);
         $view = view("reportAssociation.licenseMillerListReport",compact('MillerList'))->render();
         return response()->json(['html'=>$view]);
     }
