@@ -74,10 +74,10 @@
                                     <h4 class="header">
                                         @if (isset($errors) && count($errors) > 0)
                                             <i class="ace-icon fa fa-times-circle red"></i>
-                                            <span class="text-danger"> Invalid Username or Password </span>
+                                            <span class="text-danger"> Invalid Email or Password </span>
                                         @else
                                             <i class="ace-icon fa fa-coffee green"></i>
-                                            Enter Username & Password
+                                            Enter Email Address & Password
                                         @endif
                                     </h4>
 
@@ -88,7 +88,7 @@
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="User Name" required autofocus>
+                                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email Address" required autofocus>
                                                     <i class="ace-icon fa fa-user"></i>
                                                 </span>
                                             </label>
