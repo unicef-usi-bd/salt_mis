@@ -66,14 +66,28 @@
                                         }
 
                                     }else {
-                                        if($editPermissionLevel == 1){
-                                            echo '<li><button id="'.$addLavel.'" data-target=".modal" data-permission="'.$createPermissionLevel.'" role="button" class="btn btn-primary btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
-                                                '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;"><i class="ace-icon fa fa-pencil"></i></button>'.
-                                                $checkDelete;
-                                        }else{
-                                            echo '<li><button id="'.$addLavel.'" data-target=".modal" data-permission="'.$createPermissionLevel.'" role="button" class="btn btn-primary btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
-                                                '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;display: none;"><i class="ace-icon fa fa-pencil"></i></button>'.
-                                                $checkDelete;
+
+                                        if($value['ASSOCIATION_ID'] == Auth::user()->center_id || $value['PARENT_ID'] == Auth::user()->center_id){
+                                            if($editPermissionLevel == 1){
+                                                echo '<li><button id=""  role="button" class="btn btn-primary btn-xs" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
+                                                    '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;"><i class="ace-icon fa fa-pencil"></i></button>'.
+                                                    $checkDelete;
+                                            }else{
+                                                echo '<li><button id=""  role="button" class="btn btn-primary btn-xs" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
+                                                    '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;display: none;"><i class="ace-icon fa fa-pencil"></i></button>'.
+                                                    $checkDelete;
+                                            }
+                                        }
+                                        if(empty(Auth::user()->center_id)){
+                                            if($editPermissionLevel == 1){
+                                                echo '<li><button id=""  role="button" class="btn btn-primary btn-xs" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
+                                                    '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;"><i class="ace-icon fa fa-pencil"></i></button>'.
+                                                    $checkDelete;
+                                            }else{
+                                                echo '<li><button id=""  role="button" class="btn btn-primary btn-xs" title="Create Level">'.$value['ASSOCIATION_NAME'].'</button>'.
+                                                    '<button id="'.$editLavel.'" data-target=".modal" data-permission="'.$editPermissionLevel.'" role="button" class="btn btn-warning btn-xs showModalGlobal checkPermission" data-toggle="modal" title="Edit Level" style="margin-left:5px;display: none;"><i class="ace-icon fa fa-pencil"></i></button>'.
+                                                    $checkDelete;
+                                            }
                                         }
 
                                     }

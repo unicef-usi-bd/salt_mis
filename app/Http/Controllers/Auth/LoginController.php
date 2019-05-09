@@ -39,6 +39,8 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        //return 'username';
+
+        return property_exists($this, 'username') ? $this->username : 'email';
     }
 }

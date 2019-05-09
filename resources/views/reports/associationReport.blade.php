@@ -1,11 +1,11 @@
+<!-- association report-->
 <div id="association" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
-                        <div class="col-sm-8">
+                <div class="form-group" >
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
+                    <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select id="" class="chosen-select chosen-container reportAssociation" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
@@ -45,8 +45,9 @@
 
                                </select>
                             </span>
-                        </div>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group" >
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
                         <div class="col-sm-8">
@@ -55,52 +56,65 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="issueby width-65" name="">
+                                   <option value="">--Select--</option>
+                                   @foreach($issueBy as $row)
+                                       <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                   @endforeach
+                                </select>
+                            </span>
+                        </div>
+                    </div>
 
 
 
 
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Internal </b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                                   {{--<option value="">Select</option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Internal </b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                    {{--<option value="">Select</option>--}}
 
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group" >--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                                {{--<select id="" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
-                                    {{--<option value=""></option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
+                    {{--<option value=""></option>--}}
 
-                                {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group" >--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                                {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
 
-                                {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                                   {{--<option value="">Select</option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                    {{--<option value="">Select</option>--}}
 
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
 
 
@@ -110,65 +124,65 @@
                 <div class="col-md-6">
 
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase Range</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                                   {{--<option value="">Select</option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase Range</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                    {{--<option value="">Select</option>--}}
 
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
 
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Monitor</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                                   {{--<option value="">Select</option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Monitor</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                    {{--<option value="">Select</option>--}}
 
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Self </b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                                   {{--<option value="">Select</option>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Self </b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
+                    {{--<option value="">Select</option>--}}
 
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">--}}
-                                   {{--<option value="1">Active</option>--}}
-                                   {{--<option value="0">Inactive</option>--}}
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
+                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>--}}
+                    {{--<div class="col-sm-8">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                    {{--<select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">--}}
+                    {{--<option value="1">Active</option>--}}
+                    {{--<option value="0">Inactive</option>--}}
+                    {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
 
 
@@ -182,19 +196,6 @@
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select class="issueby width-65" name="">
-                                   <option value="">--Select--</option>
-                                   @foreach($issueBy as $row)
-                                       <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                       @endforeach
-                                </select>
                             </span>
                         </div>
                     </div>
