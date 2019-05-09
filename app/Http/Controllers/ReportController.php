@@ -163,15 +163,15 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getProcessReport(){
-        $centerId = Auth::user()->center_id;
+//    public function getProcessReport(){
+//        $centerId = Auth::user()->center_id;
+//
+//        $processStock = Route::getProcessStock($centerId);
+//        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
+//        return response()->json(['html'=>$view]);
+//    }
 
-        $processStock = Route::getProcessStock($centerId);
-        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
-        return response()->json(['html'=>$view]);
-    }
 
-    public function getProcessReportPdf(){}
 
     public function getSalesList(){
         $salesList = Report::getSalesItemMiller();
@@ -311,6 +311,62 @@ class ReportController extends Controller
     public function getMonitorSupplierPdf($starDate,$endDate){
         $monitorSuppliers = Report::monitorSupplierList($starDate,$endDate);
         $data = \View::make('reportPdf.monitorSuppliersPdf',compact('monitorSuppliers'));
+        $this->generatePdf($data);
+    }
+
+    public function getProcessReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getStockSaltForAdmin($starDate,$endDate);
+        //return $purchaseTotalSaltStock;
+        $view = view("reportView.processSrockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getProcessReportPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getStockSaltForAdmin($starDate,$endDate);
+        $data = \View::make('reportPdf.processStockPdf',compact('purchaseChemicalStocks','purchaseTotalSaltStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerProcessStockReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+
+        $view = view("reportView.millerProcessStockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerProcessStockPdf($starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $data = \View::make('reportPdf.millerProcessStockPdf',compact('purchaseChemicalStocks','purchaseTotalSaltStocks'));
+        $this->generatePdf($data);
+    }
+
+    public function getMillerProcessListReport(Request $request){
+        $centerId = Auth::user()->center_id;
+        $processType = $request->input('processType');
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $millerProcessLists = Report::millerProcessList($centerId,$processType,$starDate,$endDate);
+
+        $view = view("reportView.millerProcessListReport",compact('millerProcessLists','centerId','processType','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMillerProcessListPdf($processType,$starDate,$endDate){
+        $centerId = Auth::user()->center_id;
+        $millerProcessLists = Report::millerProcessList($centerId,$processType,$starDate,$endDate);
+        $data = \View::make('reportPdf.millerProcessListPdf',compact('millerProcessLists'));
         $this->generatePdf($data);
     }
 

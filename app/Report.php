@@ -334,4 +334,32 @@ class Report extends Model
 	  AND it.center_id =$centerId"));
     }
 
+    public static function millerProcessList($centerId,$processType,$starDate,$endDate){
+
+        if($processType == 0){
+            return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+                                          case when st.TRAN_TYPE = 'W' then
+                                            'Wash Crash'
+                                          end Process_Type
+                                          from tmm_itemstock st 
+                                          left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+                                          -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+                                          where st.TRAN_TYPE = 'W' and st.center_id and st.TRAN_FLAG = 'WI'
+                                          and st.center_id = $centerId
+                                          and DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
+        }else{
+            return DB::select(DB::raw("select i.BATCH_NO, st.QTY,
+                                          case when st.TRAN_TYPE = 'I' then
+                                            'Iodize'
+                                          end Process_Type
+                                          from tmm_itemstock st 
+                                          -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+                                          left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+                                          where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'II'
+                                          and st.center_id = $centerId
+                                          and DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
+        }
+
+    }
+
 }
