@@ -168,13 +168,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');//azharul
     Route::get('purchase-salt-total-pdf', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
     Route::get('purchase-salt-total-stock', 'ReportAssociationController@getPurchaseSaltTotalStock');//azharul
-    Route::get('purchase-salt-total-stock-pdf', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
+    Route::get('purchase-salt-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
     Route::get('purchase-chemical-item-pdf', 'ReportAssociationController@getPurchaseChemicalItemPdf');//azharul
     Route::get('purchase-chemical-total', 'ReportAssociationController@getPurchaseChemicalTotal');//azharul
     Route::get('purchase-chemical-total-pdf', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
     Route::get('purchase-chemical-total-stock', 'ReportAssociationController@getPurchaseChemicalTotalStock');//azharul
-    Route::get('purchase-chemical-total-stock-pdf', 'ReportAssociationController@getPurchaseChemicalTotalStockPdf');//azharul
+    Route::get('purchase-chemical-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalStockPdf');//azharul
     Route::get('association-total-miller', 'ReportAssociationController@getTotalMiller');//azharul
     Route::get('association-total-miller-pdf/{activStatus}', 'ReportAssociationController@getTotalMillerPdf');//azharul
     Route::get('association-miller-type', 'ReportAssociationController@getMillerType');//azharul
@@ -186,7 +186,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('qc-miller-list', 'ReportAssociationController@getQcMillerList');//azharul
     Route::get('qc-miller-list-pdf', 'ReportAssociationController@getQcMillerListPdf');//azharul
     Route::get('license-miller-list', 'ReportAssociationController@getLicenseMillerList');//azharul
-    Route::get('license-miller-list-pdf', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
+    Route::get('license-miller-list-pdf/{issueby}', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
     Route::get('sale-item-list', 'ReportAssociationController@getSaleItemList');//azharul
     Route::get('sale-item-list-pdf', 'ReportAssociationController@getSaleItemListPdf');//azharul
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul
