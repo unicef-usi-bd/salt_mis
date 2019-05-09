@@ -5,7 +5,15 @@
             <i class="ace-icon fa fa-times"></i>
         </button>
     </div>
-    <form action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
+    <form id="myform" action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
         @csrf
 
@@ -14,7 +22,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_full_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess" placeholder="{{ trans('user.example_full_nameen') }}" name="user_full_name" class="form-control col-sm-8" value="{{ old('username') }}"/>
+                    <input type="text" id="fullname" placeholder="{{ trans('user.example_full_nameen') }}" name="user_full_name" class="form-control col-sm-8 fullname" value="{{ old('username') }}"/>
                 </div>
             </div>
 
@@ -29,19 +37,18 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess username" placeholder="{{ trans('user.example_user_name') }}" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 " value="{{ old('username') }}"/>
+                    <input type="text" id="username" placeholder="{{ trans('user.example_user_name') }}" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 username" value="{{ old('username') }}"/>
                     @if ($errors->has('username'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('username') }}</strong>
                     </span>
-                    @endif
-                </div>
+                    @endif</div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.email') }}</b><span style="color: red;"> </span></label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.email') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5" value="{{ old('email') }}"/>
+                    <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 email" value="{{ old('email') }}"/>
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -53,12 +60,13 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.password') }}</b> <span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input type="password" id="inputSuccess password" placeholder="{{ trans('user.example_password') }}" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-xs-10 col-sm-5" value=""/>
+                    <input type="password" id="inputSuccess password" placeholder="{{ trans('user.example_password') }}" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 password" value=""/>
                     @if ($errors->has('password'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
+
                 </div>
             </div>
 
@@ -70,9 +78,10 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.contact_no') }}</b></label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.contact_no') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess contact_no" placeholder="{{ trans('user.example_contact_no') }}" name="contact_no" class="form-control col-xs-10 col-sm-5" value=""/>
+                    <input type="text" id="inputSuccess contact_no" placeholder="{{ trans('user.example_contact_no') }}" name="contact_no" class="form-control col-xs-10 col-sm-5 contact_no" value=""/>
+
                 </div>
             </div>
 
@@ -105,8 +114,8 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.user_group') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess user_group" class="chosen-select form-control user_group" name="user_group_id" data-placeholder="Select User Group">
-                                <option value=""> </option>
+                            <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class=" form-control user_group" name="user_group_id" data-placeholder="Select User Group">
+                                <option value="">-Select One-</option>
                                 @foreach($userGroups as $userGroup)
                                     <option value="{{$userGroup->USERGRP_ID}}"> {{$userGroup->USERGRP_NAME}}</option>
                                 @endforeach
@@ -116,27 +125,28 @@
             </div>
 
             <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select Group Level">
-                                <option value="">Select One</option>
+                                <option value="">-Select One-</option>
                             </select>
                         </span>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>
+            <div class="form-group resources"  style=" display: none;">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess center_id" class="chosen-select form-control" name="center_id" data-placeholder="Select Center">
-                                <option value=""> </option>
+                            <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
+                                <option value="">-Select One-</option>
                                 @foreach($associationCenter as $center)
                                     <option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>
+                    <span><p class='result7'></p></span>
                 </div>
             </div>
 
@@ -246,7 +256,7 @@
                     {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
                     {{--{{ trans('dashboard.submit') }}--}}
                 {{--</button>--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" id="validate" class="btn btn-primary validate">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -274,8 +284,59 @@
                 });
             });
         });
+
+        var Privileges = jQuery('#privileges');
+        var select = this.value;
+        Privileges.change(function () {
+            if ($(this).val() == 21 || $(this).val() == 22) {
+                $('.resources').show();
+            }
+            else $('.resources').hide();
+        });
+
+        $(document).ready(function () {
+
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+                    user_full_name: {
+                        required: true,
+                        maxlength:100
+                    },
+                    username: {
+                        required: true,
+                        maxlength: 100,
+                    },
+                    email:{
+                        required: true,
+                        email: true
+                    },
+                    password:{
+                        required: true,
+                        minlength:6
+                    },
+                    contact_no:{
+                        required: true,
+                        minlength:11
+                    },
+                    user_group_id:{
+                        required: true,
+                    },
+                    user_group_level_id:{
+                        required: true,
+                    },
+                    center_id:{
+                        required: true,
+                    }
+                }
+            });
+
+        });
     </script>
+
 </div>
+
 @include('masterGlobal.chosenSelect')
 {{--@include('masterGlobal.formValidation')--}}
 @include('masterGlobal.getBankBranchesEvent')
