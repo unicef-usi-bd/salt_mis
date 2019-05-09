@@ -281,7 +281,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select class="chosen-select chosen-container processType width" name="process_type" data-placeholder="Select">
+                               <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
+                                   <option value="">-Select-</option>
                                    <option value="0">Wash And Crush</option>
                                    <option value="1">Iodized </option>
                                </select>
