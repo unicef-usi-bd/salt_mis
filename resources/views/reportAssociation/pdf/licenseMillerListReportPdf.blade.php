@@ -27,8 +27,9 @@
             <td>{{$row->MILL_NAME}}</td>
             <td>{{$row->CERT_NAME}}</td>
             <td>{{$row->ISSUER}}</td>
-            <td>{{$row->ISSUING_DATE}}</td>
-            <td>{{$row->RENEWING_DATE}}</td>
+            <td>{{ date('d-M-Y', strtotime($row->ISSUING_DATE)) }}</td>
+            <td>{{ date('d-M-Y', strtotime($row->RENEWING_DATE)) }}</td>
+
         </tr>
     @endforeach
 

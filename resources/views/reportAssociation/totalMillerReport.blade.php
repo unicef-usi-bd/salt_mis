@@ -31,9 +31,9 @@
                     <td>{{$row->MILL_NAME}}</td>
                     <td>
                         <?php if ($row->ACTIVE_FLG == 1){ ?>
-                        <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                        <span>Active</span>
                         <?php }else{ ?>
-                        <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
+                        <span>Inactive </span>
                         <?php } ?>
                     </td>
                 </tr>
