@@ -19,6 +19,8 @@ use App\User;
 use File;
 use Illuminate\Support\Facades\Route;
 use App\AssociationSetup;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 
 class UserController extends Controller
@@ -101,17 +103,26 @@ class UserController extends Controller
          //  $costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
             //for user image*************
-            $userImageName = 'defaultUserImage.png';
+            //$userImageName = 'defaultUserImage.png';
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
-                try {
-                    $file = $request->file('user_image');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
-                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//                try {
+//                    $file = $request->file('user_image');
+//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
+//                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//
+//                    $request->file('user_image')->move("image/user-image/", $userImageName);
+//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+//
+//                }
 
-                    $request->file('user_image')->move("image/user-image/", $userImageName);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-
-                }
+                $image = $request->file('user_image');
+                $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                $path = 'image/user-image/' . $filename;
+                Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                //********* End Image *********
+                $user_image = "image/user-image/$filename";
+            }else{
+                $user_image = 'image/user-image/defaultUserImage.png';
             }
 
             //for user signature*************
@@ -150,7 +161,8 @@ class UserController extends Controller
                 'contact_no' => $request->input('contact_no'),
                 //'active_status' => $request->input('active_status'),
                 'active_status' => 1,
-                'user_image' => 'image/user-image/'.$userImageName,
+//                'user_image' => 'image/user-image/'.$userImageName,
+                'user_image' => $user_image,
                 'user_signature' => 'image/user-signature/'.$userSignatureName,
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
@@ -257,18 +269,29 @@ class UserController extends Controller
             }
 
             //for user image*************
-            $userImageName = 'defaultUserImage.png';
+            //$userImageName = 'defaultUserImage.png';
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
-                try {
-                    $file = $request->file('user_image');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
-                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//                try {
+//                    $file = $request->file('user_image');
+//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
+//                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//
+//                    $request->file('user_image')->move("image/user-image/", $userImageName);
+//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+////                    return false;
+//                }
 
-                    $request->file('user_image')->move("image/user-image/", $userImageName);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-//                    return false;
-                }
+                $image = $request->file('user_image');
+                $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                $path = 'image/user-image/' . $filename;
+                Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                //********* End Image *********
+                $user_image = "image/user-image/$filename";
+            }else{
+                $user_image = 'image/user-image/defaultUserImage.png';
             }
+
+
 
             //for user signature*************
             $userSignatureName = 'defaultUserSignature.png';
@@ -284,7 +307,8 @@ class UserController extends Controller
                 }
             }
 
-            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);
+//            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);
+            $userUpdate = User::updateData($request, $id,$user_image,$userSignatureName);
 
         }
 
