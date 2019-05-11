@@ -89,13 +89,19 @@ class MillerInfo extends Model
             ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
             ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
-            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
             ->where('ssm_mill_info.center_id','=',Auth::user()->center_id)
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
+            ->groupBy('ssm_mill_info.MILL_ID')
+            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
             ->get();
 
     }
-
+    public static function singleMiller($centerId){
+         return DB::table('ssm_associationsetup')
+             ->select('MILL_ID')
+             ->where('ASSOCIATION_ID','=',$centerId)
+             ->first();
+    }
     //    for view modal
     public static function showMillereProfile($id){
         return DB::table('ssm_mill_info')

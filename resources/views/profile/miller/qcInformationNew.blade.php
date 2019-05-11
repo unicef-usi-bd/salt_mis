@@ -132,25 +132,26 @@
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Standard Operation Procedure (SOP)</b></label>
                                                 <div class="col-sm-7">
-                            <span class="block input-icon input-icon-right">
-                               <input type="text" name="SOP_DESC" class="chosen-container">
-                            </span>
+                                                    <span class="block input-icon input-icon-right">
+                                                       {{--<input type="text" name="SOP_DESC" class="chosen-container">--}}
+                                                        <textarea name="SOP_DESC" id="" cols="38" rows="2"></textarea>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                                                 <div class="col-sm-7">
-                            <span class="block input-icon input-icon-right">
-                               <input type="text" name="LAB_PERSON" class="chosen-container">
-                            </span>
+                                                    <span class="block input-icon input-icon-right">
+                                                       <input type="text" name="LAB_PERSON" class="chosen-container">
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-7">
-                            <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container">
-                            </span>
+                                                    <span class="block input-icon input-icon-right">
+                                                       <input type="text" name="REMARKS" class="chosen-container">
+                                                    </span>
                                                 </div>
                                             </div>
 

@@ -75,12 +75,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTMALE_EMP" class="chosen-container" placeholder="Male">
+                                                       <input type="text" name="TOTMALE_EMP" class="chosen-container totalMaleEmp" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTFEM_EMP" class="chosen-container" placeholder="Female">
+                                                       <input type="text" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
@@ -89,12 +89,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="PARTTIMEMALE_EMP" class="chosen-container" placeholder="Male">
+                                                       <input type="text" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="PARTTIMEFEM_EMP" class="chosen-container" placeholder="Female">
+                                                       <input type="text"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
@@ -102,7 +102,8 @@
                                             <div class="form-group">
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" class="chosen-container" placeholder="Male">
+                                                       {{--<input type="text" name="REMARKS" class="chosen-container" placeholder="Male">--}}
+                                                       <textarea name="REMARKS" id="" cols="45" rows="2"></textarea>
                                                     </span>
                                                 </div>
                                             </div>
@@ -115,12 +116,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="FULLTIMEMALE_EMP" class="chosen-container" placeholder="Male">
+                                                       <input type="text" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="FULLTIMEFEM_EMP" class="chosen-container" placeholder="Female">
+                                                       <input type="text" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
@@ -147,7 +148,7 @@
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary finalSubmit">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                                     Submit
                                                 </button>
@@ -212,6 +213,27 @@
             $(this).closest("tr.removableRow").remove();
         });
 
+        // validation for full time employee
+        $(document).on("change",".partTimeFemaleEmp", function () {
+
+           var  totalMaleEmp = $('.totalMaleEmp').val();
+           var  totalFemaleEmp = $('.totalFemaleEmp').val();
+           var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+           var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+           var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+           var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+           var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+           var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+           var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+           var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+           if(total!=totalPartFullEmp){
+               alert('Total number of Employee must be equal to Part time and Full time employee');
+               $('.finalSubmit').prop('disabled', true);
+           }else{
+               $('.finalSubmit').prop('disabled', false);
+           }
+
+        });
 
 
 
@@ -225,3 +247,5 @@
     @include('masterGlobal.getDistrictUpazilaUnion')
 
 @endsection
+
+

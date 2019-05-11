@@ -18,7 +18,8 @@
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LABORATORY_FLG==0) checked @endif/>
+                                {{--<input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LABORATORY_FLG==0) checked @endif/>--}}
+                                <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0" @if(isset($editQcData->LABORATORY_FLG))@if($editQcData->LABORATORY_FLG==0) checked @endif @endif/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -55,10 +56,12 @@
                         <div class="col-sm-7">
                             <label>
                                 <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1" @if ($editQcData->MONITORING_FLG==1) checked @endif/>
+
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
                                 <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->MONITORING_FLG==0) checked @endif/>
+
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -74,6 +77,7 @@
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="SOP_DESC" class="chosen-container" value="{{ $editQcData->SOP_DESC }}">
+
                             </span>
                         </div>
                     </div>
@@ -82,6 +86,7 @@
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="LAB_PERSON" class="chosen-container" value="{{ $editQcData->LAB_PERSON }}">
+
                             </span>
                         </div>
                     </div>
@@ -89,7 +94,8 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container" value="{{ $editQcData->REMARKS }}">
+                               {{--<input type="text" name="REMARKS" class="chosen-container" value="{{ $editQcData->REMARKS }}">--}}
+                                <textarea name="REMARKS" id="" cols="44" rows="2">{{ $editQcData->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>
