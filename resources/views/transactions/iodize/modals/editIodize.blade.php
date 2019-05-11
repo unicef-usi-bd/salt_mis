@@ -48,7 +48,7 @@
                     <span class="col-sm-6" style="padding: 0;">
                         <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value="{{ $editIodize->REQ_QTY }}"/>
                     </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} KG</span><span class="resultChemical"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} ltr</span><span class="resultChemical"></span>)</span>
             </div>
         </div>
         <div class="form-group">

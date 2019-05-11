@@ -22,7 +22,7 @@
                     <td>{{$viewIodize->WASH_CRASH_QTY}} KG</td>
                     <th>Chemical Amount</th>
                     <th> :</th>
-                    <td>{{$viewIodize->REQ_QTY}} KG</td>
+                    <td>{{$viewIodize->REQ_QTY}} ltr</td>
                 </tr>
             </table>
         </div>
