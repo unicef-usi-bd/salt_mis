@@ -42,8 +42,8 @@
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.email') }}</b><span style="color: red;"> *</span></label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5" value="{{ $editData->email }}"/>
+                <div class="col-sm-8 email_grp">
+                    <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 email" value="{{ $editData->email }}"/>
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -293,8 +293,13 @@
                     },
                     email:{
                         required: true,
-                        email: true
+                        email: true,
                     },
+//                    messages:{
+//                        email: {
+//                        remote: jQuery.format("{0} is already in use!")
+//                    }
+//                },
                     password:{
                         required: true,
                         minlength:6
@@ -316,7 +321,43 @@
             });
 
         });
+
+        $(document).on('focusout','.email',function () {
+            //alert('hi');
+            var email = $('.email').val();
+            //alert(email);
+            $.ajax({
+                type: 'GET',
+                url:'email-duplicate',
+                data:{'email':email},
+                async: false,
+                success:function (data){
+                    if(data=='yes')
+                    {
+                        $('.emailId').text('');
+                        $('.email_grp').append('<span class="emailId" style="color: red">This email already exists</span>');
+                    }
+                    else
+                        $('.emailId').text('');
+                }
+            });
+        });
     </script>
+<!--    --><?php
+//    //MySQL class: http://mbe.ro/2009/08/30/fast-and-easy-php-mysql-class/
+//    //require('../shared/db-class.php');
+//    $email = $_REQUEST["email"];
+//    //$email = 'test@gmail.com'; // Just for testing.
+//    $validate = new mysql();
+//    $checkemail = $validate->query("SELECT * FROM users WHERE email = '$email'");
+//    if (count($checkemail) == 1){
+//        $valid = "false";
+//    } else {
+//        $valid = "true";
+//    }
+//    echo $valid;
+//    ?>
+
 </div>
 
 {{--@include('masterGlobal.formValidationEdit')--}}

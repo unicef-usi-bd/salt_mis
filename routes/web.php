@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('user-group-level', 'UserModuleController@getUserGroupLevelByAjax');
     Route::get('user-group-level-permission', 'UserModuleController@userGroupLevelPermissionAjax');
     Route::get('action-user-permission', 'UserModuleController@addRemovePermissionByAjax');
+    Route::get('email-duplicate','UserController@getEmailDuplicateOrNot');//jalal
 
 
     // Setup

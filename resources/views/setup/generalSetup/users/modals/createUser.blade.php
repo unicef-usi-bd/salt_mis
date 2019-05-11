@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.email') }}</b><span style="color: red;"> *</span></label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 email_grp">
                     <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 email" value="{{ old('email') }}"/>
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
@@ -332,6 +332,26 @@
                 }
             });
 
+        });
+
+        $(document).on('focusout','.email',function () {
+            //alert('hi');
+            var email = $('.email').val();
+            $.ajax({
+                type: 'GET',
+                url:'email-duplicate',
+                data:{'email':email},
+                async: false,
+                success:function (data){
+                    if(data=='yes')
+                    {
+                        $('.emailId').text('');
+                        $('.email_grp').append('<span class="emailId" style="color: red">This email already exists</span>');
+                    }
+                    else
+                        $('.emailId').text('');
+                }
+            });
         });
     </script>
 

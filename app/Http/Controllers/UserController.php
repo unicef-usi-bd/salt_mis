@@ -415,4 +415,19 @@ class UserController extends Controller
         }
     }
 
+    public function getEmailDuplicateOrNot(Request $request)
+    {
+        $email = $request->input('email');
+        $emailDup = User::getDuplicateEmail($email);
+
+        if ($emailDup) {
+            echo 'yes';
+        } else {
+            echo 'no';
+        }
+        exit;
+        //  return view("reportView.createUser",compact('emailList','email'))->render();
+
+    }
+
 }
