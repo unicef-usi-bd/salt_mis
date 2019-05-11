@@ -80,16 +80,18 @@ class UserController extends Controller
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
             //'email' => 'required|string|email|max:255|unique:users',
-            'email' => 'nullable|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
           //  'cost_center_id' => 'required',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
+            'user_group_level_id' => 'required',
             'contact_no' => 'nullable|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 6 character',
-            'user_group_id.required' => 'The user group field is required.'
+            'user_group_id.required' => 'The user group field is required.',
+            'user_group_level_id.required' => 'The user group level field is required.'
         );
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails())
@@ -227,7 +229,7 @@ class UserController extends Controller
                  //'email' => 'required|string|email|max:255',
                  'email' => 'nullable|string|email|max:255',
                  
-                 'cost_center_id' => 'required',
+                 //'cost_center_id' => 'required',
                  //'designation_id' => 'required',
                  'user_group_id' => 'required',
                  //'designation_id' => 'required',
@@ -288,7 +290,7 @@ class UserController extends Controller
 
             //session()->flash('message','User Successfully Updated');
             //return json_encode('Success');
-        return redirect('/users')->with('success', 'User Successfully Saved');
+        return redirect('/users')->with('success', 'User Successfully Updated');
 
     }
 

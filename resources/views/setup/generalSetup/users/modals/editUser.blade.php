@@ -1,6 +1,13 @@
 <div class="col-md-12">
-
-    <form action="{{ url('/users/'.$editData->id) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
+    <form id="myform" action="{{ url('/users/'.$editData->id) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -112,8 +119,8 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.user_group') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess user_group" class="chosen-select form-control user_group" name="user_group_id" data-placeholder="Select User Group">
-                                <option value=""> </option>
+                            <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class="form-control user_group" name="user_group_id" data-placeholder="Select User Group">
+                                <option value="">-Select One-</option>
                                 @foreach($userGroups as $userGroup)
                                     <option value="{{$userGroup->USERGRP_ID}}" @if($userGroup->USERGRP_ID==$editData->user_group_id) selected @endif> {{$userGroup->USERGRP_NAME}}</option>
                                 @endforeach
@@ -122,11 +129,12 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" >
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b><span style="color: red;"> </span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select Group Level">
+                                <option value="">-Select One-</option>
                                 @foreach($userGroupLevels as $userGroupLevel)
                                 <option value="{{ $userGroupLevel->UG_LEVEL_ID }}" @if($editData->user_group_level_id==$userGroupLevel->UG_LEVEL_ID) selected @endif>{{ $userGroupLevel->UGLEVE_NAME }}</option>
                                 @endforeach
@@ -135,12 +143,12 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group resources"  >
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess center_id" class="chosen-select form-control" name="center_id" data-placeholder="Select Center">
-                                <option value=""> </option>
+                            <select id="form-field-select-3 inputSuccess center_id" class=" form-control" name="center_id" data-placeholder="Select Center">
+                                <option value="">-Select One- </option>
                                 @foreach($associationCenter as $center)
                                     <option value="{{ $center->ASSOCIATION_ID }}" @if($center->ASSOCIATION_ID==$editData->center_id) selected @endif>{{ $center->ASSOCIATION_NAME }}</option>
                                 @endforeach
@@ -259,6 +267,54 @@
                     }
                 });
             });
+        });
+        var Privileges = jQuery('#privileges');
+        var select = this.value;
+        Privileges.change(function () {
+            if ($(this).val() == 21 || $(this).val() == 22) {
+                $('.resources').show();
+            }
+            else $('.resources').hide();
+        });
+
+        $(document).ready(function () {
+
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+                    user_full_name: {
+                        required: true,
+                        maxlength:100
+                    },
+                    username: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    email:{
+                        required: true,
+                        email: true
+                    },
+                    password:{
+                        required: true,
+                        minlength:6
+                    },
+                    contact_no:{
+                        required: true,
+                        minlength:11
+                    },
+                    user_group_id:{
+                        required: true,
+                    },
+                    user_group_level_id:{
+                        required: true,
+                    },
+                    center_id:{
+                        required: true,
+                    }
+                }
+            });
+
         });
     </script>
 </div>
