@@ -181,7 +181,12 @@ class User extends Authenticatable
 //        return $updateUserPassword;
 //    }
 
-
+     public static function getDuplicateEmail($email){
+      return DB::table('users')
+          ->select('users.email')
+          ->where('users.email','=',$email)
+          ->first();
+     }
 
 
 }
