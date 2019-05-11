@@ -21,7 +21,7 @@
                 <tr>
                     <th class=" ">Amount</th>
                     <th> :</th>
-                    <td>{{ $chemicalPurchaseView->RCV_QTY }} KG</td>
+                    <td>{{ $chemicalPurchaseView->RCV_QTY }} ltr</td>
                     <th class=" ">Chemical Source</th>
                     <th> :</th>
                     <td>{{ $chemicalPurchaseView->TRADING_NAME }} </td>

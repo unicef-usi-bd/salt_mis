@@ -7,7 +7,7 @@
             All Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Require Chemical Per Kg
+                Require Chemical Per ltr
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -79,7 +79,7 @@
                                             <th>Chemical Name</th>
                                             {{--<th class="hidden-480">Chemical Type</th>--}}
                                             <th class="hidden-480">Salt Amount (KG)</th>
-                                            <th class="hidden-480">Chemical Amount (KG)</th>
+                                            <th class="hidden-480">Chemical Amount (ltr)</th>
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
                                         </tr>
                                         </thead>
