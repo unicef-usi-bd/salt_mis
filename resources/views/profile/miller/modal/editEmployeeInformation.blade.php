@@ -13,13 +13,13 @@
                     <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
-                                                    <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTMALE_EMP" value="{{ $editEmployeeData->TOTMALE_EMP }}" class="chosen-container" placeholder="Male">
-                                                    </span>
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="TOTMALE_EMP" value="{{ $editEmployeeData->TOTMALE_EMP }}" class="chosen-container totalMaleEmp" placeholder="Male">
+                            </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" value="{{ $editEmployeeData->TOTFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" value="{{ $editEmployeeData->TOTFEM_EMP }}" class="chosen-container totalFemaleEmp" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -28,12 +28,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" value="{{ $editEmployeeData->PARTTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" value="{{ $editEmployeeData->PARTTIMEMALE_EMP }}" class="chosen-container partTimeMaleEmp" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" value="{{ $editEmployeeData->PARTTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" value="{{ $editEmployeeData->PARTTIMEFEM_EMP }}" class="chosen-container partTimeFemaleEmp" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -41,7 +41,8 @@
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" value="{{ $editEmployeeData->REMARKS }}" class="chosen-container" placeholder="Male">
+{{--                               <input type="text" name="REMARKS" value="{{ $editEmployeeData->REMARKS }}" class="chosen-container" placeholder="Male">--}}
+                                <textarea name="REMARKS" id="" cols="51" rows="2">{{ $editEmployeeData->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>
@@ -54,12 +55,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $editEmployeeData->FULLTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $editEmployeeData->FULLTIMEMALE_EMP }}" class="chosen-container fullTimeMaleEmp" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $editEmployeeData->FULLTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $editEmployeeData->FULLTIMEFEM_EMP }}" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -114,4 +115,25 @@
             }
         })
     })
+    // validation for full time employee
+    $(document).on("change",".partTimeFemaleEmp", function () {
+
+        var  totalMaleEmp = $('.totalMaleEmp').val();
+        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+        if(total!=totalPartFullEmp){
+            alert('Total number of Employee must be equal to Part time and Full time employee');
+            $('.btnUpdateEmp').prop('disabled', true);
+        }else{
+            $('.btnUpdateEmp').prop('disabled', false);
+        }
+
+    });
 </script>

@@ -49,7 +49,10 @@ class QcController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'LABORATORY_FLG' => 'required',
             'IODINE_CHECK_FLG' => 'required',
+            'LAB_MAN_FLG' => 'required',
+            'MONITORING_FLG' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);

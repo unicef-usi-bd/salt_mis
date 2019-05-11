@@ -34,7 +34,7 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div class="col-md-12" style="width: 1040px;">
+        <div class="col-md-12" style="width: 1250px;">
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -67,12 +67,12 @@
                                         <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                                             <thead>
                                             <tr>
-                                                <th style="width:175px ;">Type of Certificate<span style="color:red;"> </span></th>
-                                                <th style="width:130px ;">Issure Name<span style="color:red;"> </span></th>
-                                                <th style="width:140px ;">Issuing Date</th>
-                                                <th style="width:150px ;">Certificate Number</th>
-                                                <th style="width: 260px;">Trade License</th>
-                                                <th style="width:140px;" >Renewing Date</th>
+                                                <th style="width:175px ;">Type of Certificate<span style="color:red;"> *</span></th>
+                                                <th style="width:130px ;">Issure Name<span style="color:red;"> *</span></th>
+                                                <th style="width:140px ;">Issuing Date<span style="color:red;"> *</span></th>
+                                                <th style="width:150px ;">Certificate Number<span style="color:red;"> *</span></th>
+                                                <th style="width: 260px;">Attached File<span style="color:red;"> *</span></th>
+                                                <th style="width:140px;" >Renewing Date<span style="color:red;"> *</span></th>
                                                 <th  style="width:140px ;">Remarks</th>
                                                 <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd2"><i class="fa fa-plus"></i></span></th>
                                             </tr>

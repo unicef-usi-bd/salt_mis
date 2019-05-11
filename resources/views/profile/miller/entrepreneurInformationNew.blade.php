@@ -110,9 +110,9 @@
                                                 <th style="">Upazila</th>
                                                 <th style="width: 100px;">Union</th>
                                                 <th style="" >NID</th>
-                                                <th style="">Mobile 1</th>
+                                                <th style="">Mobile 1<span style="color:red;"> *</span></th>
                                                 <th  style="">Mobile 2</th>
-                                                <th  style="">Email</th>
+                                                <th  style="">Email </th>
                                                 <th  style="">Remarks</th>
                                                 <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                                             </tr>
@@ -176,7 +176,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
+                                                        <input type="email" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
                                                         <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
                                                     </span>
                                                 </td>

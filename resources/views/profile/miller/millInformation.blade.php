@@ -6,7 +6,7 @@
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="REG_TYPE_ID" class="chosen-select chosen-container regTypeId" name="REG_TYPE_ID" data-placeholder="Select or search data">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="MILL_NAME" class="chosen-container">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
                                    <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
                                    <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
@@ -158,7 +158,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">

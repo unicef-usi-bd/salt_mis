@@ -63,7 +63,22 @@ class MillerInfoController extends Controller
         $millerList = MillerInfo::getAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
         //$this->pr($millerList);
-        return view('profile.miller.millerIndex', compact( 'heading','previllage','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','millerList','millerToMerge'));
+        $centerId = Auth::user()->center_id;
+        $individualMillerProfileCheck = MillerInfo::singleMiller($centerId);
+        $millerInfoId = $individualMillerProfileCheck->MILL_ID; //$this->pr($individualMillerProfileCheck);
+        if(!empty($individualMillerProfileCheck->MILL_ID)){
+            //echo "personal dashboard for single miller ".$millerInfoId;
+            $editMillData = MillerInfo::getMillData($millerInfoId);
+            $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
+            $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
+            $editCertificateData = Certificate::getCertificateData($millerInfoId);
+            $editQcData = Qc::getQcData($millerInfoId);
+            $editEmployeeData = Employee::getEmployeeData($millerInfoId);
+            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData'));
+
+        }else {
+            return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge'));
+        }
     }
 
     /**
@@ -86,6 +101,11 @@ class MillerInfoController extends Controller
     {
         $rules = array(
             'MILL_NAME' => 'required',
+            'PROCESS_TYPE_ID' => 'required',
+            'MILL_TYPE_ID' => 'required',
+            'CAPACITY_ID' => 'required',
+            'ZONE_ID' => 'required',
+            'ACTIVE_FLG' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
