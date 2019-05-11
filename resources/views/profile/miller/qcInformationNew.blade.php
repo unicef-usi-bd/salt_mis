@@ -34,7 +34,7 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div class="col-md-12" style="width: 1040px;">
+        <div class="col-md-12" style="width: 1250px;">
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -71,7 +71,7 @@
                                         @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
                                                     <label>
                                                         <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
@@ -85,7 +85,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> </label>
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
                                                     <label>
                                                         <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
@@ -98,7 +98,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b> </label>
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
                                                     <label>
                                                         <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
@@ -111,7 +111,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
                                                     <label>
                                                         <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
