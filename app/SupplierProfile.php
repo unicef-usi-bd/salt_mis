@@ -20,9 +20,13 @@ class SupplierProfile extends Model
     ];
 
      public static function getCrudeSaltSupllier($crudeSaltSupplierTypeId){
-         return DB::table('ssm_supplier_info')
-             ->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$crudeSaltSupplierTypeId)
-             ->get();
+         $centerId = Auth::user()->center_id;
+         $crudeSaltSupllier = DB::table('ssm_supplier_info');
+             $crudeSaltSupllier->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$crudeSaltSupplierTypeId);
+             if($centerId){
+                 $crudeSaltSupllier->where('ssm_supplier_info.center_id','=',$centerId);
+             }
+         return $crudeSaltSupllier->get();
      }
 
     public static function getDivision(){

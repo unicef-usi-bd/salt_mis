@@ -1,6 +1,7 @@
 <div class="col-md-12">
 
-    <div class="alert alert-danger msg" style="display: none;">
+    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
+
 
     </div>
 
@@ -90,7 +91,7 @@ $(document).on('change','.chemical',function(){
     var washSaltAmount = $('.saltAmount').val();
     var chemicalId = $(this).val();
     if(washSaltAmount === ''){
-        $('.msg').html('<strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn().delay(1000).fadeOut();
+        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn();
     }
 
     $.ajax({
@@ -115,7 +116,7 @@ $(document).on('change','.chemical',function(){
             }else{
                 //alert("hlw");
                 $('.chemicalAmount').attr('readonly', true);
-                $('.msg').html('<strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn().delay(1000).fadeOut();
+                $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn();
                 $('.saltAmount').val("");
             }
 
@@ -126,7 +127,7 @@ $(document).on('change','.chemical',function(){
 
                 if(chemicalStock < amount){
                     $('.stockChemical').hide();
-                    $('.msg').html('<strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+                    $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn();
                     $('.resultChemical').text(0);
                     if(amount === 0){
                         $('.stockChemical').show();
@@ -148,7 +149,7 @@ $(document).on('keyup','.saltAmount',function () {
 
     if(saltStock < amount){
         $('.stockSalt').hide();
-        $('.msg').html('<strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn();
         $('.result').text(0);
         if(amount === 0){
             $('.stockSalt').show();
