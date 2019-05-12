@@ -110,7 +110,7 @@ class User extends Authenticatable
             ->first();
     }
 
-    public static function updateData($request,$id,$userImageName,$userSignatureName){
+    public static function updateData($request,$id,$user_image,$userSignatureName){
         //$costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
         $userUpdateData=array(
@@ -130,7 +130,8 @@ class User extends Authenticatable
             'address' => $request->input('address'),
             'contact_no' => $request->input('contact_no'),
             'active_status' => $request->input('active_status'), 
-            'user_image' => 'image/user-image/'.$userImageName,
+            'user_image' => $user_image,
+//            'user_image' => 'image/user-image/'.$userImageName,
             'user_signature' => 'image/user-signature/'.$userSignatureName,
             'center_id' => $request->input('center_id'),
             'update_by' => Auth::user()->id,

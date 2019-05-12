@@ -82,6 +82,7 @@ class CrudeSaltDetailsController extends Controller
                 'MOISTURIZER' => $request->input('MOISTURIZER'),
                 'PPM' => $request->input('PPM'),
                 'PH' => $request->input('PH'),
+                'center_id' => Auth::user()->center_id,
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id
            ]);
