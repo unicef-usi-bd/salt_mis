@@ -11,10 +11,16 @@ class CrudeSaltDetails extends Model
 {
 
     public static function getAllCrudDetailsData(){
-        return DB::table('ssm_crud_salt_details')
-            ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME')
-            ->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO')
-            ->get();
+        $centerId = Auth::user()->center_id;
+        $crudSaltDetails = DB::table('ssm_crud_salt_details');
+        $crudSaltDetails->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME');
+        $crudSaltDetails->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO');
+
+        if($centerId){
+            $crudSaltDetails->where('ssm_crud_salt_details.center_id', '=', $centerId);
+        }
+
+        return $crudSaltDetails->get();
     }
 
     public static function insertCrudSaltDetailData($data){
@@ -44,6 +50,7 @@ class CrudeSaltDetails extends Model
             'MOISTURIZER' => $request->input('MOISTURIZER'),
             'PPM' => $request->input('PPM'),
             'PH' => $request->input('PH'),
+            'center_id' => Auth::user()->center_id,
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
