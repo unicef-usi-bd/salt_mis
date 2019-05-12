@@ -11,7 +11,7 @@
     {{--</div>--}}
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/chemical-purchase') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/chemical-purchase') }}" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -74,7 +74,12 @@
                 <div class="form-group resources"  style=" display: none;">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Mobile Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess phone" placeholder="Example: Mobile Number here" name="PHONE" class="form-control col-xs-10 col-sm-5 phone" value=""/>
+                        @if ($errors->has('phone'))
+                            <span class="invalid-feedback">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                    </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -82,7 +87,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+                        <textarea rows="3" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
                     </div>
                 </div>
             </div>
@@ -133,6 +138,23 @@
             $('.resources').show();
         }
         else $('.resources').hide();
+    });
+
+    $(document).ready(function () {
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+
+                phone:{
+                    required: true,
+                    maxlength:11
+                }
+
+            }
+        });
+
     });
 
 </script>
