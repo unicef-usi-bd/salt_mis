@@ -135,33 +135,14 @@
                 </div>
             </div>
 
-            {{--<div class="form-group resources"  style=" display: none;">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                        {{--<span class="block input-icon input-icon-right">--}}
-                            {{--<select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">--}}
-                                {{--<option value="">-Select One-</option>--}}
-                                {{--@foreach($associationCenter as $center)--}}
-                                    {{--<option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</span>--}}
-                    {{--<span><p class='result7'></p></span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
             <div class="form-group resources"  style=" display: none;">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
-
+                                <option value="">-Select One-</option>
                                 @foreach($associationCenter as $center)
-                                    <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
-                                        <?php $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
-                                        @foreach($miller as $row)
-                                        <option value="{{$row->ASSOCIATION_ID}}"> {{$row->ASSOCIATION_NAME}}</option>
-                                        @endforeach
-
+                                    <option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>
