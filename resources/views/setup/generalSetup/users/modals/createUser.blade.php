@@ -318,7 +318,7 @@
                     },
                     contact_no:{
                         required: true,
-                        minlength:11
+                        maxlength:11
                     },
                     user_group_id:{
                         required: true,
