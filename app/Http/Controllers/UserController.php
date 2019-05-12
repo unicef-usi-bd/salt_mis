@@ -46,7 +46,7 @@ class UserController extends Controller
             'action'=>'users/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-        //dd(session()->all());
+//        dd(session()->all());
         $users = User::getData();
 //        $this->pr($users);
 

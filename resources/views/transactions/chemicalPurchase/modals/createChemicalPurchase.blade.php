@@ -1,4 +1,12 @@
 <div class="col-md-12">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
     {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
     {{--<span id="successMessage"></span>--}}
     {{--<button type="button" class="close" data-dismiss="alert">--}}
@@ -74,7 +82,7 @@
                 <div class="form-group resources"  style=" display: none;">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess phone" placeholder="Example: Mobile Number here" name="PHONE" class="form-control col-xs-10 col-sm-5 phone" value=""/>
+                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Mobile Number here" name="PHONE" class="form-control col-xs-10 col-sm-5 PHONE" value=""/>
                         @if ($errors->has('phone'))
                             <span class="invalid-feedback">
                         <strong>{{ $errors->first('phone') }}</strong>
@@ -147,11 +155,10 @@
             //validClass: "my-valid-class",
             rules: {
 
-                phone:{
+                PHONE:{
                     required: true,
                     maxlength:11
                 }
-
             }
         });
 
