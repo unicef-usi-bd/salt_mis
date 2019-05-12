@@ -49,7 +49,9 @@
                         <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
                     </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical hidden"></span><span class="resultChemical"></span> ltr)</span>
+
             </div>
+            <span class="requireChemicalPerKg" style="margin-left:27%;display: none;"></span>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
@@ -101,7 +103,8 @@
             success: function (data) {
                // alert(data)
                 var data = JSON.parse(data);
-                //console.log(data);
+                //console.log(data.chemicalPerKg);
+                $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + data.chemicalPerKg.USE_QTY).show();
                 $('.stockChemical').html(data.chemicalStock).show();
                 $('.resultChemical').html(data.chemicalStock);
                 $('.chemicalAmount').val('');
