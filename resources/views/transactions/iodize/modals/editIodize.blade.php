@@ -1,6 +1,7 @@
 <div class="col-md-12">
 
-    <div class="alert alert-danger msg" style="display: none;">
+    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
+
 
     </div>
 
@@ -50,6 +51,7 @@
                     </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} ltr</span><span class="resultChemical"></span>)</span>
             </div>
+            <span class="requireChemicalPerKg" style="margin-left:27%;display: none;"></span>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
@@ -90,7 +92,7 @@ $(document).on('change','.chemical',function(){
     var washSaltAmount = $('.saltAmount').val();
     var chemicalId = $(this).val();
     if(washSaltAmount === ''){
-        $('.msg').html('<strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn().delay(1000).fadeOut();
+        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn();
     }
 
     $.ajax({
@@ -100,7 +102,8 @@ $(document).on('change','.chemical',function(){
         success: function (data) {
             // alert(data)
             var data = JSON.parse(data);
-            //console.log(data);
+            //console.log(data.chemicalPerKg);
+            $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + data.chemicalPerKg.USE_QTY).show();
             $('.stockChemical').html(data.chemicalStock).show();
             $('.resultChemical').html(data.chemicalStock).hide();
             $('.chemicalAmount').val('');
@@ -115,7 +118,7 @@ $(document).on('change','.chemical',function(){
             }else{
                 //alert("hlw");
                 $('.chemicalAmount').attr('readonly', true);
-                $('.msg').html('<strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn().delay(1000).fadeOut();
+                $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn();
                 $('.saltAmount').val("");
             }
 
@@ -126,7 +129,7 @@ $(document).on('change','.chemical',function(){
 
                 if(chemicalStock < amount){
                     $('.stockChemical').hide();
-                    $('.msg').html('<strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+                    $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn();
                     $('.resultChemical').text(0);
                     if(amount === 0){
                         $('.stockChemical').show();
@@ -148,7 +151,7 @@ $(document).on('keyup','.saltAmount',function () {
 
     if(saltStock < amount){
         $('.stockSalt').hide();
-        $('.msg').html('<strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn();
         $('.result').text(0);
         if(amount === 0){
             $('.stockSalt').show();

@@ -4,7 +4,7 @@
     }
 </style>
 <div class="col-md-12">
-    <div class="alert alert-danger msg" style="display: none;">
+    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
 
     </div>
     <form action="{{ url('/washing-crushing/'.$editWashingAndCrushingData->WASHCRASHMST_ID) }}" method="post" class="form-horizontal" role="form">
@@ -116,7 +116,7 @@ $(document).on('keyup','.crudeSaltAmount',function () {
 
     if(saltStock < amount){
         $('.stockSalt').hide();
-        $('.msg').html('<strong>Warning !</strong> Stock Out Of bound.').fadeIn().delay(1000).fadeOut();
+        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Stock Out Of bound.').fadeIn();
         $('.result').text(0);
         if(amount === 0){
             $('.stockSalt').show();

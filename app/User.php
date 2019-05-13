@@ -73,14 +73,12 @@ class User extends Authenticatable
     }
 
     public static function getData() {
-        $positionId = Auth::user()->POSITIONLEVEl;
         return DB::table('users as u')
             ->select('u.*', 'cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID','ugl.POSITIONLEVEl')
             ->leftjoin('cost_center as cc', 'u.cost_center_id', '=', 'cc.cost_center_id')
             ->leftjoin('sa_user_group as ug', 'u.user_group_id', '=', 'ug.USERGRP_ID')
             ->leftjoin('sa_ug_level as ugl', 'u.user_group_level_id', '=', 'ugl.UG_LEVEL_ID')
             ->leftjoin('ssm_associationsetup as a', 'u.center_id', '=', 'a.ASSOCIATION_ID')
-            ->where('ugl.POSITIONLEVEl','=',$positionId)
             ->orderBy('u.id','DESC')
             ->get();
     }

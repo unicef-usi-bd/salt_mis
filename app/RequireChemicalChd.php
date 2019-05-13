@@ -11,7 +11,8 @@ class RequireChemicalChd extends Model
 {
     public static function getWastagePercentage($itemNo){
         return DB::table('smm_rmallocationchd')
-            ->select('smm_rmallocationchd.USE_QTY','smm_rmallocationchd.CRUDE_SALT')
+            ->select('smm_rmallocationchd.USE_QTY','smm_rmallocationchd.CRUDE_SALT','smm_item.ITEM_NAME')
+            ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
             ->where('ITEM_ID','=',$itemNo)
             ->first();
     }
