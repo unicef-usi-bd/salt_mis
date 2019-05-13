@@ -157,7 +157,16 @@
 
                                 @foreach($associationCenter as $center)
                                     <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
-                                        <?php $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
+<!--                                        --><?php //$miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
+                                        <?php
+                                    $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME ,a.MILL_ID,mi.ACTIVE_FLG,me.FINAL_SUBMIT_FLG
+                                                                                from ssm_associationsetup a
+                                                                                left join ssm_mill_info mi on mi.MILL_ID = a.MILL_ID
+                                                                                left join ssm_millemp_info me on me.MILL_ID = a.MILL_ID
+                                                                                where a.PARENT_ID = $center->ASSOCIATION_ID
+                                                                                and mi.ACTIVE_FLG = 1
+                                                                                and me.FINAL_SUBMIT_FLG = 1 "));
+                                        ?>
                                         @foreach($miller as $row)
                                         <option value="{{$row->ASSOCIATION_ID}}"> {{$row->ASSOCIATION_NAME}}</option>
                                         @endforeach
