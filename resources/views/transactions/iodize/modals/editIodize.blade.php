@@ -51,6 +51,7 @@
                     </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} ltr</span><span class="resultChemical"></span>)</span>
             </div>
+            <span class="requireChemicalPerKg" style="margin-left:27%;display: none;"></span>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
@@ -101,7 +102,8 @@ $(document).on('change','.chemical',function(){
         success: function (data) {
             // alert(data)
             var data = JSON.parse(data);
-            //console.log(data);
+            //console.log(data.chemicalPerKg);
+            $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + data.chemicalPerKg.USE_QTY).show();
             $('.stockChemical').html(data.chemicalStock).show();
             $('.resultChemical').html(data.chemicalStock).hide();
             $('.chemicalAmount').val('');

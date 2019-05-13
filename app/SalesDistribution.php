@@ -19,9 +19,13 @@ class SalesDistribution extends Model
             ->get();
     }
     public static function getTradingName(){
-        return DB::table('ssm_customer_info')
-            ->select('ssm_customer_info.*')
-            ->get();
+        $centerId = Auth::user()->center_id;
+        $customerInfo =  DB::table('ssm_customer_info');
+        $customerInfo->select('ssm_customer_info.*');
+        if($centerId){
+            $customerInfo->where('ssm_customer_info.center_id','=',$centerId);
+        }
+        return $customerInfo->get();
     }
 
     public static function insertSalesDistributionData($request,$saltPackId,$washAndCrushId,$iodizeId){
