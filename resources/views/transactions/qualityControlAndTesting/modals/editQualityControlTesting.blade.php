@@ -16,16 +16,20 @@
             @csrf
             @method('PUT')
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-sm-12"> <b>Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-12">
+                            <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Agency</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-sm-12" ><b>Agency</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-12">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
                                <option value=""></option>
@@ -34,19 +38,13 @@
                                 @endforeach
                             </select>
                         </span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Attached Test Document</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
-                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Quality Control BY</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-sm-12"><b>Quality Control BY</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-12">
                         <span class="block input-icon input-icon-right">
                             <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select or search data">
                                <option value=""></option>
@@ -55,11 +53,13 @@
                                 @endforeach
                             </select>
                         </span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-sm-12"> <b>Batch No</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-12">
                         <span class="block input-icon input-icon-right">
                             <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
                                <option value=""></option>
@@ -68,24 +68,42 @@
                                 @endforeach
                             </select>
                         </span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Attachment</b><span style="color: red;"> </span> </label>
-                    <div class="col-md-8">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-4">
+                    <label class="col-sm-12"><b>Attached Test Document</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
+                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-12"> <b>Attachment</b><span style="color: red;"> </span> </label>
+                    <div class="col-md-12">
                         <input type="file" name="QUALITY_CONTROL_IMAGE" class="form-control col-xs-5 col-sm-5">
                     </div>
-
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editQualityControl->REMARKS }}</textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <label class="col-sm-12"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editQualityControl->REMARKS }}</textarea>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
 
 
         <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">

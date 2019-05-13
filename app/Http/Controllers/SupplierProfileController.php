@@ -40,7 +40,7 @@ class SupplierProfileController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $supplierProfile = SupplierProfile::supplierProfile();
+        $supplierProfile = SupplierProfile::supplierProfileList();
 
         //print_r($lookupGroups);exit;
         return view('profile.supplier.supplierProfileIndex', compact( 'heading','previllage','supplierProfile'));

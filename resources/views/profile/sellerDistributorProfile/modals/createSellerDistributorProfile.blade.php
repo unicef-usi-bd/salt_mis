@@ -12,7 +12,7 @@
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
     <form action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
-      <div class="col-md-12">
+      {{--<div class="col-md-12">--}}
         @csrf
         {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
         <div class="col-md-6">
@@ -29,48 +29,55 @@
             </span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trading Name</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade Licence no</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
-                </div>
-            </div>
+
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}"/>
+                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" readonly name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}"/>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
-                </div>
-            </div>
+
         </div>
+      {{--</div>--}}
+      <div class="row">
+          <div class="col-md-12">
+              <div class="col-md-3">
+                  <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> </span> </label>
+                  <div class="col-sm-12">
+                      <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> </label>
+                  <div class="col-sm-12">
+                      <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> </span> </label>
+                  <div class="col-sm-12">
+                      <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <label class="col-sm-12" > <b>Phone Number</b><span style="color: red;"> </span> </label>
+                  <div class="col-sm-12">
+                      <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
+                  </div>
+              </div>
+          </div>
       </div>
 
       {{--<div class="col-md-12" style="margin-top: -30px;">--}}
           {{--<h2 class="left" style="margin-top: 30px;margin-bottom: 30px;">Address</h2>--}}
           {{--<hr style="margin-top: -25px;">--}}
-          <div class="col-md-6">
-              <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
-                  <div class="col-xs-8">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <label class="col-sm-12"><b>Division</b></label>
+                    <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select id="DIVISION_ID" class="form-control chosen-select" name="DIVISION_ID" data-placeholder="Select or search data">
                             <option value="">Select Division</option>
@@ -79,63 +86,59 @@
                             @endforeach
                         </select>
                     </span>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b><span style="color: red;"> </span></label>
-                  <div class="col-sm-8">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="col-sm-12" ><b>District</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select id="DISTRICT_ID" class="chosen-select form-control district" name="DISTRICT_ID" data-placeholder="Select or search data">
                            <option value=""></option>
 
                         </select>
                     </span>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Thana/Upazila</b></label>
-                  <div class="col-xs-8">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazila</b></label>
+                    <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select id="UPAZILA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
                             <option value="">Select Upazila/Thana</option>
                          </select>
                     </span>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Union</b></label>
-                  <div class="col-xs-8">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Union</b></label>
+                    <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">
                             <option value="">Select Union</option>
                         </select>
                     </span>
-                  </div>
-              </div>
-          </div>
-      {{--</div>--}}
-
-        {{--<div class="col-md-12">--}}
-            {{--<hr>--}}
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Bazar  here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
+        </div>
+
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-4">
+                    <label class="col-sm-12" > <b>Bazar</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Bazar  here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-12"  style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
                         <input type="text" id="inputSuccess EMAIL" placeholder="Example: Email here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>
-        {{--</div>--}}
+        </div>
+
 
         <div class="col-md-12" style="margin-top: 15px;">
             <h4  style="color: #1B6AAA;">Coverage Area</h4>
