@@ -66,6 +66,105 @@
                 </div>
             </div>
         </form>
+
+            <div class="col-md-12" style="margin-top: 20px;">
+                <h4  style="color: #1B6AAA; text-align: center; margin-left: -200px;">Bsti Test Standard Result Range</h4>
+                <hr>
+                <form action="" method="post" class="form-horizontal" role="form" id="myform">
+                    <h4><u>Sodium Chloride</u></h4>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess SODIUM_CHLORIDE_MIN" placeholder="" name="SODIUM_CHLORIDE_MIN" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess SODIUM_CHLORIDE_MAX" placeholder="" name="SODIUM_CHLORIDE_MAX" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><u>Moisturizer</u></h4>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess MOISTURIZER_MIN" placeholder="" name="MOISTURIZER_MIN" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess MOISTURIZER_MAX" placeholder="" name="MOISTURIZER_MAX" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><u>Iodize Content(PPM)</u></h4>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess PPM_MIN" placeholder="" name="PPM_MIN" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess PPM_MAX" placeholder="" name="PPM_MAX" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><u>PH</u></h4>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess PH_MIN" placeholder="" name="PH_MIN" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="inputSuccess PH_MAX" placeholder="" name="PH_MAX" class="form-control col-xs-10 col-sm-5" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-left: 120px;">
+                        <div class="col-md-offset-3 col-md-9">
+                            @php
+                                $editPermissionLevel = $previllage->UPDATE;
+                            @endphp
+                            @if($editPermissionLevel == 1)
+                                <a class="green showModalGlobal btn btn-warning" id="{{ 'bsti-test-standard/'.$editBstiTestStandard->BSTITEST_ID.'/edit' }}" data-target=".modal" role="button" data-toggle="modal" data-permission="{{ $editPermissionLevel }}" title="Edit BSTI Test Standard">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i> <span>Edit</span>
+                                </a>
+                            @endif
+                            @if($editBstiTestStandard)
+                                <button type="submit" class="btn btn-primary submitBtn" disabled="disabled">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Save
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-primary submitBtn">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Save
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+
     </div>
 
     <!--Sweet Alert Global Script Start-->
