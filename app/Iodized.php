@@ -24,7 +24,7 @@ class Iodized extends Model
             ->get();
     }
 
-    public static function insertIodizeData($request,$centerId,$entryBy){
+    public static function insertIodizeData($request,$centerId,$entryBy,$iodizeStock){
 
         $iodizeMstId = DB::table('tmm_iodizedmst')->insertGetId([
             'BATCH_NO' => $request->input('BATCH_NO'),
@@ -84,7 +84,8 @@ class Iodized extends Model
                 'TRAN_TYPE' => 'I', //I=Iodized
                 'TRAN_NO' => $iodizeMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
-                'QTY' => $request->input('WASH_CRASH_QTY'),
+//                'QTY' => $request->input('WASH_CRASH_QTY'),
+                'QTY' => $iodizeStock,
                 'TRAN_FLAG' => 'II', // II = Idonize Increase
                 'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
