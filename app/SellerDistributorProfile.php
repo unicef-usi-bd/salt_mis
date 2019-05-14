@@ -177,4 +177,14 @@ protected $fillable = [
         $deleteChd = DB::table('ssm_coverage_area')->where('ssm_coverage_area.COVERAGE_ID', $id)->delete();
         return $deleteChd;
     }
+
+    public static function tradingList($sellerTypeId){
+        $centerId = Auth::user()->center_id;
+        $traders = DB::table('ssm_customer_info');
+        $traders->where('SELLER_TYPE_ID', $sellerTypeId);
+        if($centerId){
+            $traders->where('center_id', '=' ,$centerId);
+        }
+        return $traders->get();
+    }
 }
