@@ -48,8 +48,14 @@ class SellerDistributorProfileController extends Controller
      */
     public function create()
     {
-        $digits = 4;
-        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+//        $digits = 4;
+//        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+//        for($i=0;$i<=1000;$i++) {
+//            $supplierId = sprintf("%04d", $i) . "<br>";
+//            //echo $test;
+//        }
+        $sellerDitributorProfile = count(SellerDistributorProfile::sellerDistributorProfile());
+        $supplierId = sprintf("%04d", $sellerDitributorProfile+1);
         $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
         $getDivision = SupplierProfile::getDivision();
         return view('profile.sellerDistributorProfile.modals.createSellerDistributorProfile',compact('sellerType','supplierId','getDivision'));
