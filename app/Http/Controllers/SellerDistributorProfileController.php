@@ -64,8 +64,8 @@ class SellerDistributorProfileController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'TRADING_NAME' => 'required|max:100',
-            'LICENCE_NO' => 'required|max:100',
+//            'TRADING_NAME' => 'required|max:100',
+//            'LICENCE_NO' => 'required|max:100',
 
         );
 

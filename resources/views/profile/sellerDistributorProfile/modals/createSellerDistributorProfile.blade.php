@@ -9,9 +9,17 @@
     {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
     {{--<span id="errorMessage"></span>--}}
     {{--</div>--}}
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
       {{--<div class="col-md-12">--}}
         @csrf
         {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -284,6 +292,42 @@
                 thisRow.find('.upazilatable').trigger("chosen:updated");
             }
         });
+    });
+
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                TRADING_NAME:{
+                  required: true
+                },
+                EMAIL:{
+                    //required: true,
+                    email: true,
+                    regex: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
+                },
+                PHONE:{
+                    //required: true,
+                    maxlength:11,
+                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                }
+            }
+        });
+
     });
 </script>
 
