@@ -191,4 +191,12 @@ class SellerDistributorProfileController extends Controller
         return $deleteChd;
     }
 
+    public function getTradingList(Request $request){
+        $sellerTypeId = $request->input('sellerTypeId');
+        $tradingLists = SellerDistributorProfile::tradingList($sellerTypeId);
+      //  return json_encode($tradingLists);
+        return $tradingLists;
+
+    }
+
 }

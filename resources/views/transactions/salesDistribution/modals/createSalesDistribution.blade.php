@@ -20,7 +20,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="chosen-select form-control" name="SELLER_TYPE" data-placeholder="Select Seller Type">
+                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="chosen-select form-control SELLER_TYPE" name="SELLER_TYPE" data-placeholder="Select Seller Type">
                    <option value=""></option>
                     @foreach($sellerType as $seller)
                         <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
@@ -41,11 +41,8 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="chosen-select form-control" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
-                   <option value=""></option>
-                    @foreach($tradingId as $trading)
-                    <option value="{{$trading->CUSTOMER_ID}}"> {{$trading->TRADING_NAME}}</option>
-                    @endforeach
+                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="chosen-select form-control CUSTOMER_ID" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
+
                 </select>
             </span>
                     </div>
@@ -271,6 +268,25 @@
             })
         }
 
+    });
+
+    $(document).on("change",".SELLER_TYPE",function(){
+        var sellerTypeId = $(this).val();
+        var option = '<option value="">Select Trading Name</option>';
+        $.ajax({
+            type : 'GET',
+            url : 'trading-list',
+            data : {'sellerTypeId':sellerTypeId},
+            success: function (data) {
+//                var data = JSON.parse(data);
+                for (var i = 0; i < data.length; i++){
+                    option = option + '<option value="'+ data[i].CUSTOMER_ID +'">'+ data[i].TRADER_NAME+'</option>';
+                }
+
+                $('.CUSTOMER_ID').html(option);
+                $('.CUSTOMER_ID').trigger("chosen:updated");
+            }
+        })
     });
 
 
