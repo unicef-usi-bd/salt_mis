@@ -9,10 +9,18 @@
     {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
     {{--<span id="errorMessage"></span>--}}
     {{--</div>--}}
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/seller-distributor-profile/'.$editSellerProfile->CUSTOMER_ID) }}" method="post" class="form-horizontal" role="form">
-        <div class="col-md-12">
+    <form id="myform" action="{{ url('/seller-distributor-profile/'.$editSellerProfile->CUSTOMER_ID) }}" method="post" class="form-horizontal" role="form">
+        {{--<div class="col-md-12">--}}
             @csrf
             @method('PUT')
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -20,58 +28,61 @@
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID"  data-placeholder="Select or search data">
-                   <option value=""></option>
-                    @foreach($sellerType as $row)
-                        <option value="{{ $row->LOOKUPCHD_ID }}" @if($row->LOOKUPCHD_ID==$editSellerProfile->SELLER_TYPE_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
-                    @endforeach
-                </select>
-            </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trading Name</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADING_NAME }}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade Lience no</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID"  data-placeholder="Select or search data">
+                               <option value=""></option>
+                                @foreach($sellerType as $row)
+                                    <option value="{{ $row->LOOKUPCHD_ID }}" @if($row->LOOKUPCHD_ID==$editSellerProfile->SELLER_TYPE_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                @endforeach
+                            </select>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                <div class="col-sm-8">
+                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" readonly="readonly" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADING_NAME }}"/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
                         <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label class="col-sm-12"> <b>Trade Lience no</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="col-sm-12"> <b>Phone Number</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
                         <input type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{--<div class="col-md-12" style="margin-top: -30px;">--}}
-        {{--<h2 class="left" style="margin-top: 30px;margin-bottom: 30px;">Address</h2>--}}
-        {{--<hr style="margin-top: -25px;">--}}
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <label for="inputSuccess" class="col-sm-12"><b>Division</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control  chosen-select" id="DIVISION_ID" name="DIVISION_ID">
                             <option value="">{{ trans('organization.select_one') }}</option>
@@ -81,65 +92,62 @@
                         </select>
                     </span>
 
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label for="inputSuccess" class="col-sm-12"><b>District</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control district chosen-select" id="DISTRICT_ID" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editSellerProfile->DISTRICT_ID }}">{{ $editSellerProfile->DISTRICT_NAME }}</option>
                         </select>
                     </span>
 
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Upazila/Thana</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Upazila/Thana</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editSellerProfile->UPAZILA_ID }}">{{ $editSellerProfile->UPAZILA_NAME }}</option>
                         </select>
                     </span>
 
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label for="inputSuccess" class="col-sm-12"  style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>
+                    <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editSellerProfile->UNION_ID }}">{{ $editSellerProfile->UNION_NAME }}</option>
                         </select>
                     </span>
 
+                    </div>
                 </div>
             </div>
         </div>
-        {{--</div>--}}
 
-        {{--<div class="col-md-12">--}}
-        {{--<hr>--}}
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Amount per KG here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->BAZAR_NAME }}"/>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-4">
+                    <label class="col-sm-12 " > <b>Bazar</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Amount per KG here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->BAZAR_NAME }}"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-sm-12" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="inputSuccess EMAIL" placeholder="Example: Amount per KG here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->EMAIL }}"/>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess EMAIL" placeholder="Example: Amount per KG here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->EMAIL }}"/>
-                </div>
-            </div>
-        </div>
-        {{--</div>--}}
+
+
 
         <div class="col-md-12" style="margin-top: 15px;">
             <h4  style="color: #1B6AAA;">Coverage Area</h4>
@@ -336,6 +344,45 @@
             }
 
         });
+    });
+
+    $(document).ready(function () {
+
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                TRADING_NAME:{
+                    required: true
+                },
+                EMAIL:{
+                    //required: true,
+                    email: true,
+                    //regex: /^[A-Za-z0-9_]+\@[A-Za-z0-9_]+\.[A-Za-z0-9_]+/,
+                    regex: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
+                },
+                PHONE:{
+                    //required: true,
+                    maxlength:11,
+                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                },
+
+            }
+        });
+
     });
 
 </script>

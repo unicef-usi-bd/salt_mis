@@ -67,6 +67,10 @@ protected $fillable = [
         }
     }
 
+    public function getAutogenerateSellerId(){
+        return DB::select(DB::raw(""));
+    }
+
     public static function sellerDistributorProfile(){
         return DB::table('ssm_customer_info')
             ->select('*')

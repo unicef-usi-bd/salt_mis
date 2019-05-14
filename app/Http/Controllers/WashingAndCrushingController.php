@@ -80,7 +80,11 @@ class WashingAndCrushingController extends Controller
             //$this->pr($request->input());
             $entryBy = Auth::user()->id;
             $centerId = Auth::user()->center_id;
-            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
+            $oty = intval($request->input('REQ_QTY'));
+            $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
+            $result = $oty - $totalStock;
+            //$this->pr($result);
+            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId,$result);
 
             if($washingAndCrashing){
                 return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
@@ -137,7 +141,10 @@ class WashingAndCrushingController extends Controller
 
 
             //$this->pr($request->input());
-            $washingAndCrashing = WashingAndCrushing::updateWashingAndCrushingData($request,$id);
+            $oty = intval($request->input('REQ_QTY'));
+            $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
+            $result = $oty - $totalStock;
+            $washingAndCrashing = WashingAndCrushing::updateWashingAndCrushingData($request,$id,$result);
 
             if($washingAndCrashing){
                 return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Updated !');

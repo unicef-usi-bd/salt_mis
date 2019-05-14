@@ -28,7 +28,7 @@ class WashingAndCrushing extends Model
             ->get();
     }
 
-    public static function insertWashingAndCrushingData($request,$entryBy,$centerId){
+    public static function insertWashingAndCrushingData($request,$entryBy,$centerId,$result){
 
         $washingCrushingMstId = DB::table('tmm_washcrashmst')->insertGetId([
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
@@ -43,7 +43,7 @@ class WashingAndCrushing extends Model
             $washingCrushingChdId = DB::table('tmm_washcrashchd')->insertGetId([
                 'WASHCRASHMST_ID' => $washingCrushingMstId,
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
-                'REQ_QTY' => $request->input('REQ_QTY'),
+                'REQ_QTY' => $result,
                 'WASTAGE' => $request->input('WASTAGE'),
                 'center_id' => $centerId,
                 'ENTRY_BY' => $entryBy,
@@ -72,7 +72,7 @@ class WashingAndCrushing extends Model
                     'TRAN_TYPE' => 'W', //W  = Washing
                     'TRAN_NO' => $washingCrushingMstId,
                     'ITEM_NO' => $request->input('PRODUCT_ID'),
-                    'QTY' => $request->input('REQ_QTY'),
+                    'QTY' => $result,
                     'TRAN_FLAG' => 'WI', //WR = Wash Increase
                     //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                     'center_id' => $centerId,
@@ -103,7 +103,7 @@ class WashingAndCrushing extends Model
             ->first();
     }
 
-    public static function updateWashingAndCrushingData($request,$id){
+    public static function updateWashingAndCrushingData($request,$id,$result){
              $washCrushMst = DB::table('tmm_washcrashmst')->where('tmm_washcrashmst.WASHCRASHMST_ID', '=' , $id)->update([
                  'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                  'BATCH_NO' => $request->input('BATCH_NO'),
@@ -115,7 +115,7 @@ class WashingAndCrushing extends Model
              ]);
             $washingCrushingChd = DB::table('tmm_washcrashchd')->where('tmm_washcrashchd.WASHCRASHMST_ID', '=' , $id)->update([
                 'ITEM_ID' => $request->input('ITEM_ID'),
-                'REQ_QTY' => $request->input('REQ_QTY'),
+                'REQ_QTY' => $result,
                 'WASTAGE' => $request->input('WASTAGE'),
                 'center_id' => Auth::user()->center_id,
                 'UPDATE_BY' => Auth::user()->id,
@@ -142,7 +142,7 @@ class WashingAndCrushing extends Model
                     'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                     'TRAN_TYPE' => 'W', //S  = Salt
                     'ITEM_NO' => $request->input('PRODUCT_ID'),
-                    'QTY' => $request->input('REQ_QTY'),
+                    'QTY' => $result,
                     'TRAN_FLAG' => 'WI', //WS = Wash Salt
                     'center_id' => Auth::user()->center_id,
                     'UPDATE_BY' => Auth::user()->id,

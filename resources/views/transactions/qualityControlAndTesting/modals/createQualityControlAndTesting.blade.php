@@ -14,38 +14,20 @@
     <form action="{{ url('/quality-control-testing') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         {{--<div class="col-md-12">--}}
             @csrf
-            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="col-md-12"> <b>Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-md-12">
+                            <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y')}}" class="date-picker" />
+                        </div>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Agency</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
-                        <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
-                               <option value=""></option>
-                                @foreach($agencyId as $agency)
-                                    <option value="{{$agency->LOOKUPCHD_ID}}"> {{$agency->LOOKUPCHD_NAME}}</option>
-                                @endforeach
-                            </select>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Attached Test Document</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
-                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder=""  value="Document here" class="form-control col-xs-5 col-sm-5" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Quality Control BY</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label class="col-md-12"><b>Quality Control BY</b><span style="color: red;"> </span></label>
+                    <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
                             <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select Quality Control BY">
                                <option value=""></option>
@@ -56,35 +38,126 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
+                <div class="col-md-3">
+                    <label class="col-md-12"><b>Agency</b><span style="color: red;"> </span></label>
+                    <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
-                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
+                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
                                <option value=""></option>
-                                @foreach($iodizeBatch as $iodize)
-                                <option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>
+                                @foreach($agencyId as $agency)
+                                    <option value="{{$agency->LOOKUPCHD_ID}}"> {{$agency->LOOKUPCHD_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Attachment</b><span style="color: red;"> </span> </label>
-                    <div class="col-md-8">
+                <div class="col-md-3">
+                    <label class="col-md-12"> <b>Batch No</b><span style="color: red;"> </span> </label>
+                    <div class="col-md-12">
+                        <span class="block input-icon input-icon-right">
+                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
+                               <option value=""></option>
+                                @foreach($iodizeBatch as $iodize)
+                                    <option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-4">
+                    <label class="col-md-12"><b>Test Name</b><span style="color: red;"> </span></label>
+                    <div class="col-md-12">
+                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="" class="form-control col-xs-5 col-sm-5" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-12"> <b>Attachment</b><span style="color: red;"> </span> </label>
+                    <div class="col-md-12">
                         <input type="file" name="QUALITY_CONTROL_IMAGE" value="" class="form-control col-xs-5 col-sm-5">
                     </div>
-
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <textarea   rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" /></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <label class="col-md-12"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+                            <textarea rows="3" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
+                        </div>
                     </div>
                 </div>
+
             </div>
+        </div>
+            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
+            {{--<div class="col-md-6">--}}
+                {{--<div class="form-group">--}}
+                    {{--<label style="margin-left: -250px;" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />--}}
+                    {{--</div>--}}
+
+                    {{--<label style="margin-left: -150px;" for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Quality Control BY</b><span style="color: red;"> </span></label>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<span class="block input-icon input-icon-right">--}}
+                            {{--<select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select Quality Control BY">--}}
+                               {{--<option value=""></option>--}}
+                                {{--@foreach($qulityControlId as $name)--}}
+                                    {{--<option value="{{$name->LOOKUPCHD_ID}}"> {{$name->LOOKUPCHD_NAME}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</span>--}}
+                    {{--</div>--}}
+                    {{--<label  style="margin-left: -210px;" for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Agency</b><span style="color: red;"> </span></label>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<span class="block input-icon input-icon-right">--}}
+                            {{--<select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">--}}
+                               {{--<option value=""></option>--}}
+                                {{--@foreach($agencyId as $agency)--}}
+                                    {{--<option value="{{$agency->LOOKUPCHD_ID}}"> {{$agency->LOOKUPCHD_NAME}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</span>--}}
+                    {{--</div>--}}
+                    {{--<label style="margin-left: -210px;" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<span class="block input-icon input-icon-right">--}}
+                            {{--<select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">--}}
+                               {{--<option value=""></option>--}}
+                                {{--@foreach($iodizeBatch as $iodize)--}}
+                                    {{--<option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                <div class="form-group">
+
+
+                </div>
+            {{--</div>--}}
+            {{--<div class="col-md-6">--}}
+
+
+
+                <div class="form-group">
+
+
+                </div>
+            {{--</div>--}}
+            {{--<div class="col-md-6">--}}
+
+            {{--</div>--}}
         {{--</div>--}}
 
         <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">
