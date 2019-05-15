@@ -46,7 +46,8 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100" placeholder="Example:- Remarks Here" />
+                        {{--<input type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100" placeholder="Example:- Remarks Here" />--}}
+                        <textarea class="form-control col-sm-8" rows="3"  id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Remarks">{{ $editMonitoring->REMARKS }}</textarea>
                     </span>
                 </div>
             </div>

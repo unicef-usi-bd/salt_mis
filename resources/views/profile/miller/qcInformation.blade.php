@@ -87,7 +87,8 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container">
+                               {{--<input type="text" name="REMARKS" class="chosen-container">--}}
+                                <textarea rows="3" class="form-control col-sm-7" name="REMARKS"></textarea>
                             </span>
                         </div>
                     </div>

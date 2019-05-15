@@ -26,8 +26,8 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
             <div class="col-sm-8">
-                {{--<textarea class="form-control" rows="5" style="height:50%;" id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Description"></textarea>--}}
-                <input type="text" name="REMARKS" class="form-control" value="" placeholder="Example:- Remarks Here"/>
+                <textarea class="form-control col-sm-8" rows="3"  id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Remarks"></textarea>
+                {{--<input type="text" name="REMARKS" class="form-control" value="" placeholder="Example:- Remarks Here"/>--}}
             </div>
         </div>
 
