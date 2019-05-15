@@ -28,6 +28,9 @@
 
                 </tr>
                 <tr>
+                    <th class=" ">Invoice No</th>
+                    <th> :</th>
+                    <td>{{ $chemicalPurchaseView->INVOICE_NO }} </td>
                     <th class=" ">REMARKS</th>
                     <th> :</th>
                     <td>{{ $chemicalPurchaseView->REMARKS }} </td>

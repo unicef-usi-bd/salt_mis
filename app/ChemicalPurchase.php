@@ -61,6 +61,7 @@ class ChemicalPurchase extends Model
             'SUPP_ID_AUTO' => $supplierId,
             'RECEIVE_TYPE' => 'CR',//chemical receive
             'REMARKS' => $request->input('REMARKS'),
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -124,6 +125,7 @@ class ChemicalPurchase extends Model
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
             'RECEIVE_TYPE' => 'CR',//chemical receive
             'REMARKS' => $request->input('REMARKS'),
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
