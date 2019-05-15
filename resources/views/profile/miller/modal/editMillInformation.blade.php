@@ -153,7 +153,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">
+                               {{--<input type="text" name="REMARKS" value="{{ $editMillData->REMARKS }}" class="chosen-container">--}}
+                                <textarea rows="3" class="form-control col-sm-8" name="REMARKS">{{ $editMillData->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>

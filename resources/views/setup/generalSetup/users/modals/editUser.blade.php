@@ -245,7 +245,8 @@
              <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.remark') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess remarks" name="remarks" placeholder="{{ trans('user.example_remarks_here') }}" class="form-control col-xs-10 col-sm-5" value="{{ $editData->remarks }}"/>
+                    {{--<input type="text" id="inputSuccess remarks" name="remarks" placeholder="{{ trans('user.example_remarks_here') }}" class="form-control col-xs-10 col-sm-5" value="{{ $editData->remarks }}"/>--}}
+                    <textarea class="form-control col-xs-10 col-sm-5" name="remarks" rows="3">{{ $editData->remarks }}</textarea>
                 </div>
             </div>
         </div>

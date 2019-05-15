@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CrudeSaltDetails;
+use App\CrudeSaltProcurement;
 use App\Item;
 use App\LookupGroupData;
 use Illuminate\Http\Request;
@@ -82,6 +83,7 @@ class CrudeSaltDetailsController extends Controller
                 'MOISTURIZER' => $request->input('MOISTURIZER'),
                 'PPM' => $request->input('PPM'),
                 'PH' => $request->input('PH'),
+                'RECEIVEMST_ID' => $request->input('RECEIVEMST_ID'),
                 'center_id' => Auth::user()->center_id,
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
                 'ENTRY_BY' => Auth::user()->id
@@ -170,5 +172,11 @@ class CrudeSaltDetailsController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
+    }
+
+    public function getInvoiceList(Request $request){
+        $crudSaltType = $request->input('crudSaltType');
+        $crudSaltInvoiceLists = CrudeSaltProcurement::crudeSaltInvoiceList($crudSaltType);
+        return $crudSaltInvoiceLists;
     }
 }

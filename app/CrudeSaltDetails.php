@@ -37,8 +37,9 @@ class CrudeSaltDetails extends Model
 
      public static function editCrudSaltDetailData($id){
          return DB::table('ssm_crud_salt_details')
-             ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME')
+             ->select('ssm_crud_salt_details.*','smm_item.ITEM_NAME','tmm_receivemst.INVOICE_NO')
              ->leftJoin('smm_item', 'ssm_crud_salt_details.CRUDSALT_TYPE_ID', '=', 'smm_item.ITEM_NO')
+             ->leftJoin('tmm_receivemst', 'ssm_crud_salt_details.RECEIVEMST_ID', '=', 'tmm_receivemst.RECEIVEMST_ID')
              ->where('ssm_crud_salt_details.CRUDSALTDETAIL_ID','=',$id)
              ->first();
      }
@@ -50,6 +51,7 @@ class CrudeSaltDetails extends Model
             'MOISTURIZER' => $request->input('MOISTURIZER'),
             'PPM' => $request->input('PPM'),
             'PH' => $request->input('PH'),
+            'RECEIVEMST_ID' => $request->input('RECEIVEMST_ID'),
             'center_id' => Auth::user()->center_id,
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),

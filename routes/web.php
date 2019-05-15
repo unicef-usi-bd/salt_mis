@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('washing-crashing-stock','SalesDistributionController@getWashingCrashingSalt');//jalal
     Route::get('iodize-stock','SalesDistributionController@getIodizeSalt');//jalal
     Route::get('trading-list','SellerDistributorProfileController@getTradingList');//rubiyat
+    Route::get('crude-salt-invoice-list','CrudeSaltDetailsController@getInvoiceList');//rubiyat
 
     //Profile
     Route::resource('mill-info', 'MillerInfoController'); //Azharul

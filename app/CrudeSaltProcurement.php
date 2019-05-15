@@ -38,6 +38,7 @@ class CrudeSaltProcurement extends Model
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
             'SOURCE_ID' => $request->input('SOURCE_ID'),
             'COUNTRY_ID' => $request->input('COUNTRY_ID'),
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
@@ -100,6 +101,7 @@ class CrudeSaltProcurement extends Model
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
             'SOURCE_ID' => $request->input('SOURCE_ID'),
             'RECEIVE_TYPE' => 'SR',//Salt receive
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -140,5 +142,22 @@ class CrudeSaltProcurement extends Model
             $deletePr = DB::table('tmm_receivemst')->where('RECEIVEMST_ID', $id)->delete();
             return $deletePr;
         }
+    }
+
+    public static function crudeSaltInvoiceList($crudSaltType){
+        $centerId = Auth::user()->center_id;
+
+//        $invoiceList = DB::table('tmm_receivemst');
+//        $invoiceList->select('tmm_receivemst.*');
+//        $invoiceList->where('tmm_receivemst.RECEIVE_NO','=',$crudSaltType);
+//        if($centerId){
+//            $invoiceList->where('tmm_receivemst.center_id','=',$centerId);
+//        }
+//        $invoiceList->get();
+
+        return DB::select(DB::raw("select tmm_receivemst.* 
+                                        from tmm_receivemst
+                                        where tmm_receivemst.RECEIVE_NO = $crudSaltType
+                                        and tmm_receivemst.center_id = $centerId"));
     }
 }
