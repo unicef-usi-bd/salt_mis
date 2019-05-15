@@ -1,4 +1,5 @@
 <div class="col-md-12">
+
     {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
     {{--<span id="successMessage"></span>--}}
     {{--<button type="button" class="close" data-dismiss="alert">--}}
@@ -9,9 +10,17 @@
     {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
     {{--<span id="errorMessage"></span>--}}
     {{--</div>--}}
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/sales-distribution') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/sales-distribution') }}" method="post" class="form-horizontal" role="form">
 
             @csrf
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -20,8 +29,8 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="chosen-select form-control SELLER_TYPE" name="SELLER_TYPE" data-placeholder="Select Seller Type">
-                   <option value=""></option>
+                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE" name="SELLER_TYPE" data-placeholder="Select Seller Type">
+                   <option value="">--Select One--</option>
                     @foreach($sellerType as $seller)
                         <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
                     @endforeach
@@ -32,7 +41,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess SALES_DATE" placeholder=" " name="SALES_DATE" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>
+                        <input type="text" id="inputSuccess SALES_DATE" readonly placeholder=" " name="SALES_DATE" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>
                     </div>
                 </div>
             </div>
@@ -41,8 +50,8 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="chosen-select form-control CUSTOMER_ID" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
-
+                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
+                 <option value="">--Select One--</option>
                 </select>
             </span>
                     </div>
@@ -114,6 +123,9 @@
         {{--</div>--}}
 
         <div class="col-md-12" style="margin-top: 15px;">
+            <div class="alert alert-danger alert-dismissible msg" style="display: none;">
+
+            </div>
             <h4  style="color: #1B6AAA;"></h4>
             <hr>
             <table class="table table-bordered fundAllocation">
@@ -121,7 +133,7 @@
                 <tr>
                     <th style="width: 255px;">Salt Type<span style="color:red;"> </span></th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
-                    <th style="width: 255px;">Salt Amount</th>
+                    <th style="width: 255px;">Salt Package</th>
                     <th style="width: 255px;">Quantity</th>
                     <th style="width: 255px;">Stock</th>
 
@@ -132,7 +144,7 @@
                 <tr class="rowFirst">
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
-                                    <select class="form-control chosen-select saltType" id="ITEM_ID" name="ITEM_ID[]">
+                                    <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
                                             <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
@@ -149,7 +161,7 @@
                     {{--</td>--}}
                     <td>
                         <span class="block input-icon input-icon-right" style="width: 255px;">
-                        <select class="form-control chosen-select " id="PACK_TYPE" name="PACK_TYPE[]">
+                        <select class="form-control packType" id="PACK_TYPE" name="PACK_TYPE[]">
                             <option value="">Select</option>
                             @foreach($saltPackId as $row)
                                 <option value="{{$row->LOOKUPCHD_ID}}"> {{$row->LOOKUPCHD_NAME}}</option>
@@ -160,7 +172,7 @@
                     <td>
                         <span class="block input-icon input-icon-right">
 
-                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]" class="form-control col-xs-10 col-sm-5" value=""/>
+                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
 
                         </span>
                     </td>
@@ -169,7 +181,8 @@
                         <span class="block input-icon input-icon-right">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
-                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash"></span><span class="result"></span>)</span>
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden"></span><span class="result"></span>KG)</span>
+                            {{--<span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockIodize"></span><span class="result"></span>)</span>--}}
 
                         </span>
                     </td>
@@ -236,6 +249,7 @@
 
 //for showing amount of salt in database using on change
     $('.stockWashCrash').hide();
+    $('.stockIodize').hide();
     $(document).on('change','.saltType',function(){
         var saltTypeId = $(this).val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
@@ -247,15 +261,17 @@
             $.ajax({
                 type : 'GET',
                 url : 'washing-crashing-stock',
-                data : {'centerId':centerId},
+                data : {'centerId':centerId,'saltTypeId':saltTypeId},
                 success: function (data) {
-                    console.log(data);
-//                    var data = JSON.parse(data);
+                  //  console.log(data);
+                   var data = JSON.parse(data);
+                    //$('.stockWashCrash').html(data).show();
                     $('.stockWashCrash').html(data).show();
+                    $('.result').html(data);
+                    $('.crudeSaltAmount').val('');
                 }
             })
         }
-
         if(saltTypeId == $iodizeId){
             $.ajax({
                 type : 'GET',
@@ -268,6 +284,37 @@
             })
         }
 
+    });
+
+    $(document).on('keyup','.crudeSaltAmount',function () {
+        var amount = parseInt($(this).val()) || 0;
+        var saltStock = parseInt($('.stockWashCrash').text());
+        var remainStock = saltStock - amount;
+
+        if(saltStock < amount){
+            $('.stockWashCrash').hide();
+            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Stock Out Of bound.').fadeIn();
+            $('.result').text(0);
+            if(amount === 0){
+                $('.stockWashCrash').show();
+            }
+        }else{
+            $('.stockWashCrash').hide();
+            $('.result').text(remainStock);
+        }
+    });
+
+    $(document).on('change','.packType',function () {
+        var packId = $(this).val();
+        //alert(packId);
+        $.ajax({
+            type:'',
+            url:'',
+            data:{'packId':packId},
+            success: function (data) {
+
+            }
+        });
     });
 
     $(document).on("change",".SELLER_TYPE",function(){
@@ -289,7 +336,46 @@
         })
     });
 
+    $(document).ready(function () {
 
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                SELLER_TYPE: {
+                    required: true,
+                },
+                CUSTOMER_ID: {
+                    required: true,
+                },
+                SALES_DATE:{
+                    required: true,
+                },
+                DRIVER_NAME:{
+                    required: true,
+                },
+                VEHICLE_LICENSE:{
+                    required: true,
+                },
+                VEHICLE_NO:{
+                    required: true,
+                },
+                TRANSPORT_NAME:{
+                    required: true,
+                },
+                "ITEM_ID[]":{
+                    required: true,
+                },
+                "PACK_TYPE[]":{
+                    required: true,
+                },
+                "PACK_QTY[]":{
+                    required: true,
+                }
+            }
+        });
+
+    });
 </script>
 
 

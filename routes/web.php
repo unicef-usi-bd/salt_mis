@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('bsti-test-standard','BstiTestStandardController');//jalal
     Route::resource('organization','OrganizationController');//Rubiyat
+    Route::resource('bsti-test-result-range','BstiTestResultRangeController');//jalal
+   // Route::get('bsti-test-result-range','BstiTestStandardController@editBstitestResutlRange');//jalal
 
 
 

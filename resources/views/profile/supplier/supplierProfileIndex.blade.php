@@ -22,14 +22,14 @@
         <div class="row">
         </div>
         <div class="col-xs-12">
-            @if(session('message'))
-                <p  class="alert alert-warning alert-dismissible">{{ session('message') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </p>
+                @if(session('message'))
+                    <p  class="alert alert-warning alert-dismissible">{{ session('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
 
-            @endif
+                @endif
             <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('module.module_list') }}">
                 <thead>
                 {{--<tr>--}}

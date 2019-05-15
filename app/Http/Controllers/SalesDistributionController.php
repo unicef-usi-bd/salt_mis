@@ -156,4 +156,11 @@ class SalesDistributionController extends Controller
         return $iodizeStock;
 
     }
+
+    public function getpackSizeData(Request $request){
+        $packQuantity = $request->input('PACK_QTY');
+        $packSize = SalesDistribution::getPacksize($packQuantity);
+
+       return  $packSize;
+    }
 }

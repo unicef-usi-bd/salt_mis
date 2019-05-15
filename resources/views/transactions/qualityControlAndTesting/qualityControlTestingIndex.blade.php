@@ -45,7 +45,14 @@
                         {{--<td class="hidden-480">{{ $row->agency }}</td>--}}
                         <td class="hidden-480">{{$row->BATCH_NO}}</td>
                         <td class="hidden-480">{{$row->QC_TESTNAME}}</td>
-                        <td></td>
+
+                        <td>
+                            @if($qualityControlResultRange->SODIUM_CHLORIDE_MAX >= $row->SODIUM_CHLORIDE && $qualityControlResultRange->SODIUM_CHLORIDE_MIN <= $row->SODIUM_CHLORIDE && $qualityControlResultRange->MOISTURIZER_MAX >= $row->MOISTURIZER && $qualityControlResultRange->MOISTURIZER_MIN <= $row->MOISTURIZER && $qualityControlResultRange->PPM_MAX >= $row->IODINE_CONTENT && $qualityControlResultRange->PPM_MIN <= $row->IODINE_CONTENT && $qualityControlResultRange->PH_MAX >= $row->PH && $qualityControlResultRange->PH_MIN <= $row->PH)
+                                <span >Pass</span>
+                            @else
+                                <span>Fail</span>
+                            @endif
+                        </td>
                         <td class="hidden-480"><a href="{{ $row->QUALITY_CONTROL_IMAGE }}"  role="button" class="btn btn-primary" download="download">Download</a> </td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">

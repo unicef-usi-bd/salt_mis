@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\BstiTestResultRange;
 
 class BstiTestStandardController extends Controller
 {
@@ -26,10 +27,11 @@ class BstiTestStandardController extends Controller
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
         $editBstiTestStandard = BstiTestStandard::getBstiTestData();
+        $editBstiTestStandardResultRange = BstiTestResultRange::getBstiTestResultDataRange();
 
         //$this->pr($editBstiTestStandard);
 
-        return view('setup.bstiTestStandard.createBstiTestStandard',compact('editBstiTestStandard','previllage'));
+        return view('setup.bstiTestStandard.createBstiTestStandard',compact('editBstiTestStandardResultRange','editBstiTestStandard','previllage'));
     }
 
     /**
@@ -87,8 +89,14 @@ class BstiTestStandardController extends Controller
      */
     public function edit($id)
     {
-      $editBstiTestStandard = BstiTestStandard::editBstiTestData($id);
-      return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
+        $editBstiTestStandard = BstiTestStandard::editBstiTestData($id);
+        $editBstiTestStandardResultRange = BstiTestResultRange::editBstiTestResultDataRange($id);
+        if($editBstiTestStandard ){
+
+         return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
+        }elseif ($editBstiTestStandardResultRange ){
+            return view('setup.bstiTestStandard.editBstiTestStandardRange',compact('editBstiTestResutlRange'));
+        }
     }
 
     /**
@@ -127,4 +135,10 @@ class BstiTestStandardController extends Controller
     {
         //
     }
+
+//    public function editBstitestResutlRange($id)
+//    {
+//        $editBstiTestResutlRange = BstiTestResultRange::editBstiTestResultDataRange($id);
+//        return view('setup.bstiTestStandard.editBstiTestStandardRange',compact('editBstiTestResutlRange'));
+//    }
 }
