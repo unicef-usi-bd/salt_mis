@@ -38,6 +38,7 @@ class CrudeSaltProcurement extends Model
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
             'SOURCE_ID' => $request->input('SOURCE_ID'),
             'COUNTRY_ID' => $request->input('COUNTRY_ID'),
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
@@ -100,6 +101,7 @@ class CrudeSaltProcurement extends Model
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
             'SOURCE_ID' => $request->input('SOURCE_ID'),
             'RECEIVE_TYPE' => 'SR',//Salt receive
+            'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")

@@ -19,13 +19,17 @@
 
                 </tr>
                 <tr>
+                    <th class=" ">Invoice No</th>
+                    <th> :</th>
+                    <td>{{ $crudeSaltShow->INVOICE_NO }} </td>
                     <th class=" ">Trading Name</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->TRADING_NAME }} </td>
+                </tr>
+                <tr>
                     <th class=" ">Amount</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->RCV_QTY }} </td>
-
                 </tr>
             </table>
         </div>

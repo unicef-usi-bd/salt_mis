@@ -54,6 +54,12 @@
 
             <div class="col-md-6">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Invoice No</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-8">
+                        <input type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->INVOICE_NO }}"/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Source from</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
