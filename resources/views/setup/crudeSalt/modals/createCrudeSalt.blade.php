@@ -12,11 +12,21 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>CRUD Salt Type</b><span style="color: red;">* </span></label>
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="inputSuccess" class="form-control" name="CRUDSALT_TYPE_ID">
+                <select id="inputSuccess" class="form-control crudSaltType" name="CRUDSALT_TYPE_ID">
                     <option value="">Select One</option>
                     @foreach($crudSaltTypes as $crudSaltType)
                         <option value="{{ $crudSaltType->ITEM_NO }}">{{ $crudSaltType->ITEM_NAME  }}</option>
                     @endforeach
+                </select>
+            </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Invoice No</b><span style="color: red;">* </span></label>
+            <div class="col-sm-8">
+            <span class="block input-icon input-icon-right">
+                <select id="inputSuccess" class="form-control invoice" name="RECEIVEMST_ID">
+
                 </select>
             </span>
             </div>
@@ -82,3 +92,25 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(document).on("change",".crudSaltType",function () {
+        var crudSaltType = $(this).val();
+        var option = '<option value="">Select Invoice No</option>';
+        $.ajax({
+            type : 'GET',
+            url : 'crude-salt-invoice-list',
+            data : {'crudSaltType':crudSaltType},
+            success: function (data) {
+                console.log(data);
+//                var data = JSON.parse(data);
+                for (var i = 0; i < data.length; i++){
+                    option = option + '<option value="'+ data[i].RECEIVEMST_ID +'">'+ data[i].INVOICE_NO+'</option>';
+                }
+
+                $('.invoice').html(option);
+                $('.invoice').trigger("chosen:updated");
+            }
+        })
+    });
+</script>

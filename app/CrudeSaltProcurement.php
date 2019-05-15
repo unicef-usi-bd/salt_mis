@@ -143,4 +143,21 @@ class CrudeSaltProcurement extends Model
             return $deletePr;
         }
     }
+
+    public static function crudeSaltInvoiceList($crudSaltType){
+        $centerId = Auth::user()->center_id;
+
+//        $invoiceList = DB::table('tmm_receivemst');
+//        $invoiceList->select('tmm_receivemst.*');
+//        $invoiceList->where('tmm_receivemst.RECEIVE_NO','=',$crudSaltType);
+//        if($centerId){
+//            $invoiceList->where('tmm_receivemst.center_id','=',$centerId);
+//        }
+//        $invoiceList->get();
+
+        return DB::select(DB::raw("select tmm_receivemst.* 
+                                        from tmm_receivemst
+                                        where tmm_receivemst.RECEIVE_NO = $crudSaltType
+                                        and tmm_receivemst.center_id = $centerId"));
+    }
 }
