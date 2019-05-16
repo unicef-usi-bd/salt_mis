@@ -177,11 +177,11 @@ class SalesDistribution extends Model
     }
     /// ----------------------Total Sale
 
-    public static function getPacksize($request){
-        $packQuantity = $request->input('PACK_QTY');
+    public static function getPacksize($packQuantity){
+
       return DB::table('ssc_lookupchd')
             ->select('ssc_lookupchd.DESCRIPTION')
             ->where('ssc_lookupchd.LOOKUPCHD_ID','=',$packQuantity)
-            ->get();
+            ->first();
     }
 }

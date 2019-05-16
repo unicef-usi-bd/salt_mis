@@ -53,6 +53,8 @@ class SalesDistributionController extends Controller
         $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
         $washAndCrushId = $this->washAndCrushId;
         $iodizeId = $this->iodizeId;
+        //$pckSize = SalesDistribution::getPacksize();
+        //$this->pr($pckSize);
         return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId'));
     }
 
@@ -158,9 +160,9 @@ class SalesDistributionController extends Controller
     }
 
     public function getpackSizeData(Request $request){
-        $packQuantity = $request->input('PACK_QTY');
+        $packQuantity = $request->input('packId');
         $packSize = SalesDistribution::getPacksize($packQuantity);
 
-       return  $packSize;
+       return  json_encode($packSize);
     }
 }

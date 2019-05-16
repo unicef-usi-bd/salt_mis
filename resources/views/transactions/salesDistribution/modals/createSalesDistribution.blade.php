@@ -152,13 +152,7 @@
                                     </select>
                                 </span>
                     </td>
-                    {{--<td>--}}
-                                {{--<span class="block input-icon input-icon-right">--}}
-                                    {{--<input type="text" id="inputSuccess SALES_DATE" placeholder=" " name="SALES_DATE[]" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>--}}
 
-                                    {{--</select>--}}
-                                {{--</span>--}}
-                    {{--</td>--}}
                     <td>
                         <span class="block input-icon input-icon-right" style="width: 255px;">
                         <select class="form-control packType" id="PACK_TYPE" name="PACK_TYPE[]">
@@ -168,7 +162,12 @@
                             @endforeach
                          </select>
                     </span>
+                        <input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack" value=""/>
+                        {{--<input type="text" class="packSize" value="{{$pckSize->DESCRIPTION}}">--}}
                     </td>
+                    {{--<td>--}}
+                        {{--<input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack" value=""/>--}}
+                    {{--</td>--}}
                     <td>
                         <span class="block input-icon input-icon-right">
 
@@ -249,7 +248,7 @@
 
 //for showing amount of salt in database using on change
     $('.stockWashCrash').hide();
-    $('.stockIodize').hide();
+    //$('.stockIodize').hide();
     $(document).on('change','.saltType',function(){
         var saltTypeId = $(this).val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
@@ -261,7 +260,7 @@
             $.ajax({
                 type : 'GET',
                 url : 'washing-crashing-stock',
-                data : {'centerId':centerId,'saltTypeId':saltTypeId},
+                data : {'centerId':centerId},
                 success: function (data) {
                   //  console.log(data);
                    var data = JSON.parse(data);
@@ -280,16 +279,47 @@
                 success: function (data) {
                     var data = JSON.parse(data);
                     $('.stockWashCrash').html(data).show();
+                    $('.result').html(data);
+                    $('.crudeSaltAmount').val('');
                 }
             })
         }
 
     });
 
+    $(document).on('change','.packType',function () {
+        $('.pack_Id').text('')
+        var packId = $(this).val();
+//        var option = '<option value="">Select pack</option>';
+//        var option = $('.pack_Id').text();
+        //alert(packId);
+        $.ajax({
+            type:'GET',
+            url:'get-packsize',
+            data:{'packId':packId},
+            success: function (data) {
+                var data = JSON.parse(data);
+                $('.pack').val(data.DESCRIPTION);
+                console.log(data);
+                //$('.pack_Id').show();
+//                $('.packSize').html(data).show();
+//                for (var i = 0; i < data.length; i++){
+//                    option = option + '<option value="'+ data[i].DESCRIPTION +'">'+ data[i].DESCRIPTION+'</option>';
+//                }
+//                $('.pack_Id').text(option);
+//                //$('.pack_Id').html(data.DESCRIPTION);
+//                $('.pack_Id').trigger("chosen:updated");
+
+            }
+        });
+    });
+
     $(document).on('keyup','.crudeSaltAmount',function () {
         var amount = parseInt($(this).val()) || 0;
+        var packId = $('.pack').val();
+        var result = (amount * packId);
         var saltStock = parseInt($('.stockWashCrash').text());
-        var remainStock = saltStock - amount;
+        var remainStock = saltStock - result;
 
         if(saltStock < amount){
             $('.stockWashCrash').hide();
@@ -304,18 +334,7 @@
         }
     });
 
-    $(document).on('change','.packType',function () {
-        var packId = $(this).val();
-        //alert(packId);
-        $.ajax({
-            type:'',
-            url:'',
-            data:{'packId':packId},
-            success: function (data) {
 
-            }
-        });
-    });
 
     $(document).on("change",".SELLER_TYPE",function(){
         var sellerTypeId = $(this).val();
