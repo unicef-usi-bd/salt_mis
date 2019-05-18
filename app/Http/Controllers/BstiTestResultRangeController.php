@@ -26,7 +26,9 @@ class BstiTestResultRangeController extends Controller
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
-        return view('setup.bstiTestStandard.editBstiTestStandardRange',compact('previllage'));
+        $editBstiTestStandardResultRange = BstiTestResultRange::getBstiTestResultDataRange();
+
+        return view('setup.bstiTestStandard.createBstiTestStandard',compact('editBstiTestStandardResultRange','previllage'));
     }
 
     /**
@@ -66,7 +68,7 @@ class BstiTestResultRangeController extends Controller
             $bstiTestStandardResultRange = BstiTestResultRange::insertBstiTestRangeData($request);
 
             if($bstiTestStandardResultRange){
-                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Data Created !');
+                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Range Data Created !');
             }
         }
     }
@@ -90,7 +92,8 @@ class BstiTestResultRangeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editBstiTestResutlRange = BstiTestResultRange::editBstiTestResultDataRange($id);
+        return view('setup.bstiTestStandard.editBstiTestStandardRange',compact('editBstiTestResutlRange'));
     }
 
     /**
@@ -102,7 +105,27 @@ class BstiTestResultRangeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'SODIUM_CHLORIDE_MIN' => 'required',
+            'SODIUM_CHLORIDE_MAX' => 'required',
+            'MOISTURIZER_MIN' => 'required',
+            'MOISTURIZER_MAX' => 'required',
+            'PPM_MIN' => 'required',
+            'PPM_MAX' => 'required',
+            'PH_MIN' => 'required',
+            'PH_MAX' => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            //SweetAlert::error('Error','Something is Wrong !');
+            return Redirect::back()->withErrors($validator);
+        }else {
+            $updateBstiTestStandard = BstiTestResultRange::updateBstiTestDataRang($request, $id);
+            if($updateBstiTestStandard){
+                return redirect('/bsti-test-standard')->with('success', 'Update Bsti Test Standard Data Updated !');
+            }
+        }
     }
 
     /**

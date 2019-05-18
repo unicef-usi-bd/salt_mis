@@ -363,8 +363,8 @@
 
         });
 
-        $(document).on('focusout','.email',function () {
-            //alert('hi');
+        $(document).on('focusout','.email',function (e) {
+            e.preventDefault();
             var email = $('.email').val();
             $.ajax({
                 type: 'GET',

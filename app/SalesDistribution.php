@@ -176,4 +176,12 @@ class SalesDistribution extends Model
         return $totalSale->sum('tmm_itemstock.QTY');
     }
     /// ----------------------Total Sale
+
+    public static function getPacksize($packQuantity){
+
+      return DB::table('ssc_lookupchd')
+            ->select('ssc_lookupchd.DESCRIPTION')
+            ->where('ssc_lookupchd.LOOKUPCHD_ID','=',$packQuantity)
+            ->first();
+    }
 }

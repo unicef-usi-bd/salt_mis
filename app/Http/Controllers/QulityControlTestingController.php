@@ -14,6 +14,7 @@ use App\LookupGroupData;
 use App\Iodized;
 use App\BstiTestStandard;
 use App\QulityControlTesting;
+use App\BstiTestResultRange;
 
 class QulityControlTestingController extends Controller
 {
@@ -38,9 +39,10 @@ class QulityControlTestingController extends Controller
         );
 
        $qualityControl = QulityControlTesting::getQualityControlData();
+       $qualityControlResultRange = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
 
-//       $this->pr($qualityControl);
-        return view('transactions.qualityControlAndTesting.qualityControlTestingIndex',compact('heading','previllage','qualityControl'));
+//       $this->pr($qualityControlResultRange);
+        return view('transactions.qualityControlAndTesting.qualityControlTestingIndex',compact('heading','previllage','qualityControl','qualityControlResultRange'));
     }
 
     /**

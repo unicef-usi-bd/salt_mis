@@ -1,28 +1,20 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="col-md-12">
+    <div id="success" class="alert alert-block alert-success" style="display: none;">
+        <span id="successMessage"></span>
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+    </div>
     <form action="{{ url('/supplier-profile/'.$editData->SUPP_ID_AUTO) }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
         @csrf
         @method('PUT')
 
-        <div class="col-md-6" style="padding: 0px;">
+        <div class="col-md-6" style="padding: 0px;margin-top: 75px;">
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trading Name</b><span style="color: red;"> *</span> </label>
-                <div class="col-xs-12 col-sm-7">
-            <span class="block input-icon input-icon-right">
-                <input type="text" id="inputSuccess org_name" name="TRADING_NAME" value="{{ $editData->TRADING_NAME }}" class="width-100" />
-            </span>
-
-                </div>
-            </div>
-
-
-
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;">* </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />
-                    </span>
+                <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
+                <div class="col-xs-8">
+                    <input style="width: 335px; margin-left: 2px;" readonly type="text" id="inputSuccess" placeholder="Supplier ID" name="SUPPLIER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $editData->SUPPLIER_ID }}" />
                 </div>
             </div>
             <div class="form-group">
@@ -38,6 +30,51 @@
                     </span>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trading Name</b><span style="color: red;"> *</span> </label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <input type="text" id="inputSuccess org_name" name="TRADING_NAME" value="{{ $editData->TRADING_NAME }}" class="width-100" />
+                    </span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trader Name</b><span style="color: red;">* </span> </label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <input type="text" name="TRADER_NAME" value="{{ $editData->TRADER_NAME }}" id="inputSuccess ogr_address" class="width-100"  />
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;">* </span> </label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <input type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>EMAIL</b><span style="color: red;"> </span> </label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <input type="text" name="EMAIL" id="inputSuccess fax" value="{{ $editData->EMAIL }}" class="width-100" />
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red;"> </span> </label>
+                <div class="col-xs-12 col-sm-7">
+                    <span class="block input-icon input-icon-right">
+                        <input type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="padding: 0px;">
+            <h4  style="color: #1B6AAA; text-align: center;">Address</h4>
+            <hr>
             <div class="form-group" style="margin-top: 15px;">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b></label>
                 <div class="col-xs-12 col-sm-7">
@@ -51,7 +88,6 @@
                     </span>
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District Name</b></label>
                 <div class="col-xs-12 col-sm-7">
@@ -63,7 +99,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Upazila Name</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazila</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -84,33 +120,6 @@
             </div>
 
 
-        </div>
-        <div class="col-md-6" style="padding: 0px;">
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trader Name</b><span style="color: red;">* </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="TRADER_NAME" value="{{ $editData->TRADER_NAME }}" id="inputSuccess ogr_address" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red;"> </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>EMAIL</b><span style="color: red;"> </span> </label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <input type="text" name="EMAIL" id="inputSuccess fax" value="{{ $editData->EMAIL }}" class="width-100" />
-                    </span>
-                </div>
-            </div>
 
             <div class="form-group">
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar Name</b></label>

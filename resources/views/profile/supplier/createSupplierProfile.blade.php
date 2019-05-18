@@ -3,12 +3,37 @@
         @csrf
         <div class="col-md-12">
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-top: 75px;">
 
                 <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
+                        <div class="col-xs-8">
+                            <input style="width: 365px; margin-left: 5px;" readonly type="text" id="inputSuccess" placeholder="Supplier ID" name="SUPPLIER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                        <div class="col-xs-8">
+                    <span class="block input-icon input-icon-right" style="width: 365px; margin-left: 5px;">
+                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select " name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
+                            <option value=""></option>
+                            @foreach($getSupplierType as $supplier)
+                                <option value="{{$supplier->LOOKUPCHD_ID}}"> {{$supplier->LOOKUPCHD_NAME}}</option>
+                            @endforeach
+                        </select>
+                    </span>
+                        </div>
+                    </div>
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trading Name</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                         <input type="text" id="inputSuccess" placeholder="Trading Name Here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red">*</span></label>
+                    <div class="col-xs-8">
+                        <input type="text" id="inputSuccess" placeholder="Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -18,19 +43,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
                     <div class="col-xs-8">
-                    <span class="block input-icon input-icon-right">
-                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select" name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
-                            <option value=""></option>
-                            @foreach($getSupplierType as $supplier)
-                                <option value="{{$supplier->LOOKUPCHD_ID}}"> {{$supplier->LOOKUPCHD_NAME}}</option>
-                            @endforeach
-                        </select>
-                    </span>
+                        <input type="text" id="inputSuccess" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b></label>
+                    <div class="col-xs-8">
+                        <input type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
 
+            </div>
+
+            <div class="col-md-6">
+                <h4  style="color: #1B6AAA; text-align: center;">Address</h4>
+                <hr>
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                     <div class="col-xs-8">
@@ -38,7 +67,7 @@
                         <select id="DIVISION_ID" class="form-control chosen-select" name="DIVISION_ID" data-placeholder="Select or search data">
                             <option value="">Select Division</option>
                             @foreach($getDivision as $row)
-                            <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                             @endforeach
                         </select>
                     </span>
@@ -74,57 +103,21 @@
                     </span>
                     </div>
                 </div>
-
-
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red">*</span></label>
-                    <div class="col-xs-8">
-                        <input type="text" id="inputSuccess" placeholder="Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
-                    <div class="col-xs-8">
-                        <input readonly type="text" id="inputSuccess" placeholder="Supplier ID" name="SUPPLIER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b></label>
-                    <div class="col-xs-8">
-                        <input type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
                     <div class="col-xs-8">
                         <input type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
-                    <div class="col-xs-8">
-                        <input type="text" id="inputSuccess" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
-                    </div>
-                </div>
-
-
-
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
                     <div class="col-xs-8">
-                        <textarea class="form-control" rows="5" name="REMARKS" placeholder="Remarks here"></textarea>
+                        <textarea class="form-control"  rows="5" name="REMARKS" placeholder="Remarks here"></textarea>
 
                     </div>
                 </div>
 
             </div>
-
             <hr>
             <div class="clearfix">
                 <div class="col-md-offset-3 col-md-9" style="    margin-left: 500px;">
