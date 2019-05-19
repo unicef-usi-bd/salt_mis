@@ -48,12 +48,12 @@ class CertificateController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'CERTIFICATE_TYPE_ID.*' => 'required',
-            'ISSURE_ID.*' => 'required',
-            'ISSUING_DATE.*' => 'required',
-            'CERTIFICATE_NO.*' => 'required',
-            'user_image.*' => 'required',
-            'RENEWING_DATE.*' => 'required',
+//            'CERTIFICATE_TYPE_ID.*' => 'required',
+//            'ISSURE_ID.*' => 'required',
+//            'ISSUING_DATE.*' => 'required',
+//            'CERTIFICATE_NO.*' => 'required',
+//            'user_image.*' => 'required',
+//            'RENEWING_DATE.*' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);

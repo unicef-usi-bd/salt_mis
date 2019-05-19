@@ -130,7 +130,8 @@ class User extends Authenticatable
             'active_status' => $request->input('active_status'), 
             'user_image' => $user_image,
 //            'user_image' => 'image/user-image/'.$userImageName,
-            'user_signature' => 'image/user-signature/'.$userSignatureName,
+//            'user_signature' => 'image/user-signature/'.$userSignatureName,
+            'user_signature' => $userSignatureName,
             'center_id' => $request->input('center_id'),
             'update_by' => Auth::user()->id,
             'update_at' => date("Y-m-d h:i:s")

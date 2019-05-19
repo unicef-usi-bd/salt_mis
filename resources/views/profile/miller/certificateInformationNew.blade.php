@@ -18,6 +18,12 @@
         .disabledTab{
             pointer-events: none;
         }
+        .my-error-class {
+            color:red;
+        }
+        /*.my-valid-class {*/
+            /*color:green;*/
+        /*}*/
 
     </style>
 
@@ -59,7 +65,7 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                                    <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" id="myform">
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -82,7 +88,7 @@
 
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                                        <select class="form-control CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($certificate as $row)
                                                                 <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -92,7 +98,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                                        <select class="form-control ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($issueBy as $row)
                                                                 <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -242,7 +248,39 @@
         });
 
 
+        $(document).ready(function () {
 
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+                    'CERTIFICATE_TYPE_ID[]': {
+                        required: true,
+                    },
+                    'ISSURE_ID[]': {
+                        required: true,
+
+                    },
+                    "ISSUING_DATE[]":{
+                        required: true,
+
+
+                    },
+                    'CERTIFICATE_NO[]':{
+                        required: true,
+
+                    },
+                    'user_image[]':{
+                        required: true,
+                    },
+                    'RENEWING_DATE[]':{
+                        required: true,
+                    }
+
+                }
+            });
+
+        });
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')

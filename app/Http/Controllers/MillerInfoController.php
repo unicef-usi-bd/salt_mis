@@ -100,12 +100,12 @@ class MillerInfoController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'MILL_NAME' => 'required',
-            'PROCESS_TYPE_ID' => 'required',
-            'MILL_TYPE_ID' => 'required',
-            'CAPACITY_ID' => 'required',
-            'ZONE_ID' => 'required',
-            'ACTIVE_FLG' => 'required'
+//            'MILL_NAME' => 'required',
+//            'PROCESS_TYPE_ID' => 'required',
+//            'MILL_TYPE_ID' => 'required',
+//            'CAPACITY_ID' => 'required',
+//            'ZONE_ID' => 'required',
+//            'ACTIVE_FLG' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);

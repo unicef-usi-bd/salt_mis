@@ -1,3 +1,8 @@
+<style>
+    .my-error-class {
+        color:red;
+    }
+</style>
 @php $districtUrl = url('supplier-profile/get-district/{id}'); @endphp
 <div id="mill" class="tab-pane fade ">
     <div class="row">
@@ -12,18 +17,18 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="MILL_NAME" class="chosen-container mill" value="{{ $editMillData->MILL_NAME }}">
+                               <input type="text" name="MILL_NAME" class="chosen-container mill" value="{{ $editMillData->MILL_NAME }}" required="required">
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select" required>
                                    <option value=""></option>
                                     @foreach($processType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->PROCESS_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
@@ -34,10 +39,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select disabled="true" id="MILL_TYPE_IDD" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
+                               <select disabled="true" id="MILL_TYPE_IDD" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select" required>
                                    <option value=""></option>
                                     @foreach($millType as $row)
                                        <option  value="{{ $row->UD_ID }}" @if($editMillData->MILL_TYPE_ID==$row->UD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
@@ -49,10 +54,10 @@
                     </div>
                     {{--to update type of mill  remove disabled="true" --}}
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                   <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
+                                   <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select" required>
                                        <option value=""></option>
                                         @foreach($capacity as $row)
                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
@@ -63,10 +68,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                   <select disabled="true" id="ZONE_IDD" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
+                                   <select disabled="true" id="ZONE_IDD" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select" required>
                                        <option value=""></option>
                                         @foreach($getZone as $row)
                                            <option value="{{ $row->ZONE_CODE }}" @if($editMillData->ZONE_ID==$row->ZONE_CODE) selected @endif>{{ $row->ZONE_NAME }}</option>
@@ -137,7 +142,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
@@ -244,5 +249,36 @@
                 }
             });
         });
+    });
+
+    $(document).ready(function () {
+
+        $('#millId').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+
+                MILL_NAME: {
+                    required: true,
+
+                },
+                MILL_TYPE_ID:{
+                    required: true,
+
+                },
+                CAPACITY_ID:{
+                    required: true,
+
+                },
+                ZONE_ID:{
+                    required: true,
+
+                },
+                ACTIVE_FLG:{
+                    required: true,
+                }
+            }
+        });
+
     });
 </script>

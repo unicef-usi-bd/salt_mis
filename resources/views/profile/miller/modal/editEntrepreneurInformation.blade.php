@@ -57,9 +57,9 @@
                         <th style="width: ;">Upazila</th>
                         <th style="width: 100px;">Union</th>
                         <th style="width: ;" >NID</th>
-                        <th style="width: ;">Mobile 1</th>
+                        <th style="width: ;">Mobile 1<span style="color:red;"> *</span></th>
                         <th  style="width: ;">Mobile 2</th>
-                        <th  style="width: ;">Email</th>
+                        <th  style="width: ;">Email<span style="color:red;"> *</span></th>
                         <th  style="width: ;">Remarks</th>
                         <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAddEntp"><i class="fa fa-plus"></i></span></th>
                     </tr>

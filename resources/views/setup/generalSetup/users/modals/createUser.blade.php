@@ -99,7 +99,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.image') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" name="user_image" class="form-control col-xs-10 col-sm-5" value=""/>
+                    <input type="file" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
                 </div>
             </div>
 
@@ -381,6 +381,15 @@
                         $('.emailId').text('');
                 }
             });
+        });
+
+        //===========image validation============
+        $(".user_image").change(function () {
+            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
+                $(".user_image").val('');
+            }
         });
     </script>
 

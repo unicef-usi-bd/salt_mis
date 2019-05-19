@@ -1,16 +1,24 @@
+<style>
+    .my-error-class {
+        color:red;
+    }
+    /*.my-valid-class {*/
+        /*color:green;*/
+    /*}*/
+</style>
 <div id="mill" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" >
+            <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form"  id="myform">
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container regTypeId" name="REG_TYPE_ID" data-placeholder="Select or search data">
-                                       <option value="" ></option>
+                               <select id="REG_TYPE_ID" class="chosen-container regTypeId" name="REG_TYPE_ID" data-placeholder="Select">
+                                       <option value="" >-Select-</option>
                                    @foreach($registrationType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
@@ -23,7 +31,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="MILL_NAME" class="chosen-container">
+                               <input type="text" name="MILL_NAME" class="chosen-container ">
                             </span>
                         </div>
                     </div>
@@ -31,8 +39,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value=""></option>
+                               <select id="" class="chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                                   <option value="">-Select-</option>
                                     @foreach($processType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
@@ -45,8 +53,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="MILL_TYPE_ID" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
-                                   <option value=""></option>
+                               <select id="MILL_TYPE_ID" class="chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
+                                   <option value="">-Select-</option>
                                     @foreach($millType as $row)
                                        <option value="{{ $row->UD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
@@ -59,8 +67,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                   <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="CAPACITY_ID" data-placeholder="Select">
-                                       <option value=""></option>
+                                   <select id="" class="chosen-container" name="CAPACITY_ID" data-placeholder="Select">
+                                       <option value="">-Select-</option>
                                         @foreach($capacity as $row)
                                            <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                        @endforeach
@@ -73,8 +81,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                   <select id="ZONE_ID" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
-                                       <option value=""></option>
+                                   <select id="ZONE_ID" class="chosen-container" name="ZONE_ID" data-placeholder="Select">
+                                       <option value="">-Select-</option>
                                         @foreach($getZone as $row)
                                            <option value="{{ $row->ZONE_CODE }}">{{ $row->ZONE_NAME }}</option>
                                        @endforeach
@@ -161,7 +169,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
+                               <select id="ACTIVE_FLG" class="chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
+
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>
@@ -262,6 +271,45 @@
 //                console.log(data);
             }
         });
+    });
+
+
+    $(document).ready(function () {
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                REG_TYPE_ID: {
+                    required: true,
+
+                },
+                MILL_NAME: {
+                    required: true,
+
+                },
+                PROCESS_TYPE_ID: {
+                    required: true,
+
+                },
+                MILL_TYPE_ID:{
+                    required: true,
+
+                },
+                CAPACITY_ID:{
+                    required: true,
+
+                },
+                ZONE_ID:{
+                    required: true,
+
+                },
+                ACTIVE_FLG:{
+                    required: true,
+                }
+            }
+        });
+
     });
 </script>
 
