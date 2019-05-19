@@ -104,7 +104,7 @@ $(document).on('change','.chemical',function(){
             var data = JSON.parse(data);
             //console.log(data.chemicalPerKg);
             var recommandedQty = (data.chemicalPerKg.USE_QTY / data.chemicalPerKg.CRUDE_SALT) * washSaltAmount;
-            $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty).show();
+            $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty.toFixed(2)).show();
             $('.stockChemical').html(data.chemicalStock).show();
             $('.resultChemical').html(data.chemicalStock).hide();
             $('.chemicalAmount').val('');
