@@ -63,7 +63,9 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class="chosen-select form-control" name="SOURCE_ID" data-placeholder="Select Source">
-                               <option value=""></option>
+                                @foreach($importedData as $row)
+                               <option value="{{$row->LOOKUPCHD_ID}}">{{$row->LOOKUPCHD_NAME}}</option>
+                                @endforeach
                                 @foreach($crudeSaltSources as $crudeSaltSource)
                                     <option value="{{$crudeSaltSource->LOOKUPCHD_ID}}"> {{$crudeSaltSource->LOOKUPCHD_NAME}}</option>
                                 @endforeach

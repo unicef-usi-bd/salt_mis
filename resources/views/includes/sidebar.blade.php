@@ -101,6 +101,14 @@
     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
         <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
     </div>
+
+    @if(Session::get('MILL_ID'))
+        <img src="{{ asset("image/qr.png") }}" width="130" height="130" style="margin-left: 30px;margin-top: 45px;"/>
+        <div style="margin-top: 10px;margin-left: 10px;">
+            <a href="{{ asset("image/apk/unicef_salt_aa.apk") }}" class="btn btn-success"><i class="fa fa-android" style="font-size: 18px;"></i> Download App <i class="fa fa-arrow-circle-o-down " style="font-size: 18px;"></i></a>
+        </div>
+    @endif
+
     <script type="text/javascript">
 
         //########### Sidebar menu selected start ###############

@@ -136,7 +136,9 @@ trait AuthenticatesUsers
             'center_name' => $userInfo->ASSOCIATION_NAME,
             'center_id' => $userInfo->ASSOCIATION_ID,
             'user_group_id' => $userInfo->user_group_id,
-            'POSITIONLEVEl' => $userInfo->POSITIONLEVEl
+            'POSITIONLEVEl' => $userInfo->POSITIONLEVEl,
+            'MILL_ID' => $userInfo->MILL_ID
+
           //  'startDate' => $financialYear->start_date,
           //  'endDate' => $financialYear->end_date,
           //  'user_group_id' => $userInfo->user_group_id

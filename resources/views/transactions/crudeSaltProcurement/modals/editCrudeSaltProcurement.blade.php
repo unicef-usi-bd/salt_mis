@@ -64,7 +64,10 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess SOURCE_ID" class="chosen-select form-control" name="SOURCE_ID" data-placeholder="Select Source from">
-                               <option value=""></option>
+                                @foreach($importedData as $row)
+                                    {{--<option value="{{$row->LOOKUPCHD_ID}}">{{$row->LOOKUPCHD_NAME}}</option>--}}
+                                    <option value="{{ $row->LOOKUPCHD_ID }}" @if($row->LOOKUPCHD_ID==$editCrudeSalt->SOURCE_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                @endforeach
                                 @foreach($crudeSaltSources as $crudeSaltSource)
                                     <option value="{{ $crudeSaltSource->LOOKUPCHD_ID }}" @if($crudeSaltSource->LOOKUPCHD_ID==$editCrudeSalt->SOURCE_ID) selected @endif>{{ $crudeSaltSource->LOOKUPCHD_NAME }}</option>
                                 @endforeach
