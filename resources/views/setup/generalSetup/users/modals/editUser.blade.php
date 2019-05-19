@@ -296,6 +296,18 @@
         });
 
         $(document).ready(function () {
+            $.validator.addMethod(
+                "regex",
+                function(value, element, regexp)
+                {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                },
+                "Please check your input."
+            );
 
             $('#myform').validate({ // initialize the plugin
                 errorClass: "my-error-class",
@@ -324,7 +336,9 @@
                     },
                     contact_no:{
                         required: true,
-                        minlength:11
+                        maxlength:11,
+                        minlength:11,
+                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
                     },
                     user_group_id:{
                         required: true,

@@ -12,8 +12,15 @@ class LookupGroupData extends Model
         return DB::table('ssc_lookupchd')
             ->select('LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID')
             ->where('LOOKUPMST_ID', '=', $id)
+            ->where('LOOKUPCHD_NAME','!=','Local')
             ->where('ACTIVE_FLG', '=', 1)
             ->get();
+    }
+
+    public static function getImported(){
+     return DB::select(DB::raw("select * 
+            from ssc_lookupchd lc
+            where lc.LOOKUPCHD_NAME like '%Local'"));
     }
 
 //    public static function getAgencyData(){

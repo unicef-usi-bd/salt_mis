@@ -55,7 +55,8 @@ class CrudeSaltProcurementController extends Controller
         $crudeSaltSources = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudeSaltSourceId);
         $importedId = LookupGroupData::viewSSCLookGroupData($this->importerId);
         $importedCrudeSaltCountry = CrudeSaltProcurement::getCountryName();
-        return view('transactions.crudeSaltProcurement.modals.createCrudeSaltProcurement',compact('crudeSaltTypes','crudeSaltSuppliers','crudeSaltSources','importedId','importedCrudeSaltCountry'));
+        $importedData = LookupGroupData::getImported();
+        return view('transactions.crudeSaltProcurement.modals.createCrudeSaltProcurement',compact('crudeSaltTypes','crudeSaltSuppliers','crudeSaltSources','importedId','importedCrudeSaltCountry','importedData'));
     }
 
     /**
@@ -114,7 +115,8 @@ class CrudeSaltProcurementController extends Controller
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
         $crudeSaltSuppliers = SupplierProfile::getCrudeSaltSupllier($this->crudeSaltSupplierTypeId);
         $crudeSaltSources = LookupGroupData::getActiveGroupDataByLookupGroup($this->crudeSaltSourceId);
-        return view('transactions.crudeSaltProcurement.modals.editCrudeSaltProcurement',compact('editCrudeSalt','crudeSaltSources','crudeSaltTypes','crudeSaltSuppliers'));
+        $importedData = LookupGroupData::getImported();
+        return view('transactions.crudeSaltProcurement.modals.editCrudeSaltProcurement',compact('editCrudeSalt','crudeSaltSources','crudeSaltTypes','crudeSaltSuppliers','importedData'));
     }
 
     /**
@@ -165,7 +167,7 @@ class CrudeSaltProcurementController extends Controller
                 'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
-                'message' => 'Level Successfully Deleted.',
+                'message' => 'Crude Salt Successfully Deleted.',
             ]);
         } else{
             echo json_encode([
