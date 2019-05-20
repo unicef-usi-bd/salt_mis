@@ -126,17 +126,25 @@ class UserController extends Controller
             }
 
             //for user signature*************
-            $userSignatureName = 'defaultUserSignature.png';
+            //$userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
-                try {
-                    $file = $request->file('user_signature');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
-                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-
-                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-
-                }
+//                try {
+//                    $file = $request->file('user_signature');
+//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
+//                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//
+//                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
+//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+//
+//                }
+                $signature = $request->file('user_signature');
+                $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
+                $path = 'image/user-signature/' . $filename;
+                Image::make($signature->getRealPath())->resize(135, 50)->save($path);
+                //********* End Image *********
+                $user_signature = "image/user-image/$filename";
+            }else{
+                $user_signature = 'image/user-image/defaultUserSignature.png';
             }
 
 
@@ -163,7 +171,8 @@ class UserController extends Controller
                 'active_status' => 1,
 //                'user_image' => 'image/user-image/'.$userImageName,
                 'user_image' => $user_image,
-                'user_signature' => 'image/user-signature/'.$userSignatureName,
+//                'user_signature' => 'image/user-signature/'.$userSignatureName,
+                'user_signature' => $user_signature,
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
             ]);
@@ -294,17 +303,26 @@ class UserController extends Controller
 
 
             //for user signature*************
-            $userSignatureName = 'defaultUserSignature.png';
+            //$userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
-                try {
-                    $file = $request->file('user_signature');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
-                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//                try {
+//                    $file = $request->file('user_signature');
+//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
+//                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+//
+//                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
+//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+////                    return false;
+//                }
 
-                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-//                    return false;
-                }
+                $signature = $request->file('user_signature');
+                $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
+                $path = 'image/user-signature/' . $filename;
+                Image::make($signature->getRealPath())->resize(135, 50)->save($path);
+                //********* End Image *********
+                $userSignatureName = "image/user-image/$filename";
+            }else{
+                $userSignatureName = 'image/user-image/defaultUserSignature.png';
             }
 
 //            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);

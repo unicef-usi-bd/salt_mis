@@ -47,10 +47,10 @@ class EntrepreneurController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'OWNER_NAME.*' => 'required',
-            'MOBILE_1.*' => 'required|digits:11',
-            'MOBILE_2.*' => 'required|digits:11',
-            'EMAIL.*' => 'required|email'
+//            'OWNER_NAME.*' => 'required',
+//            'MOBILE_1.*' => 'required|digits:11',
+//            'MOBILE_2.*' => 'required|digits:11',
+//            'EMAIL.*' => 'required|email'
         );
 
         $validator = Validator::make(Input::all(), $rules);

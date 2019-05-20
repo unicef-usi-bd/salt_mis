@@ -18,6 +18,13 @@
         .disabledTab{
             pointer-events: none;
         }
+        .my-error-class {
+            color:red;
+
+        }
+        /*.my-valid-class {*/
+        /*color:green;*/
+        /*}*/
 
     </style>
 
@@ -64,13 +71,33 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
+                                    <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form" id="myform">
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
                                         <div class="col-md-6">
+
                                             <div class="form-group">
+                                                <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;">
+                                                    <b>Have a laboratory ?</b>
+                                                    <span style="color:red;">*</span>
+                                                </label>
+                                                <div class="col-sm-7">
+                                                    <div class="error_container">
+                                                        <label>
+                                                            <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
+                                                            <span class="lbl"> Yes</span>
+                                                        </label>
+                                                        <label>
+                                                            <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0"/>
+                                                            <span class="lbl"> No</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{--<div class="form-group">
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
                                                     <label>
@@ -82,24 +109,27 @@
                                                         <span class="lbl"> No</span>
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div>--}}
 
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
+                                                    <div class="error_container">
                                                     <label>
                                                         <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
-                                                        <span class="lbl"> Yes</span>
+                                                    <span class="lbl"> Yes</span>
                                                     </label>
                                                     <label>
                                                         <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
                                                         <span class="lbl"> No</span>
                                                     </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
+                                                    <div class="error_container">
                                                     <label>
                                                         <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
                                                         <span class="lbl"> Yes</span>
@@ -108,11 +138,13 @@
                                                         <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0"/>
                                                         <span class="lbl"> No</span>
                                                     </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b><span style="color:red;"> *</span> </label>
                                                 <div class="col-sm-7">
+                                                    <div class="error_container">
                                                     <label>
                                                         <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
                                                         <span class="lbl"> Yes</span>
@@ -121,6 +153,7 @@
                                                         <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
                                                         <span class="lbl"> No</span>
                                                     </label>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -150,8 +183,10 @@
                                                 <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                                                 <div class="col-sm-7">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="REMARKS" class="chosen-container">
+                                                       {{--<input type="text" name="REMARKS" class="chosen-container">--}}
+                                                        <textarea name="REMARKS" id="" cols="38" rows="2"></textarea>
                                                     </span>
+
                                                 </div>
                                             </div>
 
@@ -234,7 +269,42 @@
         });
 
 
+        $(document).ready(function () {
 
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+                    LABORATORY_FLG: {
+                        required: true,
+                    },
+                    IODINE_CHECK_FLG: {
+                        required: true,
+
+                    },
+                    LAB_MAN_FLG:{
+                        required: true,
+
+
+                    },
+                    MONITORING_FLG:{
+                        required: true,
+
+                    }
+                },
+                errorPlacement: function(error, element)
+                {
+                    if ( element.is(":radio") )
+                    {
+                        error.appendTo( element.parents('.error_container'));
+                    }
+                    else
+                    { // This is the default behavior
+                        error.insertAfter( element );
+                    }
+                }
+            });
+        });
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')

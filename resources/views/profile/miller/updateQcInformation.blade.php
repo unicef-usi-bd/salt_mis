@@ -89,7 +89,8 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container" value="{{ $editQcData->REMARKS }}">
+                               {{--<input type="text" name="REMARKS" class="chosen-container" value="{{ $editQcData->REMARKS }}">--}}
+                                <textarea name="REMARKS" id="" cols="38" rows="2">{{ $editQcData->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>

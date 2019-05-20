@@ -22,6 +22,13 @@
             /*background-color: #1CABE2;*/
         /*}*/
 
+        .my-error-class {
+            color:red;
+        }
+        /*.my-valid-class {*/
+            /*color:green;*/
+        /*}*/
+
     </style>
 
     <div class="page-header">
@@ -58,7 +65,7 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
+                                    <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form" id="myform">
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -109,10 +116,10 @@
                                                 <th style="">District</th>
                                                 <th style="">Upazila</th>
                                                 <th style="width: 100px;">Union</th>
-                                                <th style="" >NID</th>
+                                                <th style="" >NID<span style="color:red;"> *</span></th>
                                                 <th style="">Mobile 1<span style="color:red;"> *</span></th>
                                                 <th  style="">Mobile 2</th>
-                                                <th  style="">Email </th>
+                                                <th  style="">Email <span style="color:red;"> *</span></th>
                                                 <th  style="">Remarks</th>
                                                 <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                                             </tr>
@@ -159,19 +166,19 @@
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="NID[]" id="inputSuccess total_amount" value="" class="width-100 NID"  />
+                                                        <input type="text" name="NID[]" id="inputSuccess" value="" class="width-100 NID"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_1"  />
+                                                        <input type="number" name="MOBILE_1[]" maxlength="11" minlength="11" value="" class="width-100 MOBILE_1" pattern="/^(?:\+?88)?01[15-9]\d{8}$/" />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_2"  />
+                                                        <input type="number" name="MOBILE_2[]" id="inputSuccess" value="" class="width-100 MOBILE_2" maxlength="11" minlength="11" pattern="/^(?:\+?88)?01[15-9]\d{8}$/" />
                                                     </span>
                                                 </td>
                                                 <td>
@@ -183,7 +190,7 @@
                                                 <td>
                                                     <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                                        <input type="text" name="REMARKS[]" id="inputSuccess " value="" class="width-100 REMARKS"  />
                                                     </span>
                                                 </td>
                                                 <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
@@ -349,6 +356,40 @@
                     }
                 });
             });
+        });
+
+        // validation check
+        $(document).ready(function () {
+
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+                    'OWNER_NAME[]': {
+                        required: true
+                    },
+                    // 'MOBILE_1[]':{
+                    //     required: true,
+                    //     maxlength:11,
+                    //     minlength:11,
+                    //     regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    // },
+                    // "MOBILE_2[]":{
+                    //     maxlength:11,
+                    //     regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    //
+                    // },
+                    'EMAIL[]':{
+                        required: true,
+                        email: true
+                    },
+                    'NID[]':{
+                        required: true,
+                    }
+
+                }
+            });
+
         });
     </script>
 
