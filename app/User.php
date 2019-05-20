@@ -34,7 +34,7 @@ class User extends Authenticatable
     public static function userDetails($id){
         return DB::table('users as u')
 
-            ->select('cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID','u.user_group_id','ugl.POSITIONLEVEl','a.MILL_ID')
+            ->select('cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID','u.user_group_id','ugl.POSITIONLEVEl','a.MILL_ID','ugl.USERGRP_ID')
 
             //->select('cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID')
             ->leftjoin('cost_center as cc', 'u.cost_center_id', '=', 'cc.cost_center_id')
@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public static function getData() {
         return DB::table('users as u')
-            ->select('u.*', 'cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID','ugl.POSITIONLEVEl')
+            ->select('u.*', 'cc.cost_center_name', 'ug.USERGRP_NAME' , 'ugl.UGLEVE_NAME','a.ASSOCIATION_NAME','a.ASSOCIATION_ID','ugl.POSITIONLEVEl','ugl.USERGRP_ID')
             ->leftjoin('cost_center as cc', 'u.cost_center_id', '=', 'cc.cost_center_id')
             ->leftjoin('sa_user_group as ug', 'u.user_group_id', '=', 'ug.USERGRP_ID')
             ->leftjoin('sa_ug_level as ugl', 'u.user_group_level_id', '=', 'ugl.UG_LEVEL_ID')

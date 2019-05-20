@@ -88,7 +88,7 @@ class QulityControlTestingController extends Controller
                     $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
                     $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 
-                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
+                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
                 }
@@ -181,7 +181,7 @@ class QulityControlTestingController extends Controller
                     $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 
                     //$file->move("image/testimage/", $qulityControlImge);
-                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/testimage/", $qulityControlImge);
+                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
                 }
