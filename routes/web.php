@@ -156,6 +156,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('miller-license-report/{zone}','ReportController@getListofMillerLicenses');//jalal
     Route::get('qc-report/{zone}','ReportController@getQcreport');//jalal
     Route::get('hr-report/{zone}','ReportController@getHrreport');//jalal
+    Route::get('purchase-salt-supplier-miller','ReportController@getListSupplierForMiller');//jalal
 
 
     Route::get('chemical-item-list','ReportController@getChemicalItemList');//Rubiyat

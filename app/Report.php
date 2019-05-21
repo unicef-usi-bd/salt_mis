@@ -362,4 +362,18 @@ class Report extends Model
 
     }
 
+    public static function getListOfSupplierForMiller($centerId){
+        return DB::select(DB::raw("SELECT a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME, SUM(a.QTY) QTY
+     FROM
+	(SELECT s.TRADING_NAME,DISTRICT_ID, DIVISION_ID, s.SUPPLIER_TYPE_ID,
+	(SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+	(SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+	(SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = s.SUPPLIER_TYPE_ID) supplier_type,
+	t.QTY
+	FROM ssm_supplier_info s, tmm_itemstock t
+	WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
+	AND t.TRAN_FLAG = 'PR' and t.center_id = $centerId) a
+    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
+    }
+
 }

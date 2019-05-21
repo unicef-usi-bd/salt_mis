@@ -11,7 +11,7 @@
                                <select  class="chosen-select chosen-container reportMiller" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
                                    <optgroup label="Purchase Salt">
-                                       <option value="">List of Supplier </option>
+                                       <option value="$supplierMillerList">List of Supplier </option>
                                        <option value="purchase-salt-list">List of Item </option>
                                        <option value="miller-purchase-salt-stock">Purchase</option>
                                        <option value="monitor-salt-report">Monitor Supplier</option>

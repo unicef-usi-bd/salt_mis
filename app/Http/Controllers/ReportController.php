@@ -370,4 +370,12 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
+    public function getListSupplierForMiller(){
+        $centerId = Auth::user()->center_id;
+        $supplierMillerList = Report::getListOfSupplierForMiller($centerId);
+        //$this->pr($supplierMillerList);
+        $view = view("reportView.purchaseSaltSupplierListforMiller",compact('supplierMillerList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
 }
