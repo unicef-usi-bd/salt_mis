@@ -24,7 +24,10 @@ class Iodized extends Model
             ->get();
     }
 
-    public static function insertIodizeData($request,$centerId,$entryBy,$iodizeStock){
+    public static function insertIodizeData($request,$centerId,$entryBy){
+        $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
+        $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
+        $iodizeStock = $washAndCrushQty - $iodizeWastage;
 
         $iodizeMstId = DB::table('tmm_iodizedmst')->insertGetId([
             'BATCH_NO' => $request->input('BATCH_NO'),
