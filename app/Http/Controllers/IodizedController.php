@@ -78,14 +78,8 @@ class IodizedController extends Controller
 
             $entryBy = Auth::user()->id;
             $centerId = Auth::user()->center_id;
-            $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
-            //$chemicalQty = intval($request->input('REQ_QTY'));
-            //$productionElement = $washAndCrushQty + $chemicalQty;
-            $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
-            $iodizeStock = $washAndCrushQty - $iodizeWastage;
-            //$totalStock = (intval($request->input('WASH_CRASH_QTY'))*intval($request->input('WASTAGE'))/100);
-            //$this->pr($totalStock);
-            $iodizeInsert = Iodized::insertIodizeData($request,$centerId,$entryBy,$iodizeStock);
+
+            $iodizeInsert = Iodized::insertIodizeData($request,$centerId,$entryBy);
         }
 
 

@@ -28,7 +28,10 @@ class WashingAndCrushing extends Model
             ->get();
     }
 
-    public static function insertWashingAndCrushingData($request,$entryBy,$centerId,$result){
+    public static function insertWashingAndCrushingData($request,$entryBy,$centerId){
+        $oty = intval($request->input('REQ_QTY'));
+        $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
+        $result = $oty - $totalStock;
 
         $washingCrushingMstId = DB::table('tmm_washcrashmst')->insertGetId([
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
