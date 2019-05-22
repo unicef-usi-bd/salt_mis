@@ -28,54 +28,60 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($certificate as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <select class="form-control ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($issueBy as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                      </select>
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="date" name="ISSUING_DATE[]" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
+                                    <input type="date" name="ISSUING_DATE[]" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE required">
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
 
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"  />
+                                    <input type="text" name="CERTIFICATE_NO[]" id=" " value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO license required"  />
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" value="" >
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" value="" >
                                     <a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a>
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
 
                             <td>
                                 <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editCertData->REMARKS }}" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
+                                    <input type="text" name="REMARKS[]" id="inputSuccess " value="{{ $editCertData->REMARKS }}" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                 </span>
                             </td>
                             <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
@@ -90,7 +96,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success" >
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Submit
                         </button>
@@ -100,6 +106,7 @@
         </div>
     </div>
 </div>
+@include('masterGlobal.datePicker')
 <script>
     $(document).ready(function(){
         $('.rowAddCert').click(function(){
@@ -142,6 +149,46 @@
     //         }
     //     })
     //
-    // })
+    // });
+
+    //input type text and number validation enable disable button
+    $(document).ready(function() {
+        $('input[type="text"]').keyup(function () {
+            checkValidation($(this))
+        });
+
+        $('input[type="file"]').keyup(function () {
+            checkValidation($(this))
+        });
+        $('input[type="date"]').change(function () {
+            checkValidation($(this))
+        });
+    });
+
+    function checkValidation(selector) {
+        var thisInput = selector.closest('.block');
+        var license = $('.license').val();
+        var status = true;
+        $('select.required').each(function () {
+            if ($(this).val() === "") {
+                status = false;
+            }
+        });
+
+        if (status === true) {
+            $('input[type="submit"]').prop('disabled', false);
+        } else {
+            $('input[type="submit"]').prop('disabled', true);
+        }
+        if(thisInput.find('.required').val()===""){
+            thisInput.find('span.error').show();
+
+        } else{
+            thisInput.find('span.error').hide();
+
+        }
+    }
+
+
 
 </script>

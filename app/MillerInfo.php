@@ -176,12 +176,14 @@ class MillerInfo extends Model
     }
 
     public  static function getMillerToMerge(){
+        $centerId = Auth::user()->center_id;
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.*','ssm_millemp_info.*')
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
             ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
             ->where('ssm_mill_info.REG_TYPE_ID','=', 10)
             ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
+            ->where('ssm_mill_info.center_id','=', $centerId)
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->get();
     }

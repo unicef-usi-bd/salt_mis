@@ -1,3 +1,10 @@
+<style>
+    .input-icon.input-icon-right>input,select.form-control {
+        padding-left: 3px;
+        padding-right: 0px;
+        font-size: small;
+    }
+</style>
 <div id="certificate" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
@@ -12,13 +19,13 @@
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                     <tr>
-                        <th style="width:175px ;">Type of Certificate<span style="color:red;"> </span></th>
-                        <th style="width:130px ;">Issure Name<span style="color:red;"> </span></th>
-                        <th style="width:140px ;">Issuing Date</th>
-                        <th style="width:150px ;">Certificate Number</th>
-                        <th style="width: 260px;">Trade License</th>
-                        <th style="width:140px;" >Renewing Date</th>
-                        <th  style="width:140px ;">Remarks</th>
+                        <th style="width:150px ;">Type of Certificate<span style="color:red;">*</span></th>
+                        <th style="width:120px ;">Issure Name<span style="color:red;">*</span></th>
+                        <th style="width:120px ;">Issuing Date<span style="color:red;">*</span></th>
+                        <th style="width:120px ;">Certificate Number<span style="color:red;">*</span></th>
+                        <th style="width: 120px;">Trade License<span style="color:red;">*</span></th>
+                        <th style="width:120px;" >Renewing Date<span style="color:red;">*</span></th>
+                        <th  style="width:120px ;">Remarks</th>
                         <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd2"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
@@ -28,47 +35,52 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($certificate as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <select class="form-control ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($issueBy as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                      </select>
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
+                                <span class="block input-icon input-icon-right ">
+                                    <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE required">
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
 
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"  />
+                                <span class="block input-icon input-icon-right ">
+                                    <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO required"  />
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
-
+                                <span class="block input-icon input-icon-right required">
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" >
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}">
+                                <span class="block input-icon input-icon-right ">
+                                   <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
 
@@ -126,5 +138,92 @@
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
+
+    // select validation
+    // $(document).ready(function() {
+    //     $('select.required').on('change', function () {
+    //         var status = true;
+    //         $('select.required').each(function () {
+    //             if ($(this).val() === "") {
+    //                 status = false;
+    //             }
+    //         });
+    //         if (status === true) {
+    //             $('input[type="button"]').prop('disabled', false);
+    //             $('span.error1').hide();
+    //         } else {
+    //             $('input[type="button"]').prop('disabled', true);
+    //             $('span.error1').show();
+    //         }
+    //     });
+    //     // input validation
+    //     $('input[type="text"]').keyup(function () {
+    //         var status = true;
+    //         $('input.required').each(function () {
+    //             if ($(this).val() === "") {
+    //                 status = false;
+    //             }
+    //         });
+    //         if (status === true) {
+    //             $(':input[type="button"]').prop('disabled', false);
+    //             $('span.errorLic').hide();
+    //         } else {
+    //             $(':input[type="button"]').prop('disabled', true);
+    //             $('span.errorLic').show();
+    //         }
+    //     });
+    //     $('input[type="date"]').change(function () {
+    //         var status = true;
+    //         $('input.required').each(function () {
+    //             if ($(this).val() === "") {
+    //                 status = false;
+    //             }
+    //         });
+    //         if (status === true) {
+    //             $(':input[type="button"]').prop('disabled', false);
+    //             $('span.errorDat').hide();
+    //         } else {
+    //             $(':input[type="button"]').prop('disabled', true);
+    //             $('span.errorDat').show();
+    //         }
+    //     });
+    // });
+
+    $(document).ready(function() {
+        $('input[type="text"]').keyup(function () {
+            checkValidation($(this))
+        });
+
+        $('input[type="file"]').change(function () {
+            checkValidation($(this))
+        });
+        $('input[type="date"]').change(function () {
+            checkValidation($(this))
+        });
+    });
+
+    function checkValidation(selector) {
+        var thisInput = selector.closest('.block');
+        var license = $('.license').val();
+        var status = true;
+        $('select.required').each(function () {
+            if ($(this).val() === "") {
+                status = false;
+            }
+        });
+
+        if (status === true) {
+            $('input[type="button"]').prop('disabled', false);
+        } else {
+            $('input[type="button"]').prop('disabled', true);
+        }
+        if(thisInput.find('.required').val()===""){
+            thisInput.find('span.error').show();
+
+        } else{
+            thisInput.find('span.error').hide();
+
+        }
+    }
 
 </script>

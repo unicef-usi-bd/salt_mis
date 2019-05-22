@@ -36,13 +36,16 @@
                                <input type="text" name="PARTTIMEFEM_EMP" value="{{ $editEmployeeData->PARTTIMEFEM_EMP }}" class="chosen-container partTimeFemaleEmp" placeholder="Female">
                             </span>
                         </div>
+                        <br>
+
                     </div>
-                    <b style="font-size: 14px;">Remarks</b> <br><br>
+                    <span style="color:red;display: none" class="error">Total number of Employee must be equal to Part time and Full time employee.</span>
+                    <br><b style="font-size: 14px;">Remarks</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
 {{--                               <input type="text" name="REMARKS" value="{{ $editEmployeeData->REMARKS }}" class="chosen-container" placeholder="Male">--}}
-                                <textarea name="REMARKS" id="" cols="51" rows="2">{{ $editEmployeeData->REMARKS }}</textarea>
+                                <textarea name="REMARKS" id="" cols="131" rows="3">{{ $editEmployeeData->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>
@@ -129,10 +132,12 @@
         var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
         var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
         if(total!=totalPartFullEmp){
-            alert('Total number of Employee must be equal to Part time and Full time employee');
+            //alert('Total number of Employee must be equal to Part time and Full time employee');
             $('.btnUpdateEmp').prop('disabled', true);
+            $('span.error').show();
         }else{
             $('.btnUpdateEmp').prop('disabled', false);
+            $('span.error').hide();
         }
 
     });

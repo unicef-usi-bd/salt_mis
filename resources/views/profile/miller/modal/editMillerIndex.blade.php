@@ -2,6 +2,11 @@
     .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
         border: none;
     }
+    .input-icon.input-icon-right>input,select.form-control {
+        padding-left: 3px;
+        padding-right: 0px;
+        font-size: small;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -123,7 +128,7 @@
     $(document).ready(function () {
         $('#DIVISION_IDD').on('change',function(){
             var divisionId = $(this).val(); //alert(divisionId);exit();
-            var option = '<option value="">Select District</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-district/{id}",
@@ -142,7 +147,7 @@
     $(document).ready(function () {
         $('select#DISTRICT_IDD').on('change',function(){
             var districtId = $(this).val(); //alert(districtId); exit();
-            var option = '<option value="">Select Upazila</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-upazila/{id}",
@@ -161,7 +166,7 @@
     $(document).ready(function () {
         $('#UPAZILA_IDD').on('change',function(){
             var upazilaId = $(this).val(); //alert(upazilaId);exit();
-            var option = '<option value="">Select Union</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-union/{id}",
@@ -182,7 +187,7 @@
     $(document).ready(function () {
         $('select#ENT_DIVISION_ID').on('change',function(){
             var divisionId = $(this).val(); //alert(divisionId);exit();
-            var option = '<option value="">Select District</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-district/{id}",
@@ -201,7 +206,7 @@
     $(document).ready(function () {
         $('select#ENT_DISTRICT_ID').on('change',function(){
             var districtId = $(this).val(); //alert(districtId); exit();
-            var option = '<option value="">Select Upazila</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-upazila/{id}",
@@ -220,7 +225,7 @@
     $(document).ready(function () {
         $('#ENT_UPAZILA_ID').on('change',function(){
             var upazilaId = $(this).val(); //alert(upazilaId);exit();
-            var option = '<option value="">Select Union</option>';
+            var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
                 url  : "supplier-profile/get-union/{id}",
