@@ -1,10 +1,15 @@
+<style>
+    .my-error-class {
+        color:red;
+    }
+</style>
 <div id="entrepreneur_tab" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info entrepreneur_msg"></div>
 
 
-            <form id="entrepreneurId"  class="form-horizontal" role="form" >
+            <form id="entrepreneurId"  class="form-horizontal myform" role="form">
 
                 @csrf
                 @if(isset($millerInfoId))
@@ -51,16 +56,16 @@
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                     <tr>
-                        <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
-                        <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                        <th style="width: ;">District</th>
-                        <th style="width: ;">Upazila</th>
-                        <th style="width: 100px;">Union</th>
-                        <th style="width: ;" >NID</th>
-                        <th style="width: ;">Mobile 1<span style="color:red;"> *</span></th>
-                        <th  style="width: ;">Mobile 2</th>
-                        <th  style="width: ;">Email<span style="color:red;"> *</span></th>
-                        <th  style="width: ;">Remarks</th>
+                        <th style="width:100px;">Owner Name<span style="color:red;"> *</span></th>
+                        <th style="width:100px;">Division<span style="color:red;"> </span></th>
+                        <th style="width:100px;">District</th>
+                        <th style="width:100px;">Upazila</th>
+                        <th style="width:100px;">Union</th>
+                        <th style="width:100px;">NID</th>
+                        <th style="width:100px;">Mobile 1<span style="color:red;"> *</span></th>
+                        <th style="width:100px;">Mobile 2</th>
+                        <th style="width:100px;">Email<span style="color:red;"> *</span></th>
+                        <th style="width:100px;">Remarks</th>
                         <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAddEntp"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
@@ -68,14 +73,16 @@
                     @foreach($getEntrepreneurRowData as $editEntrepData)
                         <tr class="rowFirstEntp">
                             <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax class="width-100"--> </span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="{{ $editEntrepData->OWNER_NAME }}" class="width-100 OWNER_NAME"  />
+                                    <input type="text" name="OWNER_NAME[]"  value="{{ $editEntrepData->OWNER_NAME }}" class="width-100 OWNER_NAME required" required  />
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                    {{--<select class="width-100 form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >--}}
+                                    <select class="width-100 form-control DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($getDivision as $row)
                                             <option value="{{$row->DIVISION_ID}}" @if($editEntrepData->DIVISION_ID==$row->DIVISION_ID) selected @endif> {{$row->DIVISION_NAME}}</option>
@@ -85,21 +92,21 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                    <select class="width-100 form-control  ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
                                         <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                      </select>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
+                                    <select class="width-100 form-control ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
                                         <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                     </select>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
+                                    <select class="width-100 form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
                                         <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                     </select>
                                 </span>
@@ -113,19 +120,23 @@
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_1 }}" class="width-100 MOBILE_1"  />
+                                    <input type="text" name="MOBILE_1[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_1 }}" class="width-100 MOBILE_1 required numbersOnly"   />
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
+                                    <span style="color:red;" class="errorMobile"></span>
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="{{ $editEntrepData->MOBILE_2 }}" class="width-100 MOBILE_2"  />
+                                    <input type="number" name="MOBILE_2[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_2 }}" class="width-100 MOBILE_2 " numbersOnly />
+                                    <span style="color:red;" class="errorMobile2"></span>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="width-100 EMAIL"  />
+                                    <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="width-100 EMAIL required"  />
                                     {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
+                                    <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
                             <td>
@@ -146,7 +157,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()">
+                        <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -172,10 +183,91 @@
 
                 }
             })
-        })
+        });
+
+        // Check Validation
+        // input type text and number validation enable disable button
+        $(document).ready(function() {
+            $('input[type="text"]').keyup(function () {
+                checkValidation($(this))
+            });
+
+            $('input[type="number"]').keyup(function () {
+                checkValidation($(this))
+            });
+        });
+
+        function checkValidation(selector) {
+            var thisInput = selector.closest('.block');
+            var mobile = $('.MOBILE_1').val();
+            var mobile2 = $('.MOBILE_2').val();
+            var status = true;
+            $('input.required').each(function () {
+                if ($(this).val() === "") {
+                    status = false;
+                }
+            });
+
+            if(checkMobileDigit(mobile)!==true ){
+                status = false;
+            }
+            console.log(mobile);
+            if(checkMobileDigit(mobile2)!==true ){
+                status = false;
+            }
+            console.log(mobile2);
+
+            if (status === true) {
+                $('input[type="button"]').prop('disabled', false);
+            } else {
+                $('input[type="button"]').prop('disabled', true);
+            }
+            if(thisInput.find('.required').val()===""){
+                thisInput.find('span.error').show();
+            } else{
+                thisInput.find('span.error').hide();
+            }
+        }
+        // mobilee only number
+        $(document).on('keyup', '.numbersOnly', function() {
+            var val = $(this).val();
+            if (isNaN(val)) {
+                val = val.replace(/[^0-9\.]/g, '');
+                if (val.split('.').length > 2) {
+                    val = val.replace(/\.+$/, "");
+                }
+            }
+            $(this).val(val);
+        });
+        // show error msg for mobile
+        $(document).on('keyup', '.MOBILE_1', function () {
+            var mobile =$(this).val();
+            var status = checkMobileDigit(mobile);
+            if(status!==true){
+                $('.errorMobile').text('11 digits only');
+            } else{
+                $('.errorMobile').text('');
+            }
+        });
+        // allow only 11 digit
+        $(document).on('keyup', '.MOBILE_2', function () {
+            var mobile2 =$(this).val();
+            var status = checkMobileDigit(mobile2);
+            if(status!==true){
+                $('.errorMobile2').text('11 digits only');
+            } else{
+                $('.errorMobile2').text('');
+            }
+        });
+
+        function checkMobileDigit(number) {
+            var status = true;
+            if(number.length<11 && number!==""){
+                status = false;
+            }
+            return status;
+        }
+
+
+
     </script>
-
-
-<script>
-
-</script>
