@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('purchase-salt-supplier-miller-pdf/'.$divisionId.'/'.$districtId) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('hr-employee-miller-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>List Of Supplier</h4>
+        <h4>List of HR</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -23,23 +23,23 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Supplier Name</th>
-                <th>Division</th>
-                <th>District</th>
-                <th>Total Volume (KG) </th>
+                <th>Total Number of Employee</th>
+                <th>Number of full time Employee</th>
+                <th>Number of part time Employee</th>
+                <th>Number of Technical Person </th>
             </tr>
 
             </thead>
 
             <tbody>
             <?php $sl=0;?>
-            @foreach($supplierMillerList as $row)
+            @foreach($employeeList as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->TRADING_NAME}}</td>
-                    <td>{{$row->DIVISION_NAME}}</td>
-                    <td>{{$row->DISTRICT_NAME}}</td>
-                    <td>{{$row->QTY}}</td>
+                    <td>{{$row->Total_Employee}}</td>
+                    <td>{{$row->Full_time_total_employee}}</td>
+                    <td>{{$row->Parttime_total_employee}}</td>
+                    <td>{{$row->total_tech_employee }}</td>
                 </tr>
 
             @endforeach

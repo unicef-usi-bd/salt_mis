@@ -34,8 +34,10 @@ class ReportController extends Controller
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
         $associationList = AssociationSetup::getZoneList();
+        $getDivision = SupplierProfile::getDivision();
+        $clintNameList = Report::getClintNameList();
 //        $this->pr($associationList);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList'));
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList'));
     }
 
 // test controller
@@ -370,12 +372,123 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getListSupplierForMiller(){
+    public function getListSupplierForMiller(Request $request){
         $centerId = Auth::user()->center_id;
-        $supplierMillerList = Report::getListOfSupplierForMiller($centerId);
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
+        $supplierMillerList = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId);
         //$this->pr($supplierMillerList);
-        $view = view("reportView.purchaseSaltSupplierListforMiller",compact('supplierMillerList'))->render();
+        $view = view("reportView.purchaseSaltSupplierListforMiller",compact('supplierMillerList','divisionId','districtId'))->render();
         return response()->json(['html'=>$view]);
+    }
+
+    public function getListSupplierForMillerPdf($divisionId,$districtId){
+        $centerId = Auth::user()->center_id;
+        $supplierMillerList = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId);
+        $data = \View::make('reportPdf.purchaseSaltSupplierListforMillerPdf',compact('supplierMillerList'));
+        $this->generatePdf($data);
+    }
+
+    public function getListSupplierWithNameForMiller(Request $request){
+        $centerId = Auth::user()->center_id;
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
+        $supplierMillerLisType = Report::getListOfSupplierWithNmaeForMiller($centerId,$divisionId,$districtId);
+        //$this->pr($supplierMillerList);
+        $view = view("reportView.purchaseSaltSupplierListforWithNameMiller",compact('supplierMillerLisType','divisionId','districtId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getListSupplierWithNameForMillerPdf($divisionId,$districtId){
+        $centerId = Auth::user()->center_id;
+        $supplierMillerLisType = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId);
+        $data = \View::make('reportPdf.purchaseSaltSupplierListforWithNameMillerPdf',compact('supplierMillerLisType'));
+        $this->generatePdf($data);
+    }
+
+    public function getClintListFormiller(Request $request){
+        $centerId = Auth::user()->center_id;
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
+        $clintList = Report::getListofClint($centerId,$divisionId,$districtId);
+        $view = view("reportView.millerClintList",compact('clintList','divisionId','districtId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getClintListFormillerPdf($divisionId,$districtId){
+        $centerId = Auth::user()->center_id;
+        $clintList = Report::getListofClint($centerId,$divisionId,$districtId);
+        $data = \View::make('reportPdf.millerClintListPdf',compact('clintList'));
+        $this->generatePdf($data);
+    }
+
+    public function getSaleClintList(Request $request){
+        $centerId = Auth::user()->center_id;
+        $customerId = $request->input('customerId');
+        $saleClintList = Report::getSaleClintList($centerId,$customerId);
+        $view = view("reportView.saleClintReportList",compact('saleClintList','customerId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getSaleClintListPdf($customerId){
+        $centerId = Auth::user()->center_id;
+        $saleClintList = Report::getSaleClintList($centerId,$customerId);
+        $data = \View::make('reportPdf.saleClintReportListPdf',compact('saleClintList'));
+        $this->generatePdf($data);
+    }
+
+    public function getMonitorClintListMiller(){
+        $centerId = Auth::user()->center_id;
+        $monitorClintList = Report::monitorClintMiller($centerId);
+        $view = view("reportView.monitorClintListReport",compact('monitorClintList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getMonitorClintListMillerPdf(){
+        $centerId = Auth::user()->center_id;
+        $monitorClintList = Report::monitorClintMiller($centerId);
+        $data = \View::make('reportPdf.monitorClintListReportPdf',compact('monitorClintList'));
+        $this->generatePdf($data);
+    }
+
+    public function getItemStockMiller(){
+        $centerId = Auth::user()->center_id;
+        $itemStock = Report::itemStockMiller($centerId);
+        $view = view("reportView.itemStockMillerReport",compact('itemStock'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getItemStockMillerPdf(){
+        $centerId = Auth::user()->center_id;
+        $itemStock = Report::itemStockMiller($centerId);
+        $data = \View::make('reportPdf.itemStockMillerReportPdf',compact('itemStock'));
+        $this->generatePdf($data);
+    }
+
+    public function getTotalMillerEmployee(){
+        $centerId = Auth::user()->center_id;
+        $employeeList = Report::hrMillerEmployee($centerId);
+        $view = view("reportView.hrEmployeemillerReport",compact('employeeList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getTotalMillerEmployeePdf(){
+        $centerId = Auth::user()->center_id;
+        $employeeList = Report::hrMillerEmployee($centerId);
+        $data = \View::make('reportPdf.hrEmployeemillerReportPdf',compact('employeeList'));
+        $this->generatePdf($data);
+    }
+
+    public function getAdminHrEmployee(){
+        $hrEmployeeList = Report::adminHrmillerEmployee();
+        $view = view("reportView.adminHrEmployeeReport",compact('hrEmployeeList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getAdminHrEmployeePdf(){
+        $hrEmployeeList = Report::adminHrmillerEmployee();
+        $data = \View::make('reportPdf.adminHrEmployeeReportPdf',compact('hrEmployeeList'));
+        $this->generatePdf($data);
     }
 
 }

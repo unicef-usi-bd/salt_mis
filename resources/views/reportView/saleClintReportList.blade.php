@@ -6,9 +6,9 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('purchase-salt-supplier-miller-pdf/'.$divisionId.'/'.$districtId) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('sale-clint-list-miller-pdf/'.$customerId) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>List Of Supplier</h4>
+        <h4>Sale Clint List</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -23,23 +23,23 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Supplier Name</th>
-                <th>Division</th>
-                <th>District</th>
-                <th>Total Volume (KG) </th>
+                <th>Items Type</th>
+                <th>Items Name</th>
+                <th>Client Name</th>
+                <th>Sale Volume</th>
             </tr>
 
             </thead>
 
             <tbody>
             <?php $sl=0;?>
-            @foreach($supplierMillerList as $row)
+            @foreach($saleClintList as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->TRADING_NAME}}</td>
-                    <td>{{$row->DIVISION_NAME}}</td>
-                    <td>{{$row->DISTRICT_NAME}}</td>
-                    <td>{{$row->QTY}}</td>
+                    <td>{{$row->ITEM_TYPE_NAME}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->TRADER_NAME}}</td>
+                    <td>{{abs($row->QTY)}}</td>
                 </tr>
 
             @endforeach
