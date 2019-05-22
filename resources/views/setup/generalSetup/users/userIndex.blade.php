@@ -43,7 +43,7 @@
                 <tbody>
                 <?php $sl=0;?>
                 @foreach($users as $user)
-                    @if(($user->POSITIONLEVEl!=null && ($user->POSITIONLEVEl< Session::get('POSITIONLEVEl') )) || ($user->id==1 && Auth::user()->id != 1))
+                    @if(($user->POSITIONLEVEl!=null && ($user->POSITIONLEVEl< Session::get('POSITIONLEVEl') )) || ($user->id==1 && Auth::user()->id != 1) || ($user->USERGRP_ID!=null && ($user->USERGRP_ID< Session::get('USERGRP_ID'))))
                     @else
                         <tr>
                             <td class="center">{{ ++$sl }}</td>

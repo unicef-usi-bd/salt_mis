@@ -1,5 +1,13 @@
 <div class="col-md-12">
-    <form action="{{ url('/crude-salt-procurement') }}" method="post" class="form-horizontal" role="form">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
+    <form id="myform" action="{{ url('/crude-salt-procurement') }}" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             <div class="col-md-6">
@@ -122,6 +130,32 @@
             $('.resources').show();
         }
         else $('.resources').hide();
+    });
+
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                RCV_QTY:{
+                    required: true,
+                }
+            }
+        });
+
     });
 
 </script>

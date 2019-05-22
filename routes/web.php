@@ -156,6 +156,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('miller-license-report/{zone}','ReportController@getListofMillerLicenses');//jalal
     Route::get('qc-report/{zone}','ReportController@getQcreport');//jalal
     Route::get('hr-report/{zone}','ReportController@getHrreport');//jalal
+    Route::get('purchase-salt-supplier-miller','ReportController@getListSupplierForMiller');//jalal
+    Route::get('purchase-salt-supplier-miller-type','ReportController@getListSupplierWithNameForMiller');//jalal
+    Route::get('clint-list-miller','ReportController@getClintListFormiller');//jalal
+    Route::get('sale-clint-list-miller','ReportController@getSaleClintList');//jalal
+    Route::get('monitor-clint-list-miller','ReportController@getMonitorClintListMiller');//jalal
+    Route::get('item-stock-miller','ReportController@getItemStockMiller');//jalal
+    Route::get('hr-employee-miller','ReportController@getTotalMillerEmployee');//jalal
+    Route::get('admin-hr-employee-miller','ReportController@getAdminHrEmployee');//jalal
 
 
     Route::get('chemical-item-list','ReportController@getChemicalItemList');//Rubiyat
@@ -224,6 +232,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal
     Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
     Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
+    Route::get('purchase-salt-supplier-miller-pdf/{divisionId}/{districtId}','ReportController@getListSupplierForMillerPdf');//jalal
+    Route::get('purchase-salt-supplier-miller-type-pdf/{divisionId}/{districtId}','ReportController@getListSupplierWithNameForMillerPdf');//jalal
+    Route::get('clint-list-miller-pdf/{divisionId}/{districtId}','ReportController@getClintListFormillerPdf');//jalal
+    Route::get('sale-clint-list-miller-pdf/{customerId}','ReportController@getSaleClintListPdf');//jalal
+    Route::get('monitor-clint-list-miller-pdf','ReportController@getMonitorClintListMillerPdf');//jalal
+    Route::get('item-stock-miller-pdf','ReportController@getItemStockMillerPdf');//jalal
+    Route::get('hr-employee-miller-pdf','ReportController@getTotalMillerEmployeePdf');//jalal
+    Route::get('admin-hr-employee-miller-pdf','ReportController@getAdminHrEmployeePdf');//jalal
 
 
 });

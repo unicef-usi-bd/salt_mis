@@ -249,6 +249,9 @@
                 var processType = $('.processType').val();
                 var startDate = $('.millReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.millReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var divisionId = $('.divisionId').val();
+                var districtId = $('.districtId').val();
+                var customerId = $('.customerId').val();
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
@@ -262,7 +265,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

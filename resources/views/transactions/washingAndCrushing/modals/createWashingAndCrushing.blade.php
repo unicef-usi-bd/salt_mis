@@ -3,12 +3,20 @@
         font-size: 22px;
     }
 </style>
+<style>
+    .my-error-class {
+        color:red;
+    }
+    .my-valid-class {
+        color:green;
+    }
+</style>
 <div class="col-md-12">
     <div class="alert alert-danger alert-dismissible msg" style="display: none;">
 
     </div>
 
-    <form action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
 
         @csrf
 
@@ -129,6 +137,32 @@
             $('.stockSalt').hide();
             $('.result').text(remainStock);
         }
+    });
+
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                REQ_QTY:{
+                    required: true,
+                }
+            }
+        });
+
     });
 </script>
 

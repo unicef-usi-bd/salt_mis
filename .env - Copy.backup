@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:ovEl8LLzhULpuKZSFULL/h2M8DoHb6CsAeB+qIOaf3Q=
 APP_DEBUG=true
-APP_URL=http://localhost/salt_mis/public
+APP_URL=http://localhost/salt_mis/
 
 LOG_CHANNEL=stack
 
