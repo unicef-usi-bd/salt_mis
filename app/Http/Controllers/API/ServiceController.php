@@ -34,11 +34,11 @@ class ServiceController extends Controller
     public function userLogin(Request $request)
     {
 
-        $user_name = $request->user_name;
+        $email = $request->email;
         $password  = $request->password;
 
         $checkResult = DB::table('users')
-            ->where('username', '=', $user_name)
+            ->where('email', '=', $email)
             ->first();
 
         //$this->pr($millId);
@@ -47,7 +47,7 @@ class ServiceController extends Controller
             if ($result){
                 $center_id = DB::table('users')
                     ->select('users.center_id')
-                    ->where('username', '=', $user_name)
+                    ->where('email', '=', $email)
                     ->where('password', '=', $checkResult->password)
                     ->first();
                 $child_id = $center_id->center_id;
