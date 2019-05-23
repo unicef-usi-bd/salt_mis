@@ -121,11 +121,11 @@
                                         <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                                             <thead>
                                             <tr>
-                                                <th style="width:110px;">Owner Name<span style="color:red;"> *</span></th>
-                                                <th style="width:100px;">Division<span style="color:red;"> </span></th>
-                                                <th style="width:100px;">District</th>
-                                                <th style="width:100px;">Upazila</th>
-                                                <th style="width:100px;">Union</th>
+                                                <th style="width:110px;">Owner Name <span style="color:red;"> *</span></th>
+                                                <th style="width:135px;">Division<span style="color:red;"> </span></th>
+                                                <th style="width:135px;">District</th>
+                                                <th style="width:135px;">Upazila</th>
+                                                <th style="width:135px;">Union</th>
                                                 <th style="width:100px;">NID<span style="color:red;"> </span></th>
                                                 <th style="width:100px;">Mobile 1<span style="color:red;"> *</span></th>
                                                 <th style="width:100px;">Mobile 2</th>
@@ -144,7 +144,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control DIVISION_ID width-100" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
+                                                        <select class="form-control DIVISION_ID width-100 chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
                                                             <option value="">Select</option>
                                                             @foreach($getDivision as $row)
                                                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -154,21 +154,21 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_district width-100" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
+                                                        <select class="form-control ent_district width-100 chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
                                                             <option value="">Select</option>
                                                          </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_upazila width-100" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
+                                                        <select class="form-control ent_upazila width-100 chosen-select" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
                                                             <option value=""> Select </option>
                                                         </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_union width-100" id="UNION_ID" name="UNION_ID[]"  >
+                                                        <select class="form-control ent_union width-100 chosen-select" id="UNION_ID" name="UNION_ID[]"  >
                                                             <option value="">Select</option>
                                                         </select>
                                                     </span>
@@ -176,7 +176,7 @@
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="NID[]" id="inputSuccess" value="" class="width-100 NID"  />
+                                                        <input type="text" name="NID[]" minlength="10" id="inputSuccess" value="" class="width-100 NID"  />
                                                     </span>
                                                 </td>
                                                 <td>
@@ -370,30 +370,40 @@
 
         // validation check
         $(document).ready(function () {
+            $.validator.addMethod(
+                "regex",
+                function(value, element, regexp)
+                {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                },
+                "Please check your input."
+            );
 
             $('#myform').validate({ // initialize the plugin
                 errorClass: "my-error-class",
                 //validClass: "my-valid-class",
                 rules: {
-                    'OWNER_NAME[]': {
+                    "OWNER_NAME[]": {
                         required: true
                     },
-                    // 'MOBILE_1[]':{
-                    //     required: true,
-                    //     maxlength:11,
-                    //     minlength:11,
-                    //     regex:/^(?:\+?88)?01[15-9]\d{8}$/,
-                    // },
+                    "MOBILE_1[]":{
+                        required: true,
+                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    },
                     // "MOBILE_2[]":{
                     //     maxlength:11,
                     //     regex:/^(?:\+?88)?01[15-9]\d{8}$/,
                     //
                     // },
-                    'EMAIL[]':{
+                    "EMAIL[]":{
                         required: true,
                         email: true
                     },
-                    'NID[]':{
+                    "NID[]":{
                         required: true,
                     }
 
