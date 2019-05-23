@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
+                    <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
