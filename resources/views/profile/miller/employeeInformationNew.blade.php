@@ -103,7 +103,7 @@
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
                                                        {{--<input type="text" name="REMARKS" class="chosen-container" placeholder="Male">--}}
-                                                       <textarea name="REMARKS" id="" cols="45" rows="2"></textarea>
+                                                       <textarea name="REMARKS" id="" cols="123" rows="2"></textarea>
                                                     </span>
                                                 </div>
                                             </div>

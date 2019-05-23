@@ -106,7 +106,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.signature') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" name="user_signature" class="form-control col-xs-10 col-sm-5" value=""/>
+                    <input type="file" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value=""/>
                 </div>
             </div>
 
@@ -397,12 +397,59 @@
             });
         });
 
+//        $(document).on('submit', function(e){
+//            var email = $('.email').val();
+//           // span.text('');
+//            e.preventDefault(); // <=================== Here
+//            $.ajax({
+//                url: 'email-duplicate',
+//                async: 'false',
+//                cache: 'false',
+//                type: 'GET',
+//                data:{'email':email},
+//                //data: form.serialize(),
+//                success: function(data) {
+//                    if (data == 'yes') {
+//                        // ============================ Not here, this would be too late
+//                        $('.emailId').text('');
+//                        $('.email_grp').append('<span class="emailId" style="color: red">This email already exists</span>');
+//                    }
+//                    else if (data == 'no') {
+//                        $('.emailId').text('');
+//                    }
+//                }
+//            });
+//        });
+
         //===========image validation============
-        $(".user_image").change(function () {
+        $(".user_image").bind('change',function () {
+            var fileSize = this.files[0].size;
+            var maxSize = 25000;//25kb; // alert(maxSize);
             var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+            var filename = $('input[type=file]').val().split('\\').pop();
+
             if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
                 alert("Only  "+fileExtension.join(', ')+" formats are allowed");
                 $(".user_image").val('');
+            }
+            if (fileSize>maxSize){
+                alert("File size exceeds maximum size");
+                $(".user_image").val('');
+            }
+        });
+        $(".user_signature").bind('change',function () {
+            var fileSize = this.files[0].size;
+            var maxSize = 25000;//25kb; // alert(maxSize);
+            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+            var filename = $('input[type=file]').val().split('\\').pop();
+
+            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
+                $(".user_signature").val('');
+            }
+            if (fileSize>maxSize){
+                alert("File size exceeds maximum size");
+                $(".user_signature").val('');
             }
         });
     </script>

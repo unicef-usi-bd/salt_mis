@@ -48,8 +48,8 @@
                                        <option value="qc-report/{zone}">List of QC </option>
                                   </optgroup>
                                    <optgroup label="HR">
-                                       <option value="">List of Miller </option>
-                                       <option value="">List of HR </option>
+                                       <option value="admin-hr-employee-miller">List of Miller </option>
+                                       {{--<option value="">List of HR </option>--}}
                                   </optgroup>
                                    <optgroup label="Miller">
                                        <option value="">Total Miller </option>

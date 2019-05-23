@@ -207,7 +207,30 @@
     </div>
 </div>
 {{--on change registration typr to merging open this modal--}}
-<div class="modal fade" id="mergeMillModal" role="dialog" style="display: none">
+<style>
+    .modal-open .modal1 {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .fade.in {
+        /*opacity:1;*/
+    }
+    .modal1 {
+        /*display: none;*/
+        position: fixed;
+        top: 0;
+        z-index: 1050;
+        /*-webkit-overflow-scrolling: touch;*/
+        outline: 0;
+    }
+
+    .modal1, .modal-backdrop {
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+<div class="modal1 fade" id="mergeMillModal" role="dialog" style="display: none;">
 {{--<div class="modal fade" id="mergeMillModal" role="dialog">--}}
     <div class="modal-dialog">
         <!-- Modal content-->

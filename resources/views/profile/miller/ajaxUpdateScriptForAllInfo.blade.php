@@ -10,6 +10,7 @@
             success: function (data) {
                 console.log(data);
                 $('.millInfo_msg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".millInfo_msg").hide(); }, 3000);
 
             }
         })
@@ -25,6 +26,7 @@
             success: function (data) {
                 console.log(data);
                 $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
 
             }
         })
@@ -40,6 +42,7 @@
             success: function (data) {
                 console.log(data);
                 $('.certificate_msg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
 
             }
         })
@@ -55,6 +58,7 @@
             success: function (data) {
                 console.log(data);
                 $('.qc_msg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".qc_msg").hide(); }, 3000);
 
             }
         })

@@ -24,6 +24,11 @@
         /*.my-valid-class {*/
             /*color:green;*/
         /*}*/
+        .input-icon.input-icon-right>input,select.form-control {
+            padding-left: 3px;
+            padding-right: 0px;
+            font-size: small;
+        }
 
     </style>
 
