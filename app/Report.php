@@ -22,6 +22,14 @@ class Report extends Model
             ->get();
     }
 
+    public  static function getFinishSaltItem(){
+        return DB::select(DB::raw("select i.ITEM_TYPE, i.ITEM_NAME,l.LOOKUPCHD_NAME
+       from smm_item i
+       left join ssc_lookupchd l on l.LOOKUPCHD_ID = i.ITEM_TYPE
+       where i.ITEM_TYPE = 29
+       group by i.ITEM_TYPE,i.ITEM_NAME"));
+    }
+
  public static function getAssociationList (){
      return DB::table('ssm_associationsetup')
          ->select('ssm_associationsetup.*','ssm_zonesetup.ZONE_NAME')
@@ -408,7 +416,7 @@ class Report extends Model
             AND t.TRAN_FLAG = 'SD' and s.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId"));
     }
 
-    public static function getSaleClintList($centerId,$customerId){
+    public static function getSaleClintList($centerId,$customerId,$itemTypeId){
         return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
         SUM(a.QTY) QTY
@@ -423,7 +431,7 @@ class Report extends Model
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
             AND i.ITEM_NO = t.ITEM_NO
-            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId ) a
+            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId and i.ITEM_TYPE = $itemTypeId) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
     }

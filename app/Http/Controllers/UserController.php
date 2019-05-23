@@ -82,13 +82,13 @@ class UserController extends Controller
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
             //'email' => 'required|string|email|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
+            //'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
           //  'cost_center_id' => 'required',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
-            'contact_no' => 'nullable|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
+            //'contact_no' => 'nullable|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 6 character',
@@ -237,24 +237,24 @@ class UserController extends Controller
             'user_full_name' =>'required|string|max:100',    
              'username' => 'required|string|max:100',
 //            'email' => 'required|string|email|max:255',
-              'email' => 'nullable|string|email|max:255',
+              //'email' => 'nullable|string|email|max:255',
               
               //'cost_center_id' => 'required',
 //            'designation_id' => 'required',
-             'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
+             //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
         }else{
              $rules = array(
                  'user_full_name' =>'required|string|max:100',
                  'username' => 'required|string|max:100',
                  //'email' => 'required|string|email|max:255',
-                 'email' => 'nullable|string|email|max:255',
+                 //'email' => 'nullable|string|email|max:255',
                  
                  //'cost_center_id' => 'required',
                  //'designation_id' => 'required',
                  'user_group_id' => 'required',
                  //'designation_id' => 'required',
-                 'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
+                 //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
         }
         $error = array(

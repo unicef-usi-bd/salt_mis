@@ -397,6 +397,30 @@
             });
         });
 
+//        $(document).on('submit', function(e){
+//            var email = $('.email').val();
+//           // span.text('');
+//            e.preventDefault(); // <=================== Here
+//            $.ajax({
+//                url: 'email-duplicate',
+//                async: 'false',
+//                cache: 'false',
+//                type: 'GET',
+//                data:{'email':email},
+//                //data: form.serialize(),
+//                success: function(data) {
+//                    if (data == 'yes') {
+//                        // ============================ Not here, this would be too late
+//                        $('.emailId').text('');
+//                        $('.email_grp').append('<span class="emailId" style="color: red">This email already exists</span>');
+//                    }
+//                    else if (data == 'no') {
+//                        $('.emailId').text('');
+//                    }
+//                }
+//            });
+//        });
+
         //===========image validation============
         $(".user_image").bind('change',function () {
             var fileSize = this.files[0].size;
