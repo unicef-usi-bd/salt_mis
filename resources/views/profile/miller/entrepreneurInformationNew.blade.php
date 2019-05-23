@@ -33,6 +33,11 @@
             padding-right: 0px;
             font-size: small;
         }
+        select.form-control {
+            padding-left: 1px;
+            padding-right: 0px;
+            font-size: small;
+        }
 
     </style>
 
@@ -116,17 +121,17 @@
                                         <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                                             <thead>
                                             <tr>
-                                                <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
-                                                <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                                                <th style="">District</th>
-                                                <th style="">Upazila</th>
-                                                <th style="width: 100px;">Union</th>
-                                                <th style="" >NID<span style="color:red;"> *</span></th>
-                                                <th style="">Mobile 1<span style="color:red;"> *</span></th>
-                                                <th  style="">Mobile 2</th>
-                                                <th  style="">Email <span style="color:red;"> *</span></th>
-                                                <th  style="">Remarks</th>
-                                                <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                                                <th style="width:110px;">Owner Name<span style="color:red;"> *</span></th>
+                                                <th style="width:100px;">Division<span style="color:red;"> </span></th>
+                                                <th style="width:100px;">District</th>
+                                                <th style="width:100px;">Upazila</th>
+                                                <th style="width:100px;">Union</th>
+                                                <th style="width:100px;">NID<span style="color:red;"> </span></th>
+                                                <th style="width:100px;">Mobile 1<span style="color:red;"> *</span></th>
+                                                <th style="width:100px;">Mobile 2</th>
+                                                <th style="width:100px;">Email <span style="color:red;"> *</span></th>
+                                                <th style="width:100px;">Remarks</th>
+                                                <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                                             </tr>
                                             </thead>
                                             <tbody class="newRow">
@@ -139,7 +144,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
+                                                        <select class="form-control DIVISION_ID width-100" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
                                                             <option value="">Select</option>
                                                             @foreach($getDivision as $row)
                                                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -149,21 +154,21 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
+                                                        <select class="form-control ent_district width-100" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
                                                             <option value="">Select</option>
                                                          </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
+                                                        <select class="form-control ent_upazila width-100" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
                                                             <option value=""> Select </option>
                                                         </select>
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
+                                                        <select class="form-control ent_union width-100" id="UNION_ID" name="UNION_ID[]"  >
                                                             <option value="">Select</option>
                                                         </select>
                                                     </span>
@@ -177,13 +182,13 @@
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="number" name="MOBILE_1[]" maxlength="11" minlength="11" value="" class="width-100 MOBILE_1" pattern="/^(?:\+?88)?01[15-9]\d{8}$/" />
+                                                        <input type="number" name="MOBILE_1[]" maxlength="11" minlength="11" value="" class="width-100 MOBILE_1"  />
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="number" name="MOBILE_2[]" id="inputSuccess" value="" class="width-100 MOBILE_2" maxlength="11" minlength="11" pattern="/^(?:\+?88)?01[15-9]\d{8}$/" />
+                                                        <input type="number" name="MOBILE_2[]" id="inputSuccess" value="" class="width-100 MOBILE_2" maxlength="11" minlength="11"  />
                                                     </span>
                                                 </td>
                                                 <td>
@@ -204,7 +209,7 @@
                                         </table>
                                         <hr>
                                         <div class="clearfix">
-                                            <div class="col-md-offset-3 col-md-9">
+                                            <div class="col-md-offset-3 col-md-9" style="margin-left: 360px;">
                                                 <button type="reset" class="btn">
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
@@ -303,7 +308,7 @@
         $(document).ready(function () {
             $('select#ENT_DIVISION_ID').on('change',function(){
                 var divisionId = $(this).val(); //alert(divisionId); //exit();
-                var option = '<option value="">Select District</option>';
+                var option = '<option value="">Select</option>';
                 var url  = $(this).attr('url');
                 var url = url+'/'+divisionId;
                 $.ajax({
@@ -324,7 +329,7 @@
         $(document).ready(function () {
             $('select#ENT_DISTRICT_ID').on('change',function(){
                 var districtId = $(this).val(); //alert(districtId); exit();
-                var option = '<option value="">Select Upazila</option>';
+                var option = '<option value="">Select</option>';
                 var url = $(this).attr('url');
                 var url = url+'/'+districtId;
                 $.ajax({
@@ -345,7 +350,7 @@
         $(document).ready(function () {
             $('#ENT_UPAZILA_ID').on('change',function(){
                 var upazilaId = $(this).val(); //alert(upazilaId);exit();
-                var option = '<option value="">Select Union</option>';
+                var option = '<option value="">Select</option>';
                 var url = $(this).attr('url');
                 var url = url+'/'+upazilaId;
                 $.ajax({

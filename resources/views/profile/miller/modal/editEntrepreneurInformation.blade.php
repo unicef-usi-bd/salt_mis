@@ -66,7 +66,7 @@
                         <th style="width:100px;">Mobile 2</th>
                         <th style="width:100px;">Email<span style="color:red;"> *</span></th>
                         <th style="width:100px;">Remarks</th>
-                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAddEntp"><i class="fa fa-plus"></i></span></th>
+                        <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAddEntp"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
                     <tbody class="newRowEntp">
@@ -152,7 +152,7 @@
                 </table>
                 <hr>
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 44%!important;">
+                    <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
