@@ -252,6 +252,7 @@
                 var divisionId = $('.divisionId').val();
                 var districtId = $('.districtId').val();
                 var customerId = $('.customerId').val();
+                var itemTypeId = $('.itemTypeId').val();
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
@@ -265,7 +266,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

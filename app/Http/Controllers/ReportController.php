@@ -36,8 +36,9 @@ class ReportController extends Controller
         $associationList = AssociationSetup::getZoneList();
         $getDivision = SupplierProfile::getDivision();
         $clintNameList = Report::getClintNameList();
+        $finishSaltItem = Report::getFinishSaltItem();
 //        $this->pr($associationList);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList'));
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem'));
     }
 
 // test controller
@@ -425,14 +426,15 @@ class ReportController extends Controller
     public function getSaleClintList(Request $request){
         $centerId = Auth::user()->center_id;
         $customerId = $request->input('customerId');
-        $saleClintList = Report::getSaleClintList($centerId,$customerId);
-        $view = view("reportView.saleClintReportList",compact('saleClintList','customerId'))->render();
+        $itemTypeId = $request->input('itemTypeId');
+        $saleClintList = Report::getSaleClintList($centerId,$customerId,$itemTypeId);
+        $view = view("reportView.saleClintReportList",compact('saleClintList','customerId','itemTypeId'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getSaleClintListPdf($customerId){
+    public function getSaleClintListPdf($customerId,$itemTypeId){
         $centerId = Auth::user()->center_id;
-        $saleClintList = Report::getSaleClintList($centerId,$customerId);
+        $saleClintList = Report::getSaleClintList($centerId,$customerId,$itemTypeId);
         $data = \View::make('reportPdf.saleClintReportListPdf',compact('saleClintList'));
         $this->generatePdf($data);
     }

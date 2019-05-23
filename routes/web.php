@@ -235,7 +235,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-supplier-miller-pdf/{divisionId}/{districtId}','ReportController@getListSupplierForMillerPdf');//jalal
     Route::get('purchase-salt-supplier-miller-type-pdf/{divisionId}/{districtId}','ReportController@getListSupplierWithNameForMillerPdf');//jalal
     Route::get('clint-list-miller-pdf/{divisionId}/{districtId}','ReportController@getClintListFormillerPdf');//jalal
-    Route::get('sale-clint-list-miller-pdf/{customerId}','ReportController@getSaleClintListPdf');//jalal
+    Route::get('sale-clint-list-miller-pdf/{customerId}/{itemTypeId}','ReportController@getSaleClintListPdf');//jalal
     Route::get('monitor-clint-list-miller-pdf','ReportController@getMonitorClintListMillerPdf');//jalal
     Route::get('item-stock-miller-pdf','ReportController@getItemStockMillerPdf');//jalal
     Route::get('hr-employee-miller-pdf','ReportController@getTotalMillerEmployeePdf');//jalal

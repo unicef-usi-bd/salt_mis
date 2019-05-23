@@ -370,6 +370,19 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Finished Salt Item</b> <span style="color: red;"> </span></label>
+                        <div class="col-md-8">
+                            <span class="block input-icon input-icon-right">
+                                <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >
+                                    <option value="">Select</option>
+                                    @foreach($finishSaltItem as $row)
+                                        <option value="{{ $row->ITEM_TYPE }}">{{ $row->ITEM_NAME }}</option>
+                                    @endforeach
+                                 </select>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </form>
             <br>
