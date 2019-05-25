@@ -164,6 +164,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('item-stock-miller','ReportController@getItemStockMiller');//jalal
     Route::get('hr-employee-miller','ReportController@getTotalMillerEmployee');//jalal
     Route::get('admin-hr-employee-miller','ReportController@getAdminHrEmployee');//jalal
+    Route::get('admin-association-list','ReportController@getAssociationListForAdmin');//jalal
+    Route::get('total-sale-admin','ReportController@getTotalSaleAdmin');//jalal
 
 
     Route::get('chemical-item-list','ReportController@getChemicalItemList');//Rubiyat
@@ -240,6 +242,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('item-stock-miller-pdf','ReportController@getItemStockMillerPdf');//jalal
     Route::get('hr-employee-miller-pdf','ReportController@getTotalMillerEmployeePdf');//jalal
     Route::get('admin-hr-employee-miller-pdf','ReportController@getAdminHrEmployeePdf');//jalal
+    Route::get('admin-association-list-pdf','ReportController@getAssociationListForAdminPdf');//jalal
+    Route::get('total-sale-admin-pdf/{divisionId}/{districtId}','ReportController@getTotalSaleAdminPdf');//jalal
 
 
 });

@@ -314,6 +314,18 @@
                         </span>
                         </div>
                     </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Renew Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Fail Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -376,6 +388,7 @@
                             <span class="block input-icon input-icon-right">
                                 <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >
                                     <option value="">Select</option>
+                                    <option value="0">Select All</option>
                                     @foreach($finishSaltItem as $row)
                                         <option value="{{ $row->ITEM_TYPE }}">{{ $row->ITEM_NAME }}</option>
                                     @endforeach
@@ -403,6 +416,7 @@
     </div>
 </div>
 @include('masterGlobal.getDistrict')
+{{--@include('masterGlobal.datePicker')--}}
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
@@ -431,5 +445,21 @@
 
         cb(start, end);
 
+    });
+
+    $(document).ready(function () {
+        var minDate = "<?php echo session('startDate'); ?>";
+        var maxDate = "<?php echo session('endDate'); ?>";
+        $('.date-picker').datepicker({
+            uiLibrary: 'bootstrap',
+            minDate: new Date(minDate),
+            maxDate: new Date(maxDate)
+
+        });
+    });
+    $(document).ready(function () {
+        $('.end-date').datepicker({
+            uiLibrary: 'bootstrap'
+        });
     });
 </script>
