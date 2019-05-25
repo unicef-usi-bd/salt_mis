@@ -19,16 +19,29 @@ class ReportAssociation extends Model
           where st.ACTIVE_FLG and st.item_type=26 "));
 
  }
-    public static function getPurchaseSaltTotal($starDate,$endDate){
+    public static function getPurchaseSaltTotal($starDate,$endDate,$itemTypeAssoc){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+        if ($itemTypeAssoc==0){
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
             where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
             from ssm_associationsetup ass
             where ass.PARENT_ID = '$centerId') and 
-            its.TRAN_DATE BETWEEN '$starDate' AND '$endDate' "));
+            its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'  "));
+        }else{
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            from tmm_itemstock its
+            left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
+            from ssm_associationsetup ass
+            where ass.PARENT_ID = '$centerId') and 
+            its.TRAN_DATE BETWEEN '$starDate' AND '$endDate' and 
+            its.ITEM_NO = '$itemTypeAssoc' "));
+        }
+
     }
     public static function getPurchaseSaltTotalStock($starDate,$endDate){
         $centerId = Auth::user()->center_id;
@@ -174,12 +187,13 @@ class ReportAssociation extends Model
     }
     public static function getQcMillerList(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select mi.mill_name,ql.BATCH_NO, lc.LOOKUPCHD_NAME as QC_BY, lch.LOOKUPCHD_NAME as AGENCY_NAME, ql.QC_TESTNAME
+        return DB::select(DB::raw("select mi.mill_name,i.BATCH_NO, lc.LOOKUPCHD_NAME as QC_BY, lch.LOOKUPCHD_NAME as AGENCY_NAME, ql.QC_TESTNAME
           from tmm_qualitycontrol ql
               left join ssm_associationsetup ass on ql.center_id = ass.ASSOCIATION_ID
               left join ssm_mill_info mi on ass.MILL_ID = mi.MILL_ID
               left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
               left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
+              left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
               where ql.center_id = '$centerId' "));
 
     }
@@ -214,6 +228,34 @@ class ReportAssociation extends Model
              from ssm_associationsetup ass
              where ass.PARENT_ID = '$centerId' )
              "));
+
+    }
+
+    public static function getListOfMiller(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
+              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
+              from ssm_mill_info  mi
+              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
+              where mi.center_id = '$centerId' "));
+
+    }
+    public static function assocProcessStock(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
+              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
+              from ssm_mill_info  mi
+              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
+              where mi.center_id = '$centerId' "));
+
+    }
+    public static function getAssocSale(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
+              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
+              from ssm_mill_info  mi
+              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
+              where mi.center_id = '$centerId' "));
 
     }
 

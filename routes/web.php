@@ -185,7 +185,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-item', 'ReportAssociationController@getPurchaseSaltItem'); //azharul
     Route::get('purchase-salt-item-pdf', 'ReportAssociationController@getPurchaseSaltItemPdf');//azharul
     Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');//azharul
-    Route::get('purchase-salt-total-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
+    Route::get('purchase-salt-total-pdf/{starDate}/{endDate}/{itemTypeAssoc}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
     Route::get('purchase-salt-total-stock', 'ReportAssociationController@getPurchaseSaltTotalStock');//azharul
     Route::get('purchase-salt-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
@@ -200,6 +200,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('association-miller-type-pdf', 'ReportAssociationController@getMillerTypePdf');//azharul
     Route::get('association-monitor-miller', 'ReportAssociationController@getMonitorMiller');//azharul
     Route::get('association-monitor-miller-pdf', 'ReportAssociationController@getMonitorMillerPdf');//azharul
+    Route::get('list-of-miller', 'ReportAssociationController@getListOfMiller');//azharul
+    Route::get('list-of-miller-pdf', 'ReportAssociationController@getListOfMillerPdf');//azharul
     Route::get('association-miller-list', 'ReportAssociationController@getMillerListForHr');//azharul
     Route::get('association-miller-list-pdf', 'ReportAssociationController@getMillerListForHrPdf');//azharul
     Route::get('qc-miller-list', 'ReportAssociationController@getQcMillerList');//azharul
@@ -210,6 +212,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sale-item-list-pdf', 'ReportAssociationController@getSaleItemListPdf');//azharul
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul
     Route::get('sale-item-stock-pdf', 'ReportAssociationController@getSaleItemStockPdf');//azharul
+    Route::get('assoc-process-stock', 'ReportAssociationController@assocProcessStock');//azharul
+    Route::get('assoc-process-stock-pdf', 'ReportAssociationController@assocProcessStockPdf');//azharul
+    Route::get('association-sale', 'ReportAssociationController@assocSale');//azharul
+    Route::get('association-sale-pdf', 'ReportAssociationController@assocSalePdf');//azharul
     // Report and PDF for Association End
 
     //Report reportPdf
