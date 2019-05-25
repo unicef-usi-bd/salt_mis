@@ -39,6 +39,26 @@
             font-size: small;
         }
 
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        td{
+            border:1px solid #000;
+        }
+
+        tr td:last-child{
+            width:1%;
+            white-space:nowrap;
+        }
+
     </style>
 
     <div class="page-header">
@@ -118,7 +138,7 @@
                                         {{--</div>--}}
 
 
-                                        <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                                        <table class="table table-bordered fundAllocation" style="margin-top: 64px;width: 100%">
                                             <thead>
                                             <tr>
                                                 <th style="width:110px;">Owner Name <span style="color:red;"> *</span></th>

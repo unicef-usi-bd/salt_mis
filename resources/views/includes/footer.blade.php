@@ -33,8 +33,14 @@
 	@include('masterGlobal.modalGlobal')
 	<div class="footer-inner">
 		<div class="footer-content">
-			<div style="float:left; width:350px;">Copyright &copy; 2019 SALT, All Rights Reserved.</div>
-			<div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>&nbsp;
+			<div class="pull-left" style="height:100%;">
+				<span style="vertical-align:middle;">Implemented BY </span>
+				<img src="image/association-logo.png" width="150" height="40" alt="Association Logo"/>
+			</div>
+			<div class="pull-right" style="height:100%;">
+				<span style="vertical-align:middle;">Supported BY </span>
+				<img src="image/unicef-bd.jpg" width="50" height="40" alt="Association Logo"/>
+			</div>
 		</div>
 	</div>
 </div>
