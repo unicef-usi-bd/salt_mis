@@ -260,6 +260,7 @@
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var issueby = $('select.issueby').val();
+                var itemTypeAssoc = $('.itemTypeAssoc').val(); //alert(itemTypeAssoc); exit();
 
             }
             //console.log(url);

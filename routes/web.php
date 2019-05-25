@@ -183,13 +183,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-item', 'ReportAssociationController@getPurchaseSaltItem'); //azharul
     Route::get('purchase-salt-item-pdf', 'ReportAssociationController@getPurchaseSaltItemPdf');//azharul
     Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');//azharul
-    Route::get('purchase-salt-total-pdf', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
+    Route::get('purchase-salt-total-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
     Route::get('purchase-salt-total-stock', 'ReportAssociationController@getPurchaseSaltTotalStock');//azharul
     Route::get('purchase-salt-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
     Route::get('purchase-chemical-item-pdf', 'ReportAssociationController@getPurchaseChemicalItemPdf');//azharul
     Route::get('purchase-chemical-total', 'ReportAssociationController@getPurchaseChemicalTotal');//azharul
-    Route::get('purchase-chemical-total-pdf', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
+    Route::get('purchase-chemical-total-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
     Route::get('purchase-chemical-total-stock', 'ReportAssociationController@getPurchaseChemicalTotalStock');//azharul
     Route::get('purchase-chemical-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalStockPdf');//azharul
     Route::get('association-total-miller', 'ReportAssociationController@getTotalMiller');//azharul

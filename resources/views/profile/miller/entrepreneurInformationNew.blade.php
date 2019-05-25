@@ -138,95 +138,100 @@
                                         {{--</div>--}}
 
 
-                                        <table class="table table-bordered fundAllocation" style="margin-top: 64px;width: 100%">
-                                            <thead>
-                                            <tr>
-                                                <th style="width:110px;">Owner Name <span style="color:red;"> *</span></th>
-                                                <th style="width:135px;">Division<span style="color:red;"> </span></th>
-                                                <th style="width:135px;">District</th>
-                                                <th style="width:135px;">Upazila</th>
-                                                <th style="width:135px;">Union</th>
-                                                <th style="width:100px;">NID<span style="color:red;"> </span></th>
-                                                <th style="width:100px;">Mobile 1<span style="color:red;"> *</span></th>
-                                                <th style="width:100px;">Mobile 2</th>
-                                                <th style="width:100px;">Email <span style="color:red;"> *</span></th>
-                                                <th style="width:100px;">Remarks</th>
-                                                <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="newRow">
-                                            <tr class="rowFirst">
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <select class="form-control DIVISION_ID width-100 chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
-                                                            <option value="">Select</option>
-                                                            @foreach($getDivision as $row)
-                                                                <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_district width-100 chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
-                                                            <option value="">Select</option>
-                                                         </select>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_upazila width-100 chosen-select" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
-                                                            <option value=""> Select </option>
-                                                        </select>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ent_union width-100 chosen-select" id="UNION_ID" name="UNION_ID[]"  >
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="NID[]" minlength="10" id="inputSuccess" value="" class="width-100 NID"  />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="number" name="MOBILE_1[]" maxlength="11" minlength="11" value="" class="width-100 MOBILE_1"  />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="number" name="MOBILE_2[]" id="inputSuccess" value="" class="width-100 MOBILE_2" maxlength="11" minlength="11"  />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="email" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
-                                                        <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="REMARKS[]" id="inputSuccess " value="" class="width-100 REMARKS"  />
-                                                    </span>
-                                                </td>
-                                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="table-width" style="overflow-x: scroll;height: 280px;">
+                                            <table class="table table-bordered fundAllocation" style="margin-top: 64px;width: 100%">
+                                                <thead>
+
+                                                <tr>
+                                                    <th style="width:200px;">Owner Name <span style="color:red;"> *</span></th>
+                                                    <th style="width:200px;">Division<span style="color:red;"> </span></th>
+                                                    <th style="width:200px!important;">District</th>
+                                                    <th style="width:200px;">Upazila</th>
+                                                    <th style="width:200px;">Union</th>
+                                                    <th style="width:200px;">NID<span style="color:red;"> </span></th>
+                                                    <th style="width:200px;">Mobile 1<span style="color:red;"> *</span></th>
+                                                    <th style="width:200px;">Mobile 2</th>
+                                                    <th style="width:200px;">Email <span style="color:red;"> *</span></th>
+                                                    <th style="width:200px;">Remarks</th>
+                                                    <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="newRow">
+                                                <tr class="rowFirst">
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
+                                                            {{--<input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />--}}
+                                                            <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="OWNER_NAME"  />
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <select class="form-control DIVISION_ID chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
+                                                                <option value="">Select Division</option>
+                                                                @foreach($getDivision as $row)
+                                                                    <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <select class="form-control ent_district chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}" >
+                                                                <option value="">Select</option>
+                                                             </select>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <select class="form-control ent_upazila chosen-select" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]" url="{{ url('supplier-profile/get-union') }}" >
+                                                                <option value=""> Select </option>
+                                                            </select>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <select class="form-control ent_union chosen-select" id="UNION_ID" name="UNION_ID[]"  >
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <input type="text" name="NID[]" minlength="10" id="inputSuccess" value="" class="NID"  />
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <input type="number" name="MOBILE_1[]" maxlength="11" minlength="11" value="" class="MOBILE_1"  />
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <input type="number" name="MOBILE_2[]" id="inputSuccess" value="" class="MOBILE_2" maxlength="11" minlength="11"  />
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="block input-icon input-icon-right">
+                                                            <input type="email" name="EMAIL[]" id="inputSuccess batch_no" value="" class="EMAIL"  />
+                                                            <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
+                                                        <span class="block input-icon input-icon-right">
+                                                            {{--<input type="text" name="REMARKS[]" id="inputSuccess " value="" class="REMARKS"  />--}}
+                                                            <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1"></textarea>
+                                                        </span>
+                                                    </td>
+                                                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <hr>
                                         <div class="clearfix">
                                             <div class="col-md-offset-3 col-md-9" style="margin-left: 360px;">
@@ -328,7 +333,7 @@
         $(document).ready(function () {
             $('select#ENT_DIVISION_ID').on('change',function(){
                 var divisionId = $(this).val(); //alert(divisionId); //exit();
-                var option = '<option value="">Select</option>';
+                var option = '<option value="">Select District</option>';
                 var url  = $(this).attr('url');
                 var url = url+'/'+divisionId;
                 $.ajax({
@@ -349,7 +354,7 @@
         $(document).ready(function () {
             $('select#ENT_DISTRICT_ID').on('change',function(){
                 var districtId = $(this).val(); //alert(districtId); exit();
-                var option = '<option value="">Select</option>';
+                var option = '<option value="">Select Upazila</option>';
                 var url = $(this).attr('url');
                 var url = url+'/'+districtId;
                 $.ajax({
@@ -370,7 +375,7 @@
         $(document).ready(function () {
             $('#ENT_UPAZILA_ID').on('change',function(){
                 var upazilaId = $(this).val(); //alert(upazilaId);exit();
-                var option = '<option value="">Select</option>';
+                var option = '<option value="">Select Union</option>';
                 var url = $(this).attr('url');
                 var url = url+'/'+upazilaId;
                 $.ajax({
