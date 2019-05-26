@@ -139,7 +139,14 @@ class SalesDistributionController extends Controller
     public function getWashingCrashingSalt(Request $request){
         $centerId = $request->input('centerId');
 //     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
-        $stock = Stock::getTotalWashingSalt($centerId);
+        $washingSalt = Stock::getTotalWashingSalt($centerId);
+
+        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+        if($idoizeSaltAmount){
+            $stock = $washingSalt - $idoizeSaltAmount;
+        }else{
+            $stock = $washingSalt;
+        }
      //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
 
      //$stock = $washCrashStock - abs($totalReduceWashCrashSalt);
