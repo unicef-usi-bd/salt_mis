@@ -278,7 +278,12 @@
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var issueby = $('select.issueby').val();
-                var itemTypeAssoc = $('.itemTypeAssoc').val(); //alert(itemTypeAssoc); exit();
+                var itemTypeAssoc = $('.itemTypeAssoc').val();
+                var divisionId = $('.divisionIdd').val();
+                var districtId = $('.districtIdd').val();
+                var renawlDate = $('.renew-date').data('datepicker');
+                var failDate = $('.fail-date').data('datepicker');
+
 
             }
             //console.log(url);

@@ -215,7 +215,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('assoc-process-stock', 'ReportAssociationController@assocProcessStock');//azharul
     Route::get('assoc-process-stock-pdf', 'ReportAssociationController@assocProcessStockPdf');//azharul
     Route::get('association-sale', 'ReportAssociationController@assocSale');//azharul
-    Route::get('association-sale-pdf', 'ReportAssociationController@assocSalePdf');//azharul
+    Route::get('association-sale-pdf/{divisionId}/{districtId}', 'ReportAssociationController@assocSalePdf');//azharul
     // Report and PDF for Association End
 
     //Report reportPdf

@@ -242,20 +242,46 @@ class ReportAssociation extends Model
     }
     public static function assocProcessStock(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
-              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
-              from ssm_mill_info  mi
-              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
-              where mi.center_id = '$centerId' "));
+        return DB::select(DB::raw(" SELECT a.center_id, a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO, SUM(a.production) production,
+                    SUM(a.qty) stock
+                    FROM
+                                    (SELECT c.LOOKUPCHD_ID, c.LOOKUPCHD_NAME, m.center_id, i.BATCH_NO, 
+                                    CASE WHEN s.qty > 0 THEN
+                                                    s.qty
+                                    END production,
+                                    s.qty
+                                    FROM ssc_lookupchd c, ssm_mill_info m, tmm_itemstock s, tmm_iodizedmst i
+                                    WHERE c.LOOKUPCHD_ID = m.PROCESS_TYPE_ID
+                                    AND m.center_id = s.center_id
+                                    AND i.IODIZEDMST_ID = s.TRAN_NO
+                                    AND c.LOOKUPMST_ID = 6) a
+                    WHERE a.center_id = 4  
+                    GROUP BY a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO "));
 
     }
-    public static function getAssocSale(){
+    public static function getAssocSale($divisionId,$districtId){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
-              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
-              from ssm_mill_info  mi
-              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
-              where mi.center_id = '$centerId' "));
+        return DB::select(DB::raw(" SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
+        SUM(a.QTY) QTY, 
+        (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = '$centerId') cnt_miller
+        FROM
+            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NO, i.ITEM_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
+            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
+            t.QTY
+            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
+            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
+            AND m.SALESMST_ID = t.TRAN_NO
+            AND i.ITEM_NO = t.ITEM_NO
+            and s.DIVISION_ID = $divisionId
+            and s.DISTRICT_ID = $districtId
+            and t.TRAN_FLAG = 'SD'            
+             ) a
+        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type "));
 
     }
 

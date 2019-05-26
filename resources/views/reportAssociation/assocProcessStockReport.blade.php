@@ -32,10 +32,10 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $row->LOOKUPCHD_NAME }}</td>
+                    <td>{{ $row->BATCH_NO }}</td>
+                    <td>{{ $row->production }}</td>
+                    <td>{{ $row->stock }}</td>
                 </tr>
             @endforeach
             </tbody>

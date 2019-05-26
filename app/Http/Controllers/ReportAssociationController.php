@@ -183,6 +183,8 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
     }
     public function getLicenseMillerList(Request $request){
+        $renawlDate = $request->input('renawlDate');
+        $failDate = $request->input('failDate');
         $issueby =  $request->input('issueby'); //$this->pr($issueby);
         $MillerList = ReportAssociation::getLicenseMillerList($issueby);
         $view = view("reportAssociation.licenseMillerListReport",compact('MillerList','issueby'))->render();
@@ -224,13 +226,15 @@ class ReportAssociationController extends Controller
         $data = \View::make('reportAssociation.pdf.assocProcessStockReportPdf',compact('processStock'));
         $this->generatePdf($data);
     }
-    public function assocSale(){
-        $assocSale = ReportAssociation::getAssocSale();
-        $view = view("reportAssociation.assocSaleReport",compact('assocSale'))->render();
+    public function assocSale(Request $request){
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');  //$this->pr($districtId);
+        $assocSale = ReportAssociation::getAssocSale($divisionId,$districtId);
+        $view = view("reportAssociation.assocSaleReport",compact('assocSale','divisionId','districtId'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function assocSalePdf(){
-        $assocSale = ReportAssociation::getAssocSale();
+    public function assocSalePdf(Request $request,$divisionId,$districtId){
+        $assocSale = ReportAssociation::getAssocSale($divisionId,$districtId);
         $data = \View::make('reportAssociation.pdf.assocSaleReportPdf',compact('assocSale'));
         $this->generatePdf($data);
     }
