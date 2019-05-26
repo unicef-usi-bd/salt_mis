@@ -281,8 +281,9 @@
                 var itemTypeAssoc = $('.itemTypeAssoc').val();
                 var divisionId = $('.divisionIdd').val();
                 var districtId = $('.districtIdd').val();
-                var renawlDate = $('.renew-date').data('datepicker');
-                var failDate = $('.fail-date').data('datepicker');
+                var renawlDate = $('.renew-date').val();
+                var failDate = $('.fail-date').val();
+                //alert(failDate); exit();
 
 
             }

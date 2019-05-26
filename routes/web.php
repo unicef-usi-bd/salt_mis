@@ -207,7 +207,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('qc-miller-list', 'ReportAssociationController@getQcMillerList');//azharul
     Route::get('qc-miller-list-pdf', 'ReportAssociationController@getQcMillerListPdf');//azharul
     Route::get('license-miller-list', 'ReportAssociationController@getLicenseMillerList');//azharul
-    Route::get('license-miller-list-pdf/{issueby}', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
+    Route::get('license-miller-list-pdf/{issueby}/{renawlDate}/{failDate}', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
     Route::get('sale-item-list', 'ReportAssociationController@getSaleItemList');//azharul
     Route::get('sale-item-list-pdf', 'ReportAssociationController@getSaleItemListPdf');//azharul
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul

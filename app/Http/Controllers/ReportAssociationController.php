@@ -183,16 +183,16 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
     }
     public function getLicenseMillerList(Request $request){
-        $renawlDate = $request->input('renawlDate');
-        $failDate = $request->input('failDate');
-        $issueby =  $request->input('issueby'); //$this->pr($issueby);
-        $MillerList = ReportAssociation::getLicenseMillerList($issueby);
-        $view = view("reportAssociation.licenseMillerListReport",compact('MillerList','issueby'))->render();
+        $renawlDate = date("Y-m-d", strtotime($request->input('renawlDate')));
+        $failDate = date("Y-m-d", strtotime($request->input('failDate')));
+        $issueby =  $request->input('issueby'); //$this->pr($renawlDate);
+        $MillerList = ReportAssociation::getLicenseMillerList($issueby,$renawlDate,$failDate);
+        $view = view("reportAssociation.licenseMillerListReport",compact('MillerList','issueby','renawlDate','failDate'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function getLicenseMillerListPdf(Request $request,$issueby){
+    public function getLicenseMillerListPdf(Request $request,$issueby,$renawlDate,$failDate){
         $issueby  =$issueby;
-        $MillerList = ReportAssociation::getLicenseMillerList($issueby);
+        $MillerList = ReportAssociation::getLicenseMillerList($issueby,$renawlDate,$failDate);
         $data = \View::make('reportAssociation.pdf.licenseMillerListReportPdf',compact('MillerList'));
         $this->generatePdf($data);
     }
