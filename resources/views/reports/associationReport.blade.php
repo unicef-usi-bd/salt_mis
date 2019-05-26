@@ -20,10 +20,10 @@
                                        <option value="purchase-chemical-total-stock">Purchase Stock</option>
                                  </optgroup>
                                    <optgroup label="Process">
-                                       <option value="">Process  Stock</option>
+                                       <option value="assoc-process-stock">Process  Stock</option>
                                    </optgroup>
                                    <optgroup label="Sale">
-                                       <option value="">Total Sale</option>
+                                       <option value="association-sale">Total Sale</option>
                                        <option value="sale-item-list">List of Item</option>
                                        <option value="sale-item-stock">Item Stock</option>
                                  </optgroup>
@@ -40,7 +40,7 @@
                                        <option value="association-total-miller">Total Miller </option>
                                        <option value="association-miller-type">Type of Miller </option>
                                        <option value="association-monitor-miller">Monitor Miller </option>
-                                       <option value="">List Of Miller </option>
+                                       <option value="list-of-miller">List Of Miller </option>
                                   </optgroup>
 
                                </select>
@@ -196,6 +196,20 @@
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAssoc chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                                <option value="0">All Purchase</option>
+                                @foreach($crudeSaltTypes as $chemical)
+                                       <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                                   @endforeach
+                                </select>
                             </span>
                         </div>
                     </div>

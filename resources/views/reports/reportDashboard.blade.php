@@ -213,6 +213,10 @@
                 var issuerId = $('.issuerAdmin').val();
                 var startDate = $('.adminReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.adminReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var divisionId = $('.divisionId').val();
+                var districtId = $('.districtId').val();
+                var renawlDate = $('.date-picker').data('datepicker');
+                var failDate = $('.end-date').data('datepicker');
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -222,6 +226,10 @@
                 var issuerId = $('.issuerUnicef').val();
                 var startDate = $('.unicefReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.unicefReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var divisionId = $('.divisionId').val();
+                var districtId = $('.districtId').val();
+                var renawlDate = $('.date-picker').data('datepicker');
+                var failDate = $('.end-date').data('datepicker');
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
@@ -231,6 +239,10 @@
                 var issuerId = $('.issuerBsti').val();
                 var startDate = $('.bstiReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.bstiReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var divisionId = $('.divisionId').val();
+                var districtId = $('.districtId').val();
+                var renawlDate = $('.date-picker').data('datepicker');
+                var failDate = $('.end-date').data('datepicker');
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
@@ -240,6 +252,10 @@
                 var issuerId = $('.issuerBasic').val();
                 var startDate = $('.basicReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.basicReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+                var divisionId = $('.divisionId').val();
+                var districtId = $('.districtId').val();
+                var renawlDate = $('.date-picker').data('datepicker');
+                var failDate = $('.end-date').data('datepicker');
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
@@ -253,6 +269,8 @@
                 var districtId = $('.districtId').val();
                 var customerId = $('.customerId').val();
                 var itemTypeId = $('.itemTypeId').val();
+                var renawlDate = $('.date-picker').data('datepicker');
+                var failDate = $('.end-date').data('datepicker');
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
@@ -260,13 +278,14 @@
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var issueby = $('select.issueby').val();
+                var itemTypeAssoc = $('.itemTypeAssoc').val(); //alert(itemTypeAssoc); exit();
 
             }
             //console.log(url);
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId,'renawlDate':renawlDate,'failDate':failDate,'itemTypeAssoc':itemTypeAssoc},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

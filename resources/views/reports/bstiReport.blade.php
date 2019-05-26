@@ -14,7 +14,7 @@
                                        <option value="association-list">List of Total Association </option>
                                        <option value="miller-list/{activStatus}">Type of Miller</option>
                                        <option value="monitor-association">Monitor Association</option>
-                                       <option value="">List of Association </option>
+                                       <option value="admin-association-list">List of Association </option>
                                    </optgroup>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-list">List of Item </option>
@@ -35,7 +35,7 @@
                                        {{--<option value="">List of  Stock</option>--}}
                                   </optgroup>
                                    <optgroup label="Sale">
-                                       <option value="">Total Sale</option>
+                                       <option value="total-sale-admin">Total Sale</option>
                                        <option value="sales-item-report-all">List of Item</option>
                                        <option value="">Item Stock</option>
                                   </optgroup>
@@ -311,6 +311,41 @@
                         </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
+                        <div class="col-xs-8">
+                            <span class="block input-icon input-icon-right">
+                                <select id="DIVISION_ID" class="form-control divisionId chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                    <option value="">Select Division</option>
+                                    @foreach($getDivision as $row)
+                                        <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                    @endforeach
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
+                        <div class="col-xs-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="DISTRICT_ID" class="districtId form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
+                                <option value="">Select District</option>
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Renew Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Fail Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -405,5 +440,20 @@
 
         cb(start, end);
 
+    });
+    $(document).ready(function () {
+        var minDate = "<?php echo session('startDate'); ?>";
+        var maxDate = "<?php echo session('endDate'); ?>";
+        $('.date-picker').datepicker({
+            uiLibrary: 'bootstrap',
+            minDate: new Date(minDate),
+            maxDate: new Date(maxDate)
+
+        });
+    });
+    $(document).ready(function () {
+        $('.end-date').datepicker({
+            uiLibrary: 'bootstrap'
+        });
     });
 </script>

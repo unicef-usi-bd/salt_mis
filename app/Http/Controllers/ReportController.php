@@ -204,13 +204,15 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
         $issuerId = $request->input('issuerId');
+        $renawlDate = $request->input('renawlDate');
+        $failDate = $request->input('failDate');
 
         //echo $issuerId;die();
 
 //        $issuerId = $request->input('issuerId');
-        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
+        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate);
 //        return $listLicenseMiller;
-        $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId'))->render();
+        $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId','renawlDate','failDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
@@ -490,6 +492,32 @@ class ReportController extends Controller
     public function getAdminHrEmployeePdf(){
         $hrEmployeeList = Report::adminHrmillerEmployee();
         $data = \View::make('reportPdf.adminHrEmployeeReportPdf',compact('hrEmployeeList'));
+        $this->generatePdf($data);
+    }
+
+    public function getAssociationListForAdmin(){
+        $associationList = Report::associationListForAdmin();
+        $view = view("reportView.adminAssociationListreport",compact('associationList'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getAssociationListForAdminPdf(){
+        $associationList = Report::associationListForAdmin();
+        $data = \View::make('reportPdf.adminAssociationListreportPdf',compact('associationList'));
+        $this->generatePdf($data);
+    }
+
+    public function getTotalSaleAdmin(Request $request){
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
+        $totalSale = Report::totalSaleAdmin($divisionId,$districtId);
+        $view = view("reportView.totalSaleAdminReport",compact('totalSale','divisionId','districtId'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getTotalSaleAdminPdf($divisionId,$districtId){
+        $totalSale = Report::totalSaleAdmin($divisionId,$districtId);
+        $data = \View::make('reportPdf.totalSaleAdminReportPdf',compact('totalSale'));
         $this->generatePdf($data);
     }
 

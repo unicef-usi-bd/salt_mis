@@ -53,103 +53,106 @@
                 {{--</div>--}}
 
 
-                <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
-                    <thead>
-                    <tr>
-                        <th style="width:100px;">Owner Name<span style="color:red;"> *</span></th>
-                        <th style="width:100px;">Division<span style="color:red;"> </span></th>
-                        <th style="width:100px;">District</th>
-                        <th style="width:100px;">Upazila</th>
-                        <th style="width:100px;">Union</th>
-                        <th style="width:100px;">NID</th>
-                        <th style="width:100px;">Mobile 1<span style="color:red;"> *</span></th>
-                        <th style="width:100px;">Mobile 2</th>
-                        <th style="width:100px;">Email<span style="color:red;"> *</span></th>
-                        <th style="width:100px;">Remarks</th>
-                        <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAddEntp"><i class="fa fa-plus"></i></span></th>
-                    </tr>
-                    </thead>
-                    <tbody class="newRowEntp">
-                    @foreach($getEntrepreneurRowData as $editEntrepData)
-                        <tr class="rowFirstEntp">
-                            <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax class="width-100"--> </span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="OWNER_NAME[]"  value="{{ $editEntrepData->OWNER_NAME }}" class="width-100 OWNER_NAME required" required  />
-                                    <span style="color:red;display:none;" class="error">This field is required</span>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="block input-icon input-icon-right">
-                                    {{--<select class="width-100 form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >--}}
-                                    <select class="width-100 form-control DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
-                                        <option value="">Select</option>
-                                        @foreach($getDivision as $row)
-                                            <option value="{{$row->DIVISION_ID}}" @if($editEntrepData->DIVISION_ID==$row->DIVISION_ID) selected @endif> {{$row->DIVISION_NAME}}</option>
-                                        @endforeach
-                                    </select>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="width-100 form-control  ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
-                                        <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
-                                     </select>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="width-100 form-control ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
-                                        <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
-                                    </select>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="width-100 form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
-                                        <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
-                                    </select>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="NID[]" id="inputSuccess total_amount" value="{{ $editEntrepData->NID }}" class="width-100 NID"  />
-                                </span>
-                            </td>
-                            <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_1 }}" class="width-100 MOBILE_1 required numbersOnly"   />
-                                    <span style="color:red;display:none;" class="error">This field is required</span>
-                                    <span style="color:red;" class="errorMobile"></span>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="number" name="MOBILE_2[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_2 }}" class="width-100 MOBILE_2 " numbersOnly />
-                                    <span style="color:red;" class="errorMobile2"></span>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="width-100 EMAIL required"  />
-                                    {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
-                                    <span style="color:red;display:none;" class="error">This field is required</span>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editEntrepData->REMARKS }}" class="width-100 REMARKS"  />
-                                </span>
-                            </td>
-                            <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                <div class="table-width" style="overflow-x: scroll;height: 280px;">
+                    <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                        <thead>
+                        <tr>
+                            <th style="width:200px;">Owner Name <span style="color:red;"> *</span></th>
+                            <th style="width:200px;">Division<span style="color:red;"> </span></th>
+                            <th style="width:200px!important;">District</th>
+                            <th style="width:200px;">Upazila</th>
+                            <th style="width:200px;">Union</th>
+                            <th style="width:200px;">NID<span style="color:red;"> </span></th>
+                            <th style="width:200px;">Mobile 1<span style="color:red;"> *</span></th>
+                            <th style="width:200px;">Mobile 2</th>
+                            <th style="width:200px;">Email <span style="color:red;"> *</span></th>
+                            <th style="width:200px;">Remarks</th>
+                            <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="newRowEntp">
+                        @foreach($getEntrepreneurRowData as $editEntrepData)
+                            <tr class="rowFirstEntp">
+                                <td>
+                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax class="width-100"--> </span>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="text" name="OWNER_NAME[]"  value="{{ $editEntrepData->OWNER_NAME }}" class="OWNER_NAME required" required  />
+                                        <span style="color:red;display:none;" class="error">This field is required</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block input-icon input-icon-right">
+                                        {{--<select class="width-100 form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >--}}
+                                        <select class="form-control DIVISION_ID chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                            <option value="">Select Division</option>
+                                            @foreach($getDivision as $row)
+                                                <option value="{{$row->DIVISION_ID}}" @if($editEntrepData->DIVISION_ID==$row->DIVISION_ID) selected @endif> {{$row->DIVISION_NAME}}</option>
+                                            @endforeach
+                                        </select>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block input-icon input-icon-right">
+                                        <select class="form-control  ent_district chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
+                                         </select>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block input-icon input-icon-right">
+                                        <select class="form-control ent_upazila chosen-select" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
+                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
+                                        </select>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block input-icon input-icon-right">
+                                        <select class="form-control ent_union chosen-select" id="UNION_ID" name="UNION_ID[]"  >
+                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
+                                        </select>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="text" name="NID[]" id="inputSuccess total_amount" value="{{ $editEntrepData->NID }}" class="NID"  />
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="text" name="MOBILE_1[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_1 }}" class="MOBILE_1 required numbersOnly"   />
+                                        <span style="color:red;display:none;" class="error">This field is required</span>
+                                        <span style="color:red;" class="errorMobile"></span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="number" name="MOBILE_2[]" minlength="11" maxlength="11" value="{{ $editEntrepData->MOBILE_2 }}" class="MOBILE_2 " numbersOnly />
+                                        <span style="color:red;" class="errorMobile2"></span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="EMAIL required"  />
+                                        {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
+                                        <span style="color:red;display:none;" class="error">This field is required</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
+                                    <span class="block input-icon input-icon-right">
+{{--                                        <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editEntrepData->REMARKS }}" class="REMARKS"  />--}}
+                                        <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1">{{ $editEntrepData->REMARKS }}</textarea>
+                                    </span>
+                                </td>
+                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <hr>
                 <div class="clearfix">
                     <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">

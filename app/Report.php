@@ -213,7 +213,7 @@ class Report extends Model
             and its.TRAN_FLAG = 'SD' "));
     }
 
-    public static function getListofMillerLicense($centerId,$zone,$issuerId){
+    public static function getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate){
 
         $listMillerLicense = DB::table('tsm_qc_info as qc');
         $listMillerLicense->select('qc.*','ci.*','lc.LOOKUPCHD_NAME as license_type','lch.LOOKUPCHD_NAME as issuer_name','im.*','ass.ASSOCIATION_NAME');
@@ -230,6 +230,12 @@ class Report extends Model
         }
         if($issuerId){
             $listMillerLicense->where('ci.ISSURE_ID','=',$issuerId);
+        }
+        if($renawlDate){
+            $listMillerLicense->where('ci.RENEWING_DATE','=',$renawlDate);
+        }
+        if ($failDate){
+            $listMillerLicense->where('ci.RENEWING_DATE','=',$failDate);
         }
         return $listMillerLicense->get();
     }
@@ -417,7 +423,26 @@ class Report extends Model
     }
 
     public static function getSaleClintList($centerId,$customerId,$itemTypeId){
-        return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        if($itemTypeId == 0){
+            return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
+        SUM(a.QTY) QTY
+        FROM
+            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
+            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
+            t.QTY
+            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
+            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
+            AND m.SALESMST_ID = t.TRAN_NO
+            AND i.ITEM_NO = t.ITEM_NO
+            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId) a
+        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        }else{
+            return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
         SUM(a.QTY) QTY
         FROM
@@ -434,6 +459,8 @@ class Report extends Model
             AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId and i.ITEM_TYPE = $itemTypeId) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        }
+
     }
 
     public static function monitorClintMiller ($centerId){
@@ -478,6 +505,52 @@ class Report extends Model
        from ssm_mill_info me
        left join ssm_millemp_info mi on mi.MILL_ID = me.MILL_ID
        group by me.MILL_NAME"));
+    }
+
+    public static function associationListForAdmin(){
+        return DB::select(DB::raw("SELECT b.center_id, b.ASSOCIATION_NAME, SUM(b.tot_purchase) tot_purchase,
+        SUM(b.tot_chmical_pr) tot_chmical_pr, SUM(b.tot_sales) tot_sales
+        FROM
+            (SELECT a.center_id, (SELECT ASSOCIATION_NAME FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.center_id) ASSOCIATION_NAME,
+            CASE WHEN TRAN_FLAG = 'PR' THEN
+                s.qty
+            END tot_purchase,
+        
+            CASE WHEN TRAN_FLAG = 'PR' AND TRAN_TYPE = 'CP' THEN
+                s.qty
+            END tot_chmical_pr,
+        
+            CASE WHEN TRAN_FLAG = 'SD' THEN
+                s.qty
+            END tot_sales
+        
+            FROM tmm_itemstock s, ssm_associationsetup a
+            WHERE a.ASSOCIATION_ID = s.center_id) b	
+        GROUP BY b.center_id, b.ASSOCIATION_NAME	"));
+    }
+
+    public static function totalSaleAdmin($divisionId,$districtId){
+        return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
+        SUM(a.QTY) QTY, 
+        (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID) cnt_miller
+        FROM
+            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NO, i.ITEM_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
+            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
+            t.QTY
+            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
+            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
+            AND m.SALESMST_ID = t.TRAN_NO
+            AND i.ITEM_NO = t.ITEM_NO
+            and s.DIVISION_ID = $divisionId
+            and s.DISTRICT_ID = $districtId
+            and t.TRAN_FLAG = 'SD'            
+             ) a
+        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
     }
 
 }
