@@ -263,15 +263,15 @@
     {{--@include('masterGlobal.modalGlobal')--}}
     <div class="footer-inner">
         <div class="footer-content">
-						<span class="bigger-120">
-							<span class="blue bolder">{{ Session::get('orgName') }}</span>
-                            <div>
-                                <div style="float:left; width:350px;">Copyright &copy; 2019 SALT, All Rights Reserved.</div>
-                                <div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>
-                                <div class="clearfix"></div>
-                            </div>
+						{{--<span class="bigger-120">--}}
+							{{--<span class="blue bolder">{{ Session::get('orgName') }}</span>--}}
+                            {{--<div>--}}
+                                {{--<div style="float:left; width:350px;">Copyright &copy; 2019 SALT, All Rights Reserved.</div>--}}
+                                {{--<div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>--}}
+                                {{--<div class="clearfix"></div>--}}
+                            {{--</div>--}}
                             {{--Copyright &copy; 2018 DAE, All Rights Reserved. DAE Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a>--}}
-                            </span>
+                            {{--</span>--}}
 
             &nbsp; &nbsp;
             <span class="action-buttons">
