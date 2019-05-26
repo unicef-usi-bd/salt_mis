@@ -16,7 +16,7 @@ class Iodized extends Model
     }
     public static function getIodizeData(){
         return DB::table('tmm_iodizedmst')
-            ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY')
+            ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY','tmm_iodizedchd.WASTAGE')
             ->leftJoin('smm_item','tmm_iodizedmst.PRODUCT_ID', '=','smm_item.ITEM_NO')
             ->leftJoin('tmm_iodizedchd','tmm_iodizedmst.IODIZEDMST_ID', '=','tmm_iodizedchd.IODIZEDMST_ID')
             ->where('tmm_iodizedmst.center_id','=',Auth::user()->center_id)
@@ -46,7 +46,7 @@ class Iodized extends Model
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
-                'WASH_CRASH_QTY' => $request->input('WASH_CRASH_QTY'),
+                'WASH_CRASH_QTY' => $iodizeStock,
                 'ITEM_TYPE' => 'I',//I=Iodized
                 'center_id' => $centerId,
                 'ENTRY_BY' => $entryBy,
@@ -119,7 +119,7 @@ class Iodized extends Model
             ->first();
     }
 
-    public static function updateIodizeData($request,$id){
+    public static function updateIodizeData($request,$id,$iodizeStock){
         $iodizeMstId = DB::table('tmm_iodizedmst')->where('IODIZEDMST_ID',$id)->update([
             'BATCH_NO' => $request->input('BATCH_NO'),
             'BATCH_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
@@ -135,7 +135,7 @@ class Iodized extends Model
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
                 'WASTAGE' => $request->input('WASTAGE'),
-                'WASH_CRASH_QTY' => $request->input('WASH_CRASH_QTY'),
+                'WASH_CRASH_QTY' => $iodizeStock,
                 'ITEM_TYPE' => 'I',//I=Iodized
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")

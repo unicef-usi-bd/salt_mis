@@ -22,10 +22,11 @@
     @foreach($millerList as $sl =>  $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ $row->LOOKUPCHD_NAME }}</td>
+            <td>{{ $row->ITEM_NAME }}</td>
+            <td>{{ $row->purchase }}</td>
+            <td>{{ $row->reduce }}</td>
+
         </tr>
     @endforeach
 

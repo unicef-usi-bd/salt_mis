@@ -197,14 +197,15 @@ class ReportAssociation extends Model
               where ql.center_id = '$centerId' "));
 
     }
-    public static function getLicenseMillerList($issueby){
+    public static function getLicenseMillerList($issueby,$renawlDate,$failDate){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("select mi.MILL_NAME,ci.CERTIFICATE_TYPE_ID, lc.LOOKUPCHD_NAME as CERT_NAME, ci.ISSURE_ID, lch.LOOKUPCHD_NAME as ISSUER, ci.ISSUING_DATE, ci.RENEWING_DATE
           from ssm_certificate_info ci
           left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
           left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.CERTIFICATE_TYPE_ID
           left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ci.ISSURE_ID
-          where ci.center_id = '$centerId' and ci.ISSURE_ID = '$issueby' "));
+          where ci.center_id = '$centerId' and ci.ISSURE_ID = '$issueby'
+          and ci.RENEWING_DATE = '$renawlDate' and ci.RENEWING_DATE = '$failDate' "));
 
     }
     public static function getSaleItemList(){
@@ -233,11 +234,34 @@ class ReportAssociation extends Model
 
     public static function getListOfMiller(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
-              me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
-              from ssm_mill_info  mi
-              left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
-              where mi.center_id = '$centerId' "));
+        return DB::select(DB::raw(" SELECT b.LOOKUPCHD_NAME,
+               b.ITEM_NO,
+               b.ITEM_NAME,
+               SUM(b.purchase) purchase,
+               SUM(b.reduce) reduce,
+               SUM(b.QTY) STOCK_QTY
+          FROM (SELECT c.LOOKUPCHD_NAME,
+                       i.ITEM_NO,
+                       i.ITEM_NAME,
+                       s.QTY,
+                       CASE
+                          WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN s.QTY
+                       END
+                          reduce,
+                       CASE
+                          WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN s.QTY
+                       END
+                          purchase,
+                       s.TRAN_DATE,
+                       s.center_id
+                  FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                 WHERE     i.ITEM_NO = s.ITEM_NO
+                       AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                       AND i.item_type = 26
+                       AND s.TRAN_FLAG NOT IN ('WI', 'SD')
+                       AND s.center_id = 4 
+                       AND s.TRAN_TYPE NOT IN ('S', 'C')) b
+        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
 
     }
     public static function assocProcessStock(){
@@ -255,7 +279,9 @@ class ReportAssociation extends Model
                                     AND m.center_id = s.center_id
                                     AND i.IODIZEDMST_ID = s.TRAN_NO
                                     AND c.LOOKUPMST_ID = 6) a
-                    WHERE a.center_id = 4  
+                    WHERE a.center_id in (select ass.ASSOCIATION_ID
+                                     from ssm_associationsetup ass
+                                     where ass.PARENT_ID = $centerId )
                     GROUP BY a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO "));
 
     }
