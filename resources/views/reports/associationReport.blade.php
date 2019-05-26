@@ -69,6 +69,29 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select id="ASSOC_DIVISION_ID" class="form-control divisionIdd chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                    <option value="">Select Division</option>
+                                    @foreach($getDivision as $row)
+                                       <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                   @endforeach
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select id="DISTRICT_ID" class="districtIdd form-control chosen-select assoc_district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
+                                <option value="">Select District</option>
+                            </select>
+                            </span>
+                        </div>
+                    </div>
 
 
 
@@ -213,6 +236,22 @@
                             </span>
                         </div>
                     </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="renew_date" id="" readonly value="" class="width-100 renew-date" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="fail_date" id="" readonly value="{{date('m/d/Y')}}" class="width-100 fail-date" />
+                            </span>
+                        </div>
+                    </div>
 
                 </div>
             </form>
@@ -263,4 +302,40 @@
         cb(start, end);
 
     });
+
+    $(document).ready(function () {
+        $('#ASSOC_DIVISION_ID').on('change',function(){
+            var divisionId = $(this).val(); //alert(divisionId);exit();
+            var option = '<option value="">Select District</option>';
+            $.ajax({
+                type : "get",
+                url  : "supplier-profile/get-district/{id}",
+                data : {'divisionId': divisionId},
+                success:function (data) {
+                    for (var i = 0; i < data.length; i++){
+                        option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
+                    }
+                    $('.assoc_district').html(option);
+                    $('.assoc_district').trigger("chosen:updated");
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        var minDate = "<?php echo session('startDate'); ?>";
+        var maxDate = "<?php echo session('endDate'); ?>";
+        $('.renew-date').datepicker({
+            uiLibrary: 'bootstrap',
+            minDate: new Date(minDate),
+            maxDate: new Date(maxDate)
+
+        });
+    });
+    $(document).ready(function () {
+        $('.fail-date').datepicker({
+            uiLibrary: 'bootstrap'
+        });
+    });
+
 </script>

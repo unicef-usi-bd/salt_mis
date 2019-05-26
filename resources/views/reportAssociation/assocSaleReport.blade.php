@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-sale-pdf') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-sale-pdf/'.$divisionId.'/'.$districtId) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>Association</h4>
     </div><!-- /.col -->
@@ -32,13 +32,15 @@
             <tbody>
             @foreach($assocSale as $sl =>  $row)
                 <tr>
+                <tr>
                     <td>{{ ++$sl }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$row->cnt_miller}}</td>
+                    <td>{{$row->ITEM_TYPE_NAME}}</td>
+                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->DIVISION_NAME}}</td>
+                    <td>{{$row->DISTRICT_NAME}}</td>
+                    <td>{{abs($row->QTY)}}</td>
+                </tr>
                 </tr>
             @endforeach
             </tbody>

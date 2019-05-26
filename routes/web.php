@@ -215,7 +215,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('assoc-process-stock', 'ReportAssociationController@assocProcessStock');//azharul
     Route::get('assoc-process-stock-pdf', 'ReportAssociationController@assocProcessStockPdf');//azharul
     Route::get('association-sale', 'ReportAssociationController@assocSale');//azharul
-    Route::get('association-sale-pdf', 'ReportAssociationController@assocSalePdf');//azharul
+    Route::get('association-sale-pdf/{divisionId}/{districtId}', 'ReportAssociationController@assocSalePdf');//azharul
     // Report and PDF for Association End
 
     //Report reportPdf
@@ -237,7 +237,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('process-report-pdf/{starDate}/{endDate}','ReportController@getProcessReportPdf');//jalal
     Route::get('sales-item-report-pdf','ReportController@getSalesListPdf');//jalal
     Route::get('sales-item-report-all-pdf','ReportController@getSalesListAllpdf');//jalal
-    Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal
+    Route::get('miller-license-report-pdf/{zone}/{issuerId}/{renawlDate}/{failDate}','ReportController@getListofMillerLicensesPdf');//jalal
     Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
     Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
     Route::get('purchase-salt-supplier-miller-pdf/{divisionId}/{districtId}','ReportController@getListSupplierForMillerPdf');//jalal

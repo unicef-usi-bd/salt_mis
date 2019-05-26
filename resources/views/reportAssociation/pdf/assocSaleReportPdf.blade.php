@@ -24,13 +24,15 @@
     </tr>
     @foreach($assocSale as $sl =>  $row)
         <tr>
+        <tr>
             <td>{{ ++$sl }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$row->cnt_miller}}</td>
+            <td>{{$row->ITEM_TYPE_NAME}}</td>
+            <td>{{$row->ITEM_NAME}}</td>
+            <td>{{$row->DIVISION_NAME}}</td>
+            <td>{{$row->DISTRICT_NAME}}</td>
+            <td>{{abs($row->QTY)}}</td>
+        </tr>
         </tr>
     @endforeach
 

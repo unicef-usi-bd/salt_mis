@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 use Psy\Util\Json;
 use App\Item;
 use App\AssociationSetup;
+use App\BstiTestResultRange;
 
 class ReportController extends Controller
 {
@@ -211,12 +212,13 @@ class ReportController extends Controller
 
 //        $issuerId = $request->input('issuerId');
         $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate);
-//        return $listLicenseMiller;
+        //return $listLicenseMiller;
+        //$this->pr($listLicenseMiller);
         $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId','renawlDate','failDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getListofMillerLicensesPdf($zone,$issuerId){
+    public function getListofMillerLicensesPdf($zone,$issuerId,$renawlDate,$failDate){
         $centerId = Auth::user()->center_id;
 //        $zone = $request->input('zone');
 //        $issuerId = $request->input('issuerId');
@@ -224,7 +226,7 @@ class ReportController extends Controller
         //echo $issuerId;die();
 
 //        $issuerId = $request->input('issuerId');
-        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId);
+        $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate);
         //echo $listLicenseMiller;die();
         $data = \View::make('reportPdf.licenseMillerListReportPdf',compact('listLicenseMiller'));
         $this->generatePdf($data);
@@ -233,16 +235,18 @@ class ReportController extends Controller
     public function getQcreport(Request $request){
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
+        $qualityControlResultRange = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
         $qcReports = Report::getQcReport($centerId,$zone);
-        $view = view("reportView.qcReport",compact('qcReports','zone'))->render();
+        $view = view("reportView.qcReport",compact('qcReports','zone','qualityControlResultRange'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getQcreportPdf($zone){
         $centerId = Auth::user()->center_id;
         //$zone = $request->input('zone');
+        $qualityControlResultRange = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
         $qcReports = Report::getQcReport($centerId,$zone);
-        $data = \View::make('reportPdf.qcReportPdf',compact('qcReports'));
+        $data = \View::make('reportPdf.qcReportPdf',compact('qcReports','qualityControlResultRange'));
         $this->generatePdf($data);
     }
 
@@ -519,6 +523,12 @@ class ReportController extends Controller
         $totalSale = Report::totalSaleAdmin($divisionId,$districtId);
         $data = \View::make('reportPdf.totalSaleAdminReportPdf',compact('totalSale'));
         $this->generatePdf($data);
+    }
+
+    public function getListOfMiller(){
+        $totalMiller = Report::getListofMillerAdmin();
+        $view = view("reportView.listOfmillerUnderAssociationReport",compact('totalMiller'))->render();
+        return response()->json(['html'=>$view]);
     }
 
 }
