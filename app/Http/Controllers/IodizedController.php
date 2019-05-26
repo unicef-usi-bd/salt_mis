@@ -52,8 +52,15 @@ class IodizedController extends Controller
         $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $centerId = Auth::user()->center_id;
-        $totalWashing = Stock::getTotalWashingSalt($centerId);
-        //$this->pr($test);
+        //$this->pr($centerId);
+        $washingSalt = Stock::getTotalWashingSalt($centerId);
+        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+        if($idoizeSaltAmount){
+            $totalWashing = $washingSalt - $idoizeSaltAmount;
+        }else{
+            $totalWashing = $washingSalt;
+        }
+//        $this->pr($totalWashing);
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
     }
 
@@ -145,9 +152,11 @@ class IodizedController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         } else {
+            $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
+            $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
+            $iodizeStock = $washAndCrushQty - $iodizeWastage;
 
-
-            $iodizeUpdate = Iodized::updateIodizeData($request,$id);
+            $iodizeUpdate = Iodized::updateIodizeData($request,$id,$iodizeStock);
         }
 
 

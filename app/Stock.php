@@ -54,9 +54,11 @@ class Stock extends Model
             ->select(('tmm_itemstock.QTY'))
             ->where('tmm_itemstock.TRAN_TYPE','=','W')
             ->where('tmm_itemstock.TRAN_FLAG','=','WI')
-            ->orWhere('tmm_itemstock.TRAN_FLAG','=','WR')
+//            ->orWhere('tmm_itemstock.TRAN_TYPE','=','I')
+//            ->orWhere('tmm_itemstock.TRAN_FLAG','=','WR')
             ->where('tmm_itemstock.center_id','=',$centerId)
             ->sum('tmm_itemstock.QTY');
+
     }
 
     public static function getTotalReduceWashingSalt($centerId){

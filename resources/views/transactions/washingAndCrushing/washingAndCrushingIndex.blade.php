@@ -27,7 +27,7 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Batch No</th>
                     <th>Salt Name</th>
-                    <th>Salt Amount (KG)</th>
+                    <th>Salt Amount in stock (KG)</th>
                     <th>Wastage Amount (%)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
