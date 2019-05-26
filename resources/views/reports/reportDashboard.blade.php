@@ -215,8 +215,8 @@
                 var endDate = $('.adminReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var divisionId = $('.divisionId').val();
                 var districtId = $('.districtId').val();
-                var renawlDate = $('.date-picker').data('datepicker');
-                var failDate = $('.end-date').data('datepicker');
+                var renawlDate = $('.date-picker').val();
+                var failDate = $('.end-date').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -228,8 +228,8 @@
                 var endDate = $('.unicefReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var divisionId = $('.divisionId').val();
                 var districtId = $('.districtId').val();
-                var renawlDate = $('.date-picker').data('datepicker');
-                var failDate = $('.end-date').data('datepicker');
+                var renawlDate = $('.date-picker').val();
+                var failDate = $('.end-date').val();
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
@@ -241,8 +241,8 @@
                 var endDate = $('.bstiReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var divisionId = $('.divisionId').val();
                 var districtId = $('.districtId').val();
-                var renawlDate = $('.date-picker').data('datepicker');
-                var failDate = $('.end-date').data('datepicker');
+                var renawlDate = $('.date-picker').val();
+                var failDate = $('.end-date').val();
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
@@ -254,8 +254,8 @@
                 var endDate = $('.basicReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var divisionId = $('.divisionId').val();
                 var districtId = $('.districtId').val();
-                var renawlDate = $('.date-picker').data('datepicker');
-                var failDate = $('.end-date').data('datepicker');
+                var renawlDate = $('.date-picker').val();
+                var failDate = $('.end-date').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var centerId = $('.center').val();
@@ -269,8 +269,8 @@
                 var districtId = $('.districtId').val();
                 var customerId = $('.customerId').val();
                 var itemTypeId = $('.itemTypeId').val();
-                var renawlDate = $('.date-picker').data('datepicker');
-                var failDate = $('.end-date').data('datepicker');
+                var renawlDate = $('.date-picker').val();
+                var failDate = $('.end-date').val();
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
