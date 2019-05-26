@@ -10,7 +10,7 @@
     </style>
     <div class="page-header">
         <h1>
-            BSDIC Dashboard
+            BASIC Dashboard
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Overview

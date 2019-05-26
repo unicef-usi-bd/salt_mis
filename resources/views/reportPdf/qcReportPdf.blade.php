@@ -28,7 +28,13 @@
             <td>{{$row->BATCH_NO}}</td>
             <td>{{$row->quality_control_by}}</td>
             <td>{{$row->agency_name}}</td>
-            <td></td>
+            <td>
+                @if($qualityControlResultRange->SODIUM_CHLORIDE_MAX >= $row->SODIUM_CHLORIDE && $qualityControlResultRange->SODIUM_CHLORIDE_MIN <= $row->SODIUM_CHLORIDE && $qualityControlResultRange->MOISTURIZER_MAX >= $row->MOISTURIZER && $qualityControlResultRange->MOISTURIZER_MIN <= $row->MOISTURIZER && $qualityControlResultRange->PPM_MAX >= $row->IODINE_CONTENT && $qualityControlResultRange->PPM_MIN <= $row->IODINE_CONTENT && $qualityControlResultRange->PH_MAX >= $row->PH && $qualityControlResultRange->PH_MIN <= $row->PH)
+                    <span >Pass</span>
+                @else
+                    <span>Fail</span>
+                @endif
+            </td>
         </tr>
     @endforeach
 

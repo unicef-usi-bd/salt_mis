@@ -231,7 +231,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('process-report-pdf/{starDate}/{endDate}','ReportController@getProcessReportPdf');//jalal
     Route::get('sales-item-report-pdf','ReportController@getSalesListPdf');//jalal
     Route::get('sales-item-report-all-pdf','ReportController@getSalesListAllpdf');//jalal
-    Route::get('miller-license-report-pdf/{zone}/{issuerId}','ReportController@getListofMillerLicensesPdf');//jalal
+    Route::get('miller-license-report-pdf/{zone}/{issuerId}/{renawlDate}/{failDate}','ReportController@getListofMillerLicensesPdf');//jalal
     Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
     Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
     Route::get('purchase-salt-supplier-miller-pdf/{divisionId}/{districtId}','ReportController@getListSupplierForMillerPdf');//jalal

@@ -242,11 +242,12 @@ class Report extends Model
 
     public static function getQcReport($centerId,$zone){
         $qcReports = DB::table('tmm_qualitycontrol as ql');
-        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.*');
+        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.MILL_NAME','i.BATCH_NO');
         $qcReports->leftJoin('ssc_lookupchd as lc','ql.QC_BY','=','lc.LOOKUPCHD_ID');
         $qcReports->leftJoin('ssc_lookupchd as lch','ql.AGENCY_ID','=','lch.LOOKUPCHD_ID');
         $qcReports->leftJoin('ssm_mill_info as mi','ql.center_id','=','mi.center_id');
         $qcReports->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','mi.ZONE_ID');
+        $qcReports->leftJoin('tmm_iodizedmst as i','ql.BATCH_NO','=','i.IODIZEDMST_ID');
         if($centerId){
             $qcReports->where('ql.center_id','=',$centerId);
         }
@@ -551,6 +552,22 @@ class Report extends Model
              ) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+    }
+
+    public static function getListofMillerAdmin(){
+        return DB::select(DB::raw("SELECT b.*
+         FROM
+        (SELECT (SELECT ASSOCIATION_NAME FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_NAME,
+        (SELECT `ASSOCIATION_ID` FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_ID,
+         m.MILL_NAME, (d.TOTMALE_EMP + d.TOTFEM_EMP) tot_emp,
+        (FULLTIMEMALE_EMP+FULLTIMEFEM_EMP) fulltime_emp,
+        (PARTTIMEMALE_EMP+PARTTIMEFEM_EMP) parttime_enp,
+        (TOTMALETECH_PER+TOTFEMTECH_PER) tot_tech_person
+        FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
+        WHERE m.MILL_ID = d.MILL_ID
+        AND m.MILL_ID = a.MILL_ID) b, ssm_zonesetup z
+       WHERE  b.ASSOCIATION_ID = z.ZONE_ID
+    -- and z.ZONE_ID = 2"));
     }
 
 }
