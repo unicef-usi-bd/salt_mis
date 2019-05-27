@@ -168,6 +168,10 @@
             errorClass: "my-error-class",
             //validClass: "my-valid-class",
             rules: {
+                EMAIL:{
+                    //required: true,
+                    email: true
+                },
                 PHONE:{
                     required: true,
                     maxlength:11,
