@@ -140,12 +140,23 @@ class SalesDistributionController extends Controller
         $centerId = $request->input('centerId');
 //     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
         $washingSalt = Stock::getTotalWashingSalt($centerId);
+        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
+
+        //$this->pr($washingSaltSale);
 
         $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
         if($idoizeSaltAmount){
-            $stock = $washingSalt - $idoizeSaltAmount;
+            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
+            if($washingSaltSale){
+                $stock = $afterIodizeWashingStock - $washingSaltSale;
+            }
         }else{
-            $stock = $washingSalt;
+            if($washingSaltSale){
+                $stock = $washingSalt - $washingSaltSale;
+            }else{
+                $stock = $washingSalt;
+            }
+
         }
      //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
 
@@ -157,9 +168,14 @@ class SalesDistributionController extends Controller
 
     public function getIodizeSalt(Request $request){
         $centerId = $request->input('centerId');
-        $iodizeStock = Stock::getTotalIodizeSaltForSale($centerId);
+        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
+        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
         //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
-
+        if($iodizeSale){
+            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
+        }else{
+            $iodizeStock = $beforeIodizeSaleStock;
+        }
         //$idizeStock = $iodizeStock - abs($totalReduceIodizeSalt);
 
         return $iodizeStock;
