@@ -304,7 +304,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID" class="form-control divisionId chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                <select id="DIVISION_ID" class="DIVISION_ID form-control divisionId chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">Select Division</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -403,7 +403,7 @@
         </div>
     </div>
 </div>
-
+@include('masterGlobal.districtReport')
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />

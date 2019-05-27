@@ -407,8 +407,8 @@ class Report extends Model
 	t.QTY
 	FROM ssm_supplier_info s, tmm_itemstock t
 	WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
-	AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId) a
-    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
+	AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId )a
+    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME"));
     }
 
     public static function getListofClint($centerId,$divisionId,$districtId){
