@@ -103,8 +103,10 @@
     </div>
 
     @if(Session::get('MILL_ID'))
+        {{--QR code Here--}}
         <img src="{{ asset("image/qrcode.png") }}" width="130" height="130" style="margin-left: 30px;margin-top: 45px;"/>
         <div style="margin-top: 10px;margin-left: 10px;">
+            {{--APK Here--}}
             <a href="{{ asset("image/apk/unicef_salt_aa_v1.0.0.apk") }}" class="btn btn-success"><i class="fa fa-android" style="font-size: 18px;"></i> Download App <i class="fa fa-arrow-circle-o-down " style="font-size: 18px;"></i></a>
         </div>
     @endif
