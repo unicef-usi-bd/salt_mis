@@ -554,8 +554,9 @@ class Report extends Model
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
     }
 
-    public static function getListofMillerAdmin(){
-        return DB::select(DB::raw("SELECT b.*
+    public static function getListofMillerAdmin($zone){
+        if($zone == 0){
+            return DB::select(DB::raw("SELECT b.*
          FROM
         (SELECT (SELECT ASSOCIATION_NAME FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_NAME,
         (SELECT `ASSOCIATION_ID` FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_ID,
@@ -567,7 +568,23 @@ class Report extends Model
         WHERE m.MILL_ID = d.MILL_ID
         AND m.MILL_ID = a.MILL_ID) b, ssm_zonesetup z
        WHERE  b.ASSOCIATION_ID = z.ZONE_ID
-    -- and z.ZONE_ID = 2"));
+       -- and z.ZONE_ID = $zone"));
+        }else{
+            return DB::select(DB::raw("SELECT b.*
+         FROM
+        (SELECT (SELECT ASSOCIATION_NAME FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_NAME,
+        (SELECT `ASSOCIATION_ID` FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.PARENT_ID) ASSOCIATION_ID,
+         m.MILL_NAME, (d.TOTMALE_EMP + d.TOTFEM_EMP) tot_emp,
+        (FULLTIMEMALE_EMP+FULLTIMEFEM_EMP) fulltime_emp,
+        (PARTTIMEMALE_EMP+PARTTIMEFEM_EMP) parttime_enp,
+        (TOTMALETECH_PER+TOTFEMTECH_PER) tot_tech_person
+        FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
+        WHERE m.MILL_ID = d.MILL_ID
+        AND m.MILL_ID = a.MILL_ID) b, ssm_zonesetup z
+       WHERE  b.ASSOCIATION_ID = z.ZONE_ID
+       and z.ZONE_ID = $zone"));
+        }
+
     }
 
 }

@@ -166,6 +166,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('admin-hr-employee-miller','ReportController@getAdminHrEmployee');//jalal
     Route::get('admin-association-list','ReportController@getAssociationListForAdmin');//jalal
     Route::get('total-sale-admin','ReportController@getTotalSaleAdmin');//jalal
+    route::get('miller-under-association','ReportController@getListOfMiller');//jala
 
 
     Route::get('chemical-item-list','ReportController@getChemicalItemList');//Rubiyat
@@ -207,7 +208,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('qc-miller-list', 'ReportAssociationController@getQcMillerList');//azharul
     Route::get('qc-miller-list-pdf', 'ReportAssociationController@getQcMillerListPdf');//azharul
     Route::get('license-miller-list', 'ReportAssociationController@getLicenseMillerList');//azharul
-    Route::get('license-miller-list-pdf/{issueby}', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
+    Route::get('license-miller-list-pdf/{issueby}/{renawlDate}/{failDate}', 'ReportAssociationController@getLicenseMillerListPdf');//azharul
     Route::get('sale-item-list', 'ReportAssociationController@getSaleItemList');//azharul
     Route::get('sale-item-list-pdf', 'ReportAssociationController@getSaleItemListPdf');//azharul
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul
@@ -250,6 +251,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('admin-hr-employee-miller-pdf','ReportController@getAdminHrEmployeePdf');//jalal
     Route::get('admin-association-list-pdf','ReportController@getAssociationListForAdminPdf');//jalal
     Route::get('total-sale-admin-pdf/{divisionId}/{districtId}','ReportController@getTotalSaleAdminPdf');//jalal
+    route::get('miller-under-association-pdf/{zone}','ReportController@getListOfMillerpdf');//jala
 
 
 });

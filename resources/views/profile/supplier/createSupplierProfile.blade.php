@@ -1,5 +1,13 @@
 <div class="col-md-12">
-    <form action="{{ url('/supplier-profile') }}" method="post" class="form-horizontal" role="form">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
+    <form id="myform" action="{{ url('/supplier-profile') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="col-md-12">
 
@@ -140,3 +148,35 @@
 @include('masterGlobal.getDistrict')
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
+
+<script>
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                PHONE:{
+                    required: true,
+                    maxlength:11,
+                    minlength:11,
+                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                }
+
+            }
+        });
+
+    });
+</script>

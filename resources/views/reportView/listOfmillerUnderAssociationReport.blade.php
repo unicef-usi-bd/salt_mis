@@ -1,7 +1,51 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jalal
- * Date: 26-May-19
- * Time: 1:08 PM
- */
+
+<style>
+    .table th{
+        text-align: center;
+    }
+</style>
+
+<div class="row" style="margin-bottom: 15px;">
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-under-association-pdf/'.$zone) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <div class="col-md-12 center">
+        <h4>List of Miller</h4>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
+            <thead>
+            {{--<tr>--}}
+            {{--<th rowspan="2">No. of Established FIACs </th>--}}
+            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
+            {{--<th rowspan="2">Total Nos.</th>--}}
+            {{--</tr>--}}
+            <tr>
+                <th>Sl.</th>
+                <th>Millers Name</th>
+                <th>Total Number of Employee </th>
+                <th>Number of full time Employee </th>
+                <th>Number of part time Employee</th>
+                <th>Number of Technical Person e</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+            <?php $sl=0;?>
+            @foreach($totalMiller as $row)
+                <tr>
+                    <td>{{ ++$sl }}</td>
+                    <td>{{$row->MILL_NAME}}</td>
+                    <td>{{$row->tot_emp}}</td>
+                    <td>{{$row->fulltime_emp}}</td>
+                    <td>{{$row->parttime_enp}}</td>
+                    <td>{{$row->tot_tech_person}}</td>
+                </tr>
+
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>

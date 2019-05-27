@@ -72,16 +72,16 @@
             </table>
         </div>
 
-        <h4 class="center text-success">Entrepreneur Information </h4>
+        <h4 class="center text-success">Entrepreneur Information Details</h4>
         <div class="row table-responsive">
             <table class="table">
                 <tr>
                     <th class=" ">Registration Type</th>
                     <th> :</th>
-                    <td> {{ $lookUpDataEntp->registration_type }} </td>
+                    <td> {{ $lookUpDataMill->reg_type }} </td>
                     <th class=" ">Type of Owner</th>
                     <th> :</th>
-                    <td> {{ $lookUpDataEntp->owner_type }} </td>
+                    <td> {{ $lookUpDataMill->owner_type }} </td>
 
                 </tr>
                 <tr>

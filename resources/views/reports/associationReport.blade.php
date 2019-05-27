@@ -248,7 +248,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="fail_date" id="" readonly value="{{date('m/d/Y')}}" class="width-100 fail-date" />
+                               <input type="text" name="fail_date" id="" readonly value="" class="width-100 fail-date" />
                             </span>
                         </div>
                     </div>

@@ -84,7 +84,7 @@
                     <tr>
                         <th class="fixedWidth" style="width: 5px;">Sl</th>
                         <th class="center fixedWidth">Mill Name</th>
-                        <th class="center fixedWidth">Type</th>
+                        <th class="center fixedWidth">Owner Type</th>
                         <th class="center fixedWidth">Certificate Renewing Date</th>
                         <th class="center fixedWidth">Full Time Employee</th>
                         <th class="center fixedWidth">Active Status</th>

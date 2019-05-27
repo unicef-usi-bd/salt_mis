@@ -205,8 +205,9 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
         $issuerId = $request->input('issuerId');
-        $renawlDate = $request->input('renawlDate');
-        $failDate = $request->input('failDate');
+        $renawlDate = date("Y-m-d", strtotime($request->input('renawlDate')));
+     //  return $renawlDate;
+        $failDate = date("Y-m-d", strtotime($request->input('failDate')));
 
         //echo $issuerId;die();
 
@@ -525,10 +526,17 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getListOfMiller(){
-        $totalMiller = Report::getListofMillerAdmin();
-        $view = view("reportView.listOfmillerUnderAssociationReport",compact('totalMiller'))->render();
+    public function getListOfMiller(Request $request){
+        $zone = $request->input('zone');
+        $totalMiller = Report::getListofMillerAdmin($zone);
+        $view = view("reportView.listOfmillerUnderAssociationReport",compact('totalMiller','zone'))->render();
         return response()->json(['html'=>$view]);
+    }
+
+    public function getListOfMillerpdf($zone){
+        $totalMiller = Report::getListofMillerAdmin($zone);
+        $data = \View::make('reportPdf.listOfmillerUnderAssociationReportPdf',compact('totalMiller'));
+        $this->generatePdf($data);
     }
 
 }
