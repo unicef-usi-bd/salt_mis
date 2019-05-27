@@ -88,7 +88,7 @@ class MillerInfo extends Model
             ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
             ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
             ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->leftJoin('ssc_lookupchd','ssm_entrepreneur_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd','ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('ssm_mill_info.center_id','=',Auth::user()->center_id)
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->groupBy('ssm_mill_info.MILL_ID')
@@ -120,11 +120,13 @@ class MillerInfo extends Model
 
     }
     public static function getAllMillLookUpData($id){
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','process.LOOKUPCHD_NAME as process_name','mill.LOOKUPCHD_NAME as mill_name','capacity.LOOKUPCHD_NAME as capacity_type')
+        return  DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.*','reg.LOOKUPCHD_NAME as reg_type','owner.LOOKUPCHD_NAME as owner_type','process.LOOKUPCHD_NAME as process_name','mill.LOOKUPCHD_NAME as mill_name','capacity.LOOKUPCHD_NAME as capacity_type')
             ->leftJoin('ssc_lookupchd as process','ssm_mill_info.PROCESS_TYPE_ID','=','process.LOOKUPCHD_ID')
             ->leftJoin('ssc_lookupchd as mill','ssm_mill_info.MILL_TYPE_ID','=','mill.UD_ID')
             ->leftJoin('ssc_lookupchd as capacity','ssm_mill_info.CAPACITY_ID','=','capacity.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as owner','ssm_mill_info.OWNER_TYPE_ID','=','owner.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as reg','ssm_mill_info.REG_TYPE_ID','=','reg.LOOKUPCHD_ID')
             ->where('ssm_mill_info.MILL_ID','=',$id)
             ->first();
 

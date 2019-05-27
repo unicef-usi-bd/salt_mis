@@ -24,7 +24,7 @@
     @foreach($processStock as $sl =>  $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td></td>
+            <td>{{ $row->no_of_mill }}</td>
             <td>{{ $row->LOOKUPCHD_NAME }}</td>
             <td>{{ $row->BATCH_NO }}</td>
             <td>{{ $row->production }}</td>

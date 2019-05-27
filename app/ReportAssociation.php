@@ -266,10 +266,10 @@ class ReportAssociation extends Model
     }
     public static function assocProcessStock(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.center_id, a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO, SUM(a.production) production,
+        return DB::select(DB::raw(" SELECT a.center_id,COUNT(a.MILL_ID) no_of_mill, a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO, SUM(a.production) production,
                     SUM(a.qty) stock
                     FROM
-                                    (SELECT c.LOOKUPCHD_ID, c.LOOKUPCHD_NAME, m.center_id, i.BATCH_NO, 
+                                    (SELECT m.MILL_ID,c.LOOKUPCHD_ID, c.LOOKUPCHD_NAME, m.center_id, i.BATCH_NO, 
                                     CASE WHEN s.qty > 0 THEN
                                                     s.qty
                                     END production,
