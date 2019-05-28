@@ -145,10 +145,13 @@ class SalesDistributionController extends Controller
         //$this->pr($washingSaltSale);
 
         $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+
         if($idoizeSaltAmount){
             $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
             if($washingSaltSale){
                 $stock = $afterIodizeWashingStock - $washingSaltSale;
+            }else{
+                $stock = $afterIodizeWashingStock;
             }
         }else{
             if($washingSaltSale){
