@@ -295,7 +295,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID" class="form-control divisionId chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                <select id="millerDivision" class="DIVISION_ID form-control chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">Select Division</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -308,7 +308,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-xs-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="DISTRICT_ID" class="districtId form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
+                            <select id="millerDistrict" class="district form-control chosen-select width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">Select District</option>
                             </select>
                         </span>
@@ -415,7 +415,7 @@
         </div>
     </div>
 </div>
-@include('masterGlobal.getDistrict')
+@include('masterGlobal.districtReport')
 {{--@include('masterGlobal.datePicker')--}}
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
@@ -462,4 +462,5 @@
             uiLibrary: 'bootstrap'
         });
     });
+
 </script>
