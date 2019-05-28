@@ -173,7 +173,7 @@ class Report extends Model
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 
-    public static function getProcessStock(){
+    public static function getProcessStock($starDate,$endDate){
         return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
@@ -182,6 +182,7 @@ class Report extends Model
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
       where st.TRAN_TYPE = 'W' and st.center_id and st.TRAN_FLAG = 'WI'
+      and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
       union
       select i.BATCH_NO, st.QTY,
       case when st.TRAN_TYPE = 'I' then
@@ -190,7 +191,8 @@ class Report extends Model
       from tmm_itemstock st 
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'I'"));
+      where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'II'
+      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }
 
     public static function getSalesItemMiller(){
@@ -407,8 +409,8 @@ class Report extends Model
 	t.QTY
 	FROM ssm_supplier_info s, tmm_itemstock t
 	WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
-	AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId )a
-    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME"));
+	AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId) a
+    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
     }
 
     public static function getListofClint($centerId,$divisionId,$districtId){

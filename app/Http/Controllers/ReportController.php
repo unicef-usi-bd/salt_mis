@@ -167,13 +167,20 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-//    public function getProcessReport(){
-//        $centerId = Auth::user()->center_id;
-//
-//        $processStock = Route::getProcessStock($centerId);
-//        $view = view("reportView.purchaseSaltStockReport",compact('processStock'))->render();
-//        return response()->json(['html'=>$view]);
-//    }
+    public function getProcessReportAdmin(Request $request){
+        //$centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $processStock = Report::getProcessStock($starDate,$endDate);
+        $view = view("reportView.processStockAdminReport",compact('processStock','starDate','endDate'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getProcessReportAdminPdf($starDate,$endDate){
+        $processStock = Report::getProcessStock($starDate,$endDate);
+        $data = \View::make('reportPdf.processStockAdminReportPdf',compact('processStock'));
+        $this->generatePdf($data);
+    }
 
 
 
@@ -385,7 +392,8 @@ class ReportController extends Controller
         $divisionId = $request->input('divisionId');
         $districtId = $request->input('districtId');
         $supplierMillerList = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId);
-        //$this->pr($supplierMillerList);
+
+//        $this->pr($divisionId);
         $view = view("reportView.purchaseSaltSupplierListforMiller",compact('supplierMillerList','divisionId','districtId'))->render();
         return response()->json(['html'=>$view]);
     }
