@@ -44,39 +44,47 @@
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
-
-                        <li class="active"> <a data-toggle="tab" href="#admin"> Admin </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#unicef"> UNICEF  </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#bsti"> BSTI </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#bscic"> BSCIC </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#association"> Association </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#millers"> Millers </a> </li>
+                        @if(Auth::user()->user_group_id == $adminId)
+                            <li class="active"> <a data-toggle="tab" href="#admin"> Admin </a> </li>
+                        @elseif(Auth::user()->user_group_id == $unicefId)
+                            <li class=""> <a data-toggle="tab" href="#unicef"> UNICEF  </a> </li>
+                        @elseif(Auth::user()->user_group_id == $bstiId)
+                            <li class=""> <a data-toggle="tab" href="#bsti"> BSTI </a> </li>
+                        @elseif(Auth::user()->user_group_id == $bscicId)
+                            <li class=""> <a data-toggle="tab" href="#bscic"> BSCIC </a> </li>
+                        @elseif(Auth::user()->user_group_id == $associationId)
+                            <li class=""> <a data-toggle="tab" href="#association"> Association </a> </li>
+                        @else
+                            <li class=""> <a data-toggle="tab" href="#millers"> Millers </a> </li>
+                        @endif
                     </ul>
 
                     <div class="tab-content">
+                        @if(Auth::user()->user_group_id == $adminId)
                         {{--admin Report--}}
-                        @include('reports.adminReport')
+                         @include('reports.adminReport')
                         {{--/-admin Report--}}
+                        @elseif(Auth::user()->user_group_id == $unicefId)
                         {{--unicef Report--}}
                         @include('reports.unicefReport')
                         {{--/-unicef Report--}}
-
+                        @elseif(Auth::user()->user_group_id == $bstiId)
                         {{--Bsti Report--}}
                         @include('reports.bstiReport')
                         {{--/-Bsti Report--}}
-
+                        @elseif(Auth::user()->user_group_id == $bscicId)
                         {{--Bscic Report--}}
                         @include('reports.bscicReport')
                         {{--/- Bscic Report--}}
-
+                        @elseif(Auth::user()->user_group_id == $associationId)
                         {{--Association Report--}}
                         @include('reports.associationReport')
                         {{--/- Association Report--}}
-
+                        @else
                         {{--Millers Report--}}
                         @include('reports.millersReport')
                         {{--/- Millers Report--}}
-
+                        @endif
 
                     </div>
                 </div>
