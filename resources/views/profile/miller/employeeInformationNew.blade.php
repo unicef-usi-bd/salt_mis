@@ -98,7 +98,8 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <b style="font-size: 14px;">Remarks</b> <br><br>
+                                            <span style="color:red;display: none" class="error">Total number of Employee must be equal to Part time and Full time employee.</span>
+                                            <br><b style="font-size: 14px;">Remarks</b> <br><br>
                                             <div class="form-group">
                                                 <div class="col-sm-8">
                                                     <span class="block input-icon input-icon-right">
@@ -213,32 +214,15 @@
             $(this).closest("tr.removableRow").remove();
         });
 
-        // validation for full time employee
-        $(document).on("change",".partTimeFemaleEmp", function () {
 
-           var  totalMaleEmp = $('.totalMaleEmp').val();
-           var  totalFemaleEmp = $('.totalFemaleEmp').val();
-           var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
-           var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
-           var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
-           var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
-           var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
-           var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
-           var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
-           var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
-           if(total!=totalPartFullEmp){
-               alert('Total number of Employee must be equal to Part time and Full time employee');
-               $('.finalSubmit').prop('disabled', true);
-           }else{
-               $('.finalSubmit').prop('disabled', false);
-           }
 
-        });
 
 
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')
+     {{--validation for full time employee--}}
+    @include('profile.miller.totalEmployeeValidation')
     @include('profile.miller.updateMillersId')
 
 
