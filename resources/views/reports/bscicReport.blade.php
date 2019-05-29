@@ -1,4 +1,4 @@
-<div id="bscic" class="tab-pane fade ">
+<div id="bscic" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >

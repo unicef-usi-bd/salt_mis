@@ -1,4 +1,4 @@
-<div id="millers" class="tab-pane fade">
+<div id="millers" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >
@@ -15,7 +15,7 @@
                                        <option value="purchase-salt-list">List of Item </option>
                                        <option value="miller-purchase-salt-stock">Purchase</option>
                                        <option value="monitor-salt-report">Monitor Supplier</option>
-                                       <option value="purchase-salt-amount/{itemType}">Total Purchase Stock</option>
+                                       <option value="purchase-salt-amount">Total Purchase Stock</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="purchase-salt-supplier-miller-type">List of Supplier </option>

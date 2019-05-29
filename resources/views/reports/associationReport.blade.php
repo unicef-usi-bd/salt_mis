@@ -1,5 +1,5 @@
 <!-- association report-->
-<div id="association" class="tab-pane fade">
+<div id="association" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >

@@ -103,7 +103,7 @@
     </div>
 
     @if(Session::get('MILL_ID'))
-        {{--QR code Here--}}
+        {{--Here is live QR code image--}}
         <img src="{{ asset("image/qrcode.png") }}" width="130" height="130" style="margin-left: 30px;margin-top: 45px;"/>
         <div style="margin-top: 10px;margin-left: 10px;">
             {{--APK Here--}}

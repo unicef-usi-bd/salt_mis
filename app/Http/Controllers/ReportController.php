@@ -38,8 +38,15 @@ class ReportController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $clintNameList = Report::getClintNameList();
         $finishSaltItem = Report::getFinishSaltItem();
+
+        $adminId = $this->adminId;
+        $bstiId = $this->bstiId;
+        $bscicId = $this->bscicId;
+        $unicefId = $this->unicefId;
+        $associationId = $this->associationId;
+        $millerId = $this->millerId;
 //        $this->pr($associationList);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem'));
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem','adminId','bstiId','bscicId','unicefId','associationId','millerId'));
     }
 
 // test controller
