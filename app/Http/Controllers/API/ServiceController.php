@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Crypt;
 use Validator;
 use DB;
 use Session;
+use App\Stock;
+use App\SalesDistribution;
 
 class ServiceController extends Controller
 {
@@ -61,6 +63,14 @@ class ServiceController extends Controller
                 $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
                 $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
                 $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
+
+                $totalIodizeProduction = Stock::totalIodizeProductionsService($child_id);
+                $totalWashcrashProduction = Stock::totalWashCrashProductionsService($child_id);
+                $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
+                $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
+                $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
+                $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
+
                 $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
                     ->select('smm_item.ITEM_NAME','smm_rmallocationchd.*')
                     ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
@@ -74,7 +84,14 @@ class ServiceController extends Controller
                     'crude_salt_types' => $crudeSaltTypes,
                     'chemical_types' => $chemicleType,
                     'mill_information' => $millerInfo,
-                    'require_iodized_salt' => $requireChemicalIodizedSalt
+                    'require_iodized_salt' => $requireChemicalIodizedSalt,
+                    'iodize_production' => $totalIodizeProduction,
+                    'wash_crash_production' => $totalWashcrashProduction,
+                    'total_production' => $totalProductons,
+                    'iodize_sale' => $totalIodizeSale,
+                    'wash_crash_sale' => $totalWashCrashSale,
+                    'total_sale' => $totalProductSales,
+                    'center_id' => $child_id
                 ]);
             }else{
                 return response()->json([

@@ -184,4 +184,29 @@ class SalesDistribution extends Model
             ->where('ssc_lookupchd.LOOKUPCHD_ID','=',$packQuantity)
             ->first();
     }
+
+    //for Service
+    public static function totalWashcrashSalesService($child_id){
+
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','W');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('center_id','=',$child_id);
+
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeSalesService($child_id){
+
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','I');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('center_id','=',$child_id);
+
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
 }

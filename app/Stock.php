@@ -396,6 +396,30 @@ class Stock extends Model
                   GROUP BY a.ASSOCIATION_ID,month"));
     }
 
+    //For Service
+    public static function totalIodizeProductionsService($child_id){
+
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','I');
+        $countProduction->where('TRAN_FLAG','=','II');
+        $countProduction->where('center_id','=',$child_id);
+
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalWashCrashProductionsService($child_id){
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('TRAN_FLAG','=','WI');
+        $countProduction->where('center_id','=',$child_id);
+
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
 
 }
 
