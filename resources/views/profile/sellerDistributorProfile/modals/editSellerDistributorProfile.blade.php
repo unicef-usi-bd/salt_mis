@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADING_NAME }}"/>
                     </div>
