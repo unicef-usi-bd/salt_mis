@@ -31,7 +31,7 @@
 
                                   </optgroup>
                                    <optgroup label="Process">
-                                       <option value="process-report">Process  Stock</option>
+                                       <option value="process-stock-admin">Process  Stock</option>
                                        {{--<option value="">List of  Stock</option>--}}
                                   </optgroup>
                                    <optgroup label="Sale">

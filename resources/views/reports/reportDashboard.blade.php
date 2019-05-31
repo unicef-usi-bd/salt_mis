@@ -266,6 +266,7 @@
                 var failDate = $('.end-date').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
+                var itemType = $('.itemTypeMiller').val();
                 var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
                 var zone = $('.zoneMiller').val();

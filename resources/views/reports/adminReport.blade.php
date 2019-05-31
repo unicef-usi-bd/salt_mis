@@ -36,7 +36,7 @@
                                    <optgroup label="Sale">
                                        <option value="total-sale-admin">Total Sale</option>
                                        <option value="sales-item-report-all">List of Item</option>
-                                       <option value="">Item Stock</option>
+                                       {{--<option value="">Item Stock</option>--}}
                                   </optgroup>
                                    <optgroup label="License">
                                        <option value="miller-license-report/{zone}">List of License </option>
@@ -47,7 +47,7 @@
                                   </optgroup>
                                    <optgroup label="HR">
                                        <option value="miller-under-association">List of Miller </option>
-                                       {{--<option value="">List of HR </option>--}}
+                                       <option value="">List of HR </option>
                                   </optgroup>
                                    <optgroup label="Miller">
                                        <option value="">Total Miller </option>
