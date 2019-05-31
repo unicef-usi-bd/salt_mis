@@ -34,6 +34,7 @@ class ReportController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
+        $chemicalTypes = Item::itemTypeWiseItemList($this->chemicalId);
         $associationList = AssociationSetup::getZoneList();
         $getDivision = SupplierProfile::getDivision();
         $clintNameList = Report::getClintNameList();
@@ -46,7 +47,7 @@ class ReportController extends Controller
         $associationId = $this->associationId;
         $millerId = $this->millerId;
 //        $this->pr($associationList);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem','adminId','bstiId','bscicId','unicefId','associationId','millerId'));
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem','adminId','bstiId','bscicId','unicefId','associationId','millerId','chemicalTypes'));
     }
 
 // test controller
@@ -285,15 +286,19 @@ class ReportController extends Controller
 
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+        $itemTypeId = $request->input('chemicalItemType');
+
+        //return $itemTypeId;
+
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId);
         //return $endDate;
-        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate'))->render();
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate','itemTypeId'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchasePdf($starDate,$endDate){
+    public function getChemicalPurchasePdf($starDate,$endDate,$itemTypeId){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
         $this->generatePdf($data);
     }

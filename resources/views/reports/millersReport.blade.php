@@ -264,7 +264,7 @@
                         </div>
                     </div>
                     <div class="form-group itemTypeAdminDiv">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>CRUDE Salt Item</b><span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
@@ -272,6 +272,20 @@
                                 <option value="0">All Purchase</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-group chemicalItemTypeAdminDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Item</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chemicalItemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                               <option value="">-Select One-</option>
+                                <option value="0">All Purchase</option>
+                                @foreach($chemicalTypes as $row)
+                                    <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
                                 @endforeach
                             </select>
                         </span>
@@ -477,6 +491,7 @@
         $('.processTypeDiv').hide();
         $('.clientDiv').hide();
         $('.finishedSaltItemDiv').hide();
+        $('.chemicalItemTypeAdminDiv').hide();
     });
 
     $(document).on('change','.reportMiller',function(){
@@ -518,7 +533,7 @@
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'miller-purchase-salt-stock'){
             $('.statusAdminDiv').hide();
-            $('.adminReportrangeDiv').hide();
+            $('.adminReportrangeDiv').show();
 
             $('.itemTypeAdminDiv').show();
 
@@ -531,7 +546,7 @@
             $('.issuerAdminDiv').hide();
             $('.processTypeDiv').hide();
 
-            $('.clientDiv').show();
+            $('.clientDiv').hide();
 
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'monitor-salt-report'){
@@ -602,9 +617,10 @@
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'chemical-purchase-report'){
             $('.statusAdminDiv').hide();
-            $('.adminReportrangeDiv').hide();
+            $('.adminReportrangeDiv').show();
 
-            $('.itemTypeAdminDiv').show();
+            $('.itemTypeAdminDiv').hide();
+            $('.chemicalItemTypeAdminDiv').show();
 
             $('.divisionIdDiv').hide();
             $('.districtIdDiv').hide();
@@ -615,7 +631,7 @@
             $('.issuerAdminDiv').hide();
             $('.processTypeDiv').hide();
 
-            $('.clientDiv').show();
+            $('.clientDiv').hide();
 
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'monitor-supplier'){
