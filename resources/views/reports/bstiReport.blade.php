@@ -9,54 +9,54 @@
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select  class="chosen-select chosen-container reportBsti" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value="">Select One</option>
-                                   <optgroup label="Association">
-                                       <option value="association-list">List of Total Association </option>
-                                       <option value="miller-list/{activStatus}">Type of Miller</option>
-                                       <option value="monitor-association">Monitor Association</option>
-                                       <option value="admin-association-list">List of Association </option>
-                                   </optgroup>
-                                   <optgroup label="Purchase Salt">
-                                       <option value="purchase-salt-list">List of Item </option>
-                                       <option value="purchase-salt-amount">Total Purchase</option>
-                                       <option value="purchase-salt-stock">Purchase Stock</option>
-                                   </optgroup>
-                                   <optgroup label="Purchase Chemical">
-                                       <option value="chemical-item-list">List of Item </option>
+                                   {{--<option value="">Select One</option>--}}
+                                   {{--<optgroup label="Association">--}}
+                                       {{--<option value="association-list">List of Total Association </option>--}}
+                                       {{--<option value="miller-list/{activStatus}">Type of Miller</option>--}}
+                                       {{--<option value="monitor-association">Monitor Association</option>--}}
+                                       {{--<option value="admin-association-list">List of Association </option>--}}
+                                   {{--</optgroup>--}}
+                                   {{--<optgroup label="Purchase Salt">--}}
+                                       {{--<option value="purchase-salt-list">List of Item </option>--}}
+                                       {{--<option value="purchase-salt-amount">Total Purchase</option>--}}
+                                       {{--<option value="purchase-salt-stock">Purchase Stock</option>--}}
+                                   {{--</optgroup>--}}
+                                   {{--<optgroup label="Purchase Chemical">--}}
+                                       {{--<option value="chemical-item-list">List of Item </option>--}}
                                        {{--<option value="">List of Supplier  </option>--}}
-                                       <option value="chemical-purchase-report">Purchase</option>
-                                       <option value="chemical-purchase-stock">Purchase Stock</option>
+                                       {{--<option value="chemical-purchase-report">Purchase</option>--}}
+                                       {{--<option value="chemical-purchase-stock">Purchase Stock</option>--}}
                                        {{--<option value="">Monitor Supplier</option>--}}
                                        {{--<option value="">Chemical Stock</option>--}}
 
-                                  </optgroup>
-                                   <optgroup label="Process">
-                                       <option value="process-report">Process  Stock</option>
+                                  {{--</optgroup>--}}
+                                   {{--<optgroup label="Process">--}}
+                                       {{--<option value="process-report">Process  Stock</option>--}}
                                        {{--<option value="">List of  Stock</option>--}}
-                                  </optgroup>
-                                   <optgroup label="Sale">
-                                       <option value="total-sale-admin">Total Sale</option>
-                                       <option value="sales-item-report-all">List of Item</option>
-                                       <option value="">Item Stock</option>
-                                  </optgroup>
-                                   <optgroup label="License">
+                                  {{--</optgroup>--}}
+                                   {{--<optgroup label="Sale">--}}
+                                       {{--<option value="total-sale-admin">Total Sale</option>--}}
+                                       {{--<option value="sales-item-report-all">List of Item</option>--}}
+                                       {{--<option value="">Item Stock</option>--}}
+                                  {{--</optgroup>--}}
+                                   {{--<optgroup label="License">--}}
                                        {{--<option value="">List of Miller </option>--}}
-                                       <option value="miller-license-report/{zone}">List of License </option>
-                                  </optgroup>
+                                       {{--<option value="miller-license-report/{zone}">List of License </option>--}}
+                                  {{--</optgroup>--}}
                                    <optgroup label="QC">
                                        {{--<option value="">List of Miller </option>--}}
                                        <option value="qc-report/{zone}">List of QC </option>
                                   </optgroup>
-                                   <optgroup label="HR">
-                                       <option value="admin-hr-employee-miller">List of Miller </option>
+                                   {{--<optgroup label="HR">--}}
+                                       {{--<option value="admin-hr-employee-miller">List of Miller </option>--}}
                                        {{--<option value="">List of HR </option>--}}
-                                  </optgroup>
-                                   <optgroup label="Miller">
-                                       <option value="">Total Miller </option>
-                                       <option value="">Type of Miller </option>
-                                       <option value="">Monitor Miller </option>
-                                       <option value="">List Of Miller </option>
-                                  </optgroup>
+                                  {{--</optgroup>--}}
+                                   {{--<optgroup label="Miller">--}}
+                                       {{--<option value="">Total Miller </option>--}}
+                                       {{--<option value="">Type of Miller </option>--}}
+                                       {{--<option value="">Monitor Miller </option>--}}
+                                       {{--<option value="">List Of Miller </option>--}}
+                                  {{--</optgroup>--}}
 
                                </select>
                             </span>
@@ -274,7 +274,7 @@
                         {{--</div>--}}
                     {{--</div>--}}
                 <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group statusAdminDiv">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                     <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -287,7 +287,7 @@
                             </span>
                     </div>
                 </div>
-                    <div class="form-group">
+                    <div class="form-group adminReportrangeDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right ">
@@ -297,7 +297,7 @@
                                 </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group itemTypeAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
@@ -311,7 +311,7 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group divisionIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
@@ -324,7 +324,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group districtIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-xs-8">
                         <span class="block input-icon input-icon-right">
@@ -334,13 +334,13 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                    <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Renew Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
                             <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
                         </div>
                     </div>
-                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                    <div class="form-group failDateDiv" style="margin-left:22px;width: 334px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Fail Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
                             <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
@@ -348,7 +348,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group purchaseOrderDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -362,7 +362,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group zoneAdminDiv">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -376,7 +376,7 @@
                              </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
@@ -456,5 +456,213 @@
         $('.end-date').datepicker({
             uiLibrary: 'bootstrap'
         });
+    });
+
+    $(document).ready(function(){
+        $('.statusAdminDiv').hide();
+        $('.adminReportrangeDiv').hide();
+        $('.itemTypeAdminDiv').hide();
+        $('.divisionIdDiv').hide();
+        $('.districtIdDiv').hide();
+        $('.renewDateDiv').hide();
+        $('.failDateDiv').hide();
+        $('.purchaseOrderDiv').hide();
+        $('.zoneAdminDiv').hide();
+        $('.issuerAdminDiv').hide();
+    });
+
+    $(document).on('change','.reportBsti',function(){
+        $reportUrl = $(this).val();
+
+        if($reportUrl === 'association-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'miller-list/{activStatus}'){
+
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.statusAdminDiv').show();
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'monitor-association'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'admin-association-list'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.purchaseOrderDiv').show();
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'purchase-salt-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'purchase-salt-amount'){
+            $('.statusAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.itemTypeAdminDiv').show();
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'purchase-salt-stock'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'chemical-item-list'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'chemical-purchase-report'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'chemical-purchase-stock'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'process-stock-admin'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'total-sale-admin'){
+            $('.statusAdminDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+            $('.itemTypeAdminDiv').show();
+            $('.divisionIdDiv').show();
+            $('.districtIdDiv').show();
+        }else if($reportUrl === 'sales-item-report-all'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'miller-license-report/{zone}'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.purchaseOrderDiv').hide();
+
+            $('.renewDateDiv').show();
+            $('.failDateDiv').show();
+            $('.zoneAdminDiv').show();
+            $('.issuerAdminDiv').show();
+        }else if($reportUrl === 'qc-report/{zone}'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.zoneAdminDiv').show();
+        }else{
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.zoneAdminDiv').show();
+        }
     });
 </script>

@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group" >
+                    <div class="form-group adminReportrangeDiv" >
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -56,7 +56,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -69,7 +69,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group divisionIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -82,7 +82,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group districtIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -209,7 +209,7 @@
                     {{--</div>--}}
 
 
-                    <div class="form-group">
+                    <div class="form-group statusAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -223,7 +223,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group itemTypeAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -236,7 +236,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                    <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -244,7 +244,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-left:22px;width: 334px;">
+                    <div class="form-group failDateDiv" style="margin-left:22px;width: 334px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -336,6 +336,218 @@
         $('.fail-date').datepicker({
             uiLibrary: 'bootstrap'
         });
+    });
+
+    $(document).ready(function(){
+        $('.statusAdminDiv').hide();
+        $('.adminReportrangeDiv').hide();
+        $('.itemTypeAdminDiv').hide();
+        $('.divisionIdDiv').hide();
+        $('.districtIdDiv').hide();
+        $('.renewDateDiv').hide();
+        $('.failDateDiv').hide();
+        $('.issuerAdminDiv').hide();
+    });
+
+    $(document).on('change','.reportAssociation',function(){
+        $reportUrl = $(this).val();
+         if($reportUrl === 'purchase-salt-item'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'purchase-salt-total'){
+            $('.statusAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.itemTypeAdminDiv').show();
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'purchase-salt-total-stock'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'purchase-chemical-item'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+        }else if($reportUrl === 'purchase-chemical-total'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'purchase-chemical-total-stock'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'assoc-process-stock'){
+            $('.statusAdminDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+        }else if($reportUrl === 'association-sale'){
+            $('.statusAdminDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+
+            $('.adminReportrangeDiv').show();
+            $('.itemTypeAdminDiv').show();
+            $('.divisionIdDiv').show();
+            $('.districtIdDiv').show();
+        }else if($reportUrl === 'sale-item-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+            $('.issuerAdminDiv').hide();
+        }else if($reportUrl === 'sale-item-stock'){
+             $('.statusAdminDiv').hide();
+             $('.itemTypeAdminDiv').hide();
+             $('.divisionIdDiv').hide();
+             $('.districtIdDiv').hide();
+             $('.renewDateDiv').hide();
+             $('.failDateDiv').hide();
+             $('.purchaseOrderDiv').hide();
+             $('.zoneAdminDiv').hide();
+             $('.issuerAdminDiv').hide();
+
+             $('.adminReportrangeDiv').show();
+         }else if($reportUrl === 'license-miller-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.zoneAdminDiv').hide();
+
+            $('.renewDateDiv').show();
+            $('.failDateDiv').show();
+            $('.issuerAdminDiv').show();
+        }else if($reportUrl === 'qc-miller-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.issuerAdminDiv').hide();
+            $('.zoneAdminDiv').hide();
+        }else if($reportUrl === 'association-miller-list'){
+            $('.statusAdminDiv').hide();
+            $('.adminReportrangeDiv').hide();
+            $('.itemTypeAdminDiv').hide();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.renewDateDiv').hide();
+            $('.failDateDiv').hide();
+            $('.purchaseOrderDiv').hide();
+            $('.issuerAdminDiv').hide();
+            $('.zoneAdminDiv').hide();
+        }else if($reportUrl === 'association-total-miller'){
+             $('.adminReportrangeDiv').hide();
+             $('.itemTypeAdminDiv').hide();
+             $('.divisionIdDiv').hide();
+             $('.districtIdDiv').hide();
+             $('.renewDateDiv').hide();
+             $('.failDateDiv').hide();
+             $('.purchaseOrderDiv').hide();
+             $('.issuerAdminDiv').hide();
+             $('.zoneAdminDiv').hide();
+
+             $('.statusAdminDiv').show();
+         }else if($reportUrl === 'association-miller-type'){
+             $('.statusAdminDiv').hide();
+             $('.adminReportrangeDiv').hide();
+             $('.itemTypeAdminDiv').hide();
+             $('.divisionIdDiv').hide();
+             $('.districtIdDiv').hide();
+             $('.renewDateDiv').hide();
+             $('.failDateDiv').hide();
+             $('.purchaseOrderDiv').hide();
+             $('.issuerAdminDiv').hide();
+             $('.zoneAdminDiv').hide();
+         }else if($reportUrl === 'association-monitor-miller'){
+             $('.statusAdminDiv').hide();
+             $('.adminReportrangeDiv').hide();
+             $('.itemTypeAdminDiv').hide();
+             $('.divisionIdDiv').hide();
+             $('.districtIdDiv').hide();
+             $('.renewDateDiv').hide();
+             $('.failDateDiv').hide();
+             $('.purchaseOrderDiv').hide();
+             $('.issuerAdminDiv').hide();
+             $('.zoneAdminDiv').hide();
+         }else {
+             $('.statusAdminDiv').hide();
+             $('.adminReportrangeDiv').hide();
+             $('.itemTypeAdminDiv').hide();
+             $('.divisionIdDiv').hide();
+             $('.districtIdDiv').hide();
+             $('.renewDateDiv').hide();
+             $('.failDateDiv').hide();
+             $('.purchaseOrderDiv').hide();
+             $('.issuerAdminDiv').hide();
+             $('.zoneAdminDiv').hide();
+         }
     });
 
 </script>
