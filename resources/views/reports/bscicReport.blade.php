@@ -37,7 +37,7 @@
                                    <optgroup label="Sale">
                                        <option value="total-sale-admin">Total Sale</option>
                                        <option value="sales-item-report-all">List of Item</option>
-                                       <option value="">Item Stock</option>
+                                       {{--<option value="">Item Stock</option>--}}
                                   </optgroup>
                                    <optgroup label="License">
                                        {{--<option value="">List of Miller </option>--}}
@@ -499,7 +499,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.statusAdminDiv').show();
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'monitor-association'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -569,7 +569,7 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'chemical-purchase-report'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -615,7 +615,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-            $('.itemTypeAdminDiv').show();
+            $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').show();
             $('.districtIdDiv').show();
         }else if($reportUrl === 'sales-item-report-all'){

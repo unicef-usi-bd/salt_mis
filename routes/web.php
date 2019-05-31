@@ -254,6 +254,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('total-sale-admin-pdf/{divisionId}/{districtId}','ReportController@getTotalSaleAdminPdf');//jalal
     route::get('miller-under-association-pdf/{zone}','ReportController@getListOfMillerpdf');//jala
     route::get('process-stock-admin-pdf/{starDate}/{endDate}','ReportController@getProcessReportAdminPdf');//jalal
+    Route::get('chemical-item-list-pdf','ReportController@getChemicalItemListPdf');//Rubiyat
 
 
 });

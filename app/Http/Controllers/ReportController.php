@@ -89,7 +89,7 @@ class ReportController extends Controller
 
     public function getMonitorAssociationListPdf(){
         $monitorAssociationLists = Report::getMonitorAssociationList();
-        $data = \View::make('reportPdf.purchaseSalteListReportPdf',compact('monitorAssociationLists'));
+        $data = \View::make('reportPdf.monitorAssociationListPdf',compact('monitorAssociationLists'));
         $this->generatePdf($data);
     }
 

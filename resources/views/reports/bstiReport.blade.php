@@ -9,7 +9,7 @@
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select  class="chosen-select chosen-container reportBsti" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   {{--<option value="">Select One</option>--}}
+                                   <option value="">Select One</option>
                                    {{--<optgroup label="Association">--}}
                                        {{--<option value="association-list">List of Total Association </option>--}}
                                        {{--<option value="miller-list/{activStatus}">Type of Miller</option>--}}
@@ -29,8 +29,8 @@
                                        {{--<option value="">Monitor Supplier</option>--}}
                                        {{--<option value="">Chemical Stock</option>--}}
 
-                                   <optgroup label="Process">
-                                       <option value="process-stock-admin">Process  Stock</option>
+                                   {{--<optgroup label="Process">--}}
+                                       {{--<option value="process-stock-admin">Process  Stock</option>--}}
                                        {{--<option value="">List of  Stock</option>--}}
                                   {{--</optgroup>--}}
                                    {{--<optgroup label="Sale">--}}
@@ -496,7 +496,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.statusAdminDiv').show();
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'monitor-association'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();

@@ -489,7 +489,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.statusAdminDiv').show();
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'monitor-association'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -559,7 +559,7 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'chemical-purchase-report'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -605,7 +605,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-            $('.itemTypeAdminDiv').show();
+            $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').show();
             $('.districtIdDiv').show();
         }else if($reportUrl === 'sales-item-report-all'){

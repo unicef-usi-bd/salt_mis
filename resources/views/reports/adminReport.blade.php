@@ -47,7 +47,7 @@
                                   </optgroup>
                                    <optgroup label="HR">
                                        <option value="miller-under-association">List of Miller </option>
-                                       <option value="">List of HR </option>
+                                       {{--<option value="">List of HR </option>--}}
                                   </optgroup>
                                    {{--<optgroup label="Miller">--}}
                                        {{--<option value="">Total Miller </option>--}}
@@ -335,8 +335,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 purchaseOrderDiv">
-                    <div class="form-group">
+                <div class="col-md-6">
+                    <div class="form-group purchaseOrderDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
@@ -368,7 +368,7 @@
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
-                                <select class="issuerAdmin width-65 form-control chosen-select " id="ISSURE_ID" name="ISSURE_ID"  >
+                                <select class="issuerAdmin width-65 form-control" id="ISSURE_ID" name="ISSURE_ID"  >
                                     <option value="">Select</option>
                                     @foreach($issueBy as $row)
                                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -490,7 +490,7 @@
            $('.issuerAdminDiv').hide();
 
            $('.statusAdminDiv').show();
-           $('.adminReportrangeDiv').show();
+           $('.adminReportrangeDiv').hide();
        }else if($reportUrl === 'monitor-association'){
            $('.statusAdminDiv').hide();
            $('.adminReportrangeDiv').hide();
@@ -560,7 +560,7 @@
            $('.zoneAdminDiv').hide();
            $('.issuerAdminDiv').hide();
 
-           $('.adminReportrangeDiv').show();
+           $('.adminReportrangeDiv').hide();
        }else if($reportUrl === 'chemical-purchase-report'){
            $('.statusAdminDiv').hide();
            $('.itemTypeAdminDiv').hide();
@@ -606,7 +606,7 @@
            $('.issuerAdminDiv').hide();
 
            $('.adminReportrangeDiv').show();
-           $('.itemTypeAdminDiv').show();
+           $('.itemTypeAdminDiv').hide();
            $('.divisionIdDiv').show();
            $('.districtIdDiv').show();
        }else if($reportUrl === 'sales-item-report-all'){
