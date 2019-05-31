@@ -223,7 +223,7 @@ Route::group(['middleware' => ['auth']], function() {
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
-    Route::get('chemical-purchase-pdf/{starDate}/{endDate}','ReportController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{itemTypeId}','ReportController@getChemicalPurchasePdf');//Rubiyat
     Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
 
 
