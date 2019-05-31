@@ -13,6 +13,7 @@ use DB;
 use Session;
 use App\Stock;
 use App\SalesDistribution;
+use App\AssociationSetup;
 
 class ServiceController extends Controller
 {
@@ -70,11 +71,12 @@ class ServiceController extends Controller
                 $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
                 $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
+                $organogramDt = AssociationSetup::getZoneList();
 
                 $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
                     ->select('smm_item.ITEM_NAME','smm_rmallocationchd.*')
                     ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
-                    ->where('smm_rmallocationchd.RMALLOMST_ID','=',24)
+                    ->where('smm_rmallocationchd.RMALLOMST_ID','=',25)//it can be changed
                     ->get();
                 //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
@@ -85,13 +87,15 @@ class ServiceController extends Controller
                     'chemical_types' => $chemicleType,
                     'mill_information' => $millerInfo,
                     'require_iodized_salt' => $requireChemicalIodizedSalt,
+
                     'iodize_production' => $totalIodizeProduction,
                     'wash_crash_production' => $totalWashcrashProduction,
                     'total_production' => $totalProductons,
                     'iodize_sale' => $totalIodizeSale,
                     'wash_crash_sale' => $totalWashCrashSale,
                     'total_sale' => $totalProductSales,
-                    'center_id' => $child_id
+                    'center_id' => $child_id,
+                    'zone_name' => $organogramDt
                 ]);
             }else{
                 return response()->json([

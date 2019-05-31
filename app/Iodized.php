@@ -55,7 +55,7 @@ class Iodized extends Model
         }
         if($iodizeChdId){
             $reduceWashingStokId = DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                 'TRAN_TYPE' => 'W', //W=Washing
                 'TRAN_NO' => $iodizeMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),

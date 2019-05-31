@@ -160,8 +160,9 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
-        $view = view("reportView.purchaseSaltstockMillerReport",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
+        $itemType = $request->input('itemType');
+        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate,$itemType);
+        $view = view("reportView.purchaseSaltstockMillerReport",compact('purchaseTotalSaltStock','starDate','endDate','itemType'))->render();
         return response()->json(['html'=>$view]);
     }
 
@@ -285,8 +286,8 @@ class ReportController extends Controller
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate);
-
-        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','centerId','starDate','endDate'))->render();
+        //return $endDate;
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 

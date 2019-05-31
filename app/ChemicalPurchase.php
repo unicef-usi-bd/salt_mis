@@ -78,7 +78,7 @@ class ChemicalPurchase extends Model
         }
         if($chemicalPurchaseChdId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
                 'TRAN_TYPE' => 'CP', //CP  = Chemical Purchase
                 'TRAN_NO' => $chemicalPurchaseMstId,
                 'ITEM_NO' => $request->input('RECEIVE_NO'),

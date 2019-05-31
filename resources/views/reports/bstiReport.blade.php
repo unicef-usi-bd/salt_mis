@@ -29,9 +29,8 @@
                                        {{--<option value="">Monitor Supplier</option>--}}
                                        {{--<option value="">Chemical Stock</option>--}}
 
-                                  {{--</optgroup>--}}
-                                   {{--<optgroup label="Process">--}}
-                                       {{--<option value="process-report">Process  Stock</option>--}}
+                                   <optgroup label="Process">
+                                       <option value="process-stock-admin">Process  Stock</option>
                                        {{--<option value="">List of  Stock</option>--}}
                                   {{--</optgroup>--}}
                                    {{--<optgroup label="Sale">--}}
