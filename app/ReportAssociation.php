@@ -140,19 +140,18 @@ class ReportAssociation extends Model
 // miller
     public static function getMillerList($activStatus){
         $centerId = Auth::user()->center_id;
-        $miller = DB::table('ssm_mill_info');
-        $miller->select('ssm_mill_info.*','ssc_lookupchd.LOOKUPCHD_NAME');
-        $miller->leftJoin('ssc_lookupchd','ssm_mill_info.MILL_TYPE_ID','=','ssc_lookupchd.UD_ID');
-        if($centerId){
-            $miller->where('ssm_mill_info.center_id','=',$centerId);
+        if (!empty($activStatus)){
+            return DB::select(DB::raw("select m.* from ssm_mill_info m 
+               where m.ACTIVE_FLG = $activStatus and m.center_id in (select ass.ASSOCIATION_ID
+                         from ssm_associationsetup ass
+                         where ass.PARENT_ID = '$centerId' ) "));
+        }else{
+            return DB::select(DB::raw("select m.* from ssm_mill_info m 
+               where  m.center_id in (select ass.ASSOCIATION_ID
+                         from ssm_associationsetup ass
+                         where ass.PARENT_ID = '$centerId' ) "));
         }
-        if($activStatus == 1){
-            $miller->where('ssm_mill_info.ACTIVE_FLG','=',1);
-        }
-        if($activStatus == 0){
-            $miller->where('ssm_mill_info.ACTIVE_FLG','=',0);
-        }
-        return $miller->get();
+
     }
     public static function getMillerType(){
         $centerId = Auth::user()->center_id;

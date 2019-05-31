@@ -215,7 +215,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="statusAssociation width-65" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
-                                   <option value="2">All</option>
+                                   <option value="">All</option>
                                    <option value="1">Active</option>
                                    <option value="0">Inactive</option>
                                </select>
