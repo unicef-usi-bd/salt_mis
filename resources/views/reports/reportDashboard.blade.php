@@ -96,7 +96,7 @@
             <div class="space"></div>
         </div>
     </div><!-- /.row -->
-    <div class="row" style="margin-top: 20px; width: 92%">
+    <div class="row" style="margin-top: 20px; width: 92.9%">
         <div class="col-sm-12">
             <div class="col-sm-12">
                 <div class="tabbable resultTab">
