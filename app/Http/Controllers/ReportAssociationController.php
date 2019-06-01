@@ -117,8 +117,8 @@ class ReportAssociationController extends Controller
 // miller
     public function getTotalMiller(Request $request){
         $activStatus = $request->input('activStatus');
-        //$this->pr($activStatus);
         $totalMiller = ReportAssociation::getMillerList($activStatus);
+        //$this->pr($totalMiller);
         $view = view("reportAssociation.totalMillerReport",compact('totalMiller','activStatus'))->render();
         return response()->json(['html'=>$view]);
     }

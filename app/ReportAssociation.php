@@ -194,7 +194,9 @@ class ReportAssociation extends Model
               left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
               left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
               left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
-              where ql.center_id = '$centerId' "));
+              where ql.center_id in (select ass.ASSOCIATION_ID
+             from ssm_associationsetup ass
+             where ass.PARENT_ID = '$centerId' ) "));
 
     }
     public static function getLicenseMillerList($issueby,$renawlDate,$failDate){
@@ -259,7 +261,9 @@ class ReportAssociation extends Model
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 26
                        AND s.TRAN_FLAG NOT IN ('WI', 'SD')
-                       AND s.center_id = 4 
+                       AND s.center_id in (select ass.ASSOCIATION_ID
+             from ssm_associationsetup ass
+             where ass.PARENT_ID = '$centerId' )
                        AND s.TRAN_TYPE NOT IN ('S', 'C')) b
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
 
