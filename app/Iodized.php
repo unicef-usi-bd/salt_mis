@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Input;
 class Iodized extends Model
 {
     public static function getIodizeBatchId(){
-        return DB::table('tmm_iodizedmst')
-            ->select('tmm_iodizedmst.*')
-            ->get();
+        $centerId = Auth::user()->center_id;
+        $iodizeBatch = DB::table('tmm_iodizedmst');
+        $iodizeBatch->select('tmm_iodizedmst.*');
+        if($centerId){
+            $iodizeBatch->where('tmm_iodizedmst.center_id','=',$centerId);
+        }
+        return $iodizeBatch->get();
     }
     public static function getIodizeData(){
         return DB::table('tmm_iodizedmst')
