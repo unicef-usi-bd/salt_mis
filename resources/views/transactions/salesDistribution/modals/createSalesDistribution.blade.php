@@ -242,7 +242,8 @@
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
-
+            defaultRow.find('.result').text('');
+            defaultRow.find('.stockWashCrash').text('');
             $('.chosen-select').chosen(0);
         });
     });
@@ -256,7 +257,8 @@
     $('.stockWashCrash').hide();
     //$('.stockIodize').hide();
     $(document).on('change','.saltType',function(){
-        var saltTypeId = $(this).val();
+        var thisRow = $(this).closest('tr');
+        var saltTypeId = thisRow.find('.saltType').val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
         var centerId = '<?php echo Auth::user()->center_id; ?>';
         var $iodizeId = '<?php echo $iodizeId; ?>';
@@ -271,9 +273,9 @@
                   //  console.log(data);
                    var data = JSON.parse(data);
                     //$('.stockWashCrash').html(data).show();
-                    $('.stockWashCrash').html(data).show();
-                    $('.result').html(data);
-                    $('.crudeSaltAmount').val('');
+                    thisRow.find('.stockWashCrash').html(data).show();
+                    thisRow.find('.result').html(data);
+                    thisRow.find('.crudeSaltAmount').val('');
                 }
             })
         }
@@ -284,9 +286,9 @@
                 data : {'centerId':centerId},
                 success: function (data) {
                     var data = JSON.parse(data);
-                    $('.stockWashCrash').html(data).show();
-                    $('.result').html(data);
-                    $('.crudeSaltAmount').val('');
+                    thisRow.find('.stockWashCrash').html(data).show();
+                    thisRow.find('.result').html(data);
+                    thisRow.find('.crudeSaltAmount').val('');
                 }
             })
         }
@@ -294,7 +296,7 @@
     });
 
     $(document).on('change','.packType',function () {
-        $('.pack_Id').text('')
+        $('.pack_Id').text('');
         var packId = $(this).val();
 //        var option = '<option value="">Select pack</option>';
 //        var option = $('.pack_Id').text();
