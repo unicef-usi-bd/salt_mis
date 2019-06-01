@@ -39,7 +39,7 @@
                                        <option value="miller-license-report/{zone}">List of License </option>
                                   </optgroup>
                                    <optgroup label="QC">
-                                       <option value="qc-report/{zone}">List of QC </option>
+                                       <option value="qc-miller">List of QC </option>
                                   </optgroup>
                                    <optgroup label="HR">
                                        <option value="hr-employee-miller">List of HR </option>

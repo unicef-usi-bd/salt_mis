@@ -18,19 +18,19 @@
     </tr>
     <?php $sl = 0; ?>
 
-    @foreach($purchaseChemicalStocks as $purchaseChemicalStock)
-        <tr>
-            <td>{{ ++$sl }}</td>
-            <td>{{$purchaseChemicalStock->LOOKUPCHD_NAME}}</td>
-            <td>{{$purchaseChemicalStock->STOCK_QTY}}</td>
+    {{--@foreach($purchaseChemicalStocks as $purchaseChemicalStock)--}}
+        {{--<tr>--}}
+            {{--<td>{{ ++$sl }}</td>--}}
+            {{--<td>{{$purchaseChemicalStock->LOOKUPCHD_NAME}}</td>--}}
+            {{--<td>{{$purchaseChemicalStock->STOCK_QTY}}</td>--}}
 
-        </tr>
-    @endforeach
+        {{--</tr>--}}
+    {{--@endforeach--}}
     @foreach($purchaseTotalSaltStocks as $purchaseTotalSaltStock)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$purchaseTotalSaltStock->LOOKUPCHD_NAME}}</td>
-            <td>{{$purchaseTotalSaltStock->STOCK_QTY}}</td>
+            <td>{{$purchaseTotalSaltStock->Process_Type}}</td>
+            <td>{{$purchaseTotalSaltStock->QTY}}</td>
 
         </tr>
     @endforeach
