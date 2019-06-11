@@ -41,6 +41,18 @@ class ChemicalPurchase extends Model
             ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }
+    //for service
+    public static function chemicalPurchaseService(){
+        return DB::table('tmm_receivemst')
+            ->select('tmm_receivemst.*','smm_item.ITEM_NAME','ssm_supplier_info.TRADING_NAME','tmm_receivechd.RCV_QTY')
+            ->leftJoin('smm_item','tmm_receivemst.RECEIVE_NO', '=','smm_item.ITEM_NO')
+            ->leftJoin('ssm_supplier_info','tmm_receivemst.SUPP_ID_AUTO', '=','ssm_supplier_info.SUPP_ID_AUTO')
+            ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
+            //->where('tmm_receivemst.center_id','=',Auth::user()->center_id)
+            ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
+            ->get();
+    }
+    //for service
 
     public static function insertChemicalPurchaseData($request){
         $supplierId = $request->input('SUPP_ID_AUTO');

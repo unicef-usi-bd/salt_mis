@@ -22,6 +22,20 @@ class CrudeSaltProcurement extends Model
             ->get();
     }
 
+    //for Service
+    public static function crudeSaltePurchaseService(){
+        return DB::table('tmm_receivemst')
+            ->select('tmm_receivemst.*','smm_item.ITEM_NAME','ssm_supplier_info.TRADING_NAME','tmm_receivechd.RCV_QTY','ssc_lookupchd.LOOKUPCHD_NAME')
+            ->leftJoin('smm_item','tmm_receivemst.RECEIVE_NO','=','smm_item.ITEM_NO')
+            ->leftJoin('ssm_supplier_info','tmm_receivemst.SUPP_ID_AUTO', '=','ssm_supplier_info.SUPP_ID_AUTO')
+            ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
+            ->leftJoin('ssc_lookupchd','tmm_receivemst.SOURCE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
+            //->where('tmm_receivemst.center_id','=',Auth::user()->center_id)
+            ->where('tmm_receivemst.RECEIVE_TYPE','=','SR')
+            ->get();
+    }
+    //forservice
+
     public static function getCountryName(){
         return DB::table('ssc_country')
             ->select('ssc_country.*')
