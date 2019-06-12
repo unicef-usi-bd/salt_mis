@@ -347,9 +347,9 @@
                     user_group_level_id:{
                         required: true,
                     },
-                    center_id:{
-                        required: true,
-                    }
+//                    center_id:{
+//                        required: true,
+//                    }
                 }
             });
 

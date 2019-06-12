@@ -168,6 +168,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('total-sale-admin','ReportController@getTotalSaleAdmin');//jalal
     route::get('miller-under-association','ReportController@getListOfMiller');//jala
     route::get('process-stock-admin','ReportController@getProcessReportAdmin');//jalal
+    route::get('qc-miller','ReportController@getQcformiller');//jalal
 
 
     Route::get('chemical-item-list','ReportController@getChemicalItemList');//Rubiyat
@@ -230,7 +231,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
     Route::get('purchase-salt-amount-pdf/{itemType}/{starDate}/{endDate}','ReportController@getPurchaseSaltAmountPdf');//jalal
     Route::get('purchase-salt-stock-pdf/{starDate}/{endDate}','ReportController@getAdminSaltStockPdf');//jalal
-    Route::get('miller-purchase-salt-stock-pdf/{starDate}/{endDate}','ReportController@getMillerSaltStockPdf');//jalal
+    Route::get('miller-purchase-salt-stock-pdf/{starDate}/{endDate}/{itemType}','ReportController@getMillerSaltStockPdf');//jalal
     Route::get('monitor-salt-report-pdf/{starDate}/{endDate}','ReportController@getMonitorSaltsupplierListPdf');//jalal
 
 
@@ -255,6 +256,8 @@ Route::group(['middleware' => ['auth']], function() {
     route::get('miller-under-association-pdf/{zone}','ReportController@getListOfMillerpdf');//jala
     route::get('process-stock-admin-pdf/{starDate}/{endDate}','ReportController@getProcessReportAdminPdf');//jalal
     Route::get('chemical-item-list-pdf','ReportController@getChemicalItemListPdf');//Rubiyat
+    route::get('qc-miller-pdf','ReportController@getQcformillerPdf');//jalal
+
 
 
 });

@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('qc-report-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('qc-miller-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>List of Miller QC Report</h4>
     </div><!-- /.col -->
@@ -34,7 +34,7 @@
 
             <tbody>
             <?php $sl=0;?>
-            @foreach($qcReports as $row)
+            @foreach($qcReportsMiller as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->MILL_NAME}}</td>
@@ -42,7 +42,7 @@
                     <td>{{$row->quality_control_by}}</td>
                     <td>{{$row->agency_name}}</td>
                     <td>
-                        @if($qualityControlResultRange->SODIUM_CHLORIDE_MAX >= $row->SODIUM_CHLORIDE && $qualityControlResultRange->SODIUM_CHLORIDE_MIN <= $row->SODIUM_CHLORIDE && $qualityControlResultRange->MOISTURIZER_MAX >= $row->MOISTURIZER && $qualityControlResultRange->MOISTURIZER_MIN <= $row->MOISTURIZER && $qualityControlResultRange->PPM_MAX >= $row->IODINE_CONTENT && $qualityControlResultRange->PPM_MIN <= $row->IODINE_CONTENT && $qualityControlResultRange->PH_MAX >= $row->PH && $qualityControlResultRange->PH_MIN <= $row->PH)
+                        @if($qualityControlResultRangeMiller->SODIUM_CHLORIDE_MAX >= $row->SODIUM_CHLORIDE && $qualityControlResultRangeMiller->SODIUM_CHLORIDE_MIN <= $row->SODIUM_CHLORIDE && $qualityControlResultRangeMiller->MOISTURIZER_MAX >= $row->MOISTURIZER && $qualityControlResultRangeMiller->MOISTURIZER_MIN <= $row->MOISTURIZER && $qualityControlResultRangeMiller->PPM_MAX >= $row->IODINE_CONTENT && $qualityControlResultRangeMiller->PPM_MIN <= $row->IODINE_CONTENT && $qualityControlResultRangeMiller->PH_MAX >= $row->PH && $qualityControlResultRangeMiller->PH_MIN <= $row->PH)
                             <span >Pass</span>
                         @else
                             <span>Fail</span>

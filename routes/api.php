@@ -27,5 +27,6 @@ Route::post('/wash-crush-stock', 'API\ServiceIodizeController@getWashCrushStock'
 Route::post('/chemical-stock', 'API\ServiceIodizeController@getChemicalStock'); //Rubiyat
 Route::post('/store-iodize-data','API\ServiceIodizeController@storeIodizeData');//jalal
 Route::post('/store-wash-crush-data','API\WashCrushService@storeWashCrashData');//jalal
+Route::post('user-login-production-sale', 'API\ProductionAndSaleController@userLogin');//jalal
 
 

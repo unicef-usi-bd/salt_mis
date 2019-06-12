@@ -150,27 +150,73 @@ class Report extends Model
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 
-    public static function getStockSaltForMiller($centerId,$starDate, $endDate){
-//        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
-//                                        FROM
-//                                         (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
-//                                            CASE WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN
-//                                                s.QTY
-//                                            END reduce,
-//
-//                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN
-//                                                s.QTY
-//                                            END purchase,
-//                                            s.TRAN_DATE, s.center_id
-//                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
-//                                            WHERE i.ITEM_NO = s.ITEM_NO
-//                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
-//                                            AND i.item_type = 26
-//                                            AND s.TRAN_FLAG NOT IN ('WR','II')
-//                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
-//                                            WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-//                                            AND  b.center_id = $centerId
-//                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+    public static function getStockSaltForMiller($centerId,$starDate, $endDate,$itemType){
+        if($itemType == 0) {
+            return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
+                                        FROM
+                                         (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN
+                                                s.QTY
+                                            END reduce,
+
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 26
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
+                                            -- WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                            -- AND  b.center_id = $centerId
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+        }else{
+            return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
+                                        FROM
+                                         (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN
+                                                s.QTY
+                                            END reduce,
+
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 26
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
+                                            WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                            AND  b.center_id = $centerId
+                                            AND  b.ITEM_NO = $itemType
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+        }
+//        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+//      case when st.TRAN_TYPE = 'W' then
+//        'Wash Crash'
+//      end Process_Type
+//      from tmm_itemstock st
+//      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+//      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+//      where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
+//      and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+//      union
+//      select i.BATCH_NO, st.QTY,
+//      case when st.TRAN_TYPE = 'I' then
+//        'Iodize'
+//      end Process_Type
+//      from tmm_itemstock st
+//      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+//      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+//      where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
+//      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
+    }
+
+    public static function getProcessStock($centerId,$starDate,$endDate){
         return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
@@ -189,28 +235,6 @@ class Report extends Model
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
       where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
-      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
-    }
-
-    public static function getProcessStock($starDate,$endDate){
-        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
-      case when st.TRAN_TYPE = 'W' then
-        'Wash Crash'
-      end Process_Type
-      from tmm_itemstock st 
-      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'W' and st.center_id and st.TRAN_FLAG = 'WI'
-      and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-      union
-      select i.BATCH_NO, st.QTY,
-      case when st.TRAN_TYPE = 'I' then
-        'Iodize'
-      end Process_Type
-      from tmm_itemstock st 
-      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'I' and st.center_id and st.TRAN_FLAG = 'II'
       -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }
 
@@ -255,9 +279,7 @@ class Report extends Model
         if($renawlDate){
             $listMillerLicense->where('ci.RENEWING_DATE','=',$renawlDate);
         }
-        if ($failDate){
-            $listMillerLicense->where('ci.RENEWING_DATE','=',$failDate);
-        }
+
         return $listMillerLicense->get();
     }
 
@@ -622,6 +644,43 @@ class Report extends Model
        where z.ZONE_ID = $zone"));
         }
 
+    }
+
+    public static function getQcReportMiller($centerId){
+        $qcReports = DB::table('tmm_qualitycontrol as ql');
+        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.MILL_NAME','i.BATCH_NO');
+        $qcReports->leftJoin('ssc_lookupchd as lc','ql.QC_BY','=','lc.LOOKUPCHD_ID');
+        $qcReports->leftJoin('ssc_lookupchd as lch','ql.AGENCY_ID','=','lch.LOOKUPCHD_ID');
+        $qcReports->leftJoin('ssm_mill_info as mi','ql.center_id','=','mi.center_id');
+        $qcReports->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','mi.ZONE_ID');
+        $qcReports->leftJoin('tmm_iodizedmst as i','ql.BATCH_NO','=','i.IODIZEDMST_ID');
+        if($centerId){
+            $qcReports->where('ql.center_id','=',$centerId);
+        }
+
+        return $qcReports->get();
+    }
+
+    public static function getProcessStockAdmin($starDate,$endDate){
+        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'W' then
+        'Wash Crash'
+      end Process_Type
+      from tmm_itemstock st 
+      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'W'  and st.TRAN_FLAG = 'WI'
+      and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+      union
+      select i.BATCH_NO, st.QTY,
+      case when st.TRAN_TYPE = 'I' then
+        'Iodize'
+      end Process_Type
+      from tmm_itemstock st 
+      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
+      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }
 
 }

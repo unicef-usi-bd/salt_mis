@@ -167,11 +167,11 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getMillerSaltStockPdf($starDate,$endDate){
+    public function getMillerSaltStockPdf($starDate,$endDate,$itemType){
         $centerId = Auth::user()->center_id;
 //        $starDate = $request->input('startDate');
 //        $endDate = $request->input('endDate');
-        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStock = Report::getStockSaltForMiller($centerId,$starDate,$endDate,$itemType);
         $data = \View::make('reportPdf.purchaseSaltstockMillerReportPdf',compact('purchaseTotalSaltStock'));
         $this->generatePdf($data);
     }
@@ -180,13 +180,13 @@ class ReportController extends Controller
         //$centerId = Auth::user()->center_id;
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $processStock = Report::getProcessStock($starDate,$endDate);
+        $processStock = Report::getProcessStockAdmin($starDate,$endDate);
         $view = view("reportView.processStockAdminReport",compact('processStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getProcessReportAdminPdf($starDate,$endDate){
-        $processStock = Report::getProcessStock($starDate,$endDate);
+        $processStock = Report::getProcessStockAdmin($starDate,$endDate);
         $data = \View::make('reportPdf.processStockAdminReportPdf',compact('processStock'));
         $this->generatePdf($data);
     }
@@ -368,7 +368,7 @@ class ReportController extends Controller
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
-        $purchaseTotalSaltStocks = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getProcessStock($centerId,$starDate,$endDate);
 
         $view = view("reportView.millerProcessStockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
@@ -377,7 +377,7 @@ class ReportController extends Controller
     public function getMillerProcessStockPdf($starDate,$endDate){
         $centerId = Auth::user()->center_id;
         $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
-        $purchaseTotalSaltStocks = Report::getStockSaltForMiller($centerId,$starDate,$endDate);
+        $purchaseTotalSaltStocks = Report::getProcessStock($centerId,$starDate,$endDate);
         $data = \View::make('reportPdf.millerProcessStockPdf',compact('purchaseChemicalStocks','purchaseTotalSaltStocks'));
         $this->generatePdf($data);
     }
@@ -430,7 +430,7 @@ class ReportController extends Controller
 
     public function getListSupplierWithNameForMillerPdf($divisionId,$districtId){
         $centerId = Auth::user()->center_id;
-        $supplierMillerLisType = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId);
+        $supplierMillerLisType = Report::getListOfSupplierWithNmaeForMiller($centerId,$divisionId,$districtId);
         $data = \View::make('reportPdf.purchaseSaltSupplierListforWithNameMillerPdf',compact('supplierMillerLisType'));
         $this->generatePdf($data);
     }
@@ -557,6 +557,23 @@ class ReportController extends Controller
     public function getListOfMillerpdf($zone){
         $totalMiller = Report::getListofMillerAdmin($zone);
         $data = \View::make('reportPdf.listOfmillerUnderAssociationReportPdf',compact('totalMiller'));
+        $this->generatePdf($data);
+    }
+
+    public function getQcformiller(){
+        $centerId = Auth::user()->center_id;
+        $qualityControlResultRangeMiller = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
+        $qcReportsMiller = Report::getQcReportMiller($centerId);
+        $view = view("reportView.qcMillerReport",compact('qcReportsMiller','qualityControlResultRangeMiller'))->render();
+        return response()->json(['html'=>$view]);
+    }
+
+    public function getQcformillerPdf(){
+        $centerId = Auth::user()->center_id;
+        //$zone = $request->input('zone');
+        $qualityControlResultRangeMiller = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
+        $qcReportsMiller = Report::getQcReportMiller($centerId);
+        $data = \View::make('reportPdf.qcMillerReportPdf',compact('qcReportsMiller','qualityControlResultRangeMiller'));
         $this->generatePdf($data);
     }
 
