@@ -50,12 +50,12 @@ class LookupGroupDataController extends Controller
     {
         $rules = array(
             'LOOKUPCHD_NAME' => 'required|max:60',
-            'UD_ID' => 'required|integer|unique:ssc_lookupchd'
+//            'UD_ID' => 'required|integer|unique:ssc_lookupchd'
         );
         $error = array(
             'LOOKUPCHD_NAME.required' =>'The Group Data Name field is required.',
-            'UD_ID.required' => 'The User Define Id field is required.',
-            'UD_ID.unique' => 'The User Define Id already been taken.',
+//            'UD_ID.required' => 'The User Define Id field is required.',
+//            'UD_ID.unique' => 'The User Define Id already been taken.',
         );
 
         $validator = Validator::make(Input::all(), $rules,$error);

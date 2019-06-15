@@ -70,7 +70,7 @@ class ProductionAndSaleController extends Controller
                 //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
 
-                    'message'=> 'Information are given below',
+                    'message'=> 'Sales and Production Information are given below',
                     //'child_id'=>$child_id,
                     //'crude_salt_types' => $crudeSaltTypes,
                     //'chemical_types' => $chemicleType,
