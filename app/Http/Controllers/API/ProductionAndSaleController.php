@@ -62,8 +62,8 @@ class ProductionAndSaleController extends Controller
                 $saltprocrurement = CrudeSaltProcurement::crudeSaltePurchaseService();
 //                $totalchemicalPurchaseKI = ChemicalPurchase::totalkIpurchase();
 //                $totlalChemivalPurchaseKIO3 = ChemicalPurchase::totalkio3purchase();
-                $totalChemicalPurchaseTypewise = ChemicalPurchase::totalchemicalPurchaseTypeWise();
-                $totalSaltePurchaseTypeWise = CrudeSaltProcurement::totalSaltpurchaseTypeWise();
+                $totalChemicalPurchaseTypewise = ChemicalPurchase::totalchemicalPurchaseTypeWise($child_id);
+                $totalSaltePurchaseTypeWise = CrudeSaltProcurement::totalSaltpurchaseTypeWise($child_id);
                 //$organogramDt = AssociationSetup::getZoneList();
 
 //                $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
@@ -87,8 +87,8 @@ class ProductionAndSaleController extends Controller
                     'iodize_sale' => $totalIodizeSale,
                     'wash_crash_sale' => $totalWashCrashSale,
                     'total_sale' => $totalProductSales,
-//                    'chemicalPurchase' => $chemiclePurchase,
-//                    'saltProcurement' => $saltprocrurement,
+                    //'chemicalPurchase' => $chemiclePurchase,
+                    //'saltProcurement' => $saltprocrurement,
 //                    'totalchemicalpurchaseKI' => $totalchemicalPurchaseKI,
 //                    'totlalChemivalPurchaseKIO3' => $totlalChemivalPurchaseKIO3,
                     'totalChemicalPurchaseTypewise' => $totalChemicalPurchaseTypewise,
