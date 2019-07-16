@@ -28,8 +28,8 @@
                     <th>Batch Number</th>
                     <th class="hidden-480">Date</th>
                     <th class="hidden-480">Salt Amount in Stock (KG)</th>
-                    <th class="hidden-480">Chemical Amount in Use (KG)</th>
                     <th class="hidden-480">Wastage Amount (%)</th>
+                    <th class="hidden-480">Chemical Amount in Use (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -43,8 +43,8 @@
                         <td>{{$row->BATCH_NO}}</td>
                         <td class="hidden-480">{{$row->BATCH_DATE}}</td>
                         <td class="hidden-480">{{ $row->WASH_CRASH_QTY }}</td>
+                        <td class="hidden-480">{{$row->WASTAGE}} ( {{($row->WASH_CRASH_QTY * $row->WASTAGE)/100}} )</td>
                         <td class="hidden-480">{{$row->REQ_QTY}}</td>
-                        <td class="hidden-480">{{$row->WASTAGE}}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php
