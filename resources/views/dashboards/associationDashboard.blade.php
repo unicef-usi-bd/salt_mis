@@ -44,7 +44,7 @@
                     <div class="infobox-content">
                         @foreach($totalAssociationproduction as $row)
                         @if($loop->first)
-                        {{ $row->stock_total }} KG
+                        {{ sprintf('%0.2f',$row->stock_total) }} KG
                         @endif
                         @endforeach
                     </div>
@@ -90,7 +90,7 @@
                     <div class="infobox-content">
                         @foreach($associationIodize as $row)
                         @if($loop->first)
-                        {{ $associationIodize[0]->iodize_stock }} KG
+                        {{ sprintf('%0.2f',$associationIodize[0]->iodize_stock) }} KG
                         @endif
                         @endforeach
                     </div>
@@ -135,7 +135,7 @@
                     <div class="infobox-content">
                         @foreach($associationWashCrash as $row)
                         @if($loop->first)
-                        {{ $row->washcrash_stock }} KG
+                        {{ sprintf('%0.2f',$row->washcrash_stock) }} KG
                         @endif
                         @endforeach
                     </div>
