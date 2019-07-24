@@ -347,34 +347,34 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group purchaseOrderDiv">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select class=" width-65" name="ACTIVE_FLG">
-                                   <option value="">--Select--</option>
-                                   <option value="0">Higher Purchase</option>
-                                   <option value="1">Lower Purchase</option>
-                                   <option value="2">Higher Sale</option>
-                                   <option value="3">Lower Sale</option>
-                               </select>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group zoneAdminDiv">
-                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneBsti form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
-                                    <option value="">Select Association Name</option>
-                                    <option value="0">Select All</option>
-                                    @foreach($associationList as $association)
-                                        <option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>
-                                    @endforeach
-                                </select>
-                             </span>
-                        </div>
-                    </div>
+                    {{--<div class="form-group purchaseOrderDiv">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select class=" width-65" name="ACTIVE_FLG">--}}
+                                   {{--<option value="">--Select--</option>--}}
+                                   {{--<option value="0">Higher Purchase</option>--}}
+                                   {{--<option value="1">Lower Purchase</option>--}}
+                                   {{--<option value="2">Higher Sale</option>--}}
+                                   {{--<option value="3">Lower Sale</option>--}}
+                               {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group zoneAdminDiv">--}}
+                        {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                                {{--<select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneBsti form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">--}}
+                                    {{--<option value="">Select Association Name</option>--}}
+                                    {{--<option value="0">Select All</option>--}}
+                                    {{--@foreach($associationList as $association)--}}
+                                        {{--<option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                             {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">

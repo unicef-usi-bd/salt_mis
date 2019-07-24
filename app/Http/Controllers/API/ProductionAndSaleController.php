@@ -60,6 +60,10 @@ class ProductionAndSaleController extends Controller
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
                 $chemiclePurchase = ChemicalPurchase::chemicalPurchaseService();
                 $saltprocrurement = CrudeSaltProcurement::crudeSaltePurchaseService();
+//                $totalchemicalPurchaseKI = ChemicalPurchase::totalkIpurchase();
+//                $totlalChemivalPurchaseKIO3 = ChemicalPurchase::totalkio3purchase();
+                $totalChemicalPurchaseTypewise = ChemicalPurchase::totalchemicalPurchaseTypeWise($child_id);
+                $totalSaltePurchaseTypeWise = CrudeSaltProcurement::totalSaltpurchaseTypeWise($child_id);
                 //$organogramDt = AssociationSetup::getZoneList();
 
 //                $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
@@ -70,7 +74,7 @@ class ProductionAndSaleController extends Controller
                 //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
 
-                    'message'=> 'Information are given below',
+                    'message'=> 'Sales and Production Information are given below',
                     //'child_id'=>$child_id,
                     //'crude_salt_types' => $crudeSaltTypes,
                     //'chemical_types' => $chemicleType,
@@ -83,8 +87,12 @@ class ProductionAndSaleController extends Controller
                     'iodize_sale' => $totalIodizeSale,
                     'wash_crash_sale' => $totalWashCrashSale,
                     'total_sale' => $totalProductSales,
-                    'chemicalPurchase' => $chemiclePurchase,
-                    'saltProcurement' => $saltprocrurement,
+                    //'chemicalPurchase' => $chemiclePurchase,
+                    //'saltProcurement' => $saltprocrurement,
+//                    'totalchemicalpurchaseKI' => $totalchemicalPurchaseKI,
+//                    'totlalChemivalPurchaseKIO3' => $totlalChemivalPurchaseKIO3,
+                    'totalChemicalPurchaseTypewise' => $totalChemicalPurchaseTypewise,
+                    'totalSaltePurchaseTypeWise' => $totalSaltePurchaseTypeWise,
                     'center_id' => $child_id,
                     //'zone_name' => $organogramDt
                 ]);

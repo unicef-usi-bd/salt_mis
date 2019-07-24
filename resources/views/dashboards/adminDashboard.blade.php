@@ -41,7 +41,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
-                    <div class="infobox-content">{{ $totalProductons }} KG</div>
+                    <div class="infobox-content">{{ sprintf('%0.2f',$totalProductons) }} KG</div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
-                    <div class="infobox-content">{{ $totalIodizeProduction }} KG</div>
+                    <div class="infobox-content">{{ sprintf('%0.2f',$totalIodizeProduction) }} KG</div>
                 </div>
             </div>
 
@@ -108,7 +108,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
-                    <div class="infobox-content">{{$totalWashcrashProduction}} KG</div>
+                    <div class="infobox-content">{{sprintf('%0.2f',$totalWashcrashProduction)}} KG</div>
                 </div>
             </div>
 

@@ -52,6 +52,41 @@ class ChemicalPurchase extends Model
             ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }
+
+    public static function totalkIpurchase(){
+        return DB::table('tmm_receivemst')
+            ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
+            ->where('tmm_receivemst.RECEIVE_NO', '=', 5)
+            ->sum('tmm_receivechd.RCV_QTY');
+    }
+
+    public static function totalkio3purchase(){
+        return DB::table('tmm_receivemst')
+            ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
+            ->where('tmm_receivemst.RECEIVE_NO', '=', 6)
+            ->sum('tmm_receivechd.RCV_QTY');
+    }
+
+    public static function totalchemicalPurchaseTypeWise(){
+        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase
+                                        FROM
+                                            (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'IC' AND s.TRAN_TYPE = 'C' THEN
+                                                s.QTY
+                                            END reduce,
+                                        
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'CP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 25
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+    }
     //for service
 
     public static function insertChemicalPurchaseData($request){

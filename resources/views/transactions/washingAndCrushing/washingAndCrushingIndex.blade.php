@@ -41,7 +41,7 @@
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{$row->REQ_QTY}}</td>
-                    <td>{{$row->WASTAGE}}</td>
+                    <td>{{$row->WASTAGE}} ( {{(intval($row->REQ_QTY) * intval($row->WASTAGE))/100}} )</td>
                     <td class="row{{ $row->WASHCRASHMST_ID }}">
                     <div class="hidden-sm hidden-xs action-buttons">
                     @php
