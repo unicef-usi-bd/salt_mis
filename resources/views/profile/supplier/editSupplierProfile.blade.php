@@ -108,16 +108,16 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Union Name</b></label>
-                <div class="col-xs-12 col-sm-7">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->UNION_ID }}">{{ $editData->UNION_NAME }}</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
+            {{--<div class="form-group">--}}
+                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Union Name</b></label>--}}
+                {{--<div class="col-xs-12 col-sm-7">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">--}}
+                            {{--<option value="{{ $editData->UNION_ID }}">{{ $editData->UNION_NAME }}</option>--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
 
 

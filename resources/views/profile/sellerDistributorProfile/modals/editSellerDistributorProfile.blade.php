@@ -116,17 +116,17 @@
 
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12"  style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>
-                    <div class="col-sm-12">
-                    <span class="block input-icon input-icon-right">
-                        <select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editSellerProfile->UNION_ID }}">{{ $editSellerProfile->UNION_NAME }}</option>
-                        </select>
-                    </span>
+                {{--<div class="col-md-3">--}}
+                    {{--<label for="inputSuccess" class="col-sm-12"  style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>--}}
+                    {{--<div class="col-sm-12">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">--}}
+                            {{--<option value="{{ $editSellerProfile->UNION_ID }}">{{ $editSellerProfile->UNION_NAME }}</option>--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
 
-                    </div>
-                </div>
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
         </div>
 

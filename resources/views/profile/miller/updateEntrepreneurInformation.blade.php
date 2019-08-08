@@ -105,13 +105,13 @@
                                         </select>
                                     </span>
                                 </td>
-                                <td>
-                                    <span class="block input-icon input-icon-right">
-                                        <select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >
-                                            <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
-                                        </select>
-                                    </span>
-                                </td>
+                                {{--<td>--}}
+                                    {{--<span class="block input-icon input-icon-right">--}}
+                                        {{--<select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >--}}
+                                            {{--<option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>--}}
+                                        {{--</select>--}}
+                                    {{--</span>--}}
+                                {{--</td>--}}
                                 <td>
                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                     <span class="block input-icon input-icon-right">

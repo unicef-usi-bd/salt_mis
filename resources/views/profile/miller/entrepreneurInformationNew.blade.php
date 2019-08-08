@@ -189,13 +189,13 @@
                                                             </select>
                                                         </span>
                                                     </td>
-                                                    <td>
-                                                        <span class="block input-icon input-icon-right">
-                                                            <select class="form-control ent_union chosen-select" id="UNION_ID" name="UNION_ID[]"  >
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </span>
-                                                    </td>
+                                                    {{--<td>--}}
+                                                        {{--<span class="block input-icon input-icon-right">--}}
+                                                            {{--<select class="form-control ent_union chosen-select" id="UNION_ID" name="UNION_ID[]"  >--}}
+                                                                {{--<option value="">Select</option>--}}
+                                                            {{--</select>--}}
+                                                        {{--</span>--}}
+                                                    {{--</td>--}}
                                                     <td>
                                                         <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                         <span class="block input-icon input-icon-right">

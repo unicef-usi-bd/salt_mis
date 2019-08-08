@@ -116,16 +116,16 @@
                     </span>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Union</b></label>
-                    <div class="col-xs-12">
-                    <span class="block input-icon input-icon-right">
-                        <select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">
-                            <option value="">Select Union</option>
-                        </select>
-                    </span>
-                    </div>
-                </div>
+                {{--<div class="col-md-3">--}}
+                    {{--<label  class="col-sm-12"  style="margin-left: -2%;"><b>Union</b></label>--}}
+                    {{--<div class="col-xs-12">--}}
+                    {{--<span class="block input-icon input-icon-right">--}}
+                        {{--<select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">--}}
+                            {{--<option value="">Select Union</option>--}}
+                        {{--</select>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
         </div>
 
