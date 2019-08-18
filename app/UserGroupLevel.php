@@ -10,10 +10,11 @@ class UserGroupLevel extends Model
 {
     public static function getActiveUserGroupLevel($id, $orgId){
         return DB::table('sa_ug_level')
-            ->select('UG_LEVEL_ID','UGLEVE_NAME')
+            ->select('UG_LEVEL_ID', 'UGLEVE_NAME', 'POSITIONLEVEl')
             ->where('USERGRP_ID','=',$id)
             ->where('ORG_ID','=',$orgId)
             ->where('IS_ACTIVE','=','1')
+            ->where('POSITIONLEVEl','>',$id)
             ->get();
     }
 

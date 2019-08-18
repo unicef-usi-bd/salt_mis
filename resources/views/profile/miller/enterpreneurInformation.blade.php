@@ -52,7 +52,7 @@
                         <th style="width:130px ;">Division<span style="color:red;"> </span></th>
                         <th style="width: ;">District</th>
                         <th style="width: ;">Upazila</th>
-                        <th style="width: 100px;">Union</th>
+                        {{--<th style="width: 100px;">Union</th>--}}
                         <th style="width: ;" >NID</th>
                         <th style="width: ;">Mobile 1</th>
                         <th  style="width: ;">Mobile 2</th>
