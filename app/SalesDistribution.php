@@ -11,7 +11,7 @@ class SalesDistribution extends Model
 {
     public static function getSalesDistributionData(){
         return DB::table('tmm_saleschd')
-            ->select('tmm_saleschd.*','smm_item.ITEM_NAME','tmm_salesmst.SALES_DATE','ssc_lookupchd.LOOKUPCHD_NAME')
+            ->select('tmm_saleschd.*','smm_item.ITEM_NAME','tmm_salesmst.SALES_DATE','ssc_lookupchd.LOOKUPCHD_NAME', 'ssc_lookupchd.DESCRIPTION')
             ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
             ->leftJoin('tmm_salesmst','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
             ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')

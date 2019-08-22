@@ -68,11 +68,8 @@ class QulityControlTestingController extends Controller
     public function store(Request $request)
     {
 
-
         $rules = array(
             'QC_TESTNAME' => 'required',
-
-
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -81,7 +78,7 @@ class QulityControlTestingController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
            // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
-            //$qulityControlImge = '';
+            $qulityControlImge = null;
             if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
                 try {
                     $file = $request->file('QUALITY_CONTROL_IMAGE');
@@ -94,13 +91,12 @@ class QulityControlTestingController extends Controller
                 }
             }
 
-            $data = array([
+            $data = array(
                 'QC_DATE' =>date('Y-m-d', strtotime(Input::get('QC_DATE'))),
                 'QC_BY' =>$request->input('QC_BY'),
                 'AGENCY_ID' =>$request->input('AGENCY_ID'),
                 'BATCH_NO' =>$request->input('BATCH_NO'),
                 'QC_TESTNAME' =>$request->input('QC_TESTNAME'),
-                'QUALITY_CONTROL_IMAGE' => 'image/testimage/'.$qulityControlImge,
                 'REMARKS' => $request->input('REMARKS'),
                 'SODIUM_CHLORIDE' =>$request->input('SODIUM_CHLORIDE'),
                 'MOISTURIZER' =>$request->input('MOISTURIZER'),
@@ -109,8 +105,9 @@ class QulityControlTestingController extends Controller
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+            );
 
+            if(!empty($qulityControlImge)) $data['QUALITY_CONTROL_IMAGE'] = 'image/qualitycontrol/'.$qulityControlImge;
 
             //$this->pr($request->input());
             $qualityControlTestingInsert = QulityControlTesting::insertQualityControlTestingData($data);
@@ -163,8 +160,6 @@ class QulityControlTestingController extends Controller
     {
         $rules = array(
             'QC_TESTNAME' => 'required',
-
-
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -186,9 +181,6 @@ class QulityControlTestingController extends Controller
 
                 }
             }
-
-
-
 
             //$this->pr($request->input());
             $qualityControlTestingUpdate = QulityControlTesting::updateQualityControlTestingData($request,$id,$qulityControlImge);

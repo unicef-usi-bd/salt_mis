@@ -27,8 +27,10 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Batch No</th>
                     <th>Salt Name</th>
-                    <th>Salt Amount in stock (KG)</th>
+                    <th>Date</th>
+                    <th>Salt Amount (KG)</th>
                     <th>Wastage Amount (%)</th>
+                    <th>Salt Processed in stock (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -40,8 +42,10 @@
                     <td class="center">{{ ++$sl }}</td>
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{ date('d-M-Y', strtotime($row->BATCH_DATE)) }}</td>
+                    <td>{{ ($row->REQ_QTY*100)/(100-$row->WASTAGE) }}</td>
+                    <td>{{$row->WASTAGE}} ( {{ ($row->WASTAGE*$row->REQ_QTY)/(100-$row->WASTAGE) }} KG)</td>
                     <td>{{$row->REQ_QTY}}</td>
-                    <td>{{$row->WASTAGE}} ( {{(intval($row->REQ_QTY) * intval($row->WASTAGE))/100}} )</td>
                     <td class="row{{ $row->WASHCRASHMST_ID }}">
                     <div class="hidden-sm hidden-xs action-buttons">
                     @php

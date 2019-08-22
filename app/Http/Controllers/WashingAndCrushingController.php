@@ -42,6 +42,8 @@ class WashingAndCrushingController extends Controller
 
         $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData();
 
+//        dd($washingAndCrushingData);
+
         return view('transactions.washingAndCrushing.washingAndCrushingIndex',compact('heading','previllage','washingAndCrushingData'));
     }
 
@@ -75,8 +77,6 @@ class WashingAndCrushingController extends Controller
             //SweetAlert::error('Error','Something is Wrong !');
             return Redirect::back()->withErrors($validator);
         }else {
-
-
             //$this->pr($request->input());
             $entryBy = Auth::user()->id;
             $centerId = Auth::user()->center_id;

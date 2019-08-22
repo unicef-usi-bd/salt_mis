@@ -75,7 +75,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="col-md-4">
                     <label class="col-sm-12"><b>Attached Test Document</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
@@ -87,6 +87,9 @@
                     <div class="col-md-12">
                         <input type="file" name="QUALITY_CONTROL_IMAGE" class="form-control col-xs-5 col-sm-5">
                     </div>
+                </div>
+                <div class="col-md-2">
+                    <img src="{{ $editQualityControl->QUALITY_CONTROL_IMAGE }}" alt="No Image" height="70px" width="120px" style="border: 2px solid lightblue;padding: 4px;">
                 </div>
             </div>
         </div>

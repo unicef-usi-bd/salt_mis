@@ -19,13 +19,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </p>
-
             @endif
             <table class="table table-striped table-bordered table-hover gridTable" title="Bank List">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Purchase Date</th>
+                    <th>Test Date</th>
                     <th class="hidden-480">Batch No</th>
                     <th class="hidden-480">Test Name</th>
                     <th class="hidden-480">Result</th>
@@ -53,7 +52,9 @@
                                 <span>Fail</span>
                             @endif
                         </td>
-                        <td class="hidden-480"><a href="{{ $row->QUALITY_CONTROL_IMAGE }}"  role="button" class="btn btn-primary" download="download">Download</a> </td>
+                        <td class="hidden-480">
+                            <a href="{{ url($row->QUALITY_CONTROL_IMAGE) }}" class="btn btn-primary" download="download">download</a>
+                        </td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

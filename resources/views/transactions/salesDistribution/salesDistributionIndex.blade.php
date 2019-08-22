@@ -11,6 +11,7 @@
             </small>
         </h1>
     </div><!-- /.page-header -->
+    <h4>Stock In Amount : <span style="color:red;">2000</span> KG</h4>
     <div class="row">
         <div class="col-xs-12">
             @if(session('message'))
@@ -29,6 +30,7 @@
                     <th class="hidden-480">Date</th>
                     <th class="hidden-480">Amount</th>
                     <th class="hidden-480">Quantity</th>
+                    <th class="hidden-480">Total Ammount</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -43,6 +45,7 @@
                         <td class="hidden-480">{{$row->SALES_DATE}}</td>
                         <td class="hidden-480">{{ $row->LOOKUPCHD_NAME }}</td>
                         <td class="hidden-480">{{$row->PACK_QTY}} pcs</td>
+                        <td class="hidden-480">{{ $row->DESCRIPTION*$row->PACK_QTY}} KG</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php
