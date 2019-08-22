@@ -128,6 +128,25 @@ class Report extends Model
         return $purchaseSaltList->get();
     }
 
+    public static function getItemStock($centerId,$itemType,$starDate,$endDate){
+
+        $purchaseSaltList = DB::table('ssc_lookupchd');
+        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
+        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
+        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
+        if($centerId){
+            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        if ($itemType != 0){
+            $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
+        }else if($starDate AND $endDate){
+            $purchaseSaltList->whereBetween('tmm_itemstock.TRAN_DATE',[$starDate, $endDate]);
+        }
+        return $purchaseSaltList->get();
+    }
+
     public static function getStockSaltForAdmin($starDate, $endDate){
         return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
                                         FROM
@@ -445,31 +464,39 @@ class Report extends Model
     }
 
     public static function getListOfSupplierForMiller($centerId,$divisionId,$districtId){
-        return DB::select(DB::raw("SELECT a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME, SUM(a.QTY) QTY
-     FROM
-	(SELECT s.TRADING_NAME,DISTRICT_ID, DIVISION_ID, s.SUPPLIER_TYPE_ID,
-	(SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
-	(SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
-	(SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = s.SUPPLIER_TYPE_ID) supplier_type,
-	t.QTY
-	FROM ssm_supplier_info s, tmm_itemstock t
-	WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
-	AND t.TRAN_FLAG = 'PR' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId) a
-    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
+        $condition = '';
+        if(!empty($divisionId)) $condition = " and s.DIVISION_ID = $divisionId";
+        if(!empty($districtId)) $condition .= " and s.DISTRICT_ID = $districtId";
+        $data = DB::select(DB::raw("SELECT a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME, SUM(a.QTY) QTY
+                 FROM
+                (SELECT s.TRADING_NAME,DISTRICT_ID, DIVISION_ID, s.SUPPLIER_TYPE_ID,
+                (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+                (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+                (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = s.SUPPLIER_TYPE_ID) supplier_type,
+                t.QTY
+                FROM ssm_supplier_info s, tmm_itemstock t
+                WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
+                AND t.TRAN_FLAG = 'PR' and t.center_id = $centerId $condition) a
+                GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME"));
+        return $data;
     }
 
     public static function getListOfSupplierWithNmaeForMiller($centerId,$divisionId,$districtId){
-        return DB::select(DB::raw("SELECT a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME, SUM(a.QTY) QTY
-     FROM
-	(SELECT s.TRADING_NAME,DISTRICT_ID, DIVISION_ID, s.SUPPLIER_TYPE_ID,
-	(SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
-	(SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
-	(SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = s.SUPPLIER_TYPE_ID) supplier_type,
-	t.QTY
-	FROM ssm_supplier_info s, tmm_itemstock t
-	WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
-	AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId) a
-    GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
+        $condition = '';
+        if(!empty($divisionId)) $condition = " and s.DIVISION_ID = $divisionId";
+        if(!empty($districtId)) $condition .= " and s.DISTRICT_ID = $districtId";
+        $data = DB::select(DB::raw("SELECT a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME, SUM(a.QTY) QTY
+                 FROM
+                (SELECT s.TRADING_NAME,DISTRICT_ID, DIVISION_ID, s.SUPPLIER_TYPE_ID,
+                (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+                (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+                (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = s.SUPPLIER_TYPE_ID) supplier_type,
+                t.QTY
+                FROM ssm_supplier_info s, tmm_itemstock t
+                WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
+                AND t.TRAN_FLAG = 'PR' and t.TRAN_TYPE = 'CP' and t.center_id = $centerId $condition) a
+                GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME	"));
+        return $data;
     }
 
     public static function getListofClint($centerId,$divisionId,$districtId){

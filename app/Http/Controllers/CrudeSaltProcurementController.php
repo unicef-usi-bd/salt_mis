@@ -40,6 +40,7 @@ class CrudeSaltProcurementController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
         $crudeSalt = CrudeSaltProcurement::crudeSaltePurchase();
+//        dd($crudeSalt);
         return view('transactions.crudeSaltProcurement.crudeSaltProcurementIndex', compact( 'heading','previllage','crudeSalt'));
     }
 
