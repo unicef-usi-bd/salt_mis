@@ -53,11 +53,13 @@ class SupplierProfileController extends Controller
      */
     public function create()
     {
-        $digits = 4;
-        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $supplier = count(SupplierProfile::supplier());
+        $supplierId = sprintf("%04d", $supplier+1);
+//        $digits = 4;
+//        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $getDivision = SupplierProfile::getDivision();
         $getSupplierType = LookupGroupData::getActiveGroupDataByLookupGroup($this->supplierTypeId);
-       // $this->pr($agencyList);
+//        $this->pr($test);
         return view('profile.supplier.createSupplierProfile',compact('getDivision','supplierId','getSupplierType'));
     }
 
