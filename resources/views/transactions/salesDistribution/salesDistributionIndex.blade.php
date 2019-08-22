@@ -2,6 +2,12 @@
 
 @section('mainContent')
 
+    <style>
+        .stockLebel{
+            margin-bottom: 30px;
+        }
+    </style>
+
     <div class="page-header">
         <h1>
             Transaction
@@ -11,7 +17,9 @@
             </small>
         </h1>
     </div><!-- /.page-header -->
-    <h4>Stock In Amount : <span style="color:red;">2000</span> KG</h4>
+    <h4 class="pull-left stockLebel">Washing & Crushing Salt Stock In Amount : <span style="color:red;">{{ $washingStock }}</span> KG</h4>
+    <h4 class="pull-right stockLebel">Iodize Salt Stock In Amount : <span style="color:red;">{{ $iodizeStock }}</span> KG</h4>
+    {{--<div class="clearfix"></div>--}}
     <div class="row">
         <div class="col-xs-12">
             @if(session('message'))

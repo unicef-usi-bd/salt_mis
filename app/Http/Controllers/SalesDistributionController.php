@@ -37,7 +37,46 @@ class SalesDistributionController extends Controller
         );
 
         $salesDitributionIndex = SalesDistribution::getSalesDistributionData();
-        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDitributionIndex'));
+        $centerId = Auth::user()->center_id;
+//     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
+        $washingSalt = Stock::getTotalWashingSalt($centerId);
+        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
+
+        //$this->pr($washingSaltSale);
+
+        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+
+        if($idoizeSaltAmount){
+            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
+            if($washingSaltSale){
+                $washingStock = $afterIodizeWashingStock - $washingSaltSale;
+            }else{
+                $washingStock = $afterIodizeWashingStock;
+            }
+        }else{
+            if($washingSaltSale){
+                $washingStock = $washingSalt - $washingSaltSale;
+            }else{
+                $washingStock = $washingSalt;
+            }
+
+        }
+
+
+        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
+        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
+        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+        if($iodizeSale){
+            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
+        }else{
+            $iodizeStock = $beforeIodizeSaleStock;
+        }
+        //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
+
+        //$stock = $washCrashStock - abs($totalReduceWashCrashSalt);
+
+//        return $stock;
+        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDitributionIndex','washingStock','iodizeStock'));
     }
 
     /**

@@ -46,6 +46,13 @@ class SupplierProfile extends Model
             ->get();
     }
 
+    public static function supplier(){
+        return DB::table('ssm_supplier_info')
+            ->select('*')
+            ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
+            ->get();
+    }
+
     public static function supplierProfile($crudeSaltSupplierTypeId){
         return DB::table('ssm_supplier_info')
             ->select('*','ssc_lookupchd.LOOKUPCHD_NAME')
