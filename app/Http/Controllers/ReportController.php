@@ -113,7 +113,8 @@ class ReportController extends Controller
         $itemType = $request->input('itemType');
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseTotalSalt = Report::getPurchaseSalteLists ($centerId,$itemType,$starDate,$endDate);
+//        $purchaseTotalSalt = Report::getPurchaseSalteLists ($centerId,$itemType,$starDate,$endDate);
+        $purchaseTotalSalt = Report::getItemStock($centerId,$itemType,$starDate,$endDate);
         $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }

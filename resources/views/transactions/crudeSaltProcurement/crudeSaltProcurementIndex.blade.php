@@ -27,7 +27,8 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Crude Salt Type</th>
                     <th class="hidden-480">Source</th>
-                    <th class="hidden-480">Trading Name</th>
+                    <th class="hidden-480">Date</th>
+                    <th class="hidden-480">Trading Name (Supplier)</th>
                     <th class="hidden-480">Amount (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
@@ -41,6 +42,7 @@
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->ITEM_NAME}}</td>
                         <td class="hidden-480">{{$row->LOOKUPCHD_NAME}}</td>
+                        <td class="hidden-480">{{ date('d-M-Y', strtotime($row->ENTRY_TIMESTAMP)) }}</td>
                         <td class="hidden-480">{{ $row->TRADING_NAME }}</td>
                         <td class="hidden-480">{{$row->RCV_QTY}}</td>
                         <td class="">
