@@ -29,7 +29,7 @@
                     <th class="hidden-480">Date</th>
                     <th class="hidden-480">Salt Amount (KG)</th>
                     <th class="hidden-480">Wastage Amount (%)</th>
-                    <th class="hidden-480">Salt Amount in Stock (KG)</th>
+                    <th class="hidden-480">Iodize Process in Stock (KG)</th>
                     <th class="hidden-480">Chemical Amount in Use (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>

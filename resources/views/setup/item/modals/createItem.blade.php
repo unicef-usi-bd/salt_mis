@@ -1,11 +1,19 @@
+<style>
+    .my-error-class {
+        color:red;
+    }
+    .my-valid-class {
+        color:green;
+    }
+</style>
 <div class="col-md-12">
-    <form action="{{ url('/item') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/item') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item Type</b><span style="color: red;">* </span></label>
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="inputSuccess" class="form-control" name="ITEM_TYPE">
+                <select id="form-field-select-3 ITEM_TYPE inputSuccess" class="form-control ITEM_TYPE" name="ITEM_TYPE" >
                     <option>-Select-</option>
                     @foreach($itemTypes as $itemType)
                         <option value="{{ $itemType->LOOKUPCHD_ID }}">{{ $itemType->LOOKUPCHD_NAME }}</option>
@@ -19,7 +27,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="ITEM_NAME"  class="form-control" value=""/>
+                        <input type="text" id="ITEM_NAME" name="ITEM_NAME"  class="form-control ITEM_NAME" value=""/>
                     </span>
             </div>
         </div>
@@ -52,3 +60,19 @@
         </div>
     </form>
 </div>
+
+<script>
+    $('#myform').validate({ // initialize the plugin
+        errorClass: "my-error-class",
+        //validClass: "my-valid-class",
+        rules: {
+            ITEM_TYPE:{
+                required:true,
+            },
+            ITEM_NAME:{
+                required:true,
+            }
+
+        }
+    });
+</script>

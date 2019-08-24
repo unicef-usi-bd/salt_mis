@@ -40,7 +40,7 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control chemical" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="form-control chemical" name="PRODUCT_ID" data-placeholder="Select or search data">
                         <option value=""></option>
                         @foreach($chemicleType as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -50,7 +50,7 @@
                 </div>
             </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Chemical</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1" style="margin-left: -47px;"> <b>Amount of Chemical</b><span style="color: red;"> *</span> </label>
 
             <div class="col-sm-8">
                     <span class="col-sm-6" style="padding: 0;">
@@ -190,9 +190,12 @@
             errorClass: "my-error-class",
             //validClass: "my-valid-class",
             rules: {
+                PRODUCT_ID:{
+                    required: true,
+                },
                 REQ_QTY:{
                     required: true,
-                }
+                },
             }
         });
 
