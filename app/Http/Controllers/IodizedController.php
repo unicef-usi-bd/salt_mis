@@ -53,14 +53,18 @@ class IodizedController extends Controller
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $centerId = Auth::user()->center_id;
         //$this->pr($centerId);
-        $washingSalt = Stock::getTotalWashingSalt($centerId);
-        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
-        if($idoizeSaltAmount){
-            $totalWashing = $washingSalt - $idoizeSaltAmount;
-        }else{
-            $totalWashing = $washingSalt;
-        }
+        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $totalWashing = $incresedWashingSalt - abs($reducedWashinfSalt);
+
+//        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+//        if($idoizeSaltAmount){
+//            $totalWashing = $washingSalt - $idoizeSaltAmount;
+//        }else{
+//            $totalWashing = $washingSalt;
+//        }
 //        $this->pr($totalWashing);
+
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
     }
 
