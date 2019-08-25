@@ -28,7 +28,7 @@ class SalesDistribution extends Model
         return $customerInfo->get();
     }
 
-    public static function insertSalesDistributionData($request,$saltPackId,$washAndCrushId,$iodizeId){
+    public static function insertSalesDistributionData($request, $saltPackId, $washAndCrushId, $iodizeId){
 
         $salesDistributionMstId = DB::table('tmm_salesmst')->insertGetId([
             'SELLER_TYPE'=> $request->input('SELLER_TYPE'),
@@ -56,37 +56,43 @@ class SalesDistribution extends Model
                  $packageCalculation = (float)$saltPackingSize->DESCRIPTION;
                   $test =  (float)$request->input('PACK_QTY')[$i];
 
-                 $packageQuantity = number_format($test * $packageCalculation);
-
-              $salesDistributionChdId = DB::table('tmm_saleschd')->insertGetId([
+                 $packageQuantity = $test * $packageCalculation;
+//              echo $packageQuantity;exit;
+              $salesChdData = array(
                   'SALESMST_ID'=>$salesDistributionMstId,
                   'ITEM_ID'=> $request->input('ITEM_ID')[$i],
                   'PACK_TYPE'=> $request->input('PACK_TYPE')[$i],
                   'PACK_QTY'=> $request->input('PACK_QTY')[$i],
                   'center_id' => Auth::user()->center_id,
-                  'QTY'=> $packageQuantity,
-              ]);
+                  'QTY'=> $packageQuantity
+              );
+
+              DB::table('tmm_saleschd')->insertGetId($salesChdData);
 
               $finishSaltId = $request->input('ITEM_ID')[$i];
 
              // return $finishSaltId;
 
               if($finishSaltId == $washAndCrushId){
-                $itemStock = DB::table('tmm_itemstock')->insertGetId([
-                    'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
-                    'TRAN_TYPE' => 'W', //  W=Wash
-                    'TRAN_NO' => $salesDistributionMstId,
-                    'ITEM_NO' => $request->input('ITEM_ID')[$i],
-                    'QTY' => '-'.$packageQuantity,
-                    'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
-                    'center_id' => Auth::user()->center_id,
-                    //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                    'ENTRY_BY' => Auth::user()->id,
-                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                ]);
+//                echo $packageQuantity;exit;
+                  $stockData = array(
+                      'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
+                      'TRAN_TYPE' => 'W', //  W=Wash
+                      'TRAN_NO' => $salesDistributionMstId,
+                      'ITEM_NO' => $request->input('ITEM_ID')[$i],
+                      'QTY' => '-'.$packageQuantity,
+                      'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
+                      'center_id' => Auth::user()->center_id,
+                      //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                      'ENTRY_BY' => Auth::user()->id,
+                      'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                  );
+                $itemStock = DB::table('tmm_itemstock')->insert($stockData);
               }
+
               if($finishSaltId == $iodizeId){
-                  $itemStock =  DB::table('tmm_itemstock')->insertGetId([
+//                  echo $packageQuantity;exit;
+                  $stockData = array(
                       'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
                       'TRAN_TYPE' => 'I', //  I= Iodize
                       'TRAN_NO' => $salesDistributionMstId,
@@ -97,7 +103,8 @@ class SalesDistribution extends Model
                       //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                       'ENTRY_BY' => Auth::user()->id,
                       'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                  ]);
+                  );
+                  $itemStock =  DB::table('tmm_itemstock')->insert($stockData);
               }
           }
           return $itemStock;

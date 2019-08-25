@@ -41,9 +41,9 @@ class SalesDistributionController extends Controller
 //     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
 //        $washingSalt = Stock::getTotalWashingSalt($centerId);
 //        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
-//
-//        //$this->pr($washingSaltSale);
-//
+
+        //$this->pr($washingSaltSale);
+
 //        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
 //
 //        if($idoizeSaltAmount){
@@ -64,7 +64,16 @@ class SalesDistributionController extends Controller
 
         $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
         $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $washingStock = $incresedWashingSalt - abs($reducedWashinfSalt);
+        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
+
+        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+
+        if($afterSaleWashing){
+            $washingStock = $WashingTotalUseInIodize - abs($afterSaleWashing);
+        }else{
+            $washingStock = $WashingTotalUseInIodize;
+        }
+
 
         $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
         $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
@@ -181,27 +190,39 @@ class SalesDistributionController extends Controller
     public function getWashingCrashingSalt(Request $request){
         $centerId = $request->input('centerId');
 //     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
-        $washingSalt = Stock::getTotalWashingSalt($centerId);
-        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
+//        $washingSalt = Stock::getTotalWashingSalt($centerId);
+//        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
+//
+//        //$this->pr($washingSaltSale);
+//
+//        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+//
+//        if($idoizeSaltAmount){
+//            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
+//            if($washingSaltSale){
+//                $stock = $afterIodizeWashingStock - $washingSaltSale;
+//            }else{
+//                $stock = $afterIodizeWashingStock;
+//            }
+//        }else{
+//            if($washingSaltSale){
+//                $stock = $washingSalt - $washingSaltSale;
+//            }else{
+//                $stock = $washingSalt;
+//            }
+//
+//        }
 
-        //$this->pr($washingSaltSale);
+        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
 
-        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
+        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
 
-        if($idoizeSaltAmount){
-            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
-            if($washingSaltSale){
-                $stock = $afterIodizeWashingStock - $washingSaltSale;
-            }else{
-                $stock = $afterIodizeWashingStock;
-            }
+        if($afterSaleWashing){
+            $stock = $WashingTotalUseInIodize - abs($afterSaleWashing);
         }else{
-            if($washingSaltSale){
-                $stock = $washingSalt - $washingSaltSale;
-            }else{
-                $stock = $washingSalt;
-            }
-
+            $stock = $WashingTotalUseInIodize;
         }
      //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
 

@@ -55,8 +55,16 @@ class IodizedController extends Controller
         //$this->pr($centerId);
         $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
         $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $totalWashing = $incresedWashingSalt - abs($reducedWashinfSalt);
+        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
 
+        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+
+        if($afterSaleWashing){
+            $totalWashing = $WashingTotalUseInIodize - abs($afterSaleWashing);
+        }else{
+            $totalWashing = $WashingTotalUseInIodize;
+        }
+//        $this->pr($afterSaleWashing);
 //        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
 //        if($idoizeSaltAmount){
 //            $totalWashing = $washingSalt - $idoizeSaltAmount;
@@ -127,9 +135,21 @@ class IodizedController extends Controller
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
 
         $centerId = Auth::user()->center_id;
-        $totalWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $totalSalt = $totalWashingSalt - abs($totalReduceWashingSalt);
+//        $totalWashingSalt = Stock::getTotalWashingSalt($centerId);
+//        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
+//        $totalSalt = $totalWashingSalt - abs($totalReduceWashingSalt);
+
+        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
+
+        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+
+        if($afterSaleWashing){
+            $totalSalt = $WashingTotalUseInIodize - abs($afterSaleWashing);
+        }else{
+            $totalSalt = $WashingTotalUseInIodize;
+        }
 
         $totalReduceChemical = Stock::getTotalReduceChemical($editIodize->ITEM_NO,$centerId);
         $totalChemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO,$centerId);
