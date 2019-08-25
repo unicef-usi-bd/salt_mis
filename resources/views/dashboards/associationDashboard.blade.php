@@ -42,11 +42,11 @@
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
                     <div class="infobox-content">
+                        @php $total=0; @endphp
                         @foreach($totalAssociationproduction as $row)
-                        @if($loop->first)
-                        {{ sprintf('%0.2f',$row->stock_total) }} KG
-                        @endif
+                        @php $total = $total+(abs($row->stock_total)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
                     <div class="infobox-content">
+                        @php $total = 0; @endphp
                         @foreach($totalSales as $row)
-                            @if($loop->first)
-                                {{ abs($row->Sales_total) }} KG
-                            @endif
+                        @php $total = $total+(abs($row->Sales_total)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>
@@ -88,11 +88,11 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
                     <div class="infobox-content">
+                        @php $total = 0; @endphp
                         @foreach($associationIodize as $row)
-                        @if($loop->first)
-                        {{ sprintf('%0.2f',$associationIodize[0]->iodize_stock) }} KG
-                        @endif
+                        @php $total = $total+(abs($row->iodize_stock)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>
@@ -105,11 +105,11 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
                     <div class="infobox-content">
+                        @php $total=0; @endphp
                         @foreach($totalAssociationIodizeSale as $row)
-                        @if($loop->first)
-                        {{ abs($row->iodize_sale) }} KG
-                        @endif
+                        @php $total = $total+(abs($row->iodize_sale)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>
@@ -133,11 +133,11 @@
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
                     <div class="infobox-content">
+                        @php $total = 0; @endphp
                         @foreach($associationWashCrash as $row)
-                        @if($loop->first)
-                        {{ sprintf('%0.2f',$row->washcrash_stock) }} KG
-                        @endif
+                        @php $total = $total+(abs($row->washcrash_stock)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>
@@ -152,11 +152,11 @@
                         INDUSTRIAL SALT
                         SALES</div>
                     <div class="infobox-content">
+                        @php $total = 0; @endphp
                         @foreach($totalAssociationWashCrasheSale as $row)
-                        @if($loop->first)
-                        {{ abs($row->washcrash_sales) }} KG
-                        @endif
+                        @php $total = $total+(abs($row->washcrash_sales)) @endphp
                         @endforeach
+                        {{ number_format($total, 2) }}
                     </div>
                 </div>
             </div>

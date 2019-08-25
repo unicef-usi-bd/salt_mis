@@ -141,8 +141,10 @@ class DashboardController extends Controller
         $totalMiller= count(MillerInfo::associationTotalMill());
         $totalActiveMiller= count(MillerInfo::associationTotalActiveMill());
         $totalInactiveMiller= count(MillerInfo::associationTotalInactiveMill());
+
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();
+
         $totalAssociationproduction = Stock::totalAssociationproduction();
         $totalAssociationIodizeSale = Stock::totalAssociationIodizeSale();
         $totalAssociationWashCrasheSale = Stock::totalAssociationWashCrashSale();
@@ -150,7 +152,7 @@ class DashboardController extends Controller
         $totlaProductionList = Stock::totalProductionList();
         $totalSaleLists = Stock::totalSaleList();
         $associationMonthWishProduction = Stock::monthWiseAssociationProduction();
-        //$this->pr($totalActiveMiller);
+//        $this->pr($totalSales);
         return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction'));
     }
 
