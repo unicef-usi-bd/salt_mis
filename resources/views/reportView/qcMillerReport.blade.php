@@ -23,7 +23,7 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Millers Name</th>
+                {{--<th>Millers Name</th>--}}
                 <th>Batch NO</th>
                 <th>QC BY</th>
                 <th>Agency Name</th>
@@ -37,7 +37,7 @@
             @foreach($qcReportsMiller as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->MILL_NAME}}</td>
+                    {{--<td>{{$row->MILL_NAME}}</td>--}}
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->quality_control_by}}</td>
                     <td>{{$row->agency_name}}</td>

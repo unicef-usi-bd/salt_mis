@@ -35,15 +35,15 @@
                                        <option value="monitor-clint-list-miller">Monitor Client</option>
                                        <option value="item-stock-miller">Item Stock</option>
                                  </optgroup>
-                                   <optgroup label="License">
-                                       <option value="miller-license-report/{zone}">List of License </option>
-                                  </optgroup>
+                                   {{--<optgroup label="License">--}}
+                                       {{--<option value="miller-license-report/{zone}">List of License </option>--}}
+                                  {{--</optgroup>--}}
                                    <optgroup label="QC">
                                        <option value="qc-miller">List of QC </option>
                                   </optgroup>
-                                   <optgroup label="HR">
-                                       <option value="hr-employee-miller">List of HR </option>
-                                  </optgroup>
+                                   {{--<optgroup label="HR">--}}
+                                       {{--<option value="hr-employee-miller">List of HR </option>--}}
+                                  {{--</optgroup>--}}
 
 
                                </select>
@@ -451,6 +451,7 @@
             $('.processTypeDiv').hide();
             $('.clientDiv').hide();
             $('.finishedSaltItemDiv').hide();
+            $('.chemicalItemTypeAdminDiv').hide();
         }else if($reportUrl === 'miller-chemical-purchase-stock'){
             $('.statusAdminDiv').hide();
 
@@ -467,6 +468,7 @@
             $('.processTypeDiv').hide();
             $('.clientDiv').hide();
             $('.finishedSaltItemDiv').hide();
+            $('.chemicalItemTypeAdminDiv').hide();
         }else if($reportUrl === 'miller-process-list-report'){
             $('.statusAdminDiv').hide();
 
@@ -616,5 +618,6 @@
             $('.finishedSaltItemDiv').hide();
         }
     });
+
 
 </script>

@@ -190,6 +190,7 @@ class Report extends Model
                                             AND s.TRAN_TYPE NOT IN ('W','I')) b
                                             -- WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
                                             -- AND  b.center_id = $centerId
+                                             WHERE b.center_id = $centerId
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
         }else{
             return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
@@ -253,7 +254,7 @@ class Report extends Model
       from tmm_itemstock st 
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
+      where st.TRAN_TYPE = 'I' and st.center_id = $centerId  and st.TRAN_FLAG = 'II'
       -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }
 
@@ -421,7 +422,7 @@ class Report extends Model
                                           left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = si.SUPPLIER_TYPE_ID
                                           left join tmm_itemstock it on it.SUPP_ID_AUTO = si.SUPP_ID_AUTO
                                           WHERE DATE(it.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-                                          and it.center_id = $centerId"));
+                                          and it.center_id = $centerId and lc.LOOKUPCHD_ID = 42"));
 
     }
 
@@ -432,7 +433,7 @@ class Report extends Model
 	  left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = si.SUPPLIER_TYPE_ID
 	  left join tmm_itemstock it on it.SUPP_ID_AUTO = si.SUPP_ID_AUTO
       WHERE DATE(it.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-	  AND it.center_id =$centerId"));
+	  AND it.center_id =$centerId and lc.LOOKUPCHD_ID = 41"));
     }
 
     public static function millerProcessList($centerId,$processType,$starDate,$endDate){
