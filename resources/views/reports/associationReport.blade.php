@@ -19,17 +19,17 @@
                                        <option value="purchase-chemical-total">Purchase</option>
                                        <option value="purchase-chemical-total-stock">Purchase Stock</option>
                                  </optgroup>
-                                   <optgroup label="Process">
-                                       <option value="assoc-process-stock">Process  Stock</option>
-                                   </optgroup>
+                                   {{--<optgroup label="Process">--}}
+                                       {{--<option value="assoc-process-stock">Process  Stock</option>--}}
+                                   {{--</optgroup>--}}
                                    <optgroup label="Sale">
                                        <option value="association-sale">Total Sale</option>
                                        <option value="sale-item-list">List of Item</option>
                                        <option value="sale-item-stock">Item Stock</option>
                                  </optgroup>
-                                   <optgroup label="License">
-                                       <option value="license-miller-list">List of Miller </option>
-                                  </optgroup>
+                                   {{--<optgroup label="License">--}}
+                                       {{--<option value="license-miller-list">List of Miller </option>--}}
+                                  {{--</optgroup>--}}
                                    <optgroup label="QC">
                                        <option value="qc-miller-list">List of Miller </option>
                                   </optgroup>
@@ -39,7 +39,7 @@
                                    <optgroup label="Miller">
                                        <option value="association-total-miller">Total Miller </option>
                                        <option value="association-miller-type">Type of Miller </option>
-                                       <option value="association-monitor-miller">Monitor Miller </option>
+                                       {{--<option value="association-monitor-miller">Monitor Miller </option>--}}
                                        <option value="list-of-miller">List Of Miller </option>
                                   </optgroup>
 
@@ -435,6 +435,7 @@
             $('.adminReportrangeDiv').show();
         }else if($reportUrl === 'association-sale'){
             $('.statusAdminDiv').hide();
+             $('.itemTypeAdminDiv').hide();
             $('.renewDateDiv').hide();
             $('.failDateDiv').hide();
             $('.purchaseOrderDiv').hide();
@@ -442,7 +443,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-            $('.itemTypeAdminDiv').show();
+            $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').show();
             $('.districtIdDiv').show();
         }else if($reportUrl === 'sale-item-list'){

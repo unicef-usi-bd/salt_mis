@@ -38,9 +38,9 @@
                                        <option value="sales-item-report-all">List of Item</option>
                                        {{--<option value="">Item Stock</option>--}}
                                   </optgroup>
-                                   <optgroup label="License">
-                                       <option value="miller-license-report/{zone}">List of License </option>
-                                  </optgroup>
+                                   {{--<optgroup label="License">--}}
+                                       {{--<option value="miller-license-report/{zone}">List of License </option>--}}
+                                  {{--</optgroup>--}}
                                    <optgroup label="QC">
                                        {{--<option value="">List of Miller </option>--}}
                                        <option value="qc-report/{zone}">List of QC </option>

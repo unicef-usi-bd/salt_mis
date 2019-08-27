@@ -236,36 +236,9 @@ class ReportAssociation extends Model
 
     public static function getListOfMiller(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT b.LOOKUPCHD_NAME,
-               b.ITEM_NO,
-               b.ITEM_NAME,
-               SUM(b.purchase) purchase,
-               SUM(b.reduce) reduce,
-               SUM(b.QTY) STOCK_QTY
-          FROM (SELECT c.LOOKUPCHD_NAME,
-                       i.ITEM_NO,
-                       i.ITEM_NAME,
-                       s.QTY,
-                       CASE
-                          WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN s.QTY
-                       END
-                          reduce,
-                       CASE
-                          WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN s.QTY
-                       END
-                          purchase,
-                       s.TRAN_DATE,
-                       s.center_id
-                  FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
-                 WHERE     i.ITEM_NO = s.ITEM_NO
-                       AND c.LOOKUPCHD_ID = i.ITEM_TYPE
-                       AND i.item_type = 26
-                       AND s.TRAN_FLAG NOT IN ('WI', 'SD')
-                       AND s.center_id in (select ass.ASSOCIATION_ID
-             from ssm_associationsetup ass
-             where ass.PARENT_ID = '$centerId' )
-                       AND s.TRAN_TYPE NOT IN ('S', 'C')) b
-        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
+        return DB::select(DB::raw(" select mi.MILL_NAME 
+           from ssm_mill_info mi
+           where mi.center_id = '$centerId' "));
 
     }
     public static function assocProcessStock(){

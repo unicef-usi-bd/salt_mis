@@ -602,7 +602,7 @@ class Report extends Model
         SUM(b.tot_chmical_pr) tot_chmical_pr, SUM(b.tot_sales) tot_sales
         FROM
             (SELECT a.center_id, (SELECT ASSOCIATION_NAME FROM ssm_associationsetup WHERE ASSOCIATION_ID = a.center_id) ASSOCIATION_NAME,
-            CASE WHEN TRAN_FLAG = 'PR' THEN
+            CASE WHEN TRAN_FLAG = 'PR' AND TRAN_TYPE = 'SP' THEN
                 s.qty
             END tot_purchase,
         
