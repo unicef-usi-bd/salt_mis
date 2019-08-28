@@ -42,11 +42,12 @@
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
                     <div class="infobox-content">
-                        @php $total=0; @endphp
-                        @foreach($totalAssociationproduction as $row)
-                        @php $total = $total+(abs($row->stock_total)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total=0; @endphp--}}
+                        {{--@foreach($totalAssociationproduction as $row)--}}
+                        {{--@php $total = $total+(abs($row->stock_total)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{sprintf('%0.2f',$totalassociationproduction)}}
                     </div>
                 </div>
             </div>
@@ -59,11 +60,12 @@
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
                     <div class="infobox-content">
-                        @php $total = 0; @endphp
-                        @foreach($totalSales as $row)
-                        @php $total = $total+(abs($row->Sales_total)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total = 0; @endphp--}}
+                        {{--@foreach($totalSales as $row)--}}
+                        {{--@php $total = $total+(abs($row->Sales_total)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{sprintf('%0.2f',$totalSales)}}
                     </div>
                 </div>
             </div>
@@ -88,11 +90,12 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        @php $total = 0; @endphp
-                        @foreach($associationIodize as $row)
-                        @php $total = $total+(abs($row->iodize_stock)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total = 0; @endphp--}}
+                        {{--@foreach($associationIodize as $row)--}}
+                        {{--@php $total = $total+(abs($row->iodize_stock)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{sprintf('%0.2f',$associationIodize)}}
                     </div>
                 </div>
             </div>
@@ -105,11 +108,12 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
                     <div class="infobox-content">
-                        @php $total=0; @endphp
-                        @foreach($totalAssociationIodizeSale as $row)
-                        @php $total = $total+(abs($row->iodize_sale)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total=0; @endphp--}}
+                        {{--@foreach($totalAssociationIodizeSale as $row)--}}
+                        {{--@php $total = $total+(abs($row->iodize_sale)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{sprintf('%0.2f',$totalAssociationIodizeSale)}}
                     </div>
                 </div>
             </div>
@@ -133,11 +137,12 @@
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        @php $total = 0; @endphp
-                        @foreach($associationWashCrash as $row)
-                        @php $total = $total+(abs($row->washcrash_stock)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total = 0; @endphp--}}
+                        {{--@foreach($associationWashCrash as $row)--}}
+                        {{--@php $total = $total+(abs($row->washcrash_stock)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{ sprintf('%0.2f',$associationWashCrash) }}
                     </div>
                 </div>
             </div>
@@ -152,11 +157,12 @@
                         INDUSTRIAL SALT
                         SALES</div>
                     <div class="infobox-content">
-                        @php $total = 0; @endphp
-                        @foreach($totalAssociationWashCrasheSale as $row)
-                        @php $total = $total+(abs($row->washcrash_sales)) @endphp
-                        @endforeach
-                        {{ number_format($total, 2) }}
+                        {{--@php $total = 0; @endphp--}}
+                        {{--@foreach($totalAssociationWashCrasheSale as $row)--}}
+                        {{--@php $total = $total+(abs($row->washcrash_sales)) @endphp--}}
+                        {{--@endforeach--}}
+                        {{--{{ number_format($total, 2) }}--}}
+                        {{ sprintf('%0.2f',$totalAssociationWashCrasheSale) }}
                     </div>
                 </div>
             </div>
@@ -240,7 +246,7 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ abs($row->stock_total) }}</td>
+                                    <td>{{ abs($row->QTY) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -301,7 +307,7 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ abs($row->Total_sale) }}</td>
+                                    <td>{{ abs($row->QTY) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -373,13 +379,8 @@
                 ],
                 datasets: [{
                     data: [
-                        <?php foreach ($totalAssociationproduction as $row){
-                            echo $row->stock_total;
-                        }?>,
-                        <?php foreach ($totalSales as $row){
-                            echo abs($row->Sales_total);
-                    }?>
-                    ],
+                        <?php
+                            echo $totalassociationproduction;?>,<?php echo $totalSales ;?>],
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff'
 
@@ -414,12 +415,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [<?php foreach ($totalAssociationWashCrasheSale as $row){
-                        echo abs($row->washcrash_sales);
-                    }?>,<?php foreach ($totalAssociationIodizeSale as $row){
-                        echo abs($row->iodize_sale);
-                    }?>
-                    ],
+                    data: [<?php echo $totalAssociationWashCrasheSale?>, <?php echo $totalAssociationIodizeSale ?>],
 
 
                 }],

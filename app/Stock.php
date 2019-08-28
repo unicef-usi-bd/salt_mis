@@ -190,6 +190,16 @@ class Stock extends Model
                                        GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
     }
+
+    public static function monthWiseAsociationProduction(){
+        $centerId = Auth::user()->center_id;
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                       FROM tmm_itemstock it
+                                       LEFT JOIN ssm_associationsetup ass ON ass.ASSOCIATION_ID = it.center_id
+                                       WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II' and ass.center_id = $centerId
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
+    }
     /// ----------------------Production Graph
 
     ///------------------Procurement List
@@ -282,30 +292,50 @@ class Stock extends Model
     /// ----------------------Total stock for association
 
     public static function totalAssociationWashcrash(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw("SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
+//                  ROUND(SUM(CASE WHEN s.tran_flag = 'WI' THEN
+//                     s.QTY
+//                  END))iodize_stock
+//                   FROM tmm_itemstock s, ssm_associationsetup a
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                  AND a.center_id  = $centerId
+//                  GROUP BY a.ASSOCIATION_ID"));
+
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("SELECT DISTINCT a.ASSOCIATION_ID, (SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
-   ROUND(SUM(CASE WHEN s.tran_flag = 'WI' THEN
-     s.QTY
-  END))washcrash_stock,
-  ROUND(SUM(CASE WHEN s.tran_flag = 'II' THEN
-     s.QTY
-  END))iodize_stock
-   FROM tmm_itemstock s, ssm_associationsetup a
-  WHERE a.ASSOCIATION_ID = s.center_id
-  AND a.center_id  =$centerId
-  GROUP BY a.ASSOCIATION_ID"));
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+//        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('tmm_itemstock.TRAN_FLAG','=','WI');
+        if($centerId){
+            $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
     }
 
     public static function totalAssociationIodize(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
+//                  ROUND(SUM(CASE WHEN s.tran_flag = 'II' THEN
+//                     s.QTY
+//                  END))iodize_stock
+//                   FROM tmm_itemstock s, ssm_associationsetup a
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                  AND a.center_id  = $centerId
+//                  GROUP BY a.ASSOCIATION_ID"));
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
-                  ROUND(SUM(CASE WHEN s.tran_flag = 'II' THEN
-                     s.QTY
-                  END))iodize_stock
-                   FROM tmm_itemstock s, ssm_associationsetup a
-                  WHERE a.ASSOCIATION_ID = s.center_id
-                  AND a.center_id  = $centerId
-                  GROUP BY a.ASSOCIATION_ID"));
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+//        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('tmm_itemstock.TRAN_FLAG','=','II');
+        if($centerId){
+            $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
     }
 
     public static function totalAssociationproduction(){
@@ -321,29 +351,52 @@ class Stock extends Model
     }
 
     public static function totalAssociationWashCrashSale(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
+//                   ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'W' THEN
+//                    s.QTY
+//                  END))washcrash_sales
+//                   FROM tmm_itemstock s, ssm_associationsetup a
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                 -- AND a.center_id = m.center_id
+//                  AND a.center_id  = $centerId
+//                  GROUP BY a.ASSOCIATION_ID"));
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
-                   ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'W' THEN
-                    s.QTY
-                  END))washcrash_sales
-                   FROM tmm_itemstock s, ssm_associationsetup a
-                  WHERE a.ASSOCIATION_ID = s.center_id
-                 -- AND a.center_id = m.center_id
-                  AND a.center_id  = $centerId
-                  GROUP BY a.ASSOCIATION_ID"));
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        $countSales->where('TRAN_TYPE','=','W');
+        $countSales->where('TRAN_FLAG','=','SD');
+        if($centerId){
+            $countSales->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
     }
 
     public static function totalAssociationIodizeSale(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
+//                  ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'I' THEN
+//                    s.QTY
+//                  END))iodize_sale
+//                   FROM tmm_itemstock s, ssm_associationsetup a
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                 -- AND a.center_id = m.center_id
+//                  AND a.center_id  = $centerId
+//                  GROUP BY a.ASSOCIATION_ID"));
+
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
-                  ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'I' THEN
-                    s.QTY
-                  END))iodize_sale
-                   FROM tmm_itemstock s, ssm_associationsetup a
-                  WHERE a.ASSOCIATION_ID = s.center_id
-                 -- AND a.center_id = m.center_id
-                  AND a.center_id  = $centerId
-                  GROUP BY a.ASSOCIATION_ID"));
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        $countSales->where('TRAN_TYPE','=','I');
+        $countSales->where('TRAN_FLAG','=','SD');
+        if($centerId){
+            $countSales->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
     }
 
     public static function totalSale(){
@@ -360,25 +413,48 @@ class Stock extends Model
     }
 
     public static function totalProductionList(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( s.QTY)) stock_total,s.TRAN_TYPE,s.TRAN_DATE
+//                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                  AND a.center_id = m.center_id
+//                  AND a.center_id  = $centerId
+//                  and (s.TRAN_FLAG = 'WI' or s.TRAN_FLAG = 'II')
+//                  GROUP BY a.ASSOCIATION_ID,m.mill_name,month,TRAN_TYPE,s.TRAN_DATE"));
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( s.QTY)) stock_total,s.TRAN_TYPE,s.TRAN_DATE
-                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
-                  WHERE a.ASSOCIATION_ID = s.center_id
-                  AND a.center_id = m.center_id
-                  AND a.center_id  = $centerId
-                  and (s.TRAN_FLAG = 'WI' or s.TRAN_FLAG = 'II')
-                  GROUP BY a.ASSOCIATION_ID,m.mill_name,month,TRAN_TYPE,s.TRAN_DATE"));
+        $totalProductions = DB::table('tmm_itemstock');
+        $totalProductions->select('tmm_itemstock.*','smm_item.ITEM_NAME');
+        $totalProductions->leftJoin('smm_item','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+        $totalProductions->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        //$totalProductions->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//        $totalProductions->where('tmm_itemstock.TRAN_TYPE','=','W');
+//        $totalProductions->orwhere('tmm_itemstock.TRAN_TYPE','=','I');
+        if($centerId){
+            $totalProductions->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalProductions->orwhere('tmm_itemstock.TRAN_FLAG','=','II');
+        return $totalProductions->get();
     }
 
     public static function totalSaleList(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::select(DB::raw(" SELECT m.mill_name,MONTH(TRAN_DATE) month,ROUND(SUM( s.QTY)) Total_sale,s.TRAN_TYPE,s.TRAN_DATE
+//                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
+//                  WHERE a.ASSOCIATION_ID = s.center_id
+//                  AND a.center_id = m.center_id
+//                  and s.TRAN_FLAG = 'SD'
+//                  AND a.center_id  = $centerId
+//                  GROUP BY a.ASSOCIATION_ID,m.mill_name,month,TRAN_TYPE,s.TRAN_DATE"));
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT m.mill_name,MONTH(TRAN_DATE) month,ROUND(SUM( s.QTY)) Total_sale,s.TRAN_TYPE,s.TRAN_DATE
-                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
-                  WHERE a.ASSOCIATION_ID = s.center_id
-                  AND a.center_id = m.center_id
-                  and s.TRAN_FLAG = 'SD'
-                  AND a.center_id  = $centerId
-                  GROUP BY a.ASSOCIATION_ID,m.mill_name,month,TRAN_TYPE,s.TRAN_DATE"));
+        $totalProductionSale = DB::table('tmm_itemstock');
+        $totalProductionSale->select('tmm_itemstock.*');
+        $totalProductionSale->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        $totalProductionSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
+        if($centerId){
+            $totalProductionSale->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+        return $totalProductionSale->get();
     }
 
     public static function monthWiseAssociationProduction(){

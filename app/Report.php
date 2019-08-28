@@ -675,18 +675,26 @@ class Report extends Model
     }
 
     public static function getQcReportMiller($centerId){
-        $qcReports = DB::table('tmm_qualitycontrol as ql');
-        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.MILL_NAME','i.BATCH_NO');
-        $qcReports->leftJoin('ssc_lookupchd as lc','ql.QC_BY','=','lc.LOOKUPCHD_ID');
-        $qcReports->leftJoin('ssc_lookupchd as lch','ql.AGENCY_ID','=','lch.LOOKUPCHD_ID');
-        $qcReports->leftJoin('ssm_mill_info as mi','ql.center_id','=','mi.center_id');
-        $qcReports->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','mi.ZONE_ID');
-        $qcReports->leftJoin('tmm_iodizedmst as i','ql.BATCH_NO','=','i.IODIZEDMST_ID');
-        if($centerId){
-            $qcReports->where('ql.center_id','=',$centerId);
-        }
-
-        return $qcReports->get();
+//        $qcReports = DB::table('tmm_qualitycontrol as ql');
+//        $qcReports->select('ql.*','lc.LOOKUPCHD_NAME as quality_control_by','lch.LOOKUPCHD_NAME as agency_name','mi.MILL_NAME','i.BATCH_NO');
+//        $qcReports->leftJoin('ssc_lookupchd as lc','ql.QC_BY','=','lc.LOOKUPCHD_ID');
+//        $qcReports->leftJoin('ssc_lookupchd as lch','ql.AGENCY_ID','=','lch.LOOKUPCHD_ID');
+//        $qcReports->leftJoin('ssm_mill_info as mi','ql.center_id','=','mi.center_id');
+//        $qcReports->leftJoin('ssm_associationsetup as ass','ass.ZONE_ID','=','mi.ZONE_ID');
+//        $qcReports->leftJoin('tmm_iodizedmst as i','ql.BATCH_NO','=','i.IODIZEDMST_ID');
+//        if($centerId){
+//            $qcReports->where('ql.center_id','=',$centerId);
+//        }
+//
+//        return $qcReports->get();
+        return DB::select(DB::raw("select DISTINCT *, lc.LOOKUPCHD_NAME quality_control_by, lch.LOOKUPCHD_NAME agency_name,
+(select ASSOCIATION_NAME from ssm_associationsetup where ASSOCIATION_ID = ql.center_id) MILL_NAME
+from tmm_qualitycontrol ql
+left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
+left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
+left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
+left join ssm_mill_info mi on mi.center_id = ql.center_id
+where ql.center_id =$centerId"));
     }
 
     public static function getProcessStockAdmin($starDate,$endDate){

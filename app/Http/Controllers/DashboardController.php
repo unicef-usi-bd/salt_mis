@@ -66,7 +66,7 @@ class DashboardController extends Controller
 
         $monthWiseProduction = Stock::monthWiseProduction();
         $saleTotal = SalesDistribution::totalSale();
-//        $this->pr($monthWiseProduction);
+//        $this->pr($totalWashcrashProduction);
 
         return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock', 'monthWiseProduction','saleTotal'));
     }
@@ -145,15 +145,18 @@ class DashboardController extends Controller
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();
 
-        $totalAssociationproduction = Stock::totalAssociationproduction();
-        $totalAssociationIodizeSale = Stock::totalAssociationIodizeSale();
-        $totalAssociationWashCrasheSale = Stock::totalAssociationWashCrashSale();
-        $totalSales = Stock::totalSale();
+        $totalassociationproduction = $associationWashCrash+$associationIodize;
+
+        //$totalAssociationproduction = Stock::totalAssociationproduction();
+        $totalAssociationIodizeSale = abs(Stock::totalAssociationIodizeSale());
+        $totalAssociationWashCrasheSale = abs(Stock::totalAssociationWashCrashSale());
+        $totalSales = $totalAssociationIodizeSale + $totalAssociationWashCrasheSale;
+        //$totalSales = Stock::totalSale();
         $totlaProductionList = Stock::totalProductionList();
         $totalSaleLists = Stock::totalSaleList();
-        $associationMonthWishProduction = Stock::monthWiseAssociationProduction();
-//        $this->pr($totalSales);
-        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction'));
+        $associationMonthWishProduction = Stock::monthWiseAsociationProduction();
+       //$this->pr($associationWashCrash);
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction'));
     }
 
     public function miller(){
