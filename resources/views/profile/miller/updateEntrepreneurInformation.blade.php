@@ -214,26 +214,26 @@
         });
     });
 
-    $(document).ready(function () {
-        $('#ENT_UPAZILA_ID').on('change',function(){
-            var upazilaId = $(this).val(); //alert(upazilaId);exit();
-            var option = '<option value="">Select Union</option>';
-            var url = $(this).attr('url');
-            var url = url+'/'+upazilaId;
-            $.ajax({
-                type : "get",
-                url  : url,
-                data : {'upazilaId': upazilaId},
-                success:function (data) {
-                    for (var i = 0; i < data.length; i++){
-                        option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-                    }
-                    $('.ent_union').html(option);
-                    $('.ent_union').trigger("chosen:updated");
-                }
-            });
-        });
-    });
+//    $(document).ready(function () {
+//        $('#ENT_UPAZILA_ID').on('change',function(){
+//            var upazilaId = $(this).val(); //alert(upazilaId);exit();
+//            var option = '<option value="">Select Union</option>';
+//            var url = $(this).attr('url');
+//            var url = url+'/'+upazilaId;
+//            $.ajax({
+//                type : "get",
+//                url  : url,
+//                data : {'upazilaId': upazilaId},
+//                success:function (data) {
+//                    for (var i = 0; i < data.length; i++){
+//                        option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
+//                    }
+//                    $('.ent_union').html(option);
+//                    $('.ent_union').trigger("chosen:updated");
+//                }
+//            });
+//        });
+//    });
 
     // $(document).ready(function() {
     //     $('input[type="text"]').keyup(function () {

@@ -433,7 +433,7 @@
                 $(".user_image").val('');
             }
             if (fileSize>maxSize){
-                alert("File size exceeds maximum size");
+                alert("Only Supporting jpg, jpeg, png and gif format and Image size width = 250 and hight =250.");
                 $(".user_image").val('');
             }
         });
@@ -448,7 +448,7 @@
                 $(".user_signature").val('');
             }
             if (fileSize>maxSize){
-                alert("File size exceeds maximum size");
+                alert("Only Supporting jpg, jpeg, png and gif format and Image size width = 135 and hight = 50.");
                 $(".user_signature").val('');
             }
         });
