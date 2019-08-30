@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade licence No</b><span style="color: red">*</span> </label>
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade licence No</b><span style="color: red"></span> </label>
                     <div class="col-xs-8">
                         <input type="text" id="inputSuccess LICENCE_NO" placeholder="licence No Here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5 LICENCE_NO" value=""/>
                     </div>
@@ -53,11 +53,11 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess EMAIL" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5 EMAIL" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b></label>
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red"> *</span> </label>
                     <div class="col-xs-8">
                         <input type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
@@ -172,9 +172,6 @@
                     required: true,
                 },
                 TRADER_NAME:{
-                    required: true,
-                },
-                LICENCE_NO:{
                     required: true,
                 },
                 EMAIL:{

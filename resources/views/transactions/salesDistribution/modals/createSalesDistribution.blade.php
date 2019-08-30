@@ -89,13 +89,13 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle No</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving licence</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport Name</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport rent</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
                         <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
@@ -133,7 +133,7 @@
                 <tr>
                     <th style="width: 255px;">Salt Type<span style="color:red;"> *</span></th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
-                    <th style="width: 255px;">Salt Package<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Quantity<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Total<span style="color:red;"> </span></th>
                     <th style="width: 255px;">Stock<span style="color:red;"> </span></th>

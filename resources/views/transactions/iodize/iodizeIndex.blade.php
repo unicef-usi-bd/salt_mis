@@ -7,7 +7,7 @@
             Transaction
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Iodized
+                Iodization
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -54,7 +54,7 @@
                                     $viewPermissionLevel = $previllage->READ;
                                 @endphp
                                 @if($viewPermissionLevel == 1)
-                                    <a href="#" id="{{ 'iodized/'.$row->IODIZEDMST_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Iodize">
+                                    <a href="#" id="{{ 'iodized/'.$row->IODIZEDMST_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Iodization">
                                 <span class="blue">
                                 <i class="ace-icon fa fa-eye bigger-130"></i>
                                 </span>
@@ -67,11 +67,11 @@
                                     </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-md" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodize">
+                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-md" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodization">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @else
-                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodize" style="display: none;">
+                                    <a class="green showModalGlobal" id="{{ 'iodized/'.$row->IODIZEDMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Iodization" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif

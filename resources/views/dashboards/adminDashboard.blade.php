@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Stock And Sales Report
+                        Production stock(W&C + iodized) & sales report(W&C + iodized)
                     </h5>
 
                 </div>
@@ -165,7 +165,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Production List
+                        Last mont date wise production list
                     </h4>
 
                     <div class="widget-toolbar">
@@ -228,7 +228,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Sale List
+                        Last mont date wise sales list
                     </h4>
 
                     <div class="widget-toolbar">
@@ -303,7 +303,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Current Year Production Chart',
+                    label: 'Month wise current year production chart',
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                    // data: [0, 10, 5, 2, 20, 30, 45]

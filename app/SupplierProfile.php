@@ -63,10 +63,10 @@ class SupplierProfile extends Model
             ->get();
     }
 
-    public static function supplierProfileBsti(){
+    public static function supplierProfileBscic(){
         return DB::select(DB::raw("select si.*
             from ssm_supplier_info si
-            where TRADING_NAME like '%BSTI'"));
+            where TRADING_NAME like '%BSCIC'"));
     }
 
     public static function supplierProfileList(){
