@@ -52,10 +52,19 @@ class QulityControlTestingController extends Controller
      */
     public function create()
     {
+        $filterBatch = array();
         $agencyId = LookupGroupData::getActiveGroupDataByLookupGroup($this->agencyId);
         $qulityControlId = LookupGroupData::getActiveGroupDataByLookupGroup($this->qualityControlId);
-        $iodizeBatch = Iodized::getIodizeBatchId();
+//        $iodizeBatch = Iodized::getIodizeBatchId();
+        $qualityControlBatch= QulityControlTesting::getQualityControlBatchList();
+        foreach ($qualityControlBatch as $batch){
+            $filterBatch[] = $batch->BATCH_NO;
+        }
+        $iodizeBatch = Iodized::getIodizeBatchList($filterBatch);
+
         $bstiChemicalData = BstiTestStandard::getBstiChemicalData();
+
+//        $this->pr($qualityControlBatch);
         return view('transactions.qualityControlAndTesting.modals.createQualityControlAndTesting',compact('agencyId','qulityControlId','iodizeBatch','bstiChemicalData'));
     }
 
