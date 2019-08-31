@@ -325,7 +325,7 @@
     $(document).on('keyup','.crudeSaltAmount',function () {
         var amount = parseInt($(this).val()) || 0;
         var packId = $('.pack').val();
-        var result = parseInt(amount * packId);
+        var result = amount * packId;
         $('.totalQty').val(result);
         var saltStock = $('.stockWashCrash').text();
         var remainStock = saltStock - result;
