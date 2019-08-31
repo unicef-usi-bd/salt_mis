@@ -60,13 +60,8 @@ class SupplierProfile extends Model
             ->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$crudeSaltSupplierTypeId)
             ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
             ->where('ssm_supplier_info.TRADING_NAME','!=','BSTI')
+            ->orderBy('ssm_supplier_info.TRADING_NAME','=','BSCIC','DESC')
             ->get();
-    }
-
-    public static function supplierProfileBscic(){
-        return DB::select(DB::raw("select si.*
-            from ssm_supplier_info si
-            where TRADING_NAME like '%BSCIC'"));
     }
 
     public static function supplierProfileList(){
