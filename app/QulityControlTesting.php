@@ -18,6 +18,14 @@ class QulityControlTesting extends Model
             ->where('tmm_qualitycontrol.center_id','=',Auth::user()->center_id)
             ->get();
     }
+
+    public static function getQualityControlBatchList(){
+        return DB::table('tmm_qualitycontrol')
+            ->select('tmm_qualitycontrol.BATCH_NO','tmm_qualitycontrol.center_id')
+            ->where('tmm_qualitycontrol.center_id','=',Auth::user()->center_id)
+            ->get();
+    }
+
     public static function insertQualityControlTestingData($data){
        return DB::table('tmm_qualitycontrol')->insert($data);
     }

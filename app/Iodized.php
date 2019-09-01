@@ -18,6 +18,18 @@ class Iodized extends Model
         }
         return $iodizeBatch->get();
     }
+
+    public static function getIodizeBatchList($batch){
+
+        $centerId = Auth::user()->center_id;
+        $iodizeBatch = DB::table('tmm_iodizedmst');
+        $iodizeBatch->select('tmm_iodizedmst.*');
+        $iodizeBatch->whereNotIn('tmm_iodizedmst.IODIZEDMST_ID',$batch);
+        if($centerId){
+            $iodizeBatch->where('tmm_iodizedmst.center_id','=',$centerId);
+        }
+        return $iodizeBatch->get();
+    }
     public static function getIodizeData(){
         return DB::table('tmm_iodizedmst')
             ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY','tmm_iodizedchd.WASTAGE')
