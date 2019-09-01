@@ -14,10 +14,13 @@ class UserGroup extends Model
     }
 
     public static function getActiveData(){
-        return DB::table('sa_user_group')
-            ->select('USERGRP_ID', 'USERGRP_NAME')
-            ->where('IS_ACTIVE', '=', 1)
-            ->get();
+        $userGroup = DB::table('sa_user_group');
+        $userGroup->select('USERGRP_ID', 'USERGRP_NAME','GROUP_LEVEL');
+        $userGroup->where('IS_ACTIVE', '=', 1);
+        if(Auth::user()->center_id){
+            $userGroup->where('GROUP_LEVEL', '=', 5);
+        }
+        return $userGroup->get();
     }
 
     public static function getOrgActiveData($orgId){
