@@ -27,9 +27,9 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.full_namebn') }}</b></label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Designation</b></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess" placeholder="{{ trans('user.example_full_namebn') }}" name="user_full_name_bn" class="form-control col-sm-8" value="{{ old('username') }}"/>
+                    <input type="text" id="inputSuccess" placeholder="Designation Here" name="designation" class="form-control col-sm-8" value="{{ old('username') }}"/>
                 </div>
             </div>
 

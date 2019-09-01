@@ -20,7 +20,7 @@
                 <tr>
                     <th>{{ trans('user.designation') }} </th>
                     <th> :</th>
-                    {{--<td>{{$userView->group_data_name}}</td>--}}
+                    <td>{{$userView->designation}}</td>
                     <th>{{ trans('user.email') }} </th>
                     <th> :</th>
                     <td>{{$userView->email}}</td>

@@ -115,7 +115,7 @@ class User extends Authenticatable
 
         $userUpdateData=array(
             'user_full_name' => $request['user_full_name'],
-            'user_full_name_bn' => $request['user_full_name_bn'],
+            'designation' => $request['designation'],
             'username' => $request['username'],
             'email' => $request['email'],            
             'remarks' => $request->input('remarks'),
