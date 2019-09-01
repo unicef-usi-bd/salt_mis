@@ -104,9 +104,18 @@ class SalesDistributionController extends Controller
         $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
         $washAndCrushId = $this->washAndCrushId;
         $iodizeId = $this->iodizeId;
+        $centerId = Auth::user()->center_id;
+        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
+        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
+        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+        if($iodizeSale){
+            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
+        }else{
+            $iodizeStock = $beforeIodizeSaleStock;
+        }
         //$pckSize = SalesDistribution::getPacksize();
-        //$this->pr($pckSize);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId'));
+        //$this->pr($iodizeStock);
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock'));
     }
 
     /**

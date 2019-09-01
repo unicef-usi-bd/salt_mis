@@ -156,7 +156,7 @@
 
                     <td>
                         <span class="block input-icon input-icon-right" style="width: 255px;">
-                        <select class="form-control packType" id="PACK_TYPE" name="PACK_TYPE[]">
+                        <select class="form-control packType chosen-select" id="PACK_TYPE" name="PACK_TYPE[]">
                             <option value="">Select</option>
                             @foreach($saltPackId as $row)
                                 <option value="{{$row->LOOKUPCHD_ID}}"> {{$row->LOOKUPCHD_NAME}}</option>
@@ -186,7 +186,7 @@
                         <span class="block input-icon input-icon-right">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
-                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden"></span><span class="result"></span>KG)</span>
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden"></span><span class="result"></span><span class="defaultStock">{{ $iodizeStock }}</span>KG)</span>
                             {{--<span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockIodize"></span><span class="result"></span>)</span>--}}
 
                         </span>
@@ -257,6 +257,7 @@
     $('.stockWashCrash').hide();
     //$('.stockIodize').hide();
     $(document).on('change','.saltType',function(){
+        $('.defaultStock').text('');
         var thisRow = $(this).closest('tr');
         var saltTypeId = thisRow.find('.saltType').val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
@@ -270,6 +271,7 @@
                 url : 'washing-crashing-stock',
                 data : {'centerId':centerId},
                 success: function (data) {
+                    thisRow.find('.crudeSaltAmount').val('');
                   //  console.log(data);
                    var data = JSON.parse(data);
                     //$('.stockWashCrash').html(data).show();
@@ -285,6 +287,7 @@
                 url : 'iodize-stock',
                 data : {'centerId':centerId},
                 success: function (data) {
+                    thisRow.find('.crudeSaltAmount').val('');
                     var data = JSON.parse(data);
                     thisRow.find('.stockWashCrash').html(data).show();
                     thisRow.find('.result').html(data);
