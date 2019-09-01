@@ -31,7 +31,7 @@
                 <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID" data-placeholder="Select or search data">
                    <option value=""></option>
                     @foreach($sellerType as $seller)
-                    <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
+                    <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
                     @endforeach
                 </select>
             </span>
