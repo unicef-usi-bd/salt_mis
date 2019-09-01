@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('employee-info/createEmployee/{millInfoId}', 'EmployeeController@createEmployee'); //Azharul
     Route::get('deactivate-mill-profile','MillerInfoController@deactivateMillProfile');
 
+    Route::resource('brand', 'BrandController'); //Rubiyat
 
     // modal edit mill information
     Route::post('edit-mill-info', 'MillerInfoController@updateMillInfo'); //Azharul
