@@ -82,6 +82,51 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12" style="margin-top: 15px;">
+                <h4  style="color: #1B6AAA;">Transport Details</h4>
+                <hr>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> *</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here" name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->DRIVER_NAME  }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle License</b><span style="color: red;"> *</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here" name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->VEHICLE_LICENSE  }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> *</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here" name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->MOBILE_NO  }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving licence</b><span style="color: red;"> *</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->VEHICLE_NO  }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport rent</b><span style="color: red;"> *</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->TRANSPORT_NAME  }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-8">
+                            <textarea rows="3"  placeholder="Example: Remarks here" name="REMARKS_Tansport" class="form-control col-xs-10 col-sm-5" >{{ $editCrudeSalt->REMARKS_Tansport  }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
 

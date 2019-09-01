@@ -75,6 +75,12 @@ class CrudeSaltProcurement extends Model
             'COUNTRY_ID' => $request->input('COUNTRY_ID'),
             'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
+            'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
+            'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
+            'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
+            'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
+            'MOBILE_NO'=> $request->input('MOBILE_NO'),
+            'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -138,6 +144,12 @@ class CrudeSaltProcurement extends Model
             'RECEIVE_TYPE' => 'SR',//Salt receive
             'INVOICE_NO' => $request->input('INVOICE_NO'),
             'REMARKS' => $request->input('REMARKS'),
+            'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
+            'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
+            'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
+            'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
+            'MOBILE_NO'=> $request->input('MOBILE_NO'),
+            'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);

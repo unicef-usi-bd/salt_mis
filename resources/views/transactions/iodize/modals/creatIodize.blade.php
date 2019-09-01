@@ -113,11 +113,10 @@
                 var data = JSON.parse(data);
                 var recommandedQty = (data.chemicalPerKg.USE_QTY / data.chemicalPerKg.CRUDE_SALT) * washSaltAmount;
                 //console.log(data.chemicalPerKg.USE_QTY * washSaltAmount);
+                $('.chemicalAmount').val(recommandedQty.toFixed(2));
                 $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty.toFixed(2)).show();
                 $('.stockChemical').html(data.chemicalStock).show();
                 $('.resultChemical').html(data.chemicalStock);
-                $('.chemicalAmount').val('');
-
                 var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
 
               //  alert(chemicalNeed);
