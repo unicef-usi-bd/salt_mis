@@ -86,7 +86,7 @@
                 <div class="col-md-4">
                     <label class="col-md-12"> <b>Attachment</b><span style="color: red;"> *</span> </label>
                     <div class="col-md-12">
-                        <input type="file" name="QUALITY_CONTROL_IMAGE" value="" class="form-control col-xs-5 col-sm-5">
+                        <input type="file" id="QUALITY_CONTROL_IMAGE" name="QUALITY_CONTROL_IMAGE" value="" class="form-control col-xs-5 col-sm-5">
                     </div>
                 </div>
             </div>
@@ -271,9 +271,8 @@
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
 
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
 <script>
-
-
     $(document).ready(function () {
         $.validator.addMethod(
             "regex",
@@ -308,7 +307,16 @@
                 },
                 PH:{
                     required: true,
+                },
+                QUALITY_CONTROL_IMAGE:{
+                    extension: "xlsx|csv"
                 }
+            },
+            messages: {
+                QUALITY_CONTROL_IMAGE: {
+                    //required: "Please upload file.",
+                    extension: "Please upload file in these format only ( XLSX,CSV )."
+                },
             }
         });
 

@@ -145,7 +145,17 @@
                 <tr class="rowFirst">
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
-                                    <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
+                                    <select class="form-control saltType" id="brand_id" name="brand_id[]">
+                                        <option value="">Select</option>
+                                        @foreach($saltId as $row)
+                                            <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
+                                        @endforeach
+                                    </select>
+                                </span>
+                    </td>
+                    <td>
+                                <span class="block input-icon input-icon-right" style="width: 255px;">
+                                    <select class="form-control" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
                                             <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>

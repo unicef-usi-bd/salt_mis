@@ -104,14 +104,14 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.image') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
+                    <input type="file" id="user_image" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.signature') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value=""/>
+                    <input type="file" id="user_signature" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value=""/>
                 </div>
             </div>
 
@@ -266,6 +266,7 @@
             </div>
         </div>
     </form>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
     <script>
         $(document).ready(function () {
             $('.user_group').on('change',function(){
@@ -347,9 +348,26 @@
                     user_group_level_id:{
                         required: true,
                     },
+                    user_image: {
+                        //required: true,
+                        extension: "jpg|jpeg|png|gif"
+                    },
+                    user_signature:{
+                        extension: "jpg|jpeg|png|gif"
+                    }
 //                    center_id:{
 //                        required: true,
 //                    }
+                },
+                messages: {
+                    user_image: {
+                        //required: "Please upload file.",
+                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
+                    },
+                    user_signature:{
+                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
+                    },
+
                 }
             });
 
@@ -377,36 +395,36 @@
         });
 
         //===========image validation============
-        $(".user_image").bind('change',function () {
-            var fileSize = this.files[0].size;
-            var maxSize = 25000;//25kb; // alert(maxSize);
-            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-            var filename = $('input[type=file]').val().split('\\').pop();
-
-            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-                $(".user_image").val('');
-            }
-            if (fileSize>maxSize){
-                alert("File size exceeds maximum size");
-                $(".user_image").val('');
-            }
-        });
-        $(".user_signature").bind('change',function () {
-            var fileSize = this.files[0].size;
-            var maxSize = 25000;//25kb; // alert(maxSize);
-            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-            var filename = $('input[type=file]').val().split('\\').pop();
-
-            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-                $(".user_signature").val('');
-            }
-            if (fileSize>maxSize){
-                alert("File size exceeds maximum size");
-                $(".user_signature").val('');
-            }
-        });
+//        $(".user_image").bind('change',function () {
+//            var fileSize = this.files[0].size;
+//            var maxSize = 25000;//25kb; // alert(maxSize);
+//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+//            var filename = $('input[type=file]').val().split('\\').pop();
+//
+//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
+//                $(".user_image").val('');
+//            }
+//            if (fileSize>maxSize){
+//                alert("File size exceeds maximum size");
+//                $(".user_image").val('');
+//            }
+//        });
+//        $(".user_signature").bind('change',function () {
+//            var fileSize = this.files[0].size;
+//            var maxSize = 25000;//25kb; // alert(maxSize);
+//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+//            var filename = $('input[type=file]').val().split('\\').pop();
+//
+//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
+//                $(".user_signature").val('');
+//            }
+//            if (fileSize>maxSize){
+//                alert("File size exceeds maximum size");
+//                $(".user_signature").val('');
+//            }
+//        });
     </script>
 <!--    --><?php
 //    //MySQL class: http://mbe.ro/2009/08/30/fast-and-easy-php-mysql-class/

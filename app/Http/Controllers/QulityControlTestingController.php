@@ -78,7 +78,7 @@ class QulityControlTestingController extends Controller
     {
 
         $rules = array(
-            'QC_TESTNAME' => 'required',
+            //'QC_TESTNAME' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -168,7 +168,7 @@ class QulityControlTestingController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'QC_TESTNAME' => 'required',
+            //'QC_TESTNAME' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);

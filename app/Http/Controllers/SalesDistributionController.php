@@ -113,9 +113,11 @@ class SalesDistributionController extends Controller
         }else{
             $iodizeStock = $beforeIodizeSaleStock;
         }
+
+        $brandName = SalesDistribution::millerBrand();
         //$pckSize = SalesDistribution::getPacksize();
-        //$this->pr($iodizeStock);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock'));
+        //$this->pr($brandName);
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock','brandName'));
     }
 
     /**
