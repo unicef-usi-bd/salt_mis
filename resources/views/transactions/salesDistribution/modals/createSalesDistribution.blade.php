@@ -32,7 +32,7 @@
                 <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE" name="SELLER_TYPE" data-placeholder="Select Seller Type">
                    <option value="">--Select One--</option>
                     @foreach($sellerType as $seller)
-                        <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
+                        <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
                     @endforeach
                 </select>
             </span>
@@ -148,7 +148,7 @@
                                     <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
-                                            <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
+                                            <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
                                         @endforeach
                                     </select>
                                 </span>
