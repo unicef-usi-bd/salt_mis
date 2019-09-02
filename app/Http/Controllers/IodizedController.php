@@ -47,9 +47,9 @@ class IodizedController extends Controller
      */
     public function create()
     {
-//        $digits = 4;
-//        $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
-        $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
+        $iodizeIndex = Iodized::getIodizeData();
+        $num = count($iodizeIndex);
+        $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d\n", ++$num);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $centerId = Auth::user()->center_id;
         //$this->pr($centerId);
