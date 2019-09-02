@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\LookupGroupData;
 use App\SalesDistribution;
 use App\Item;
+use App\Brand;
 
 class SalesDistributionController extends Controller
 {
@@ -114,7 +115,7 @@ class SalesDistributionController extends Controller
             $iodizeStock = $beforeIodizeSaleStock;
         }
 
-        $brandName = SalesDistribution::millerBrand();
+        $brandName = Brand::millerBrand();
         //$pckSize = SalesDistribution::getPacksize();
         //$this->pr($brandName);
         return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock','brandName'));

@@ -132,6 +132,7 @@
                 <thead>
                 <tr>
                     <th style="width: 255px;">Salt Type<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;">Brand Name<span style="color: red;"></span> </th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Quantity<span style="color:red;"> *</span></th>
@@ -145,7 +146,7 @@
                 <tr class="rowFirst">
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
-                                    <select class="form-control saltType" id="brand_id" name="brand_id[]">
+                                    <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
                                             <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
@@ -155,10 +156,10 @@
                     </td>
                     <td>
                                 <span class="block input-icon input-icon-right" style="width: 255px;">
-                                    <select class="form-control" id="ITEM_ID" name="ITEM_ID[]">
+                                    <select class="form-control" id="brand_id" name="brand_id[]">
                                         <option value="">Select</option>
-                                        @foreach($saltId as $row)
-                                            <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
+                                        @foreach($brandName as $row)
+                                            <option value="{{$row->brand_id}}"> {{$row->brand_name}}</option>
                                         @endforeach
                                     </select>
                                 </span>

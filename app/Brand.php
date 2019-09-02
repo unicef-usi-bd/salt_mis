@@ -39,4 +39,12 @@ class Brand extends Model
     public static function deleteBrandData($id){
         return DB::table('brand')->where('brand_id', $id)->delete();
     }
+
+    public static function millerBrand(){
+        $centerId = Auth::user()->center_id;
+        return DB::table('brand')
+            ->select('brand.*')
+            ->where('brand.center_id','=',$centerId)
+            ->get();
+    }
 }
