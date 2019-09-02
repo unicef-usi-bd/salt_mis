@@ -62,6 +62,7 @@ class SalesDistribution extends Model
               $salesChdData = array(
                   'SALESMST_ID'=>$salesDistributionMstId,
                   'ITEM_ID'=> $request->input('ITEM_ID')[$i],
+                  'brand_id'=> $request->input('brand_id')[$i],
                   'PACK_TYPE'=> $request->input('PACK_TYPE')[$i],
                   'PACK_QTY'=> $request->input('PACK_QTY')[$i],
                   'center_id' => Auth::user()->center_id,
@@ -218,11 +219,5 @@ class SalesDistribution extends Model
         return $countSales->sum('tmm_itemstock.QTY');
     }
 
-    public static function millerBrand(){
-        $centerId = Auth::user()->center_id;
-        return DB::table('brand')
-            ->select('brand.*')
-            ->where('brand.center_id','=',$centerId)
-            ->get();
-    }
+
 }
