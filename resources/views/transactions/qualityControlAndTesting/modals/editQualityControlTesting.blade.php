@@ -1,4 +1,12 @@
 <div class="col-md-12">
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
     {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
     {{--<span id="successMessage"></span>--}}
     {{--<button type="button" class="close" data-dismiss="alert">--}}
@@ -11,7 +19,7 @@
     {{--</div>--}}
 
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form action="{{ url('/quality-control-testing/'.$editQualityControl->QUALITYCONTROL_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <form id="myform" action="{{ url('/quality-control-testing/'.$editQualityControl->QUALITYCONTROL_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
@@ -85,7 +93,7 @@
                 <div class="col-md-4">
                     <label class="col-sm-12"> <b>Attachment</b><span style="color: red;"> </span> </label>
                     <div class="col-md-12">
-                        <input type="file" name="QUALITY_CONTROL_IMAGE" class="form-control col-xs-5 col-sm-5">
+                        <input type="file" id="QUALITY_CONTROL_IMAGE" name="QUALITY_CONTROL_IMAGE" class="form-control col-xs-5 col-sm-5">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -213,5 +221,52 @@
 @include('masterGlobal.datePicker')
 
 {{--@include('masterGlobal.formValidation')--}}
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
+<script>
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "regex",
+            function(value, element, regexp)
+            {
+                if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                else if (regexp.global)
+                    regexp.lastIndex = 0;
+                return this.optional(element) || regexp.test(value);
+            },
+            "Please check your input."
+        );
+
+        $('#myform').validate({ // initialize the plugin
+            errorClass: "my-error-class",
+            //validClass: "my-valid-class",
+            rules: {
+                SODIUM_CHLORIDE:{
+                    required: true,
+                },
+                MOISTURIZER:{
+                    required: true,
+                },
+                IODINE_CONTENT:{
+                    required: true,
+                },
+                PH:{
+                    required: true,
+                },
+                QUALITY_CONTROL_IMAGE:{
+                    required: true,
+                    extension: "xlsx|csv"
+                }
+            },
+            messages: {
+                QUALITY_CONTROL_IMAGE: {
+                    //required: "Please upload file.",
+                    extension: "Please upload file in these format only ( XLSX,CSV )."
+                },
+            }
+        });
+
+    });
+</script>
 
 

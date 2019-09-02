@@ -217,4 +217,12 @@ class SalesDistribution extends Model
 
         return $countSales->sum('tmm_itemstock.QTY');
     }
+
+    public static function millerBrand(){
+        $centerId = Auth::user()->center_id;
+        return DB::table('brand')
+            ->select('brand.*')
+            ->where('brand.center_id','=',$centerId)
+            ->get();
+    }
 }
