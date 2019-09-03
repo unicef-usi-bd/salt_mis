@@ -146,6 +146,36 @@ class Stock extends Model
 
         return $countProduction->sum('tmm_itemstock.QTY');
     }
+
+    public static function totalWashCrashProductionsMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('TRAN_FLAG','=','WI');
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeProductionsMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->where('TRAN_TYPE','=','I');
+        $countProduction->where('TRAN_FLAG','=','II');
+        $countProduction->where('tmm_itemstock.TRAN_DATE','<',$date);
+        if($centerId){
+            $countProduction->where('center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
     /// ----------------------Production
 
     ///-----------------------Dashboard wise production
@@ -222,10 +252,29 @@ class Stock extends Model
     /// ----------------------Procurement Graph
     public static function monthWiseProcurement(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+        if($centerId){
+            return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
                                        FROM tmm_itemstock it
                                        WHERE it.center_id = $centerId
                                        and it.TRAN_FLAG = 'PR'
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
+        }else{
+            return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                       FROM tmm_itemstock it
+                                       WHERE it.TRAN_FLAG = 'PR'
+                                       and YEAR(TRAN_DATE)
+                                       GROUP BY month"));
+        }
+
+        //$monthProduction = DB::table('tmm_itemstock')
+    }
+
+    public static function monthWiseProcurementadmin(){
+
+        return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
+                                       FROM tmm_itemstock it
+                                       WHERE  it.TRAN_FLAG = 'PR'
                                        and YEAR(TRAN_DATE)
                                        GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
@@ -399,6 +448,38 @@ class Stock extends Model
         return $countSales->sum('tmm_itemstock.QTY');
     }
 
+    public static function totalAssociationIodizeSaleMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        $countSales->where('TRAN_TYPE','=','I');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countSales->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalAssociationWashCrashSaleMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+        $countSales->where('TRAN_TYPE','=','W');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countSales->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+
     public static function totalSale(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw(" SELECT a.ASSOCIATION_ID,(SELECT mill_name FROM ssm_mill_info WHERE mill_id = a.mill_id) mill_name,
@@ -438,14 +519,6 @@ class Stock extends Model
     }
 
     public static function totalSaleList(){
-//        $centerId = Auth::user()->center_id;
-//        return DB::select(DB::raw(" SELECT m.mill_name,MONTH(TRAN_DATE) month,ROUND(SUM( s.QTY)) Total_sale,s.TRAN_TYPE,s.TRAN_DATE
-//                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
-//                  WHERE a.ASSOCIATION_ID = s.center_id
-//                  AND a.center_id = m.center_id
-//                  and s.TRAN_FLAG = 'SD'
-//                  AND a.center_id  = $centerId
-//                  GROUP BY a.ASSOCIATION_ID,m.mill_name,month,TRAN_TYPE,s.TRAN_DATE"));
         $centerId = Auth::user()->center_id;
         $totalProductionSale = DB::table('tmm_itemstock');
         $totalProductionSale->select('tmm_itemstock.*');
@@ -493,6 +566,38 @@ class Stock extends Model
         return $countProduction->sum('tmm_itemstock.QTY');
     }
 
+    //month wise association graph
+    public static function totalAssociationWashcrashMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+//        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('tmm_itemstock.TRAN_FLAG','=','WI');
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalAssociationIodizeMonthwise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countProduction = DB::table('tmm_itemstock');
+        $countProduction->select('tmm_itemstock.QTY');
+        $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
+//        $countProduction->where('TRAN_TYPE','=','W');
+        $countProduction->where('tmm_itemstock.TRAN_FLAG','=','II');
+        $countProduction->where('tmm_itemstock.TRAN_DATE','<',$date);
+        if($centerId){
+            $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
+        }
+
+        return $countProduction->sum('tmm_itemstock.QTY');
+    }
 
 }
 

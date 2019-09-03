@@ -8,12 +8,12 @@
                 <input type="text" id="inputSuccess LOOKUPCHD_NAME" placeholder="Example:- Group Data name here" name="LOOKUPCHD_NAME" class="form-control" value="{{ $lookupGroupData->LOOKUPCHD_NAME }}"/>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.user_define_id') }}</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-8">
-                <input type="number" id="inputSuccess UD_ID" placeholder="Example:- User Define Serial  here" name="UD_ID" class="form-control col-xs-10 col-sm-5" value="{{ $lookupGroupData->UD_ID }}"/>
-            </div>
-        </div>
+        {{--<div class="form-group">--}}
+            {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.user_define_id') }}</b><span style="color: red;"> *</span> </label>--}}
+            {{--<div class="col-sm-8">--}}
+                {{--<input type="number" id="inputSuccess UD_ID" placeholder="Example:- User Define Serial  here" name="UD_ID" class="form-control col-xs-10 col-sm-5" value="{{ $lookupGroupData->UD_ID }}"/>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.description') }}</b></label>
             <div class="col-sm-8">

@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Production stock(W&C + iodized) & sales report(W&C + iodized)
+                        Production stock(W&C + iodized) & sales stock(W&C + iodized)
                     </h5>
 
                 </div>
@@ -280,12 +280,16 @@
         <div class="col-sm-6">
             <canvas id="myChart2"></canvas>
         </div><!-- /.col -->
+        <div class="col-sm-6">
+            <canvas id="myChart" height="200"></canvas>
+        </div><!-- /.col -->
     </div><!-- /.row -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
-        var ctx = document.getElementById('myChart1').getContext('2d');
-        var datas = '<?php echo json_encode($monthWiseProduction); ?>';
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var datas = '<?php echo json_encode($monthWiseProcurement); ?>';
         //console.log(datas);
         datas = JSON.parse(datas);
         //console.log(datas);
@@ -294,7 +298,48 @@
             //barData.push(data.subtotal);
             barData[data.month-1] = data.subtotal;
         });
-       // console.log(barData);
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
+                datasets: [{
+                    label: 'Current Year Procurement Chart',
+                    backgroundColor: 'rgb(135, 206, 250)',
+                    borderColor: 'rgb(135, 206, 250)',
+                    data: barData
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    xAxes: [{
+                        barPercentage: 0.5,
+                        barThickness: 6,
+                        maxBarThickness: 8,
+                        minBarLength: 2,
+                        gridLines: {
+                            offsetGridLines: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var datas = '<?php echo json_encode($monthWiseProduction); ?>';
+        //console.log(datas);
+        datas = JSON.parse(datas);
+        //console.log(datas);
+        let barDataProduction = [0,0,0,0,0,0,0,0,0,0,0,0];
+        datas.forEach(function (data) {
+            //barData.push(data.subtotal);
+            barDataProduction[data.month-1] = data.subtotal;
+        });
+        // console.log(barData);
 
         var chart = new Chart(ctx, {
             // The type of chart we want to create
@@ -303,11 +348,11 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Month wise current year production chart',
+                    label: 'Current Year Production Chart',
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
-                   // data: [0, 10, 5, 2, 20, 30, 45]
-                    data: barData
+                    // data: [0, 10, 5, 2, 20, 30, 45]
+                    data: barDataProduction
                 }]
             },
 
@@ -341,7 +386,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [<?php echo $totalWashCrashSale?>, <?php echo $totalIodizeSale?>],
+                    data: [<?php echo $totalMonthWiseWascrashSale?>, <?php echo $totalMonthWiseIodizeSale?>],
 
 
                 }],
@@ -370,7 +415,7 @@
                     'Sales'
                 ],
                 datasets: [{
-                    data: [<?php echo $totalProductons; ?>, <?php echo $totalProductSales; ?>],
+                    data: [<?php echo $totalMonthWiseProduction; ?>, <?php echo $totalsaleMonthWise; ?>],
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff'
 
@@ -390,8 +435,8 @@
             }
 
         });
-
     </script>
+
 
 @endsection
 

@@ -158,6 +158,36 @@ class SalesDistribution extends Model
 
         return $countSales->sum('tmm_itemstock.QTY');
     }
+
+    public static function totalWashcrashSalesMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','W');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countSales->where('center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeSalesMonthWise(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+        $centerId = Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock');
+        $countSales->select('tmm_itemstock.QTY');
+        $countSales->where('TRAN_TYPE','=','I');
+        $countSales->where('TRAN_FLAG','=','SD');
+        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $countSales->where('center_id','=',$centerId);
+        }
+
+        return $countSales->sum('tmm_itemstock.QTY');
+    }
     ///-----------------------Sales
 
     ///-----------------------Dashboard product sale

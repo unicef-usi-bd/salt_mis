@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Stock And Sales Report
+                        Production stock(W&C + iodized) & sales stock(W&C + iodized)
                     </h5>
 
                 </div>
@@ -341,7 +341,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff',
-                    data: [<?php echo $totalWashCrashSale?>, <?php echo $totalIodizeSale?>],
+                    data: [<?php echo $totalMonthWiseWascrashSale?>, <?php echo $totalMonthWiseIodizeSale?>],
 
 
                 }],
@@ -370,7 +370,7 @@
                     'Sales'
                 ],
                 datasets: [{
-                    data: [<?php echo $totalProductons; ?>, <?php echo $totalProductSales; ?>],
+                    data: [<?php echo $totalMonthWiseProduction; ?>, <?php echo $totalProductSales; ?>],
                     backgroundColor: ['#3498DB','#900C3F'],
                     borderColor: '#ffffff'
 
