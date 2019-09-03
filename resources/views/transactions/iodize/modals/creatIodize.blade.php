@@ -116,7 +116,7 @@
                 $('.chemicalAmount').val(recommandedQty.toFixed(2));
                 $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty.toFixed(2)).show();
                 $('.stockChemical').html(data.chemicalStock).show();
-                $('.resultChemical').html(data.chemicalStock);
+                $('.resultChemical').html(data.chemicalStock.toFixed(2));
                 var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
 
               //  alert(chemicalNeed);

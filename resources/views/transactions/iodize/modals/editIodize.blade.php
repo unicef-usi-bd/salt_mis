@@ -49,7 +49,7 @@
                     <span class="col-sm-6" style="padding: 0;">
                         <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value="{{ $editIodize->REQ_QTY }}"/>
                     </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ $totalChemical }} ltr</span><span class="resultChemical"></span>)</span>
+                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical">{{ number_format($totalChemical, 2) }} ltr</span><span class="resultChemical"></span>)</span>
             </div>
             <span class="requireChemicalPerKg" style="margin-left:27%;display: none;color:#1cabe2;"></span>
         </div>
@@ -104,10 +104,11 @@ $(document).on('change','.chemical',function(){
             var data = JSON.parse(data);
             //console.log(data.chemicalPerKg);
             var recommandedQty = (data.chemicalPerKg.USE_QTY / data.chemicalPerKg.CRUDE_SALT) * washSaltAmount;
+            $('.chemicalAmount').val(recommandedQty.toFixed(2));
             $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty.toFixed(2)).show();
-            $('.stockChemical').html(data.chemicalStock).show();
+            $('.stockChemical').html(data.chemicalStock.toFixed(2)).show();
             $('.resultChemical').html(data.chemicalStock).hide();
-            $('.chemicalAmount').val('');
+//            $('.chemicalAmount').val('');
 
             var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
 

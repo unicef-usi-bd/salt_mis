@@ -135,7 +135,7 @@
                     <th style="width: 255px;">Brand Name<span style="color: red;"></span> </th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
-                    <th style="width: 255px;">Quantity<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;">Quantity (KG)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Total<span style="color:red;"> </span></th>
                     <th style="width: 255px;">Stock<span style="color:red;"> </span></th>
 
@@ -145,7 +145,7 @@
                 <tbody class="newRow">
                 <tr class="rowFirst">
                     <td>
-                                <span class="block input-icon input-icon-right" style="width: 255px;">
+                                <span class="block input-icon input-icon-right" style="width: 180px;">
                                     <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
@@ -155,7 +155,7 @@
                                 </span>
                     </td>
                     <td>
-                                <span class="block input-icon input-icon-right" style="width: 255px;">
+                                <span class="block input-icon input-icon-right" style="width: 180px;">
                                     <select class="form-control" id="brand_id" name="brand_id[]">
                                         <option value="">Select</option>
                                         @foreach($brandName as $row)
@@ -166,7 +166,7 @@
                     </td>
 
                     <td>
-                        <span class="block input-icon input-icon-right" style="width: 255px;">
+                        <span class="block input-icon input-icon-right" style="width: 180px;">
                         <select class="form-control packType chosen-select" id="PACK_TYPE" name="PACK_TYPE[]">
                             <option value="">Select</option>
                             @foreach($saltPackId as $row)
@@ -194,7 +194,7 @@
                     </td>
 
                     <td>
-                        <span class="block input-icon input-icon-right">
+                        <span class="block input-icon input-icon-right" style="width: 155px;">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
                             <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden"></span><span class="result"></span><span class="defaultStock">{{ $iodizeStock }}</span>KG)</span>

@@ -54,7 +54,9 @@ class WashingAndCrushingController extends Controller
      */
     public function create()
     {
-        $batch = 'WC' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
+        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData();
+        $num = count($washingAndCrushingData);
+        $batch = 'WC' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d\n", ++$num);
 
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
 
