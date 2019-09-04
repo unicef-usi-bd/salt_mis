@@ -111,34 +111,35 @@ class ReportController extends Controller
     public function getPurchaseSaltAmount(Request $request){
         $centerId = Auth::user()->center_id;
         $itemType = $request->input('itemType');
-        $starDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
+//        $starDate = $request->input('startDate');
+//        $endDate = $request->input('endDate');
 //        $purchaseTotalSalt = Report::getPurchaseSalteLists ($centerId,$itemType,$starDate,$endDate);
-        $purchaseTotalSalt = Report::getItemStock($centerId,$itemType,$starDate,$endDate);
+        $purchaseTotalSalt = Report::getItemStock($centerId,$itemType);
         $view = view("reportView.purchaseSaltAmountReport",compact('purchaseTotalSalt','itemType','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf($itemType,$starDate,$endDate){
+    public function getPurchaseSaltAmountPdf($itemType){
         $centerId = Auth::user()->center_id;
         //$itemType = $request->input('itemType');
-        $purchaseTotalSalt = Report::getPurchaseSalteLists($centerId,$itemType,$starDate,$endDate);
+//        $purchaseTotalSalt = Report::getPurchaseSalteLists($centerId,$itemType,$starDate,$endDate);
+        $purchaseTotalSalt = Report::getItemStock($centerId,$itemType);
         $data = \View::make('reportPdf.purchaseSaltAmountReportPdf',compact('purchaseTotalSalt'));
         $this->generatePdf($data);
     }
 
     public function getAdminSaltStock(Request $request){
-        $starDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
-        $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
+//        $starDate = $request->input('startDate');
+//        $endDate = $request->input('endDate');
+        $purchaseTotalSaltStock = Report::getStockSaltForAdmin();
         //$this->pr($purchaseTotalSaltStock);
         $view = view("reportView.purchaseSaltStockReport",compact('purchaseTotalSaltStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getAdminSaltStockPdf($starDate,$endDate){
+    public function getAdminSaltStockPdf(){
 
-        $purchaseTotalSaltStock = Report::getStockSaltForAdmin($starDate,$endDate);
+        $purchaseTotalSaltStock = Report::getStockSaltForAdmin();
         $data = \View::make('reportPdf.purchaseSaltStockReportPdf',compact('purchaseTotalSaltStock'));
         $this->generatePdf($data);
     }

@@ -128,7 +128,7 @@ class Report extends Model
         return $purchaseSaltList->get();
     }
 
-    public static function getItemStock($centerId,$itemType,$starDate,$endDate){
+    public static function getItemStock($centerId,$itemType){
 
         $purchaseSaltList = DB::table('ssc_lookupchd');
         $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
@@ -141,13 +141,11 @@ class Report extends Model
         }
         if ($itemType != 0){
             $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
-        }else if($starDate AND $endDate){
-            $purchaseSaltList->whereBetween('tmm_itemstock.TRAN_DATE',[$starDate, $endDate]);
         }
         return $purchaseSaltList->get();
     }
 
-    public static function getStockSaltForAdmin($starDate, $endDate){
+    public static function getStockSaltForAdmin(){
         return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
                                         FROM
                                          (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
@@ -165,7 +163,6 @@ class Report extends Model
                                             AND i.item_type = 26
                                             AND s.TRAN_FLAG NOT IN ('WR','II')
                                             AND s.TRAN_TYPE NOT IN ('W','I')) b
-                                            WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 

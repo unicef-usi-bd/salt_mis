@@ -369,7 +369,7 @@
         }else if($reportUrl === 'purchase-salt-amount'){
             $('.statusAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
 
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
