@@ -177,6 +177,11 @@
         <div class="col-sm-6">
             <canvas id="myChart" height="200"></canvas>
         </div><!-- /.col -->
+        @if($renewalMessageCertificate)
+            <p>your licence expaire between 30 days</p>
+        @else
+            <p>ok</p>
+        @endif
     </div><!-- /.row -->
 
     <div class="hr hr32 hr-dotted"></div>

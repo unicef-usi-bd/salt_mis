@@ -8,6 +8,7 @@ use App\SalesDistribution;
 use App\CrudeSaltProcurement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Certificate;
 
 
 class DashboardController extends Controller
@@ -225,7 +226,8 @@ class DashboardController extends Controller
         $monthWiseProcurement = Stock::monthWiseProcurement();
         $totalStock = Stock::totalStocks();
         $saleTotal = SalesDistribution::totalSale();
-       //$this->pr($totalIodizeSale);
-        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction'));
+        $renewalMessageCertificate = Certificate::certificateRenewalMessage();
+       //$this->pr($renewalMessageCertificate);
+        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction','renewalMessageCertificate'));
     }
 }
