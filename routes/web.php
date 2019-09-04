@@ -191,7 +191,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');//azharul
     Route::get('purchase-salt-total-pdf/{starDate}/{endDate}/{itemTypeAssoc}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
     Route::get('purchase-salt-total-stock', 'ReportAssociationController@getPurchaseSaltTotalStock');//azharul
-    Route::get('purchase-salt-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
+    Route::get('purchase-salt-total-stock-pdf', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
     Route::get('purchase-chemical-item-pdf', 'ReportAssociationController@getPurchaseChemicalItemPdf');//azharul
     Route::get('purchase-chemical-total', 'ReportAssociationController@getPurchaseChemicalTotal');//azharul
@@ -230,8 +230,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
-    Route::get('purchase-salt-amount-pdf/{itemType}/{starDate}/{endDate}','ReportController@getPurchaseSaltAmountPdf');//jalal
-    Route::get('purchase-salt-stock-pdf/{starDate}/{endDate}','ReportController@getAdminSaltStockPdf');//jalal
+    Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
+    Route::get('purchase-salt-stock-pdf','ReportController@getAdminSaltStockPdf');//jalal
     Route::get('miller-purchase-salt-stock-pdf/{starDate}/{endDate}/{itemType}','ReportController@getMillerSaltStockPdf');//jalal
     Route::get('monitor-salt-report-pdf/{starDate}/{endDate}','ReportController@getMonitorSaltsupplierListPdf');//jalal
 

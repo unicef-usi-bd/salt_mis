@@ -385,7 +385,7 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'purchase-chemical-item'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();

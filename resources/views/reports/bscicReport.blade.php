@@ -557,7 +557,7 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
         }else if($reportUrl === 'chemical-item-list'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
