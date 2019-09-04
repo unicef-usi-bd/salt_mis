@@ -80,24 +80,21 @@ class Certificate extends Model
 
     }
 
+
+
     public static function certificateRenewalMessage(){
 
-//        $centerId = Auth::user()->center_id;
-//
-//        $mill_id =  DB::table('ssm_associationsetup')
-//        ->select('ssm_associationsetup.MILL_ID')
-//        ->where('ssm_associationsetup.center_id','=',$centerId)
-//        ->get();
-//        return $mill_id;
-       // $date = date("Y-m-d", strtotime("- 30 days"));
 
-        return DB::select(DB::raw("SELECT CONCAT('Your lience will expired winthin ',RENEW_DAY,' Days') message
+
+        //$date = date("Y-m-d", strtotime("- 30 days"));
+
+        return DB::select(DB::raw("SELECT CONCAT('Your licence will expired winthin ',RENEW_DAY,' Days') message
             FROM
             (SELECT MILL_ID, CERTIFICATE_TYPE_ID,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY
             FROM ssm_certificate_info
-            WHERE MILL_ID = 310
+            WHERE MILL_ID 
             AND CERTIFICATE_TYPE_ID IN (34,38,39)) a
-            WHERE a.RENEW_DAY < 30;"));
+            WHERE a.RENEW_DAY > 30 "));
     }
 
 } //end Class
