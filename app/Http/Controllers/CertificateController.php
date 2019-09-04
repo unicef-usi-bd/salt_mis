@@ -82,6 +82,7 @@ class CertificateController extends Controller
                     'MILL_ID' => $request->input('MILL_ID'),
                     'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
                     'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                     'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
                     'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                     //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
@@ -188,6 +189,7 @@ class CertificateController extends Controller
     public function createCertificate($millerInfoId){
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
+        $getDistrict = SupplierProfile::getDistrict();
 
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -200,7 +202,7 @@ class CertificateController extends Controller
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData'));
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','getDistrict'));
     }
 //    public function updateCertificateInfo(Request $request)
 //    {
@@ -238,6 +240,7 @@ class CertificateController extends Controller
                     'MILL_ID' => $millerInfoId,
                     'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
                     'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                     'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
                     'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                     'TRADE_LICENSE' => 'image/user-image/' . $userImageName[$i],

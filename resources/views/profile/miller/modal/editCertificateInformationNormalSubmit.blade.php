@@ -14,6 +14,7 @@
                     <tr>
                         <th style="width:175px ;">Type of Certificate<span style="color:red;"> *</span></th>
                         <th style="width:130px ;">Issure Name<span style="color:red;"> *</span></th>
+                        <th style="width:140px ;">District<span style="color:red;"> </span></th>
                         <th style="width:140px ;">Issuing Date<span style="color:red;"> *</span></th>
                         <th style="width:150px ;">Certificate Number<span style="color:red;"> *</span></th>
                         <th style="width: 260px;">Attached File<span style="color:red;"> *</span></th>
@@ -46,6 +47,16 @@
                                         @endforeach
                                      </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <select class="form-control DISTRICT_ID" id="DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                        <option value="">Select</option>
+                                        @foreach($getDistrict as $row)
+                                            <option value="{{ $row->DISTRICT_ID }}" @if($editCertData->DISTRICT_ID==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
+                                        @endforeach
+                                    </select>
                                 </span>
                             </td>
                             <td>

@@ -80,6 +80,7 @@
                                             <tr>
                                                 <th style="width:175px ;">Type of Certificate<span style="color:red;"> *</span></th>
                                                 <th style="width:130px ;">Issure Name<span style="color:red;"> *</span></th>
+                                                <th style="width:140px ;">District<span style="color:red;"> </span></th>
                                                 <th style="width:140px ;">Issuing Date<span style="color:red;"> *</span></th>
                                                 <th style="width:150px ;">Certificate Number<span style="color:red;"> *</span></th>
                                                 <th style="width: 260px;">Attached File<span style="color:red;"> *</span></th>
@@ -113,14 +114,24 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="date" name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
+                                                        <select class="form-control DISTRICT_ID" id="DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                                            <option value="">Select</option>
+                                                            @foreach($getDistrict as $row)
+                                                                <option value="{{ $row->DISTRICT_ID }}">{{ $row->DISTRICT_NAME }}</option>
+                                                            @endforeach
+                                                         </select>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="date" id="textInput" name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
                                                     </span>
                                                 </td>
 
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
+                                                        <input type="text"  name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
                                                     </span>
                                                 </td>
                                                 <td>
@@ -132,7 +143,7 @@
                                                 <td>
                                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
+                                                       <input type="date" id="textInput1" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
                                                     </span>
                                                 </td>
 
@@ -285,6 +296,16 @@
                 }
             });
 
+        });
+
+        $('#CERTIFICATE_TYPE_ID').change(function() {
+            if( $(this).val() == 32 || $(this).val() == 36) {
+                $('#textInput').prop( "disabled", true );
+                $('#textInput1').prop( "disabled", true );
+            } else {
+                $('#textInput').prop( "disabled", false );
+                $('#textInput1').prop( "disabled", false );
+            }
         });
 
     </script>

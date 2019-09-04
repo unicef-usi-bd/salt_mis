@@ -67,13 +67,14 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
-                                   <select id="" class="chosen-container" name="CAPACITY_ID" data-placeholder="Select">
-                                       <option value="">-Select-</option>
-                                        @foreach($capacity as $row)
-                                           <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                       @endforeach
+                                   {{--<select id="" class="chosen-container" name="CAPACITY_ID" data-placeholder="Select">--}}
+                                       {{--<option value="">-Select-</option>--}}
+                                        {{--@foreach($capacity as $row)--}}
+                                           {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                       {{--@endforeach--}}
 
-                                   </select>
+                                   {{--</select>--}}
+                                    <input type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID">
                                 </span>
                         </div>
                     </div>

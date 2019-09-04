@@ -154,6 +154,7 @@ class MillerInfoController extends Controller
          $millerInfoId = $id;
          $getDivision = SupplierProfile::getDivision();
          $getZone = SupplierProfile::getZone();
+         $getDistrict = SupplierProfile::getDistrict();
 
          $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
          $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -169,7 +170,7 @@ class MillerInfoController extends Controller
          $editCertificateData = Certificate::getCertificateData($id);
          $editQcData = Qc::getQcData($id);
          $editEmployeeData = Employee::getEmployeeData($id);
-         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData'));
+         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict'));
     }
 
     /**

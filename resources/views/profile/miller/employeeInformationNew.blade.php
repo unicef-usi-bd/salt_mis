@@ -75,14 +75,15 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTMALE_EMP" class="chosen-container totalMaleEmp" placeholder="Male">
+                                                       <input type="text" name="TOTMALE_EMP" class="chosen-container totalMaleEmp txtCal" onblur="findTotal()" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp" placeholder="Female">
+                                                       <input type="text" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp txtCal" onblur="findTotal()" placeholder="Female">
                                                     </span>
                                                 </div>
+                                                <input type="number" name="total_no_of_questions" class="totCal" value="" readonly="readonly" id="input_item" placeholder="Total number of employee"/><br />
                                             </div>
 
                                             <b style="font-size: 14px;">Part Time Employee</b> <br><br>
@@ -98,6 +99,7 @@
                                                     </span>
                                                 </div>
                                             </div>
+
                                             <span style="color:red;display: none" class="error">Total number of Employee must be equal to Part time and Full time employee.</span>
                                             <br><b style="font-size: 14px;">Remarks</b> <br><br>
                                             <div class="form-group">
@@ -215,7 +217,19 @@
         });
 
 
+        var arr = document.getElementsByClassName('txtCal');
 
+        function findTotal() {
+            var tot = 0;
+            for (var i = 0; i < arr.length; i++) {
+                tot += parseInt(arr[i].value);
+            }
+            document.getElementsByClassName('totCal')[0].value = tot;
+        }
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i].addEventListener('keyup', findTotal);
+        }
 
 
 

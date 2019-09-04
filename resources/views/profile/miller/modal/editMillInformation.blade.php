@@ -60,13 +60,14 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color:red;"> *</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container required" name="CAPACITY_ID" data-placeholder="Select">
-                                   <option value=""></option>
-                                    @foreach($capacity as $row)
-                                       <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
-                                   @endforeach
+                               {{--<select id="REG_TYPE_ID" class="chosen-select chosen-container required" name="CAPACITY_ID" data-placeholder="Select">--}}
+                                   {{--<option value=""></option>--}}
+                                    {{--@foreach($capacity as $row)--}}
+                                       {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->CAPACITY_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                   {{--@endforeach--}}
 
-                               </select>
+                               {{--</select>--}}
+                                <input type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID" value="{{ $editMillData->CAPACITY_ID }}">
                                 <span style="color:red;display:none;" class="error">This field is required</span>
                             </span>
                         </div>
