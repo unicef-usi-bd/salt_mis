@@ -27,6 +27,9 @@ class CertificateController extends Controller
      */
     public function index()
     {
+        $certificates = Certificate::getCertificateData(Auth::user()->MILL_ID);
+
+        $this->pr($certificates);
         return view('profile.miller.millCertificateList');
     }
 
