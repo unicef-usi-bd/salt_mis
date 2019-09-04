@@ -599,5 +599,14 @@ class Stock extends Model
         return $countProduction->sum('tmm_itemstock.QTY');
     }
 
+    public static function millId(){
+        $centerId = Auth::user()->center_id;
+        return DB::table('ssm_associationsetup')
+            ->select('ssm_associationsetup.MILL_ID')
+            ->where('ssm_associationsetup.ASSOCIATION_ID','=',$centerId)
+            ->get();
+
+    }
+
 }
 
