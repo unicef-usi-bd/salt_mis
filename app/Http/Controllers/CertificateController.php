@@ -6,6 +6,7 @@ use App\Entrepreneur;
 use App\LookupGroupData;
 use App\MillerInfo;
 use App\Certificate;
+use App\Stock;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
@@ -27,9 +28,10 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::getCertificateData(Auth::user()->MILL_ID);
+        $millerId = Stock::millId();
+        $certificates = Certificate::getCertificateData($millerId);
 
-        $this->pr($certificates);
+        $this->pr($millerId);
         return view('profile.miller.millCertificateList');
     }
 
