@@ -598,6 +598,5 @@ class Stock extends Model
 
         return $countProduction->sum('tmm_itemstock.QTY');
     }
-
 }
 

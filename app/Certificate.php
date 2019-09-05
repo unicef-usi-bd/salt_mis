@@ -80,33 +80,24 @@ class Certificate extends Model
 
     }
 
-//    public static function millId(){
-//        return DB::table('ssm_associationsetup')
-//            ->select('ssm_associationsetup.MILL_ID')
-//            ->where('ssm_associationsetup.center_id','=',$centerId)
-//            ->get();
-//
-//    }
+
 
     public static function certificateRenewalMessage(){
 
-//        $centerId = Auth::user()->center_id;
+        $centerId = Auth::user()->center_id;
 //
 //        $mill_id =  DB::table('ssm_associationsetup')
 //        ->select('ssm_associationsetup.MILL_ID')
 //        ->where('ssm_associationsetup.ASSOCIATION_ID','=',$centerId)
 //        ->get();
 //        return $mill_id;
-        $mill_id = Stock::millId();
+        //$mill_id = MillerInfo::millId();
         //$date = date("Y-m-d", strtotime("- 30 days"));
 
-        return DB::select(DB::raw("SELECT CONCAT('Your licence will expired winthin ',RENEW_DAY,' Days') message
-            FROM
-            (SELECT MILL_ID, CERTIFICATE_TYPE_ID,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY
-            FROM ssm_certificate_info
-            WHERE MILL_ID = $mill_id
-            AND CERTIFICATE_TYPE_ID IN (34,38,39)) a
-            WHERE a.RENEW_DAY < 30 "));
-    }
+        return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY
+                FROM ssm_certificate_info
+                WHERE MILL_ID = $centerId
+                AND CERTIFICATE_TYPE_ID IN (34,38,39) and RENEWING_DATE > 30 "));
+            }
 
 } //end Class
