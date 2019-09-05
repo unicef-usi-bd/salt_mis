@@ -24,8 +24,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {{--@foreach()--}}
-                    {{--@endforeach--}}
+                    @php $sl = 0; @endphp
+                    @foreach($certificates as $certificate)
+
+                        @if($certificate->RENEWING_DATE <= date("Y-m-d"))
+                            <tr style="background-color: red;color: #fff;">
+                                <td>{{ ++$sl }}</td>
+                                <td>{{ $certificate->certificate_type }}</td>
+                                <td>{{ $certificate->issuer_name }}</td>
+                                <td>{{ $certificate->ISSUING_DATE }}</td>
+                                <td>{{ $certificate->CERTIFICATE_NO }}</td>
+                                <td>{{ $certificate->RENEWING_DATE }}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{ ++$sl }}</td>
+                                <td>{{ $certificate->certificate_type }}</td>
+                                <td>{{ $certificate->issuer_name }}</td>
+                                <td>{{ $certificate->ISSUING_DATE }}</td>
+                                <td>{{ $certificate->CERTIFICATE_NO }}</td>
+                                <td>{{ $certificate->RENEWING_DATE }}</td>
+                            </tr>
+                        @endif
+
+                    @endforeach
                 </tbody>
             </table>
         </div><!-- /.col -->

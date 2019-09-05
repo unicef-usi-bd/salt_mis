@@ -28,11 +28,13 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $millerId = Stock::millId();
-        $certificates = Certificate::getCertificateData($millerId);
+        $millerId = (array)MillerInfo::millId();
+//        $millerId1 = (array)$millerId;
+        $links = implode(' ', $millerId);
 
-        $this->pr($millerId);
-        return view('profile.miller.millCertificateList');
+        $certificates = Certificate::getAllCertificate($links);
+//        $this->pr($certificates);
+        return view('profile.miller.millCertificateList',compact('certificates'));
     }
 
     /**
