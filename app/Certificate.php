@@ -39,6 +39,13 @@ class Certificate extends Model
             ->get();
 
     }
+
+    public static function getAllCertificate($millerId){
+        return DB::select(DB::raw("select sci.*,slc1.LOOKUPCHD_NAME as certificate_type,slc2.LOOKUPCHD_NAME as issuer_name from ssm_certificate_info sci
+left join ssc_lookupchd slc1 on slc1.LOOKUPCHD_ID = sci.CERTIFICATE_TYPE_ID
+left join ssc_lookupchd slc2 on slc2.LOOKUPCHD_ID = sci.ISSURE_ID
+where sci.MILL_ID = $millerId"));
+    }
     public static function updateMillCertificateData($request,$id){
         $certificateId = DB::table('ssm_certificate_info')->where('MILL_ID', $id)->delete();
 
