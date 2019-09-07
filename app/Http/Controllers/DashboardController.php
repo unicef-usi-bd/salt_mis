@@ -227,9 +227,11 @@ class DashboardController extends Controller
         $totalStock = Stock::totalStocks();
         $saleTotal = SalesDistribution::totalSale();
         $millId = MillerInfo::millId();
-        $renewalMessageCertificate = Certificate::certificateRenewalMessage();
+        $millId1 = (array)$millId;
+        $links = implode(' ', array_values($millId1));
+        $renewalMessageCertificate = Certificate::certificateRenewalMessage($links);
 
-        //$this->pr($millId);
+//        $this->pr($renewalMessageCertificate);
         return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction','renewalMessageCertificate','millId'));
     }
 }

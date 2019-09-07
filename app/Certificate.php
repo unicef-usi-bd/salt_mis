@@ -82,9 +82,9 @@ class Certificate extends Model
 
 
 
-    public static function certificateRenewalMessage(){
+    public static function certificateRenewalMessage($links){
 
-        $centerId = Auth::user()->center_id;
+//        $centerId = Auth::user()->center_id;
 //
 //        $mill_id =  DB::table('ssm_associationsetup')
 //        ->select('ssm_associationsetup.MILL_ID')
@@ -94,10 +94,13 @@ class Certificate extends Model
         //$mill_id = MillerInfo::millId();
         //$date = date("Y-m-d", strtotime("- 30 days"));
 
-        return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY
-                FROM ssm_certificate_info
-                WHERE MILL_ID = $centerId
-                AND CERTIFICATE_TYPE_ID IN (34,38,39) and RENEWING_DATE > 30 "));
+        return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,RENEWING_DATE,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME
+FROM ssm_certificate_info
+left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
+WHERE MILL_ID = 335
+AND CERTIFICATE_TYPE_ID IN (34,38,39) 
+and lc.LOOKUPCHD_ID IN (34,38,39)
+AND RENEWING_DATE >=30"));
             }
 
 } //end Class

@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class MillerInfo extends Model
 {
 
-     public static function insertMillerInfoData($request){
+     public static function insertMillerInfoData($request, $mill_logo){
+
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
              'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
              'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
-
              'MILL_NAME' => $request->input('MILL_NAME'),
+             'mill_logo' => $mill_logo,
              'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
              'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
              'CAPACITY_ID' => $request->input('CAPACITY_ID'),

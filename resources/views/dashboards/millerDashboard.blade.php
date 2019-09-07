@@ -19,11 +19,23 @@
     </div><!-- /.page-header -->
 
     <div class="row">
+        <div class="alert alert-danger">
+            @foreach($renewalMessageCertificate as $row)
+                @if($row->RENEW_DAY <=30)
+                    <p style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
+                @else
+
+                @endif
+            @endforeach
+        </div>
+        <hr>
+    </div>
+
+    <div class="row">
 
         <div class="space-6"></div>
 
         <div class="col-sm-7 infobox-container">
-
 
             <div class="infobox infobox-blue infobox-medium infobox-dark">
                 <div class="infobox-icon">
@@ -177,11 +189,13 @@
         <div class="col-sm-6">
             <canvas id="myChart" height="200"></canvas>
         </div><!-- /.col -->
-        @if($renewalMessageCertificate)
-            <p>your licence expaire between 30 days</p>
-        @else
-            <p>ok</p>
-        @endif
+        {{--@if($renewalMessageCertificate as $row)--}}
+            {{--<p>your licence expaire between 30 days</p>--}}
+        {{--@else--}}
+            {{--<p>ok</p>--}}
+        {{--@endif--}}
+
+        {{--{{ $renewalMessageCertificate[0]->message }}--}}
     </div><!-- /.row -->
 
     <div class="hr hr32 hr-dotted"></div>

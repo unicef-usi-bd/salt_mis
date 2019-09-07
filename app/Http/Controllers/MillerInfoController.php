@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class MillerInfoController extends Controller
 {
@@ -113,8 +115,19 @@ class MillerInfoController extends Controller
         if($validator->fails()){
             return Redirect::back()->withErrors($validator);
         }else {
+            if($request->file('mill_logo')!=null && $request->file('mill_logo')->isValid()) {
+                $image = $request->file('mill_logo');
+                $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                $path = 'image/mill-logo/' . $filename;
+                Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                //********* End Image *********
+                $mill_logo = "image/mill-logo/$filename";
+            }else{
+                $mill_logo = 'image/mill-logo/defaultUserImage.png';
+            }
 
-            $millerInfoId = MillerInfo::insertMillerInfoData($request);
+//            dd($mill_logo);
+            $millerInfoId = MillerInfo::insertMillerInfoData($request, $mill_logo);
             //$association = MillerInfo::insertIntoAssociation($request);
             //$this->pr($association);
             if($millerInfoId){
