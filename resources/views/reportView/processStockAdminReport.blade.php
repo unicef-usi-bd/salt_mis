@@ -23,6 +23,7 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
+                <th>Mill Name</th>
                 <th>Process Type</th>
                 <th>Batch No</th>
                 <th>ProductionAmount</th>
@@ -35,6 +36,7 @@
             @foreach($processStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
+                    <td>{{ $row->ASSOCIATION_NAME }}</td>
                     <td>{{$row->Process_Type}}</td>
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->QTY}}</td>

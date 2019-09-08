@@ -234,23 +234,25 @@ class Report extends Model
     }
 
     public static function getProcessStock($centerId,$starDate,$endDate){
-        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
       end Process_Type
       from tmm_itemstock st 
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
       -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
       where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
       and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
       union
-      select i.BATCH_NO, st.QTY,
+      select i.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'I' then
         'Iodize'
       end Process_Type
       from tmm_itemstock st 
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
       where st.TRAN_TYPE = 'I' and st.center_id = $centerId  and st.TRAN_FLAG = 'II'
       -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }
@@ -695,23 +697,25 @@ where ql.center_id =$centerId"));
     }
 
     public static function getProcessStockAdmin($starDate,$endDate){
-        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
+        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
       end Process_Type
       from tmm_itemstock st 
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
       -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
       where st.TRAN_TYPE = 'W'  and st.TRAN_FLAG = 'WI'
       and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
       union
-      select i.BATCH_NO, st.QTY,
+      select i.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'I' then
         'Iodize'
       end Process_Type
       from tmm_itemstock st 
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
       where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
       -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
     }

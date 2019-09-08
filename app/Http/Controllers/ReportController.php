@@ -536,10 +536,11 @@ class ReportController extends Controller
     }
 
     public function getTotalSaleAdmin(Request $request){
-        $divisionId = $request->input('divisionId');
-        $districtId = $request->input('districtId');
-        $totalSale = Report::totalSaleAdmin($divisionId,$districtId);
-        $view = view("reportView.totalSaleAdminReport",compact('totalSale','divisionId','districtId'))->render();
+//        $divisionId = $request->input('divisionId');
+//        $districtId = $request->input('districtId');
+        $processType = $request->input('processType');
+        $totalSale = Report::totalSaleAdmin($processType);
+        $view = view("reportView.totalSaleAdminReport",compact('totalSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
     }
 

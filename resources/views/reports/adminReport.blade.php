@@ -261,6 +261,18 @@
                         {{--</div>--}}
                     {{--</div>--}}
                 <div class="col-md-6">
+                    <div class="form-group processTypeDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
+                                   <option value="">-Select-</option>
+                                   <option value="0">Wash And Crush</option>
+                                   <option value="1">Iodized </option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
                     <div class="form-group statusAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                         <div class="col-sm-8">
@@ -462,6 +474,7 @@
         $('.purchaseOrderDiv').hide();
         $('.zoneAdminDiv').hide();
         $('.issuerAdminDiv').hide();
+        $('.processTypeDiv').hide();
     });
 
     $(document).on('change','.reportAdmin',function(){
@@ -605,10 +618,11 @@
            $('.zoneAdminDiv').hide();
            $('.issuerAdminDiv').hide();
 
-           $('.adminReportrangeDiv').show();
+           $('.adminReportrangeDiv').hide();
            $('.itemTypeAdminDiv').hide();
-           $('.divisionIdDiv').show();
-           $('.districtIdDiv').show();
+           $('.divisionIdDiv').hide();
+           $('.districtIdDiv').hide();
+           $('.processTypeDiv').show();
        }else if($reportUrl === 'sales-item-report-all'){
            $('.statusAdminDiv').hide();
            $('.adminReportrangeDiv').hide();
