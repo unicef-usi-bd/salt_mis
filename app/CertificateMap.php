@@ -40,4 +40,10 @@ class CertificateMap extends Model
     public static function deleteData($id){
         return DB::table('ssm_certificate_map_info')->where('CERTIFICATE_MAP_ID', $id)->delete();
     }
+
+    public static function getIssuerNameByCertificateId($certificateTypeId){
+        return DB::select(DB::raw("select scmi.*,slc1.LOOKUPCHD_NAME from ssm_certificate_map_info scmi
+                                    left join ssc_lookupchd slc1 on scmi.ISSURE_ID = slc1.LOOKUPCHD_ID
+                                    where scmi.CERTIFICATE_TYPE_ID = $certificateTypeId"));
+    }
 }

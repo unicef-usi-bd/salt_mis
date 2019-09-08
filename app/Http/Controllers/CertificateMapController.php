@@ -162,4 +162,9 @@ class CertificateMapController extends Controller
             ]);
         }
     }
+
+    public function getCertificateIssuerName(Request $request, $certificateTypeId){
+        $issuerName = CertificateMap::getIssuerNameByCertificateId($certificateTypeId);
+        return $issuerName;
+    }
 }

@@ -118,12 +118,13 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
-                                                            <option value="">Select</option>
-                                                            @foreach($issueBy as $row)
-                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                                            @endforeach
-                                                         </select>
+                                                        <input type="text" id="textInput" name="ISSURE_ID[]" class="chosen-container ISSURE_ID">
+                                                        {{--<select class="form-control ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >--}}
+                                                            {{--<option value="">Select</option>--}}
+                                                            {{--@foreach($issueBy as $row)--}}
+                                                                {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                                            {{--@endforeach--}}
+                                                         {{--</select>--}}
                                                     </span>
                                                 </td>
                                                 <td>
@@ -279,6 +280,17 @@
         // Fore Remove Row By Click
         $(document).on("click", "span.rowRemove ", function () {
             $(this).closest("tr.removableRow").remove();
+        });
+
+        $(document).on('change','.CERTIFICATE_TYPE_ID',function(){
+            var certificateTypeId = $(this).val();
+            $.ajax({
+                type : 'GET',
+                url : '{{ url('certificate-issuer-name') }}/'+certificateTypeId,
+                success: function (data) {
+                    $('.ISSURE_ID').val(data[0].LOOKUPCHD_NAME);
+                }
+            })
         });
 
 
