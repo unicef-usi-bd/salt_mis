@@ -13,6 +13,7 @@
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <th>Sl.</th>
+        <th>Mill Name</th>
         <th>Process Type</th>
         <th>Stock Amount</th>
     </tr>
@@ -29,6 +30,7 @@
     @foreach($purchaseTotalSaltStocks as $purchaseTotalSaltStock)
         <tr>
             <td>{{ ++$sl }}</td>
+            <td>{{ $purchaseTotalSaltStock->ASSOCIATION_NAME }}</td>
             <td>{{$purchaseTotalSaltStock->Process_Type}}</td>
             <td>{{$purchaseTotalSaltStock->QTY}}</td>
 
