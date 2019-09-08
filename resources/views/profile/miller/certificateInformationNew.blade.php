@@ -50,20 +50,34 @@
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
 
+                        @php
+                            $millerDetails = DB::select(DB::raw(
+                                "select * from ssm_mill_info where MILL_ID = $millerInfoId"
+                            ));
+                            //echo $millerDetails[0]->OWNER_TYPE_ID;
+                        @endphp
+
                         <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
+                        @if($millerDetails[0]->OWNER_TYPE_ID == 12)
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                        @else
                         <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                        @endif
                         <li class="active"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">
+
                         {{--Mill Info--}}
                         @include('profile.miller.updateMillInformation')
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
                         @include('profile.miller.updateEntrepreneurInformation')
                         {{--/-Entrepreneur Information--}}
+
+
 
                         {{--Certificate Info--}}
                         <div id="certificate" class="tab-pane fade in active">
@@ -234,6 +248,10 @@
 
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script>
+
+//        $(document).on('click','#OWNER_TYPE_ID',function(){
+//            console.log('hi');
+//        });
 
         $(document).ready(function(){
             $('.rowAdd').click(function(){
