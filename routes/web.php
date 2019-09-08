@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('crude-salt-invoice-list','CrudeSaltDetailsController@getInvoiceList');//rubiyat
 
     //Profile
+    Route::resource('certificate-map', 'CertificateMapController'); //Azharul
     Route::resource('mill-info', 'MillerInfoController'); //Azharul
     Route::resource('seller-distributor-profile','SellerDistributorProfileController');//jalal
     Route::resource('supplier-profile', 'SupplierProfileController'); //Azharul
