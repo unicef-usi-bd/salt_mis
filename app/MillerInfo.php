@@ -291,4 +291,10 @@ class MillerInfo extends Model
             ->first();
 
     }
+
+    public static function millInfo(){
+        return DB::table('ssm_mill_info')
+            ->select('ssm_mill_info.*')
+            ->get();
+    }
 }

@@ -19,10 +19,10 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div class="alert alert-danger">
+        <div >
             @foreach($renewalMessageCertificate as $row)
                 @if($row->RENEW_DAY <=30)
-                    <p style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
+                    <p class="alert alert-danger" style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
                 @else
 
                 @endif

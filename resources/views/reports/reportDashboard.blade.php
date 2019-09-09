@@ -225,6 +225,8 @@
                 var districtId = $('.districtId').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
             }else if(center_type == 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
@@ -238,6 +240,8 @@
                 var districtId = $('#unicefDistrict').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
             }else if(center_type == 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
@@ -251,6 +255,8 @@
                 var districtId = $('#bstiDistrict').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
             }else if(center_type == 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
@@ -264,6 +270,8 @@
                 var districtId = $('#basicDistrict').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
             }else if(center_type == 'miller'){
                 var url = $('.reportMiller').val();
                 var itemType = $('.itemTypeMiller').val();
@@ -282,6 +290,8 @@
                 var itemTypeId = $('.itemTypeId').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
 
             }else if(center_type == 'association'){
                 var url = $('.reportAssociation').val();
@@ -294,6 +304,8 @@
                 var districtId = $('.districtIdd').val();
                 var renawlDate = $('.renew-date').val();
                 var failDate = $('.fail-date').val();
+                var processType = $('.processType').val();
+                var millTypeAdmin = $('.millTypeAdmin').val();
                 //alert(failDate); exit();
 
 
@@ -302,7 +314,7 @@
             $.ajax({
                 type : "get",
                 url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'chemicalItemType':chemicalItemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId,'renawlDate':renawlDate,'failDate':failDate,'itemTypeAssoc':itemTypeAssoc},
+                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'chemicalItemType':chemicalItemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId,'renawlDate':renawlDate,'failDate':failDate,'itemTypeAssoc':itemTypeAssoc,'millTypeAdmin':millTypeAdmin},
                 success:function (data) {
 //                    console.log(data);
                     $('.soeRowDiv').hide();

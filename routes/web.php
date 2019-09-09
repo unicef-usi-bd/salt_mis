@@ -197,7 +197,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
     Route::get('purchase-chemical-item-pdf', 'ReportAssociationController@getPurchaseChemicalItemPdf');//azharul
     Route::get('purchase-chemical-total', 'ReportAssociationController@getPurchaseChemicalTotal');//azharul
-    Route::get('purchase-chemical-total-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
+    Route::get('purchase-chemical-total-pdf/{starDate}/{endDate}/{millTypeAdmin}', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
     Route::get('purchase-chemical-total-stock', 'ReportAssociationController@getPurchaseChemicalTotalStock');//azharul
     Route::get('purchase-chemical-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalStockPdf');//azharul
     Route::get('association-total-miller', 'ReportAssociationController@getTotalMiller');//azharul
@@ -221,14 +221,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('assoc-process-stock', 'ReportAssociationController@assocProcessStock');//azharul
     Route::get('assoc-process-stock-pdf', 'ReportAssociationController@assocProcessStockPdf');//azharul
     Route::get('association-sale', 'ReportAssociationController@assocSale');//azharul
-    Route::get('association-sale-pdf/{divisionId}/{districtId}', 'ReportAssociationController@assocSalePdf');//azharul
+    Route::get('association-sale-pdf/{processType}', 'ReportAssociationController@assocSalePdf');//azharul
     // Report and PDF for Association End
 
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
-    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{itemTypeId}','ReportController@getChemicalPurchasePdf');//Rubiyat
-    Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{millTypeAdmin}','ReportController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf/{millTypeAdmin}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
 
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
@@ -255,7 +255,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('hr-employee-miller-pdf','ReportController@getTotalMillerEmployeePdf');//jalal
     Route::get('admin-hr-employee-miller-pdf','ReportController@getAdminHrEmployeePdf');//jalal
     Route::get('admin-association-list-pdf','ReportController@getAssociationListForAdminPdf');//jalal
-    Route::get('total-sale-admin-pdf/{divisionId}/{districtId}','ReportController@getTotalSaleAdminPdf');//jalal
+    Route::get('total-sale-admin-pdf/{processType}','ReportController@getTotalSaleAdminPdf');//jalal
     route::get('miller-under-association-pdf/{zone}','ReportController@getListOfMillerpdf');//jala
     route::get('process-stock-admin-pdf/{starDate}/{endDate}','ReportController@getProcessReportAdminPdf');//jalal
     Route::get('chemical-item-list-pdf','ReportController@getChemicalItemListPdf');//Rubiyat

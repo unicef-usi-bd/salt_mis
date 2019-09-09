@@ -88,16 +88,30 @@ class ReportAssociation extends Model
           where st.ACTIVE_FLG and st.item_type=25 "));
 
     }
-    public static function getPurchaseChemicalTotal($starDate,$endDate){
+    public static function getPurchaseChemicalTotal($starDate,$endDate,$millTypeAdmin){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+        if($millTypeAdmin==0){
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP'  and its.center_id in (select ass.ASSOCIATION_ID 
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId' )
+            where ass.PARENT_ID = '$centerId'  )
             and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
+        }else{
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            from tmm_itemstock its
+            left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
+            left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and ai.MILL_ID = $millTypeAdmin and its.center_id in (select ass.ASSOCIATION_ID 
+            from ssm_associationsetup ass
+            where ass.PARENT_ID = '$centerId'  )
+            and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
+        }
+
 
     }
     public static function getPurchaseChemicalTotalStock($starDate,$endDate){
@@ -262,9 +276,11 @@ class ReportAssociation extends Model
                     GROUP BY a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO "));
 
     }
-    public static function getAssocSale($divisionId,$districtId){
+    public static function getAssocSale($processType){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+
+        if($processType == 0){
+            return DB::select(DB::raw(" SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
         SUM(a.QTY) QTY, 
         (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = '$centerId') cnt_miller
@@ -279,12 +295,34 @@ class ReportAssociation extends Model
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
             AND i.ITEM_NO = t.ITEM_NO
-            and s.DIVISION_ID = $divisionId
-            and s.DISTRICT_ID = $districtId
+            AND t.TRAN_TYPE = 'W'
             and t.TRAN_FLAG = 'SD'            
              ) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type "));
+        }else{
+            return DB::select(DB::raw(" SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
+        SUM(a.QTY) QTY, 
+        (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = '$centerId') cnt_miller
+        FROM
+            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NO, i.ITEM_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
+            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
+            t.QTY
+            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
+            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
+            AND m.SALESMST_ID = t.TRAN_NO
+            AND i.ITEM_NO = t.ITEM_NO
+            AND t.TRAN_TYPE = 'I'
+            and t.TRAN_FLAG = 'SD'            
+             ) a
+        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type "));
+        }
+
 
     }
 

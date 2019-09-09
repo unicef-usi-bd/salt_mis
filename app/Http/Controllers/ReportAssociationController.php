@@ -84,15 +84,16 @@ class ReportAssociationController extends Controller
     public function getPurchaseChemicalTotal(Request $request){
         $starDate = $request->input('assStartDate');
         $endDate = $request->input('assEndDate');
-        $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal($starDate,$endDate);
-        $view = view("reportAssociation.purchaseChemicalTotalReport",compact('purchaseChemicalTotal','starDate','endDate'))->render();
+        $millTypeAdmin = $request->input('millTypeAdmin');
+        $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal($starDate,$endDate,$millTypeAdmin);
+        $view = view("reportAssociation.purchaseChemicalTotalReport",compact('purchaseChemicalTotal','starDate','endDate','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
 
     }
-    public function getPurchaseChemicalTotalPdf(Request $request,$starDate,$endDate){
+    public function getPurchaseChemicalTotalPdf($starDate,$endDate,$millTypeAdmin){
         $starDate = $starDate;
         $endDate = $endDate;
-        $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal($starDate,$endDate);
+        $purchaseChemicalTotal = ReportAssociation::getPurchaseChemicalTotal($starDate,$endDate,$millTypeAdmin);
         $data = \View::make('reportAssociation.pdf.purchaseChemicalTotalReportPdf',compact('purchaseChemicalTotal'));
         $this->generatePdf($data);
 
@@ -227,14 +228,16 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
     }
     public function assocSale(Request $request){
-        $divisionId = $request->input('divisionId');
-        $districtId = $request->input('districtId');  //$this->pr($districtId);
-        $assocSale = ReportAssociation::getAssocSale($divisionId,$districtId);
-        $view = view("reportAssociation.assocSaleReport",compact('assocSale','divisionId','districtId'))->render();
+//        $divisionId = $request->input('divisionId');
+//        $districtId = $request->input('districtId');
+//  //$this->pr($districtId);
+        $processType = $request->input('processType');
+        $assocSale = ReportAssociation::getAssocSale($processType);
+        $view = view("reportAssociation.assocSaleReport",compact('assocSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function assocSalePdf(Request $request,$divisionId,$districtId){
-        $assocSale = ReportAssociation::getAssocSale($divisionId,$districtId);
+    public function assocSalePdf($processType){
+        $assocSale = ReportAssociation::getAssocSale($processType);
         $data = \View::make('reportAssociation.pdf.assocSaleReportPdf',compact('assocSale'));
         $this->generatePdf($data);
     }
