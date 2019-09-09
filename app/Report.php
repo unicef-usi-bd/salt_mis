@@ -334,15 +334,22 @@ class Report extends Model
         return $chemicalItemList->get();
     }
 
-    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId){
+    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId,$millTypeAdmin){
 
         if($itemTypeId == 0){
-            $chemicalItemList = DB::table("smm_item");
-            $chemicalItemList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
-            $chemicalItemList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-            $chemicalItemList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+//            $chemicalItemList = DB::table("smm_item");
+//            $chemicalItemList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
+//            $chemicalItemList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//            $chemicalItemList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+//            $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
+//            $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
+            $chemicalItemList = DB::table("tmm_itemstock");
+            $chemicalItemList->select('tmm_itemstock.*','smm_item.ITEM_NO','smm_item.ITEM_NAME','ssm_associationsetup.ASSOCIATION_NAME');
+            $chemicalItemList->leftJoin('smm_item','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+            $chemicalItemList->leftJoin('ssm_associationsetup','tmm_itemstock.center_id','=','ssm_associationsetup.ASSOCIATION_ID');
             $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
             $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
+            $chemicalItemList->where('ssm_associationsetup.MILL_ID','=',$millTypeAdmin);
 
             if($centerId){
                 $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
@@ -351,13 +358,21 @@ class Report extends Model
             }
             return $chemicalItemList->get();
         }else{
-            $chemicalItemList = DB::table("smm_item");
-            $chemicalItemList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
-            $chemicalItemList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-            $chemicalItemList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+//            $chemicalItemList = DB::table("smm_item");
+//            $chemicalItemList->select('ssc_lookupchd.LOOKUPCHD_NAME', 'smm_item.ITEM_NO','smm_item.ITEM_NAME','tmm_itemstock.*' );
+//            $chemicalItemList->leftJoin('ssc_lookupchd','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//            $chemicalItemList->leftJoin('tmm_itemstock','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+//            $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
+//            $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
+//            $chemicalItemList->where('smm_item.ITEM_NO','=',$itemTypeId);
+            $chemicalItemList = DB::table("tmm_itemstock");
+            $chemicalItemList->select('tmm_itemstock.*','smm_item.ITEM_NO','smm_item.ITEM_NAME','ssm_associationsetup.ASSOCIATION_NAME');
+            $chemicalItemList->leftJoin('smm_item','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
+            $chemicalItemList->leftJoin('ssm_associationsetup','tmm_itemstock.center_id','=','ssm_associationsetup.ASSOCIATION_ID');
             $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
             $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
             $chemicalItemList->where('smm_item.ITEM_NO','=',$itemTypeId);
+            $chemicalItemList->where('ssm_associationsetup.MILL_ID','=',$millTypeAdmin);
             if($centerId){
                 $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
             }else{
@@ -368,7 +383,7 @@ class Report extends Model
 
     }
 
-    public static function adminChemicalStock($starDate,$endDate){
+    public static function adminChemicalStock($millTypeAdmin){
         return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
                                         FROM
                                             (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
@@ -386,7 +401,8 @@ class Report extends Model
                                             AND i.item_type = 25
                                             AND s.TRAN_FLAG NOT IN ('WR','II')
                                             AND s.TRAN_TYPE NOT IN ('W','I')) b
-                                        WHERE DATE(b.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                        /*WHERE DATE(b.TRAN_DATE) BETWEEN '' AND ''*/
+  WHERE b.center_id IN (SELECT ASSOCIATION_ID  FROM ssm_associationsetup WHERE mill_id = $millTypeAdmin)
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
 
@@ -618,7 +634,8 @@ class Report extends Model
         GROUP BY b.center_id, b.ASSOCIATION_NAME	"));
     }
 
-    public static function totalSaleAdmin($divisionId,$districtId){
+    public static function totalSaleAdmin($processType){
+        if($processType == 0){
         return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
         SUM(a.QTY) QTY, 
@@ -634,12 +651,31 @@ class Report extends Model
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
             AND i.ITEM_NO = t.ITEM_NO
-            and s.DIVISION_ID = $divisionId
-            and s.DISTRICT_ID = $districtId
-            and t.TRAN_FLAG = 'SD'            
-             ) a
-        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+            AND t.TRAN_TYPE = 'W'
+            AND t.TRAN_FLAG = 'SD' )a
+            GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        }else{
+            return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
+        SUM(a.QTY) QTY, 
+        (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID) cnt_miller
+        FROM
+            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NO, i.ITEM_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
+            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
+            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
+            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
+            t.QTY
+            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
+            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
+            AND m.SALESMST_ID = t.TRAN_NO
+            AND i.ITEM_NO = t.ITEM_NO
+            AND t.TRAN_TYPE = 'I'
+            AND t.TRAN_FLAG = 'SD' )a
+            GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        }
     }
 
     public static function getListofMillerAdmin($zone){

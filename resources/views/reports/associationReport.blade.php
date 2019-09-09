@@ -208,6 +208,19 @@
                     {{--</div>--}}
                     {{--</div>--}}
 
+                    <div class="form-group processTypeDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
+                                   <option value="">-Select-</option>
+                                   <option value="0">Wash And Crush</option>
+                                   <option value="1">Iodized </option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
+
 
                     <div class="form-group statusAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
@@ -347,6 +360,7 @@
         $('.renewDateDiv').hide();
         $('.failDateDiv').hide();
         $('.issuerAdminDiv').hide();
+        $('.processTypeDiv').hide();
     });
 
     $(document).on('change','.reportAssociation',function(){
@@ -362,6 +376,7 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'purchase-salt-total'){
             $('.statusAdminDiv').hide();
             $('.divisionIdDiv').hide();
@@ -374,6 +389,7 @@
 
             $('.itemTypeAdminDiv').show();
             $('.adminReportrangeDiv').show();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'purchase-salt-total-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -386,6 +402,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'purchase-chemical-item'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -397,6 +414,7 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'purchase-chemical-total'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -409,6 +427,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'purchase-chemical-total-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -421,6 +440,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'assoc-process-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -433,6 +453,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'association-sale'){
             $('.statusAdminDiv').hide();
              $('.itemTypeAdminDiv').hide();
@@ -442,10 +463,11 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
             $('.itemTypeAdminDiv').hide();
-            $('.divisionIdDiv').show();
-            $('.districtIdDiv').show();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.processTypeDiv').show();
         }else if($reportUrl === 'sale-item-list'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -457,6 +479,7 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'sale-item-stock'){
              $('.statusAdminDiv').hide();
              $('.itemTypeAdminDiv').hide();
@@ -469,6 +492,7 @@
              $('.issuerAdminDiv').hide();
 
              $('.adminReportrangeDiv').show();
+             $('.processTypeDiv').hide();
          }else if($reportUrl === 'license-miller-list'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -481,6 +505,7 @@
             $('.renewDateDiv').show();
             $('.failDateDiv').show();
             $('.issuerAdminDiv').show();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'qc-miller-list'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -492,6 +517,7 @@
             $('.purchaseOrderDiv').hide();
             $('.issuerAdminDiv').hide();
             $('.zoneAdminDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'association-miller-list'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -503,6 +529,7 @@
             $('.purchaseOrderDiv').hide();
             $('.issuerAdminDiv').hide();
             $('.zoneAdminDiv').hide();
+             $('.processTypeDiv').hide();
         }else if($reportUrl === 'association-total-miller'){
              $('.adminReportrangeDiv').hide();
              $('.itemTypeAdminDiv').hide();
@@ -515,6 +542,7 @@
              $('.zoneAdminDiv').hide();
 
              $('.statusAdminDiv').show();
+             $('.processTypeDiv').hide();
          }else if($reportUrl === 'association-miller-type'){
              $('.statusAdminDiv').hide();
              $('.adminReportrangeDiv').hide();
@@ -526,6 +554,7 @@
              $('.purchaseOrderDiv').hide();
              $('.issuerAdminDiv').hide();
              $('.zoneAdminDiv').hide();
+             $('.processTypeDiv').hide();
          }else if($reportUrl === 'association-monitor-miller'){
              $('.statusAdminDiv').hide();
              $('.adminReportrangeDiv').hide();
@@ -537,6 +566,7 @@
              $('.purchaseOrderDiv').hide();
              $('.issuerAdminDiv').hide();
              $('.zoneAdminDiv').hide();
+             $('.processTypeDiv').hide();
          }else {
              $('.statusAdminDiv').hide();
              $('.adminReportrangeDiv').hide();
@@ -548,6 +578,7 @@
              $('.purchaseOrderDiv').hide();
              $('.issuerAdminDiv').hide();
              $('.zoneAdminDiv').hide();
+             $('.processTypeDiv').hide();
          }
     });
 

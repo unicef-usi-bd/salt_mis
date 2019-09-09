@@ -274,6 +274,32 @@
                         {{--</div>--}}
                     {{--</div>--}}
                 <div class="col-md-6">
+                    <div class="form-group millerDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
+                               <option value="">-Select One-</option>
+                                {{--<option value="0">All Purchase</option>--}}
+                                @foreach($millInfo as $row)
+                                    <option value="{{$row->MILL_ID}}"> {{$row->MILL_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-group processTypeDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
+                                   <option value="">-Select-</option>
+                                   <option value="0">Wash And Crush</option>
+                                   <option value="1">Iodized </option>
+                               </select>
+                            </span>
+                        </div>
+                    </div>
                 <div class="form-group statusAdminDiv">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                     <div class="col-sm-8">
@@ -471,6 +497,8 @@
         $('.purchaseOrderDiv').hide();
         $('.zoneAdminDiv').hide();
         $('.issuerAdminDiv').hide();
+        $('.processTypeDiv').hide();
+        $('.millerDiv').hide();
     });
 
     $(document).on('change','.reportBasic',function(){
@@ -487,6 +515,8 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'miller-list/{activStatus}'){
 
             $('.itemTypeAdminDiv').hide();
@@ -500,6 +530,8 @@
 
             $('.statusAdminDiv').show();
             $('.adminReportrangeDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'monitor-association'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -511,6 +543,8 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'admin-association-list'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -523,6 +557,8 @@
 
             $('.purchaseOrderDiv').show();
             $('.adminReportrangeDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'purchase-salt-list'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -534,6 +570,8 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'purchase-salt-amount'){
             $('.statusAdminDiv').hide();
             $('.divisionIdDiv').hide();
@@ -546,6 +584,8 @@
 
             $('.itemTypeAdminDiv').show();
             $('.adminReportrangeDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'purchase-salt-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -558,6 +598,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'chemical-item-list'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -570,6 +612,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'chemical-purchase-report'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -582,6 +626,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'chemical-purchase-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -593,7 +639,9 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').show();
         }else if($reportUrl === 'process-stock-admin'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
@@ -606,6 +654,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'total-sale-admin'){
             $('.statusAdminDiv').hide();
             $('.renewDateDiv').hide();
@@ -614,10 +664,12 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
             $('.itemTypeAdminDiv').hide();
-            $('.divisionIdDiv').show();
-            $('.districtIdDiv').show();
+            $('.divisionIdDiv').hide();
+            $('.districtIdDiv').hide();
+            $('.processTypeDiv').show();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'sales-item-report-all'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -629,6 +681,8 @@
             $('.purchaseOrderDiv').hide();
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'miller-license-report/{zone}'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -641,6 +695,8 @@
             $('.failDateDiv').show();
             $('.zoneAdminDiv').show();
             $('.issuerAdminDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else if($reportUrl === 'qc-report/{zone}'){
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -653,6 +709,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.zoneAdminDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }else{
             $('.statusAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
@@ -665,6 +723,8 @@
             $('.issuerAdminDiv').hide();
 
             $('.zoneAdminDiv').show();
+            $('.processTypeDiv').hide();
+            $('.millerDiv').hide();
         }
     });
 </script>

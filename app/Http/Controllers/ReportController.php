@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use App\LookupGroupData;
+use App\MillerInfo;
 use App\Report;
 use App\SupplierProfile;
 use Illuminate\Http\Request;
@@ -39,6 +40,7 @@ class ReportController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $clintNameList = Report::getClintNameList();
         $finishSaltItem = Report::getFinishSaltItem();
+        $millInfo = MillerInfo::millInfo();
 
         $adminId = $this->adminId;
         $bstiId = $this->bstiId;
@@ -47,7 +49,7 @@ class ReportController extends Controller
         $associationId = $this->associationId;
         $millerId = $this->millerId;
 //        $this->pr($associationList);
-        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem','adminId','bstiId','bscicId','unicefId','associationId','millerId','chemicalTypes'));
+        return view("reports.reportDashboard", compact('itemList','getDivision','issueBy','crudeSaltTypes','associationList','clintNameList','finishSaltItem','adminId','bstiId','bscicId','unicefId','associationId','millerId','chemicalTypes','millInfo'));
     }
 
 // test controller
@@ -289,12 +291,13 @@ class ReportController extends Controller
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $itemTypeId = $request->input('chemicalItemType');
+        $millTypeAdmin = $request->input('millTypeAdmin');
 
         //return $itemTypeId;
 
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId,$millTypeAdmin);
         //return $endDate;
-        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate','itemTypeId'))->render();
+        $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate','itemTypeId','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
     }
 
@@ -307,17 +310,18 @@ class ReportController extends Controller
 
     public function getChemicalPurchaseStock(Request $request){
         $centerId = Auth::user()->center_id;
-        $starDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
-        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+//        $starDate = $request->input('startDate');
+//        $endDate = $request->input('endDate');
+        $millTypeAdmin = $request->input('millTypeAdmin');
+        $purchaseChemicalStocks = Report::adminChemicalStock($millTypeAdmin);
         //return $purchaseChemicalStocks;
-        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
+        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchaseStockPdf($starDate,$endDate){
+    public function getChemicalPurchaseStockPdf($millTypeAdmin){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicalStocks = Report::adminChemicalStock($starDate,$endDate);
+        $purchaseChemicalStocks = Report::adminChemicalStock($millTypeAdmin);
         $data = \View::make('reportPdf.purchaseChemicalStockPdf',compact('purchaseChemicalStocks'));
         $this->generatePdf($data);
     }
@@ -537,15 +541,18 @@ class ReportController extends Controller
 
     public function getTotalSaleAdmin(Request $request){
 //        $divisionId = $request->input('divisionId');
+//        echo $request->input('processType');exit;
 //        $districtId = $request->input('districtId');
         $processType = $request->input('processType');
         $totalSale = Report::totalSaleAdmin($processType);
+//        $this->pr($totalSale);
+
         $view = view("reportView.totalSaleAdminReport",compact('totalSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getTotalSaleAdminPdf($divisionId,$districtId){
-        $totalSale = Report::totalSaleAdmin($divisionId,$districtId);
+    public function getTotalSaleAdminPdf($processType){
+        $totalSale = Report::totalSaleAdmin($processType);
         $data = \View::make('reportPdf.totalSaleAdminReportPdf',compact('totalSale'));
         $this->generatePdf($data);
     }
