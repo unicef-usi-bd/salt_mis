@@ -47,7 +47,9 @@
     <div class="row">
         <div class="col-md-12" style="width: 1250px;">
             <div class="col-sm-12">
+
                 <div class="tabbable">
+
                     <ul class="nav nav-tabs" id="myTab">
 
                         @php
@@ -83,7 +85,7 @@
                         <div id="certificate" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-
+                                    <h5 style="color: red;">** You Must Provide Industrial Salt Manufacturing,Edible Salt Manufacturing and BSTI Certificate, OtherWise you can't go further of profile creation. </h5>
                                     <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" id="myform">
                                         @csrf
                                         @if(isset($millerInfoId))
@@ -108,7 +110,7 @@
 
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                                        <select class="form-control CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($certificate as $row)
                                                                 <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -179,7 +181,7 @@
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button class="btn btn-primary btnCertificate">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                                     Save & Next
                                                 </button>
@@ -290,11 +292,12 @@
                 success: function (data) {
                     $('.ISSURE_ID').val(data[0].LOOKUPCHD_NAME);
                 }
-            })
+            });
+            checkCertificate();
         });
 
-
         $(document).ready(function () {
+            $('.btnCertificate').prop('disabled', true);
 
             $('#myform').validate({ // initialize the plugin
                 errorClass: "my-error-class",
@@ -327,16 +330,33 @@
             });
 
         });
-
-        $('#CERTIFICATE_TYPE_ID').change(function() {
-            if( $(this).val() == 32 || $(this).val() == 36) {
-                $('#textInput').prop( "disabled", true );
-                $('#textInput1').prop( "disabled", true );
-            } else {
-                $('#textInput').prop( "disabled", false );
-                $('#textInput1').prop( "disabled", false );
+        
+        function checkCertificate() {
+            var bsti = false; // 34
+            var industrial = false; // 38
+            var ediTable = false; // 39
+            $('.newRow2 tr').each(function () {
+                var certificateId = parseInt($(this).find('.CERTIFICATE_TYPE_ID').val());
+                if(certificateId===34) bsti = true;
+                if(certificateId===38) industrial = true;
+                if(certificateId===39) ediTable = true;
+            });
+            if(bsti && industrial && ediTable){
+                $('.btnCertificate').prop('disabled', false);
+            } else{
+                $('.btnCertificate').prop('disabled', true);
             }
-        });
+        }
+
+//        $('.CERTIFICATE_TYPE_ID').change(function() {
+//            if( $(this).val() == 32 || $(this).val() == 36) {
+//                $('#textInput').prop( "disabled", true );
+//                $('#textInput1').prop( "disabled", true );
+//            } else {
+//                $('#textInput').prop( "disabled", false );
+//                $('#textInput1').prop( "disabled", false );
+//            }
+//        });
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')
