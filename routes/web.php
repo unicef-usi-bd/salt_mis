@@ -197,7 +197,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul
     Route::get('purchase-chemical-item-pdf', 'ReportAssociationController@getPurchaseChemicalItemPdf');//azharul
     Route::get('purchase-chemical-total', 'ReportAssociationController@getPurchaseChemicalTotal');//azharul
-    Route::get('purchase-chemical-total-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
+    Route::get('purchase-chemical-total-pdf/{starDate}/{endDate}/{millTypeAdmin}', 'ReportAssociationController@getPurchaseChemicalTotalPdf');//azharul
     Route::get('purchase-chemical-total-stock', 'ReportAssociationController@getPurchaseChemicalTotalStock');//azharul
     Route::get('purchase-chemical-total-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@getPurchaseChemicalTotalStockPdf');//azharul
     Route::get('association-total-miller', 'ReportAssociationController@getTotalMiller');//azharul
@@ -227,7 +227,7 @@ Route::group(['middleware' => ['auth']], function() {
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
-    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{itemTypeId}','ReportController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{millTypeAdmin}','ReportController@getChemicalPurchasePdf');//Rubiyat
     Route::get('chemical-purchase-stock-pdf/{millTypeAdmin}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
 
 

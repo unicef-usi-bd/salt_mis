@@ -88,16 +88,30 @@ class ReportAssociation extends Model
           where st.ACTIVE_FLG and st.item_type=25 "));
 
     }
-    public static function getPurchaseChemicalTotal($starDate,$endDate){
+    public static function getPurchaseChemicalTotal($starDate,$endDate,$millTypeAdmin){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+        if($millTypeAdmin==0){
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP'  and its.center_id in (select ass.ASSOCIATION_ID 
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId' )
+            where ass.PARENT_ID = '$centerId'  )
             and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
+        }else{
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            from tmm_itemstock its
+            left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
+            left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and ai.MILL_ID = $millTypeAdmin and its.center_id in (select ass.ASSOCIATION_ID 
+            from ssm_associationsetup ass
+            where ass.PARENT_ID = '$centerId'  )
+            and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
+        }
+
 
     }
     public static function getPurchaseChemicalTotalStock($starDate,$endDate){

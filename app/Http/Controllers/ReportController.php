@@ -290,20 +290,20 @@ class ReportController extends Controller
 
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $itemTypeId = $request->input('chemicalItemType');
+        //$itemTypeId = $request->input('chemicalItemType');
         $millTypeAdmin = $request->input('millTypeAdmin');
 
         //return $itemTypeId;
 
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId,$millTypeAdmin);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin);
         //return $endDate;
         $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate','itemTypeId','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchasePdf($starDate,$endDate,$itemTypeId){
+    public function getChemicalPurchasePdf($starDate,$endDate,$millTypeAdmin){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
         $this->generatePdf($data);
     }

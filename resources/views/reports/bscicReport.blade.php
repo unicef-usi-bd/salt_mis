@@ -280,7 +280,7 @@
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select One-</option>
-                                {{--<option value="0">All Purchase</option>--}}
+                                <option value="0">All Mill</option>
                                 @foreach($millInfo as $row)
                                     <option value="{{$row->MILL_ID}}"> {{$row->MILL_NAME}}</option>
                                 @endforeach
@@ -627,7 +627,7 @@
 
             $('.adminReportrangeDiv').show();
             $('.processTypeDiv').hide();
-            $('.millerDiv').hide();
+            $('.millerDiv').show();
         }else if($reportUrl === 'chemical-purchase-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
