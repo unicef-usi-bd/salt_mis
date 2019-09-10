@@ -50,6 +50,9 @@
                         <i class="ace-icon fa fa-times"></i>
                     </button>
                 </div>
+                @if($editMillData->approval_status == 'm')
+                    <p class="alert alert-danger" style="color: red;font-weight: bolder;">You are not able to edit your account. After approval by association you can edit your account.</p>
+                @else
 
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -64,8 +67,10 @@
                     </ul>
 
                     <div class="tab-content">
+
                         {{--Mill Info--}}
                         @include('profile.miller.modal.editMillInformation')
+
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
                         @include('profile.miller.modal.editEntrepreneurInformation')
@@ -82,11 +87,10 @@
 
                         {{--Employee Info--}}
                         @include('profile.miller.modal.editEmployeeInformation')
-                        {{--/- Employee Info--}}
-
 
                     </div>
                 </div>
+                @endif
 
 
 

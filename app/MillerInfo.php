@@ -28,6 +28,7 @@ class MillerInfo extends Model
              'UNION_ID' => $request->input('UNION_ID'),
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
              'center_id' => Auth::user()->center_id,
+             'approval_status' => 'm',
              'REMARKS' => $request->input('REMARKS'),
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
