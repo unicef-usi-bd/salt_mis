@@ -90,10 +90,17 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
-                        </button>
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @endif
                     </div>
                 </div>
             </form>

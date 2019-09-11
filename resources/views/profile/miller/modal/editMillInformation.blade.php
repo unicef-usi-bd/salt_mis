@@ -179,10 +179,18 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
+                        @endif
+
                     </div>
                 </div>
             </form>
@@ -195,6 +203,21 @@
         $.ajax({
             type : 'POST',
             url : 'edit-mill-info',
+            data : $('#millId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.millmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".millmsg").hide(); }, 3000);
+
+            }
+        })
+    });
+
+    $('.millmsg').hide();
+    $(document).on('click','.btnUpdateApprove',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-mill-info-approve',
             data : $('#millId').serialize(),
             success: function (data) {
                 console.log(data);

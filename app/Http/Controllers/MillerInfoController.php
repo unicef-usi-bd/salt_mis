@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use File;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\AssociationSetup;
 
 class MillerInfoController extends Controller
 {
@@ -67,6 +68,7 @@ class MillerInfoController extends Controller
         $millerToMerge = MillerInfo::getMillerToMerge();
         //$this->pr($millerList);
         $centerId = Auth::user()->center_id;
+
         $individualMillerProfileCheck = MillerInfo::singleMiller($centerId);
         $millerInfoId = $individualMillerProfileCheck->MILL_ID; //$this->pr($individualMillerProfileCheck);
         if(!empty($individualMillerProfileCheck->MILL_ID)){
@@ -192,7 +194,10 @@ class MillerInfoController extends Controller
          $editCertificateData = Certificate::getCertificateData($id);
          $editQcData = Qc::getQcData($id);
          $editEmployeeData = Employee::getEmployeeData($id);
-         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict'));
+         $associationId = AssociationSetup::singleAssociation();
+         //echo $associationId;exit;
+         //$this->pr($associationId);
+         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','associationId'));
     }
 
     /**
@@ -204,6 +209,7 @@ class MillerInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $associationId = AssociationSetup::singleAssociation();
         $rules = array(
             'MILL_NAME' => 'required',
         );
@@ -214,7 +220,7 @@ class MillerInfoController extends Controller
             return Redirect::back()->withErrors($validator);
         }else {
             $millerInfoId = $request->input('MILL_ID');
-            $updateMillData = MillerInfo::updateMillData($request, $id);
+            $updateMillData = MillerInfo::updateMillData($request, $id,$associationId);
             if($updateMillData){
 //                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
                 return "Mill informatin has been updated!";
@@ -248,9 +254,22 @@ class MillerInfoController extends Controller
     }
 
     public function updateMillInfo(Request $request){
+        $centerId = Auth::user()->center_id;
+        $associationId = AssociationSetup::singleAssociation();
         $millerInfoId = $request->input('MILL_ID');
         //$this->pr($request->input('MILL_NAME'));
-        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId);
+        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId);
+        //echo $updateMillData;die();
+        return "Miller Information has been updated";
+    }
+
+    public function approveByAssociation(Request $request){
+        $centerId = Auth::user()->center_id;
+        $associationId = AssociationSetup::singleAssociation();
+        $millerInfoId = $request->input('MILL_ID');
+        //$this->pr($request->input('MILL_NAME'));
+        $updateMillData = MillerInfo::approveByassociation($request,$millerInfoId,$centerId, $associationId);
+        //echo $updateMillData;die();
         return "Miller Information has been updated";
     }
 

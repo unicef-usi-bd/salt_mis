@@ -65,4 +65,12 @@ class AssociationSetup extends Model
     public  static function deleteAssociationData($id){
         return DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', $id)->delete();
     }
+
+    public static function singleAssociation(){
+        $centerId = Auth::user()->center_id;
+        return DB::table('ssm_associationsetup')
+            ->select('PARENT_ID')
+            ->where('ASSOCIATION_ID','=',$centerId)
+            ->first();
+    }
 }

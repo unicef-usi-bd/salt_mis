@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\AssociationSetup;
 
 class CertificateController extends Controller
 {
@@ -209,7 +210,8 @@ class CertificateController extends Controller
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','getDistrict'));
+        $associationId = AssociationSetup::singleAssociation();
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','getDistrict','associationId'));
     }
 //    public function updateCertificateInfo(Request $request)
 //    {

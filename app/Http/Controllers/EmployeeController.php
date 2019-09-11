@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\AssociationSetup;
 
 class EmployeeController extends Controller
 {
@@ -164,7 +165,8 @@ public function createEmployee($millerInfoId){
     $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
     $editCertificateData = Certificate::getCertificateData($millerInfoId);
     $editQcData = Qc::getQcData($millerInfoId);
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData'));
+    //$associationId = AssociationSetup::singleAssociation();
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId'));
 }
 
     public function updateEmployeeInfo(Request $request){

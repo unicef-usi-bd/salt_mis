@@ -163,7 +163,8 @@ class QcController extends Controller
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
         $editCertificateData = Certificate::getCertificateData($millerInfoId);
-        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData'));
+        //$associationId = AssociationSetup::singleAssociation();
+        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId'));
     }
 
     public function updateQcInfo(Request $request){

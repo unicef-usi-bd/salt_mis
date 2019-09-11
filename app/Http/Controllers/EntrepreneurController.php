@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\AssociationSetup;
 
 class EntrepreneurController extends Controller
 {
@@ -160,8 +161,9 @@ class EntrepreneurController extends Controller
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $editMillData = MillerInfo::getMillData($millerInfoId);
+        $associationId = AssociationSetup::singleAssociation();
         //$this->pr($millerInfoId);
-        return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData'));
+        return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','associationId'));
     }
 
     public function updateEntrepreneurInfo(Request $request){

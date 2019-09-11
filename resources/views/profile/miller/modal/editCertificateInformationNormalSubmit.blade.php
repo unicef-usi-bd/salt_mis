@@ -107,10 +107,17 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-success" >
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
-                        </button>
+                        @if(isset($associationId))
+                            <button type="submit" class="btn btn-success" >
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
+                        @else
+                            <button type="submit" class="btn btn-success" >
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Submit
+                            </button>
+                        @endif
                     </div>
                 </div>
             </form>
