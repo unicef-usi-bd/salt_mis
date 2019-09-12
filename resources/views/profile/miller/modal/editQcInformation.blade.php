@@ -113,7 +113,7 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateQc" onclick="qcTab()">
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="qcTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Approve
                             </button>
@@ -143,6 +143,21 @@
                 // $('.qcmsg').html('<span>'+ data +'</span>').show();
                 $('.qcmsg').html('<span>'+ data +'</span>').show();
                 setTimeout(function() { $(".qcmsg").hide(); }, 3000);
+
+            }
+        })
+    });
+
+    $('.millmsg').hide();
+    $(document).on('click','.btnUpdateApprove',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-mill-info-approve',
+            data : $('#millId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.millmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".millmsg").hide(); }, 3000);
 
             }
         })

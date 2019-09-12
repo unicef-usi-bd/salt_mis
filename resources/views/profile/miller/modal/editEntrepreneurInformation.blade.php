@@ -161,7 +161,7 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Approve
                             </button>
@@ -191,6 +191,21 @@
                     $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
 
                     setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+
+                }
+            })
+        });
+
+        $('.millmsg').hide();
+        $(document).on('click','.btnUpdateApprove',function () {
+            $.ajax({
+                type : 'POST',
+                url : 'edit-mill-info-approve',
+                data : $('#millId').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('.millmsg').html('<span>'+ data +'</span>').show();
+                    setTimeout(function() { $(".millmsg").hide(); }, 3000);
 
                 }
             })
