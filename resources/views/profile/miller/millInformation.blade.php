@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
                                    {{--<select id="" class="chosen-container" name="CAPACITY_ID" data-placeholder="Select">--}}
@@ -117,7 +117,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b> Type Of Owner</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">
+                               <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID" data-placeholder="Select or search data">
                                 <option value=""></option>
                                 @foreach($ownerType as $row)
                                    <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>

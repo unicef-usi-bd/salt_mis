@@ -60,6 +60,7 @@ class EntrepreneurController extends Controller
         }else {
             //$this->pr($request->input());
             $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
+
             $insert = Entrepreneur::insertMillerProfile($request);
             //$millerInfoId = $request->input('MILL_ID');
 

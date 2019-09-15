@@ -100,6 +100,15 @@
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                                         @endif
+
+                                        <?php
+
+                                        $milltype =  DB::select(DB::raw("select OWNER_TYPE_ID, MILL_ID
+                                                    from ssm_mill_info
+                                                    where MILL_ID = $millerInfoId"));
+
+                                        ?>
+
                                         {{--<div class="col-md-6">--}}
                                             {{--<div class="form-group">--}}
                                                 {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>--}}
@@ -153,7 +162,11 @@
                                                     <th style="width:200px;">Mobile 2</th>
                                                     <th style="width:200px;">Email <span style="color:red;"> *</span></th>
                                                     <th style="width:200px;">Remarks</th>
+                                                    @if($milltype[0]->OWNER_TYPE_ID != 12)
                                                     <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                                                    {{--@eles--}}
+                                                        {{--<th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>--}}
+                                                    @endif
                                                 </tr>
                                                 </thead>
                                                 <tbody class="newRow">
@@ -162,7 +175,7 @@
                                                         <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                         <span class="block input-icon input-icon-right">
                                                             {{--<input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />--}}
-                                                            <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="OWNER_NAME"  />
+                                                            <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="OWNER_NAME"/>
                                                         </span>
                                                     </td>
                                                     <td>
@@ -227,7 +240,9 @@
                                                             <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1"></textarea>
                                                         </span>
                                                     </td>
+                                                    @if($milltype[0]->OWNER_TYPE_ID != 12)
                                                     <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                                    @endif
                                                 </tr>
                                                 </tbody>
                                             </table>

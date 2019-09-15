@@ -60,11 +60,11 @@
                         @endphp
 
                         <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                        @if($millerDetails[0]->OWNER_TYPE_ID == 12)
+                        {{--@if($millerDetails[0]->OWNER_TYPE_ID == 12)--}}
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                        @else
-                        <li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                        @endif
+                        {{--@else--}}
+                        {{--<li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>--}}
+                        {{--@endif--}}
                         <li class="active"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>

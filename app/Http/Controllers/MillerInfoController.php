@@ -133,17 +133,17 @@ class MillerInfoController extends Controller
             //$association = MillerInfo::insertIntoAssociation($request);
             //$this->pr($association);
 
-            if($ownerType == 12){
-
-                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('disableEntrepreneur','disabled disabledTab');
-//                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('ownerType'=> 12);
-            }else{
-                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
-            }
-//            if($millerInfoId){
-//                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
+//            if($ownerType == 12){
 //
-//             }
+//                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('disableEntrepreneur','disabled disabledTab');
+////                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('ownerType'=> 12);
+//            }else{
+//                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
+//            }
+            if($millerInfoId){
+                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
+
+             }
         }
     }
 
@@ -282,6 +282,8 @@ class MillerInfoController extends Controller
         $updateMillStatusFromEmpTable = MillerInfo::deactivateMillEmpTable($request, $millerInfoId);
 
     }
+
+
 
 
 }
