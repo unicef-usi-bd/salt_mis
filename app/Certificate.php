@@ -104,10 +104,10 @@ where sci.MILL_ID = $millerId"));
         return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,RENEWING_DATE,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME
 FROM ssm_certificate_info
 left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
-WHERE MILL_ID = 335
+WHERE MILL_ID = $links
 AND CERTIFICATE_TYPE_ID IN (34,38,39) 
 and lc.LOOKUPCHD_ID IN (34,38,39)
-AND RENEWING_DATE >=30"));
+AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30"));
             }
 
 } //end Class

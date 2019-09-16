@@ -23,6 +23,10 @@
             @foreach($renewalMessageCertificate as $row)
                 @if($row->RENEW_DAY <=30)
                     <p class="alert alert-danger" style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
+                @elseif($row->RENEW_DAY <=60)
+                        <p class="alert alert-warning" style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
+                @elseif($row->RENEW_DAY <=90)
+                    <p class="alert alert-success" style="color: red;font-weight: bolder;">if don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
                 @else
 
                 @endif
