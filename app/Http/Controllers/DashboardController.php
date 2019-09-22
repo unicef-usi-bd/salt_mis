@@ -203,10 +203,11 @@ class DashboardController extends Controller
         $totalSaleLists = Stock::totalSaleList();
         $associationMonthWishProduction = Stock::monthWiseAsociationProduction();
         $monthWiseProcurement = Stock::monthWiseProcurement();
+        $associationMillerCertificate = Certificate::associatonCertificate();
        // $approvelNotificaion = MillerInfo::approveMill();
         //$associationmonthwisestock = Stock::monthWiseAssociationProduction();
        //$this->pr($associationTotalStockMonthWise);
-        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction','associationTotalStockMonthWise','totalassociationsaleMonthwise','totalassociationIodizeSaleMonthWise','totalAssociationWashCrasheSaleMonthWise','monthWiseProcurement','approvelNotificaion'));
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction','associationTotalStockMonthWise','totalassociationsaleMonthwise','totalassociationIodizeSaleMonthWise','totalAssociationWashCrasheSaleMonthWise','monthWiseProcurement','approvelNotificaion','associationMillerCertificate'));
     }
 
     public function miller(){

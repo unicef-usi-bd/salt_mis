@@ -65,7 +65,7 @@
                         <div id="employee" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >
+                                    <form id="myform" action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >
                                         @csrf
                                         @if(isset($millerInfoId))
                                             <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -80,22 +80,22 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp txtCal" onblur="findTotal()" placeholder="Female">
+                                                       <input type="text" id="textInput4" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp txtCal" onblur="findTotal()" placeholder="Female">
                                                     </span>
                                                 </div>
-                                                <input type="number" name="total_no_of_questions" class="totCal" value="" readonly="readonly" id="input_item" placeholder="Total number of employee"/><br />
+                                                {{--<input type="number" name="total_no_of_questions" class="totCal" value="" readonly="readonly" id="input_item" placeholder="Total number of employee"/><br />--}}
                                             </div>
 
                                             <b style="font-size: 14px;">Part Time Employee</b> <br><br>
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male">
+                                                       <input type="text" id="textInput2" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female">
+                                                       <input type="text" id="textInput3"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
@@ -119,12 +119,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male">
+                                                       <input type="text" id="textInput" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
+                                                       <input type="text" id="textInput1" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
@@ -231,12 +231,47 @@
             arr[i].addEventListener('keyup', findTotal);
         }
 
+        $(document).ready(function () {
+            $.validator.addMethod(
+                "regex",
+                function(value, element, regexp)
+                {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                },
+                "Please check your input."
+            );
+
+
+
+        });
+
+        $(document).change(function() {
+            if( $(this).val('.totalMaleEmp')) {
+                //$('#textInput').prop( "disabled", true );
+                $('#textInput').prop( 'required', false );
+                $('#textInput4').prop( 'required', false );
+                $('#textInput1').prop( 'required', false );
+                $('#textInput2').prop( 'required', false );
+                $('#textInput3').prop( 'required', false );
+            } else {
+                $('#textInput').prop( 'required', true );
+                $('#textInput4').prop( 'required', true );
+                $('#textInput1').prop( 'required', true );
+                $('#textInput2').prop( 'required', true );
+                $('#textInput3').prop( 'required', true );
+            }
+        });
+
 
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')
      {{--validation for full time employee--}}
-    @include('profile.miller.totalEmployeeValidation')
+    {{--@include('profile.miller.totalEmployeeValidation')--}}
     @include('profile.miller.updateMillersId')
 
 

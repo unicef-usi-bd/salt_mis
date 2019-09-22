@@ -53,7 +53,7 @@ class EmployeeController extends Controller
     {
         $rules = array(
             'TOTMALE_EMP' => 'required',
-            'TOTFEM_EMP' => 'required',
+            //'TOTFEM_EMP' => 'required',
         );
 
         $validator = Validator::make(Input::all(), $rules);

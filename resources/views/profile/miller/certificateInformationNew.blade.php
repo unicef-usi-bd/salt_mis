@@ -31,6 +31,14 @@
         }
 
     </style>
+    <style>
+        .my-error-class {
+            color:red;
+        }
+        .my-valid-class {
+            color:green;
+        }
+    </style>
 
     <div class="page-header">
         <h1>
@@ -120,7 +128,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" id="textInput" name="ISSURE_ID[]" class="chosen-container ISSURE_ID">
+                                                        <input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID">
                                                         {{--<select class="form-control ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >--}}
                                                             {{--<option value="">Select</option>--}}
                                                             {{--@foreach($issueBy as $row)--}}
@@ -141,7 +149,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="date" id="textInput" name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
+                                                        <input type="date"  name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
                                                     </span>
                                                 </td>
 
@@ -348,15 +356,15 @@
             }
         }
 
-//        $('.CERTIFICATE_TYPE_ID').change(function() {
-//            if( $(this).val() == 32 || $(this).val() == 36) {
-//                $('#textInput').prop( "disabled", true );
-//                $('#textInput1').prop( "disabled", true );
-//            } else {
-//                $('#textInput').prop( "disabled", false );
-//                $('#textInput1').prop( "disabled", false );
-//            }
-//        });
+        $('.CERTIFICATE_TYPE_ID').change(function() {
+            if( $(this).val() == 32 || $(this).val() == 36) {
+                //$('#textInput').prop( "disabled", true );
+                $('#textInput1').prop( "disabled", true );
+            } else {
+                //$('#textInput').prop( "disabled", false );
+                $('#textInput1').prop( "disabled", false );
+            }
+        });
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')

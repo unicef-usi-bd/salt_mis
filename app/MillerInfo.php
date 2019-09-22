@@ -51,10 +51,11 @@ class MillerInfo extends Model
      }
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*')
+            ->select('ssm_mill_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*','ssc_lookupchd.*')
             ->leftJoin('ssc_districts','ssm_mill_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
             ->leftJoin('ssc_upazilas','ssm_mill_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
             ->leftJoin('ssc_unions','ssm_mill_info.UNION_ID','=','ssc_unions.UNION_ID')
+            ->leftJoin('ssc_lookupchd','ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('MILL_ID','=',$millerInfoId)
             ->first();
 

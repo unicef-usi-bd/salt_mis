@@ -107,7 +107,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.image') }}</b></label>
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Miller Logo</b></label>
                         <div class="col-sm-8">
                             <input type="file" id="mill_logo" name="mill_logo" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
                         </div>

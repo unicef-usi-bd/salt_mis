@@ -97,6 +97,27 @@
                 </div>
 
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Miller Logo</b></label>
+                        <div class="col-sm-8">
+                            <input type="file" id="mill_logo" name="mill_logo" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b> Type Of Owner</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID" data-placeholder="Select or search data">
+                                <option value=""></option>
+                                   @foreach($ownerType as $row)
+                                       <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                   @endforeach
+
+                            </select>
+                            </span>
+                        </div>
+                    </div>
 
                     <div class="form-group" >
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>

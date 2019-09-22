@@ -102,12 +102,27 @@ where sci.MILL_ID = $millerId"));
         //$date = date("Y-m-d", strtotime("- 30 days"));
 
         return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,RENEWING_DATE,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME
-FROM ssm_certificate_info
-left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
-WHERE MILL_ID = $links
-AND CERTIFICATE_TYPE_ID IN (34,38,39) 
-and lc.LOOKUPCHD_ID IN (34,38,39)
-AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30"));
+            FROM ssm_certificate_info
+            left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
+            WHERE MILL_ID = $links
+            AND CERTIFICATE_TYPE_ID IN (34,38,39) 
+            and lc.LOOKUPCHD_ID IN (34,38,39)
+            AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30"));
             }
 
+    public static function associatonCertificate(){
+        $centerId = Auth::user()->center_id;
+
+        return DB::select(DB::raw("SELECT c.MILL_ID, c.CERTIFICATE_TYPE_ID,c.RENEWING_DATE,  DATEDIFF(c.RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME, ass.center_id, ass.ASSOCIATION_NAME
+            FROM ssm_certificate_info c
+            left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = c.CERTIFICATE_TYPE_ID
+            left join ssm_associationsetup ass on ass.MILL_ID = c.MILL_ID
+            WHERE ass.center_id = $centerId
+            AND CERTIFICATE_TYPE_ID IN (34,38,39) 
+            and lc.LOOKUPCHD_ID IN (34,38,39)
+            AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30;"));
+    }
+
 } //end Class
+
+
