@@ -40,12 +40,13 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >
-                                        <option value="">Select</option>
-                                        @foreach($issueBy as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
-                                        @endforeach
-                                     </select>
+                                    <input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID" value="{{ $editCertData->ISSURE_ID }}">
+                                    {{--<select class="form-control ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >--}}
+                                        {{--<option value="">Select</option>--}}
+                                        {{--@foreach($issueBy as $row)--}}
+                                            {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                        {{--@endforeach--}}
+                                     {{--</select>--}}
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
@@ -84,7 +85,7 @@
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
+                                   <input type="date" id="textInput1" name="RENEWING_DATE[]"  class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
@@ -206,6 +207,16 @@
 
         }
     }
+
+    $('.CERTIFICATE_TYPE_ID').change(function() {
+        if( $(this).val() == 32 || $(this).val() == 36) {
+            //$('#textInput').prop( "disabled", true );
+            $('#textInput1').prop( "disabled", true );
+        } else {
+            //$('#textInput').prop( "disabled", false );
+            $('#textInput1').prop( "disabled", false );
+        }
+    });
 
 
 

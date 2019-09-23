@@ -263,29 +263,30 @@
     {{--@include('masterGlobal.modalGlobal')--}}
     <div class="footer-inner">
         <div class="footer-content">
-						{{--<span class="bigger-120">--}}
-							{{--<span class="blue bolder">{{ Session::get('orgName') }}</span>--}}
-                            {{--<div>--}}
-                                {{--<div style="float:left; width:350px;">Copyright &copy; 2019 SALT, All Rights Reserved.</div>--}}
+						<span class="bigger-120">
+							<span class="blue bolder">{{ Session::get('orgName') }}</span>
+                            <div>
+                                <div style="float:left; width:350px;"></div>
                                 {{--<div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>--}}
-                                {{--<div class="clearfix"></div>--}}
-                            {{--</div>--}}
+                                <div style="float:right; width:300px;"> <img src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
+                                <div class="clearfix"></div>
+                            </div>
                             {{--Copyright &copy; 2018 DAE, All Rights Reserved. DAE Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a>--}}
-                            {{--</span>--}}
+                            </span>
 
             &nbsp; &nbsp;
             <span class="action-buttons">
 							{{--<a href="#">--}}
-								{{--<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>--}}
-							{{--</a>--}}
+                {{--<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>--}}
+                {{--</a>--}}
 
-							{{--<a href="#">--}}
-								{{--<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>--}}
-							{{--</a>--}}
+                {{--<a href="#">--}}
+                {{--<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>--}}
+                {{--</a>--}}
 
-							{{--<a href="#">--}}
-								{{--<i class="ace-icon fa fa-rss-square orange bigger-150"></i>--}}
-							{{--</a>--}}
+                {{--<a href="#">--}}
+                {{--<i class="ace-icon fa fa-rss-square orange bigger-150"></i>--}}
+                {{--</a>--}}
 						</span>
         </div>
     </div>
