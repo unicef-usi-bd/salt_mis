@@ -30,7 +30,7 @@ class WashingAndCrushingController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Washing and Crushing (Industrial)');
+        $title = trans('Washing and Crushing (Industrial) Union');
 
         $heading=array(
             'title'=> $title,

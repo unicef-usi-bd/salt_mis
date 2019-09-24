@@ -142,9 +142,9 @@ class UserController extends Controller
                 $path = 'image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
-                $user_signature = "image/user-image/$filename";
+                $user_signature = "image/user_signature/$filename";
             }else{
-                $user_signature = 'image/user-image/defaultUserSignature.png';
+                $user_signature = 'image/user_signature/defaultUserSignature.png';
             }
 
 
@@ -267,28 +267,20 @@ class UserController extends Controller
             return response()->json(['errors'=>$validator->errors()->all()]);
         }else {
 
-            $image_path = $editUser->user_image;  // Value is not URL but directory file path
-            if(File::exists($image_path)) {
-                File::delete($image_path);
-            }
 
-            $signature_path = $editUser->user_signature;  // Value is not URL but directory file path
-            if(File::exists($signature_path)) {
-                File::delete($signature_path);
-            }
+
+
 
             //for user image*************
             //$userImageName = 'defaultUserImage.png';
+
+
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
-//                try {
-//                    $file = $request->file('user_image');
-//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
-//                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-//
-//                    $request->file('user_image')->move("image/user-image/", $userImageName);
-//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-////                    return false;
-//                }
+
+                $image_path = $editUser->user_image;  // Value is not URL but directory file path
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }//use for delete existing image
 
                 $image = $request->file('user_image');
                 $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
@@ -298,6 +290,7 @@ class UserController extends Controller
                 $user_image = "image/user-image/$filename";
             }else{
                 $user_image = 'image/user-image/defaultUserImage.png';
+                $user_image = $editUser->user_image;
             }
 
 
@@ -305,24 +298,21 @@ class UserController extends Controller
             //for user signature*************
             //$userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
-//                try {
-//                    $file = $request->file('user_signature');
-//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
-//                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-//
-//                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
-//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-////                    return false;
-//                }
+
+                $signature_path = $editUser->user_signature;  // Value is not URL but directory file path
+                if(File::exists($signature_path)) {
+                    File::delete($signature_path);
+                }//use for delete existing image
 
                 $signature = $request->file('user_signature');
                 $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
                 $path = 'image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
-                $userSignatureName = "image/user-image/$filename";
+                $userSignatureName = "image/user-signature/$filename";
             }else{
-                $userSignatureName = 'image/user-image/defaultUserSignature.png';
+                //$userSignatureName = 'image/user-signature/defaultUserSignature.png';
+                $userSignatureName = $editUser->user_signature;
             }
 
 //            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);

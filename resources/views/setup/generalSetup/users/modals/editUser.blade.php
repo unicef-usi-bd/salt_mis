@@ -104,14 +104,20 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.image') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" id="user_image" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value=""/>
+                    <input type="file" id="user_image" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value="" onchange="loadFile(event)"/>
+                </div>
+                <div style="margin-top: 40px; margin-left: 120px;">
+                    <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editData->user_image) }}" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.signature') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="file" id="user_signature" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value=""/>
+                    <input type="file" id="user_signature" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value="" onchange="loadFile1(event)"/>
+                </div>
+                <div style="margin-top: 40px; margin-left: 120px;">
+                    <img id="output1"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editData->user_signature) }}" />
                 </div>
             </div>
 
@@ -425,6 +431,17 @@
 //                $(".user_signature").val('');
 //            }
 //        });
+    </script>
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        var loadFile1 = function(event) {
+            var output = document.getElementById('output1');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
 <!--    --><?php
 //    //MySQL class: http://mbe.ro/2009/08/30/fast-and-easy-php-mysql-class/

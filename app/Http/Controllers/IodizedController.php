@@ -29,7 +29,7 @@ class IodizedController extends Controller
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
         $heading=array(
-            'title'=>'Iodization Production',
+            'title'=>'Iodization',
             'library'=>'datatable',
             'modalSize'=>'modal-md',
             'action'=>'iodized/create',

@@ -80,7 +80,7 @@
                 <div class="col-md-4">
                     <label class="col-md-12"><b>Test Name</b><span style="color: red;"> </span></label>
                     <div class="col-md-12">
-                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="" class="form-control col-xs-5 col-sm-5" />
+                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="BSTI test standard"  value="BSTI test standard" class="form-control col-xs-5 col-sm-5" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -291,11 +291,6 @@
             errorClass: "my-error-class",
             //validClass: "my-valid-class",
             rules: {
-
-                QUALITY_CONTROL_IMAGE:{
-                    required: true,
-
-                },
                  SODIUM_CHLORIDE:{
                     required: true,
                 },
@@ -309,6 +304,7 @@
                     required: true,
                 },
                 QUALITY_CONTROL_IMAGE:{
+                    required: true,
                     extension: "xlsx|csv"
                 }
             },
