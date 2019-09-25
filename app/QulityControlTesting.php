@@ -79,4 +79,14 @@ class QulityControlTesting extends Model
     public static function deleteQualityControlTestingData($id){
         return DB::table('tmm_qualitycontrol')->where('QUALITYCONTROL_ID', $id)->delete();
     }
+
+    public static function iodizeBatchNo (){
+        $centerId = Auth::user()->center_id;
+      return DB::select(DB::raw("SELECT IODIZEDMST_ID, BATCH_NO, tmm_iodizedmst.BATCH_DATE
+            from tmm_iodizedmst
+            left join ssm_associationsetup ao on ao.MILL_ID = tmm_iodizedmst.center_id
+             -- where BATCH_DATE >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+            where BATCH_DATE BETWEEN BATCH_DATE and DATE_ADD(NOW(), INTERVAL 30 DAY)
+            and tmm_iodizedmst.center_id = $centerId"));
+    }
 }

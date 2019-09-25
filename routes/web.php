@@ -117,6 +117,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('get-packsize','SalesDistributionController@getpackSizeData');//jalal
     Route::get('trading-list','SellerDistributorProfileController@getTradingList');//rubiyat
     Route::get('crude-salt-invoice-list','CrudeSaltDetailsController@getInvoiceList');//rubiyat
+    Route::resource('stock-adjustment','StockAdjusmentController');//jalal
 
     //Profile
     Route::resource('certificate-map', 'CertificateMapController'); //Rubiyat

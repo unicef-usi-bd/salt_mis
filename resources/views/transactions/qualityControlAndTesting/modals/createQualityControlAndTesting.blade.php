@@ -65,8 +65,11 @@
                         <span class="block input-icon input-icon-right">
                             <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
                                <option value=""></option>
-                                @foreach($iodizeBatch as $iodize)
-                                    <option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>
+                                {{--@foreach($iodizeBatch as $iodize)--}}
+                                    {{--<option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>--}}
+                                {{--@endforeach--}}
+                                @foreach($iodizeBatchIdByMonth as $iodizebatch)
+                                    <option value="{{$iodizebatch->IODIZEDMST_ID}}"> {{$iodizebatch->BATCH_NO}}</option>
                                 @endforeach
                             </select>
                         </span>

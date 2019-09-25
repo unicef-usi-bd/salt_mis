@@ -64,8 +64,10 @@ class QulityControlTestingController extends Controller
 
         $bstiChemicalData = BstiTestStandard::getBstiChemicalData();
 
+        $iodizeBatchIdByMonth = QulityControlTesting::iodizeBatchNo();
+
 //        $this->pr($qualityControlBatch);
-        return view('transactions.qualityControlAndTesting.modals.createQualityControlAndTesting',compact('agencyId','qulityControlId','iodizeBatch','bstiChemicalData'));
+        return view('transactions.qualityControlAndTesting.modals.createQualityControlAndTesting',compact('agencyId','qulityControlId','iodizeBatch','bstiChemicalData','iodizeBatchIdByMonth'));
     }
 
     /**
