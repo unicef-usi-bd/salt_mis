@@ -49,9 +49,10 @@ class ChemicalPurchaseController extends Controller
     {
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $supplierName = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
+        $defultSupplier = SupplierProfile::defultSupplierProfile($this->chemicalSupplierTypeId);
 //        $supplierNameBscic = SupplierProfile::supplierProfileBscic();
         //$this->pr($supplierName);
-        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName','supplierNameBscic'));
+        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName','supplierNameBscic','defultSupplier'));
     }
 
     /**

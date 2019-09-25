@@ -7,7 +7,7 @@
             Transaction
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Washing And Crushing (Industrial)
+                Washing And Crushing (Industrial) Union
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -43,8 +43,8 @@
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{ date('d-M-Y', strtotime($row->BATCH_DATE)) }}</td>
-                    <td>{{ ($row->REQ_QTY*100)/(100-$row->WASTAGE) }}</td>
-                    <td>{{$row->WASTAGE}} ( {{ ($row->WASTAGE*$row->REQ_QTY)/(100-$row->WASTAGE) }} KG)</td>
+                    <td>{{ sprintf('%0.2f',($row->REQ_QTY*100)/(100-$row->WASTAGE)) }}</td>
+                    <td>{{$row->WASTAGE}} ( {{ sprintf('%0.2f',($row->WASTAGE*$row->REQ_QTY)/(100-$row->WASTAGE)) }} KG)</td>
                     <td>{{$row->REQ_QTY}}</td>
                     <td class="row{{ $row->WASHCRASHMST_ID }}">
                     <div class="hidden-sm hidden-xs action-buttons">

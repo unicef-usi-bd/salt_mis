@@ -347,6 +347,8 @@
         if(saltStock < result){
             $('.stockWashCrash').hide();
             $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Stock Out Of bound.').fadeIn();
+            $('.crudeSaltAmount').val('');
+            $('.totalQty').val('');
             $('.result').text(0);
             if(result === 0){
                 $('.stockWashCrash').show();

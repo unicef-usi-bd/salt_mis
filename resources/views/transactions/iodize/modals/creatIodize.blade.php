@@ -123,7 +123,7 @@
 
                 if(parseInt(data.chemicalStock) > chemicalNeed){
                   //  alert("hi");
-                    $('.chemicalAmount').attr('readonly', false);
+                    $('.chemicalAmount').attr('readonly', true);
                 }else{
                     //alert("hlw");
                     $('.chemicalAmount').attr('readonly', true);
@@ -161,6 +161,7 @@
         if(saltStock < amount){
             $('.stockSalt').hide();
             $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn();
+            $('.saltAmount').val('');
             $('.result').text(0);
             if(amount === 0){
                 $('.stockSalt').show();

@@ -16,7 +16,7 @@ class SalesDistribution extends Model
             ->leftJoin('tmm_salesmst','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
             ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('tmm_saleschd.center_id','=',Auth::user()->center_id)
-            ->orderBy('tmm_saleschd.center_id', 'DESC')
+            ->orderBy('tmm_saleschd.SALESMST_ID', 'DESC')
             ->get();
     }
     public static function getTradingName(){
