@@ -211,6 +211,6 @@ class StockAdjusmentController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-    
+
     }
 }

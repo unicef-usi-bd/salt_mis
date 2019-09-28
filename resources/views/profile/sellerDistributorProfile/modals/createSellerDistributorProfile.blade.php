@@ -51,7 +51,7 @@
       <div class="row">
           <div class="col-md-12">
               <div class="col-md-3">
-                  <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> *</span> </label>
+                  <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> </span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
@@ -69,7 +69,7 @@
                   </div>
               </div>
               <div class="col-md-3">
-                  <label class="col-sm-12" > <b>Phone Number</b><span style="color: red;"> </span> </label>
+                  <label class="col-sm-12" > <b>Phone Number</b><span style="color: red;"> *</span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
@@ -311,16 +311,16 @@
             errorClass: "my-error-class",
             //validClass: "my-valid-class",
             rules: {
-                TRADING_NAME:{
-                  required: true
-                },
+//                TRADING_NAME:{
+//                  //required: true
+//                },
                 EMAIL:{
                     //required: true,
                     email: true,
                     regex: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
                 },
                 PHONE:{
-                    //required: true,
+                    required: true,
                     maxlength:11,
                     regex:/^(?:\+?88)?01[15-9]\d{8}$/,
                 }

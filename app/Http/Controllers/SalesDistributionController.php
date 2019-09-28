@@ -14,6 +14,7 @@ use App\LookupGroupData;
 use App\SalesDistribution;
 use App\Item;
 use App\Brand;
+use App\SellerDistributorProfile;
 
 class SalesDistributionController extends Controller
 {
@@ -116,9 +117,10 @@ class SalesDistributionController extends Controller
         }
 
         $brandName = Brand::millerBrand();
+        $traderName = SellerDistributorProfile::traderName();
         //$pckSize = SalesDistribution::getPacksize();
         //$this->pr($brandName);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock','brandName'));
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock','brandName','traderName'));
     }
 
     /**

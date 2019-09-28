@@ -72,7 +72,7 @@ class SupplierProfile extends Model
             ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
             ->where('ssm_supplier_info.TRADING_NAME','Like','BSCIC')
             ->orderBy('ssm_supplier_info.TRADING_NAME','=','BSCIC','DESC')
-            ->get();
+            ->first();
     }
 
     public static function supplierProfileList(){

@@ -15,6 +15,8 @@ use App\Iodized;
 use App\BstiTestStandard;
 use App\QulityControlTesting;
 use App\BstiTestResultRange;
+use File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class QulityControlTestingController extends Controller
 {
@@ -90,16 +92,36 @@ class QulityControlTestingController extends Controller
         }else {
            // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
             $qulityControlImge = null;
+            $image = $request->file('QUALITY_CONTROL_IMAGE');
+            $image->getClientOriginalExtension();
             if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
-                try {
-                    $file = $request->file('QUALITY_CONTROL_IMAGE');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
-                    $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+                $image = $request->file('QUALITY_CONTROL_IMAGE');
+                $extension = $image->getClientOriginalExtension();
+                //
+                if($extension == "jpg" || $extension == "jpeg" || $extension == "png" || $extension == "gif"){
+                    //
+                    if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
+                        $image = $request->file('QUALITY_CONTROL_IMAGE');
+                        $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                        $path = 'image/qualitycontrol/' . $filename;
+                        Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                        //********* End Image *********
+                        $qulityControlImge = "$filename";
+                    }else{
+                        $qulityControlImge = 'defaultUserImage.png';
+                    }
+                }else{
+                    try {
+                        $file = $request->file('QUALITY_CONTROL_IMAGE');
+                        $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
+                        $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 
-                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+                        $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
+                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
+                    }
                 }
+               // exit;
             }
 
             $data = array(
@@ -180,17 +202,36 @@ class QulityControlTestingController extends Controller
         }else {
             // $this->pr($request->file('QUALITY_CONTROL_IMAGE'));
             $qulityControlImge = '';
+//            $image = $request->file('QUALITY_CONTROL_IMAGE');
+//            $image->getClientOriginalExtension();
             if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
-                try {
-                    $file = $request->file('QUALITY_CONTROL_IMAGE');
-                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
-                    $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
+                $image = $request->file('QUALITY_CONTROL_IMAGE');
+                $extension = $image->getClientOriginalExtension();
+                //
+                if($extension == "jpg" || $extension == "jpeg" || $extension == "png" || $extension == "gif"){
+                    //
+                    if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
+                        $image = $request->file('QUALITY_CONTROL_IMAGE');
+                        $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                        $path = 'image/qualitycontrol/' . $filename;
+                        Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                        //********* End Image *********
+                        $qulityControlImge = "$filename";
+                    }else{
+                        $qulityControlImge = 'defaultUserImage.png';
+                    }
+                }else{
+                    try {
+                        $file = $request->file('QUALITY_CONTROL_IMAGE');
+                        $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
+                        $qulityControlImge = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 
-                    //$file->move("image/testimage/", $qulityControlImge);
-                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
-                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+                        $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qulityControlImge);
+                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
+                    }
                 }
+                // exit;
             }
 
             //$this->pr($request->input());

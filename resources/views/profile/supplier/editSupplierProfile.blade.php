@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;">* </span> </label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <input type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />

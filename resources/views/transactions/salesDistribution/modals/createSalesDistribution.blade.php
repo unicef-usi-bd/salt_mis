@@ -51,7 +51,10 @@
                     <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
-                 <option value="">--Select One--</option>
+                    @foreach($traderName as $row)
+                        <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
+                    @endforeach
+                 {{--<option value="">--Select One--</option>--}}
                 </select>
             </span>
                     </div>
@@ -197,7 +200,7 @@
                         <span class="block input-icon input-icon-right" style="width: 155px;">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
-                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden"></span><span class="result"></span><span class="defaultStock">{{ $iodizeStock }}</span>KG)</span>
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden">{{ $iodizeStock }}</span><span class="result">{{ $iodizeStock }}</span>KG)</span>
                             {{--<span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockIodize"></span><span class="result"></span>)</span>--}}
 
                         </span>
@@ -268,7 +271,7 @@
     $('.stockWashCrash').hide();
     //$('.stockIodize').hide();
     $(document).on('change','.saltType',function(){
-        $('.defaultStock').text('');
+//        $('.defaultStock').text('');
         var thisRow = $(this).closest('tr');
         var saltTypeId = thisRow.find('.saltType').val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';

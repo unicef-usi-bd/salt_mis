@@ -254,16 +254,16 @@
                     required: true,
                 },
                 QUALITY_CONTROL_IMAGE:{
-                    required: true,
-                    extension: "xlsx|csv"
+                    //required: true,
+                    //extension: "xlsx|csv"
                 }
             },
-            messages: {
-                QUALITY_CONTROL_IMAGE: {
-                    //required: "Please upload file.",
-                    extension: "Please upload file in these format only ( XLSX,CSV )."
-                },
-            }
+//            messages: {
+//                QUALITY_CONTROL_IMAGE: {
+//                    //required: "Please upload file.",
+//                    extension: "Please upload file in these format only ( XLSX,CSV )."
+//                },
+//            }
         });
 
     });

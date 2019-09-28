@@ -56,10 +56,10 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
-                              @foreach($supplierNameBsti as $row)
+                              {{--@foreach($supplierNameBsti as $row)--}}
                                     {{--<option value="{{$row->SUPP_ID_AUTO}}">{{$row->TRADING_NAME}}</option>--}}
-                                    <option value="{{ $row->SUPP_ID_AUTO }}" @if($row->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $row->TRADING_NAME }}</option>
-                                @endforeach
+                                    {{--<option value="{{ $row->SUPP_ID_AUTO }}" @if($row->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $row->TRADING_NAME }}</option>--}}
+                                {{--@endforeach--}}
                                 @foreach($supplierName as $name)
                                     <option value="{{ $name->SUPP_ID_AUTO }}" @if($name->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $name->TRADING_NAME }}</option>
                                 @endforeach

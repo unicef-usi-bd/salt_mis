@@ -70,9 +70,11 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
-                                @foreach($defultSupplier as $bscic)
-                                    <option value="{{$bscic->SUPP_ID_AUTO}}"> {{$bscic->TRADING_NAME}}</option>
-                                @endforeach
+                                @if($defultSupplier)
+                                    <option value="{{$defultSupplier->SUPP_ID_AUTO}}"> {{$defultSupplier->TRADING_NAME}}</option>
+                                @else
+                                    <option value=""> </option>
+                                @endif
                                 @foreach($supplierName as $name)
                                 <option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>
                                 @endforeach

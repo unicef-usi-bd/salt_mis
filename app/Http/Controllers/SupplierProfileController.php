@@ -73,7 +73,7 @@ class SupplierProfileController extends Controller
     {
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
-            'LICENCE_NO' => 'required|max:100',
+            //'LICENCE_NO' => 'required|max:100',
 
         );
 
@@ -153,7 +153,7 @@ class SupplierProfileController extends Controller
 
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
-            'LICENCE_NO' => 'required|max:100',
+            //'LICENCE_NO' => 'required|max:100',
         );
 
         $validator = Validator::make(Input::all(), $rules);
