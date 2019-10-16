@@ -271,7 +271,7 @@
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')
      {{--validation for full time employee--}}
-    {{--@include('profile.miller.totalEmployeeValidation')--}}
+    @include('profile.miller.totalEmployeeValidation')
     @include('profile.miller.updateMillersId')
 
 

@@ -93,7 +93,7 @@
                         <div id="certificate" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5 style="color: red;">** You Must Provide Industrial Salt Manufacturing,Edible Salt Manufacturing and BSTI Certificate, OtherWise you can't go further of profile creation. </h5>
+                                    <h5 style="color: red;">** You Must Provide Edible Salt Manufacturing and BSTI Certificate, OtherWise you can't go further of profile creation. </h5>
                                     <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" id="myform">
                                         @csrf
                                         @if(isset($millerInfoId))
@@ -118,23 +118,22 @@
 
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                                        <select class="form-control CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                                             <option value="">Select</option>
                                                             @foreach($certificate as $row)
-                                                                <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                                                <option value="{{ $row->CERTIFICATE_ID }}">{{ $row->CERTIFICATE_NAME }}</option>
                                                             @endforeach
                                                         </select>
                                                     </span>
+                                                    <input type="text" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value=""/>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID">
-                                                        {{--<select class="form-control ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >--}}
-                                                            {{--<option value="">Select</option>--}}
-                                                            {{--@foreach($issueBy as $row)--}}
-                                                                {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                                            {{--@endforeach--}}
-                                                         {{--</select>--}}
+                                                        {{--<input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID">--}}
+                                                        <select class="form-control issuer" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                                            <option value="">Select</option>
+
+                                                         </select>
                                                     </span>
                                                 </td>
                                                 <td>
@@ -170,6 +169,7 @@
                                                     <span class="block input-icon input-icon-right">
                                                        <input type="date" id="textInput1" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
                                                     </span>
+                                                    <input type="hidden" placeholder=" " name="IS_EXPIRE[]" class="form-control col-xs-10 col-sm-5 IS_EXPIRE" value=""/>
                                                 </td>
 
                                                 <td>
@@ -293,14 +293,14 @@
         });
 
         $(document).on('change','.CERTIFICATE_TYPE_ID',function(){
-            var certificateTypeId = $(this).val();
-            $.ajax({
-                type : 'GET',
-                url : '{{ url('certificate-issuer-name') }}/'+certificateTypeId,
-                success: function (data) {
-                    $('.ISSURE_ID').val(data[0].LOOKUPCHD_NAME);
-                }
-            });
+            {{--var certificateTypeId = $(this).val();--}}
+            {{--$.ajax({--}}
+                {{--type : 'GET',--}}
+                {{--url : '{{ url('certificate-issuer-name') }}/'+certificateTypeId,--}}
+                {{--success: function (data) {--}}
+                    {{--$('.ISSURE_ID').val(data[0].LOOKUPCHD_NAME);--}}
+                {{--}--}}
+            {{--});--}}
             checkCertificate();
         });
 
@@ -311,7 +311,7 @@
                 errorClass: "my-error-class",
                 //validClass: "my-valid-class",
                 rules: {
-                    'CERTIFICATE_TYPE_ID[]': {
+                    'CERTIFICATE_ID[]': {
                         required: true,
                     },
                     'ISSURE_ID[]': {
@@ -330,9 +330,9 @@
                     'user_image[]':{
                         required: true,
                     },
-                    'RENEWING_DATE[]':{
-                        required: true,
-                    }
+//                    'RENEWING_DATE[]':{
+//                        required: true,
+//                    }
 
                 }
             });
@@ -341,15 +341,15 @@
         
         function checkCertificate() {
             var bsti = false; // 34
-            var industrial = false; // 38
+            //var industrial = false; // 38
             var ediTable = false; // 39
             $('.newRow2 tr').each(function () {
                 var certificateId = parseInt($(this).find('.CERTIFICATE_TYPE_ID').val());
-                if(certificateId===34) bsti = true;
-                if(certificateId===38) industrial = true;
-                if(certificateId===39) ediTable = true;
+                if(certificateId===5) bsti = true;
+                //if(certificateId===38) industrial = true;
+                if(certificateId===10) ediTable = true;
             });
-            if(bsti && industrial && ediTable){
+            if(bsti  && ediTable){
                 $('.btnCertificate').prop('disabled', false);
             } else{
                 $('.btnCertificate').prop('disabled', true);
@@ -365,6 +365,39 @@
                 $('#textInput1').prop( "disabled", false );
             }
         });
+
+$(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+    var thisRow = $(this).closest('tr');
+    var issuerId = thisRow.find('.CERTIFICATE_TYPE_ID').val();
+    var option = '<option value="">Select Issuer</option>';
+    var _token = '{{ csrf_token() }}';
+    $.ajax({
+        type : "post",
+        url  : '{{ url('certificate/get-issuer') }}',
+        data : {issuerId: issuerId, _token: _token},
+        success:function (data) {
+            console.log(thisRow);
+            var selected = '';
+            var issurInfo = data[0];
+            var certificate = data[1];
+
+            thisRow.find('.CERTIFICATE_TYPE').val(certificate.CERTIFICATE_TYPE);
+            thisRow.find('.IS_EXPIRE').val(certificate.IS_EXPIRE);
+
+            if(certificate.CERTIFICATE_TYPE == 1) {
+                thisRow.find('.RENEWING_DATE').prop('required' , true );
+            }else{
+                thisRow.find('.RENEWING_DATE').prop('required' , false );
+            }
+
+           for (var i = 0; i < issurInfo.length; i++){
+              var selected = issurInfo[i].LOOKUPCHD_ID == certificate.ISSUR_ID ? 'Selected' : '';
+              option = option + '<option value="'+ issurInfo[i].LOOKUPCHD_ID +'"' + selected +' >'+ issurInfo[i].LOOKUPCHD_NAME+'</option>';
+           }
+           thisRow.find('.issuer').html(option);
+        }
+    });
+});
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')

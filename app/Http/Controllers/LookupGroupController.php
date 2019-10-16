@@ -63,7 +63,7 @@ class LookupGroupController extends Controller
     {
         $rules = array(
             'LOOKUPMST_NAME' => 'required|max:60',
-            'UD_SL' => 'required|integer|unique:ssc_lookupmst'
+            //'UD_SL' => 'required|integer|unique:ssc_lookupmst'
         );
         $error = array(
             'LOOKUPMST_NAME.required' =>'The Group Name field is required.',

@@ -3,7 +3,8 @@
         <div class="col-md-12">
             {{--<div class="alert alert-info certificate_msg"></div>--}}
 
-            <form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            {{--<form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
+            <form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 
                @csrf
                 @if(isset($millerInfoId))
@@ -37,6 +38,8 @@
                                     </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
+                                <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>
+                                <input type="hidden" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -88,6 +91,7 @@
                                    <input type="date" id="textInput1" name="RENEWING_DATE[]"  class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
+                                <input type="hidden" value="{{ $editCertData->IS_EXPIRE }}" name="IS_EXPIRE[]">
                             </td>
 
                             <td>

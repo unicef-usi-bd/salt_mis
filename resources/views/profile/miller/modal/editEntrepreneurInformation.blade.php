@@ -15,6 +15,10 @@
                 @if(isset($millerInfoId))
                     <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
+
+
+
+
                 {{--<div class="col-md-6">--}}
                     {{--<div class="form-group">--}}
                         {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>--}}
@@ -79,6 +83,7 @@
                                         <input type="text" name="OWNER_NAME[]"  value="{{ $editEntrepData->OWNER_NAME }}" class="OWNER_NAME required" required  />
                                         <span style="color:red;display:none;" class="error">This field is required</span>
                                     </span>
+                                    <input type="hidden" value="{{ $editEntrepData->ENTREPRENEUR_ID }}" name="ENTREPRENEUR_ID">
                                 </td>
                                 <td>
                                     <span class="block input-icon input-icon-right">
@@ -166,7 +171,12 @@
                                 Approve
                             </button>
                         @else
-                            <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                            {{--<button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update & Next--}}
+                            {{--</button>--}}
+
+                            <button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
@@ -180,11 +190,27 @@
 </div>
 
     <script>
+//        $('.entrepreneur_msg').hide();
+//        $(document).on('click','.btnUpdateEntrepreneur',function () {
+//            $.ajax({
+//                type : 'POST',
+//                url : 'edit-entrepreneur-info',
+//                data : $('#entrepreneurId').serialize(),
+//                success: function (data) {
+//                    console.log(data);
+//                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+//
+//                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+//
+//                }
+//            })
+//        });
+
         $('.entrepreneur_msg').hide();
-        $(document).on('click','.btnUpdateEntrepreneur',function () {
+        $(document).on('click','.btnUpdateTemEntrepreneur',function () {
             $.ajax({
                 type : 'POST',
-                url : 'edit-entrepreneur-info',
+                url : 'edit-entrepreneur-info-tem',
                 data : $('#entrepreneurId').serialize(),
                 success: function (data) {
                     console.log(data);

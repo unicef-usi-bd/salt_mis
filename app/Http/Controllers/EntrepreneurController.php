@@ -173,6 +173,12 @@ class EntrepreneurController extends Controller
         return "Entrepreneur Information has been updated";
     }
 
+    public function updateEntrepreneurInfoTem(Request $request){
+        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
+        $updateEmpData = Entrepreneur::insertMillerTemProfile($request, $millerInfoId);
+        return "Entrepreneur Information has been updated";
+    }
+
 
 
 }

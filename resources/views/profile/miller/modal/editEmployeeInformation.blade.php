@@ -16,6 +16,7 @@
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="TOTMALE_EMP" value="{{ $editEmployeeData->TOTMALE_EMP }}" class="chosen-container totalMaleEmp" placeholder="Male">
                             </span>
+                            <input type="hidden" value="{{ $editEmployeeData->MILLEMP_ID}}" name="MILLEMP_ID">
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
@@ -96,7 +97,12 @@
                                 Approve
                             </button>
                         @else
-                            <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
+                            {{--<button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update & Next--}}
+                            {{--</button>--}}
+
+                            <button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
@@ -111,11 +117,26 @@
 </div>
 
 <script>
+//    $('.empmsg').hide();
+//    $(document).on('click','.btnUpdateEmp',function () {
+//        $.ajax({
+//            type : 'POST',
+//            url : 'edit-employee-info',
+//            data : $('#employeeId').serialize(),
+//            success: function (data) {
+//                console.log(data);
+//                $('.empmsg').html('<span>'+ data +'</span>').show();
+//                setTimeout(function() { $(".empmsg").hide(); }, 3000);
+//
+//            }
+//        })
+//    });
+
     $('.empmsg').hide();
-    $(document).on('click','.btnUpdateEmp',function () {
+    $(document).on('click','.btnUpdateEmpTem',function () {
         $.ajax({
             type : 'POST',
-            url : 'edit-employee-info',
+            url : 'edit-employee-info-tem',
             data : $('#employeeId').serialize(),
             success: function (data) {
                 console.log(data);

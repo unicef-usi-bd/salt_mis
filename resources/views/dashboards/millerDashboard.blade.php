@@ -478,6 +478,24 @@
 
         });
 
+        window.setTimeout(function() {
+            $(".alert-danger").fadeOut(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 5000);
+
+        window.setTimeout(function() {
+            $(".alert-warning").fadeOut(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 5000);
+
+        window.setTimeout(function() {
+            $(".alert-info").fadeOut(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 5000);
+
 
     </script>
 

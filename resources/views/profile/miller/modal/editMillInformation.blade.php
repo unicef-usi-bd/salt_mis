@@ -13,8 +13,8 @@
             <div class="alert alert-info millmsg"></div>
 
 
-            <form id="millId"  class="form-horizontal myform" role="form" >
-                <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
+            <form id="millId"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
+                <input type="hidden" id="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">
@@ -100,6 +100,30 @@
                 </div>
 
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Miller Logo</b></label>
+                        <div class="col-sm-8">
+                            <input type="file" id="mill_logo" name="mill_logo" class="form-control col-xs-10 col-sm-5 user_image" value="" onchange="loadFile(event)"/>
+                        </div>
+                        <div style="margin-top: 40px; margin-left: 120px;">
+                            <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editMillData->mill_logo) }}" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b> Type Of Owner</b></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID" data-placeholder="Select or search data">
+                                <option value=""></option>
+                                   @foreach($ownerType as $row)
+                                       <option value="{{ $row->LOOKUPCHD_ID }}" @if($editMillData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                   @endforeach
+
+                            </select>
+                            </span>
+                        </div>
+                    </div>
 
                     <div class="form-group" >
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
@@ -135,16 +159,16 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Union</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="UNION_IDD" class="chosen-select chosen-container unionn" name="UNION_ID" data-placeholder="Select">
-                                   <option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>
-                                </select>
-                            </span>
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Union</b></label>--}}
+                        {{--<div class="col-sm-8">--}}
+                            {{--<span class="block input-icon input-icon-right">--}}
+                               {{--<select id="UNION_IDD" class="chosen-select chosen-container unionn" name="UNION_ID" data-placeholder="Select">--}}
+                                   {{--<option value="{{ $editMillData->UNION_ID }}">{{ $editMillData->UNION_NAME }}</option>--}}
+                                {{--</select>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b><span style="color:red;"> *</span></label>
                         <div class="col-sm-8">
@@ -185,10 +209,14 @@
                                 Approve
                             </button>
                         @else
-                            <button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
-                        </button>
+                            {{--<button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">--}}
+                            {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                            {{--Update & Next--}}
+                        {{--</button>--}}
+                            <button type="button" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
                         @endif
 
                     </div>
@@ -198,11 +226,26 @@
     </div>
 </div>
 <script>
+//    $('.millmsg').hide();
+//    $(document).on('click','.btnUpdateMill',function () {
+//        $.ajax({
+//            type : 'POST',
+//            url : 'edit-mill-info',
+//            data : $('#millId').serialize(),
+//            success: function (data) {
+//                console.log(data);
+//                $('.millmsg').html('<span>'+ data +'</span>').show();
+//                setTimeout(function() { $(".millmsg").hide(); }, 3000);
+//
+//            }
+//        })
+//    });
+
     $('.millmsg').hide();
-    $(document).on('click','.btnUpdateMill',function () {
+    $(document).on('click','.btnUpdatetemMill',function () {
         $.ajax({
             type : 'POST',
-            url : 'edit-mill-info',
+            url : 'edit-mill-info-tem',
             data : $('#millId').serialize(),
             success: function (data) {
                 console.log(data);
@@ -218,7 +261,7 @@
         $.ajax({
             type : 'POST',
             url : 'edit-mill-info-approve',
-            data : $('#millId').serialize(),
+           data : $('#millId').serialize(),
             success: function (data) {
                 console.log(data);
                 $('.millmsg').html('<span>'+ data +'</span>').show();
@@ -287,5 +330,10 @@
         });
 
     });
+
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
 
 </script>

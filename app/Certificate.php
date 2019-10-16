@@ -105,8 +105,8 @@ where sci.MILL_ID = $millerId"));
             FROM ssm_certificate_info
             left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
             WHERE MILL_ID = $links
-            AND CERTIFICATE_TYPE_ID IN (34,38,39) 
-            and lc.LOOKUPCHD_ID IN (34,38,39)
+            AND CERTIFICATE_TYPE_ID IN (34,39) 
+            and lc.LOOKUPCHD_ID IN (34,39)
             AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30"));
             }
 
@@ -118,8 +118,8 @@ where sci.MILL_ID = $millerId"));
             left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = c.CERTIFICATE_TYPE_ID
             left join ssm_associationsetup ass on ass.MILL_ID = c.MILL_ID
             WHERE ass.center_id = $centerId
-            AND CERTIFICATE_TYPE_ID IN (34,38,39) 
-            and lc.LOOKUPCHD_ID IN (34,38,39)
+            AND CERTIFICATE_TYPE_ID IN (34,39) 
+            and lc.LOOKUPCHD_ID IN (34,39)
             AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30;"));
     }
 

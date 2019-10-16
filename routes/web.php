@@ -94,6 +94,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('brand', 'BrandController'); //Rubiyat
 
+    Route::resource('certificate','CertificateIssurController');//jalal
+    Route::post('certificate/get-issuer', 'CertificateIssurController@getIssuerIdByAjax');//jalal
+
     // modal edit mill information
     Route::post('edit-mill-info', 'MillerInfoController@updateMillInfo'); //Azharul
     Route::post('edit-mill-info-approve','MillerInfoController@approveByAssociation');//jalal
@@ -103,6 +106,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-certificate-info-normal', 'CertificateController@updateCertificateInfoNormal'); //Azharul
     Route::post('edit-entrepreneur-info', 'EntrepreneurController@updateEntrepreneurInfo'); //Azharul
     // modal edit mill information
+
+    //Temporary modal for mill information
+    Route::post('edit-mill-info-tem','MillerInfoController@temUpdate');//jalal
+    Route::post('edit-entrepreneur-info-tem', 'EntrepreneurController@updateEntrepreneurInfoTem'); //jalal
+    Route::post('edit-employee-info-tem', 'EmployeeController@updateEmployeeInfoTem'); //jalal
+    Route::post('edit-certificate-info-normal-tem', 'CertificateController@updateCertificateInfoNormalTem'); //jalal
+    //Temporary modal for mill information
 
     //transaction
     Route::resource('chemical-purchase','ChemicalPurchaseController');//jalal

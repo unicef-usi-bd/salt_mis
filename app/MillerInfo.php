@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class MillerInfo extends Model
 {
 
-     public static function insertMillerInfoData($request, $imageN){
+     public static function insertMillerInfoData($request, $mill_logo){
 
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
              'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
              'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
              'MILL_NAME' => $request->input('MILL_NAME'),
-             'mill_logo' => $request->input('$mill_logo'),
+             'mill_logo' => $mill_logo,
              'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
              'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
              'CAPACITY_ID' => $request->input('CAPACITY_ID'),
@@ -49,6 +49,35 @@ class MillerInfo extends Model
          }
          return $millInfoId;
      }
+
+    public static function insertMillerInfoTemData($request, $mill_logo,$millerInfoId){
+        //return $request->all();
+        $millInfoId = DB::table('tem_ssm_mill_info')->insertGetId([
+            'MILL_ID' => $request->input('MILL_ID'),
+            'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
+            'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
+            'MILL_NAME' => $request->input('MILL_NAME'),
+            'mill_logo' => $mill_logo,
+            'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
+            'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
+            'CAPACITY_ID' => $request->input('CAPACITY_ID'),
+            'ZONE_ID' => $request->input('ZONE_ID'),
+            'MILLERS_ID' => $request->input('MILLERS_ID'),
+            'DIVISION_ID' => $request->input('DIVISION_ID'),
+            'DISTRICT_ID' => $request->input('DISTRICT_ID'),
+            'UPAZILA_ID' => $request->input('UPAZILA_ID'),
+            'UNION_ID' => $request->input('UNION_ID'),
+            'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+            'center_id' => Auth::user()->center_id,
+            'REMARKS' => $request->input('REMARKS'),
+            'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+        ]);
+
+//
+//        }
+        return $millInfoId;
+    }
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.*','ssc_districts.*','ssc_upazilas.*','ssc_unions.*','ssc_lookupchd.*')
@@ -61,16 +90,19 @@ class MillerInfo extends Model
 
     }
 
-    public static function updateMillData($request,$id,$associationId){
+    public static function updateMillData($request,$id,$associationId,$mill_logo){
 
 
             $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
                 'MILL_NAME' => $request->input('MILL_NAME'),
+                'mill_logo' => $mill_logo,
                 'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
+                'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
                 //'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
                 'CAPACITY_ID' => $request->input('CAPACITY_ID'),
                 //'ZONE_ID' => $request->input('ZONE_ID'),
                 //'MILLERS_ID' => $request->input('MILLERS_ID'),
+
                 'DIVISION_ID' => $request->input('DIVISION_ID'),
                 'DISTRICT_ID' => $request->input('DISTRICT_ID'),
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
@@ -81,21 +113,23 @@ class MillerInfo extends Model
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
             ]);
-
             return $update;
 
 
     }
 
-    public static function approveByassociation($request,$id){
+    public static function approveByassociation($request,$id,$mill_logo){
 //        if ($associationId){
         $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
             'MILL_NAME' => $request->input('MILL_NAME'),
+            'mill_logo' => $mill_logo,
             'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
+            'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
             //'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
             'CAPACITY_ID' => $request->input('CAPACITY_ID'),
             //'ZONE_ID' => $request->input('ZONE_ID'),
             //'MILLERS_ID' => $request->input('MILLERS_ID'),
+
             'DIVISION_ID' => $request->input('DIVISION_ID'),
             'DISTRICT_ID' => $request->input('DISTRICT_ID'),
             'UPAZILA_ID' => $request->input('UPAZILA_ID'),
@@ -124,6 +158,24 @@ class MillerInfo extends Model
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->groupBy('ssm_mill_info.MILL_ID')
             ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+            ->get();
+
+    }
+
+    public static function getApprovalAllMillDataList(){
+
+        return DB::table('tem_ssm_mill_info')
+            ->select('tem_ssm_mill_info.*','tem_ssm_mill_info.ACTIVE_FLG','tem_ssm_entrepreneur_info.*','tem_ssm_certificate_info.*','tem_tsm_qc_info.*','tem_ssm_millemp_info.*','ssc_lookupchd.*')
+//            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
+            ->leftJoin('tem_ssm_entrepreneur_info','tem_ssm_mill_info.MILL_ID','=','tem_ssm_entrepreneur_info.MILL_ID')
+            ->leftJoin('tem_ssm_certificate_info','tem_ssm_mill_info.MILL_ID','=','tem_ssm_certificate_info.MILL_ID')
+            ->leftJoin('tem_tsm_qc_info','tem_ssm_mill_info.MILL_ID','=','tem_tsm_qc_info.MILL_ID')
+            ->leftJoin('tem_ssm_millemp_info','tem_ssm_mill_info.MILL_ID','=','tem_ssm_millemp_info.MILL_ID')
+            ->leftJoin('ssc_lookupchd','tem_ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            //->where('tem_ssm_mill_info.center_id','=',Auth::user()->center_id)
+            ->where('tem_ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
+            ->groupBy('tem_ssm_mill_info.MILL_ID_TEM')
+            ->orderBy('tem_ssm_mill_info.MILL_ID_TEM', 'DESC')
             ->get();
 
     }

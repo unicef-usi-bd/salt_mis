@@ -29,6 +29,7 @@ class Controller extends BaseController
     public $itemTypeId = 10;
     public $certificateTypeId = 12;
     public $issureTypeId = 13;
+    public $certificateissureTypeId = 21;
     public $supplierTypeId = 14;
     public $crudeSaltSourceId = 15;
     public $qualityControlId = 19;
