@@ -130,7 +130,7 @@
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
                                                         {{--<input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID">--}}
-                                                        <select class="form-control issuer" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                                        <select class="form-control issuer ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
                                                             <option value="">Select</option>
 
                                                          </select>
@@ -208,8 +208,10 @@
                                     $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
                                     var defaultRow = $('tr.removableRow:last');
                                     defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
-                                    defaultRow.find('select.ISSURE_ID').prop('disabled', false);
-
+//                                    defaultRow.find('select.ISSURE_ID').prop('disabled', false);
+//                                    defaultRow.find('select.ISSURE_ID').attr('disabled', false);
+                                    defaultRow.find('select.ISSURE_ID').empty().append('<option value="">Select</option>');
+                                    console.log(defaultRow.find('select.ISSURE_ID').val(''));
 //            For Ignore array Conflict
                                     defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
                                     defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
@@ -218,6 +220,8 @@
                                     defaultRow.find('input.REMARKS').attr('disabled', false);
                                     defaultRow.find('span.budget_against_code').text('');
                                     defaultRow.find('span.errorMsg').text('');
+                                    defaultRow.find('.my-error-class').text('');
+                                    defaultRow.find('.user_image[]-error').text('');
                                     $('.chosen-select').chosen(0);
                                 });
                             });
@@ -337,6 +341,7 @@
                 }
             });
 
+
         });
         
         function checkCertificate() {
@@ -371,6 +376,7 @@ $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
     var issuerId = thisRow.find('.CERTIFICATE_TYPE_ID').val();
     var option = '<option value="">Select Issuer</option>';
     var _token = '{{ csrf_token() }}';
+
     $.ajax({
         type : "post",
         url  : '{{ url('certificate/get-issuer') }}',
