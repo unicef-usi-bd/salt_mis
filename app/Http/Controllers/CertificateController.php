@@ -75,14 +75,15 @@ class CertificateController extends Controller
             $reqTime = count($_POST['CERTIFICATE_TYPE_ID']); //$this->pr($request->file('user_image'));
             for($i=0; $i<$reqTime; $i++){
                 // file upload
-                $userImageName[$i] = '';
-                if($request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
+                $imagePath = '';
+                $arrLimit = count($request->file('user_image'));
+                if($i<$arrLimit && $request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
                     try {
                         $file = $request->file('user_image')[$i];
                         $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
-                        $userImageName[$i] = $tempName.date("Y-m-d").$i.'_'.time().'.' . $file->getClientOriginalExtension();
-
-                        $request->file('user_image')[$i]->move("image/user-image", $userImageName[$i]);
+                        $userImageName = $tempName.date("Y-m-d").$i.'_'.time().'.' . $file->getClientOriginalExtension();
+                        $imagePath= 'image/user-image/'.$userImageName;
+                        $request->file('user_image')[$i]->move("image/user-image", $userImageName);
 
                     } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
@@ -96,7 +97,7 @@ class CertificateController extends Controller
                     'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
                     'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                     //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
-                    'TRADE_LICENSE' => 'image/user-image/'.$userImageName[$i],
+                    'TRADE_LICENSE' => $imagePath,
                     'RENEWING_DATE' =>date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i])),
                     'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
                     'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],

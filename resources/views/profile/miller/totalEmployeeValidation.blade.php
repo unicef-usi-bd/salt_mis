@@ -1,7 +1,44 @@
 <script>
 
+    $(document).ready(function () {
+        $('.finalSubmit').prop('disabled', true);
+    });
+
+    $(document).on('keyup','.partTimeMaleEmp',function () {
+       var partTimeMale = $(this).val();
+
+       if(partTimeMale > 0){
+           $('.fullTimeMaleEmp').removeAttr('required');
+       }
+    });
+
+    $(document).on('keyup','.partTimeFemaleEmp',function () {
+        var partTimeFemale = $(this).val();
+
+        if(partTimeFemale > 0){
+            $('.fullTimeFemaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on('keyup','.fullTimeMaleEmp',function () {
+        var fullTimeMale = $(this).val();
+
+        if(fullTimeMale > 0){
+            $('.partTimeMaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on('keyup','.partTimeFemaleEmp',function () {
+        var partTimeFemale = $(this).val();
+
+        if(partTimeFemale > 0){
+            $('.fullTimeFemaleEmp').removeAttr('required');
+        }
+    });
+
+
     // validation for full time employee
-    $(document).on("change",".partTimeMaleEmp", function () {
+    $(document).on("keyup",".partTimeMaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();
@@ -23,7 +60,7 @@
         }
 
     });
-    $(document).on("change",".partTimeFemaleEmp", function () {
+    $(document).on("keyup",".partTimeFemaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();
@@ -45,7 +82,7 @@
         }
 
     });
-    $(document).on("change",".fullTimeMaleEmp", function () {
+    $(document).on("keyup",".fullTimeMaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();
@@ -67,7 +104,7 @@
         }
 
     });
-    $(document).on("change",".fullTimeFemaleEmp", function () {
+    $(document).on("keyup",".fullTimeFemaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();
@@ -89,7 +126,7 @@
         }
 
     });
-    $(document).on("change",".totalMaleEmp", function () {
+    $(document).on("keyup",".totalMaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();
@@ -112,7 +149,7 @@
 
     });
 
-    $(document).on("change",".totalFemaleEmp", function () {
+    $(document).on("keyup",".totalFemaleEmp", function () {
 
         var  totalMaleEmp = $('.totalMaleEmp').val();
         var  totalFemaleEmp = $('.totalFemaleEmp').val();

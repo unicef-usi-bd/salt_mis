@@ -42,11 +42,9 @@
 
     <div class="page-header">
         <h1>
-            {{--{{ trans('soeReport.report') }}--}}
             Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                {{--{{ trans('soeReport.report_dashboard') }}--}}
                 Miller Profie
             </small>
         </h1>
@@ -64,15 +62,10 @@
                             $millerDetails = DB::select(DB::raw(
                                 "select * from ssm_mill_info where MILL_ID = $millerInfoId"
                             ));
-                            //echo $millerDetails[0]->OWNER_TYPE_ID;
                         @endphp
 
                         <li> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                        {{--@if($millerDetails[0]->OWNER_TYPE_ID == 12)--}}
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                        {{--@else--}}
-                        {{--<li> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>--}}
-                        {{--@endif--}}
                         <li class="active"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
                         <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
@@ -86,7 +79,6 @@
                         {{--Entrepreneur Information--}}
                         @include('profile.miller.updateEntrepreneurInformation')
                         {{--/-Entrepreneur Information--}}
-
 
 
                         {{--Certificate Info--}}
@@ -118,19 +110,18 @@
 
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        <select class="form-control CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                                        <select class="form-control CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  required>
                                                             <option value="">Select</option>
                                                             @foreach($certificate as $row)
                                                                 <option value="{{ $row->CERTIFICATE_ID }}">{{ $row->CERTIFICATE_NAME }}</option>
                                                             @endforeach
                                                         </select>
                                                     </span>
-                                                    <input type="text" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value=""/>
+                                                    <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value=""/>
                                                 </td>
                                                 <td>
                                                     <span class="block input-icon input-icon-right">
-                                                        {{--<input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID">--}}
-                                                        <select class="form-control issuer ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                                        <select class="form-control issuer ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  required>
                                                             <option value="">Select</option>
 
                                                          </select>
@@ -153,27 +144,23 @@
                                                 </td>
 
                                                 <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text"  name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
+                                                        <input type="text"  name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  required/>
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+                                                        <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" required>
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="date" id="textInput1" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
+                                                       <input type="date" id="textInput1" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" required>
                                                     </span>
                                                     <input type="hidden" placeholder=" " name="IS_EXPIRE[]" class="form-control col-xs-10 col-sm-5 IS_EXPIRE" value=""/>
                                                 </td>
 
                                                 <td>
-                                                    <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                                     <span class="block input-icon input-icon-right">
                                                         <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
                                                     </span>
@@ -189,7 +176,7 @@
                                                     <i class="ace-icon fa fa-undo bigger-110"></i>
                                                     {{ trans('dashboard.reset') }}
                                                 </button>
-                                                <button class="btn btn-primary btnCertificate">
+                                                <button type="submit" class="btn btn-primary btnCertificate">
                                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                                     Save & Next
                                                 </button>
@@ -203,25 +190,18 @@
                             $(document).ready(function(){
                                 $('.rowAdd2').click(function(){
                                     var getTr = $('tr.rowFirst2:first');
-//            alert(getTr.html());
                                     $("select.chosen-select").chosen('destroy');
                                     $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
                                     var defaultRow = $('tr.removableRow:last');
                                     defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
-//                                    defaultRow.find('select.ISSURE_ID').prop('disabled', false);
-//                                    defaultRow.find('select.ISSURE_ID').attr('disabled', false);
                                     defaultRow.find('select.ISSURE_ID').empty().append('<option value="">Select</option>');
                                     console.log(defaultRow.find('select.ISSURE_ID').val(''));
-//            For Ignore array Conflict
                                     defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
                                     defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
                                     defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
                                     defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
                                     defaultRow.find('input.REMARKS').attr('disabled', false);
-                                    defaultRow.find('span.budget_against_code').text('');
-                                    defaultRow.find('span.errorMsg').text('');
-                                    defaultRow.find('.my-error-class').text('');
-                                    defaultRow.find('.user_image[]-error').text('');
+
                                     $('.chosen-select').chosen(0);
                                 });
                             });
@@ -264,89 +244,19 @@
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script>
 
-//        $(document).on('click','#OWNER_TYPE_ID',function(){
-//            console.log('hi');
-//        });
-
-        $(document).ready(function(){
-            $('.rowAdd').click(function(){
-                var getTr = $('tr.rowFirst:first');
-//            alert(getTr.html());
-                $("select.chosen-select").chosen('destroy');
-                $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-                var defaultRow = $('tr.removableRow:last');
-                defaultRow.find(' input.OWNER_NAME').attr('disabled', false);
-                defaultRow.find('select.DIVISION_ID').prop('disabled', false);
-                defaultRow.find('select.DISTRICT_ID').prop('disabled', false);
-                defaultRow.find('select.UPAZILA_ID').prop('disabled', false);
-                defaultRow.find('select.UNION_ID').prop('disabled', false);
-//            For Ignore array Conflict
-                defaultRow.find('input.NID').attr('NID', false);
-                defaultRow.find('input.MOBILE_1').attr('MOBILE_1', false);
-                defaultRow.find('input.MOBILE_2').attr('disabled', false);
-                defaultRow.find('input.EMAIL').attr('disabled', false);
-                defaultRow.find('input.REMARKS').attr('disabled', false);
-                defaultRow.find('span.budget_against_code').text('');
-                defaultRow.find('span.errorMsg').text('');
-                $('.chosen-select').chosen(0);
-            });
-        });
         // Fore Remove Row By Click
         $(document).on("click", "span.rowRemove ", function () {
             $(this).closest("tr.removableRow").remove();
         });
 
         $(document).on('change','.CERTIFICATE_TYPE_ID',function(){
-            {{--var certificateTypeId = $(this).val();--}}
-            {{--$.ajax({--}}
-                {{--type : 'GET',--}}
-                {{--url : '{{ url('certificate-issuer-name') }}/'+certificateTypeId,--}}
-                {{--success: function (data) {--}}
-                    {{--$('.ISSURE_ID').val(data[0].LOOKUPCHD_NAME);--}}
-                {{--}--}}
-            {{--});--}}
+
             checkCertificate();
         });
 
-        $(document).ready(function () {
-            $('.btnCertificate').prop('disabled', true);
 
-            $('#myform').validate({ // initialize the plugin
-                errorClass: "my-error-class",
-                //validClass: "my-valid-class",
-                rules: {
-                    'CERTIFICATE_ID[]': {
-                        required: true,
-                    },
-                    'ISSURE_ID[]': {
-                        required: true,
-
-                    },
-                    "ISSUING_DATE[]":{
-                        required: true,
-
-
-                    },
-                    'CERTIFICATE_NO[]':{
-                        required: true,
-
-                    },
-                    'user_image[]':{
-                        required: true,
-                    },
-//                    'RENEWING_DATE[]':{
-//                        required: true,
-//                    }
-
-                }
-            });
-
-
-        });
-        
         function checkCertificate() {
             var bsti = false; // 34
-            //var industrial = false; // 38
             var ediTable = false; // 39
             $('.newRow2 tr').each(function () {
                 var certificateId = parseInt($(this).find('.CERTIFICATE_TYPE_ID').val());
@@ -404,6 +314,7 @@ $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
         }
     });
 });
+
 
     </script>
     @include('profile.miller.ajaxUpdateScriptForAllInfo')

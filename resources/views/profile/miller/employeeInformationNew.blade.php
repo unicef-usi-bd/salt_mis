@@ -90,12 +90,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput2" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male">
+                                                       <input type="text" id="textInput2" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male" required value="0">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput3"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female">
+                                                       <input type="text" id="textInput3"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female" required value="0">
                                                     </span>
                                                 </div>
                                             </div>
@@ -119,12 +119,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male">
+                                                       <input type="text" id="textInput" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male" required>
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput1" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
+                                                       <input type="text" id="textInput1" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female" required>
                                                     </span>
                                                 </div>
                                             </div>
