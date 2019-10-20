@@ -10,49 +10,12 @@
         <div class="col-md-12">
             <div class="alert alert-info entrepreneur_msg"></div>
 
-            {{--<form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">--}}
+
             <form id="entrepreneurId"  class="form-horizontal" role="form" action="{{ url('edit-entrepreneur-info') }}" >
                 @csrf
                 @if(isset($millerInfoId))
                     <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
-                {{--<div class="col-md-6">--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                               {{--<select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">--}}
-                                   {{--<option value=""></option>--}}
-                                    {{--@foreach($registrationType as $row)--}}
-                                       {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->REG_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                   {{--@endforeach--}}
-
-                               {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-
-                {{--<div class="col-md-6">--}}
-
-                    {{--<div class="form-group" >--}}
-                        {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Owner</b></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                                {{--<select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">--}}
-                                    {{--<option value=""></option>--}}
-                                    {{--@foreach($ownerType as $row)--}}
-                                        {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editEntrepData->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                    {{--@endforeach--}}
-
-                                {{--</select>--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-
 
                 <div class="table-width" style="overflow-x: scroll;height: 280px;">
                     <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
@@ -68,7 +31,7 @@
                             <th style="width:200px;">Mobile 2</th>
                             <th style="width:200px;">Email <span style="color:red;"> *</span></th>
                             <th style="width:200px;">Remarks</th>
-                            <th style="width:30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                            <th style="width:30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd3"><i class="fa fa-plus"></i></span></th>
                         </tr>
                         </thead>
                         <tbody class="newRow">
@@ -105,13 +68,7 @@
                                         </select>
                                     </span>
                                 </td>
-                                {{--<td>--}}
-                                    {{--<span class="block input-icon input-icon-right">--}}
-                                        {{--<select class="form-control ent_union" id="UNION_ID" name="UNION_ID[]"  >--}}
-                                            {{--<option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>--}}
-                                        {{--</select>--}}
-                                    {{--</span>--}}
-                                {{--</td>--}}
+
                                 <td>
                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                     <span class="block input-icon input-icon-right">
@@ -137,13 +94,13 @@
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="EMAIL required"  />
                                         <span style="color:red;display:none;" class="error">This field is required</span>
-                                        {{--<input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">--}}
+                                        
                                     </span>
                                 </td>
                                 <td>
                                     <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                     <span class="block input-icon input-icon-right">
-                                        {{--<input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="{{ $editEntrepData->REMARKS }}" class="width-100 REMARKS"  />--}}
+
                                         <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1">{{ $editEntrepData->REMARKS }}</textarea>
                                     </span>
                                 </td>
@@ -172,10 +129,34 @@
 </div>
 
 <script>
-   
+    $(document).ready(function(){
+        $('.rowAdd3').click(function(){
+            var getTr = $('tr.rowFirst:first');
+//            alert(getTr.html());
+            $("select.chosen-select").chosen('destroy');
+            $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            var defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' input.OWNER_NAME').val('');
+            defaultRow.find('select.DIVISION_ID').val('');
+            defaultRow.find('select.ent_district').val('');
+            defaultRow.find('select.ent_upazila').val('');
+//            For Ignore array Conflict
+            defaultRow.find('input.NID').val('');
+            defaultRow.find('input.MOBILE_1').val('');
+            defaultRow.find('input.MOBILE_2').val('');
+            defaultRow.find('input.EMAIL').val('');
+            defaultRow.find('input.REMARKS').val('');
+            defaultRow.find('span.budget_against_code').text('');
+            defaultRow.find('span.errorMsg').text('');
+            $('.chosen-select').chosen(0);
+        });
 
-    $(document).ready(function () {
-        $('select#ENT_DIVISION_ID').on('change',function(){
+        // Fore Remove Row By Click
+        $(document).on("click", "span.rowRemove ", function () {
+            $(this).closest("tr.removableRow").remove();
+        });
+
+        $(document).on('change','.DIVISION_ID',function () {
             var divisionId = $(this).val(); //alert(divisionId); //exit();
             var option = '<option value="">Select District</option>';
             var url  = $(this).attr('url');
@@ -193,10 +174,9 @@
                 }
             });
         });
-    });
 
-    $(document).ready(function () {
-        $('select#ENT_DISTRICT_ID').on('change',function(){
+
+        $(document).on('change','.ent_district',function(){
             var districtId = $(this).val(); //alert(districtId); exit();
             var option = '<option value="">Select Upazila</option>';
             var url = $(this).attr('url');
@@ -214,47 +194,9 @@
                 }
             });
         });
+
     });
 
-//    $(document).ready(function () {
-//        $('#ENT_UPAZILA_ID').on('change',function(){
-//            var upazilaId = $(this).val(); //alert(upazilaId);exit();
-//            var option = '<option value="">Select Union</option>';
-//            var url = $(this).attr('url');
-//            var url = url+'/'+upazilaId;
-//            $.ajax({
-//                type : "get",
-//                url  : url,
-//                data : {'upazilaId': upazilaId},
-//                success:function (data) {
-//                    for (var i = 0; i < data.length; i++){
-//                        option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-//                    }
-//                    $('.ent_union').html(option);
-//                    $('.ent_union').trigger("chosen:updated");
-//                }
-//            });
-//        });
-//    });
-
-    // $(document).ready(function() {
-    //     $('input[type="text"]').keyup(function () {
-    //         var status = true;
-    //         $('input.required').each(function () {
-    //             if ($(this).val() === "") {
-    //                 status = false;
-    //             }
-    //         });
-    //         if (status === true) {
-    //             $(':input[type="button"]').prop('disabled', false);
-    //         } else {
-    //             $(':input[type="button"]').prop('disabled', true);
-    //         }
-    //     });
-    // });
-
-    // Check Validation
-    // input type text and number validation enable disable button
     $(document).ready(function() {
         $('input[type="text"]').keyup(function () {
             checkValidation($(this))
