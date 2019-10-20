@@ -94,7 +94,7 @@
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $editEntrepData->EMAIL }}" class="EMAIL required"  />
                                         <span style="color:red;display:none;" class="error">This field is required</span>
-                                        
+
                                     </span>
                                 </td>
                                 <td>
