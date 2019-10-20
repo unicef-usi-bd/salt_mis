@@ -58,7 +58,7 @@
                         <th  style="width: ;">Mobile 2</th>
                         <th  style="width: ;">Email</th>
                         <th  style="width: ;">Remarks</th>
-                        <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                        <th style="width: 30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                     </tr>
                     </thead>
                     <tbody class="newRow">
@@ -130,7 +130,7 @@
                                                         <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
                                                     </span>
                         </td>
-                        <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                        <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                     </tr>
                     </tbody>
                 </table>

@@ -303,4 +303,17 @@
         });
 
     });
+
+    $('.OWNER_TYPE_ID').change(function() {
+        //alert($('#textInput1').html());
+        if( $(this).val() == 12 ) {
+            //$('#textInput').prop( "disabled", true );
+            $('.removeButton').addClass( 'hidden' );
+            $('.addButton').addClass( 'hidden' );
+        } else {
+            //$('#textInput').prop( "disabled", false );
+            $('.removeButton').removeClass( 'hidden' );
+            $('.addButton').removeClass( 'hidden' );
+        }
+    });
 </script>

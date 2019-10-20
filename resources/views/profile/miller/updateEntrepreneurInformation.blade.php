@@ -68,7 +68,7 @@
                             <th style="width:200px;">Mobile 2</th>
                             <th style="width:200px;">Email <span style="color:red;"> *</span></th>
                             <th style="width:200px;">Remarks</th>
-                            <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                            <th style="width:30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                         </tr>
                         </thead>
                         <tbody class="newRow">
@@ -147,7 +147,7 @@
                                         <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1">{{ $editEntrepData->REMARKS }}</textarea>
                                     </span>
                                 </td>
-                                <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -172,6 +172,8 @@
 </div>
 
 <script>
+   
+
     $(document).ready(function () {
         $('select#ENT_DIVISION_ID').on('change',function(){
             var divisionId = $(this).val(); //alert(divisionId); //exit();
