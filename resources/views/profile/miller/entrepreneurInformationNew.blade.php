@@ -162,7 +162,7 @@
                                                     <th style="width:200px;">Mobile 2</th>
                                                     <th style="width:200px;">Email <span style="color:red;"> *</span></th>
                                                     <th style="width:200px;">Remarks</th>
-                                                    <th style="width:30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                                                    <th style="width:30px;" id="addButton" class="addButton @php echo $editMillData->OWNER_TYPE_ID == 12 ? "hidden" : ""  @endphp"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
 
                                                 </tr>
                                                 </thead>
@@ -237,7 +237,7 @@
                                                             <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1"></textarea>
                                                         </span>
                                                     </td>
-                                                    <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                                    <td id="removeButton" class="removeButton @php echo $editMillData->OWNER_TYPE_ID == 12 ? "hidden" : ""  @endphp"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
 
                                                 </tr>
                                                 </tbody>
