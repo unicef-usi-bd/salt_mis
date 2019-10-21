@@ -283,7 +283,8 @@ class MillerInfoController extends Controller
         }
         $ownerType = $request->input('OWNER_TYPE_ID');
         //$this->pr($request->input('MILL_NAME'));
-        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId,$mill_logo);
+//        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId,$mill_logo);
+        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId,$associationId,$mill_logo);
         //echo $updateMillData;die();
         return "Miller Information has been updated";
     }

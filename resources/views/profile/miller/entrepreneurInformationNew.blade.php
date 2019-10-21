@@ -162,11 +162,8 @@
                                                     <th style="width:200px;">Mobile 2</th>
                                                     <th style="width:200px;">Email <span style="color:red;"> *</span></th>
                                                     <th style="width:200px;">Remarks</th>
-                                                    @if($milltype[0]->OWNER_TYPE_ID != 12)
-                                                    <th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
-                                                    {{--@eles--}}
-                                                        {{--<th style="width:30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>--}}
-                                                    @endif
+                                                    <th style="width:30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+
                                                 </tr>
                                                 </thead>
                                                 <tbody class="newRow">
@@ -240,9 +237,8 @@
                                                             <textarea name="REMARKS[]" class="REMARKS" id="" cols="25" rows="1"></textarea>
                                                         </span>
                                                     </td>
-                                                    @if($milltype[0]->OWNER_TYPE_ID != 12)
-                                                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
-                                                    @endif
+                                                    <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -345,6 +341,7 @@
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
     <script>
+
         $(document).ready(function () {
             $('select#ENT_DIVISION_ID').on('change',function(){
                 var divisionId = $(this).val(); //alert(divisionId); //exit();
