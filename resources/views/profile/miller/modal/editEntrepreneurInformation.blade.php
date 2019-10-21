@@ -56,7 +56,7 @@
                                 </td>
                                 <td>
                                     <span class="block input-icon input-icon-right">
-                                        <select class="form-control DIVISION_ID chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                        <select class="form-control DIVISION_ID chosen-select" id="ENT_DIVISION_ID" name="DIVISION_ID[]" url="{{ url('supplier-profile/get-district') }}" >
                                             <option value="">Select Division</option>
                                             @foreach($getDivision as $row)
                                                 <option value="{{$row->DIVISION_ID}}" @if($editEntrepData->DIVISION_ID==$row->DIVISION_ID) selected @endif> {{$row->DIVISION_NAME}}</option>
@@ -66,7 +66,7 @@
                                 </td>
                                 <td>
                                     <span class="block input-icon input-icon-right">
-                                        <select class="form-control  ent_district chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                        <select class="form-control  ent_district chosen-select" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]" url="{{ url('supplier-profile/get-upazila') }}"  >
                                             <option value="{{ $editEntrepData->DISTRICT_ID }}">{{ $editEntrepData->DISTRICT_NAME }}</option>
                                          </select>
                                     </span>
@@ -128,12 +128,12 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
-                        @else
+                        {{--@if(isset($associationId))--}}
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
+                        {{--@else--}}
                             {{--<button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
                                 {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
                                 {{--Update & Next--}}
@@ -143,7 +143,7 @@
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
-                        @endif
+                        {{--@endif--}}
 
                     </div>
                 </div>
@@ -154,96 +154,78 @@
 
 <script>
 
-        $(document).on('click','.rowAddNew',function () {
-            var getTr = $('tr.rowFirstNew:first');
+        //$(document).on('click','.rowAddNew',function () {
+        $(document).ready(function() {
+            $('.rowAddNew').click(function () {
+                var getTr = $('tr.rowFirstNew:first');
 //            alert(getTr.html());
-            $("select.chosen-select").chosen('destroy');
-            $('tbody.newRowNew').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            var defaultRow = $('tr.removableRow:last');
-            defaultRow.find(' input.OWNER_NAME').val('');
-            defaultRow.find('select.DIVISION_ID').val('');
-            defaultRow.find('select.ent_district').val('');
-            defaultRow.find('select.ent_upazila ').val('');
-            defaultRow.find('select.UNION_ID').val('');
+                $("select.chosen-select").chosen('destroy');
+                $('tbody.newRowNew').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
+                var defaultRow = $('tr.removableRow:last');
+                defaultRow.find(' input.OWNER_NAME').val('');
+                defaultRow.find('select.DIVISION_ID').val('');
+                defaultRow.find('select.ent_district').val('').trigger("chosen:updated");
+                defaultRow.find('select.ent_upazila ').val('').trigger("chosen:updated");
+                defaultRow.find('select.UNION_ID').val('');
 //            For Ignore array Conflict
-            defaultRow.find('input.NID').val('');
-            defaultRow.find('input.MOBILE_1').val('');
-            defaultRow.find('input.MOBILE_2').val('');
-            defaultRow.find('input.EMAIL').val('');
-            defaultRow.find('input.REMARKS').val('');
-            defaultRow.find('span.budget_against_code').val('');
-            defaultRow.find('span.errorMsg').val('');
-            $('.chosen-select').chosen(0);
+                defaultRow.find('input.NID').val('');
+                defaultRow.find('input.MOBILE_1').val('');
+                defaultRow.find('input.MOBILE_2').val('');
+                defaultRow.find('input.EMAIL').val('');
+                defaultRow.find('input.REMARKS').val('');
+                defaultRow.find('span.budget_against_code').val('');
+                defaultRow.find('span.errorMsg').val('');
+                $('.chosen-select').chosen(0);
+            });
+
+
+            // Fore Remove Row By Click
+            $(document).on("click", "span.rowRemove ", function () {
+                $(this).closest("tr.removableRow").remove();
+            });
+
+            $(document).on('change','.DIVISION_ID',function () {
+                var thisRow = $(this).closest('tr');
+                var divisionId = $(this).val(); //alert(divisionId); //exit();
+                var option = '<option value="">Select District</option>';
+                var url  = $(this).attr('url');
+                var url = url+'/'+divisionId;
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'divisionId': divisionId},
+                    success:function (data) {
+                        for (var i = 0; i < data.length; i++){
+                            option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
+                        }
+                        thisRow.find('.ent_district').html(option);
+                        thisRow.find('.ent_district').trigger("chosen:updated");
+                    }
+                });
+            });
+
+
+            $(document).on('change','.ent_district',function(){
+                var thisRow = $(this).closest('tr');
+                var districtId = $(this).val(); //alert(districtId); exit();
+                var option = '<option value="">Select Upazila</option>';
+                var url = $(this).attr('url');
+                var url = url+'/'+districtId;
+                $.ajax({
+                    type : "get",
+                    url  : url,
+                    data : {'districtId': districtId},
+                    success:function (data) {
+                        for (var i = 0; i < data.length; i++){
+                            option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                        }
+                        thisRow.find('.ent_upazila').html(option);
+                        thisRow.find('.ent_upazila').trigger("chosen:updated");
+                    }
+                });
+            });
         });
 
-
-    // Fore Remove Row By Click
-    $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
-    });
-
-//    $(document).ready(function () {
-//        $('select#ENT_DIVISION_ID').on('change',function(){
-//            var divisionId = $(this).val(); //alert(divisionId); //exit();
-//            var option = '<option value="">Select District</option>';
-//            var url  = $(this).attr('url');
-//            var url = url+'/'+divisionId;
-//            $.ajax({
-//                type : "get",
-//                url  : url,
-//                data : {'divisionId': divisionId},
-//                success:function (data) {
-//                    for (var i = 0; i < data.length; i++){
-//                        option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-//                    }
-//                    $('.ent_district').html(option);
-//                    $('.ent_district').trigger("chosen:updated");
-//                }
-//            });
-//        });
-//    });
-//
-//    $(document).ready(function () {
-//        $('select#ENT_DISTRICT_ID').on('change',function(){
-//            var districtId = $(this).val(); //alert(districtId); exit();
-//            var option = '<option value="">Select Upazila</option>';
-//            var url = $(this).attr('url');
-//            var url = url+'/'+districtId;
-//            $.ajax({
-//                type : "get",
-//                url  : url,
-//                data : {'districtId': districtId},
-//                success:function (data) {
-//                    for (var i = 0; i < data.length; i++){
-//                        option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
-//                    }
-//                    $('.ent_upazila').html(option);
-//                    $('.ent_upazila').trigger("chosen:updated");
-//                }
-//            });
-//        });
-//    });
-//
-//    $(document).ready(function () {
-//        $('#ENT_UPAZILA_ID').on('change',function(){
-//            var upazilaId = $(this).val(); //alert(upazilaId);exit();
-//            var option = '<option value="">Select Union</option>';
-//            var url = $(this).attr('url');
-//            var url = url+'/'+upazilaId;
-//            $.ajax({
-//                type : "get",
-//                url  : url,
-//                data : {'upazilaId': upazilaId},
-//                success:function (data) {
-//                    for (var i = 0; i < data.length; i++){
-//                        option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-//                    }
-//                    $('.ent_union').html(option);
-//                    $('.ent_union').trigger("chosen:updated");
-//                }
-//            });
-//        });
-//    });
 
     // validation check
     $(document).ready(function () {
@@ -291,21 +273,21 @@
 </script>
 
     <script>
-//        $('.entrepreneur_msg').hide();
-//        $(document).on('click','.btnUpdateEntrepreneur',function () {
-//            $.ajax({
-//                type : 'POST',
-//                url : 'edit-entrepreneur-info',
-//                data : $('#entrepreneurId').serialize(),
-//                success: function (data) {
-//                    console.log(data);
-//                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
-//
-//                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
-//
-//                }
-//            })
-//        });
+        $('.entrepreneur_msg').hide();
+        $(document).on('click','.btnUpdateEntrepreneur',function () {
+            $.ajax({
+                type : 'POST',
+                url : 'edit-entrepreneur-info',
+                data : $('#entrepreneurId').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+
+                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+
+                }
+            })
+        });
 
         $('.entrepreneur_msg').hide();
         $(document).on('click','.btnUpdateTemEntrepreneur',function () {
