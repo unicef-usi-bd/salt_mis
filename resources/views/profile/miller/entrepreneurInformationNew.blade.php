@@ -313,7 +313,7 @@
                 defaultRow.find('select.DIVISION_ID').prop('disabled', false);
                 defaultRow.find('select.DISTRICT_ID').prop('disabled', false);
                 defaultRow.find('select.UPAZILA_ID').prop('disabled', false);
-                defaultRow.find('select.UNION_ID').prop('disabled', false);
+                //defaultRow.find('select.UNION_ID').prop('disabled', false);
 //            For Ignore array Conflict
                 defaultRow.find('input.NID').attr('NID', false);
                 defaultRow.find('input.MOBILE_1').attr('MOBILE_1', false);
