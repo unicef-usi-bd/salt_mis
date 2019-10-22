@@ -232,7 +232,8 @@ class CertificateController extends Controller
 //    public function updateCertificateInfo(Request $request)
     {
         //$this->pr($request->file('user_image'));
-        //$this->pr($request->input());
+        //dd($request);
+        $data = array();
        $millerInfoId = $request->input('MILL_ID');
 
         $certificateId = DB::table('ssm_certificate_info')->where('MILL_ID',$millerInfoId)->delete();
@@ -255,7 +256,7 @@ class CertificateController extends Controller
                }
            }
 
-           $newInsertdata = ([
+           $data[] = array(
                    'MILL_ID' => $millerInfoId,
                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
                    'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
@@ -267,11 +268,14 @@ class CertificateController extends Controller
                    'REMARKS' => $request->input('REMARKS')[$i],
                    'UPDATE_BY' => Auth::user()->id,
                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-           ]);
+           );
            //DB::table('ssm_certificate_info')->where('MILL_ID',$millerInfoId)->delete();
-           $inset = DB::table('tem_ssm_certificate_info')->where('CERTIFICATE_TYPE_ID',$millerInfoId)->insert($newInsertdata);
+//           $inset = DB::table('tem_ssm_certificate_info')->where('CERTIFICATE_TYPE_ID',$millerInfoId)->insert($newInsertdata);
+
+
            //$this->pr($inset);
        }
+            $inset = DB::table('ssm_certificate_info')->insert($data);
 
        }
 

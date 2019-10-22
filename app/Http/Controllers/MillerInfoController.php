@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 use File;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\AssociationSetup;
+use App\CertificateIssur;
 
 class MillerInfoController extends Controller
 {
@@ -144,7 +145,7 @@ class MillerInfoController extends Controller
             if($millerInfoId){
                 return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Created !');
 
-             }
+            }
         }
     }
 
@@ -177,30 +178,32 @@ class MillerInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-     {
-         $millerInfoId = $id;
-         $getDivision = SupplierProfile::getDivision();
-         $getZone = SupplierProfile::getZone();
-         $getDistrict = SupplierProfile::getDistrict();
+    {
+        $millerInfoId = $id;
+        $getDivision = SupplierProfile::getDivision();
+        $getZone = SupplierProfile::getZone();
+        $getDistrict = SupplierProfile::getDistrict();
 
-         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
-         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
+        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
-         $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
-         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-         $editMillData = MillerInfo::getMillData($id);
-         $editEntrepData = Entrepreneur::getEntrepreneurData($id);
-         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($id);
-         $editCertificateData = Certificate::getCertificateData($id);
-         $editQcData = Qc::getQcData($id);
-         $editEmployeeData = Employee::getEmployeeData($id);
-         $associationId = AssociationSetup::singleAssociation();
-         //echo $associationId;exit;
-         //$this->pr($associationId);
-         return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','associationId'));
+        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $certificateId = CertificateIssur::getCertificate();
+        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        $editMillData = MillerInfo::getMillData($id);
+        $editEntrepData = Entrepreneur::getEntrepreneurData($id);
+        $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($id);
+        $editCertificateData = Certificate::getCertificateData($id);
+        $issuerId = Certificate::getIssuerIs();
+        $editQcData = Qc::getQcData($id);
+        $editEmployeeData = Employee::getEmployeeData($id);
+        $associationId = AssociationSetup::singleAssociation();
+        //echo $associationId;exit;
+//        $this->pr($editCertificateData);
+        return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','certificateId','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','associationId','issuerId'));
     }
 
     /**

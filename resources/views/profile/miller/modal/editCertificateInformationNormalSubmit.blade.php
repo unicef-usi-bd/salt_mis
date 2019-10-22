@@ -3,8 +3,8 @@
         <div class="col-md-12">
             {{--<div class="alert alert-info certificate_msg"></div>--}}
 
-            {{--<form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
-            <form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            <form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            {{--<form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
 
                @csrf
                 @if(isset($millerInfoId))
@@ -32,8 +32,9 @@
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
-                                        @foreach($certificate as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                        @foreach($certificateId as $row)
+                                            {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                            <option value="{{ $row->CERTIFICATE_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->CERTIFICATE_ID) selected @endif>{{ $row->CERTIFICATE_NAME }}</option>
                                         @endforeach
                                     </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
@@ -43,13 +44,13 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID" value="{{ $editCertData->ISSURE_ID }}">
-                                    {{--<select class="form-control ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >--}}
-                                        {{--<option value="">Select</option>--}}
-                                        {{--@foreach($issueBy as $row)--}}
-                                            {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
-                                        {{--@endforeach--}}
-                                     {{--</select>--}}
+                                    {{--<input type="text"  name="ISSURE_ID[]" class="chosen-container ISSURE_ID" value="{{ $editCertData->ISSURE_ID }}">--}}
+                                    <select class="form-control issuer  ISSURE_ID required" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                        <option value="">Select</option>
+                                        @foreach($issuerId as $row)
+                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                        @endforeach
+                                     </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
@@ -112,17 +113,17 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        @if(isset($associationId))
-                            <button type="submit" class="btn btn-success" >
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
-                        @else
+                        {{--@if(isset($associationId))--}}
+                            {{--<button type="submit" class="btn btn-success" >--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
+                        {{--@else--}}
                             <button type="submit" class="btn btn-success" >
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Submit
                             </button>
-                        @endif
+                        {{--@endif--}}
                     </div>
                 </div>
             </form>
@@ -138,15 +139,16 @@
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRowCert').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
-            defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
-            defaultRow.find('select.ISSURE_ID').prop('disabled', false);
+            defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
+            defaultRow.find('select.ISSURE_ID').val('');
+            defaultRow.find('select.DISTRICT_ID').val('');
 
 //            For Ignore array Conflict
-            defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
-            defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
-            defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
-            defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
-            defaultRow.find('input.REMARKS').attr('disabled', false);
+            defaultRow.find('input.ISSUING_DATE').val('');
+            defaultRow.find('input.CERTIFICATE_NO').val('');
+            defaultRow.find('input.TRADE_LICENSE').val('');
+            defaultRow.find('input.RENEWING_DATE').val('');
+            defaultRow.find('input.REMARKS').val('');
             defaultRow.find('span.budget_against_code').text('');
             defaultRow.find('span.errorMsg').text('');
             $('.chosen-select').chosen(0);
@@ -224,4 +226,39 @@
 
 
 
+</script>
+<script>
+    $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+        var thisRow = $(this).closest('tr');
+        var issuerId = thisRow.find('.CERTIFICATE_TYPE_ID').val();
+        var option = '<option value="">Select Issuer</option>';
+        var _token = '{{ csrf_token() }}';
+
+        $.ajax({
+            type : "post",
+            url  : '{{ url('certificate/get-issuer') }}',
+            data : {issuerId: issuerId, _token: _token},
+            success:function (data) {
+                console.log(thisRow);
+                var selected = '';
+                var issurInfo = data[0];
+                var certificate = data[1];
+
+                thisRow.find('.CERTIFICATE_TYPE').val(certificate.CERTIFICATE_TYPE);
+                thisRow.find('.IS_EXPIRE').val(certificate.IS_EXPIRE);
+
+                if(certificate.CERTIFICATE_TYPE == 1) {
+                    thisRow.find('.RENEWING_DATE').prop('required' , true );
+                }else{
+                    thisRow.find('.RENEWING_DATE').prop('required' , false );
+                }
+
+                for (var i = 0; i < issurInfo.length; i++){
+                    var selected = issurInfo[i].LOOKUPCHD_ID == certificate.ISSUR_ID ? 'Selected' : '';
+                    option = option + '<option value="'+ issurInfo[i].LOOKUPCHD_ID +'"' + selected +' >'+ issurInfo[i].LOOKUPCHD_NAME+'</option>';
+                }
+                thisRow.find('.issuer').html(option);
+            }
+        });
+    });
 </script>

@@ -35,9 +35,17 @@ class Certificate extends Model
     public static function getCertificateData($millerInfoId){
         return DB::table('ssm_certificate_info')
             ->select('ssm_certificate_info.*')
+            ->leftJoin('ssc_lookupchd','ssm_certificate_info.ISSURE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('MILL_ID','=',$millerInfoId)
             ->get();
 
+    }
+
+    public static function getIssuerIs(){
+        return DB::table('ssc_lookupchd')
+            ->select('ssc_lookupchd.*')
+            ->where('ssc_lookupchd.LOOKUPMST_ID','=',21)
+            ->get();
     }
 
     public static function getAllCertificate($millerId){

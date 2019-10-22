@@ -129,20 +129,20 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         {{--@if(isset($associationId))--}}
-                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Approve--}}
-                            {{--</button>--}}
+                        {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">--}}
+                        {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                        {{--Approve--}}
+                        {{--</button>--}}
                         {{--@else--}}
-                            <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Update & Next
-                            </button>
+                        <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Update & Next
+                        </button>
 
-                            {{--<button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Update & Next--}}
-                            {{--</button>--}}
+                        {{--<button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
+                        {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                        {{--Update & Next--}}
+                        {{--</button>--}}
                         {{--@endif--}}
 
                     </div>
@@ -154,77 +154,77 @@
 
 <script>
 
-        //$(document).on('click','.rowAddNew',function () {
-        $(document).ready(function() {
-            $('.rowAddNew').click(function () {
-                var getTr = $('tr.rowFirstNew:first');
+    //$(document).on('click','.rowAddNew',function () {
+    $(document).ready(function() {
+        $('.rowAddNew').click(function () {
+            var getTr = $('tr.rowFirstNew:first');
 //            alert(getTr.html());
-                $("select.chosen-select").chosen('destroy');
-                $('tbody.newRowNew').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
-                var defaultRow = $('tr.removableRow:last');
-                defaultRow.find(' input.OWNER_NAME').val('');
-                defaultRow.find('select.DIVISION_ID').val('');
-                defaultRow.find('select.ent_district').val('').trigger("chosen:updated");
-                defaultRow.find('select.ent_upazila ').val('').trigger("chosen:updated");
-                defaultRow.find('select.UNION_ID').val('');
+            $("select.chosen-select").chosen('destroy');
+            $('tbody.newRowNew').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
+            var defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' input.OWNER_NAME').val('');
+            defaultRow.find('select.DIVISION_ID').val('');
+            defaultRow.find('select.ent_district').val('').trigger("chosen:updated");
+            defaultRow.find('select.ent_upazila ').val('').trigger("chosen:updated");
+            defaultRow.find('select.UNION_ID').val('');
 //            For Ignore array Conflict
-                defaultRow.find('input.NID').val('');
-                defaultRow.find('input.MOBILE_1').val('');
-                defaultRow.find('input.MOBILE_2').val('');
-                defaultRow.find('input.EMAIL').val('');
-                defaultRow.find('input.REMARKS').val('');
-                defaultRow.find('span.budget_against_code').val('');
-                defaultRow.find('span.errorMsg').val('');
-                $('.chosen-select').chosen(0);
-            });
+            defaultRow.find('input.NID').val('');
+            defaultRow.find('input.MOBILE_1').val('');
+            defaultRow.find('input.MOBILE_2').val('');
+            defaultRow.find('input.EMAIL').val('');
+            defaultRow.find('input.REMARKS').val('');
+            defaultRow.find('span.budget_against_code').val('');
+            defaultRow.find('span.errorMsg').val('');
+            $('.chosen-select').chosen(0);
+        });
 
 
-            // Fore Remove Row By Click
-            $(document).on("click", "span.rowRemove ", function () {
-                $(this).closest("tr.removableRow").remove();
-            });
+        // Fore Remove Row By Click
+        $(document).on("click", "span.rowRemove ", function () {
+            $(this).closest("tr.removableRow").remove();
+        });
 
-            $(document).on('change','.DIVISION_ID',function () {
-                var thisRow = $(this).closest('tr');
-                var divisionId = $(this).val(); //alert(divisionId); //exit();
-                var option = '<option value="">Select District</option>';
-                var url  = $(this).attr('url');
-                var url = url+'/'+divisionId;
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'divisionId': divisionId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-                        }
-                        thisRow.find('.ent_district').html(option);
-                        thisRow.find('.ent_district').trigger("chosen:updated");
+        $(document).on('change','.DIVISION_ID',function () {
+            var thisRow = $(this).closest('tr');
+            var divisionId = $(this).val(); //alert(divisionId); //exit();
+            var option = '<option value="">Select District</option>';
+            var url  = $(this).attr('url');
+            var url = url+'/'+divisionId;
+            $.ajax({
+                type : "get",
+                url  : url,
+                data : {'divisionId': divisionId},
+                success:function (data) {
+                    for (var i = 0; i < data.length; i++){
+                        option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
                     }
-                });
-            });
-
-
-            $(document).on('change','.ent_district',function(){
-                var thisRow = $(this).closest('tr');
-                var districtId = $(this).val(); //alert(districtId); exit();
-                var option = '<option value="">Select Upazila</option>';
-                var url = $(this).attr('url');
-                var url = url+'/'+districtId;
-                $.ajax({
-                    type : "get",
-                    url  : url,
-                    data : {'districtId': districtId},
-                    success:function (data) {
-                        for (var i = 0; i < data.length; i++){
-                            option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
-                        }
-                        thisRow.find('.ent_upazila').html(option);
-                        thisRow.find('.ent_upazila').trigger("chosen:updated");
-                    }
-                });
+                    thisRow.find('.ent_district').html(option);
+                    thisRow.find('.ent_district').trigger("chosen:updated");
+                }
             });
         });
+
+
+        $(document).on('change','.ent_district',function(){
+            var thisRow = $(this).closest('tr');
+            var districtId = $(this).val(); //alert(districtId); exit();
+            var option = '<option value="">Select Upazila</option>';
+            var url = $(this).attr('url');
+            var url = url+'/'+districtId;
+            $.ajax({
+                type : "get",
+                url  : url,
+                data : {'districtId': districtId},
+                success:function (data) {
+                    for (var i = 0; i < data.length; i++){
+                        option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                    }
+                    thisRow.find('.ent_upazila').html(option);
+                    thisRow.find('.ent_upazila').trigger("chosen:updated");
+                }
+            });
+        });
+    });
 
 
     // validation check
@@ -272,159 +272,159 @@
     });
 </script>
 
-    <script>
-//        $('.entrepreneur_msg').hide();
-//        $(document).on('click','.btnUpdateEntrepreneur',function () {
-//            $.ajax({
-//                type : 'POST',
-//                url : 'edit-entrepreneur-info',
-//                data : $('#entrepreneurId').serialize(),
-//                success: function (data) {
-//                    console.log(data);
-//                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
-//
-////                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
-//
-//                }
-//            })
-//        });
+<script>
+    //        $('.entrepreneur_msg').hide();
+    //        $(document).on('click','.btnUpdateEntrepreneur',function () {
+    //            $.ajax({
+    //                type : 'POST',
+    //                url : 'edit-entrepreneur-info',
+    //                data : $('#entrepreneurId').serialize(),
+    //                success: function (data) {
+    //                    console.log(data);
+    //                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+    //
+    ////                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+    //
+    //                }
+    //            })
+    //        });
 
-        $('.entrepreneur_msg').hide();
-        $(document).on('click','.btnUpdateEntrepreneur',function () {
-            $.ajax({
-                type : 'POST',
-                url : 'edit-entrepreneur-info-update',
-                data : $('#entrepreneurId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+    $('.entrepreneur_msg').hide();
+    $(document).on('click','.btnUpdateEntrepreneur',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-entrepreneur-info-update',
+            data : $('#entrepreneurId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
 
-//                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+                setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
 
-                }
-            })
+            }
+        })
+    });
+
+    $('.entrepreneur_msg').hide();
+    $(document).on('click','.btnUpdateTemEntrepreneur',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-entrepreneur-info-tem',
+            data : $('#entrepreneurId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+
+                setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+
+            }
+        })
+    });
+    //      $(document).ready(function () {
+    //          $("#entrepreneur_tab").load(location.href + " #entrepreneur_tab");
+    //      });
+    $('.millmsg').hide();
+    $(document).on('click','.btnUpdateApprove',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-mill-info-approve',
+            data : $('#millId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.millmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".millmsg").hide(); }, 3000);
+
+            }
+        })
+    });
+
+
+
+
+
+    // Check Validation
+    // input type text and number validation enable disable button
+    $(document).ready(function() {
+        $('input[type="text"]').keyup(function () {
+            checkValidation($(this))
         });
 
-        $('.entrepreneur_msg').hide();
-        $(document).on('click','.btnUpdateTemEntrepreneur',function () {
-            $.ajax({
-                type : 'POST',
-                url : 'edit-entrepreneur-info-tem',
-                data : $('#entrepreneurId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
-
-                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
-
-                }
-            })
+        $('input[type="number"]').keyup(function () {
+            checkValidation($(this))
         });
-//      $(document).ready(function () {
-//          $("#entrepreneur_tab").load(location.href + " #entrepreneur_tab");
-//      });
-        $('.millmsg').hide();
-        $(document).on('click','.btnUpdateApprove',function () {
-            $.ajax({
-                type : 'POST',
-                url : 'edit-mill-info-approve',
-                data : $('#millId').serialize(),
-                success: function (data) {
-                    console.log(data);
-                    $('.millmsg').html('<span>'+ data +'</span>').show();
-                    setTimeout(function() { $(".millmsg").hide(); }, 3000);
+    });
 
-                }
-            })
-        });
-
-
-
-
-
-        // Check Validation
-        // input type text and number validation enable disable button
-        $(document).ready(function() {
-            $('input[type="text"]').keyup(function () {
-                checkValidation($(this))
-            });
-
-            $('input[type="number"]').keyup(function () {
-                checkValidation($(this))
-            });
-        });
-
-        function checkValidation(selector) {
-            var thisInput = selector.closest('.block');
-            var mobile = $('.MOBILE_1').val();
-            var mobile2 = $('.MOBILE_2').val();
-            var status = true;
-            $('input.required').each(function () {
-                if ($(this).val() === "") {
-                    status = false;
-                }
-            });
-
-            if(checkMobileDigit(mobile)!==true ){
+    function checkValidation(selector) {
+        var thisInput = selector.closest('.block');
+        var mobile = $('.MOBILE_1').val();
+        var mobile2 = $('.MOBILE_2').val();
+        var status = true;
+        $('input.required').each(function () {
+            if ($(this).val() === "") {
                 status = false;
             }
-            console.log(mobile);
-            if(checkMobileDigit(mobile2)!==true ){
-                status = false;
-            }
-            console.log(mobile2);
+        });
 
-            if (status === true) {
-                $('input[type="button"]').prop('disabled', false);
-            } else {
-                $('input[type="button"]').prop('disabled', true);
-            }
-            if(thisInput.find('.required').val()===""){
-                thisInput.find('span.error').show();
-            } else{
-                thisInput.find('span.error').hide();
+        if(checkMobileDigit(mobile)!==true ){
+            status = false;
+        }
+        console.log(mobile);
+        if(checkMobileDigit(mobile2)!==true ){
+            status = false;
+        }
+        console.log(mobile2);
+
+        if (status === true) {
+            $('input[type="button"]').prop('disabled', false);
+        } else {
+            $('input[type="button"]').prop('disabled', true);
+        }
+        if(thisInput.find('.required').val()===""){
+            thisInput.find('span.error').show();
+        } else{
+            thisInput.find('span.error').hide();
+        }
+    }
+    // mobilee only number
+    $(document).on('keyup', '.numbersOnly', function() {
+        var val = $(this).val();
+        if (isNaN(val)) {
+            val = val.replace(/[^0-9\.]/g, '');
+            if (val.split('.').length > 2) {
+                val = val.replace(/\.+$/, "");
             }
         }
-        // mobilee only number
-        $(document).on('keyup', '.numbersOnly', function() {
-            var val = $(this).val();
-            if (isNaN(val)) {
-                val = val.replace(/[^0-9\.]/g, '');
-                if (val.split('.').length > 2) {
-                    val = val.replace(/\.+$/, "");
-                }
-            }
-            $(this).val(val);
-        });
-        // show error msg for mobile
-        $(document).on('keyup', '.MOBILE_1', function () {
-            var mobile =$(this).val();
-            var status = checkMobileDigit(mobile);
-            if(status!==true){
-                $('.errorMobile').text('11 digits only');
-            } else{
-                $('.errorMobile').text('');
-            }
-        });
-        // allow only 11 digit
-        $(document).on('keyup', '.MOBILE_2', function () {
-            var mobile2 =$(this).val();
-            var status = checkMobileDigit(mobile2);
-            if(status!==true){
-                $('.errorMobile2').text('11 digits only');
-            } else{
-                $('.errorMobile2').text('');
-            }
-        });
-
-        function checkMobileDigit(number) {
-            var status = true;
-            if(number.length<11 && number!==""){
-                status = false;
-            }
-            return status;
+        $(this).val(val);
+    });
+    // show error msg for mobile
+    $(document).on('keyup', '.MOBILE_1', function () {
+        var mobile =$(this).val();
+        var status = checkMobileDigit(mobile);
+        if(status!==true){
+            $('.errorMobile').text('11 digits only');
+        } else{
+            $('.errorMobile').text('');
         }
+    });
+    // allow only 11 digit
+    $(document).on('keyup', '.MOBILE_2', function () {
+        var mobile2 =$(this).val();
+        var status = checkMobileDigit(mobile2);
+        if(status!==true){
+            $('.errorMobile2').text('11 digits only');
+        } else{
+            $('.errorMobile2').text('');
+        }
+    });
+
+    function checkMobileDigit(number) {
+        var status = true;
+        if(number.length<11 && number!==""){
+            status = false;
+        }
+        return status;
+    }
 
 
 
-    </script>
+</script>
