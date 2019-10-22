@@ -134,15 +134,15 @@
                                 {{--Approve--}}
                             {{--</button>--}}
                         {{--@else--}}
-                            {{--<button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Update & Next--}}
-                            {{--</button>--}}
-
-                            <button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                            <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
+
+                            {{--<button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update & Next--}}
+                            {{--</button>--}}
                         {{--@endif--}}
 
                     </div>
@@ -273,17 +273,33 @@
 </script>
 
     <script>
+//        $('.entrepreneur_msg').hide();
+//        $(document).on('click','.btnUpdateEntrepreneur',function () {
+//            $.ajax({
+//                type : 'POST',
+//                url : 'edit-entrepreneur-info',
+//                data : $('#entrepreneurId').serialize(),
+//                success: function (data) {
+//                    console.log(data);
+//                    $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
+//
+////                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+//
+//                }
+//            })
+//        });
+
         $('.entrepreneur_msg').hide();
         $(document).on('click','.btnUpdateEntrepreneur',function () {
             $.ajax({
                 type : 'POST',
-                url : 'edit-entrepreneur-info',
+                url : 'edit-entrepreneur-info-update',
                 data : $('#entrepreneurId').serialize(),
                 success: function (data) {
                     console.log(data);
                     $('.entrepreneur_msg').html('<span>'+ data +'</span>').show();
 
-                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
+//                    setTimeout(function() { $(".entrepreneur_msg").hide(); }, 3000);
 
                 }
             })

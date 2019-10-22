@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-certificate-info', 'CertificateController@updateCertificateInfo'); //Azharul
     Route::post('edit-certificate-info-normal', 'CertificateController@updateCertificateInfoNormal'); //Azharul
     Route::post('edit-entrepreneur-info', 'EntrepreneurController@updateEntrepreneurInfo'); //Azharul
+    Route::post('edit-entrepreneur-info-update', 'EntrepreneurController@updateEntrepreneurInfoUpdate'); //jalal
     // modal edit mill information
 
     //Temporary modal for mill information

@@ -14,13 +14,13 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" value="{{ $editEmployeeData->TOTMALE_EMP }}" class="chosen-container totalMaleEmp" placeholder="Male">
+                               <input type="text" name="TOTMALE_EMP" value="{{ $editEmployeeData->TOTMALE_EMP }}" class="chosen-container totalMaleEmp empValidation" placeholder="Male">
                             </span>
                             <input type="hidden" value="{{ $editEmployeeData->MILLEMP_ID}}" name="MILLEMP_ID">
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" value="{{ $editEmployeeData->TOTFEM_EMP }}" class="chosen-container totalFemaleEmp" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" value="{{ $editEmployeeData->TOTFEM_EMP }}" class="chosen-container totalFemaleEmp empValidation" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -29,12 +29,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" value="{{ $editEmployeeData->PARTTIMEMALE_EMP }}" class="chosen-container partTimeMaleEmp" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" value="{{ $editEmployeeData->PARTTIMEMALE_EMP }}" class="chosen-container partTimeMaleEmp empValidation" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" value="{{ $editEmployeeData->PARTTIMEFEM_EMP }}" class="chosen-container partTimeFemaleEmp" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" value="{{ $editEmployeeData->PARTTIMEFEM_EMP }}" class="chosen-container partTimeFemaleEmp empValidation" placeholder="Female">
                             </span>
                         </div>
                         <br>
@@ -59,12 +59,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $editEmployeeData->FULLTIMEMALE_EMP }}" class="chosen-container fullTimeMaleEmp" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $editEmployeeData->FULLTIMEMALE_EMP }}" class="chosen-container fullTimeMaleEmp empValidation" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $editEmployeeData->FULLTIMEFEM_EMP }}" class="chosen-container fullTimeFemaleEmp" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $editEmployeeData->FULLTIMEFEM_EMP }}" class="chosen-container fullTimeFemaleEmp empValidation" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -91,22 +91,22 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="employeeTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
-                        @else
-                            {{--<button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">--}}
+                        {{--@if(isset($associationId))--}}
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="employeeTab()">--}}
                                 {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Update & Next--}}
+                                {{--Approve--}}
                             {{--</button>--}}
-
-                            <button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">
+                        {{--@else--}}
+                            <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
-                        @endif
+
+                            {{--<button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update & Next--}}
+                            {{--</button>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </form>
@@ -117,20 +117,20 @@
 </div>
 
 <script>
-//    $('.empmsg').hide();
-//    $(document).on('click','.btnUpdateEmp',function () {
-//        $.ajax({
-//            type : 'POST',
-//            url : 'edit-employee-info',
-//            data : $('#employeeId').serialize(),
-//            success: function (data) {
-//                console.log(data);
-//                $('.empmsg').html('<span>'+ data +'</span>').show();
-//                setTimeout(function() { $(".empmsg").hide(); }, 3000);
-//
-//            }
-//        })
-//    });
+    $('.empmsg').hide();
+    $(document).on('click','.btnUpdateEmp',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-employee-info',
+            data : $('#employeeId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.empmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".empmsg").hide(); }, 3000);
+
+            }
+        })
+    });
 
     $('.empmsg').hide();
     $(document).on('click','.btnUpdateEmpTem',function () {
@@ -185,4 +185,211 @@
     //
     // });
 </script>
-@include('profile.miller.totalEmployeeValidation')
+{{--@include('profile.miller.totalEmployeeValidation')--}}
+<script>
+
+    $(document).ready(function () {
+        $('.finalSubmit').prop('disabled', true);
+    });
+
+    $(document).on('keyup','.partTimeMaleEmp',function () {
+        var partTimeMale = $(this).val();
+
+        if(partTimeMale > 0){
+            $('.fullTimeMaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on('keyup','.partTimeFemaleEmp',function () {
+        var partTimeFemale = $(this).val();
+
+        if(partTimeFemale > 0){
+            $('.fullTimeFemaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on('keyup','.fullTimeMaleEmp',function () {
+        var fullTimeMale = $(this).val();
+
+        if(fullTimeMale > 0){
+            $('.partTimeMaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on('keyup','.partTimeFemaleEmp',function () {
+        var partTimeFemale = $(this).val();
+
+        if(partTimeFemale > 0){
+            $('.fullTimeFemaleEmp').removeAttr('required');
+        }
+    });
+
+    $(document).on("keyup  change",".empValidation",function(){
+        var thisvalue= $(this).val();
+        if(!thisvalue){
+            $(this).val(0).select();
+        }
+        var  totalMaleEmp = $('.totalMaleEmp').val();
+        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+        var total  = parseInt(totalMaleEmp == '' ? 0 : totalMaleEmp)+parseInt(totalFemaleEmp == '' ? 0 :totalFemaleEmp);
+        var totalPartFullMaleEmp  = parseInt(partTimeMaleEmp == '' ? 0 :partTimeMaleEmp)+parseInt(fullTimeMaleEmp == '' ? 0 :fullTimeMaleEmp);
+        var totalPartFullFemaleEmp  = parseInt(partTimeFemaleEmp == '' ? 0 :partTimeFemaleEmp)+parseInt(fullTimeFemaleEmp == '' ? 0 :fullTimeFemaleEmp);
+        var totalPartFullEmp = parseInt(partTimeMaleEmp == '' ? 0 :partTimeMaleEmp)+parseInt(partTimeFemaleEmp == '' ? 0 :partTimeFemaleEmp)+parseInt(fullTimeMaleEmp == '' ? 0 :fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp == '' ? 0 :fullTimeFemaleEmp);
+
+        if(totalPartFullEmp <= 0){
+            $('.finalSubmit').prop('disabled', true);
+            $('span.error').show();
+        }else{
+            if(total == totalPartFullEmp && totalMaleEmp == totalPartFullMaleEmp && totalFemaleEmp == totalPartFullFemaleEmp){
+                $('.btnUpdateEmp').prop('disabled', false);
+                $('span.error').hide();
+            }else{
+                $('.btnUpdateEmp').prop('disabled', true);
+                $('span.error').show();
+            }
+        }
+    });
+
+
+    // validation for full time employee
+    //    $(document).on("keyup",".partTimeMaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+    //    $(document).on("keyup",".partTimeFemaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+    //    $(document).on("keyup",".fullTimeMaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+    //    $(document).on("keyup blur change",".fullTimeFemaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+    //    $(document).on("keyup",".totalMaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+    //
+    //    $(document).on("keyup",".totalFemaleEmp", function () {
+    //
+    //        var  totalMaleEmp = $('.totalMaleEmp').val();
+    //        var  totalFemaleEmp = $('.totalFemaleEmp').val();
+    //        var  partTimeMaleEmp = $('.partTimeMaleEmp').val();
+    //        var  partTimeFemaleEmp = $('.partTimeFemaleEmp').val();
+    //        var  fullTimeMaleEmp = $('.fullTimeMaleEmp').val();
+    //        var  fullTimeFemaleEmp = $('.fullTimeFemaleEmp').val();
+    //        var total  = parseInt(totalMaleEmp)+parseInt(totalFemaleEmp);
+    //        var totalPartTime  = parseInt(partTimeMaleEmp)+parseInt(partTimeFemaleEmp);
+    //        var totalFullTime  = parseInt(fullTimeMaleEmp)+parseInt(fullTimeFemaleEmp);
+    //        var totalPartFullEmp = parseInt(totalPartTime)+parseInt(totalFullTime);
+    //        if(total!=totalPartFullEmp){
+    //
+    //            $('.finalSubmit').prop('disabled', true);
+    //            $('span.error').show();
+    //        }else{
+    //            $('.finalSubmit').prop('disabled', false);
+    //            $('span.error').hide();
+    //        }
+    //
+    //    });
+
+
+
+</script>

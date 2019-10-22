@@ -342,27 +342,6 @@
     @include('masterGlobal.deleteScript')
     <script>
 
-//        $(document).ready(function () {
-//            $('.DIVISION_ID').on('change',function(){
-//                var divisionId = $(this).val(); //alert(divisionId); //exit();
-//                var option = '<option value="">Select District</option>';
-//                var url  = $(this).attr('url');
-//                var url = url+'/'+divisionId;
-//                $.ajax({
-//                    type : "get",
-//                    url  : url,
-//                    data : {'divisionId': divisionId},
-//                    success:function (data) {
-//                        for (var i = 0; i < data.length; i++){
-//                            option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-//                        }
-//                        $('.ent_district').html(option);
-//                        $('.ent_district').trigger("chosen:updated");
-//                    }
-//                });
-//            });
-//        });
-
         $(document).on('change','.DIVISION_ID',function () {
             var thisRow = $(this).closest('tr');
             var divisionId = $(this).val(); //alert(divisionId); //exit();
@@ -402,50 +381,6 @@
                 }
             });
         });
-
-//        $(document).ready(function () {
-//            $('.ent_district').on('change',function(){
-//                var districtId = $(this).val(); //alert(districtId); exit();
-//                var option = '<option value="">Select Upazila</option>';
-//                var url = $(this).attr('url');
-//                var url = url+'/'+districtId;
-//                $.ajax({
-//                    type : "get",
-//                    url  : url,
-//                    data : {'districtId': districtId},
-//                    success:function (data) {
-//                        for (var i = 0; i < data.length; i++){
-//                            option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
-//                        }
-//                        $('.ent_upazila').html(option);
-//                        $('.ent_upazila').trigger("chosen:updated");
-//                    }
-//                });
-//            });
-//        });
-
-
-
-//        $(document).ready(function () {
-//            $('#ENT_UPAZILA_ID').on('change',function(){
-//                var upazilaId = $(this).val(); //alert(upazilaId);exit();
-//                var option = '<option value="">Select Union</option>';
-//                var url = $(this).attr('url');
-//                var url = url+'/'+upazilaId;
-//                $.ajax({
-//                    type : "get",
-//                    url  : url,
-//                    data : {'upazilaId': upazilaId},
-//                    success:function (data) {
-//                        for (var i = 0; i < data.length; i++){
-//                            option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
-//                        }
-//                        $('.ent_union').html(option);
-//                        $('.ent_union').trigger("chosen:updated");
-//                    }
-//                });
-//            });
-//        });
 
         // validation check
         $(document).ready(function () {
