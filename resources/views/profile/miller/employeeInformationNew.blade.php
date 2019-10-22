@@ -75,12 +75,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTMALE_EMP" class="chosen-container totalMaleEmp txtCal" onblur="findTotal()" placeholder="Male">
+                                                       <input type="number" name="TOTMALE_EMP" class="chosen-container totalMaleEmp txtCal empValidation" onblur="findTotal()" placeholder="Male" value="0" min="0">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput4" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp txtCal" onblur="findTotal()" placeholder="Female">
+                                                       <input type="number" id="textInput4" name="TOTFEM_EMP" class="chosen-container totalFemaleEmp txtCal empValidation" onblur="findTotal()" placeholder="Female" value="0" min="0">
                                                     </span>
                                                 </div>
                                                 {{--<input type="number" name="total_no_of_questions" class="totCal" value="" readonly="readonly" id="input_item" placeholder="Total number of employee"/><br />--}}
@@ -90,12 +90,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput2" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp" placeholder="Male" required value="0">
+                                                       <input type="number" id="textInput2" name="PARTTIMEMALE_EMP" class="chosen-container partTimeMaleEmp empValidation" placeholder="Male" required value="0" min="0">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput3"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp" placeholder="Female" required value="0">
+                                                       <input type="number" id="textInput3"  name="PARTTIMEFEM_EMP" class="chosen-container partTimeFemaleEmp empValidation" placeholder="Female" required value="0" min="0">
                                                     </span>
                                                 </div>
                                             </div>
@@ -119,12 +119,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp" placeholder="Male" required>
+                                                       <input type="number" id="textInput" name="FULLTIMEMALE_EMP" class="chosen-container fullTimeMaleEmp empValidation" placeholder="Male" value="0" required min="0">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" id="textInput1" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp" placeholder="Female" required>
+                                                       <input type="number" id="textInput1" name="FULLTIMEFEM_EMP" class="chosen-container fullTimeFemaleEmp empValidation" placeholder="Female" value="0" required min="0">
                                                     </span>
                                                 </div>
                                             </div>
@@ -132,12 +132,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTMALETECH_PER" class="chosen-container" placeholder="Male">
+                                                       <input type="number" name="TOTMALETECH_PER" class="chosen-container" placeholder="Male">
                                                     </span>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <span class="block input-icon input-icon-right">
-                                                       <input type="text" name="TOTFEMTECH_PER" class="chosen-container" placeholder="Female">
+                                                       <input type="number" name="TOTFEMTECH_PER" class="chosen-container" placeholder="Female">
                                                     </span>
                                                 </div>
                                             </div>
