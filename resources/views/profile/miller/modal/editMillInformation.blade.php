@@ -203,21 +203,21 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
-                        @else
-                            {{--<button type="button" class="btn btn-success btnUpdateMill" onclick="millTab()">--}}
-                            {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                            {{--Update & Next--}}
-                        {{--</button>--}}
-                            <button type="button" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Update & Next
-                            </button>
-                        @endif
+                        {{--@if(isset($associationId))--}}
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
+                        {{--@else--}}
+                            <button type="submit" class="btn btn-success btnUpdateMill" onclick="millTab()">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Update & Next
+                        </button>
+                            {{--<button type="button" class="btn btn-success btnUpdatetemMill" onclick="millTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update & Next--}}
+                            {{--</button>--}}
+                        {{--@endif--}}
 
                     </div>
                 </div>
@@ -228,6 +228,7 @@
 <script>
 //    $('.millmsg').hide();
 //    $(document).on('click','.btnUpdateMill',function () {
+//
 //        $.ajax({
 //            type : 'POST',
 //            url : 'edit-mill-info',
@@ -240,6 +241,24 @@
 //            }
 //        })
 //    });
+
+        $(document).ready(function () {
+            $("#millId").on('submit',function (e) {
+
+                //alert('hi');
+                e.preventDefault();
+                $.ajax({
+                    type:'POST',
+                    url:"edit-mill-info",
+                    data: new FormData(this),
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success: function(msg) {
+                    }
+                })
+            })
+        });
 
     $('.millmsg').hide();
     $(document).on('click','.btnUpdatetemMill',function () {
@@ -352,3 +371,4 @@ $('.OWNER_TYPE_ID').change(function() {
 });
 
 </script>
+
