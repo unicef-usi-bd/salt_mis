@@ -8,7 +8,7 @@
 <div id="certificate" class="tab-pane fade ">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-info message"></div>
+            {{--<div class="alert alert-info message"></div>--}}
 
             {{--<form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">--}}
             <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info-normal') }}" enctype="multipart/form-data">

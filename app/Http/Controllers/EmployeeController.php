@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\AssociationSetup;
+use App\CertificateIssur;
 
 class EmployeeController extends Controller
 {
@@ -165,8 +166,10 @@ public function createEmployee($millerInfoId){
     $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
     $editCertificateData = Certificate::getCertificateData($millerInfoId);
     $editQcData = Qc::getQcData($millerInfoId);
+    $certificateId = CertificateIssur::getCertificate();
+    $issuerId = Certificate::getIssuerIs();
     //$associationId = AssociationSetup::singleAssociation();
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId'));
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId'));
 }
 
     public function updateEmployeeInfo(Request $request){
