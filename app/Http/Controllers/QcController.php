@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Certificate;
+use App\CertificateIssur;
 use App\LookupGroupData;
 use App\Qc;
 use App\MillerInfo;
@@ -163,8 +164,10 @@ class QcController extends Controller
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
         $editCertificateData = Certificate::getCertificateData($millerInfoId);
+        $certificateId = CertificateIssur::getCertificate();
+        $issuerId = Certificate::getIssuerIs();
         //$associationId = AssociationSetup::singleAssociation();
-        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId'));
+        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId','certificateId','issuerId'));
     }
 
     public function updateQcInfo(Request $request){
