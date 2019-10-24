@@ -92,10 +92,11 @@ class MillerInfo extends Model
 
     public static function updateMillData($request,$id,$associationId,$mill_logo){
 
+            $info = DB::table('ssm_mill_info')->where('MILL_ID', '=', $id)->first();
 
             $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
                 'MILL_NAME' => $request->input('MILL_NAME'),
-                'mill_logo' => $mill_logo,
+                'mill_logo' => $mill_logo == "" ? $info->mill_logo : $mill_logo,
                 'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
                 'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
                 //'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
