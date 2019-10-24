@@ -10,12 +10,12 @@
         <div class="col-md-12">
             {{--<div class="alert alert-info message"></div>--}}
 
-            {{--<form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">--}}
-            <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info-normal') }}" enctype="multipart/form-data">
+{{--            <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">--}}
+            <form id="certtificateId"  class="form-horizontal" role="form" method="post" action="{{ url('edit-certificate-info-normal') }}" enctype="multipart/form-data">
 
                 @csrf
                 @if(isset($millerInfoId))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
+                    <input type="hidden" class="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
@@ -49,7 +49,7 @@
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                                 <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>
-                                <input type="hidden" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
+                                <input type="hidden" class="CERTIFICATE_ID" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -99,6 +99,7 @@
                                 <span class="block input-icon input-icon-right">
                                     <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                 </span>
+                                <input type="hidden" value="{{ $editCertData->IS_EXPIRE }}" name="IS_EXPIRE[]">
                             </td>
                             <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                         </tr>
@@ -112,7 +113,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
+                        <button type="submit" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -130,9 +131,11 @@
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow2').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' input.MILL_ID').val('');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
             defaultRow.find('select.ISSURE_ID').val('');
             defaultRow.find('select.DISTRICT_ID').val('');
+            defaultRow.find('input.CERTIFICATE_ID').val('');
 
 //            For Ignore array Conflict
             defaultRow.find('input.ISSUING_DATE').val('');
