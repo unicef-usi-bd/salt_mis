@@ -231,25 +231,18 @@ class CertificateController extends Controller
     public function updateCertificateInfoNormal(Request $request)
 //    public function updateCertificateInfo(Request $request)
     {
+//        $data = array();
         $tempName = null;
-        $dataArray = array();
         $millerInfoId = $request->input('MILL_ID');
-        $millerInfoId = $request->input('CERTIFICATE_ID');
+        $certificateId = $request->input('CERTIFICATE_ID');
         $image = $request->file('user_image');
 
-
-        $certificateId = true;//DB::table('ssm_certificate_info')->where('MILL_ID',$millerInfoId)->delete();
-        if($certificateId){
-
-       $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
-       for($i = 0;$i <$millinfo; $i++){
-
+        $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
+        for($i = 0;$i <$millinfo; $i++){
            if (isset($image[$i]) && $image[$i]->isValid()) {
-//               $tempName = 'defaultImage.jpg';
                try {
                    $file = $image[$i];
                    $tempName = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
-
 
                    $image[$i]->move("image/user-image", $tempName);
 
@@ -274,16 +267,14 @@ class CertificateController extends Controller
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
             }
 
-            $dataArray[] = $data;
+           if(!empty($certificateId[$i])){
+               $update = DB::table('ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId[$i])->update($data);
+           } else{
+               $inset = DB::table('ssm_certificate_info')->insert($data);
+           }
 
        }
-
-       $this->pr($dataArray);
-            $inset = DB::table('ssm_certificate_info')->insert($data);
-
-       }
-
-
+       //$this->pr($data);
 
         return Redirect::back()->with('message','Certificate Updated Successful !');
 
