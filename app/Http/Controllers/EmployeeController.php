@@ -153,6 +153,7 @@ class EmployeeController extends Controller
 public function createEmployee($millerInfoId){
     $getDivision = SupplierProfile::getDivision();
     $getZone = SupplierProfile::getZone();
+    $getDistrict = SupplierProfile::getDistrict();
     $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
     $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
@@ -169,7 +170,7 @@ public function createEmployee($millerInfoId){
     $certificateId = CertificateIssur::getCertificate();
     $issuerId = Certificate::getIssuerIs();
     //$associationId = AssociationSetup::singleAssociation();
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId'));
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId','getDistrict'));
 }
 
     public function updateEmployeeInfo(Request $request){
