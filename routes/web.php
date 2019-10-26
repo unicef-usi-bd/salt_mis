@@ -112,6 +112,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-mill-info-tem','MillerInfoController@temUpdate');//jalal
     Route::post('edit-entrepreneur-info-tem', 'EntrepreneurController@updateEntrepreneurInfoTem'); //jalal
     Route::post('edit-employee-info-tem', 'EmployeeController@updateEmployeeInfoTem'); //jalal
+    Route::post('edit-qc-tem', 'QcController@updateQcInfoTem'); //jalal
     Route::post('edit-certificate-info-normal-tem', 'CertificateController@updateCertificateInfoNormalTem'); //jalal
     //Temporary modal for mill information
 

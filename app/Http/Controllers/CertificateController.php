@@ -284,63 +284,115 @@ class CertificateController extends Controller
     public function updateCertificateInfoNormalTem(Request $request)
 //    public function updateCertificateInfo(Request $request)
     {
-        $rules = array(
-//            'CERTIFICATE_TYPE_ID.*' => 'required',
-//            'ISSURE_ID.*' => 'required',
-//            'ISSUING_DATE.*' => 'required',
-//            'CERTIFICATE_NO.*' => 'required',
-//            'user_image.*' => 'required',
-//            'RENEWING_DATE.*' => 'required',
-        );
-        $data = array();
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $millerInfoId = $request->input('MILL_ID');
-            //$this->pr($request->input());
-            $reqTime = count($_POST['CERTIFICATE_TYPE_ID']); //$this->pr($request->file('user_image'));
-            for ($i = 0; $i < $reqTime; $i++) {
-                // file upload
-                $userImageName[$i] = '';
-                if ($request->file('user_image')[$i] != null && $request->file('user_image')[$i]->isValid()) {
-                    try {
-                        $file = $request->file('user_image')[$i];
-                        $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
-                        $userImageName[$i] = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
+//        dd($request);
+//        $rules = array(
+////            'CERTIFICATE_TYPE_ID.*' => 'required',
+////            'ISSURE_ID.*' => 'required',
+////            'ISSUING_DATE.*' => 'required',
+////            'CERTIFICATE_NO.*' => 'required',
+////            'user_image.*' => 'required',
+////            'RENEWING_DATE.*' => 'required',
+//        );
+//        $data = array();
+//        $validator = Validator::make(Input::all(), $rules);
+//        if($validator->fails()){
+//            return Redirect::back()->withErrors($validator);
+//        }else {
+//            $millerInfoId = $request->input('MILL_ID');
+//            //$this->pr($request->input());
+//            $reqTime = count($_POST['CERTIFICATE_TYPE_ID']); //$this->pr($request->file('user_image'));
+//            for ($i = 0; $i < $reqTime; $i++) {
+//                // file upload
+//                $userImageName[$i] = '';
+//                if ($request->file('user_image')[$i] != null && $request->file('user_image')[$i]->isValid()) {
+//                    try {
+//                        $file = $request->file('user_image')[$i];
+//                        $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
+//                        $userImageName[$i] = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
+//
+//                        $request->file('user_image')[$i]->move("image/user-image", $userImageName[$i]);
+//
+//                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+//
+//                    }
+//                }
+//                $data[] = array(
+//                    'MILL_ID' => $request->input('MILL_ID'),
+//                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
+//                    'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+//                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
+//                    'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
+//                    'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
+//                    //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
+//                    'TRADE_LICENSE' => 'image/user-image/' . $userImageName[$i],
+//                    'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
+//                    'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
+//                    'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
+//                    'REMARKS' => $request->input('REMARKS')[$i],
+//                    'center_id' => Auth::user()->center_id,
+//                    'ENTRY_BY' => Auth::user()->id,
+//                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+//                );
+//                //$this->pr($data);exit();
+//                //var_dump($data);exit();
+//                // -/---file upload
+//
+//            } //end for
+//            //dd($data);
+//            $insert = DB::table('tem_ssm_certificate_info')->insert($data);
+//
+//        }
+//
+//        return Redirect::back()->with('message','Certificate Updated Successful !');
 
-                        $request->file('user_image')[$i]->move("image/user-image", $userImageName[$i]);
+        //        $data = array();
+        $tempName = null;
+        $millerInfoId = $request->input('MILL_ID');
+        $certificateId = $request->input('CERTIFICATE_ID');
+        $image = $request->file('user_image');
 
-                    } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+        $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
+        for($i = 0;$i <$millinfo; $i++){
+            if (isset($image[$i]) && $image[$i]->isValid()) {
+                try {
+                    $file = $image[$i];
+                    $tempName = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
 
-                    }
+                    $image[$i]->move("image/user-image", $tempName);
+
+                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
+
                 }
-                $data[] = array(
-                    'MILL_ID' => $request->input('MILL_ID'),
-                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
-                    'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
-                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                    'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
-                    'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
-                    //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
-                    'TRADE_LICENSE' => 'image/user-image/' . $userImageName[$i],
-                    'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
-                    'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
-                    'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
-                    'REMARKS' => $request->input('REMARKS')[$i],
-                    'center_id' => Auth::user()->center_id,
-                    'ENTRY_BY' => Auth::user()->id,
-                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                );
-                //$this->pr($data);exit();
-                //var_dump($data);exit();
-                // -/---file upload
+            }
 
-            } //end for
-            //dd($data);
-            $insert = DB::table('tem_ssm_certificate_info')->insert($data);
+            $data = array(
+                'MILL_ID' => $millerInfoId,
+                'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
+                'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
+                'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
+                'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
+                'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
+                'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
+                'REMARKS' => $request->input('REMARKS')[$i],
+                'UPDATE_BY' => Auth::user()->id,
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+            );
+            if(!empty($tempName)){
+                $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
+            }else{
+                $data['TRADE_LICENSE'] = $request->input('userImage');
+            }
+
+//            if(!empty($certificateId[$i])){
+//                $update = DB::table('ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId[$i])->update($data);
+//            } else{
+//                $inset = DB::table('tem_ssm_certificate_info')->insert($data);
+//            }
+
+            $inset = DB::table('tem_ssm_certificate_info')->insert($data);
 
         }
+        //$this->pr($data);
 
         return Redirect::back()->with('message','Certificate Updated Successful !');
 

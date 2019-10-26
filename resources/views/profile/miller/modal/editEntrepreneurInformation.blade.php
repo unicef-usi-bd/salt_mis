@@ -128,22 +128,21 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        {{--@if(isset($associationId))--}}
-                        {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">--}}
-                        {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                        {{--Approve--}}
-                        {{--</button>--}}
-                        {{--@else--}}
-                        <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
-                        </button>
-
-                        {{--<button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">--}}
-                        {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                        {{--Update & Next--}}
-                        {{--</button>--}}
-                        {{--@endif--}}
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
+                            <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @endif
 
                     </div>
                 </div>

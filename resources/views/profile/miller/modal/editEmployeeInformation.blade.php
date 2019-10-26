@@ -91,22 +91,21 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        {{--@if(isset($associationId))--}}
-                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="employeeTab()">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Approve--}}
-                            {{--</button>--}}
-                        {{--@else--}}
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="employeeTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
                             <button type="button" class="btn btn-success btnUpdateEmp" onclick="employeeTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
-
-                            {{--<button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Update & Next--}}
-                            {{--</button>--}}
-                        {{--@endif--}}
+                        @else
+                            <button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @endif
                     </div>
                 </div>
             </form>
