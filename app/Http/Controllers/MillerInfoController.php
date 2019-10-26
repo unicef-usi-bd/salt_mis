@@ -183,6 +183,7 @@ class MillerInfoController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
         $getDistrict = SupplierProfile::getDistrict();
+        $getUpazilla = SupplierProfile::getUpazilla();
 
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -203,7 +204,7 @@ class MillerInfoController extends Controller
         $associationId = AssociationSetup::singleAssociation();
         //echo $associationId;exit;
 //        $this->pr($editCertificateData);
-        return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','certificateId','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','associationId','issuerId'));
+        return view('profile.miller.modal.editMillerIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','certificateId','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','associationId','issuerId','getDistrict','getUpazilla'));
     }
 
     /**
@@ -271,6 +272,7 @@ class MillerInfoController extends Controller
     }
 
     public function updateMillInfo(Request $request){
+//        $this->pr($request->input());
         $centerId = Auth::user()->center_id;
         $associationId = AssociationSetup::singleAssociation();
         $millerInfoId = $request->input('MILL_ID');
@@ -292,7 +294,11 @@ class MillerInfoController extends Controller
 //        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId,$mill_logo);
         $updateMillData = MillerInfo::updateMillData($request, $millerInfoId,$associationId,$mill_logo);
         //echo $updateMillData;die();
-        return "Miller Information has been updated";
+        if($updateMillData){
+//                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
+//            return "Mill informatin has been updated!";
+            return "Mill informatin has been updated!";
+        }
     }
 
     public function approveByAssociation(Request $request){

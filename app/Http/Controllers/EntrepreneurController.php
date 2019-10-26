@@ -152,6 +152,8 @@ class EntrepreneurController extends Controller
 
     public function createEntrepreneur($millerInfoId){
         $getDivision = SupplierProfile::getDivision();
+        $getDistrict = SupplierProfile::getDistrict();
+        $getUpazilla = SupplierProfile::getUpazilla();
         $getZone = SupplierProfile::getZone();
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -163,8 +165,8 @@ class EntrepreneurController extends Controller
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $associationId = AssociationSetup::singleAssociation();
-        //$this->pr($millerInfoId);
-        return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','associationId'));
+//        $this->pr($editMillData);
+        return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','associationId','getDistrict','getUpazilla'));
     }
 
     public function updateEntrepreneurInfo(Request $request){
