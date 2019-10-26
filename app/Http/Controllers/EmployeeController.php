@@ -154,6 +154,7 @@ public function createEmployee($millerInfoId){
     $getDivision = SupplierProfile::getDivision();
     $getZone = SupplierProfile::getZone();
     $getDistrict = SupplierProfile::getDistrict();
+    $getUpazilla = SupplierProfile::getUpazilla();
     $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
     $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
@@ -170,7 +171,7 @@ public function createEmployee($millerInfoId){
     $certificateId = CertificateIssur::getCertificate();
     $issuerId = Certificate::getIssuerIs();
     //$associationId = AssociationSetup::singleAssociation();
-    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId','getDistrict'));
+    return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));
 }
 
     public function updateEmployeeInfo(Request $request){
