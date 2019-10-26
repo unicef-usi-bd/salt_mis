@@ -13,6 +13,7 @@
 {{--            <form id="certtificateId"  class="form-horizontal" role="form" action="{{ url('edit-certificate-info') }}" enctype="multipart/form-data">--}}
             <form id="certtificateId"  class="form-horizontal" role="form" method="post" action="{{ url('edit-certificate-info-normal') }}" enctype="multipart/form-data">
 
+
                 @csrf
                 @if(isset($millerInfoId))
                     <input type="hidden" class="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
@@ -22,6 +23,7 @@
                     <tr>
                         <th style="width:150px ;">Type of Certificate<span style="color:red;">*</span></th>
                         <th style="width:120px ;">Issure Name<span style="color:red;">*</span></th>
+                        <th style="width:140px ;">District<span style="color:red;"> </span></th>
                         <th style="width:120px ;">Issuing Date<span style="color:red;">*</span></th>
                         <th style="width:120px ;">Certificate Number<span style="color:red;">*</span></th>
                         <th style="width: 120px;">Trade License<span style="color:red;">*</span></th>
@@ -66,6 +68,16 @@
                                 </span>
                             </td>
                             <td>
+                                <span class="block input-icon input-icon-right">
+                                    <select class="form-control DISTRICT_ID" id="DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                        <option value="">Select</option>
+                                        @foreach($getDistrict as $row)
+                                            <option value="{{ $row->DISTRICT_ID }}" @if($editCertData->DISTRICT_ID==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
+                                        @endforeach
+                                    </select>
+                                </span>
+                            </td>
+                            <td>
                                 <span class="block input-icon input-icon-right ">
                                     <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE required">
                                     <span style="color:red;display:none;" class="error">This field is required</span>
@@ -79,11 +91,21 @@
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
+                            {{--<td>--}}
+                                {{--<span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>--}}
+                                {{--<span class="block input-icon input-icon-right required">--}}
+                                    {{--<input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" >--}}
+                                    {{--<span style="color:red;display:none;" class="error">This field is required</span>--}}
+                                {{--</span>--}}
+                            {{--</td>--}}
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right required">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" >
+                                <span class="block input-icon input-icon-right">
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" value="" >
+                                    {{--<span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>--}}
+                                    <span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
+
                                 </span>
                             </td>
                             <td>
@@ -113,7 +135,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
+                        <button type="submit" class="btn btn-primary" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -123,6 +145,7 @@
         </div>
     </div>
 </div>
+@include('masterGlobal.datePicker')
 <script>
     $(document).ready(function(){
         $('.rowAdd2').click(function(){
@@ -140,7 +163,7 @@
 //            For Ignore array Conflict
             defaultRow.find('input.ISSUING_DATE').val('');
             defaultRow.find('input.CERTIFICATE_NO').val('');
-            defaultRow.find('input.TRADE_LICENSE').val('');
+            defaultRow.find('span.TRADE_LICENSE').text('');
             defaultRow.find('input.RENEWING_DATE').val('');
             defaultRow.find('input.REMARKS').val('');
             defaultRow.find('span.budget_against_code').text('');
@@ -276,4 +299,6 @@
             }
         });
     });
+
+
 </script>
