@@ -203,6 +203,7 @@ class CertificateController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
         $getDistrict = SupplierProfile::getDistrict();
+        $getUpazilla = SupplierProfile::getUpazilla();
 
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -219,7 +220,7 @@ class CertificateController extends Controller
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
         $associationId = AssociationSetup::singleAssociation();
-        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','getDistrict','associationId','certificateIssuer'));
+        return view('profile.miller.certificateInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','getDistrict','associationId','certificateIssuer','getUpazilla'));
     }
 //    public function updateCertificateInfo(Request $request)
 //    {
