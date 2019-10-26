@@ -8,9 +8,10 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="alert alert-info millInfo_msg"></div>
+            <div class="alert alert-info millInfo_msg" style="display: none;"></div>
 
-            <form id="millId"  class="form-horizontal" role="form" action="{{ url('edit-mill-info') }}" >
+            {{--<form id="millId"  class="form-horizontal" role="form" action="{{ url('edit-mill-info') }}" >--}}
+            <form id="millId"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
                 {{--<form id="millId"  class="form-horizontal" role="form" action="{{ url('update-mill-information') }}" >--}}
                 <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID" class="millerInfoId" >
                 @csrf
@@ -133,7 +134,11 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="DISTRICT_ID_MILL" class="chosen-select chosen-container district_mill" name="DISTRICT_ID" url="{{ url('supplier-profile/get-upazila') }}" data-placeholder="Select">
-                                   <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
+{{--                                   <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>--}}
+                                   @foreach($getDistrict as $row)
+                                       <option value="{{ $row->DISTRICT_ID }}" @if($editMillData->DISTRICT_ID ==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
+                                   @endforeach
+
                                </select>
                             </span>
                         </div>
@@ -143,7 +148,11 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID_MILL" class="chosen-select chosen-container upazila_mill" name="UPAZILA_ID" url="{{ url('supplier-profile/get-union') }}" data-placeholder="Select">
-                                   <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
+{{--                                   <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>--}}
+                                   @foreach($getUpazilla as $row)
+                                       <option value="{{ $row->UPAZILA_ID }}" @if($editMillData->UPAZILA_ID ==$row->UPAZILA_ID) selected @endif>{{ $row->UPAZILA_NAME }}</option>
+                                   @endforeach
+
                                </select>
                             </span>
                         </div>
@@ -193,7 +202,8 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateMillInfo" onclick="millTab()">
+                        <button type="submit" class="btn btn-primary btnUpdateMillInfo" onclick="millTab()">
+                        {{--<button type="submit" class="btn btn-primary btnUpdateMillInfo" onclick="millTab()">--}}
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -315,5 +325,24 @@
             $('.removeButton').removeClass( 'hidden' );
             $('.addButton').removeClass( 'hidden' );
         }
+    });
+
+    $(document).ready(function () {
+        $('#millId').on('submit', function (e) {
+            console.log(new FormData(this));
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('edit-mill-info') }}",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (msg) {
+                    $('.millInfo_msg').html(msg).show();
+                }
+
+            })
+        });
     });
 </script>

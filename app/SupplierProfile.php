@@ -46,6 +46,12 @@ class SupplierProfile extends Model
             ->get();
     }
 
+    public static function getUpazilla(){
+        return DB::table('ssc_upazilas')
+            ->select('*')
+            ->get();
+    }
+
     public static function supplier(){
         return DB::table('ssm_supplier_info')
             ->select('*')
