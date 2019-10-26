@@ -144,7 +144,10 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="DISTRICT_IDD" class="chosen-select chosen-container districtt" name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>
+                                   {{--<option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>--}}
+                                   @foreach($getDistrict as $row)
+                                       <option value="{{ $row->DISTRICT_ID }}" @if($editMillData->DISTRICT_ID ==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
+                                   @endforeach
                                </select>
                             </span>
                         </div>
@@ -154,7 +157,10 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_IDD" class="chosen-select chosen-container upazilaa" name="UPAZILA_ID" data-placeholder="Select">
-                                   <option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>
+                                   {{--<option value="{{ $editMillData->UPAZILA_ID }}">{{ $editMillData->UPAZILA_NAME }}</option>--}}
+                                   @foreach($getUpazilla as $row)
+                                       <option value="{{ $row->UPAZILA_ID }}" @if($editMillData->UPAZILA_ID ==$row->UPAZILA_ID) selected @endif>{{ $row->UPAZILA_NAME }}</option>
+                                   @endforeach
                                </select>
                             </span>
                         </div>

@@ -153,6 +153,7 @@ class QcController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
         $getDistrict = SupplierProfile::getDistrict();
+        $getUpazilla = SupplierProfile::getUpazilla();
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
@@ -168,7 +169,7 @@ class QcController extends Controller
         $certificateId = CertificateIssur::getCertificate();
         $issuerId = Certificate::getIssuerIs();
         //$associationId = AssociationSetup::singleAssociation();
-        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId','certificateId','issuerId','getDistrict'));
+        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));
     }
 
     public function updateQcInfo(Request $request){

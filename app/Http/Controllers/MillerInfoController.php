@@ -84,7 +84,8 @@ class MillerInfoController extends Controller
             $editEmployeeData = Employee::getEmployeeData($millerInfoId);
             $certificateId = CertificateIssur::getCertificate();
             $issuerId = Certificate::getIssuerIs();
-            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','certificateId','issuerId'));
+            $getUpazilla = SupplierProfile::getUpazilla();
+            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','certificateId','issuerId','getUpazilla'));
 
         }else {
             return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone','getUpazilla', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge','approvalMillList'));
@@ -275,33 +276,35 @@ class MillerInfoController extends Controller
     }
 
     public function updateMillInfo(Request $request){
-//        $this->pr($request->input());
-        $centerId = Auth::user()->center_id;
-        $associationId = AssociationSetup::singleAssociation();
-        $millerInfoId = $request->input('MILL_ID');
-        $mill_logo = "";
-        if(!empty($request->file('mill_logo'))) {
-            if ($request->file('mill_logo') != null && $request->file('mill_logo')->isValid()) {
-                $image = $request->file('mill_logo');
-                $filename = date('Y-m-d') . '_' . time() . '.' . $image->getClientOriginalExtension();
-                $path = 'image/mill-logo/' . $filename;
-                Image::make($image->getRealPath())->resize(250, 250)->save($path);
-                //********* End Image *********
-                $mill_logo = "image/mill-logo/$filename";
-            } else {
-                $mill_logo = 'image/mill-logo/defaultUserImage.png';
+            //$this->pr($request->input());
+            $centerId = Auth::user()->center_id;
+            $associationId = AssociationSetup::singleAssociation();
+            $millerInfoId = $request->input('MILL_ID');
+            $mill_logo = "";
+            if(!empty($request->file('mill_logo'))) {
+                if ($request->file('mill_logo') != null && $request->file('mill_logo')->isValid()) {
+                    $image = $request->file('mill_logo');
+                    $filename = date('Y-m-d') . '_' . time() . '.' . $image->getClientOriginalExtension();
+                    $path = 'image/mill-logo/' . $filename;
+                    Image::make($image->getRealPath())->resize(250, 250)->save($path);
+                    //********* End Image *********
+                    $mill_logo = "image/mill-logo/$filename";
+                } else {
+                    $mill_logo = 'image/mill-logo/defaultUserImage.png';
+                }
             }
-        }
-        $ownerType = $request->input('OWNER_TYPE_ID');
-        //$this->pr($request->input('MILL_NAME'));
+            $ownerType = $request->input('OWNER_TYPE_ID');
+            //$this->pr($request->input('MILL_NAME'));
 //        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId,$mill_logo);
-        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId,$associationId,$mill_logo);
-        //echo $updateMillData;die();
-        if($updateMillData){
+            $updateMillData = MillerInfo::updateMillData($request, $millerInfoId,$associationId,$mill_logo);
+            //echo $updateMillData;die();
+            if($updateMillData){
 //                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
 //            return "Mill informatin has been updated!";
-            return "Mill informatin has been updated!";
-        }
+                return "Mill informatin has been updated!";
+            }
+
+//
     }
 
     public function approveByAssociation(Request $request){
