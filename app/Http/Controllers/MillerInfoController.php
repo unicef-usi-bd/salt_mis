@@ -55,6 +55,7 @@ class MillerInfoController extends Controller
         $getDivision = SupplierProfile::getDivision();
         $getZone = SupplierProfile::getZone();
         $getDistrict = SupplierProfile::getDistrict();
+        $getUpazilla = SupplierProfile::getUpazilla();
 
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
@@ -86,7 +87,7 @@ class MillerInfoController extends Controller
             return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','certificateId','issuerId'));
 
         }else {
-            return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge','approvalMillList'));
+            return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone','getUpazilla', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge','approvalMillList'));
         }
     }
 
