@@ -50,9 +50,9 @@
                         <i class="ace-icon fa fa-times"></i>
                     </button>
                 </div>
-                @if($editMillData->approval_status == 'm')
-                    <p class="alert alert-danger" style="color: red;font-weight: bolder;">You are not able to edit your account. After approval by association you can edit your account.</p>
-                @else
+                {{--@if($editMillData->approval_status == 'm')--}}
+                    {{--<p class="alert alert-danger" style="color: red;font-weight: bolder;">You are not able to edit your account. After approval by association you can edit your account.</p>--}}
+                {{--@else--}}
 
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -90,7 +90,7 @@
 
                     </div>
                 </div>
-                @endif
+                {{--@endif--}}
 
 
 

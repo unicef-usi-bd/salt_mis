@@ -81,7 +81,9 @@ class MillerInfoController extends Controller
             $editCertificateData = Certificate::getCertificateData($millerInfoId);
             $editQcData = Qc::getQcData($millerInfoId);
             $editEmployeeData = Employee::getEmployeeData($millerInfoId);
-            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict'));
+            $certificateId = CertificateIssur::getCertificate();
+            $issuerId = Certificate::getIssuerIs();
+            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','certificateId','issuerId'));
 
         }else {
             return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge','approvalMillList'));

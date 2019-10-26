@@ -8,7 +8,7 @@
 <div id="entrepreneur" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-info entrepreneur_msg"></div>
+            {{--<div class="alert alert-info entrepreneur_msg"></div>--}}
 
 
             <form id="entrepreneurId"  class="form-horizontal" role="form" action="{{ url('edit-entrepreneur-info') }}" >

@@ -8,7 +8,7 @@
 
                @csrf
                 @if(isset($millerInfoId))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
+                    <input type="hidden" class="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
@@ -40,7 +40,7 @@
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                                 <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>
-                                <input type="hidden" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
+                                <input type="hidden" class="CERTIFICATE_ID" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -82,8 +82,8 @@
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                     <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" value="" >
-                                    <span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>
-                                    {{--<a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a>--}}
+                                    {{--<span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>--}}
+                                    <span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
 
                                 </span>
@@ -141,9 +141,11 @@
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRowCert').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' input.MILL_ID').val('');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
             defaultRow.find('select.ISSURE_ID').val('');
             defaultRow.find('select.DISTRICT_ID').val('');
+            defaultRow.find('input.CERTIFICATE_ID').val('');
 
 //            For Ignore array Conflict
             defaultRow.find('input.ISSUING_DATE').val('');
