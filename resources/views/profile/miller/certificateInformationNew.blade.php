@@ -204,10 +204,19 @@
 
                                     $('.chosen-select').chosen(0);
                                 });
+
+                                $('.btnCertificate').prop('disabled', true);
                             });
                             // Fore Remove Row By Click
                             $(document).on("click", "span.rowRemove ", function () {
-                                $(this).closest("tr.removableRow").remove();
+                                var thisRow = $(this).closest("tr.removableRow");
+                                var certificateType = thisRow.find('.CERTIFICATE_TYPE_ID').val();
+                                if(certificateType == 5 || certificateType == 10){
+                                    $('.btnCertificate').prop('disabled', true);
+                                }
+                                thisRow.remove();
+
+//
                             });
 
                         </script>
@@ -245,9 +254,10 @@
     <script>
 
         // Fore Remove Row By Click
-        $(document).on("click", "span.rowRemove ", function () {
-            $(this).closest("tr.removableRow").remove();
-        });
+//        $(document).on("click", "span.rowRemove ", function () {
+//            $(this).closest("tr.removableRow").remove();
+//
+//        });
 
         $(document).on('change','.CERTIFICATE_TYPE_ID',function(){
 
