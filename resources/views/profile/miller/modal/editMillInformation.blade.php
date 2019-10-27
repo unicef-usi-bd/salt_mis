@@ -108,6 +108,7 @@
                         <div style="margin-top: 40px; margin-left: 120px;">
                             <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editMillData->mill_logo) }}" />
                         </div>
+                        <input type="hidden" name="mill_logo" value="{{ $editMillData->mill_logo }}">
                     </div>
 
                     <div class="form-group">
@@ -209,21 +210,21 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        {{--@if(isset($associationId))--}}
-                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Approve--}}
-                            {{--</button>--}}
-                        {{--@else--}}
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
                             <button type="submit" class="btn btn-success btnUpdateMill" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @else
+                        <button type="submit" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
-                            {{--<button type="button" class="btn btn-success btnUpdatetemMill" onclick="millTab()">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Update & Next--}}
-                            {{--</button>--}}
-                        {{--@endif--}}
+                        @endif
 
                     </div>
                 </div>
@@ -267,7 +268,12 @@
         });
 
     $('.millmsg').hide();
-    $(document).on('click','.btnUpdatetemMill',function () {
+//    $(document).on('click','.btnUpdatetemMill',function () {
+    $("#millId").on('submit',function (e) {
+//        alert('hi');
+        e.preventDefault();
+        var formData = new FormData(this);
+        console.log(formData);
         $.ajax({
             type : 'POST',
             url : 'edit-mill-info-tem',
@@ -280,6 +286,8 @@
             }
         })
     });
+
+
 
     $('.millmsg').hide();
     $(document).on('click','.btnUpdateApprove',function () {

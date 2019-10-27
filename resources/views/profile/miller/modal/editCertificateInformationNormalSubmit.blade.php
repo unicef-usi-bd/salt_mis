@@ -3,7 +3,7 @@
         <div class="col-md-12">
             {{--<div class="alert alert-info certificate_msg"></div>--}}
 
-            <form action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            <form id="certificateId" action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
             {{--<form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
 
                @csrf
@@ -87,6 +87,7 @@
                                     <span style="color:red;display:none;" class="error">This field is required</span>
 
                                 </span>
+                                <input type="text" name="userImage" value="{{ $editCertData->TRADE_LICENSE }}"/>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
@@ -115,17 +116,22 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        {{--@if(isset($associationId))--}}
-                            {{--<button type="submit" class="btn btn-success" >--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Approve--}}
-                            {{--</button>--}}
-                        {{--@else--}}
+                        @if(isset($associationId))
+                            <button type="submit" class="btn btn-success" >
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
                             <button type="submit" class="btn btn-success" >
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Submit
                             </button>
-                        {{--@endif--}}
+                        @else
+
+                            <button type="button" class="btn btn-success btnUpdateCertificateTem" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update
+                            </button>
+                        @endif
                     </div>
                 </div>
             </form>
@@ -179,6 +185,23 @@
     //     })
     //
     // });
+
+     $(document).on('click','.btnUpdateCertificateTem',function () {
+//         alert('hi');
+//         var data = $('#certificateId').serialize();
+//         console.log(data);
+         $.ajax({
+             type : 'POST',
+             url : 'edit-certificate-info-normal-tem',
+             data : $('#certificateId').serialize(),
+             success: function (data) {
+                 console.log(data);
+                 $('.certificate_msg').html('<span>'+ data +'</span>').show();
+
+             }
+         })
+
+     });
 
     //input type text and number validation enable disable button
     $(document).ready(function() {

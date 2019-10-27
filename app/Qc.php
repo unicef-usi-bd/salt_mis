@@ -51,5 +51,23 @@ class Qc extends Model
         return $update;
     }
 
+    public static function insertQc($request){
+        $qcInfoId = DB::table('tem_tsm_qc_info')->insertGetId([
+            'MILL_ID' => $request->input('MILL_ID'),
+            'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
+            'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
+            'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
+            'MONITORING_FLG' => $request->input('MONITORING_FLG'),
+            'SOP_DESC' => $request->input('SOP_DESC'),
+            'LAB_PERSON' => $request->input('LAB_PERSON'),
+            'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+        ]);
+
+        return $qcInfoId;
+    }
+
 
 }

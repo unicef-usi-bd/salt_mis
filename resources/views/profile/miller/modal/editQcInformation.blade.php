@@ -112,17 +112,21 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        {{--@if(isset($associationId))--}}
-                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="qcTab()">--}}
-                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                                {{--Approve--}}
-                            {{--</button>--}}
-                        {{--@else--}}
+                        @if(isset($associationId))
+                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="qcTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Approve
+                            </button>
                             <button type="button" class="btn btn-success btnUpdateQc" onclick="qcTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
                             </button>
-                        {{--@endif--}}
+                        @else
+                            <button type="button" class="btn btn-success btnUpdateQcTem" onclick="qcTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
+                        @endif
 
                     </div>
                 </div>
@@ -132,6 +136,21 @@
 </div>
 
 <script>
+
+    $(document).on('click','.btnUpdateQcTem',function () {
+        $.ajax({
+            type : 'POST',
+            url : 'edit-qc-tem',
+            data : $('#qcInfoId').serialize(),
+            success: function (data) {
+                console.log(data);
+                $('.empmsg').html('<span>'+ data +'</span>').show();
+                setTimeout(function() { $(".empmsg").hide(); }, 3000);
+
+            }
+        })
+    });
+
     $('.qcmsg').hide();
     $(document).on('click','.btnUpdateQc',function () {
         $.ajax({

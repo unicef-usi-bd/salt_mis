@@ -344,14 +344,16 @@ class MillerInfoController extends Controller
             //********* End Image *********
             $mill_logo = "image/mill-logo/$filename";
         }else{
-            $mill_logo = 'image/mill-logo/defaultUserImage.png';
+//            $mill_logo = 'image/mill-logo/defaultUserImage.png';
+            $mill_logo = $request->input('mill_logo');
         }
         $ownerType = $request->input('OWNER_TYPE_ID');
         //$this->pr($request->input('MILL_NAME'));
-        $updateMillData = MillerInfo::insertMillerInfoTemData($request,$millerInfoId,$mill_logo,$millerInfoId);
+        $updateMillData = MillerInfo::insertMillerInfoTemData($request,$mill_logo,$millerInfoId);
 
         //echo $updateMillData;die();
         return "Miller Information has been updated";
+//        return $mill_logo;
     }
 
     public function deactivateMillProfile(Request $request){

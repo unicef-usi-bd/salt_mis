@@ -183,8 +183,9 @@ public function createEmployee($millerInfoId){
 
     public function updateEmployeeInfoTem(Request $request){
         $millerInfoId = $request->input('MILL_ID');
-        $updateEmpData = Employee::insertMillerEmployeeInfoTem($request, $millerInfoId);
+        $updateEmpData = Employee::insertMillerEmployeeInfoTem($request);
         return "Employee Information has been updated";
+//        return $request;
 
     }
 
