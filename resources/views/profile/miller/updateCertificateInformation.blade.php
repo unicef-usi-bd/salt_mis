@@ -50,7 +50,7 @@
                                     </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
-                                <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>
+                                {{--<input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>--}}
                                 <input type="hidden" class="CERTIFICATE_ID" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
                             </td>
                             <td>
@@ -79,14 +79,14 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right ">
-                                    <input type="date" name="ISSUING_DATE" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE required">
+                                    <input type="date" name="ISSUING_DATE[]" value="{{ $editCertData->ISSUING_DATE }}" class="chosen-container ISSUING_DATE required">
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
 
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
-                                <span class="block input-icon input-icon-right ">
+                                <span class="block input-icon input-icon-right">
                                     <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="{{ $editCertData->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO required"  />
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
@@ -105,13 +105,13 @@
                                     {{--<span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>--}}
                                     <span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
-
+                                    {{--<input type="text" name="tradeFile[]" value="{{ $editCertData->TRADE_LICENSE }}">--}}
                                 </span>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right ">
-                                   <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
@@ -135,7 +135,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
+                        <button type="submit" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>
@@ -145,7 +145,7 @@
         </div>
     </div>
 </div>
-@include('masterGlobal.datePicker')
+{{--@include('masterGlobal.datePicker')--}}
 <script>
     $(document).ready(function(){
         $('.rowAdd2').click(function(){
@@ -173,7 +173,8 @@
     });
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
+//        $(this).closest("tr.removableRow").remove();
+        $(this).parents("tr").remove();
     });
 
     // select validation
