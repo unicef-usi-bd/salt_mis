@@ -135,7 +135,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" onclick="certificateTab()">
+                        <button type="button" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>

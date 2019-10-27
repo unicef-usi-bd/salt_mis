@@ -165,7 +165,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last mont date wise production list
+                        Last month date wise production 
                     </h4>
 
                     <div class="widget-toolbar">
@@ -228,7 +228,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last mont date wise sales list
+                        Last month date wise sales
                     </h4>
 
                     <div class="widget-toolbar">
