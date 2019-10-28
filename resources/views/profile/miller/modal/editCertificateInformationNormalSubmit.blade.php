@@ -170,7 +170,23 @@
     });
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
+//        $(this).closest("tr.removableRow").remove();
+        var thisRow = $(this).parents("tr");
+        var certificateId = thisRow.find('.CERTIFICATE_ID').val();
+        var actionUrl = '{{ url("single-certificate-delete") }}';
+        var token =  "{{ csrf_token() }}";
+        console.log(token, certificateId, actionUrl);
+        $.ajax({
+            type : "POST",
+            url : actionUrl,
+            data : {certificateId: certificateId, _token: token },
+            success: function (data) {
+                console.log(data);
+
+            }
+        });
+
+        $(this).parents("tr").remove();
     });
 
 </script>
