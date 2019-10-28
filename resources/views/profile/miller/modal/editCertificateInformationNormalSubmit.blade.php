@@ -30,7 +30,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  disabled>
                                         <option value="">Select</option>
                                         @foreach($certificateId as $row)
                                             {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
@@ -104,7 +104,7 @@
                                     <input type="text" name="REMARKS[]" id="inputSuccess " value="{{ $editCertData->REMARKS }}" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                 </span>
                             </td>
-                            <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                            <td><span class="btn btn-danger btn-sm pull-right rowRemove" disabled="disabled"><i class="fa fa-remove"></i></span></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -153,6 +153,7 @@
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.MILL_ID').val('');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
+            defaultRow.find(' select.CERTIFICATE_TYPE_ID').removeAttr("disabled");
             defaultRow.find('select.ISSURE_ID').val('');
             defaultRow.find('select.DISTRICT_ID').val('');
             defaultRow.find('input.CERTIFICATE_ID').val('');
