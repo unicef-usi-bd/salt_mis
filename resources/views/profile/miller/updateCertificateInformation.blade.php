@@ -50,7 +50,7 @@
                                     </select>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
-                                {{--<input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>--}}
+                                <input type="hidden" placeholder=" " name="CERTIFICATE_TYPE[]" class="form-control col-xs-10 col-sm-5 CERTIFICATE_TYPE" value="{{ $editCertData->CERTIFICATE_TYPE }}"/>
                                 <input type="hidden" class="CERTIFICATE_ID" value="{{ $editCertData->CERTIFICATE_ID }}" name="CERTIFICATE_ID[]">
                             </td>
                             <td>
@@ -111,7 +111,8 @@
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right ">
-                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE required" value="{{ $editCertData->RENEWING_DATE }}">
+
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ $editCertData->RENEWING_DATE }}" @if($editCertData->CERTIFICATE_TYPE == 1) required @endif>
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                 </span>
                             </td>
@@ -135,7 +136,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary btnUpdateCertificateInfo" onclick="certificateTab()">
+                        <button type="submit" class="btn btn-primary btnUpdateCertificateInfo">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update & Next
                         </button>

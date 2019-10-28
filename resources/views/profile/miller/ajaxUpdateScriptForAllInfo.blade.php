@@ -64,7 +64,7 @@ $('#certtificateId').on('submit', function (e) {
             console.log(data);
             $('.certificate_msg').html('<span>'+ data +'</span>').show();
             setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
-
+            certificateTab();
         }
     })
 });
