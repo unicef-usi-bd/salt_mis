@@ -30,7 +30,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  disabled>
+                                    <select class="form-control CERTIFICATE_TYPE_ID required" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  @if($editCertData->CERTIFICATE_TYPE_ID == 5 || $editCertData->CERTIFICATE_TYPE_ID == 10) disabled  @endif>
                                         <option value="">Select</option>
                                         @foreach($certificateId as $row)
                                             {{--<option value="{{ $row->LOOKUPCHD_ID }}" @if($editCertData->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>--}}
@@ -105,7 +105,7 @@
                                 </span>
                             </td>
                             <td>
-                                {{--<span class="btn btn-danger btn-sm pull-right rowRemove" disabled="disabled"><i class="fa fa-remove"></i></span>--}}
+                                <span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span>
                             </td>
                         </tr>
                     @endforeach
@@ -155,7 +155,7 @@
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.MILL_ID').val('');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
-//            defaultRow.find(' select.CERTIFICATE_TYPE_ID').removeAttr("disabled");
+            defaultRow.find(' select.CERTIFICATE_TYPE_ID').removeAttr("disabled");
             defaultRow.find('select.ISSURE_ID').val('');
             defaultRow.find('select.DISTRICT_ID').val('');
             defaultRow.find('input.CERTIFICATE_ID').val('');
@@ -175,10 +175,12 @@
     $(document).on("click", "span.rowRemove ", function () {
 //        $(this).closest("tr.removableRow").remove();
         var thisRow = $(this).parents("tr");
+        var certificateTypeId = parseInt(thisRow.find('.CERTIFICATE_TYPE_ID').val());
+        if(certificateTypeId === 5 || certificateTypeId === 10) return false;
         var certificateId = thisRow.find('.CERTIFICATE_ID').val();
         var actionUrl = '{{ url("single-certificate-delete") }}';
         var token =  "{{ csrf_token() }}";
-        console.log(token, certificateId, actionUrl);
+
         $.ajax({
             type : "POST",
             url : actionUrl,
