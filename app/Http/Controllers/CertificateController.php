@@ -403,5 +403,11 @@ class CertificateController extends Controller
 
     }
 
+    public function singleCertificateDeleteByAjax(Request $request){
+        $certificateId = $request->input('certificateId');
+        $delete = DB::table('ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId)->delete();
+        return "Certificate Successfully Deleted";
+    }
+
 
 } // END CLASS

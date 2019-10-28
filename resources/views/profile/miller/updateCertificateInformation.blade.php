@@ -102,8 +102,8 @@
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                     <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" value="" >
-                                    {{--<span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>--}}
-                                    <span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>
+                                    <span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>
+                                    {{--<span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>--}}
                                     <span style="color:red;display:none;" class="error">This field is required</span>
                                     {{--<input type="text" name="tradeFile[]" value="{{ $editCertData->TRADE_LICENSE }}">--}}
                                 </span>
@@ -174,6 +174,20 @@
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
 //        $(this).closest("tr.removableRow").remove();
+        var thisRow = $(this).parents("tr");
+        var certificateId = thisRow.find('.CERTIFICATE_ID').val();
+        var actionUrl = '{{ url("single-certificate-delete") }}';
+        var token =  "{{ csrf_token() }}";
+        console.log(token, certificateId, actionUrl);
+        $.ajax({
+            type : "POST",
+            url : actionUrl,
+            data : {certificateId: certificateId, _token: token },
+            success: function (data) {
+                console.log(data);
+
+            }
+        });
         $(this).parents("tr").remove();
     });
 
