@@ -32,21 +32,42 @@
         })
     });
     $('.certificate_msg').hide();
-    $(document).on('click','.btnUpdateCertificateInfo',function (){
-        //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
-        var url = $(this).closest('form').attr('action');
-        $.ajax({
-            type : 'POST',
-            url : url,
-            data : $('#certtificateId').serialize(),
-            success: function (data) {
-                console.log(data);
-                $('.certificate_msg').html('<span>'+ data +'</span>').show();
-                setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
+//    $(document).on('click','.btnUpdateCertificateInfo',function (){
+//        //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
+//        var url = $(this).closest('form').attr('action');
+//        $.ajax({
+//            type : 'POST',
+//            url : url,
+//            data : $('#certtificateId').serialize(),
+//            success: function (data) {
+//                console.log(data);
+//                $('.certificate_msg').html('<span>'+ data +'</span>').show();
+//                setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
+//
+//            }
+//        })
+//    });
+//$(document).on('click','.btnUpdateCertificateInfo',function (){
+$('#certtificateId').on('submit', function (e) {
+    //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();
+    var url = $(this).closest('form').attr('action');
+    console.log(new FormData(this));
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+            console.log(data);
+            $('.certificate_msg').html('<span>'+ data +'</span>').show();
+            setTimeout(function() { $(".certificate_msg").hide(); }, 3000);
 
-            }
-        })
-    });
+        }
+    })
+});
     $('.qc_msg').hide();
     $(document).on('click','.btnUpdateQcInfo',function (){
         //var millerInfoId = $('.millerInfoId').val(); //alert(millerInfoId);exit();

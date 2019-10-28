@@ -232,6 +232,7 @@ class CertificateController extends Controller
     public function updateCertificateInfoNormal(Request $request)
 //    public function updateCertificateInfo(Request $request)
     {
+//        dd($request->input());
 //        $data = array();
         $tempName = null;
         $millerInfoId = $request->input('MILL_ID');
@@ -239,7 +240,7 @@ class CertificateController extends Controller
         $image = $request->file('user_image');
 
         $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
-        for($i = 0;$i <$millinfo; $i++){
+        for($i = 0; $i<$millinfo; $i++){
            if (isset($image[$i]) && $image[$i]->isValid()) {
                try {
                    $file = $image[$i];
@@ -266,6 +267,8 @@ class CertificateController extends Controller
            );
             if(!empty($tempName)){
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
+            }else{
+                $data['TRADE_LICENSE'] = $request->input('tradeFile')[$i];
             }
 
            if(!empty($certificateId[$i])){
@@ -275,9 +278,10 @@ class CertificateController extends Controller
            }
 
        }
-       //$this->pr($data);
+//       $this->pr($request);
 
         return Redirect::back()->with('message','Certificate Updated Successful !');
+//        return $request;
 
     }
 
