@@ -222,9 +222,9 @@ class Stock extends Model
     }
 
     public static function yearWiseProduction(){
-        $centerId = Auth::user()->center_id;
+        //$centerId = Auth::user()->center_id;
          $yearWiseProduction = DB::select(DB::raw(" select MONTH(TRAN_DATE) month,ROUND(SUM( it.QTY)) as qty from tmm_itemstock it
-                                         WHERE it.center_id = $centerId  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'and YEAR(TRAN_DATE)"))[0];
+                                         WHERE it.center_id   and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'and YEAR(TRAN_DATE)"))[0];
         return $yearWiseProduction;
     }
 
