@@ -234,13 +234,13 @@ class CertificateController extends Controller
     {
 //        dd($request->input());
 //        $data = array();
-        $tempName = null;
         $millerInfoId = $request->input('MILL_ID');
         $certificateId = $request->input('CERTIFICATE_ID');
         $image = $request->file('user_image');
 
         $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
         for($i = 0; $i<$millinfo; $i++){
+            $tempName = null;
            if (isset($image[$i]) && $image[$i]->isValid()) {
                try {
                    $file = $image[$i];
