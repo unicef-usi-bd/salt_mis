@@ -104,7 +104,9 @@
                                     <input type="text" name="REMARKS[]" id="inputSuccess " value="{{ $editCertData->REMARKS }}" class="width-100 REMARKS" value="{{ $editCertData->RENEWING_DATE }}" />
                                 </span>
                             </td>
-                            <td><span class="btn btn-danger btn-sm pull-right rowRemove" disabled="disabled"><i class="fa fa-remove"></i></span></td>
+                            <td>
+                                {{--<span class="btn btn-danger btn-sm pull-right rowRemove" disabled="disabled"><i class="fa fa-remove"></i></span>--}}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -153,7 +155,7 @@
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.MILL_ID').val('');
             defaultRow.find(' select.CERTIFICATE_TYPE_ID').val('');
-            defaultRow.find(' select.CERTIFICATE_TYPE_ID').removeAttr("disabled");
+//            defaultRow.find(' select.CERTIFICATE_TYPE_ID').removeAttr("disabled");
             defaultRow.find('select.ISSURE_ID').val('');
             defaultRow.find('select.DISTRICT_ID').val('');
             defaultRow.find('input.CERTIFICATE_ID').val('');
