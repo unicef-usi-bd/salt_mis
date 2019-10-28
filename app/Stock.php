@@ -607,11 +607,13 @@ class Stock extends Model
     }
 
     public  static function totalWashCrashForDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
         $totalWc = DB::table('tmm_itemstock');
         $totalWc->select('tmm_itemstock.QTY');
         $totalWc->where('tmm_itemstock.TRAN_TYPE','=','W');
         $totalWc->where('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalWc->where('tmm_itemstock.TRAN_DATE','>',$date);
         if($centerId){
             $totalWc->where('tmm_itemstock.center_id','=',$centerId);
         }
@@ -619,14 +621,40 @@ class Stock extends Model
     }
 
     public static function totalIodizeForDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
         $totalIo = DB::table('tmm_itemstock');
         $totalIo->select('tmm_itemstock.QTY');
         $totalIo->where('tmm_itemstock.TRAN_TYPE','=','I');
         $totalIo->where('tmm_itemstock.TRAN_FLAG','=','II');
+        $totalIo->where('tmm_itemstock.TRAN_DATE','<',$date);
         if($centerId){
             $totalIo->where('tmm_itemstock.center_id','=',$centerId);
         }
+        return $totalIo->sum('tmm_itemstock.QTY');
+    }
+
+    public  static function totalAssociationWashCrashForDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+
+        $totalWc = DB::table('tmm_itemstock');
+        $totalWc->select('tmm_itemstock.QTY');
+        $totalWc->where('tmm_itemstock.TRAN_TYPE','=','W');
+        $totalWc->where('tmm_itemstock.TRAN_FLAG','=','WI');
+        $totalWc->where('tmm_itemstock.TRAN_DATE','>',$date);
+
+        return $totalWc->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalAssociationIodizeForDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+
+        $totalIo = DB::table('tmm_itemstock');
+        $totalIo->select('tmm_itemstock.QTY');
+        $totalIo->where('tmm_itemstock.TRAN_TYPE','=','I');
+        $totalIo->where('tmm_itemstock.TRAN_FLAG','=','II');
+        $totalIo->where('tmm_itemstock.TRAN_DATE','<',$date);
+
         return $totalIo->sum('tmm_itemstock.QTY');
     }
 }
