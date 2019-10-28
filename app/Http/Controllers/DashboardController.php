@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChemicalPurchase;
 use App\MillerInfo;
 use App\Stock;
 use App\SalesDistribution;
@@ -76,9 +77,18 @@ class DashboardController extends Controller
         $monthWiseProduction = Stock::monthWiseProduction();
         $saleTotal = SalesDistribution::totalSale();
         $monthWiseProcurement = Stock::monthWiseProcurement();
-        //$this->pr($totalsaleMonthWise);
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
+        //$this->pr($kiStock);exit;
 
-        return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock', 'monthWiseProduction','saleTotal','totalMonthWiseProduction','totalsaleMonthWise','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','monthWiseProcurement'));
+        return view('dashboards.adminDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock', 'monthWiseProduction','saleTotal','totalMonthWiseProduction','totalsaleMonthWise','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','monthWiseProcurement','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','totalProcrument','kiStock','kiUsed','totalKiInStock'));
     }
 
     public function unicef(){
@@ -108,7 +118,16 @@ class DashboardController extends Controller
 
         $saleTotal = SalesDistribution::totalSale();
         $monthWiseProduction = Stock::monthWiseProduction();
-        return view('dashboards.unicefDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalsaleMonthWise','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale'));
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
+        return view('dashboards.unicefDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalsaleMonthWise','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','kiStock','kiUsed','totalKiInStock','totalProcrument'));
     }
 
     public function bsti(){
@@ -139,7 +158,16 @@ class DashboardController extends Controller
         $saleTotal = SalesDistribution::totalSale();
         $monthWiseProduction = Stock::monthWiseProduction();
         $monthWiseProcurement = Stock::monthWiseProcurement();
-        return view('dashboards.bstiDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','totalsaleMonthWise','monthWiseProcurement'));
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
+        return view('dashboards.bstiDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','totalsaleMonthWise','monthWiseProcurement','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','kiStock','kiUsed','totalKiInStock','totalProcrument'));
     }
 
     public function basic(){
@@ -170,7 +198,16 @@ class DashboardController extends Controller
         $saleTotal = SalesDistribution::totalSale();
         $monthWiseProduction = Stock::monthWiseProduction();
         $monthWiseProcurement = Stock::monthWiseProcurement();
-        return view('dashboards.basicDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','totalsaleMonthWise','monthWiseProcurement'));
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
+        return view('dashboards.basicDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','totalproduction','totalSale','totalStock','saleTotal','monthWiseProduction','totalMonthWiseWashcrashProduction','totlalMonthWiseIodizeProduction','totalMonthWiseProduction','totalMonthWiseWascrashSale','totalMonthWiseIodizeSale','totalsaleMonthWise','monthWiseProcurement','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','kiStock','kiUsed','totalKiInStock','totalProcrument'));
     }
 
     public function association(){
@@ -204,10 +241,19 @@ class DashboardController extends Controller
         $associationMonthWishProduction = Stock::monthWiseAsociationProduction();
         $monthWiseProcurement = Stock::monthWiseProcurement();
         $associationMillerCertificate = Certificate::associatonCertificate();
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
        // $approvelNotificaion = MillerInfo::approveMill();
         //$associationmonthwisestock = Stock::monthWiseAssociationProduction();
        //$this->pr($associationTotalStockMonthWise);
-        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction','associationTotalStockMonthWise','totalassociationsaleMonthwise','totalassociationIodizeSaleMonthWise','totalAssociationWashCrasheSaleMonthWise','monthWiseProcurement','approvelNotificaion','associationMillerCertificate'));
+        return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction','associationTotalStockMonthWise','totalassociationsaleMonthwise','totalassociationIodizeSaleMonthWise','totalAssociationWashCrasheSaleMonthWise','monthWiseProcurement','approvelNotificaion','associationMillerCertificate','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','totalProcrument','kiStock','kiUsed','totalKiInStock'));
     }
 
     public function miller(){
@@ -232,8 +278,17 @@ class DashboardController extends Controller
         $millId1 = (array)$millId;
         $links = implode(' ', array_values($millId1));
         $renewalMessageCertificate = Certificate::certificateRenewalMessage($links);
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock () ;
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock-$kiUsed;
 
 //        $this->pr($renewalMessageCertificate);
-        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction','renewalMessageCertificate','millId'));
+        return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction','renewalMessageCertificate','millId','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','kiStock','kiUsed','totalKiInStock','totalProcrument'));
     }
 }

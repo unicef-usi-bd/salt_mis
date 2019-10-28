@@ -221,6 +221,12 @@ class Stock extends Model
         //$monthProduction = DB::table('tmm_itemstock')
     }
 
+    public static function yearWiseProduction(){
+         $yearWiseProduction = DB::select(DB::raw(" select MONTH(TRAN_DATE) month,ROUND(SUM( it.QTY)) as qty from tmm_itemstock it
+                                         WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'and YEAR(TRAN_DATE)"))[0];
+        return $yearWiseProduction;
+    }
+
     public static function monthWiseAsociationProduction(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
@@ -597,6 +603,30 @@ class Stock extends Model
         }
 
         return $countProduction->sum('tmm_itemstock.QTY');
+    }
+
+    public  static function totalWashCrashForDashboard(){
+        $centerId = Auth::user()->center_id;
+        $totalWc = DB::table('tmm_itemstock');
+        $totalWc->select('tmm_itemstock.QTY');
+        $totalWc->where('tmm_itemstock.TRAN_TYPE','=','W');
+        $totalWc->where('tmm_itemstock.TRAN_FLAG','=','WI');
+        if($centerId){
+            $totalWc->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalWc->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalIodizeForDashboard(){
+        $centerId = Auth::user()->center_id;
+        $totalIo = DB::table('tmm_itemstock');
+        $totalIo->select('tmm_itemstock.QTY');
+        $totalIo->where('tmm_itemstock.TRAN_TYPE','=','I');
+        $totalIo->where('tmm_itemstock.TRAN_FLAG','=','II');
+        if($centerId){
+            $totalIo->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalIo->sum('tmm_itemstock.QTY');
     }
 }
 

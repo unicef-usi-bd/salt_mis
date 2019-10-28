@@ -165,7 +165,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Production List
+                        Last month date wise production
                     </h4>
 
                     <div class="widget-toolbar">
@@ -210,6 +210,11 @@
                                     <td>{{ $row->QTY }}</td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td></td>
+                                <td><b class="red">Total</b> </td>
+                                <td><b class="red">{{ $totalWcIoDashboard }}</b></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div><!-- /.widget-main -->
@@ -228,7 +233,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Sale List
+                        Last month date wise sales
                     </h4>
 
                     <div class="widget-toolbar">
@@ -271,61 +276,96 @@
                                     <td>{{ abs($row->QTY) }}</td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td></td>
+                                <td><b class="red">Total</b> </td>
+                                <td><b class="red">{{abs ($totalSaleDashboard) }}</b></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div><!-- /.widget-main -->
                 </div><!-- /.widget-body -->
             </div><!-- /.widget-box -->
         </div><!-- /.col -->
-        <div class="col-sm-6">
-            <canvas id="myChart2"></canvas>
+        {{--<div class="col-sm-6">--}}
+            {{--<canvas id="myChart2"></canvas>--}}
+        {{--</div><!-- /.col -->--}}
+        <div class="col-sm-5">
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat widget-header-small">
+                    <h5 class="widget-title">
+                        <i class="ace-icon fa fa-signal"></i>
+                        Last month sales report W&C vs Iodized
+                    </h5>
+
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main">
+                        {{--<div id="piechart-placeholder">--}}
+                        <canvas id="myChart2"></canvas>
+                        {{--</div>--}}
+
+                    </div><!-- /.widget-main -->
+                </div><!-- /.widget-body -->
+            </div><!-- /.widget-box -->
         </div><!-- /.col -->
         <div class="col-sm-6">
-            <canvas id="myChart" height="200"></canvas>
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat widget-header-small">
+                    <h5 class="widget-title">
+                        <i class="ace-icon fa fa-signal"></i>
+                        KI last 3 month statistics (Procurment + Used + In stock)
+                    </h5>
+
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main">
+                        {{--<div id="piechart-placeholder">--}}
+                        <canvas id="myChart4"></canvas>
+                        {{--</div>--}}
+
+                    </div><!-- /.widget-main -->
+                </div><!-- /.widget-body -->
+            </div><!-- /.widget-box -->
         </div><!-- /.col -->
     </div><!-- /.row -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script type="text/javascript">
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var datas = '<?php echo json_encode($monthWiseProcurement); ?>';
-        //console.log(datas);
-        datas = JSON.parse(datas);
-        //console.log(datas);
-        let barData = [0,0,0,0,0,0,0,0,0,0,0,0];
-        datas.forEach(function (data) {
-            //barData.push(data.subtotal);
-            barData[data.month-1] = data.subtotal;
-        });
+        var qty = '<?php echo json_encode($totalYearProduction); ?>';
+        var yearQty = JSON.parse(qty).qty;
+
+        var ctx = document.getElementById('myChart4').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
-            type: 'bar',
+            type: 'doughnut',
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
+                labels: [
+                    'PROCUREMENT ',
+                    'USED',
+                    'IN STOCK'
+                ],
                 datasets: [{
-                    label: 'Current Year Procurement Chart',
-                    backgroundColor: 'rgb(135, 206, 250)',
-                    borderColor: 'rgb(135, 206, 250)',
-                    data: barData
-                }]
+                    backgroundColor: ['#3498DB','#c63939','#1f7a3d'],
+                    borderColor: '#ffffff',
+                    data: [<?php echo $totalProcrument?>, <?php echo abs($kiUsed) ?>,<?php echo $totalKiInStock?>],
+
+
+                }],
+
             },
 
-            // Configuration options go here
             options: {
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.5,
-                        barThickness: 6,
-                        maxBarThickness: 8,
-                        minBarLength: 2,
-                        gridLines: {
-                            offsetGridLines: true
-                        }
-                    }]
+                animation:{
+                    animateScale:true,
+                    animateRotate:true
                 }
             }
+
         });
 
         var ctx = document.getElementById('myChart1').getContext('2d');
@@ -347,7 +387,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
                 datasets: [{
-                    label: 'Current Year Production Chart',
+                    label: 'Month wise current year production chart Total = ' + yearQty,
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                     // data: [0, 10, 5, 2, 20, 30, 45]
@@ -380,7 +420,7 @@
             data: {
                 labels: [
                     'INDUSTRIAL SALT ',
-                    'IDONAIZE SALT'
+                    'IDONAIZE SALT',
                 ],
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],

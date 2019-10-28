@@ -249,5 +249,18 @@ class SalesDistribution extends Model
         return $countSales->sum('tmm_itemstock.QTY');
     }
 
+    //for Service
+
+    public static function totalSaleDashboard(){
+        $centerId = Auth::user()->center_id;
+        $totalSale = DB::table('tmm_itemstock');
+        $totalSale->select('tmm_itemstock.QTY');
+        $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
+        if($centerId){
+            $totalSale->where('tmm_itemstock.center_id','=',$centerId);
+        }
+        return $totalSale->sum('tmm_itemstock.QTY');
+    }
+
 
 }

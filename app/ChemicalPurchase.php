@@ -215,4 +215,50 @@ class ChemicalPurchase extends Model
             return $deletePr;
         }
     }
+
+
+    public static function totalProcurment(){
+        $date = date("Y-m-d", strtotime("- 90 days"));
+        $centerId = Auth::user()->center_id;
+        $procurment = DB::table('tmm_receivemst');
+        $procurment->select('tmm_receivemst.RECEIVE_TYPE','tmm_receivechd.RCV_QTY');
+        $procurment->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID','=','tmm_receivechd.RECEIVEMST_ID');
+        $procurment->where('tmm_receivemst.RECEIVE_TYPE','=','CR');
+        $procurment->where('tmm_receivemst.RECEIVE_DATE','>',$date);
+        if($centerId){
+            $procurment->where('tmm_receivemst.center_id','=',$centerId);
+        }
+
+        return $procurment->sum('tmm_receivechd.RCV_QTY');
+    }
+
+    public static function kiInstock(){
+        $date = date("Y-m-d", strtotime("- 90 days"));
+        $centerId = Auth::user()->center_id;
+        $kiStock = DB::table('tmm_itemstock');
+        $kiStock->select('tmm_itemstock.QTY');
+        $kiStock->where('tmm_itemstock.TRAN_TYPE','=','CP');
+        $kiStock->where('tmm_itemstock.TRAN_FLAG','=','PR');
+        $kiStock->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $kiStock->where('tmm_itemstock.center_id','=',$centerId);
+        }
+
+        return $kiStock->sum('tmm_itemstock.QTY');
+    }
+
+    public static function kiInUsed(){
+        $date = date("Y-m-d", strtotime("- 90 days"));
+        $centerId = Auth::user()->center_id;
+        $kiUsed = DB::table('tmm_itemstock');
+        $kiUsed->select('tmm_itemstock.QTY');
+        $kiUsed->where('tmm_itemstock.TRAN_TYPE','=','C');
+        $kiUsed->where('tmm_itemstock.TRAN_FLAG','=','IC');
+        $kiUsed->where('tmm_itemstock.TRAN_DATE','>',$date);
+        if($centerId){
+            $kiUsed->where('tmm_itemstock.center_id','=',$centerId);
+        }
+
+        return $kiUsed->sum('tmm_itemstock.QTY');
+    }
 }
