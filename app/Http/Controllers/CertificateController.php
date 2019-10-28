@@ -267,9 +267,10 @@ class CertificateController extends Controller
            );
             if(!empty($tempName)){
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
-            }else{
-                $data['TRADE_LICENSE'] = $request->input('tradeFile')[$i];
             }
+//            else{
+//                $data['TRADE_LICENSE'] = $request->input('tradeFile')[$i];
+//            }
 
            if(!empty($certificateId[$i])){
                $update = DB::table('ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId[$i])->update($data);

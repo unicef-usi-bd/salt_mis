@@ -569,7 +569,7 @@
            $('.issuerAdminDiv').hide();
 
            $('.itemTypeAdminDiv').show();
-           $('.adminReportrangeDiv').show();
+           $('.adminReportrangeDiv').hide();
            $('.millerDiv').hide();
        }else if($reportUrl === 'purchase-salt-stock'){
            $('.statusAdminDiv').hide();

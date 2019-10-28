@@ -82,12 +82,12 @@
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                     <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE required" value="" >
-                                    {{--<span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>--}}
-                                    <span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>
+                                    <span class="TRADE_LICENSE">{{  $editCertData->TRADE_LICENSE  }}</span>
+                                    {{--<span class="TRADE_LICENSE"><a href="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" target="_blank"><img src="{{ url('/'. $editCertData->TRADE_LICENSE ) }}" alt="trade license"  width="20%"></a></span>--}}
                                     <span style="color:red;display:none;" class="error">This field is required</span>
 
                                 </span>
-                                <input type="text" name="userImage" value="{{ $editCertData->TRADE_LICENSE }}"/>
+                                {{--<input type="text" name="userImage" value="{{ $editCertData->TRADE_LICENSE }}"/>--}}
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
