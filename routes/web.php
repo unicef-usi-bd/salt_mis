@@ -276,6 +276,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-item-list-pdf','ReportController@getChemicalItemListPdf');//Rubiyat
     route::get('qc-miller-pdf','ReportController@getQcformillerPdf');//jalal
 
+    //Millers Profile Approval System
+    Route::resource('miller-profile-approval','MillerProfileApprovalController');//Rubiyat
+
+
 
 
 });

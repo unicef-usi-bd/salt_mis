@@ -163,6 +163,19 @@
 
                                     @endif
 
+                                    @if($viewPermissionLevel == 1)
+                                    <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval">
+                                        <span class="blue">
+                                            <i class="ace-icon fa fa-check bigger-130"></i>
+                                        </span>
+                                    </a>
+                                    @else
+                                    <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval" style="display: none;">
+                                        <span class="blue">
+                                            <i class="ace-icon fa fa-check bigger-130"></i>
+                                        </span>
+                                    </a>
+                                    @endif
                                 </div>
 
                             </td>
