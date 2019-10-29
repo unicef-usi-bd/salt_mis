@@ -252,13 +252,26 @@ class SalesDistribution extends Model
     //for Service
 
     public static function totalSaleDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
         $totalSale = DB::table('tmm_itemstock');
         $totalSale->select('tmm_itemstock.QTY');
         $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
+        $totalSale->where('tmm_itemstock.TRAN_DATE','>',$date);
         if($centerId){
             $totalSale->where('tmm_itemstock.center_id','=',$centerId);
         }
+        return $totalSale->sum('tmm_itemstock.QTY');
+    }
+
+    public static function totalSaleAssociationDashboard(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
+
+        $totalSale = DB::table('tmm_itemstock');
+        $totalSale->select('tmm_itemstock.QTY');
+        $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
+        $totalSale->where('tmm_itemstock.TRAN_DATE','>',$date);
+
         return $totalSale->sum('tmm_itemstock.QTY');
     }
 
