@@ -127,9 +127,13 @@
                             </button>
                         @else
 
-                            <button type="button" class="btn btn-success btnUpdateCertificateTem" onclick="millTab()">
+                            {{--<button type="button" class="btn btn-success btnUpdateCertificateTem" onclick="millTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Update--}}
+                            {{--</button>--}}
+                            <button type="submit" class="btn btn-success" >
                                 <i class="ace-icon fa fa-check bigger-110"></i>
-                                Update
+                                Submit
                             </button>
                         @endif
                     </div>
