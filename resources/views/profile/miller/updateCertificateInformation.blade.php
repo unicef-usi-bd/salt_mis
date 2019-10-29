@@ -170,11 +170,20 @@
             defaultRow.find('span.errorMsg').text('');
             $('.chosen-select').chosen(0);
         });
+
+        checkCertificate();
     });
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
 //        $(this).closest("tr.removableRow").remove();
         var thisRow = $(this).parents("tr");
+
+        var certificateType = thisRow.find('.CERTIFICATE_TYPE_ID').val();
+        if(certificateType == 5 || certificateType == 10){
+            $('.btnUpdateCertificateInfo').prop('disabled', true);
+        }
+
+
         var certificateId = thisRow.find('.CERTIFICATE_ID').val();
         var actionUrl = '{{ url("single-certificate-delete") }}';
         var token =  "{{ csrf_token() }}";
@@ -190,6 +199,31 @@
         });
         $(this).parents("tr").remove();
     });
+
+
+    $(document).on('change','.CERTIFICATE_TYPE_ID',function(){
+
+        //var certificateId = $(this).val();
+       // alert(certificateId);
+        checkCertificate();
+    });
+
+    function checkCertificate() {
+        var bsti = false; // 34
+        var ediTable = false; // 39
+        $('.newRow2 tr').each(function () {
+            var certificateId = parseInt($(this).find('.CERTIFICATE_TYPE_ID').val());
+            //alert(certificateId);
+            if(certificateId===5) bsti = true;
+            //if(certificateId===38) industrial = true;
+            if(certificateId===10) ediTable = true;
+        });
+        if(bsti && ediTable){
+            $('.btnUpdateCertificateInfo').prop('disabled', false);
+        } else{
+            $('.btnUpdateCertificateInfo').prop('disabled', true);
+        }
+    }
 
     // select validation
     // $(document).ready(function() {
