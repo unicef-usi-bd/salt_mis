@@ -351,13 +351,14 @@ class CertificateController extends Controller
 //        return Redirect::back()->with('message','Certificate Updated Successful !');
 
         //        $data = array();
-        $tempName = null;
+
         $millerInfoId = $request->input('MILL_ID');
         $certificateId = $request->input('CERTIFICATE_ID');
         $image = $request->file('user_image');
 
         $millinfo = count($_POST['CERTIFICATE_TYPE_ID']);
         for($i = 0;$i <$millinfo; $i++){
+            $tempName = null;
             if (isset($image[$i]) && $image[$i]->isValid()) {
                 try {
                     $file = $image[$i];
@@ -373,6 +374,7 @@ class CertificateController extends Controller
             $data = array(
                 'MILL_ID' => $millerInfoId,
                 'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
+                'CERTIFICATE_ID' => $request->input('CERTIFICATE_ID')[$i],
                 'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                 'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
@@ -389,7 +391,7 @@ class CertificateController extends Controller
             }
 
 //            if(!empty($certificateId[$i])){
-//                $update = DB::table('ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId[$i])->update($data);
+//                $update = DB::table('tem_ssm_certificate_info')->where('CERTIFICATE_ID',$certificateId[$i])->update($data);
 //            } else{
 //                $inset = DB::table('tem_ssm_certificate_info')->insert($data);
 //            }

@@ -3,8 +3,12 @@
         <div class="col-md-12">
             {{--<div class="alert alert-info certificate_msg"></div>--}}
 
+
+            @if(request()->session()->get('MILL_ID'))
+            <form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            @else
             <form id="certificateId" action="{{ url('/edit-certificate-info-normal') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-            {{--<form action="{{ url('/edit-certificate-info-normal-tem') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">--}}
+            @endif
 
                @csrf
                 @if(isset($millerInfoId))
@@ -87,7 +91,7 @@
                                     <span style="color:red;display:none;" class="error">This field is required</span>
 
                                 </span>
-                                {{--<input type="text" name="userImage" value="{{ $editCertData->TRADE_LICENSE }}"/>--}}
+                                <input type="hidden" name="userImage" value="{{ $editCertData->TRADE_LICENSE }}"/>
                             </td>
                             <td>
                                 <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
