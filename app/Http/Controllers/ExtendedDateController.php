@@ -124,9 +124,9 @@ class ExtendedDateController extends Controller
     }
 
     public function millerInfo(Request $request){
-     $millId = $request->input('millerName');
+     $millId = $request->input('mill_id');
      $millInfo = ExtendedDate::millerDetails($millId);
-     //dd($millId);
+     //dd($millInfo);
      $view = view("setup.extendate.millerInfo",compact('millInfo','millId'))->render();
      return response()->json(['html'=>$view]);
     }

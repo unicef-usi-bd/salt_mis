@@ -10,39 +10,44 @@
         <h4 class="center text-success">Expired Mill Information </h4>
         <div class="row table-responsive">
             <table class="table">
+                <tr style="margin-left: 200%;">
+                    <th>Renewing Date </th>
+                    <th> :</th>
+                    <td style="background-color: red;  font-weight: bolder; color: white;">{{$millInfo->RENEWING_DATE}}</td>
+                </tr>
                 <tr>
                     <th>Mill Name</th>
                     <th> :</th>
                     <td>{{$millInfo->MILL_NAME}}</td>
-                    {{--<th>{{ trans('user.user_name') }} </th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$userView->username}}</td>--}}
+                    <th>Process Type</th>
+                    <th> :</th>
+                    <td>{{$millInfo->ProcessType}}</td>
 
                 </tr>
 
-                {{--<tr>--}}
-                    {{--<th>{{ trans('user.designation') }} </th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$userView->designation}}</td>--}}
-                    {{--<th>{{ trans('user.email') }} </th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{$userView->email}}</td>--}}
+                <tr>
+                    <th>Zone </th>
+                    <th> :</th>
+                    <td>{{$millInfo->ZONE_NAME}}</td>
+                    <th>Millers ID </th>
+                    <th> :</th>
+                    <td>{{$millInfo->MILLERS_ID}}</td>
 
 
-                {{--</tr>--}}
-                {{--<tr>--}}
-                    {{--<th>{{ trans('user.contact_no') }}</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>--}}
-                        {{--{{$userView->contact_no}}--}}
-                    {{--</td>--}}
+                </tr>
+                <tr>
+                    <th>Type Of Owner</th>
+                    <th> :</th>
+                    <td>
+                        {{$millInfo->ownerType}}
+                    </td>
                     {{--<th>{{ trans('user.address') }}</th>--}}
                     {{--<th> :</th>--}}
                     {{--<td>--}}
                         {{--{{$userView->address}}--}}
                     {{--</td>--}}
 
-                {{--</tr>--}}
+                </tr>
                 {{--<tr>--}}
                     {{--<th>{{ trans('user.cost_center') }}</th>--}}
                     {{--<th> :</th>--}}

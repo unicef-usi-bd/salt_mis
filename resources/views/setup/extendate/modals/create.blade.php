@@ -32,9 +32,9 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Expired Date</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                        <input type="date" id="textInput1" name="RENEWING_DATE[]"  class="chosen-container RENEWING_DATE " value="">
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
     $(document).on('change','.millerName',function () {
         //alert('hi');
        var mill_id = $(this).val();
-       //alert(mill_id);
+//       alert(mill_id);
         var _token = '{{ csrf_token() }}';
        $.ajax({
            type: 'POST',
