@@ -13,10 +13,11 @@
             <div class="alert alert-info millmsg"></div>
 
             @if(request()->session()->get('MILL_ID'))
-            <form id="millId"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
-            @else
             <form id="millIdTemp"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
-            @endif
+            @else
+            <form id="millId"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
+
+             @endif
                <input type="hidden" id="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @csrf
                 <div class="col-md-6">
@@ -260,6 +261,23 @@
                 $.ajax({
                     type:'POST',
                     url:"edit-mill-info",
+                    data: new FormData(this),
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success: function(msg) {
+                    }
+                })
+            });
+
+
+            $("#millIdTemp").on('submit',function (e) {
+
+//                alert('hi');
+                e.preventDefault();
+                $.ajax({
+                    type:'POST',
+                    url:"edit-mill-info-temp",
                     data: new FormData(this),
                     contentType:false,
                     cache:false,

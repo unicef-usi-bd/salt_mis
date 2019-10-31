@@ -101,6 +101,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // modal edit mill information
     Route::post('edit-mill-info', 'MillerInfoController@updateMillInfo'); //Azharul
+    Route::post('edit-mill-info-temp', 'MillerInfoController@temUpdate'); //Azharul
     Route::post('edit-mill-info-approve','MillerInfoController@approveByAssociation');//jalal
     Route::post('edit-employee-info', 'EmployeeController@updateEmployeeInfo'); //Azharul
     Route::post('edit-qc-info', 'QcController@updateQcInfo'); //Azharul

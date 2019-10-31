@@ -387,7 +387,7 @@ class CertificateController extends Controller
             if(!empty($tempName)){
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
             }else{
-                $data['TRADE_LICENSE'] = $request->input('userImage');
+                $data['TRADE_LICENSE'] = $request->input('userImage')[$i];
             }
 
 //            if(!empty($certificateId[$i])){
