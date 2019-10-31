@@ -1,0 +1,37 @@
+19/09/2019
+---------------
+table name notic
+remarks: image field nullable
+
+
+26/09/2019
+------------------
+table name morphine_dispenses
+remarks: new column add name enTitle,bnTitle
+
+
+29/09/2019
+-----------------------
+table name educationtraning
+remarks: new column add name aboutCourse,aboutCurriculum,contact,courseType,position,curriculum,tearmsAndCondition,application,courseImage1,courseImage2,courseImage3,courseImage4
+
+
+1/10/2019
+------------------------
+table name sliders
+remarks: new column add name image2,image3,image4
+
+3/10/2019
+------------------------
+table name photoGallery
+remarks: group_id,subGroup_id,bn_group_id,bn_subGroup_id (int)
+
+7/10/2019
+------------------------
+table name faqenglish,faqbangla
+remarks answer (txt)
+
+------------------------------------------
+1. nav,gallery data from menus table
+2. change Aboutus to About Us and contactus to Contact Us data in menus table
+3. Add dashboardnotification table
