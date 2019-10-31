@@ -96,6 +96,8 @@ class MillerProfileApprovalController extends Controller
 
         $certificateId = $request->input('CERTIFICATE_ID');
         $certificateIdTemp = $request->input('CERTIFICATE_ID_TEM');
+        $tempCertificateId = $request->input('TEM_CERTIFICATE_ID');
+
         $qcInfoId = $request->input('QCINFO_ID');
         $qcInfoTempId = $request->input('QCINFO_ID_TEM');
         $millEmpId = $request->input('MILLEMP_ID');
@@ -129,7 +131,7 @@ class MillerProfileApprovalController extends Controller
         $notCommonEnterpreneurInfoData = array_merge(array_diff($enterpreneurInfo, $tempEnterpreneurId),array_diff($tempEnterpreneurId, $enterpreneurInfo));
         $notExistEnterpreneurInfoData = array_diff($enterpreneurInfo, $tempEnterpreneurId);
 
-        dd($enterpreneurInfo);
+//        dd($enterpreneurInfo);
 
         $enterpreneurInfoOldData = array();
         for($i=0;$i<count($enterpreneurInfo);$i++){
@@ -186,6 +188,11 @@ class MillerProfileApprovalController extends Controller
 
 
         //Certificate Information Data
+        $commonCertificateInfoData = array_intersect($certificateId, $tempCertificateId);
+        $notCommonCertificateInfoData = array_merge(array_diff($certificateId, $tempCertificateId),array_diff($tempCertificateId, $certificateId));
+        $notExistCertificateInfoData = array_diff($certificateId, $tempCertificateId);
+
+
         $certificateinfoData = array();
         for($i=0;$i<count($certificateIdTemp);$i++){
             $certificate =  DB::table('tem_ssm_certificate_info')

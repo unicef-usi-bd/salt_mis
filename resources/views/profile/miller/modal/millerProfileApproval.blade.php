@@ -263,6 +263,7 @@
                     </tr>
                     @foreach($presentCertificaterData as $row)
                         <input type="hidden" name="CERTIFICATE_ID_TEM[]" value="{{ $row->CERTIFICATE_ID_TEM }}">
+                        <input type="hidden" name="TEM_CERTIFICATE_ID[]" value="{{ $row->CERTIFICATE_ID }}">
                     <tr>
                         <td> {{ $row->CERTIFICATE_NAME }} </td>
                         <td> {{ $row->issuer_name }} </td>
