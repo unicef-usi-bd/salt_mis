@@ -37,11 +37,13 @@
                         <tbody class="newRow">
                         @foreach($getEntrepreneurRowData as $editEntrepData)
                             <tr class="rowFirst">
+
                                 <td>
                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="{{ $editEntrepData->OWNER_NAME }}" class="OWNER_NAME required"  />
                                         <span style="color:red;display:none;" class="error">This field is required</span>
+                                        <input type="hidden" name="ENTREPRENEUR_ID" class="ENTREPRENEUR_ID" value="{{ $editEntrepData->ENTREPRENEUR_ID }}">
                                     </span>
                                 </td>
                                 <td>
@@ -137,6 +139,7 @@
             $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.OWNER_NAME').val('');
+            defaultRow.find(' input.ENTREPRENEUR_ID').val('');
             defaultRow.find('select.DIVISION_ID').val('');
             defaultRow.find('select.ent_district').val('').trigger("chosen:updated");
             defaultRow.find('select.ent_upazila').val('').trigger("chosen:updated");
@@ -153,7 +156,22 @@
 
         // Fore Remove Row By Click
         $(document).on("click", "span.rowRemove ", function () {
-            $(this).closest("tr.removableRow").remove();
+//            $(this).closest("tr.removableRow").remove();
+            var thisRow = $(this).parents("tr");
+            var enterpreneurId = thisRow.find('.ENTREPRENEUR_ID').val();
+            var actionUrl = '{{ url("single-enterpreneur-delete") }}';
+            var token =  "{{ csrf_token() }}";
+//            console.log(token, certificateId, actionUrl);
+            $.ajax({
+                type : "POST",
+                url : actionUrl,
+                data : {enterpreneurId: enterpreneurId, _token: token },
+                success: function (data) {
+                    console.log(data);
+
+                }
+            });
+            $(this).parents("tr").remove();
         });
 
         $(document).on('change','.DIVISION_ID',function () {

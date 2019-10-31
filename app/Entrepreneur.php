@@ -97,7 +97,7 @@ class Entrepreneur extends Model
             $reqTime = count($_POST['OWNER_NAME']);
             for($i=0; $i<$reqTime; $i++){
                 $data = ([
-                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
+//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
                     //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
                     'MILL_ID' => $request->input('MILL_ID'),
                     //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
