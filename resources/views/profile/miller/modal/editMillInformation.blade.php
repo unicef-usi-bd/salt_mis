@@ -12,9 +12,12 @@
 
             <div class="alert alert-info millmsg"></div>
 
-
+            @if(request()->session()->get('MILL_ID'))
             <form id="millId"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
-                <input type="hidden" id="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
+            @else
+            <form id="millIdTemp"  class="form-horizontal myform" role="form" enctype="multipart/form-data">
+            @endif
+               <input type="hidden" id="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">
