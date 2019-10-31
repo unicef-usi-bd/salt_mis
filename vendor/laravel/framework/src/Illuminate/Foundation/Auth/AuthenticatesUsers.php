@@ -23,7 +23,8 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('layouts.adminLogin');
+        $worningMessage = Session::get('worningMessage');
+        return view('layouts.adminLogin',compact('worningMessage'));
     }
 
     /**

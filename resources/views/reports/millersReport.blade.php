@@ -334,7 +334,7 @@
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'miller-purchase-salt-stock'){
             $('.statusAdminDiv').hide();
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
 
             $('.itemTypeAdminDiv').show();
 
