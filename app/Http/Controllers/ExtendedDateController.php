@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
+use Psy\Util\Json;
 use App\User;
 use File;
 use Illuminate\Support\Facades\Route;
@@ -123,8 +124,10 @@ class ExtendedDateController extends Controller
     }
 
     public function millerInfo(Request $request){
-     $millId = $request->input('millerName');
-     $view = view("extendate.millerInfo",compact('millId'))->render();
+     $millId = $request->input('mill_id');
+     $millInfo = ExtendedDate::millerDetails($millId);
+     //dd($millInfo);
+     $view = view("setup.extendate.millerInfo",compact('millInfo','millId'))->render();
      return response()->json(['html'=>$view]);
     }
 }

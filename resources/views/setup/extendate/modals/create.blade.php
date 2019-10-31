@@ -17,7 +17,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess millerName" class="chosen-select form-control" name="MILL_NAME" data-placeholder="Select Mill Name">
+                            <select id="form-field-select-3 inputSuccess " class="chosen-select millerName form-control" name="MILL_ID" data-placeholder="Select Mill Name">
                                <option value=""></option>
                                 @foreach($millerId as $row)
                                     <option value="{{$row->MILL_ID}}">{{ $row->MILL_NAME }}</option>
@@ -27,25 +27,14 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> * </span> </label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here in KG" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" value=""/>--}}
-                    {{--</div>--}}
-                    {{--<i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >ltr</i>--}}
-                </div>
-                <div class="form-group">
-                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<textarea rows="3" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>--}}
-                    {{--</div>--}}
-                </div>
+
+
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Expired Date</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                        <input type="date" id="textInput1" name="RENEWING_DATE[]"  class="chosen-container RENEWING_DATE " value="">
                     </div>
                 </div>
             </div>
@@ -67,21 +56,24 @@
             </span>
                 </div>
             </div> -->
-        <div class="row" style="margin-top: 20px; width: 92.9%">
+        <div class="row" style="margin-top: 20px; width: 100%">
             <div class="col-sm-12">
                 <div class="col-sm-12">
-                    <div class="tabbable resultTab">
+                    {{--<div class="tabbable resultTab">--}}
                         <div class="tab-content">
-                            <span id="printButton"></span>
+
                             <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
 
                             </div>
                         </div>
-                    </div>
+                    {{--</div>--}}
                 </div>
 
 
             </div>
+        </div>
+        <div class="form-group">
+
         </div>
 
         <div class="clearfix" style="margin-left: 150px;">
@@ -145,6 +137,25 @@
                 }
             }
         });
+
+    });
+
+    $(document).on('change','.millerName',function () {
+        //alert('hi');
+       var mill_id = $(this).val();
+//       alert(mill_id);
+        var _token = '{{ csrf_token() }}';
+       $.ajax({
+           type: 'POST',
+           url:'{{ url('extended-date/miller-info') }}',
+           data:{'mill_id':mill_id,_token: _token},
+           success:function (data) {
+//                    console.log(data);
+               //$('.resultTab').show();
+               $('.tblReport').html(data.html);
+
+           }
+       });
 
     });
 
