@@ -90,8 +90,8 @@ class Entrepreneur extends Model
     }
 
     public static function updateMillEntrepData($request,$id){
-        echo '<pre>';
-        echo($request);exit;
+//        echo '<pre>';
+//        echo($request);exit;
         $enterId = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $id)->delete();
         if ($enterId) {
             $reqTime = count($_POST['OWNER_NAME']);

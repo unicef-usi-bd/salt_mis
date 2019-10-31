@@ -138,8 +138,8 @@
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.OWNER_NAME').val('');
             defaultRow.find('select.DIVISION_ID').val('');
-            defaultRow.find('select.ent_district').val('');
-            defaultRow.find('select.ent_upazila').val('');
+            defaultRow.find('select.ent_district').val('').trigger("chosen:updated");
+            defaultRow.find('select.ent_upazila').val('').trigger("chosen:updated");
 //            For Ignore array Conflict
             defaultRow.find('input.NID').val('');
             defaultRow.find('input.MOBILE_1').val('');
@@ -157,6 +157,7 @@
         });
 
         $(document).on('change','.DIVISION_ID',function () {
+            var thisRow = $(this).closest('tr');
             var divisionId = $(this).val(); //alert(divisionId); //exit();
             var option = '<option value="">Select District</option>';
             var url  = $(this).attr('url');
@@ -169,14 +170,15 @@
                     for (var i = 0; i < data.length; i++){
                         option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
                     }
-                    $('.ent_district').html(option);
-                    $('.ent_district').trigger("chosen:updated");
+                    thisRow.find('.ent_district').html(option);
+                    thisRow.find('.ent_district').trigger("chosen:updated");
                 }
             });
         });
 
 
         $(document).on('change','.ent_district',function(){
+            var thisRow = $(this).closest('tr');
             var districtId = $(this).val(); //alert(districtId); exit();
             var option = '<option value="">Select Upazila</option>';
             var url = $(this).attr('url');
@@ -189,8 +191,8 @@
                     for (var i = 0; i < data.length; i++){
                         option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
                     }
-                    $('.ent_upazila').html(option);
-                    $('.ent_upazila').trigger("chosen:updated");
+                    thisRow.find('.ent_upazila').html(option);
+                    thisRow.find('.ent_upazila').trigger("chosen:updated");
                 }
             });
         });
