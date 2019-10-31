@@ -126,6 +126,8 @@ class MillerProfileApprovalController extends Controller
             'UPDATE_BY' => Auth::user()->id
         );
 
+        $updateMillerInfo = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $miller)->update($millerInfoData);
+
         //Enterpreneur Information Data
         $commonEnterpreneurInfoData = array_intersect($enterpreneurInfo, $tempEnterpreneurId);
         $notCommonEnterpreneurInfoData = array_merge(array_diff($enterpreneurInfo, $tempEnterpreneurId),array_diff($tempEnterpreneurId, $enterpreneurInfo));
@@ -234,7 +236,7 @@ class MillerProfileApprovalController extends Controller
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         );
-
+        $updateQcInformation = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $miller)->update($qcInfoData);
         //Employee Information Data
         $qcInfoTemp = DB::table('tem_ssm_millemp_info')
             ->where('MILLEMP_ID_TEM','=',$millEmpTempId)
@@ -254,6 +256,8 @@ class MillerProfileApprovalController extends Controller
             'UPDATE_BY' => Auth::user()->id
         );
 
+        $updateEmployeeInfo = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $miller)->update($employeeInfoData);
+
 //        $data = array(
 //            'millerId' => $id,
 //            'MILL_ID' => $request->input('MILL_ID'),
@@ -268,6 +272,8 @@ class MillerProfileApprovalController extends Controller
 //            'MILLEMP_ID_TEM' => $request->input('MILLEMP_ID_TEM'),
 //            'REMARKS' => $request->input('REMARKS'),
 //        );
+
+        return redirect()->back();
 
 
     }
