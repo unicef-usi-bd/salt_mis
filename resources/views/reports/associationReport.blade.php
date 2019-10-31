@@ -94,60 +94,24 @@
                     </div>
 
 
-
-
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Internal </b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                    {{--<option value="">Select</option>--}}
-
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group" >--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
-                    {{--<option value=""></option>--}}
-
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group" >--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DIVISION_ID" name="DIVISION_ID" class="chosen-select chosen-container division" data-placeholder="Select">--}}
-
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                    {{--<option value="">Select</option>--}}
-
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-
-
-
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group millerDiv">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
+                    <div class="form-group itemTypeAdminDiv">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b></label>
                         <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                               <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAssoc chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
+                                <option value="0">All Purchase</option>
+                                   @foreach($crudeSaltTypes as $chemical)
+                                       <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
+                                   @endforeach
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+
+
+                        <div class="form-group millerDiv">
+                            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
+                            <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select One-</option>
@@ -157,70 +121,16 @@
                                 @endforeach
                             </select>
                         </span>
-                        </div>
-                    </div>
+                            </div>
 
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase Range</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                    {{--<option value="">Select</option>--}}
 
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
 
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<input type="date" name="renew_date" class="chosen-select chosen-container">--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Monitor</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                    {{--<option value="">Select</option>--}}
 
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Self </b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="DISTRICT_ID" class="chosen-select chosen-container district" name="DISTRICT_ID" data-placeholder="Select">--}}
-                    {{--<option value="">Select</option>--}}
+                </div>
 
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                    {{--<select id="ACTIVE_FLG" class="chosen-select chosen-container" name="ACTIVE_FLG" data-placeholder="Select">--}}
-                    {{--<option value="1">Active</option>--}}
-                    {{--<option value="0">Inactive</option>--}}
-                    {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+
+
+
 
                     <div class="form-group processTypeDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
@@ -250,19 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group itemTypeAdminDiv">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAssoc chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                                <option value="0">All Purchase</option>
-                                @foreach($crudeSaltTypes as $chemical)
-                                       <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
-                                   @endforeach
-                                </select>
-                            </span>
-                        </div>
-                    </div>
+
                     <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
                         <div class="col-sm-8">
@@ -404,7 +302,7 @@
             $('.issuerAdminDiv').hide();
 
             $('.itemTypeAdminDiv').show();
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
              $('.processTypeDiv').hide();
              $('.millerDiv').hide();
         }else if($reportUrl === 'purchase-salt-total-stock'){

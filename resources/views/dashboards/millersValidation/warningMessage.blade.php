@@ -71,11 +71,15 @@
                                         {{--<img src="{{asset('/'.$orgInfo->org_logo)}}" class="img-responsive center-block">--}}
                                         <img src="{{asset('image/unicef-bd.jpg')}}" class="img-responsive center-block" style="border-radius: 50%;width: 100px;">
                                     </div>
-                                    @if($worningMessage !="")
-                                    <h4 class="header" style="color: red">
-                                        {{$worningMessage}}
+                                    <h4 class="header">
+                                        @if (isset($errors) && count($errors) > 0)
+                                            <i class="ace-icon fa fa-times-circle red"></i>
+                                            <span class="text-danger"> Invalid Email or Password </span>
+                                        @else
+
+                                            <P style="color: red;">You Are Expired . Please Contact With Association.</p>
+                                        @endif
                                     </h4>
-                                    @endif
                                     <h4 class="header">
                                         @if (isset($errors) && count($errors) > 0)
                                             <i class="ace-icon fa fa-times-circle red"></i>

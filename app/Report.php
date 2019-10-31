@@ -400,7 +400,29 @@ class Report extends Model
     }
 
     public static function adminChemicalStock($millTypeAdmin){
-        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
+        if($millTypeAdmin == 0){
+            return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
+                                        FROM
+                                            (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'IC' AND s.TRAN_TYPE = 'C' THEN
+                                                s.QTY
+                                            END reduce,
+                                        
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'CP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 25
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b
+                                        /*WHERE DATE(b.TRAN_DATE) BETWEEN '' AND ''*/
+  WHERE b.center_id IN (SELECT ASSOCIATION_ID  FROM ssm_associationsetup )
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+        }else{
+            return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase, SUM(b.reduce) reduce, SUM(b.QTY) STOCK_QTY
                                         FROM
                                             (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
                                             CASE WHEN s.TRAN_FLAG = 'IC' AND s.TRAN_TYPE = 'C' THEN
@@ -420,6 +442,8 @@ class Report extends Model
                                         /*WHERE DATE(b.TRAN_DATE) BETWEEN '' AND ''*/
   WHERE b.center_id IN (SELECT ASSOCIATION_ID  FROM ssm_associationsetup WHERE mill_id = $millTypeAdmin)
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+        }
+
     }
 
     public static function millerChemicalStock($centerId,$starDate,$endDate){
@@ -670,7 +694,7 @@ class Report extends Model
             AND t.TRAN_TYPE = 'W'
             AND t.TRAN_FLAG = 'SD' )a
             GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
-        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type order by a.QTY asc "));
         }else{
             return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
@@ -690,7 +714,7 @@ class Report extends Model
             AND t.TRAN_TYPE = 'I'
             AND t.TRAN_FLAG = 'SD' )a
             GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
-        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
+        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type order by a.QTY asc"));
         }
     }
 
