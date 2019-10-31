@@ -20,7 +20,7 @@ class ExtendedDate extends Model
 
     public static function millerDetails($millId){
         return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.MILL_NAME','ssm_mill_info.MILL_ID')
+            ->select('ssm_mill_info.*')
             ->where('ssm_mill_info.MILL_ID','=',$millId)
             ->first();
     }

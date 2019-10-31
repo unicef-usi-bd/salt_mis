@@ -1,52 +1,87 @@
 
+
 <style>
-    .table th{
-        text-align: center;
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+        border: none;
     }
 </style>
+<div class="col-md-12">
+    <div class="error-container">
+        <h4 class="center text-success">Expired Mill Information </h4>
+        <div class="row table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Mill Name</th>
+                    <th> :</th>
+                    <td>{{$millInfo->MILL_NAME}}</td>
+                    {{--<th>{{ trans('user.user_name') }} </th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>{{$userView->username}}</td>--}}
 
-<div class="row" style="margin-bottom: 15px;">
-    <div class="col-md-12 center">
-        <h4>Total Sale</h4>
-    </div><!-- /.col -->
-</div><!-- /.row -->
+                </tr>
 
-<div class="row">
-    <div class="col-md-12 table-responsive">
-        <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
-            <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
-            <tr>
-                <th>Sl.</th>
-                <th>Number of Millers</th>
-                <th>Items Type</th>
-                <th>Items Name</th>
-                <th>Division</th>
-                <th>District</th>
-                <th>Sales Amount</th>
-            </tr>
-
-            </thead>
-
-            {{--<tbody>--}}
-            {{--<?php $sl=0;?>--}}
-            {{--@foreach($totalSale as $row)--}}
                 {{--<tr>--}}
-                    {{--<td>{{ ++$sl }}</td>--}}
-                    {{--<td>{{$row->cnt_miller}}</td>--}}
-                    {{--<td>{{$row->ITEM_TYPE_NAME}}</td>--}}
-                    {{--<td>{{$row->ITEM_NAME}}</td>--}}
-                    {{--<td>{{$row->DIVISION_NAME}}</td>--}}
-                    {{--<td>{{$row->DISTRICT_NAME}}</td>--}}
-                    {{--<td>{{abs($row->QTY)}}</td>--}}
+                    {{--<th>{{ trans('user.designation') }} </th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>{{$userView->designation}}</td>--}}
+                    {{--<th>{{ trans('user.email') }} </th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>{{$userView->email}}</td>--}}
+
+
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>{{ trans('user.contact_no') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--{{$userView->contact_no}}--}}
+                    {{--</td>--}}
+                    {{--<th>{{ trans('user.address') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--{{$userView->address}}--}}
+                    {{--</td>--}}
+
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>{{ trans('user.cost_center') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--{{$userView->cost_center_name}}--}}
+                    {{--</td>--}}
+                    {{--<th>{{ trans('user.remark') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--{{$userView->remarks}}--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>{{ trans('user.image') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--<img src="{{asset($userView->user_image)}}" class="image-responsive" height="80px" width="90px">--}}
+                    {{--</td>--}}
+                    {{--<th>{{ trans('user.signature') }}</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--<img src="{{ asset($userView->user_signature) }}" height="80px" width="90px">--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>{{ trans('user.status') }} </th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>--}}
+                        {{--@if($userView->active_status==1)--}}
+                            {{--<span class="label label-md label-info arrowed arrowed-righ"> Active </span>--}}
+                        {{--@else--}}
+                            {{--<span class="label label-md label-danger arrowed arrowed-righ"> Inactive </span>--}}
+                        {{--@endif--}}
+                    {{--</td>--}}
                 {{--</tr>--}}
 
-            {{--@endforeach--}}
-            {{--</tbody>--}}
-        </table>
+            </table>
+        </div>
+
+        <div class="space"></div>
     </div>
 </div>
