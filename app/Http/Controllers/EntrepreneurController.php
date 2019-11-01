@@ -220,6 +220,10 @@ class EntrepreneurController extends Controller
 //        return $request;
     }
 
-
+    public function singleEnterpreneurDeleteByAjax(Request $request){
+        $enterpreneurId = $request->input('enterpreneurId');
+        $delete = DB::table('ssm_entrepreneur_info')->where('ENTREPRENEUR_ID', $enterpreneurId)->delete();
+        return "ENTREPRENEUR Successfully Deleted";
+    }
 
 }

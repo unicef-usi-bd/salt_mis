@@ -109,7 +109,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-certificate-info-normal', 'CertificateController@updateCertificateInfoNormal'); //Azharul
     Route::post('edit-entrepreneur-info', 'EntrepreneurController@updateEntrepreneurInfo'); //Azharul
     Route::post('edit-entrepreneur-info-update', 'EntrepreneurController@updateEntrepreneurInfoUpdate'); //jalal
-    Route::post('single-certificate-delete', 'CertificateController@singleCertificateDeleteByAjax'); //jalal
+    Route::post('single-certificate-delete', 'CertificateController@singleCertificateDeleteByAjax'); //rubiyat
+    Route::post('single-enterpreneur-delete', 'EntrepreneurController@singleEnterpreneurDeleteByAjax'); //rubiyat
     // modal edit mill information
 
     //Temporary modal for mill information
