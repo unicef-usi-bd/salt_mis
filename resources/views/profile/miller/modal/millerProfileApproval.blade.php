@@ -203,6 +203,7 @@
                         <tr>
                             <input type="hidden" name="ENTREPRENEUR_ID_TEM[]" value="{{ $row->ENTREPRENEUR_ID_TEM }}">
                             <input type="hidden" name="TEM_ENTREPRENEUR_ID[]" value="{{ $row->ENTREPRENEUR_ID }}">
+                            <input type="hidden" name="TEM_MILL_ID[]" value="{{ $row->MILL_ID }}">
                             <td> {{ $row->OWNER_NAME }}</td>
                             <td>{{ $row->NID }} </td>
                             <td>{{ $row->DIVISION_NAME }} </td>

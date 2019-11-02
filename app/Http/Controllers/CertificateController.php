@@ -381,6 +381,7 @@ class CertificateController extends Controller
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
                 'REMARKS' => $request->input('REMARKS')[$i],
+                'approval_status' => 1,
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );

@@ -29,6 +29,7 @@ class MillerInfo extends Model
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
              'center_id' => Auth::user()->center_id,
              'REMARKS' => $request->input('REMARKS'),
+//             'approval_status' => 0,
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
@@ -70,6 +71,7 @@ class MillerInfo extends Model
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'center_id' => Auth::user()->center_id,
             'REMARKS' => $request->input('REMARKS'),
+            'approval_status' => 1,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
@@ -115,7 +117,7 @@ class MillerInfo extends Model
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
                 'UNION_ID' => $request->input('UNION_ID'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-                'approval_status' => 'm',
+                'approval_status' => 0,
                 'REMARKS' => $request->input('REMARKS'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id

@@ -46,6 +46,7 @@ class Employee extends Model
             'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
             'REMARKS' => $request->input('REMARKS'),
             'FINAL_SUBMIT_FLG' => 1,
+            'approval_status' => 1,
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")

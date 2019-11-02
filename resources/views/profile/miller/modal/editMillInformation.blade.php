@@ -224,10 +224,10 @@
                                 Update & Next
                             </button>
                         @else
-                        <button type="submit" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
-                        </button>
+                            <button type="submit" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Update & Next
+                            </button>
                         @endif
 
                     </div>
