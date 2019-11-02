@@ -14,6 +14,7 @@
         <div class="row table-responsive">
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: green;">Previous Mill Information </h4>
+                @if($previousMillerData)
                 <input type="hidden" name="MILL_ID" value="{{ $previousMillerData->MILL_ID }}">
                 <table class="table borderless">
                     <tr>
@@ -79,10 +80,14 @@
                         <td> {{ $previousMillerData->REMARKS }}</td>
                     </tr>
                 </table>
+                    @else
+                    <h3>No Data Found</h3>
+                    @endif
             </div>
 
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: red;">Change Mill Information </h4>
+                @if($presentMillerData)
                 <input type="hidden" name="MILL_ID_TEM" value="{{ $presentMillerData->MILL_ID_TEM }}">
                 <table class="table borderless">
                     <tr>
@@ -148,6 +153,9 @@
                         <td> {{ $presentMillerData->REMARKS }}</td>
                     </tr>
                 </table>
+                    @else
+                    <h3>No Data Found</h3>
+                    @endif
             </div>
         </div>
 
@@ -167,6 +175,7 @@
                         <th class=" ">Email </th>
                         <th class=" ">Remarks</th>
                     </tr>
+                    @if($previousEnterpreneurData)
                     @foreach($previousEnterpreneurData as $row)
                         <input type="hidden" name="ENTREPRENEUR_ID[]" value="{{ $row->ENTREPRENEUR_ID }}">
                         <tr>
@@ -181,7 +190,9 @@
                             <td> {{ $row->REMARKS }}</td>
                         </tr>
                     @endforeach
-
+                        @else
+                        <h3>No Data Found</h3>
+                    @endif
                 </table>
             </div>
 
@@ -199,6 +210,7 @@
                         <th class=" ">Email </th>
                         <th class=" ">Remarks</th>
                     </tr>
+                    @if($presentEnterpreneurData)
                     @foreach($presentEnterpreneurData as $row)
                         <tr>
                             <input type="hidden" name="ENTREPRENEUR_ID_TEM[]" value="{{ $row->ENTREPRENEUR_ID_TEM }}">
@@ -215,7 +227,9 @@
                             <td> {{ $row->REMARKS }}</td>
                         </tr>
                     @endforeach
-
+@else
+                        <h3>No Data Found</h3>
+                        @endif
                 </table>
             </div>
         </div>
@@ -234,6 +248,7 @@
                         <th class=" ">Renewing Date</th>
                         <th class=" ">Remarks</th>
                     </tr>
+                    @if($previousCertificaterData)
                     @foreach($previousCertificaterData as $row)
                         <input type="hidden" name="CERTIFICATE_ID[]" value="{{ $row->CERTIFICATE_ID }}">
                     <tr>
@@ -246,7 +261,9 @@
                         <td>{{ $row->REMARKS }} </td>
                     </tr>
                     @endforeach
-
+@else
+                        <h3>No Data Foun</h3>
+                        @endif
                 </table>
             </div>
 
@@ -262,6 +279,7 @@
                         <th class=" ">Renewing Date</th>
                         <th class=" ">Remarks</th>
                     </tr>
+                    @if($presentCertificaterData)
                     @foreach($presentCertificaterData as $row)
                         <input type="hidden" name="CERTIFICATE_ID_TEM[]" value="{{ $row->CERTIFICATE_ID_TEM }}">
                         <input type="hidden" name="TEM_CERTIFICATE_ID[]" value="{{ $row->CERTIFICATE_ID }}">
@@ -275,7 +293,9 @@
                         <td>{{ $row->REMARKS }} </td>
                     </tr>
                     @endforeach
-
+@else
+                        <h3>No Data Found</h3>
+                        @endif
                 </table>
             </div>
         </div>
@@ -283,8 +303,9 @@
         <h4 class="center text-success">QC Information </h4>
         <div class="row table-responsive">
             <div class="col-md-6">
-                <input type="hidden" name="QCINFO_ID" value="{{ $previousQcData->QCINFO_ID }}">
                 <h4 class="center text-success" style="color: green;">Previous QC Information </h4>
+                @if($previousQcData)
+                    <input type="hidden" name="QCINFO_ID" value="{{ $previousQcData->QCINFO_ID }}">
                 <table class="table borderless">
                     <tr>
                         <th class=" ">laboratory </th>
@@ -348,12 +369,16 @@
                     </tr>
 
                 </table>
+                    @else
+                    <h3>No Data Found</h3>
+                    @endif
             </div>
 
             <div class="col-md-6">
 
-                <input type="hidden" name="QCINFO_ID_TEM" value="{{ $presentQcData->QCINFO_ID_TEM }}">
                 <h4 class="center text-success" style="color: red;">Change QC Information </h4>
+                @if($presentQcData)
+                <input type="hidden" name="QCINFO_ID_TEM" value="{{ $presentQcData->QCINFO_ID_TEM }}">
                 <table class="table borderless">
                     <tr>
                         <th class=" ">laboratory </th>
@@ -417,14 +442,18 @@
                     </tr>
 
                 </table>
+                    @else
+                    <h3>No Data Found</h3>
+                    @endif
             </div>
         </div>
 
         <h4 class="center text-success">Employee Information </h4>
         <div class="row table-responsive">
             <div class="col-md-6">
-                <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
                 <h4 class="center text-success" style="color: red;">Change Employee Information </h4>
+@if($previousEmployeeData)
+                <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
                 <table class="table borderless">
                     <tr>
                         <th class=" ">Total Male Employee </th>
@@ -474,11 +503,15 @@
                     </tr>
 
                 </table>
+    @else
+                    <h3>No Data Found</h3>
+    @endif
             </div>
 
             <div class="col-md-6">
-                <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
                 <h4 class="center text-success" style="color: green;">Previous Employee Information </h4>
+@if($presentEmployeeData)
+                <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
                 <table class="table borderless">
                     <tr>
                         <th class=" ">Total Male Employee </th>
@@ -528,6 +561,9 @@
                     </tr>
 
                 </table>
+    @else
+                    <h3>No Data Found</h3>
+    @endif
             </div>
         </div>
 

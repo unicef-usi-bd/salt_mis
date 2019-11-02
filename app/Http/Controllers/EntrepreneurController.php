@@ -216,8 +216,11 @@ class EntrepreneurController extends Controller
     public function updateEntrepreneurInfoTem(Request $request){
         $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
         $updateEmpData = Entrepreneur::insertMillerTemProfile($request);
-        return "Entrepreneur Information has been updated";
-//        return $request;
+        if($updateEmpData){
+            return "Entrepreneur Information has been updated";
+        }else{
+            return "Entrepreneur Information has been updated failed";
+        }
     }
 
     public function singleEnterpreneurDeleteByAjax(Request $request){

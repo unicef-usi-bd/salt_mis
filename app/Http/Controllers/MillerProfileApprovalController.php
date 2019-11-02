@@ -85,31 +85,10 @@ class MillerProfileApprovalController extends Controller
     public function update(Request $request, $id)
     {
         $millerId = $id;
-
-        $miller = $request->input('MILL_ID');
-//        $millerIdTemp = $request->input('MILL_ID_TEM');
-//
-//        $enterpreneurInfo = $request->input('ENTREPRENEUR_ID');
-//        $enterpreneurInfoTemp = $request->input('ENTREPRENEUR_ID_TEM');
-//        $tempEnterpreneurId = $request->input('TEM_ENTREPRENEUR_ID');
-//        $tempEnterpreneurMillId = $request->input('TEM_MILL_ID');
-//
-//        $certificateId = $request->input('CERTIFICATE_ID');
-//        $certificateIdTemp = $request->input('CERTIFICATE_ID_TEM');
-//        $tempCertificateId = $request->input('TEM_CERTIFICATE_ID');
-//
-//        $qcInfoId = $request->input('QCINFO_ID');
-//        $qcInfoTempId = $request->input('QCINFO_ID_TEM');
-//        $millEmpId = $request->input('MILLEMP_ID');
-//        $millEmpTempId = $request->input('MILLEMP_ID_TEM');
-
-//        $remarks = $request->input('REMARKS');
-
-
         //Start Mill Info Data
         $millerProfileTemp = DB::table('tem_ssm_mill_info')
             ->where('MILL_ID','=',$millerId)
-            ->where('approval_status','=',1)
+            ->where('approval_status','=',0)
             ->first();
 
         if($millerProfileTemp){
@@ -122,20 +101,18 @@ class MillerProfileApprovalController extends Controller
                 'DISTRICT_ID' => $millerProfileTemp->DISTRICT_ID,
                 'UPAZILA_ID' => $millerProfileTemp->UPAZILA_ID,
                 'ACTIVE_FLG' => $millerProfileTemp->ACTIVE_FLG,
-                'approval_status' => '1',
+                'approval_status' => 0,
                 'REMARKS' => $millerProfileTemp->REMARKS,
                 'approval_comments' => $request->input('REMARKS'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
             );
             $updateMillerInfo = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($millerInfoData);
+            if($updateMillerInfo){
+                $tempMillerInfoData = ['approval_status' => '1'];
+                DB::table('tem_ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($tempMillerInfoData);
+            }
         }
-
-        if($updateMillerInfo){
-            $tempMillerInfoData = ['approval_status' => '0'];
-            DB::table('tem_ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($tempMillerInfoData);
-        }
-
         //End Mill Info Data
 
         //Start Enterpreneur Information Data
@@ -144,112 +121,133 @@ class MillerProfileApprovalController extends Controller
             ->where('approval_status','=',0)
             ->get();
 
-        dd($enterpreneur);
-//        if($enterpreneur) {
-//            $enterpreneurinfoDataInsert = array();
-//            foreach ($enterpreneur as $key => $value) {
-//                $enterpreneurinfoDataInsert [] = array(
-//                    'MILL_ID' => $value->MILL_ID,
-//                    'OWNER_NAME' => $value->OWNER_NAME,
-//                    'DIVISION_ID' => $value->DIVISION_ID,
-//                    'DISTRICT_ID' => $value->DISTRICT_ID,
-//                    'UPAZILA_ID' => $value->UPAZILA_ID,
-//                    'NID' => $value->NID,
-//                    'MOBILE_1' => $value->MOBILE_1,
-//                    'MOBILE_2' => $value->MOBILE_2,
-//                    'EMAIL' => $value->EMAIL,
-//                    'REMARKS' => $value->REMARKS,
-//                    'ACTIVE_FLG' => 1,
-//                    'approval_status' => 0,
-//                    'center_id' => Auth::user()->center_id,
-//                    'ENTRY_BY' => Auth::user()->id,
-//                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-//                );
-//            }
-//            $deleteData = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $tempEnterpreneurMillId)->delete();
-//            if($deleteData) {
-//                $status = DB::table('ssm_entrepreneur_info')->insert($enterpreneurinfoDataInsert);
-//                if($status){
-//                    //update
-//                }
-//            }
-//        }
+        if($enterpreneur) {
+            $enterpreneurinfoDataInsert = array();
+            foreach ($enterpreneur as $key => $value) {
+                $enterpreneurinfoDataInsert [] = array(
+                    'MILL_ID' => $value->MILL_ID,
+                    'OWNER_NAME' => $value->OWNER_NAME,
+                    'DIVISION_ID' => $value->DIVISION_ID,
+                    'DISTRICT_ID' => $value->DISTRICT_ID,
+                    'UPAZILA_ID' => $value->UPAZILA_ID,
+                    'NID' => $value->NID,
+                    'MOBILE_1' => $value->MOBILE_1,
+                    'MOBILE_2' => $value->MOBILE_2,
+                    'EMAIL' => $value->EMAIL,
+                    'REMARKS' => $value->REMARKS,
+                    'ACTIVE_FLG' => 1,
+                    'approval_status' => 0,
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                );
+            }
+            $deleteData = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
+            if($deleteData) {
+                $status = DB::table('ssm_entrepreneur_info')->insert($enterpreneurinfoDataInsert);
+                if($status){
+                    $tempEnterpreneurInfoData = ['approval_status' => 1];
+                }
+                DB::table('tem_ssm_entrepreneur_info')->where('MILL_ID', '=' , $millerId)->update($tempEnterpreneurInfoData);
+            }
+        }
         //End Enterpreneur Information Data
 
+       //Start Certificate Information Data
+        $certificates = DB::table('tem_ssm_certificate_info')
+            ->where('MILL_ID','=',$millerId)
+            ->where('approval_status','=',0)
+            ->get();
 
-////        var_dump($enterpreneurinfoDataInsert);exit;
-//
-//        //Certificate Information Data
-//        $commonCertificateInfoData = array_intersect($certificateId, $tempCertificateId);
-//        $notCommonCertificateInfoData = array_merge(array_diff($certificateId, $tempCertificateId),array_diff($tempCertificateId, $certificateId));
-//        $notExistCertificateInfoData = array_diff($certificateId, $tempCertificateId);
-//
-//
-//        $certificateinfoData = array();
-//        for($i=0;$i<count($certificateIdTemp);$i++){
-//            $certificate =  DB::table('tem_ssm_certificate_info')
-//                            ->where('CERTIFICATE_ID_TEM','=',$certificateIdTemp[$i])
-//                            ->first();
-//            $certificateinfoData[] = array(
-//                'MILL_ID' => $certificate->MILL_ID,
-//                'CERTIFICATE_TYPE_ID' => $certificate->CERTIFICATE_TYPE_ID,
-//                'ISSURE_ID' => $certificate->ISSURE_ID,
-//                'DISTRICT_ID' => $certificate->DISTRICT_ID,
-//                'ISSUING_DATE' => date('Y-m-d',strtotime($certificate->ISSUING_DATE)),
-//                'CERTIFICATE_NO' => $certificate->CERTIFICATE_NO,
-//                //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
-////                'TRADE_LICENSE' => $imagePath,
-//                'RENEWING_DATE' =>date('Y-m-d',strtotime( $certificate->RENEWING_DATE)),
-//                'CERTIFICATE_TYPE' =>  $certificate->CERTIFICATE_TYPE,
-//                'IS_EXPIRE' =>  $certificate->IS_EXPIRE,
-//                'REMARKS' =>  $certificate->REMARKS,
-//                'center_id' => Auth::user()->center_id,
-//                'ENTRY_BY' => Auth::user()->id,
-//                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-//            );
-//        }
-//        //QC Info Data
-//        $qcInfoTemp = DB::table('tem_tsm_qc_info')
-//            ->where('QCINFO_ID_TEM','=',$qcInfoTempId)
-//            ->first();
-//
-//        $qcInfoData = array(
-//            'MILL_ID' => $qcInfoTemp->MILL_ID,
-//            'LABORATORY_FLG' => $qcInfoTemp->LABORATORY_FLG,
-//            'SOP_DESC' => $qcInfoTemp->SOP_DESC,
-//            'IODINE_CHECK_FLG' => $qcInfoTemp->IODINE_CHECK_FLG,
-//            'MONITORING_FLG' => $qcInfoTemp->MONITORING_FLG,
-//            'LAB_MAN_FLG' => $qcInfoTemp->LAB_MAN_FLG,
-//            'LAB_PERSON' => $qcInfoTemp->LAB_PERSON,
-//            'REMARKS' => $qcInfoTemp->REMARKS,
-//            'approval_status' => '0',
-//            'center_id' => Auth::user()->center_id,
-//            'ENTRY_BY' => Auth::user()->id,
-//            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-//        );
-//        $updateQcInformation = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $miller)->update($qcInfoData);
-//
+        if($certificates){
+            $certificateinfoData = array();
+            foreach ($certificates as $key=>$certificate){
+                $certificateinfoData[] = array(
+                    'MILL_ID' => $certificate->MILL_ID,
+                    'CERTIFICATE_TYPE_ID' => $certificate->CERTIFICATE_TYPE_ID,
+                    'ISSURE_ID' => $certificate->ISSURE_ID,
+                    'DISTRICT_ID' => $certificate->DISTRICT_ID,
+                    'ISSUING_DATE' => date('Y-m-d',strtotime($certificate->ISSUING_DATE)),
+                    'CERTIFICATE_NO' => $certificate->CERTIFICATE_NO,
+                    'TRADE_LICENSE' => $certificate->TRADE_LICENSE,
+                    'RENEWING_DATE' =>date('Y-m-d',strtotime( $certificate->RENEWING_DATE)),
+                    'CERTIFICATE_TYPE' =>  $certificate->CERTIFICATE_TYPE,
+                    'IS_EXPIRE' =>  $certificate->IS_EXPIRE,
+                    'REMARKS' =>  $certificate->REMARKS,
+                    'approval_status' => 0,
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                );
+            }
+            $deleteData = DB::table('ssm_certificate_info')->where('MILL_ID', $millerId)->delete();
+            if($deleteData) {
+                $status = DB::table('ssm_certificate_info')->insert($certificateinfoData);
+                if($status){
+                    $tempCertificateInfoData = ['approval_status' => 1];
+                    DB::table('tem_ssm_certificate_info')->where('MILL_ID', '=' , $millerId)->update($tempCertificateInfoData);
+                }
+            }
+        }
+        //End Certificate Information Data
+        //QC Info Data
+        $qcInfoTemp = DB::table('tem_tsm_qc_info')
+            ->where('MILL_ID','=',$millerId)
+            ->where('approval_status','=',0)
+            ->first();
+        if($qcInfoTemp) {
+            $qcInfoData = array(
+                'MILL_ID' => $qcInfoTemp->MILL_ID,
+                'LABORATORY_FLG' => $qcInfoTemp->LABORATORY_FLG,
+                'SOP_DESC' => $qcInfoTemp->SOP_DESC,
+                'IODINE_CHECK_FLG' => $qcInfoTemp->IODINE_CHECK_FLG,
+                'MONITORING_FLG' => $qcInfoTemp->MONITORING_FLG,
+                'LAB_MAN_FLG' => $qcInfoTemp->LAB_MAN_FLG,
+                'LAB_PERSON' => $qcInfoTemp->LAB_PERSON,
+                'REMARKS' => $qcInfoTemp->REMARKS,
+                'approval_status' => 0,
+                'center_id' => Auth::user()->center_id,
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            );
+            $updateQcInformation = DB::table('tsm_qc_info')->where('MILL_ID', '=', $millerId)->update($qcInfoData);
+            if($updateQcInformation){
+                $tempQCInfoData = ['approval_status' => 1];
+                DB::table('tem_tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update($tempQCInfoData);
+            }
+        }
 //        //Employee Information Data
-//        $qcInfoTemp = DB::table('tem_ssm_millemp_info')
-//            ->where('MILLEMP_ID_TEM','=',$millEmpTempId)
-//            ->first();
-//
-//        $employeeInfoData = array(
-//            'TOTMALE_EMP' => $qcInfoTemp->TOTMALE_EMP,
-//            'TOTFEM_EMP' => $qcInfoTemp->TOTFEM_EMP,
-//            'FULLTIMEMALE_EMP' => $qcInfoTemp->FULLTIMEMALE_EMP,
-//            'FULLTIMEFEM_EMP' => $qcInfoTemp->FULLTIMEFEM_EMP,
-//            'PARTTIMEMALE_EMP' => $qcInfoTemp->PARTTIMEMALE_EMP,
-//            'PARTTIMEFEM_EMP' => $qcInfoTemp->PARTTIMEFEM_EMP,
-//            'TOTMALETECH_PER' => $qcInfoTemp->TOTMALETECH_PER,
-//            'TOTFEMTECH_PER' => $qcInfoTemp->TOTFEMTECH_PER,
-//            'REMARKS' => $qcInfoTemp->REMARKS,
-//            'approval_status' => '0',
-//            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-//            'UPDATE_BY' => Auth::user()->id
-//        );
-//
-//        $updateEmployeeInfo = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $miller)->update($employeeInfoData);
+        $empInfoTemp = DB::table('tem_ssm_millemp_info')
+            ->where('MILL_ID','=',$millerId)
+            ->where('approval_status','=',0)
+            ->first();
+
+        if($empInfoTemp){
+            $employeeInfoData = array(
+                'TOTMALE_EMP' => $empInfoTemp->TOTMALE_EMP,
+                'TOTFEM_EMP' => $empInfoTemp->TOTFEM_EMP,
+                'FULLTIMEMALE_EMP' => $empInfoTemp->FULLTIMEMALE_EMP,
+                'FULLTIMEFEM_EMP' => $empInfoTemp->FULLTIMEFEM_EMP,
+                'PARTTIMEMALE_EMP' => $empInfoTemp->PARTTIMEMALE_EMP,
+                'PARTTIMEFEM_EMP' => $empInfoTemp->PARTTIMEFEM_EMP,
+                'TOTMALETECH_PER' => $empInfoTemp->TOTMALETECH_PER,
+                'TOTFEMTECH_PER' => $empInfoTemp->TOTFEMTECH_PER,
+                'REMARKS' => $empInfoTemp->REMARKS,
+                'approval_status' => 0,
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+                'UPDATE_BY' => Auth::user()->id
+            );
+            $updateEmployeeInfo = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($employeeInfoData);
+            if($updateEmployeeInfo){
+                $tempEmpInfoData = ['approval_status' => 1];
+                DB::table('tem_ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($tempEmpInfoData);
+            }
+
+        }
+
+
+
+
 
 
 

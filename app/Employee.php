@@ -33,6 +33,7 @@ class Employee extends Model
     }
 
     public static function insertMillerEmployeeInfoTem($request){
+        $MILL_ID = $request->input('MILL_ID');
         $EmployeeInfoId = DB::table('tem_ssm_millemp_info')->insertGetId([
             'MILL_ID' => $request->input('MILL_ID'),
             'MILLEMP_ID' => $request->input('MILLEMP_ID'),
@@ -46,13 +47,18 @@ class Employee extends Model
             'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
             'REMARKS' => $request->input('REMARKS'),
             'FINAL_SUBMIT_FLG' => 1,
-            'approval_status' => 1,
+            'approval_status' => 0,
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
-
-        return $EmployeeInfoId;
+        if($EmployeeInfoId){
+            $millerInfoData = array(
+                'approval_status' => 1
+            );
+            $updateMillerInfo = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $MILL_ID)->update($millerInfoData);
+        }
+        return $updateMillerInfo;
     }
 
     public static function getEmployeeData($millerInfoId){

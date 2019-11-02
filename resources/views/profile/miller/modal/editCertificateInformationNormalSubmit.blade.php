@@ -138,10 +138,14 @@
                                 {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
                                 {{--Update--}}
                             {{--</button>--}}
-                            <button type="submit" class="btn btn-success" >
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Submit
-                            </button>
+                            @if($editMillData->approval_status == 0)
+                                <button type="submit" class="btn btn-success" >
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+                            @else
+                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                            @endif
                         @endif
                     </div>
                 </div>

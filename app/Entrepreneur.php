@@ -41,6 +41,7 @@ class Entrepreneur extends Model
 
     public static function insertMillerTemProfile($request){
         $reqTime = count($_POST['OWNER_NAME']);
+        $MILL_ID = $request->input('MILL_ID');
         for($i=0; $i<$reqTime; $i++){
             $data = ([
                 'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
@@ -58,15 +59,20 @@ class Entrepreneur extends Model
                 'EMAIL' => $request->input('EMAIL')[$i],
                 'REMARKS' => $request->input('REMARKS')[$i],
                 'ACTIVE_FLG' => 1,
-                'approval_status' => 1,
+                'approval_status' => 0,
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
             $insert = DB::table('tem_ssm_entrepreneur_info')->insert($data);
-
         }
-        return $insert;
+        if($insert){
+            $enterInfoData = array(
+                'approval_status' => 1
+            );
+            $updatenfo = DB::table('ssm_entrepreneur_info')->where('MILL_ID', '=' , $MILL_ID)->update($enterInfoData);
+        }
+        return $updatenfo;
     }
 
     public static function getEntrepreneurData($millerInfoId){

@@ -67,6 +67,7 @@ class MillerInfoController extends Controller
         $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $millerList = MillerInfo::getAllMillDataList();
+        //$millerUpdateStatus = MillerInfo::getAllMillDataList($MILL_ID);
         $approvalMillList = MillerInfo::getApprovalAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
         //$this->pr($millerList);
@@ -348,12 +349,12 @@ class MillerInfoController extends Controller
             $mill_logo = $request->input('mill_logo');
         }
         $ownerType = $request->input('OWNER_TYPE_ID');
-        //$this->pr($request->input('MILL_NAME'));
         $updateMillData = MillerInfo::insertMillerInfoTemData($request,$mill_logo,$millerInfoId);
-
-        //echo $updateMillData;die();
-        return "Miller Information has been updated";
-//        return $mill_logo;
+        if($updateMillData){
+            return "Miller Information has been updated";
+        }else{
+            return "Miller Information has been updated failed";
+        }
     }
 
     public function deactivateMillProfile(Request $request){

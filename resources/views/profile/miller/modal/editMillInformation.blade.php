@@ -224,10 +224,14 @@
                                 Update & Next
                             </button>
                         @else
-                            <button type="submit" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Update & Next
-                            </button>
+                            @if($editMillData->approval_status == 0)
+                                <button type="submit" class="btn btn-success btnUpdatetemMill" onclick="millTab()">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Update & Next
+                                </button>
+                            @else
+                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                            @endif
                         @endif
 
                     </div>

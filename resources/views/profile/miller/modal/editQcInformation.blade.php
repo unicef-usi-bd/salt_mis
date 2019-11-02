@@ -122,12 +122,15 @@
                                 Update & Next
                             </button>
                         @else
-                            <button type="button" class="btn btn-success btnUpdateQcTem" onclick="qcTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Update & Next
-                            </button>
+                            @if($editMillData->approval_status == 0)
+                                <button type="button" class="btn btn-success btnUpdateQcTem" onclick="qcTab()">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Update & Next
+                                </button>
+                            @else
+                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                            @endif
                         @endif
-
                     </div>
                 </div>
             </form>
