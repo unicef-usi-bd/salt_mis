@@ -8,17 +8,17 @@
         }
     </style>
 
-    <form id="myform" action="{{ url('/extended-date') }}" method="post" class="form-horizontal" role="form">
+    <form id="myform" action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> </span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess " class="chosen-select millerName form-control" name="MILL_ID" data-placeholder="Select Mill Name">
-                               <option value=""></option>
+                               <option value="">Select Mill Name</option>
                                 @foreach($millerId as $row)
                                     <option value="{{$row->MILL_ID}}">{{ $row->MILL_NAME }}</option>
                                 @endforeach
@@ -26,36 +26,26 @@
                         </span>
                     </div>
                 </div>
-
-
-
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="date" id="textInput1" name="RENEWING_DATE[]"  class="chosen-container RENEWING_DATE " value="">
+                    <label style="margin-left: -18%" class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-6">
+                        <input style="width: 50px;"  type="text"  name="RENEWING_DATE"  class="chosen-container " value="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label style="margin-left: -5%" class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-4">
+                        <input type="date"  name="RENEWING_DATE"  class="chosen-container" value="">
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-
-
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
         <div class="row" style="margin-top: 20px; width: 100%">
             <div class="col-sm-12">
                 <div class="col-sm-12">

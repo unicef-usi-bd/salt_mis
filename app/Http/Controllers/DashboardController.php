@@ -300,7 +300,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        if($millercertificateInfo->RENEWING_DATE<=$date){
+        if($millercertificateInfo->RENEWING_DATE>=$date){
 
 
             $totalWashcrashProduction = Stock::totalWashCrashProductions();
