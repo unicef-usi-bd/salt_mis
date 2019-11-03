@@ -135,12 +135,30 @@ class ExtendedDateController extends Controller
     }
 
     public function updateExtendedDate(Request $request){
+
         $center_id = Auth::user()->center_id ;
 
-            DB::table('users')->where('center_id',$center_id)->update([
-                'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE'))),
-                'ACTIVE_FLAG' => $request->input('ACTIVE_FLAG')?:1,
-            ]);
+        $associationId = DB::table('ssm_associationsetup')
+            ->select('ssm_associationsetup.ASSOCIATION_ID')
+            ->where('MILL_ID','=',$request->input('MILL_ID'))
+            ->first();
+
+
+
+       if($associationId){
+           $status = DB::table('users')->where('center_id',$associationId->ASSOCIATION_ID)->update([
+               'renewing_date' => date('Y-m-d', strtotime($request->input('renewing_date'))),
+               'renewing_days' => $request->input('renewing_days')
+           ]);
+           if($status)
+           {
+               return redirect()->back()->with('success','Updated successfully');
+           }else{
+               return redirect()->back()->with('warning','Updated Fail');
+           }
+       }else{
+           return redirect()->back()->with('danger','Miller does not found');
+       }
 
         return redirect('/extended-date');
     }
