@@ -25,6 +25,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 use App\Http\Controllers\Controller;
 use App\ExtendedDate;
+use Illuminate\Support\Facades\DB;
 
 class ExtendedDateController extends Controller
 {
@@ -45,7 +46,7 @@ class ExtendedDateController extends Controller
         $heading=array(
             'title'=>'Extended date',
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-bg',
             'action'=>'extended-date/create',
             'createPermissionLevel' => $previllage->CREATE
         );
@@ -126,8 +127,21 @@ class ExtendedDateController extends Controller
     public function millerInfo(Request $request){
      $millId = $request->input('mill_id');
      $millInfo = ExtendedDate::millerDetails($millId);
+     $millenteprunerInfo = ExtendedDate::millerEnteprunerDetails($millId);
+     $certificateInfo = ExtendedDate::millerCertificateInfo($millId);
      //dd($millInfo);
-     $view = view("setup.extendate.millerInfo",compact('millInfo','millId'))->render();
+     $view = view("setup.extendate.millerInfo",compact('millInfo','millId','millenteprunerInfo','certificateInfo'))->render();
      return response()->json(['html'=>$view]);
+    }
+
+    public function updateExtendedDate(Request $request){
+        $center_id = Auth::user()->center_id ;
+
+            DB::table('users')->where('center_id',$center_id)->update([
+                'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE'))),
+                'ACTIVE_FLAG' => $request->input('ACTIVE_FLAG')?:1,
+            ]);
+
+        return redirect('/extended-date');
     }
 }
