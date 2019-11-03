@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LookupGroupData;
 use App\Employee;
+use App\MillerProfileApproval;
 use App\Qc;
 use App\MillerInfo;
 use App\Entrepreneur;
@@ -165,15 +166,13 @@ class MillerInfoController extends Controller
     public function show($id)
     {
 
-        $viewMillerData = MillerInfo::showMillereProfile($id);
-        $millerListForEntrepreneur = Entrepreneur::showEntrepreneurProfile($id);
-        $lookUpDataMill = MillerInfo::getAllMillLookUpData($id);
-
-        $lookUpDataEntp = MillerInfo::getAllEntrepLookUpData($id);
-        $lookUpDataCertificate = MillerInfo::getAllCertificateLookUpData($id);
-        $remarks = MillerInfo::allRemarks($id);
+        $previousMillerData = MillerProfileApproval::previousMillerInformation($id);
+        $previousEnterpreneurData = MillerProfileApproval::previousEntrepreneurInformation($id);
+        $previousCertificaterData = MillerProfileApproval::previousCertificateInformation($id);
+        $previousQcData = MillerProfileApproval::previousQcInformation($id);
+        $previousEmployeeData = MillerProfileApproval::previousEmployeeInformation($id);
         //$this->pr($lookUpDataMill);
-        return view('profile.miller.modal.viewMillerIndex', compact('viewMillerData','millerListForEntrepreneur','lookUpDataMill','lookUpDataEntp','lookUpDataCertificate','remarks'));
+        return view('profile.miller.modal.viewMillerIndex', compact('previousMillerData','previousEnterpreneurData','previousCertificaterData','previousQcData','previousEmployeeData'));
     }
 
     /**

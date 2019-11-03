@@ -460,7 +460,7 @@
         <h4 class="center text-success">Employee Information </h4>
         <div class="row table-responsive">
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: red;">Change Employee Information </h4>
+                <h4 class="center text-success" style="color: red;">Previous Employee Information </h4>
                 @if($previousEmployeeData)
                 <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
                 <table class="table borderless">
@@ -518,7 +518,7 @@
             </div>
 
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: green;">Previous Employee Information </h4>
+                <h4 class="center text-success" style="color: green;">Change Employee Information </h4>
                 @if($presentEmployeeData)
                 <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
                 <table class="table borderless">
