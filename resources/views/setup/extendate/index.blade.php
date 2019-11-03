@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label style="margin-left: -5%" class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-4">
-                            <input type="date" id="expierDateId"  name="RENEWING_DATE"  class="chosen-container" value="">
+                            <input type="date"  name="RENEWING_DATE"  class="expierDateId" value="{{ date('Y-m-d') }}">
                         </div>
                     </div>
                 </div>
@@ -175,12 +175,12 @@
             var yy = array[2];
             var dateFrom = yy + '-' + mm + '-' + dd;
             renewalDate = daysAddToDate(dateFrom, dayAdd);
-            $('#expierDateId').val(renewalDate);
+            $('.expierDateId').val(renewalDate);
         });
 
-        $(document).on('change','#expierDateId',function () {
+        $(document).on('change','.expierDateId',function () {
             //alert('hi');
-            var toDate = $('#expierDateId').val();
+            var toDate = $(this).val();
             var fromDate = $('.renewalDate').text();
 //            if(fromDate===""){
 //                alert('Alert ! Mill name is required.')
@@ -188,11 +188,11 @@
 
             if(fromDate!=="" && toDate!==""){
                 fromDate = dateToArray(fromDate)[2]+'-'+dateToArray(fromDate)[1]+'-'+dateToArray(fromDate)[0]; // format day-month-year to month-day-year
-                toDate = dateToArray(toDate)[2]+'-'+dateToArray(toDate)[1]+'-'+dateToArray(toDate)[0]; // format day-month-year to month-day-year
-                var date1 = new Date(fromDate);
-                var date2 = new Date(toDate);
-                console.log(date2);
-//                console.log(diffDays);
+                var fromDate = new Date(fromDate);
+                var toDate = new Date(toDate);
+                var diffTime = Math.abs(toDate - fromDate);
+                var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                $('.renewingDays').val(diffDays)
             }
         });
 
