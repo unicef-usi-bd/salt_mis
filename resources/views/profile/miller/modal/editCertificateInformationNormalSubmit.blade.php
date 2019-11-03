@@ -14,7 +14,7 @@
                 @if(isset($millerInfoId))
                     <input type="hidden" class="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
-                <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                <table id="certificateInfoTableID" class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                     <tr>
                         <th style="width:175px ;">Type of Certificate<span style="color:red;"> *</span></th>
@@ -124,13 +124,13 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
+                            {{--<button type="submit" class="btn btn-success" >--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
                             <button type="submit" class="btn btn-success" >
                                 <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
-                            <button type="submit" class="btn btn-success" >
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Submit
+                                Update
                             </button>
                         @else
 
@@ -141,10 +141,10 @@
                             @if($editMillData->approval_status == 0)
                                 <button type="submit" class="btn btn-success" >
                                     <i class="ace-icon fa fa-check bigger-110"></i>
-                                    Submit
+                                    Update
                                 </button>
                             @else
-                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                                <span style="color: red;font-size: 18px;margin-left: 5px;">Waiting for Association update your previous request</span>
                             @endif
                         @endif
                     </div>
@@ -201,8 +201,12 @@
 
             }
         });
+        var count = $('#certificateInfoTableID tr').length - 1;
+        if(count > 1) {
+//            $(this).closest("tr.removableRow").remove();
+            $(this).parents("tr").remove();
+        }
 
-        $(this).parents("tr").remove();
     });
 
 </script>

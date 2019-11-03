@@ -18,7 +18,7 @@
                 @if(isset($millerInfoId))
                     <input type="hidden" class="MILL_ID" value="{{ $millerInfoId }}" name="MILL_ID">
                 @endif
-                <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                <table id="certificateInfoTableID" class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                     <tr>
                         <th style="width:150px ;">Type of Certificate<span style="color:red;">*</span></th>
@@ -198,7 +198,12 @@
 
             }
         });
-        $(this).parents("tr").remove();
+        var count = $('#certificateInfoTableID tr').length - 1;
+        if(count > 1) {
+//            $(this).closest("tr.removableRow").remove();
+            $(this).parents("tr").remove();
+        }
+        //$(this).parents("tr").remove();
     });
 
 

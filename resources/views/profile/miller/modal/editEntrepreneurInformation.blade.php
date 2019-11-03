@@ -26,7 +26,7 @@
 
 
                 <div class="table-width" style="overflow-x: scroll;height: 280px;">
-                    <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                    <table id="enterprenurInfoTableID" class="table table-bordered fundAllocation" style="margin-top: 64px;">
                         <thead>
                         <tr>
                             <th style="width:200px;">Owner Name <span style="color:red;"> *</span></th>
@@ -45,7 +45,7 @@
                         </thead>
                         <tbody class="newRowNew">
                         @foreach($getEntrepreneurRowData as $editEntrepData)
-                            <tr class="rowFirstNew">
+                            <tr class="removableRow">
                                 <td>
                                     <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax class="width-100"--> </span>
                                     <span class="block input-icon input-icon-right">
@@ -114,7 +114,7 @@
                                     </span>
                                 </td>
 
-                                <td class="removeButton @if($editMillData->OWNER_TYPE_ID == 12) hidden @endif"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                <td class="removeButton @if($editMillData->OWNER_TYPE_ID == 12) hidden @endif"><span class="btn btn-danger btn-sm pull-right EntrowRemove"><i class="fa fa-remove"></i></span></td>
 
                             </tr>
                         @endforeach
@@ -129,10 +129,10 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="entrepreneurTab()" id="submitbutton">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
                             <button type="button" class="btn btn-success btnUpdateEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
@@ -144,7 +144,7 @@
                                     Update & Next
                                 </button>
                             @else
-                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                                <span style="color: red;font-size: 18px;margin-left: 5px;">Waiting for Association update your previous request</span>
                             @endif
                         @endif
 
@@ -160,8 +160,7 @@
     //$(document).on('click','.rowAddNew',function () {
     $(document).ready(function() {
         $('.rowAddNew').click(function () {
-            var getTr = $('tr.rowFirstNew:first');
-//            alert(getTr.html());
+            var getTr = $('tr.removableRow:first');
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRowNew').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
             var defaultRow = $('tr.removableRow:last');
@@ -183,8 +182,11 @@
 
 
         // Fore Remove Row By Click
-        $(document).on("click", "span.rowRemove ", function () {
-            $(this).closest("tr.removableRow").remove();
+        $(document).on("click", "span.EntrowRemove ", function () {
+            var count = $('#enterprenurInfoTableID tr').length - 1;
+            if(count > 1) {
+                $(this).closest("tr.removableRow").remove();
+            }
         });
 
         $(document).on('change','.DIVISION_ID',function () {

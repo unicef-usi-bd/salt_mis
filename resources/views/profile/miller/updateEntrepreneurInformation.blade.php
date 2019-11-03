@@ -18,7 +18,7 @@
                 @endif
 
                 <div class="table-width" style="overflow-x: scroll;height: 280px;">
-                    <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                    <table id="enterprenurInfoTableID" class="table table-bordered fundAllocation" style="margin-top: 64px;">
                         <thead>
                         <tr>
                             <th style="width:200px;">Owner Name <span style="color:red;"> *</span></th>
@@ -171,7 +171,12 @@
 
                 }
             });
-            $(this).parents("tr").remove();
+            var count = $('#enterprenurInfoTableID tr').length - 1;
+            if(count > 1) {
+//                $(this).closest("tr.removableRow").remove();
+                $(this).parents("tr").remove();
+            }
+//            $(this).parents("tr").remove();
         });
 
         $(document).on('change','.DIVISION_ID',function () {

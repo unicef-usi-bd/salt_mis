@@ -93,7 +93,7 @@
                         </button>
                         <button type="button" class="btn btn-success btnUpdateCertificate" onclick="certificateTab()">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
+                            update
                         </button>
                     </div>
                 </div>

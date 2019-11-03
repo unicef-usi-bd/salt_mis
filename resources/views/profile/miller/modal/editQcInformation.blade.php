@@ -113,10 +113,10 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="qcTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="qcTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
                             <button type="button" class="btn btn-success btnUpdateQc" onclick="qcTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
@@ -128,7 +128,7 @@
                                     Update & Next
                                 </button>
                             @else
-                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                                <span style="color: red;font-size: 18px;margin-left: 5px;">Waiting for Association update your previous request</span>
                             @endif
                         @endif
                     </div>

@@ -244,16 +244,7 @@ class MillerProfileApprovalController extends Controller
             }
 
         }
-
-
-
-
-
-
-
         return redirect()->back();
-
-
     }
 
     /**

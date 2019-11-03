@@ -111,9 +111,9 @@ class MillerInfo extends Model
                 'mill_logo' => $mill_logo == "" ? $info->mill_logo : $mill_logo,
                 'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
                 'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
-                //'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
+                'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
                 'CAPACITY_ID' => $request->input('CAPACITY_ID'),
-                //'ZONE_ID' => $request->input('ZONE_ID'),
+                'ZONE_ID' => $request->input('ZONE_ID'),
                 //'MILLERS_ID' => $request->input('MILLERS_ID'),
 
                 'DIVISION_ID' => $request->input('DIVISION_ID'),
@@ -176,18 +176,47 @@ class MillerInfo extends Model
     }
     public static function millerUpdateStatus($MILL_ID){
 
-        $return = DB::raw(DB::select("select distinct approval_status from 
-                                (select approval_status from ssm_mill_info where MILL_ID = $MILL_ID
-                                union all
-                                select approval_status from ssm_entrepreneur_info where MILL_ID = $MILL_ID
-                                union all
-                                select approval_status from ssm_millemp_info where MILL_ID = $MILL_ID
-                                union all
-                                select approval_status from tsm_qc_info where MILL_ID = $MILL_ID
-                                union all
-                                select approval_status from ssm_certificate_info where MILL_ID = $MILL_ID
-                                )m where approval_status = 0 group by approval_status"));
-        return 1;
+        $millerInfoStatus = DB::table('ssm_mill_info')
+            ->select('approval_status')
+            ->where('MILL_ID','=',$MILL_ID)
+            ->where('approval_status','=',0)
+            ->groupBy('approval_status')
+            ->first();
+        $millerInfoStatus = isset($millerInfoStatus) ? 0 : 1;
+
+        $enterpreneurInfoStatus = DB::table('ssm_entrepreneur_info')
+                            ->select('approval_status')
+                            ->where('MILL_ID','=',$MILL_ID)
+                            ->where('approval_status','=',0)
+                            ->groupBy('approval_status')
+                            ->first();
+        $enterpreneurInfoStatus = isset($enterpreneurInfoStatus) ? 0 : 1;
+
+        $millerEmpInfoStatus = DB::table('ssm_millemp_info')
+                                ->select('approval_status')
+                                ->where('MILL_ID','=',$MILL_ID)
+                                ->where('approval_status','=',0)
+                                ->groupBy('approval_status')
+                                ->first();
+        $millerEmpInfoStatus = isset($millerEmpInfoStatus) ? 0 : 1;
+        $qcInfoStatus = DB::table('tsm_qc_info')
+                        ->select('approval_status')
+                        ->where('MILL_ID','=',$MILL_ID)
+                        ->where('approval_status','=',0)
+                        ->groupBy('approval_status')
+                        ->first();
+        $qcInfoStatus = isset($qcInfoStatus) ? 0 : 1;
+
+        $certificateInfoStatus = DB::table('ssm_certificate_info')
+                                ->select('approval_status')
+                                ->where('MILL_ID','=',$MILL_ID)
+                                ->where('approval_status','=',0)
+                                ->groupBy('approval_status')
+                                ->first();
+        $certificateInfoStatus = isset($certificateInfoStatus) ? 0 : 1;
+
+        $statusArray = array($millerInfoStatus,$enterpreneurInfoStatus,$millerEmpInfoStatus,$qcInfoStatus,$certificateInfoStatus);
+        return in_array(1, $statusArray) ? 1 : 0;
     }
 
     public static function getApprovalAllMillDataList(){
