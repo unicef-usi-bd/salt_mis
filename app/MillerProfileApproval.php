@@ -35,8 +35,8 @@ class MillerProfileApproval extends Model
             ->leftJoin('ssc_lookupchd as owner','tem_ssm_mill_info.OWNER_TYPE_ID','=','owner.LOOKUPCHD_ID')
             ->leftJoin('ssc_lookupchd as reg','tem_ssm_mill_info.REG_TYPE_ID','=','reg.LOOKUPCHD_ID')
             ->where('tem_ssm_mill_info.MILL_ID','=',$id)
+            ->where('tem_ssm_mill_info.approval_status','=',0)
             ->first();
-
     }
 
     public static function previousEntrepreneurInformation($id){
@@ -56,6 +56,7 @@ class MillerProfileApproval extends Model
             ->leftJoin('ssc_districts','tem_ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
             ->leftJoin('ssc_upazilas','tem_ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
             ->where('tem_ssm_entrepreneur_info.MILL_ID','=',$id)
+            ->where('tem_ssm_entrepreneur_info.approval_status','=',0)
             ->get();
     }
 
@@ -76,6 +77,7 @@ class MillerProfileApproval extends Model
             ->leftJoin('smm_certificate','tem_ssm_certificate_info.CERTIFICATE_TYPE_ID','=','smm_certificate.CERTIFICATE_ID')
             ->leftJoin('ssc_lookupchd as issuer','tem_ssm_certificate_info.ISSURE_ID','=','issuer.LOOKUPCHD_ID')
             ->where('tem_ssm_certificate_info.MILL_ID','=',$id)
+            ->where('tem_ssm_certificate_info.approval_status','=',0)
             ->get();
     }
 
@@ -90,6 +92,7 @@ class MillerProfileApproval extends Model
         return DB::table('tem_tsm_qc_info')
             ->select('tem_tsm_qc_info.*')
             ->where('tem_tsm_qc_info.MILL_ID','=',$id)
+            ->where('tem_tsm_qc_info.approval_status','=',0)
             ->first();
     }
 
@@ -104,6 +107,7 @@ class MillerProfileApproval extends Model
         return DB::table('tem_ssm_millemp_info')
             ->select('tem_ssm_millemp_info.*')
             ->where('tem_ssm_millemp_info.MILL_ID','=',$id)
+            ->where('tem_ssm_millemp_info.approval_status','=',0)
             ->first();
     }
 }

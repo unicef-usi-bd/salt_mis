@@ -29,6 +29,7 @@ class MillerInfo extends Model
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
              'center_id' => Auth::user()->center_id,
              'REMARKS' => $request->input('REMARKS'),
+//             'approval_status' => 0,
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
@@ -52,6 +53,7 @@ class MillerInfo extends Model
 
     public static function insertMillerInfoTemData($request, $mill_logo,$millerInfoId){
         //return $request->all();
+        $MILL_ID = $request->input('MILL_ID');
         $millInfoId = DB::table('tem_ssm_mill_info')->insertGetId([
             'MILL_ID' => $request->input('MILL_ID'),
             'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
@@ -70,13 +72,17 @@ class MillerInfo extends Model
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'center_id' => Auth::user()->center_id,
             'REMARKS' => $request->input('REMARKS'),
+            'approval_status' => 0,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
-
-//
-//        }
-        return $millInfoId;
+        if($millInfoId){
+            $millerInfoData = array(
+                'approval_status' => 1
+            );
+            $updateMillerInfo = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $MILL_ID)->update($millerInfoData);
+        }
+        return $updateMillerInfo;
     }
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
@@ -115,7 +121,7 @@ class MillerInfo extends Model
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
                 'UNION_ID' => $request->input('UNION_ID'),
                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-                'approval_status' => 'm',
+                'approval_status' => 0,
                 'REMARKS' => $request->input('REMARKS'),
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
@@ -167,6 +173,21 @@ class MillerInfo extends Model
             ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
             ->get();
 
+    }
+    public static function millerUpdateStatus($MILL_ID){
+
+        $return = DB::raw(DB::select("select distinct approval_status from 
+                                (select approval_status from ssm_mill_info where MILL_ID = $MILL_ID
+                                union all
+                                select approval_status from ssm_entrepreneur_info where MILL_ID = $MILL_ID
+                                union all
+                                select approval_status from ssm_millemp_info where MILL_ID = $MILL_ID
+                                union all
+                                select approval_status from tsm_qc_info where MILL_ID = $MILL_ID
+                                union all
+                                select approval_status from ssm_certificate_info where MILL_ID = $MILL_ID
+                                )m where approval_status = 0 group by approval_status"));
+        return 1;
     }
 
     public static function getApprovalAllMillDataList(){

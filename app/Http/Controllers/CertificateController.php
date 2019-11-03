@@ -381,6 +381,7 @@ class CertificateController extends Controller
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
                 'REMARKS' => $request->input('REMARKS')[$i],
+                'approval_status' => 0,
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );
@@ -399,9 +400,17 @@ class CertificateController extends Controller
             $inset = DB::table('tem_ssm_certificate_info')->insert($data);
 
         }
-        //$this->pr($data);
-
+        if($inset){
+            $millerInfoData = array(
+                'approval_status' => 1
+            );
+            $updateMillerInfo = DB::table('ssm_certificate_info')->where('MILL_ID', '=' , $millerInfoId)->update($millerInfoData);
+        }
+    if($updateMillerInfo){
         return Redirect::back()->with('message','Certificate Updated Successful !');
+    }else{
+        return Redirect::back()->with('message','Certificate Updated Failed !');
+    }
 
     }
 
