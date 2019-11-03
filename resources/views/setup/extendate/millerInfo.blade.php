@@ -92,21 +92,21 @@
                        <hr>
                        <table class="table">
                            <tr style="margin-left: 200%;">
-                               <th>Total Number of Employee </th>
-                               <th> :</th>
+                               <th width="200px;">Total Number of Employee </th>
+                               <th width="5px;"> :</th>
                                <td>{{ $millInfo->TOTMALE_EMP + $millInfo->TOTFEM_EMP  }}</td>
                            </tr>
 
 
                            <tr>
-                               <th>Full Time Employee</th>
-                               <th> :</th>
+                               <th width="200px;">Full Time Employee</th>
+                               <th width="5px;"> :</th>
                                <td>{{$millInfo->FULLTIMEMALE_EMP + $millInfo->FULLTIMEFEM_EMP}}</td>
                            </tr>
 
                            <tr>
-                               <th> Part Time Employee</th>
-                               <th> :</th>
+                               <th width="200px;"> Part Time Employee</th>
+                               <th width="5px;"> :</th>
                                <td>{{ $millInfo->PARTTIMEMALE_EMP + $millInfo->PARTTIMEFEM_EMP }}</td>
                            </tr>
                        </table>
