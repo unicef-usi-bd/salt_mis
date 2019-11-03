@@ -7,92 +7,214 @@
             All Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Certificate Issuer Setup
+                Extended date
             </small>
         </h1>
     </div><!-- /.page-header -->
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="col-md-12">
+        <style>
+            .my-error-class {
+                color:red;
+            }
+            .my-valid-class {
+                color:green;
+            }
+        </style>
 
-            <table class="table table-striped table-bordered table-hover gridTable" title="Bank List">
-                <thead>
-                <tr>
-                    <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Certificate Name</th>
-                    <th>Issuer Name</th>
-                    <th>Certificate Type</th>
-                    <th>Status </th>
-                    <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
-                </tr>
-                </thead>
+        <form id="myform" action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">
+            <div class="col-md-12">
+                @csrf
+                {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label  for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess " class="chosen-select millerName form-control" name="MILL_ID" data-placeholder="Select Mill Name">
+                               <option value="">Select Mill Name</option>
+                                @foreach($millerId as $row)
+                                    <option value="{{$row->MILL_ID}}">{{ $row->MILL_NAME }}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="margin-left: -18%" class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-6">
+                            <input style="width: 50px;" id="renewalDaysId" type="text"  name=""  class="chosen-container renewingDays" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="margin-left: -5%" class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
+                        <div class="col-sm-4">
+                            <input type="date" id="expierDateId"  name="RENEWING_DATE"  class="chosen-container" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px; width: 100%">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        {{--<div class="tabbable resultTab">--}}
+                        <div class="tab-content">
+
+                            <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
+
+                            </div>
+                        </div>
+                        {{--</div>--}}
+                    </div>
 
 
-                {{--<tbody>--}}
-                {{--<?php $sl=0;?>--}}
-                {{--@foreach($issuerData as $row)--}}
-                    {{--<tr>--}}
-                        {{--<td class="center">{{ ++$sl }}</td>--}}
-                        {{--<td>{{$row->CERTIFICATE_NAME}}</td>--}}
-                        {{--<td>{{$row->LOOKUPCHD_NAME}}</td>--}}
+                </div>
+            </div>
+            <div class="form-group">
 
-                        {{--<td>--}}
-                            {{--@if($row->CERTIFICATE_TYPE == 1)--}}
-                                {{--<span class="label label-sm label-info arrowed arrowed-righ">Mandatory</span>--}}
-                            {{--@else--}}
-                                {{--<span class="label label-sm label-danger arrowed arrowed-righ">Not Mandatory</span>--}}
-                            {{--@endif--}}
-                        {{--</td>--}}
+            </div>
 
-                        {{--<td>--}}
-                            {{--@if($row->ACTIVE_FLG == 1)--}}
-                                {{--<span class="label label-sm label-info arrowed arrowed-righ">Active</span>--}}
-                            {{--@else--}}
-                                {{--<span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>--}}
-                            {{--@endif--}}
-                        {{--</td>--}}
-                        {{--<td class="row{{ $row->CERTIFICATE_ID }}">--}}
-                            {{--@php--}}
-                                {{--$editPermissionLevel = $previllage->UPDATE;--}}
-                                {{--$viewPermissionLevel = $previllage->READ;--}}
-                            {{--@endphp--}}
-                            {{--@if($viewPermissionLevel == 1)--}}
-                                {{--<a href="#" id="{{ 'certificate/'.$row->CERTIFICATE_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Certificate Issuer">--}}
-                        {{--<span class="blue">--}}
-                            {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                        {{--</span>--}}
-                                {{--</a>--}}
-                            {{--@else--}}
-                                {{--<a href="#" id="{{ 'certificate/'.$row->CERTIFICATE_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Certificate Issuer" style="display: none;">--}}
-                        {{--<span class="blue">--}}
-                            {{--<i class="ace-icon fa fa-eye bigger-130"></i>--}}
-                        {{--</span>--}}
-                                {{--</a>--}}
-                            {{--@endif--}}
-                            {{--@if($editPermissionLevel == 1)--}}
-                                {{--<a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Certificate Issuer">--}}
-                                    {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                {{--</a>--}}
-                            {{--@else--}}
-                                {{--<a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Certificate Issuer" style="display: none;">--}}
-                                    {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                {{--</a>--}}
-                            {{--@endif--}}
-                            {{--@if($previllage->DELETE == 1)--}}
-                                {{--<a class="red clickForDelete row{{ $row->CERTIFICATE_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'certificate/'.$row->CERTIFICATE_ID }}" role="button" title="Delete Certificate Issuer">--}}
-                                    {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
-                                {{--</a>--}}
-                            {{--@endif--}}
-                        {{--</td>--}}
-                    {{--</tr>--}}
-                {{--@endforeach--}}
+            <div class="clearfix" style="margin-left: 150px;">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="reset" class="btn test">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        {{ trans('dashboard.reset') }}
+                    </button>
+                    {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        {{ trans('dashboard.submit') }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-                {{--</tbody>--}}
-            </table>
-        </div><!-- /.col -->
 
-    </div><!-- /.row -->
+    @include('masterGlobal.chosenSelect')
+    @include('masterGlobal.datePicker')
 
-    @include('masterGlobal.deleteScript')
+    {{--@include('masterGlobal.formValidation')--}}
+    <script>
+        var Privileges = jQuery('#privileges');
+        var select = this.value;
+        Privileges.change(function () {
+            if ($(this).val() == 1001) {
+                $('.resources').show();
+            }
+            else $('.resources').hide();
+        });
+
+        $(document).ready(function () {
+            $.validator.addMethod(
+                "regex",
+                function(value, element, regexp)
+                {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                },
+                "Please check your input."
+            );
+
+            $('#myform').validate({ // initialize the plugin
+                errorClass: "my-error-class",
+                //validClass: "my-valid-class",
+                rules: {
+
+                    PHONE:{
+                        required: true,
+                        maxlength:11,
+                        minlength:11,
+                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    },
+                    RCV_QTY:{
+                        required: true,
+                    }
+                }
+            });
+
+        });
+
+        $(document).on('change','.millerName',function () {
+            //alert('hi');
+            var mill_id = $(this).val();
+//       alert(mill_id);
+            var _token = '{{ csrf_token() }}';
+            $.ajax({
+                type: 'POST',
+                url:'{{ url('extended-date/miller-info') }}',
+                data:{'mill_id':mill_id,_token: _token},
+                success:function (data) {
+//                    console.log(data);
+                    //$('.resultTab').show();
+                    $('.tblReport').html(data.html);
+
+                }
+            });
+
+        });
+
+        $(document).on('keyup','.renewingDays',function () {
+            //alert('hi');
+            var dayAdd = $(this).val();
+            var renewalDate = $('.renewalDate').text();
+            if(renewalDate===""){
+                alert('Alert ! Mill name is required.')
+            }
+            var array = renewalDate.split('-');
+            var dd = array[0];
+            var mm = array[1];
+            var yy = array[2];
+            var dateFrom = yy + '-' + mm + '-' + dd;
+            renewalDate = daysAddToDate(dateFrom, dayAdd);
+            $('#expierDateId').val(renewalDate);
+        });
+
+        $(document).on('change','#expierDateId',function () {
+            //alert('hi');
+            var toDate = $('#expierDateId').val();
+            var fromDate = $('.renewalDate').text();
+//            if(fromDate===""){
+//                alert('Alert ! Mill name is required.')
+//            }
+
+            if(fromDate!=="" && toDate!==""){
+                fromDate = dateToArray(fromDate)[2]+'-'+dateToArray(fromDate)[1]+'-'+dateToArray(fromDate)[0]; // format day-month-year to month-day-year
+                toDate = dateToArray(toDate)[2]+'-'+dateToArray(toDate)[1]+'-'+dateToArray(toDate)[0]; // format day-month-year to month-day-year
+                var date1 = new Date(fromDate);
+                var date2 = new Date(toDate);
+                console.log(date2);
+//                console.log(diffDays);
+            }
+        });
+
+        function daysAddToDate(fromDate, daysToAdd) {
+            var someDate = new Date(fromDate);
+            someDate.setDate(someDate.getDate() + parseInt(daysToAdd));
+            var dd = someDate.getDate()+1;
+            var mm = someDate.getMonth() + 1;
+            var yy = someDate.getFullYear();
+            var someFormattedDate = yy +'-'+ mm +'-'+dd;
+            return someFormattedDate;
+        }
+
+        function dateToArray(data) {
+            return data.split('-');
+        }
+
+
+    </script>
+
+
+
 
 @endsection
 

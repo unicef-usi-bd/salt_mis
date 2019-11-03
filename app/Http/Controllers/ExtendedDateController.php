@@ -47,14 +47,14 @@ class ExtendedDateController extends Controller
             'title'=>'Extended date',
             'library'=>'datatable',
             'modalSize'=>'modal-bg',
-            'action'=>'extended-date/create',
-            'createPermissionLevel' => $previllage->CREATE
+//            'action'=>'extended-date/create',
+//            'createPermissionLevel' => $previllage->CREATE
         );
 //        dd(session()->all());
-        $users = User::getData();
+           $millerId = ExtendedDate::millerName();
 //        $this->pr($users);
 
-        return view('setup.extendate.index',compact( 'users','heading','previllage'));
+        return view('setup.extendate.index',compact( 'users','heading','previllage','millerId'));
     }
 
     /**

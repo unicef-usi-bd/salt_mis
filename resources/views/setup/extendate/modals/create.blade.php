@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label style="margin-left: -18%" class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input style="width: 50px;"  type="text"  name="RENEWING_DATE"  class="chosen-container " value="">
+                        <input style="width: 50px;" id="renewalDaysId" type="text"  name=""  class="chosen-container renewingDays" value="">
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <label style="margin-left: -5%" class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-4">
-                        <input type="date"  name="RENEWING_DATE"  class="chosen-container" value="">
+                        <input type="date" id="expierDateId"  name="RENEWING_DATE"  class="chosen-container" value="">
                     </div>
                 </div>
             </div>
@@ -148,6 +148,14 @@
        });
 
     });
+
+    $(document).on('keyup','.renewingDays',function () {
+        //alert('hi');
+        var days = $('#renewalDaysId').val();
+        var expirDate = $('#expierDateId').vla();
+        alert(days);
+
+    })
 
 </script>
 

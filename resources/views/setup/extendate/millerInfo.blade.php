@@ -7,7 +7,7 @@
 </style>
 <div class="col-md-12">
     <div class="error-container">
-       <div class="row table-responsive">
+       <div class="row">
            <div class="col-md-6">
                <h4 class="left text-danger" >Mill Information </h4>
                <hr>
@@ -62,6 +62,7 @@
            <div class="space"></div>
 
            <div class="col-md-6">
+               <div class="col-md-12">
                <h4 class="left text-danger" >Entrepreneur Information</h4>
                <hr>
                <table  class="table table-bordered table-hover">
@@ -84,61 +85,36 @@
                    @endforeach
                    </tbody>
                </table>
+               </div>
+               <div class="col-md-12">
+
+                       <h4 class="left text-danger" >Employee Information </h4>
+                       <hr>
+                       <table class="table">
+                           <tr style="margin-left: 200%;">
+                               <th>Total Number of Employee </th>
+                               <th> :</th>
+                               <td>{{ $millInfo->TOTMALE_EMP + $millInfo->TOTFEM_EMP  }}</td>
+                           </tr>
+
+
+                           <tr>
+                               <th>Full Time Employee</th>
+                               <th> :</th>
+                               <td>{{$millInfo->FULLTIMEMALE_EMP + $millInfo->FULLTIMEFEM_EMP}}</td>
+                           </tr>
+
+                           <tr>
+                               <th> Part Time Employee</th>
+                               <th> :</th>
+                               <td>{{ $millInfo->PARTTIMEMALE_EMP + $millInfo->PARTTIMEFEM_EMP }}</td>
+                           </tr>
+                       </table>
+
+               </div>
            </div>
            <div class="space"></div>
        </div>
-
-        <div class="row table-responsive">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <h4 class="left text-danger" >Employee Information </h4>
-                <hr>
-                <table class="table">
-                    <tr style="margin-left: 200%;">
-                        <th>Total Number of Employee </th>
-                        <th> :</th>
-                        <td>{{ $millInfo->TOTMALE_EMP + $millInfo->TOTFEM_EMP  }}</td>
-                    </tr>
-                    {{--<tr>--}}
-                        {{--<th>Total Number of Male Employee</th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{$millInfo->TOTMALE_EMP}}</td>--}}
-                        {{--<th>Total Number of Female Employee</th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{$millInfo->TOTFEM_EMP}}</td>--}}
-                    {{--</tr>--}}
-
-                    <tr>
-                        <th>Full Time Employee</th>
-                        <th> :</th>
-                        <td>{{$millInfo->FULLTIMEMALE_EMP + $millInfo->FULLTIMEFEM_EMP}}</td>
-                    </tr>
-                    {{--<tr>--}}
-                        {{--<th>Full Time Male Employee</th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{ $millInfo->FULLTIMEFEM_EMP }}</td>--}}
-                        {{--<th>Full Time Male Employee</th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{$millInfo->FULLTIMEFEM_EMP}}</td>--}}
-                    {{--</tr>--}}
-                    <tr>
-                        <th> Part Time Employee</th>
-                        <th> :</th>
-                        <td>{{ $millInfo->PARTTIMEMALE_EMP + $millInfo->PARTTIMEFEM_EMP }}</td>
-                    </tr>
-                    {{--<tr>--}}
-                        {{--<th>Part Time Male Employee </th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{$millInfo->PARTTIMEMALE_EMP}}</td>--}}
-                        {{--<th>Part Time Female Employee  </th>--}}
-                        {{--<th> :</th>--}}
-                        {{--<td>{{$millInfo->PARTTIMEFEM_EMP}}</td>--}}
-                    {{--</tr>--}}
-
-                </table>
-            </div>
-            <div class="space"></div>
-        </div>
     </div>
 </div>
     <div class="error-container">
