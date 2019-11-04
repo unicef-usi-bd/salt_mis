@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="clearfix" style="margin-left: 210px;">
+        <div class="clearfix" style="margin-left: 230px;">
             <div class="col-md-offset-3 col-md-9">
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
