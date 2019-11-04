@@ -81,7 +81,7 @@
                     </tr>
                 </table>
                     @else
-                    <h3>No Data Found</h3>
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
                     @endif
             </div>
 
@@ -154,7 +154,7 @@
                     </tr>
                 </table>
                     @else
-                    <h3>No Data Found</h3>
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
                     @endif
             </div>
         </div>
@@ -191,7 +191,9 @@
                         </tr>
                     @endforeach
                         @else
-                        <h3>No Data Found</h3>
+                        <tr>
+                            <td style="text-align: center;color: red;">No Data Found</td>
+                        </tr>
                     @endif
                 </table>
             </div>
@@ -227,9 +229,11 @@
                             <td> {{ $row->REMARKS }}</td>
                         </tr>
                     @endforeach
-@else
-                        <h3>No Data Found</h3>
-                        @endif
+                    @else
+                        <tr>
+                            <td style="text-align: center;color: red;">No Data Found</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         </div>
@@ -261,9 +265,11 @@
                         <td>{{ $row->REMARKS }} </td>
                     </tr>
                     @endforeach
-@else
-                        <h3>No Data Foun</h3>
-                        @endif
+                    @else
+                        <tr>
+                            <td style="text-align: center;color: red;">No Data Found</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
 
@@ -293,9 +299,11 @@
                         <td>{{ $row->REMARKS }} </td>
                     </tr>
                     @endforeach
-@else
-                        <h3>No Data Found</h3>
-                        @endif
+                    @else
+                        <tr>
+                            <td style="text-align: center;color: red;">No Data Found</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         </div>
@@ -369,9 +377,10 @@
                     </tr>
 
                 </table>
-                    @else
-                    <h3>No Data Found</h3>
-                    @endif
+                @else
+
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
+                @endif
             </div>
 
             <div class="col-md-6">
@@ -442,9 +451,9 @@
                     </tr>
 
                 </table>
-                    @else
-                    <h3>No Data Found</h3>
-                    @endif
+                @else
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
+                @endif
             </div>
         </div>
 
@@ -452,7 +461,7 @@
         <div class="row table-responsive">
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: red;">Change Employee Information </h4>
-@if($previousEmployeeData)
+                @if($previousEmployeeData)
                 <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
                 <table class="table borderless">
                     <tr>
@@ -503,14 +512,14 @@
                     </tr>
 
                 </table>
-    @else
-                    <h3>No Data Found</h3>
-    @endif
+                @else
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
+                @endif
             </div>
 
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: green;">Previous Employee Information </h4>
-@if($presentEmployeeData)
+                @if($presentEmployeeData)
                 <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
                 <table class="table borderless">
                     <tr>
@@ -561,9 +570,9 @@
                     </tr>
 
                 </table>
-    @else
-                    <h3>No Data Found</h3>
-    @endif
+                @else
+                    <h3 style="text-align: center;color: red;">No Data Found</h3>
+                @endif
             </div>
         </div>
 

@@ -48,6 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Mill</b><span style="color:red;"> *</span></label>
+                       <input type="hidden" name="MILL_TYPE_ID" value="{{ $editMillData->MILL_TYPE_ID }}">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select disabled="true" id="MILL_TYPE_IDD" class="chosen-select chosen-container" name="MILL_TYPE_ID" data-placeholder="Select">
@@ -78,6 +79,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Zone</b><span style="color:red;"> *</span></label>
+                        <input type="hidden" name="ZONE_ID" value="{{ $editMillData->ZONE_ID }}">
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right">
                                    <select disabled="true" id="ZONE_IDD" class="chosen-select chosen-container" name="ZONE_ID" data-placeholder="Select">
@@ -215,10 +217,10 @@
                             {{ trans('dashboard.reset') }}
                         </button>
                         @if(isset($associationId))
-                            <button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">
-                                <i class="ace-icon fa fa-check bigger-110"></i>
-                                Approve
-                            </button>
+                            {{--<button type="button" class="btn btn-success btnUpdateApprove" onclick="millTab()">--}}
+                                {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
+                                {{--Approve--}}
+                            {{--</button>--}}
                             <button type="submit" class="btn btn-success btnUpdateMill" onclick="millTab()">
                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                 Update & Next
@@ -230,7 +232,7 @@
                                     Update & Next
                                 </button>
                             @else
-                                <h3 style="color: red">Waiting for Association update your previous request</h3>
+                                <span style="color: red;font-size: 18px;margin-left: 5px;">Waiting for Association update your previous request</span>
                             @endif
                         @endif
 

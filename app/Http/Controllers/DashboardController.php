@@ -54,15 +54,15 @@ class DashboardController extends Controller
                ->first();
 
             $millercertificateInfo = DB::table('ssm_certificate_info')
-                ->select('ssm_certificate_info.RENEWING_DATE')
+                ->select('ssm_certificate_info.renewing_date')
                 ->where('ssm_certificate_info.MILL_ID','=',$millerId->MILL_ID)
-                ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
+                ->orderBy('ssm_certificate_info.renewing_date','asc')
                 ->limit(1)
                 ->first();
 
             if($millercertificateInfo){
                 DB::table('users')->where('center_id',$center_id)->update([
-                    'RENEWING_DATE' => date('Y-m-d', strtotime($millercertificateInfo->RENEWING_DATE)),
+                    'renewing_date' => date('Y-m-d', strtotime($millercertificateInfo->renewing_date)),
                 ]);
             }
             return $this->miller();
@@ -280,6 +280,33 @@ class DashboardController extends Controller
     }
 
     public function miller(){
+        $totalWashcrashProduction = Stock::totalWashCrashProductions();
+        $totalIodizeProduction = Stock::totalIodizeProductions();
+        $totalProductons = $totalWashcrashProduction + $totalIodizeProduction;
+        $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
+        $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
+        $totalProductSales = $totalWashCrashSale + $totalIodizeSale;
+        $procurementList = Stock::procurementList();
+        $totalproduction = Stock::millerProduction();
+        $totalSale = SalesDistribution::totalproductSale();
+        $monthWiseProduction = Stock::monthWiseMillProduction();
+        $monthWiseProcurement = Stock::monthWiseProcurement();
+        $totalStock = Stock::totalStocks();
+        $saleTotal = SalesDistribution::totalSale();
+        $millId = MillerInfo::millId();
+        $millId1 = (array)$millId;
+        $links = implode(' ', array_values($millId1));
+        $renewalMessageCertificate = Certificate::certificateRenewalMessage($links);
+        $totalWcDashboard = Stock::totalWashCrashForDashboard();
+        $totalIoDashboard = Stock:: totalIodizeForDashboard();
+        $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
+        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalYearProduction = Stock::yearWiseProduction();
+        $totalProcrument = ChemicalPurchase::totalProcurment();
+        $kiStock = ChemicalPurchase::kiInstock();
+        $kiUsed = abs(ChemicalPurchase::kiInUsed());
+        $totalKiInStock = $kiStock - $kiUsed;
+        //
         $date = date('Y-m-d');
         $center_id = Auth::user()->center_id ;
         $millerId = DB::table('ssm_associationsetup')
@@ -288,58 +315,28 @@ class DashboardController extends Controller
             ->first();
 
         $millercertificateInfo = DB::table('ssm_certificate_info')
-            ->select('ssm_certificate_info.RENEWING_DATE')
+            ->select('ssm_certificate_info.renewing_date')
             ->where('ssm_certificate_info.MILL_ID','=',$millerId->MILL_ID)
-            ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
+            ->orderBy('ssm_certificate_info.renewing_date','asc')
             ->limit(1)
             ->first();
-
-        if($millercertificateInfo){
-            DB::table('users')->where('center_id',$center_id)->update([
-                'RENEWING_DATE' => date('Y-m-d', strtotime($millercertificateInfo->RENEWING_DATE)),
-            ]);
-        }
-
-        if($millercertificateInfo->RENEWING_DATE>=$date){
-
-
-            $totalWashcrashProduction = Stock::totalWashCrashProductions();
-            $totalIodizeProduction = Stock::totalIodizeProductions();
-            $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
-
-            $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
-            $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
-            $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
-
-            $procurementList = Stock::procurementList();
-            $totalproduction = Stock::millerProduction();
-            $totalSale = SalesDistribution::totalproductSale();
-
-            $monthWiseProduction = Stock::monthWiseMillProduction();
-//        $this->pr($monthWiseProduction);
-            $monthWiseProcurement = Stock::monthWiseProcurement();
-            $totalStock = Stock::totalStocks();
-            $saleTotal = SalesDistribution::totalSale();
-            $millId = MillerInfo::millId();
-            $millId1 = (array)$millId;
-            $links = implode(' ', array_values($millId1));
-            $renewalMessageCertificate = Certificate::certificateRenewalMessage($links);
-            $totalWcDashboard = Stock::totalWashCrashForDashboard();
-            $totalIoDashboard = Stock:: totalIodizeForDashboard();
-            $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
-            $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-            $totalYearProduction = Stock::yearWiseProduction();
-            $totalProcrument = ChemicalPurchase::totalProcurment();
-            $kiStock = ChemicalPurchase::kiInstock () ;
-            $kiUsed = abs(ChemicalPurchase::kiInUsed());
-            $totalKiInStock = $kiStock-$kiUsed;
-
-//        $this->pr($renewalMessageCertificate);
-            return view('dashboards.millerDashboard',compact('totalWashcrashProduction','totalIodizeProduction','totalProductons','totalWashCrashSale','totalIodizeSale','totalProductSales','procurementList','totalproduction','totalSale','totalStock','saleTotal','monthWiseProcurement','monthWiseProduction','renewalMessageCertificate','millId','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','kiStock','kiUsed','totalKiInStock','totalProcrument'));
+        if($millercertificateInfo) {
+            if ($millercertificateInfo) {
+                DB::table('users')->where('center_id', $center_id)->update([
+                    'renewing_date' => date('Y-m-d', strtotime($millercertificateInfo->renewing_date)),
+                ]);
+            }
+            if ($millercertificateInfo->renewing_date >= $date) {
+                return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument'));
+            } else {
+                Session::flush();
+                $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
+                return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+            }
         }else{
             Session::flush();
-            $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
-            return redirect()->route('login')->with(['worningMessage' => $worningMessage] );
+            $worningMessage = "No Info Found. Please Contact With Your Association.!!!";
+            return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
         }
     }
 }
