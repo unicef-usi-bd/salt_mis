@@ -101,7 +101,7 @@
                                 Update & Next
                             </button>
                         @else
-                            @if($editMillData->approval_status == 0)
+                            @if($editEmployeeData->approval_status == 0)
                                 <button type="button" class="btn btn-success btnUpdateEmpTem" onclick="employeeTab()">
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     Update & Next
