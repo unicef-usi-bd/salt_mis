@@ -37,19 +37,7 @@
                         </span>
                     </div>
                 </div>
-                {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Source from</b><span style="color: red;"> </span></label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<span class="block input-icon input-icon-right">--}}
-                            {{--<select id="form-field-select-3 inputSuccess ITEM_NO" class="chosen-select form-control" name="ITEM_NO" data-placeholder="Select or search data">--}}
-                               {{--<option value=""></option>--}}
-                                {{--@foreach($crudeSaltSources as $crudeSaltSource)--}}
-                                    {{--<option value="{{$crudeSaltSource->LOOKUPCHD_ID}}"> {{$crudeSaltSource->LOOKUPCHD_NAME}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</span>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
@@ -215,7 +203,7 @@
                     required: true,
                     maxlength:11,
                     minlength:11,
-                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                 }
             }
         });

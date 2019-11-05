@@ -1,14 +1,5 @@
 <div class="col-md-12">
-    {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
-        {{--<span id="successMessage"></span>--}}
-        {{--<button type="button" class="close" data-dismiss="alert">--}}
-            {{--<i class="ace-icon fa fa-times"></i>--}}
-        {{--</button>--}}
-    {{--</div>--}}
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
     <style>
         .my-error-class {
             color:red;
@@ -18,7 +9,7 @@
         }
     </style>
 
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
+
     <form id="myform" action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
       {{--<div class="col-md-12">--}}
         @csrf
@@ -77,9 +68,7 @@
           </div>
       </div>
 
-      {{--<div class="col-md-12" style="margin-top: -30px;">--}}
-          {{--<h2 class="left" style="margin-top: 30px;margin-bottom: 30px;">Address</h2>--}}
-          {{--<hr style="margin-top: -25px;">--}}
+
         <div class="row" style="margin-top: 20px;">
             <div class="col-md-12">
                 <div class="col-md-3">
@@ -116,16 +105,6 @@
                     </span>
                     </div>
                 </div>
-                {{--<div class="col-md-3">--}}
-                    {{--<label  class="col-sm-12"  style="margin-left: -2%;"><b>Union</b></label>--}}
-                    {{--<div class="col-xs-12">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">--}}
-                            {{--<option value="">Select Union</option>--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         </div>
 
@@ -201,20 +180,6 @@
               </div>
           </div>
       </div>
-
-
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
 
         <div class="clearfix" style="margin-left: 150px;">
             <div class="col-md-offset-3 col-md-9">
@@ -322,7 +287,7 @@
                 PHONE:{
                     required: true,
                     maxlength:11,
-                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                 }
             }
         });

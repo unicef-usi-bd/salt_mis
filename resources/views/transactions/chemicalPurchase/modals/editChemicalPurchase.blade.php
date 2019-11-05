@@ -1,16 +1,5 @@
 <div class="col-md-12">
-    {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
-    {{--<span id="successMessage"></span>--}}
-    {{--<button type="button" class="close" data-dismiss="alert">--}}
-    {{--<i class="ace-icon fa fa-times"></i>--}}
-    {{--</button>--}}
-    {{--</div>--}}
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
-
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
     <form action="{{ url('/chemical-purchase/'.$editChemicalpurchase->RECEIVEMST_ID) }}" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
@@ -56,10 +45,7 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
-                              {{--@foreach($supplierNameBsti as $row)--}}
-                                    {{--<option value="{{$row->SUPP_ID_AUTO}}">{{$row->TRADING_NAME}}</option>--}}
-                                    {{--<option value="{{ $row->SUPP_ID_AUTO }}" @if($row->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $row->TRADING_NAME }}</option>--}}
-                                {{--@endforeach--}}
+
                                 @foreach($supplierName as $name)
                                     <option value="{{ $name->SUPP_ID_AUTO }}" @if($name->SUPP_ID_AUTO==$editChemicalpurchase->SUPP_ID_AUTO) selected @endif>{{ $name->TRADING_NAME }}</option>
                                 @endforeach
@@ -77,23 +63,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
 
         <div class="clearfix" style="margin-left: 150px;">
             <div class="col-md-offset-3 col-md-9">

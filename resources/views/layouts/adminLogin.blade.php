@@ -118,7 +118,7 @@
                                                     <span class="bigger-110">Login</span>
                                                 </button>
                                             </div>
-                                            <div style="float:left; margin-top: -30px;"> <img style="width:100px; height: 40px;" src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
+                                            <div style="float:left; margin-top: -30px;"> <img style="width:130px; height: 55px;" src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
                                             <div class="space-4"></div>
                                         </fieldset>
                                     </form>

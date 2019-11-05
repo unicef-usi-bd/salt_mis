@@ -101,16 +101,7 @@
                     </span>
                     </div>
                 </div>
-                {{--<div class="form-group">--}}
-                    {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Union</b></label>--}}
-                    {{--<div class="col-xs-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="UNION_ID" class="form-control chosen-select union" name="UNION_ID" data-placeholder="Select or search data">--}}
-                            {{--<option value="">Select Union</option>--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
                     <div class="col-xs-8">
@@ -182,7 +173,7 @@
                     required: true,
                     maxlength:11,
                     minlength:11,
-                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                 }
 
             }
