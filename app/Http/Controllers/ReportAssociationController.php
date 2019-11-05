@@ -99,17 +99,18 @@ class ReportAssociationController extends Controller
 
     }
     public function getPurchaseChemicalTotalStock(Request $request){
-        $starDate = $request->input('assStartDate');
-        $endDate = $request->input('assEndDate');
-        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($starDate,$endDate);
-        $view = view("reportAssociation.purchaseChemicalTotalStockReport",compact('purchaseChemicalTotalStock','starDate','endDate'))->render();
+//        $starDate = $request->input('assStartDate');
+//        $endDate = $request->input('assEndDate');
+        $millTypeAdmin = $request->input('millTypeAdmin');
+        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($millTypeAdmin);
+        $view = view("reportAssociation.purchaseChemicalTotalStockReport",compact('purchaseChemicalTotalStock','starDate','endDate','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
 
     }
-    public function getPurchaseChemicalTotalStockPdf(Request $request,$starDate,$endDate){
-        $starDate = $starDate;
-        $endDate = $endDate;
-        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($starDate,$endDate);
+    public function getPurchaseChemicalTotalStockPdf(Request $request,$millTypeAdmin){
+//        $starDate = $starDate;
+//        $endDate = $endDate;
+        $purchaseChemicalTotalStock = ReportAssociation::getPurchaseChemicalTotalStock($millTypeAdmin);
         $data = \View::make('reportAssociation.pdf.purchaseChemicalTotalStockReportPdf',compact('purchaseChemicalTotalStock'));
         $this->generatePdf($data);
 

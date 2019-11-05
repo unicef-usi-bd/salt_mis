@@ -357,9 +357,9 @@
             $('.zoneAdminDiv').hide();
             $('.issuerAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
              $('.processTypeDiv').hide();
-             $('.millerDiv').hide();
+             $('.millerDiv').show();
         }else if($reportUrl === 'assoc-process-stock'){
             $('.statusAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();

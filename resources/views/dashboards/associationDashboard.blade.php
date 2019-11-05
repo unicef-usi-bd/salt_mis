@@ -7,6 +7,31 @@
         .flot-overlay{
             width: 330px !important;
         }
+
+        .boxDanger{
+            background-color: #F2DEDE;
+            width: 37px;
+            height: 13px;
+        }
+
+        .boxWarning{
+            background-color: #FCF8E3;
+            width: 37px;
+            height: 13px;
+        }
+
+        .boxSuccess{
+            background-color: #DFF0D8;
+            width: 37px;
+            height: 13px;
+        }
+
+        /*For Scroll*/
+        .scroll-Div{
+            width:550px;
+            height:221px !important;
+            overflow:auto;
+        }
     </style>
     <div class="page-header">
         <h1>
@@ -19,20 +44,6 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div >
-            @foreach($associationMillerCertificate as $row)
-                @if($row->RENEW_DAY <=30)
-                    <p class="alert alert-danger" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate for {{ $row->ASSOCIATION_NAME }}.</p>
-                @elseif($row->RENEW_DAY <=60)
-                    <p class="alert alert-warning" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate for {{ $row->ASSOCIATION_NAME }}.</p>
-                @elseif($row->RENEW_DAY <=90)
-                    <p class="alert alert-info" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate for {{ $row->ASSOCIATION_NAME }}.</p>
-                @else
-
-                @endif
-            @endforeach
-        </div>
-
         <div class="space-6"></div>
 
         <div class="col-sm-7 infobox-container">
@@ -55,11 +66,6 @@
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
                     <div class="infobox-content">
-                        {{--@php $total=0; @endphp--}}
-                        {{--@foreach($totalAssociationproduction as $row)--}}
-                        {{--@php $total = $total+(abs($row->stock_total)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{sprintf('%0.2f',$totalassociationproduction)}}
                     </div>
                 </div>
@@ -73,11 +79,6 @@
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
                     <div class="infobox-content">
-                        {{--@php $total = 0; @endphp--}}
-                        {{--@foreach($totalSales as $row)--}}
-                        {{--@php $total = $total+(abs($row->Sales_total)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{sprintf('%0.2f',$totalSales)}}
                     </div>
                 </div>
@@ -103,11 +104,6 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        {{--@php $total = 0; @endphp--}}
-                        {{--@foreach($associationIodize as $row)--}}
-                        {{--@php $total = $total+(abs($row->iodize_stock)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{sprintf('%0.2f',$associationIodize)}}
                     </div>
                 </div>
@@ -121,11 +117,6 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
                     <div class="infobox-content">
-                        {{--@php $total=0; @endphp--}}
-                        {{--@foreach($totalAssociationIodizeSale as $row)--}}
-                        {{--@php $total = $total+(abs($row->iodize_sale)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{sprintf('%0.2f',$totalAssociationIodizeSale)}}
                     </div>
                 </div>
@@ -150,11 +141,6 @@
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        {{--@php $total = 0; @endphp--}}
-                        {{--@foreach($associationWashCrash as $row)--}}
-                        {{--@php $total = $total+(abs($row->washcrash_stock)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{ sprintf('%0.2f',$associationWashCrash) }}
                     </div>
                 </div>
@@ -170,11 +156,6 @@
                         INDUSTRIAL SALT
                         SALES</div>
                     <div class="infobox-content">
-                        {{--@php $total = 0; @endphp--}}
-                        {{--@foreach($totalAssociationWashCrasheSale as $row)--}}
-                        {{--@php $total = $total+(abs($row->washcrash_sales)) @endphp--}}
-                        {{--@endforeach--}}
-                        {{--{{ number_format($total, 2) }}--}}
                         {{ sprintf('%0.2f',$totalAssociationWashCrasheSale) }}
                     </div>
                 </div>
@@ -362,6 +343,7 @@
                 </div><!-- /.widget-body -->
             </div><!-- /.widget-box -->
         </div><!-- /.col -->
+
         <div class="col-sm-6">
             <div class="widget-box">
                 <div class="widget-header widget-header-flat widget-header-small">
@@ -378,6 +360,93 @@
                         <canvas id="myChart4"></canvas>
                         {{--</div>--}}
 
+                    </div><!-- /.widget-main -->
+                </div><!-- /.widget-body -->
+            </div><!-- /.widget-box -->
+        </div><!-- /.col -->
+
+        <div class="col-sm-6">
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat widget-header-small">
+                    <h5 class="widget-title">
+                        <i class="ace-icon fa fa-star orange"></i>
+                        List of licence
+                    </h5>
+
+                    {{--<div class="widget-toolbar">--}}
+                        {{--<a href="#" data-action="collapse">--}}
+                            {{--<i class="ace-icon fa fa-chevron-up"></i>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                </div>
+
+                <div class="widget-body">
+                    <div class="space"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label style="font-weight: bolder;">Expire in 30 Days </label>
+                                <div class="boxDanger"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label style="font-weight: bolder;">Expire in 60 Days </label>
+                                <div class="boxWarning"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label style="font-weight: bolder;">Expire in 90 Days </label>
+                                <div class="boxSuccess"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-main scroll-Div">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thin-border-bottom">
+                            <tr>
+                                <th>
+                                    Mill&nbsp;Logo
+                                </th>
+
+                                <th>
+                                    Miller&nbsp;Name
+                                </th>
+
+                                <th>
+                                    Certificate&nbsp;Name
+                                </th>
+
+                                <th>
+                                    Renewing&nbsp;Date
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach($associationMillerCertificate as $row)
+                                @if($row->RENEW_DAY<=30)
+                                <tr>
+                                    <td class="alert alert-danger text-center"><span class="TRADE_LICENSE"><img src="{{ url('/'. $row->mill_logo ) }}" alt="trade license"  width="20px"></span></td>
+                                    <td class="alert alert-danger">{{ $row->MILL_NAME }}</td>
+                                    <td class="alert alert-danger">{{ $row->CERTIFICATE_NAME }}</td>
+                                    <td class="alert alert-danger">{{ date('d-m-Y',strtotime($row->RENEWING_DATE)) }}</td>
+                                </tr>
+                                @elseif($row->RENEW_DAY<=60)
+                                    <tr>
+                                        <td class="alert alert-warning text-center"><span class="TRADE_LICENSE"><img src="{{ url('/'. $row->mill_logo ) }}" alt="trade license"  width="20px"></span></td>
+                                        <td class="alert alert-warning">{{ $row->MILL_NAME }}</td>
+                                        <td class="alert alert-warning">{{ $row->CERTIFICATE_NAME }}</td>
+                                        <td class="alert alert-warning">{{ date('d-m-Y',strtotime($row->RENEWING_DATE)) }}</td>
+                                    </tr>
+                                @elseif($row->RENEW_DAY<=90)
+                                    <tr>
+                                        <td class="alert alert-success text-center"><span class="TRADE_LICENSE"><img src="{{ url('/'. $row->mill_logo ) }}" alt="trade license"  width="20px"></span></td>
+                                        <td class="alert alert-success">{{ $row->MILL_NAME }}</td>
+                                        <td class="alert alert-success">{{ $row->CERTIFICATE_NAME }}</td>
+                                        <td class="alert alert-success">{{ date('d-m-Y',strtotime($row->RENEWING_DATE)) }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div><!-- /.widget-main -->
                 </div><!-- /.widget-body -->
             </div><!-- /.widget-box -->
@@ -527,23 +596,7 @@
 
         });
 
-        window.setTimeout(function() {
-            $(".alert-danger").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
 
-        window.setTimeout(function() {
-            $(".alert-warning").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
-
-        window.setTimeout(function() {
-            $(".alert-info").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
     </script>
 
 

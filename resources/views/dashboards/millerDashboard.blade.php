@@ -19,20 +19,23 @@
     </div><!-- /.page-header -->
 
     <div class="row">
-        <div >
+        <marquee   direction="left"   height="23px" width="95%">
+        <div>
             @foreach($renewalMessageCertificate as $row)
-                @if($row->RENEW_DAY <=30)
-                    <p class="alert alert-danger" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
-                @elseif($row->RENEW_DAY <=60)
-                        <p class="alert alert-warning" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
-                @elseif($row->RENEW_DAY <=90)
-                    <p class="alert alert-info" style="color: red;font-weight: bolder;">If don’t  renewal {{ $row->LOOKUPCHD_NAME }} then account is deactivate.</p>
-                @else
 
-                @endif
+                    @if($row->RENEW_DAY <=30)
+                    <span class="alert alert-danger" style="font-weight: bolder;">If don’t  renewal {{ $row->CERTIFICATE_NAME }} then account is deactivate.&nbsp;</span>
+                    @elseif($row->RENEW_DAY <=60)
+                    <span class="alert alert-warning" style="font-weight: bolder;">If don’t  renewal {{ $row->CERTIFICATE_NAME }} then account is deactivate.&nbsp;</span>
+                    @elseif($row->RENEW_DAY <=90)
+                    <span class="alert alert-success" style="font-weight: bolder;">If don’t  renewal {{ $row->CERTIFICATE_NAME }} then account is deactivate.</span>
+                    @else
+
+                    @endif
             @endforeach
         </div>
-        <hr>
+        </marquee>
+        <hr style="margin-top: 2px;">
     </div>
 
     <div class="row">
@@ -521,23 +524,23 @@
 
         });
 
-        window.setTimeout(function() {
-            $(".alert-danger").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
-
-        window.setTimeout(function() {
-            $(".alert-warning").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
-
-        window.setTimeout(function() {
-            $(".alert-info").fadeOut(500, 0).slideUp(500, function(){
-                $(this).remove();
-            });
-        }, 5000);
+//        window.setTimeout(function() {
+//            $(".alert-danger").fadeOut(500, 0).slideUp(500, function(){
+//                $(this).remove();
+//            });
+//        }, 5000);
+//
+//        window.setTimeout(function() {
+//            $(".alert-warning").fadeOut(500, 0).slideUp(500, function(){
+//                $(this).remove();
+//            });
+//        }, 5000);
+//
+//        window.setTimeout(function() {
+//            $(".alert-info").fadeOut(500, 0).slideUp(500, function(){
+//                $(this).remove();
+//            });
+//        }, 5000);
 
 
     </script>

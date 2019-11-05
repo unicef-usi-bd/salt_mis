@@ -315,7 +315,7 @@ class ReportController extends Controller
         $millTypeAdmin = $request->input('millTypeAdmin');
         $purchaseChemicalStocks = Report::adminChemicalStock($millTypeAdmin);
         //return $purchaseChemicalStocks;
-        $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate','millTypeAdmin'))->render();
+        $view = view("reportView.adminPurchasseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
     }
 
