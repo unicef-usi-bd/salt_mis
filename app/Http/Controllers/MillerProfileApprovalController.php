@@ -94,6 +94,7 @@ class MillerProfileApprovalController extends Controller
         if($millerProfileTemp){
             $millerInfoData = array(
                 'MILL_NAME' => $millerProfileTemp->MILL_NAME,
+                'mill_logo' => $millerProfileTemp->mill_logo,
                 'PROCESS_TYPE_ID' => $millerProfileTemp->PROCESS_TYPE_ID,
                 'OWNER_TYPE_ID' => $millerProfileTemp->OWNER_TYPE_ID,
                 'CAPACITY_ID' => $millerProfileTemp->CAPACITY_ID,
