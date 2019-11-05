@@ -6,9 +6,7 @@
         </button>
     </div>
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
+
     <style>
         .my-error-class {
             color:red;
@@ -18,7 +16,7 @@
         }
     </style>
 
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
+
     <form id="myform" action="{{ url('/seller-distributor-profile/'.$editSellerProfile->CUSTOMER_ID) }}" method="post" class="form-horizontal" role="form">
         {{--<div class="col-md-12">--}}
             @csrf
@@ -116,17 +114,6 @@
 
                     </div>
                 </div>
-                {{--<div class="col-md-3">--}}
-                    {{--<label for="inputSuccess" class="col-sm-12"  style="margin-left: -2%;"><b>Union</b><span style="color: red;"> </span></label>--}}
-                    {{--<div class="col-sm-12">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select class="form-control union chosen-select" id="UNION_ID" name="UNION_ID" data-placeholder="{{ trans('organization.select_one') }}">--}}
-                            {{--<option value="{{ $editSellerProfile->UNION_ID }}">{{ $editSellerProfile->UNION_NAME }}</option>--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         </div>
 
@@ -209,18 +196,7 @@
         </div>
 
 
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
+
 
         <div class="clearfix" style="margin-left: 150px;">
             <div class="col-md-offset-3 col-md-9">
@@ -377,7 +353,7 @@
                 PHONE:{
                     //required: true,
                     maxlength:11,
-                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                 },
 
             }

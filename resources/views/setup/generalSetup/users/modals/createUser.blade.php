@@ -362,7 +362,7 @@
                         required: true,
                         maxlength:11,
                         minlength:11,
-                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                        regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                     },
                     user_group_id:{
                         required: true,

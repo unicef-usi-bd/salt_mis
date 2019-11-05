@@ -78,12 +78,7 @@
                 </div>
             </div>
 
-           <!--  <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess remarks" name="remarks" class="form-control col-xs-10 col-sm-5" value="{{ $editData->remarks }}"/>
-                </div>
-            </div> -->
+
 
             <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.active_status') }}</b></label>
@@ -149,19 +144,7 @@
                 </div>
             </div>
 
-            {{--<div class="form-group resources"  >--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                        {{--<span class="block input-icon input-icon-right">--}}
-                            {{--<select id="form-field-select-3 inputSuccess center_id" class=" form-control" name="center_id" data-placeholder="Select Center">--}}
-                                {{--<option value="">-Select One- </option>--}}
-                                {{--@foreach($associationCenter as $center)--}}
-                                    {{--<option value="{{ $center->ASSOCIATION_ID }}" @if($center->ASSOCIATION_ID==$editData->center_id) selected @endif>{{ $center->ASSOCIATION_NAME }}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+
             <div class="form-group resources"  >
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;"></span></label>
                 <div class="col-sm-8">
@@ -180,75 +163,7 @@
                         </span>
                 </div>
             </div>
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.cost_center') }}</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="form-field-select-3 inputSuccess cost_center_id" class="chosen-select form-control" name="cost_center_id" data-placeholder="Select or search data">--}}
-                            {{--<option value=""> </option>--}}
-                            {{--@foreach($costCenters as $costCenter)--}}
-                                {{--<option value="{{$costCenter->cost_center_id}}" @if($costCenter->cost_center_id==$editData->cost_center_id) selected @endif> {{ $costCenter->cost_center_name }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.designation') }}</b><span style="color: red;"> </span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="form-field-select-3 inputSuccess designation_id" class="chosen-select form-control" name="designation_id" data-placeholder="Select or search data">--}}
-                            {{--<option value=""> </option>--}}
-                            {{--@foreach($designations as $designation)--}}
-                                {{--<option value="{{ $designation->lookup_group_data_id}}" @if($designation->lookup_group_data_id==$editData->designation_id) selected @endif> {{ $designation->group_data_name }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
 
-            {{--<div class="form-group" style="margin-top: 15px;">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bank Name</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select class="form-control bank" id="bank_id" name="bank_id">--}}
-                            {{--<option>Select One {{ $editData->bank_id }} </option>--}}
-                            {{--@foreach($banks as $bank)--}}
-                                {{--<option value="{{ $bank->bank_id }}" @if($bank->bank_id==$editData->bank_id) selected @endif >{{ $bank->bank_name }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Branch</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select class="form-control branch" id="branch_id" name="branch_id">--}}
-                            {{--<option value="{{ $editData->branch_id }}">{{ $editData->bank_branch_name }}</option>--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Account no.</b><span style="color: red;"> *</span> </label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<input type="text" name="account_no" value="{{ $editData->account_no }}" id="inputSuccess account_no" class="width-100"  />--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Route no.</b></label>--}}
-                {{--<div class="col-xs-12 col-sm-7">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<input type="text" name="route_no" id="inputSuccess route_no" value="{{ $editData->route_no }}" class="width-100"  />--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
              <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.remark') }}</b></label>
                 <div class="col-sm-8">
@@ -346,7 +261,7 @@
                         required: true,
                         maxlength:11,
                         minlength:11,
-                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                        regex:/^(?:\+88|01)?\d{11}$/,
                     },
                     user_group_id:{
                         required: true,
@@ -400,37 +315,7 @@
             });
         });
 
-        //===========image validation============
-//        $(".user_image").bind('change',function () {
-//            var fileSize = this.files[0].size;
-//            var maxSize = 25000;//25kb; // alert(maxSize);
-//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-//            var filename = $('input[type=file]').val().split('\\').pop();
-//
-//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-//                $(".user_image").val('');
-//            }
-//            if (fileSize>maxSize){
-//                alert("File size exceeds maximum size");
-//                $(".user_image").val('');
-//            }
-//        });
-//        $(".user_signature").bind('change',function () {
-//            var fileSize = this.files[0].size;
-//            var maxSize = 25000;//25kb; // alert(maxSize);
-//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-//            var filename = $('input[type=file]').val().split('\\').pop();
-//
-//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-//                $(".user_signature").val('');
-//            }
-//            if (fileSize>maxSize){
-//                alert("File size exceeds maximum size");
-//                $(".user_signature").val('');
-//            }
-//        });
+
     </script>
     <script>
         var loadFile = function(event) {
@@ -443,20 +328,7 @@
             output.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
-<!--    --><?php
-//    //MySQL class: http://mbe.ro/2009/08/30/fast-and-easy-php-mysql-class/
-//    //require('../shared/db-class.php');
-//    $email = $_REQUEST["email"];
-//    //$email = 'test@gmail.com'; // Just for testing.
-//    $validate = new mysql();
-//    $checkemail = $validate->query("SELECT * FROM users WHERE email = '$email'");
-//    if (count($checkemail) == 1){
-//        $valid = "false";
-//    } else {
-//        $valid = "true";
-//    }
-//    echo $valid;
-//    ?>
+
 
 </div>
 

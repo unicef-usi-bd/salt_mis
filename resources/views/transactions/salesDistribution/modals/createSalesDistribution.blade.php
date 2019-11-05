@@ -1,15 +1,6 @@
 <div class="col-md-12">
 
-    {{--<div id="success" class="alert alert-block alert-success" style="display: none;">--}}
-    {{--<span id="successMessage"></span>--}}
-    {{--<button type="button" class="close" data-dismiss="alert">--}}
-    {{--<i class="ace-icon fa fa-times"></i>--}}
-    {{--</button>--}}
-    {{--</div>--}}
 
-    {{--<div id="error" class="alert alert-block alert-danger" style="display: none;">--}}
-    {{--<span id="errorMessage"></span>--}}
-    {{--</div>--}}
     <style>
         .my-error-class {
             color:red;
@@ -19,7 +10,7 @@
         }
     </style>
 
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
+
     <form id="myform" action="{{ url('/sales-distribution') }}" method="post" class="form-horizontal" role="form">
 
             @csrf
@@ -54,18 +45,10 @@
                     @foreach($traderName as $row)
                         <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
                     @endforeach
-                 {{--<option value="">--Select One--</option>--}}
                 </select>
             </span>
                     </div>
                 </div>
-
-                {{--<div class="form-group">--}}
-                    {{--<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red;"> </span> </label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         <div class="col-md-12" style="margin-top: 15px;">
             <h4  style="color: #1B6AAA;">Transport Details</h4>
@@ -112,18 +95,6 @@
             </div>
 
         </div>
-
-        {{--<div class="col-md-12" style="margin-top: -30px;">--}}
-        {{--<h2 class="left" style="margin-top: 30px;margin-bottom: 30px;">Address</h2>--}}
-        {{--<hr style="margin-top: -25px;">--}}
-
-
-        {{--</div>--}}
-
-        {{--<div class="col-md-12">--}}
-        {{--<hr>--}}
-
-        {{--</div>--}}
 
         <div class="col-md-12" style="margin-top: 15px;">
             <div class="alert alert-danger alert-dismissible msg" style="display: none;">
@@ -211,19 +182,6 @@
                 </tbody>
             </table>
         </div>
-
-    <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('union.active_status') }}</b></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
-                    <option value="1" selected>Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-            </span>
-                </div>
-            </div> -->
 
         <div class="clearfix" style="margin-left: 150px;">
             <div class="col-md-offset-3 col-md-9">
@@ -426,7 +384,7 @@
                     required: true,
                     maxlength:11,
                     minlength:11,
-                    regex:/^(?:\+?88)?01[15-9]\d{8}$/,
+                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
                 },
                 "ITEM_ID[]":{
                     required: true,

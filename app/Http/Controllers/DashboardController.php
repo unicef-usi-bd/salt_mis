@@ -309,34 +309,50 @@ class DashboardController extends Controller
         //
         $date = date('Y-m-d');
         $center_id = Auth::user()->center_id ;
-        $millerId = DB::table('ssm_associationsetup')
-            ->select('ssm_associationsetup.MILL_ID')
-            ->where('ASSOCIATION_ID','=',$center_id)
+        $renewingDateCheck = DB::table('users')
+            ->select('users.renewing_days','users.renewing_date','users.center_id')
+            ->where('users.center_id','=',$center_id)
             ->first();
 
-        $millercertificateInfo = DB::table('ssm_certificate_info')
-            ->select('ssm_certificate_info.renewing_date')
-            ->where('ssm_certificate_info.MILL_ID','=',$millerId->MILL_ID)
-            ->orderBy('ssm_certificate_info.renewing_date','asc')
-            ->limit(1)
-            ->first();
-        if($millercertificateInfo) {
-            if ($millercertificateInfo) {
-                DB::table('users')->where('center_id', $center_id)->update([
-                    'renewing_date' => date('Y-m-d', strtotime($millercertificateInfo->renewing_date)),
-                ]);
-            }
-            if ($millercertificateInfo->renewing_date >= $date) {
-                return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument'));
-            } else {
-                Session::flush();
-                $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
-                return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
-            }
-        }else{
-            Session::flush();
-            $worningMessage = "No Info Found. Please Contact With Your Association.!!!";
-            return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
-        }
-    }
+      if($renewingDateCheck->renewing_days >=0 && $renewingDateCheck->renewing_days <=$date){
+          return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument'));
+      }else {
+          Session::flush();
+          $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
+          return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+      }
+      if($renewingDateCheck->renewing_days >=$date)
+          $millerId = DB::table('ssm_associationsetup')
+              ->select('ssm_associationsetup.MILL_ID')
+              ->where('ASSOCIATION_ID','=',$center_id)
+              ->first();
+
+          $millercertificateInfo = DB::table('ssm_certificate_info')
+              ->select('ssm_certificate_info.renewing_date')
+              ->where('ssm_certificate_info.MILL_ID','=',$millerId->MILL_ID)
+              ->orderBy('ssm_certificate_info.renewing_date','asc')
+              ->limit(1)
+              ->first();
+          if($millercertificateInfo) {
+              if ($millercertificateInfo) {
+                  DB::table('users')->where('center_id', $center_id)->update([
+                      'renewing_date' => date('Y-m-d', strtotime($millercertificateInfo->renewing_date)),
+                  ]);
+              }
+              if ($millercertificateInfo->renewing_date >= $date) {
+                  return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument'));
+              } else {
+                  Session::flush();
+                  $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
+                  return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+              }
+          }else{
+              Session::flush();
+              $worningMessage = "No Info Found. Please Contact With Your Association.!!!";
+              return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+          }
+      }
+        //$center_id = Auth::user()->center_id ;
+
+
 }

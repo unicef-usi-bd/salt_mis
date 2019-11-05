@@ -370,14 +370,8 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-star orange"></i>
-                        List of licence
+                        Miller's Certificate Status
                     </h5>
-
-                    {{--<div class="widget-toolbar">--}}
-                        {{--<a href="#" data-action="collapse">--}}
-                            {{--<i class="ace-icon fa fa-chevron-up"></i>--}}
-                        {{--</a>--}}
-                    {{--</div>--}}
                 </div>
 
                 <div class="widget-body">
