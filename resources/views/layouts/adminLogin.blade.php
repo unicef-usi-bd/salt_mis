@@ -118,7 +118,7 @@
                                                     <span class="bigger-110">Login</span>
                                                 </button>
                                             </div>
-
+                                            <div style="float:left; margin-top: -30px;"> <img style="width:100px; height: 40px;" src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
                                             <div class="space-4"></div>
                                         </fieldset>
                                     </form>
@@ -273,7 +273,7 @@
                             <div>
                                 <div style="float:left; width:350px;"></div>
                                 {{--<div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>--}}
-                                <div style="float:right; width:300px;"> <img src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
+                                {{--<div style="float:right; width:300px;"> <img src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>--}}
                                 <div class="clearfix"></div>
                             </div>
                             {{--Copyright &copy; 2018 DAE, All Rights Reserved. DAE Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a>--}}
