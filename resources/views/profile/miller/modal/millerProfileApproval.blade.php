@@ -23,6 +23,11 @@
                         <td> {{ $previousMillerData->MILL_NAME }} </td>
                     </tr>
                     <tr>
+                        <th class=" ">Mill Logo</th>
+                        <th> :</th>
+                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$previousMillerData->mill_logo) }}" /> </td>
+                    </tr>
+                    <tr>
                         <th class=" ">Process Type</th>
                         <th> :</th>
                         <td> {{ $previousMillerData->process_name }} </td>
@@ -94,6 +99,11 @@
                         <th class=" ">Name of Mill</th>
                         <th> :</th>
                         <td> {{ $presentMillerData->MILL_NAME }} </td>
+                    </tr>
+                    <tr>
+                        <th class=" ">Mill Logo</th>
+                        <th> :</th>
+                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$presentMillerData->mill_logo) }}" /></td>
                     </tr>
                     <tr>
                         <th class=" ">Process Type</th>
