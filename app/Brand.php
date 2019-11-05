@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class Brand extends Model
 {
     public static function getData(){
+        $center_id = Auth::user()->center_id;
         return DB::table('brand')
             ->select('brand.*')
+            ->where('brand.center_id','=',$center_id)
             ->get();
     }
 

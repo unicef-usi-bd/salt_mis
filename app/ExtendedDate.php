@@ -13,7 +13,7 @@ class ExtendedDate extends Model
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.MILL_NAME','ssm_mill_info.MILL_ID','ssm_certificate_info.RENEWING_DATE')
             ->leftjoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
-            ->where('ssm_certificate_info.RENEWING_DATE','>',$date)
+            ->where('ssm_certificate_info.RENEWING_DATE','<',$date)
             ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
             ->get();
     }
@@ -52,7 +52,7 @@ class ExtendedDate extends Model
             ->leftJoin('ssc_lookupchd as lc','ci.ISSURE_ID','=','lc.LOOKUPCHD_ID')
             ->leftJoin('ssm_mill_info as mi','mi.MILL_ID','=','ci.MILL_ID')
             ->where('ci.MILL_ID','=',$millId)
-            ->where('ci.RENEWING_DATE','>',$date)
+            ->where('ci.RENEWING_DATE','<',$date)
             ->get();
     }
 }
