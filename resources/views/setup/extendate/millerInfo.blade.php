@@ -9,8 +9,9 @@
     <form id="myform" action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">
      @csrf
     <div class="col-md-12">
+
         <div class="col-md-6">
-            <div class="form-group" style="margin-left: 35px;">
+            <div class="form-group" style="margin-left: -95px;">
                 <label  class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-4">
                     <input style="width: 50px;" id="renewalDaysId" placeholder="0" type="number" min="0"    name="renewing_days"  class="chosen-container renewingDays" value="0">
@@ -20,7 +21,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="form-group" style="margin-left: -20%">
+            <div class="form-group" style="margin-left: -35%">
                 <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-4">
                     <input type="date" name="renewing_date"  class="expierDateId" value="{{date('Y-m-d',strtotime($millInfo->RENEWING_DATE))}}">
@@ -28,7 +29,7 @@
             </div>
         </div>
 
-        <div class="clearfix" style="margin-left: 230px;">
+        <div class="clearfix" style="margin-left: 280px;">
             <div class="col-md-offset-3 col-md-9">
                 <button type="submit" class="btn btn-primary">
                     <i class="ace-icon fa fa-check bigger-110"></i>
@@ -44,7 +45,7 @@
     <div class="error-container">
        <div class="row">
            <div class="col-md-6">
-               <h4 class="left text-danger" >Mill Information </h4>
+               <h4 class="left text-danger" >Mill&nbsp;Information </h4>
                <hr>
                <table class="table">
                    <tr style="margin-left: 200%;">
@@ -53,7 +54,7 @@
                        <td class="renewalDate" style="background-color: red; max-width: 100px; font-weight: bolder; color: white;">{{date('d-m-Y',strtotime($millInfo->RENEWING_DATE))}}</td>
                    </tr>
                    <tr>
-                       <th>Mill Name</th>
+                       <th>Mill&nbsp;Name</th>
                        <th> :</th>
                        <td>{{$millInfo->MILL_NAME}}</td>
                        <th>Mill Logo</th>
@@ -64,16 +65,16 @@
                    </tr>
 
                    <tr>
-                       <th>Process Type</th>
+                       <th>Process&nbsp;Type</th>
                        <th> :</th>
                        <td>{{$millInfo->ProcessType}}</td>
 
                    </tr>
                    <tr>
-                       <th>Type of Mill</th>
+                       <th>Type&nbsp;of&nbsp;Mill</th>
                        <th> :</th>
                        <td>{{ $millInfo->millerType }}</td>
-                       <th>Type Of Owner</th>
+                       <th>Type&nbsp;Of&nbsp;Owner</th>
                        <th> :</th>
                        <td>{{$millInfo->ownerType}}</td>
                    </tr>
@@ -90,7 +91,7 @@
 
            <div class="col-md-6">
                <div class="col-md-12">
-               <h4 class="left text-danger" >Entrepreneur Information</h4>
+               <h4 class="left text-danger" >Entrepreneur&nbsp;Information</h4>
                <hr>
                <table  class="table table-bordered table-hover">
                    <thead>
@@ -115,24 +116,24 @@
                </div>
                <div class="col-md-12">
 
-                       <h4 class="left text-danger" >Employee Information </h4>
+                       <h4 class="left text-danger" >Employee&nbsp;Information </h4>
                        <hr>
                        <table class="table">
                            <tr style="margin-left: 200%;">
-                               <th width="200px;">Total Number of Employee </th>
+                               <th width="200px;">Total&nbsp;Number&nbsp;of&nbsp;Employee </th>
                                <th width="5px;"> :</th>
                                <td>{{ $millInfo->TOTMALE_EMP + $millInfo->TOTFEM_EMP  }}</td>
                            </tr>
 
 
                            <tr>
-                               <th width="200px;">Full Time Employee</th>
+                               <th width="200px;">Full&nbsp;Time&nbsp;Employee</th>
                                <th width="5px;"> :</th>
                                <td>{{$millInfo->FULLTIMEMALE_EMP + $millInfo->FULLTIMEFEM_EMP}}</td>
                            </tr>
 
                            <tr>
-                               <th width="200px;"> Part Time Employee</th>
+                               <th width="200px;"> Part&nbsp;Time&nbsp;Employee</th>
                                <th width="5px;"> :</th>
                                <td>{{ $millInfo->PARTTIMEMALE_EMP + $millInfo->PARTTIMEFEM_EMP }}</td>
                            </tr>
@@ -145,18 +146,18 @@
     </div>
 </div>
     <div class="error-container">
-        <h4 class="left text-danger" >Certificate Information</h4>
+        <h4 class="left text-danger" >Certificate&nbsp;Information</h4>
         <hr>
         <div class="row table-responsive">
             <table  class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>Type of Certificate</th>
-                    <th>Issure Name</th>
-                    <th>Issuing Date</th>
-                    <th>Certificate Number</th>
-                    <th>Attached File</th>
-                    <th>Renewing Date</th>
+                    <th>Type&nbsp;of&nbsp;Certificate</th>
+                    <th>Issuer&nbsp;Name</th>
+                    <th>Issuing&nbsp;Date</th>
+                    <th>Certificate&nbsp;Number</th>
+                    <th>Attached&nbsp;File</th>
+                    <th>Renewing&nbsp;Date</th>
                 </tr>
                 </thead>
                 <tbody>
