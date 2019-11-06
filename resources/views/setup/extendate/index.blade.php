@@ -20,12 +20,8 @@
                 color:green;
             }
         </style>
-
-{{--        <form id="myform" action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">--}}
             <div class="col-md-12">
-                @csrf
-                {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-                <div class="col-md-6" style="margin-left: 20%;">
+                <div class="col-md-6" style="margin-left: 25%;">
                     <div class="form-group">
                         <label  for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> </span></label>
                         <div class="col-sm-8">
@@ -40,38 +36,21 @@
                         </div>
                     </div>
                 </div>
-                {{--<div class="col-md-4">--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label style="margin-left: -18%" class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>--}}
-                        {{--<div class="col-sm-6">--}}
-                            {{--<input style="width: 50px;" id="renewalDaysId" type="text"  name=""  class="chosen-container renewingDays" value="">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="col-md-4">--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label style="margin-left: -5%" class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>--}}
-                        {{--<div class="col-sm-4">--}}
-                            {{--<input type="date" id="renewaldateId"  name="RENEWING_DATE"  class="expierDateId renewalDate RENEWING_DATE" value="">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         <br>
         <br>
 
-            <div class="row" style="margin-top: 20px; width: 100%">
+            <div class="row" style="margin-top: 20px; margin-left: -37px; width: 1185px;">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
-                        {{--<div class="tabbable resultTab">--}}
+
                         <div class="tab-content">
 
                             <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
 
                             </div>
                         </div>
-                        {{--</div>--}}
+
                     </div>
 
 
@@ -80,21 +59,6 @@
             <div class="form-group">
 
             </div>
-
-            <div class="clearfix" style="margin-left: 150px;">
-                {{--<div class="col-md-offset-3 col-md-9">--}}
-                    {{--<button type="reset" class="btn test">--}}
-                        {{--<i class="ace-icon fa fa-undo bigger-110"></i>--}}
-                        {{--{{ trans('dashboard.reset') }}--}}
-                    {{--</button>--}}
-                    {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                    {{--<button type="submit" class="btn btn-primary">--}}
-                        {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                        {{--{{ trans('dashboard.submit') }}--}}
-                    {{--</button>--}}
-                {{--</div>--}}
-            </div>
-        {{--</form>--}}
     </div>
 
 
