@@ -112,7 +112,7 @@ where sci.MILL_ID = $millerId"));
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-            where ci.MILL_ID = $links and ci.IS_EXPIRE = 1
+            where ci.MILL_ID = $links and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
             -- and ci.RENEWING_DATE 
             AND ci.RENEWING_DATE >=90 AND ci.RENEWING_DATE >=60 AND ci.RENEWING_DATE >=30
             order By ci.RENEWING_DATE asc;"));
@@ -135,7 +135,7 @@ where sci.MILL_ID = $millerId"));
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-            where ass.center_id = $centerId and ci.IS_EXPIRE = 1
+            where ass.center_id = $centerId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
             -- and ci.RENEWING_DATE 
             AND ci.RENEWING_DATE >=90 AND ci.RENEWING_DATE >=60 AND ci.RENEWING_DATE >=30
             order By ci.RENEWING_DATE asc"));
