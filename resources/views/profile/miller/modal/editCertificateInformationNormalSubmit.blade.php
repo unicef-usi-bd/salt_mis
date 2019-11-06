@@ -138,7 +138,7 @@
                                 {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
                                 {{--Update--}}
                             {{--</button>--}}
-                            @if($editMillData->approval_status == 0)
+                            @if($editCertData->approval_status == 0)
                                 <button type="submit" class="btn btn-success" >
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     Update
