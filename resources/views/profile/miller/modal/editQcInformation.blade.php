@@ -122,7 +122,7 @@
                                 Update & Next
                             </button>
                         @else
-                            @if($editMillData->approval_status == 0)
+                            @if($editQcData->approval_status == 0)
                                 <button type="button" class="btn btn-success btnUpdateQcTem" onclick="qcTab()">
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     Update & Next

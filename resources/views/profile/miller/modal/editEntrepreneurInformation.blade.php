@@ -138,7 +138,7 @@
                                 Update & Next
                             </button>
                         @else
-                            @if($editMillData->approval_status == 0)
+                            @if($editEntrepData->approval_status == 0)
                                 <button type="button" class="btn btn-success btnUpdateTemEntrepreneur" onclick="entrepreneurTab()" id="submitbutton">
                                     <i class="ace-icon fa fa-check bigger-110"></i>
                                     Update & Next
