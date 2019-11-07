@@ -467,7 +467,7 @@
                 datasets: [{
                     backgroundColor: ['#3498DB','#c63939','#1f7a3d'],
                     borderColor: '#ffffff',
-                    data: [<?php echo sprintf('%0.2f',$totalProcrument)?>, <?php echo sprintf('%0.2f',abs($kiUsed)) ?>,<?php echo sprintf('%0.2f',$totalKiInStock)?>],
+                    data: [<?php echo sprintf('%0.2f',$totalProcrument)?>, <?php echo sprintf('%0.2f',abs($kiUsed)) ?>,<?php echo sprintf('%0.2f',$totalStock)?>],
 
 
                 }],

@@ -239,7 +239,7 @@ class ChemicalPurchase extends Model
         $kiStock->select('tmm_itemstock.QTY');
         $kiStock->where('tmm_itemstock.TRAN_TYPE','=','CP');
         $kiStock->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        $kiStock->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $kiStock->where('tmm_itemstock.TRAN_DATE','<=',$date);
         if($centerId){
             $kiStock->where('tmm_itemstock.center_id','=',$centerId);
         }
@@ -254,7 +254,7 @@ class ChemicalPurchase extends Model
         $kiUsed->select('tmm_itemstock.QTY');
         $kiUsed->where('tmm_itemstock.TRAN_TYPE','=','C');
         $kiUsed->where('tmm_itemstock.TRAN_FLAG','=','IC');
-        $kiUsed->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $kiUsed->where('tmm_itemstock.TRAN_DATE','<=',$date);
         if($centerId){
             $kiUsed->where('tmm_itemstock.center_id','=',$centerId);
         }
@@ -282,7 +282,7 @@ class ChemicalPurchase extends Model
         $kiStock->select('tmm_itemstock.QTY');
         $kiStock->where('tmm_itemstock.TRAN_TYPE','=','CP');
         $kiStock->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        $kiStock->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $kiStock->where('tmm_itemstock.TRAN_DATE','<=',$date);
 
 
         return $kiStock->sum('tmm_itemstock.QTY');
@@ -295,7 +295,7 @@ class ChemicalPurchase extends Model
         $kiUsed->select('tmm_itemstock.QTY');
         $kiUsed->where('tmm_itemstock.TRAN_TYPE','=','C');
         $kiUsed->where('tmm_itemstock.TRAN_FLAG','=','IC');
-        $kiUsed->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $kiUsed->where('tmm_itemstock.TRAN_DATE','<=',$date);
 
 
         return $kiUsed->sum('tmm_itemstock.QTY');
