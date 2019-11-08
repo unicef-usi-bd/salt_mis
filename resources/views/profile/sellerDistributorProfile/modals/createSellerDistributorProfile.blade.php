@@ -96,11 +96,11 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazila</b></label>
+                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana</b></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
-                        <select id="UPAZILA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
-                            <option value="">Select Upazila/Thana</option>
+                        <select id="THANA_ID" class="form-control chosen-select thana" name="THANA_ID" data-placeholder="Select or search data">
+                            <option value="">Select Thana</option>
                          </select>
                     </span>
                     </div>
@@ -134,7 +134,7 @@
                 <tr>
                     <th style="width: 255px;">Division<span style="color:red;"> </span></th>
                     <th style="width: 255px;">District<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Upazila/Thana</th>
+                    <th style="width: 255px;">Thana</th>
                     {{--<th style="width: 150px;">Problem</th>--}}
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
@@ -161,8 +161,8 @@
                     </td>
                     <td>
                         <span class="block input-icon input-icon-right">
-                        <select id="COV_UPAZILA_ID" class="form-control chosen-select upazilatable" name="COV_UPAZILA_ID[]" data-placeholder="Select or search data">
-                            <option value="">Select Upazila/Thana</option>
+                        <select id="COV_THANA_ID" class="form-control chosen-select thanatable" name="COV_THANA_ID[]" data-placeholder="Select or search data">
+                            <option value="">Select Thana</option>
                          </select>
                     </span>
                     </td>
@@ -199,8 +199,9 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.getDistrict')
-@include('masterGlobal.getUpazila')
+{{--@include('masterGlobal.getUpazila')--}}
 @include('masterGlobal.getUnion')
+@include('masterGlobal.getThana')
 {{--@include('masterGlobal.formValidation')--}}
 <script>
     //    Add For Multiple Row Dynamically
@@ -243,17 +244,17 @@
     $(document).on('change', '.districttable', function () {
         var thisRow = $(this).closest('tr');
         var districtId = thisRow.find('.districttable').val();
-        var option = '<option value="">Select Upazila</option>';
+        var option = '<option value="">Select Thana</option>';
         $.ajax({
             type : "get",
-            url  : "supplier-profile/get-upazila/{id}",
+            url  : "supplier-profile/get-thana/{id}",
             data : {'districtId': districtId},
             success:function (data) {
                 for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                    option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
                 }
-                thisRow.find('.upazilatable').html(option);
-                thisRow.find('.upazilatable').trigger("chosen:updated");
+                thisRow.find('.thanatable').html(option);
+                thisRow.find('.thanatable').trigger("chosen:updated");
             }
         });
     });

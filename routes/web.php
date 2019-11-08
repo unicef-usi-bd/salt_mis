@@ -149,6 +149,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('supplier-profile/get-upazila/{id}', 'SupplierProfileController@getUpazilaByAjax'); //Azharul
     Route::get('supplier-profile/get-union/{id}', 'SupplierProfileController@getUnionByAjax'); //Azharul
+    Route::get('supplier-profile/get-thana/{id}', 'SupplierProfileController@getThanaByAjax'); //jalal
 
 
     //chemical setup

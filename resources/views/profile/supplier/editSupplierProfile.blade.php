@@ -99,11 +99,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazila</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->UPAZILA_ID }}">{{ $editData->UPAZILA_NAME }}</option>
+                        <select class="form-control upazila chosen-select" id="THANA_ID" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                            <option value="{{ $editData->THANA_ID }}">{{ $editData->THANA_NAME }}</option>
                         </select>
                     </span>
                 </div>
@@ -151,3 +151,4 @@
 @include('masterGlobal.getDistrict')
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
+@include('masterGlobal.getThana')

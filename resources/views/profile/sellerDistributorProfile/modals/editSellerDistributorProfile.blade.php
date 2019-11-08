@@ -104,11 +104,11 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Upazila/Thana</b><span style="color: red;"> </span></label>
+                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control upazila chosen-select" id="UPAZILA_ID" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editSellerProfile->UPAZILA_ID }}">{{ $editSellerProfile->UPAZILA_NAME }}</option>
+                        <select class="form-control thana chosen-select" id="THANA_ID" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                            <option value="{{ $editSellerProfile->THANA_ID }}">{{ $editSellerProfile->THANA_NAME }}</option>
                         </select>
                     </span>
 
@@ -144,7 +144,7 @@
                 <tr>
                     <th style="width: 255px;">Division<span style="color:red;"> </span></th>
                     <th style="width: 255px;">District<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Upazila/Thana</th>
+                    <th style="width: 255px;">Thana</th>
                     {{--<th style="width: 150px;">Problem</th>--}}
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
@@ -167,14 +167,14 @@
                     <td>
                                <span class="block input-icon input-icon-right">
                                     <select id="COV_DISTRICT_ID" class="chosen-select form-control districttable" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
-                                        <option value="{{ $seller->COV_DISTRICT_ID }}">{{ $seller->UPAZILA_NAME }}</option>
+                                        <option value="{{ $seller->COV_DISTRICT_ID }}">{{ $seller->DISTRICT_NAME }}</option>
                                     </select>
                                 </span>
                     </td>
                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select id="COV_UPAZILA_ID" class="form-control chosen-select upazilatable" name="COV_UPAZILA_ID[]" data-placeholder="Select or search data">
-                                        <option value="{{ $seller->COV_UPAZILA_ID }}">{{ $seller->UPAZILA_NAME }}</option>
+                                    <select id="COV_THANA_ID" class="form-control chosen-select thanatable" name="COV_THANA_ID[]" data-placeholder="Select or search data">
+                                        <option value="{{ $seller->COV_THANA_ID }}">{{ $seller->THANA_NAME }}</option>
                                      </select>
                                 </span>
                     </td>
@@ -218,6 +218,7 @@
 @include('masterGlobal.getDistrict')
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
+@include('masterGlobal.getThana')
 {{--@include('masterGlobal.formValidation')--}}
 <script>
     //    Add For Multiple Row Dynamically
@@ -292,17 +293,17 @@
     $(document).on('change', '.districttable', function () {
         var thisRow = $(this).closest('tr');
         var districtId = thisRow.find('.districttable').val();
-        var option = '<option value="">Select Upazila</option>';
+        var option = '<option value="">Select Thana</option>';
         $.ajax({
             type : "get",
-            url  : "supplier-profile/get-upazila/{id}",
+            url  : "supplier-profile/get-thana/{id}",
             data : {'districtId': districtId},
             success:function (data) {
                 for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                    option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
                 }
-                thisRow.find('.upazilatable').html(option);
-                thisRow.find('.upazilatable').trigger("chosen:updated");
+                thisRow.find('.thanatable').html(option);
+                thisRow.find('.thanatable').trigger("chosen:updated");
             }
         });
     });

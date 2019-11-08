@@ -92,6 +92,7 @@ class SupplierProfileController extends Controller
                 'DISTRICT_ID' => $request->input('DISTRICT_ID'),
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
                 'UNION_ID' => $request->input('UNION_ID'),
+                'THANA_ID' => $request->input('THANA_ID'),
                 'BAZAR_NAME' => $request->input('BAZAR_NAME'),
                 'PHONE' => $request->input('PHONE'),
                 'EMAIL' => $request->input('EMAIL'),
@@ -208,5 +209,10 @@ class SupplierProfileController extends Controller
         $upazilaId = $request->input('upazilaId');
         return SupplierProfile::getUnionByAjax($upazilaId);
 
+    }
+
+    public static function getThanaByAjax(Request $request){
+        $thanaId = $request->input('districtId');
+        return SupplierProfile::getThanaByAjax($thanaId);
     }
 }
