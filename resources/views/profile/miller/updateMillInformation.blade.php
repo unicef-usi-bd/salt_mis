@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana/Upazilla</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID_MILL" class="chosen-select chosen-container upazila_mill" name="UPAZILA_ID" url="{{ url('supplier-profile/get-union') }}" data-placeholder="Select">

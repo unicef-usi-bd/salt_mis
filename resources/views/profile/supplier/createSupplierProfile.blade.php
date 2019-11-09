@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana</b></label>
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana/Upazilla</b></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="THANA_ID" class="form-control chosen-select thana" name="THANA_ID" data-placeholder="Select or search data">

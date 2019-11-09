@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana</b></label>
+                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazilla</b></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select id="THANA_ID" class="form-control chosen-select thana" name="THANA_ID" data-placeholder="Select or search data">
@@ -134,7 +134,7 @@
                 <tr>
                     <th style="width: 255px;">Division<span style="color:red;"> </span></th>
                     <th style="width: 255px;">District<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Thana</th>
+                    <th style="width: 255px;">Thana/Upazilla</th>
                     {{--<th style="width: 150px;">Problem</th>--}}
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>

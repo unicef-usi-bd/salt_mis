@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana</b><span style="color: red;"> </span></label>
+                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control thana chosen-select" id="THANA_ID" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -144,7 +144,7 @@
                 <tr>
                     <th style="width: 255px;">Division<span style="color:red;"> </span></th>
                     <th style="width: 255px;">District<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Thana</th>
+                    <th style="width: 255px;">Thana/Upazilla</th>
                     {{--<th style="width: 150px;">Problem</th>--}}
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
