@@ -133,7 +133,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID_MILL" class="chosen-select chosen-container district_mill" name="DISTRICT_ID" url="{{ url('supplier-profile/get-upazila') }}" data-placeholder="Select">
+                               <select id="DISTRICT_ID_MILL" class="chosen-select chosen-container district_mill" name="DISTRICT_ID" url="{{ url('supplier-profile/get-thana') }}" data-placeholder="Select">
 {{--                                   <option value="{{ $editMillData->DISTRICT_ID }}">{{ $editMillData->DISTRICT_NAME }}</option>--}}
                                    @foreach($getDistrict as $row)
                                        <option value="{{ $row->DISTRICT_ID }}" @if($editMillData->DISTRICT_ID ==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazila</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID_MILL" class="chosen-select chosen-container upazila_mill" name="UPAZILA_ID" url="{{ url('supplier-profile/get-union') }}" data-placeholder="Select">
@@ -249,7 +249,7 @@
                 data : {'districtId': districtId},
                 success:function (data) {
                     for (var i = 0; i < data.length; i++){
-                        option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                        option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
                     }
                     $('.upazila_mill').html(option);
                     $('.upazila_mill').trigger("chosen:updated");

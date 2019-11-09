@@ -150,11 +150,11 @@
             var option = '<option value="">Select</option>';
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-upazila/{id}",
+                url  : "supplier-profile/get-thana/{id}",
                 data : {'districtId': districtId},
                 success:function (data) {
                     for (var i = 0; i < data.length; i++){
-                        option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
+                        option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
                     }
                     $('.upazilaa').html(option);
                     $('.upazilaa').trigger("chosen:updated");

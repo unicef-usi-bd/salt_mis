@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazila</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_IDD" class="chosen-select chosen-container upazilaa" name="UPAZILA_ID" data-placeholder="Select">
