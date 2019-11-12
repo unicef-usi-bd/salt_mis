@@ -37,12 +37,12 @@
 
                 </tr>
                 <tr>
-                    <th class=" ">Upazila/Thana Name</th>
+                    <th class=" ">Thana\Upazila</th>
                     <th> :</th>
-                    <td>{{ $viewSupplierProfile->UPAZILA_NAME }} </td>
-                    <th class=" ">Union Name</th>
-                    <th> :</th>
-                    <td>{{ $viewSupplierProfile->UNION_NAME }} </td>
+                    <td>{{ $viewSupplierProfile->THANA_NAME }} </td>
+                    {{--<th class=" ">Union Name</th>--}}
+                    {{--<th> :</th>--}}
+                    {{--<td>{{ $viewSupplierProfile->UNION_NAME }} </td>--}}
 
                 </tr>
                 <tr>

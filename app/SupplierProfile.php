@@ -125,10 +125,11 @@ class SupplierProfile extends Model
 
      public static function showSupplierProfile($id){
          return DB::table('ssm_supplier_info')
-             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME')
+             ->select('ssm_supplier_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME','ssc_thana.THANA_NAME')
              ->leftjoin('ssc_divisions','ssm_supplier_info.DIVISION_ID', '=', 'ssc_divisions.DIVISION_ID')
              ->leftjoin('ssc_districts','ssm_supplier_info.DISTRICT_ID', '=', 'ssc_districts.DISTRICT_ID')
-             ->leftjoin('ssc_upazilas','ssm_supplier_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
+             //->leftjoin('ssc_upazilas','ssm_supplier_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
+             ->leftjoin('ssc_thana','ssm_supplier_info.THANA_ID', '=', 'ssc_thana.THANA_ID')
              ->leftjoin('ssc_unions','ssm_supplier_info.UNION_ID', '=', 'ssc_unions.UNION_ID')
              ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
              ->where('SUPP_ID_AUTO', '=', $id)
