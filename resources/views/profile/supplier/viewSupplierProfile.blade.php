@@ -40,9 +40,6 @@
                     <th class=" ">Thana\Upazila</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->THANA_NAME }} </td>
-                    {{--<th class=" ">Union Name</th>--}}
-                    {{--<th> :</th>--}}
-                    {{--<td>{{ $viewSupplierProfile->UNION_NAME }} </td>--}}
 
                 </tr>
                 <tr>

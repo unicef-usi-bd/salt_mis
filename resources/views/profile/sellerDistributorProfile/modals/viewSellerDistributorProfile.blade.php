@@ -37,13 +37,9 @@
 
                 </tr>
                 <tr>
-                    <th class=" ">Upazila/Thana Name</th>
+                    <th class=" ">Thana Name/Upazila</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->UPAZILA_NAME }} </td>
-                    <th class=" ">Union Name</th>
-                    <th> :</th>
-                    <td>{{ $viewSellerDistributor->UNION_NAME }} </td>
-
                 </tr>
                 <tr>
                     <th class=" ">Phone Number</th>
