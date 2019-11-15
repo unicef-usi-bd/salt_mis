@@ -201,7 +201,13 @@ class Iodized extends Model
     }
 
     public  static function deleteIodizeData($id){
-        $deleteStock = DB::table('tmm_itemstock')->where('TRAN_NO',$id)->delete();
+        $deleteStock = DB::table('tmm_itemstock')
+            ->where('TRAN_NO',$id)
+//            ->where('TRAN_FLAG','=','IC')
+//            ->orWhere('TRAN_FLAG','=','II')
+//            ->orWhere('TRAN_FLAG','=','WR')
+            ->delete();
+
         if($deleteStock){
             $deleteChd = DB::table('tmm_iodizedchd')->where('IODIZEDMST_ID', $id)->delete();
             $deletePr = DB::table('tmm_iodizedmst')->where('IODIZEDMST_ID', $id)->delete();

@@ -198,7 +198,20 @@ class SalesDistributionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = SalesDistribution::saleDistributionDelete($id);
+
+        if($delete){
+            echo json_encode([
+                'type' => 'tr',
+                'id' => $id,
+                'flag' => true,
+                'message' => 'Sale Distribution Successfully Deleted.',
+            ]);
+        } else{
+            echo json_encode([
+                'message' => 'Error Founded Here!',
+            ]);
+        }
     }
 
     public function getWashingCrashingSalt(Request $request){

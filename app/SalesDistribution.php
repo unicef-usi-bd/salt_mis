@@ -275,5 +275,17 @@ class SalesDistribution extends Model
         return $totalSale->sum('tmm_itemstock.QTY');
     }
 
+    public static function saleDistributionDelete($id){
+        //dd($id);
+        $deleteStock = DB::table('tmm_itemstock')->where('TRAN_NO',$id)->delete();
+
+
+        if($deleteStock){
+            $deleteSaleChd = DB::table('tmm_saleschd')->where('SALESMST_ID',$id)->delete();
+            $deleteSalePr = DB::table('tmm_salesmst')->where('SALESMST_ID',$id)->delete();
+            return $deleteSalePr;
+        }
+    }
+
 
 }

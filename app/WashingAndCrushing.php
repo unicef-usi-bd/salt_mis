@@ -158,9 +158,16 @@ class WashingAndCrushing extends Model
 
 
     public static function deleteWashingAndCrushingData($id){
-        $deleteStock = DB::table('tmm_itemstock')->where('TRAN_NO',$id)->delete();
-        if($deleteStock){
+        $deleteStock = DB::table('tmm_itemstock')
+            ->where('TRAN_NO',$id)
+//            ->where('TRAN_FLAG','=','WS')
+//            ->orWhere('TRAN_FLAG','=','WI')
+//            ->orWhere('TRAN_FLAG','=','WR')
+            ->delete();
+       if($deleteStock){
             $deleteChd = DB::table('tmm_washcrashchd')->where('WASHCRASHMST_ID', $id)->delete();
+//            $deletePr = DB::table('tmm_washcrashmst')->where('WASHCRASHMST_ID', $id)->delete();
+//            return $deletePr;
         }
         if($deleteChd){
             $deletePr = DB::table('tmm_washcrashmst')->where('WASHCRASHMST_ID', $id)->delete();

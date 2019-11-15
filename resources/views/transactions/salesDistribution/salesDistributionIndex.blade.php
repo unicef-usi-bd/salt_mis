@@ -82,11 +82,11 @@
                                         {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
                                     {{--</a>--}}
                                 {{--@endif--}}
-                                {{--@if($previllage->DELETE == 1)--}}
-                                    {{--<a class="red clickForDelete row{{ $row->SALESMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'sales-distribution/'.$row->SALESMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">--}}
-                                        {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
+                                @if($previllage->DELETE == 1)
+                                    <a class="red clickForDelete row{{ $row->SALESMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'sales-distribution/'.$row->SALESMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                    </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
