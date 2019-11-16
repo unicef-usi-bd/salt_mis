@@ -385,7 +385,7 @@
             type: 'horizontalBar',
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
                 datasets: [{
                     label: 'Month wise current year production chart Total = ' + yearQty,
                     backgroundColor: 'rgb(30, 144, 255)',

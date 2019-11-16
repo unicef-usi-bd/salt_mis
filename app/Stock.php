@@ -212,11 +212,13 @@ class Stock extends Model
 
     /// ----------------------Production Graph
     public static function monthWiseProduction(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         //$centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
                                        FROM tmm_itemstock it
                                        WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'
                                        and YEAR(TRAN_DATE)
+                                       and TRAN_DATE > $date
                                        GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
     }
@@ -229,12 +231,14 @@ class Stock extends Model
     }
 
     public static function monthWiseAsociationProduction(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
                                        FROM tmm_itemstock it
                                        LEFT JOIN ssm_associationsetup ass ON ass.ASSOCIATION_ID = it.center_id
                                        WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II' and ass.center_id = $centerId
                                        and YEAR(TRAN_DATE)
+                                       and TRAN_DATE <= $date
                                        GROUP BY month"));
     }
     /// ----------------------Production Graph
@@ -290,12 +294,14 @@ class Stock extends Model
 
     /// ----------------------Production Graph
     public static function monthWiseMillProduction(){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("SELECT MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY)) subtotal
                                        FROM tmm_itemstock it
                                        WHERE it.center_id = $centerId
                                        and (it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II')
                                        and YEAR(TRAN_DATE)
+                                       AND TRAN_DATE > $date
                                        GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
     }

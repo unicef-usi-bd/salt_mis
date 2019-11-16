@@ -231,7 +231,7 @@
                             @foreach($totlaProductionList as $row)
                                 <tr>
                                     <td>
-                                        <b class="blue">{{ date('d-m-Y', strtotime($row->TRAN_DATE))  }}</b>
+                                        <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')
@@ -500,7 +500,7 @@
             type: 'horizontalBar',
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','November','December'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
                 datasets: [{
                     label: 'Month wise current year production chart Total = ' + yearQty,
                     backgroundColor: 'rgb(30, 144, 255)',
