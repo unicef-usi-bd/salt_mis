@@ -6,7 +6,7 @@
 </style>
 
 <div class="row" style="margin-bottom: 15px;">
-    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('purchase-salt-total-pdf/'.$starDate.'/'.$endDate.'/'.$itemTypeAssoc) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('purchase-salt-total-pdf/'.$itemTypeAssoc) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
         <h4>Association</h4>
     </div><!-- /.col -->
@@ -18,8 +18,10 @@
             <thead>
             <tr>
                 <th>Sl.</th>
+                <th>Mill name</th>
                 <th>Item Type</th>
                 <th>Item Name</th>
+                <th>Purchase Date</th>
                 <th>Purchase Volume</th>
             </tr>
 
@@ -29,8 +31,10 @@
             @foreach($purchaseSaltTotal as $sl =>  $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
+                    <td>{{$row->ASSOCIATION_NAME}}</td>
                     <td>{{$row->LOOKUPCHD_NAME}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{ date('d-M-Y',strtotime($row->TRAN_DATE))}}</td>
                     <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach

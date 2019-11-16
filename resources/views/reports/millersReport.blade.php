@@ -13,7 +13,7 @@
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-supplier-miller">List of Supplier </option>
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="miller-purchase-salt-stock">Purchase</option>
+                                       <option value="miller-purchase-salt-stock">purchase stock</option>
                                        <option value="monitor-salt-report">Monitor Supplier</option>
                                        <option value="purchase-salt-amount">Total Purchase Stock</option>
                                    </optgroup>
@@ -540,7 +540,7 @@
         }else if($reportUrl === 'sale-clint-list-miller'){
             $('.statusAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
 
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
@@ -557,7 +557,7 @@
         }else if($reportUrl === 'item-stock-miller'){
             $('.statusAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
 
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();

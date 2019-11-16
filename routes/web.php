@@ -212,7 +212,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('purchase-salt-item', 'ReportAssociationController@getPurchaseSaltItem'); //azharul
     Route::get('purchase-salt-item-pdf', 'ReportAssociationController@getPurchaseSaltItemPdf');//azharul
     Route::get('purchase-salt-total', 'ReportAssociationController@getPurchaseSaltTotal');//azharul
-    Route::get('purchase-salt-total-pdf/{starDate}/{endDate}/{itemTypeAssoc}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
+    Route::get('purchase-salt-total-pdf/{itemTypeAssoc}', 'ReportAssociationController@getPurchaseSaltTotalPdf');//azharul
     Route::get('purchase-salt-total-stock', 'ReportAssociationController@getPurchaseSaltTotalStock');//azharul
     Route::get('purchase-salt-total-stock-pdf', 'ReportAssociationController@getPurchaseSaltTotalStockPdf');//azharul
     Route::get('purchase-chemical-item', 'ReportAssociationController@getPurchaseChemicalItem');//azharul

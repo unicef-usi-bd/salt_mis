@@ -85,7 +85,8 @@ class Iodized extends Model
         }
         if($reduceWashingStokId){
             $reduceChemicalId =  DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                //'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                 'TRAN_TYPE' => 'C', //C=Chemical
                 'TRAN_NO' => $iodizeMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
@@ -99,7 +100,8 @@ class Iodized extends Model
         }
         if ($reduceChemicalId){
             $itemStokId = DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                //'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
                 'TRAN_TYPE' => 'I', //I=Iodized
                 'TRAN_NO' => $iodizeMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),

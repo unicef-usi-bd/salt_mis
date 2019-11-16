@@ -198,7 +198,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last month date wise production
+                        Last 30 days production
                     </h4>
 
                     <div class="widget-toolbar">
@@ -231,7 +231,7 @@
                             @foreach($totlaProductionList as $row)
                                 <tr>
                                     <td>
-                                        <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                        <b class="blue">{{ date('d-M-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')

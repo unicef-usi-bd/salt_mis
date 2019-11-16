@@ -234,7 +234,7 @@ class Report extends Model
     }
 
     public static function getProcessStock($centerId,$starDate,$endDate){
-        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
+        return DB::select(DB::raw("select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
       end Process_Type
@@ -245,7 +245,7 @@ class Report extends Model
       where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
       and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
       union
-      select i.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
+      select i.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'I' then
         'Iodize'
       end Process_Type

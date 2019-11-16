@@ -19,26 +19,29 @@ class ReportAssociation extends Model
           where st.ACTIVE_FLG and st.item_type=26 "));
 
  }
-    public static function getPurchaseSaltTotal($starDate,$endDate,$itemTypeAssoc){
+    public static function getPurchaseSaltTotal($itemTypeAssoc){
         $centerId = Auth::user()->center_id;
         if ($itemTypeAssoc==0){
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
             where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId') and 
-            its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'  "));
+            where ass.PARENT_ID = '$centerId') 
+            "));
         }else{
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME 
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
+            left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
             where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId') and 
-            its.TRAN_DATE BETWEEN '$starDate' AND '$endDate' and 
+            where ass.PARENT_ID = '$centerId') 
+          
+             and 
             its.ITEM_NO = '$itemTypeAssoc' "));
         }
 
