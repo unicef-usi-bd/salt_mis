@@ -248,7 +248,7 @@ class ChemicalPurchase extends Model
     }
 
     public static function kiInUsed(){
-        $date = date("Y-m-d", strtotime("- 90 days"));
+        $date = date("Y-m-d", strtotime(" 90 days"));
         $centerId = Auth::user()->center_id;
         $kiUsed = DB::table('tmm_itemstock');
         $kiUsed->select('tmm_itemstock.QTY');
@@ -263,7 +263,7 @@ class ChemicalPurchase extends Model
     }
 
     public static function totalAssociationProcurment(){
-        $date = date("Y-m-d", strtotime("- 90 days"));
+        $date = date("Y-m-d", strtotime(" -90 days"));
 
         $procurment = DB::table('tmm_receivemst');
         $procurment->select('tmm_receivemst.RECEIVE_TYPE','tmm_receivechd.RCV_QTY');
@@ -276,7 +276,7 @@ class ChemicalPurchase extends Model
     }
 
     public static function kiAssociationInstock(){
-        $date = date("Y-m-d", strtotime("- 90 days"));
+        $date = date("Y-m-d", strtotime(" -90 days"));
 
         $kiStock = DB::table('tmm_itemstock');
         $kiStock->select('tmm_itemstock.QTY');
@@ -289,7 +289,7 @@ class ChemicalPurchase extends Model
     }
 
     public static function kiAssociationInUsed(){
-        $date = date("Y-m-d", strtotime("- 90 days"));
+        $date = date("Y-m-d", strtotime(" 90 days"));
 
         $kiUsed = DB::table('tmm_itemstock');
         $kiUsed->select('tmm_itemstock.QTY');
