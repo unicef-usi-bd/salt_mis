@@ -205,7 +205,7 @@
                                     <option value="">Select</option>
                                     <option value="0">Select All</option>
                                     @foreach($finishSaltItem as $row)
-                                        <option value="{{ $row->ITEM_TYPE }}">{{ $row->ITEM_NAME }}</option>
+                                        <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>
                                     @endforeach
                                  </select>
                             </span>

@@ -23,11 +23,14 @@ class Report extends Model
     }
 
     public  static function getFinishSaltItem(){
-        return DB::select(DB::raw("select i.ITEM_TYPE, i.ITEM_NAME,l.LOOKUPCHD_NAME
-       from smm_item i
-       left join ssc_lookupchd l on l.LOOKUPCHD_ID = i.ITEM_TYPE
-       where i.ITEM_TYPE = 29
-       group by i.ITEM_TYPE,i.ITEM_NAME"));
+//        return DB::select(DB::raw("select i.ITEM_TYPE, i.ITEM_NAME,l.LOOKUPCHD_NAME
+//       from smm_item i
+//       left join ssc_lookupchd l on l.LOOKUPCHD_ID = i.ITEM_TYPE
+//       where i.ITEM_TYPE = 29
+//       group by i.ITEM_TYPE,i.ITEM_NAME"));
+        return DB::select(DB::raw("select i.ITEM_NO,i.ITEM_NAME 
+        from smm_item i
+        where i.ITEM_NO in (7,8)"));
     }
 
  public static function getAssociationList (){
@@ -627,7 +630,7 @@ class Report extends Model
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
             AND i.ITEM_NO = t.ITEM_NO
-            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId and i.ITEM_TYPE = $itemTypeId) a
+            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId and s.CUSTOMER_ID = $customerId and i.ITEM_NO = $itemTypeId) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
         }
