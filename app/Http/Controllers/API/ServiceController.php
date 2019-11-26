@@ -76,7 +76,7 @@ class ServiceController extends Controller
                 $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
                     ->select('smm_item.ITEM_NAME','smm_rmallocationchd.*')
                     ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
-                    ->where('smm_rmallocationchd.RMALLOMST_ID','=',25)//it can be changed
+                    //->where('smm_rmallocationchd.RMALLOMST_ID','=',26)//it can be changed
                     ->get();
                 //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
