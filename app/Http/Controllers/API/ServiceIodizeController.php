@@ -28,10 +28,16 @@ class ServiceIodizeController extends Controller
     public function getWashCrushStock(Request $request){
         $centerId = $request->input('centerId');
         $totalWashing = Stock::getTotalWashingSalt($centerId);
+        //$this->pr($totalWashing);
+        $reduceSalt = Stock::reduceSaltafterIodize($centerId);
+
+        $totalReduce = $totalWashing - abs($reduceSalt);
+
+        //$this->pr($totalReduce);
 
         if (!empty($totalWashing)){
             return response()->json([
-                'totalWashing' => $totalWashing
+                'totalWashing' => $totalReduce
             ]);
         }else{
             return response()->json([]);

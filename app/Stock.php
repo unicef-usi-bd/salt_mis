@@ -61,6 +61,17 @@ class Stock extends Model
 
     }
 
+    public static function reduceSaltafterIodize($centerId){
+        return DB::table('tmm_itemstock')
+            ->select(('tmm_itemstock.QTY'))
+            ->where('tmm_itemstock.TRAN_TYPE','=','I')
+            ->where('tmm_itemstock.TRAN_FLAG','=','II')
+//            ->orWhere('tmm_itemstock.TRAN_TYPE','=','I')
+//            ->orWhere('tmm_itemstock.TRAN_FLAG','=','WR')
+            ->where('tmm_itemstock.center_id','=',$centerId)
+            ->sum('tmm_itemstock.QTY');
+    }
+
     public static function getTotalReduceWashingSalt($centerId){
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
