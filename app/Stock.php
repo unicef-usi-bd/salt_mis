@@ -64,8 +64,8 @@ class Stock extends Model
     public static function reduceSaltafterIodize($centerId){
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
-            ->where('tmm_itemstock.TRAN_TYPE','=','I')
-            ->where('tmm_itemstock.TRAN_FLAG','=','II')
+            ->where('tmm_itemstock.TRAN_TYPE','=','W')
+            ->where('tmm_itemstock.TRAN_FLAG','=','WR')
 //            ->orWhere('tmm_itemstock.TRAN_TYPE','=','I')
 //            ->orWhere('tmm_itemstock.TRAN_FLAG','=','WR')
             ->where('tmm_itemstock.center_id','=',$centerId)
