@@ -112,7 +112,7 @@ class ChemicalPurchaseController extends Controller
         //$supplierName = ChemicalPurchase::getSupplierName();
         $supplierName = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
         $editChemicalpurchase = ChemicalPurchase::editChemicalPurchase($id);
-        $supplierNameBsti = SupplierProfile::supplierProfileBsti();
+        //$supplierNameBsti = SupplierProfile::supplierProfileBsti();
 
         return view('transactions.chemicalPurchase.modals.editChemicalPurchase',compact('chemicleType','supplierName','editChemicalpurchase','supplierNameBsti'));
     }
