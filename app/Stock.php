@@ -234,9 +234,26 @@ class Stock extends Model
         //$monthProduction = DB::table('tmm_itemstock')
     }
 
-    public static function yearWiseProduction(){
+    public static function millerYearWiseProduction(){
+        $centerId = Auth::user()->center_id;
+         $yearWiseProduction = DB::select(DB::raw(" select round(sum(it.QTY)) qty, MONTH(it.TRAN_DATE) month
+                                                    from tmm_itemstock it
+                                                    where it.TRAN_FLAG in('WI','II')
+                                                    and it.center_id = $centerId
+                                                    and YEAR(it.TRAN_DATE)"))[0];
+        return $yearWiseProduction;
+    }
+
+    public static function associationYearWiseProduction(){
         //$centerId = Auth::user()->center_id;
-         $yearWiseProduction = DB::select(DB::raw(" select MONTH(TRAN_DATE) month,ROUND(SUM( it.QTY)) as qty from tmm_itemstock it
+        $yearWiseProduction = DB::select(DB::raw(" select MONTH(TRAN_DATE) month,ROUND(SUM( it.QTY)) as qty from tmm_itemstock it
+                                         WHERE it.center_id   and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'and YEAR(TRAN_DATE)"))[0];
+        return $yearWiseProduction;
+    }
+
+    public static function adminYearWiseProduction(){
+        //$centerId = Auth::user()->center_id;
+        $yearWiseProduction = DB::select(DB::raw(" select MONTH(TRAN_DATE) month,ROUND(SUM( it.QTY)) as qty from tmm_itemstock it
                                          WHERE it.center_id   and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II'and YEAR(TRAN_DATE)"))[0];
         return $yearWiseProduction;
     }

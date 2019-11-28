@@ -85,7 +85,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
@@ -127,7 +127,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
@@ -168,7 +168,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
@@ -209,7 +209,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
@@ -253,7 +253,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalAssociationIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleAssociationDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::associationYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalAssociationProcurment();
         //dd($totalProcrument);
         $kiStock = ChemicalPurchase::kiAssociationInstock () ;
@@ -288,7 +288,7 @@ class DashboardController extends Controller
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
-        $totalYearProduction = Stock::yearWiseProduction();
+        $totalYearProduction = Stock::millerYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock();
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
