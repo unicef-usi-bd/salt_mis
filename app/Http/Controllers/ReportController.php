@@ -502,15 +502,21 @@ class ReportController extends Controller
     }
 
     public function getTotalMillerEmployee(){
-        $centerId = Auth::user()->center_id;
-        $employeeList = Report::hrMillerEmployee($centerId);
+        //$centerId = Auth::user()->center_id;
+        $millId = MillerInfo::millId();
+        $millId1 = (array)$millId;
+        $links = implode(' ', array_values($millId1));
+        $employeeList = Report::hrMillerEmployee($links);
         $view = view("reportView.hrEmployeemillerReport",compact('employeeList'))->render();
         return response()->json(['html'=>$view]);
     }
 
     public function getTotalMillerEmployeePdf(){
-        $centerId = Auth::user()->center_id;
-        $employeeList = Report::hrMillerEmployee($centerId);
+        //$centerId = Auth::user()->center_id;
+        $millId = MillerInfo::millId();
+        $millId1 = (array)$millId;
+        $links = implode(' ', array_values($millId1));
+        $employeeList = Report::hrMillerEmployee($links);
         $data = \View::make('reportPdf.hrEmployeemillerReportPdf',compact('employeeList'));
         $this->generatePdf($data);
     }

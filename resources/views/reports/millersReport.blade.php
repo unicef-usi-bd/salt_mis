@@ -41,9 +41,9 @@
                                    <optgroup label="QC">
                                        <option value="qc-miller">List of QC </option>
                                   </optgroup>
-                                   {{--<optgroup label="HR">--}}
-                                       {{--<option value="hr-employee-miller">List of HR </option>--}}
-                                  {{--</optgroup>--}}
+                                   <optgroup label="HR">
+                                       <option value="hr-employee-miller">List of HR </option>
+                                  </optgroup>
 
 
                                </select>
