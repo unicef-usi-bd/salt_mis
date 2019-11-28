@@ -19,7 +19,7 @@
             <tr>
                 <th>Sl.</th>
                 <th>Item Name</th>
-                <th>Total Purchase Amount</th>
+                <th> Total chemical in stock</th>
             </tr>
 
             </thead>

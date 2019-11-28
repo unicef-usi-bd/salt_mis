@@ -337,7 +337,7 @@ class Report extends Model
         return $chemicalItemList->get();
     }
 
-    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin){
+    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId){
         $chemicalItemList = DB::table("tmm_itemstock");
         $chemicalItemList->select('tmm_itemstock.*','smm_item.ITEM_NO','smm_item.ITEM_NAME','ssm_associationsetup.ASSOCIATION_NAME');
         $chemicalItemList->leftJoin('smm_item','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
@@ -348,8 +348,8 @@ class Report extends Model
         if($centerId){
             $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
         }
-        if($millTypeAdmin != 0){
-            $chemicalItemList->where('ssm_associationsetup.MILL_ID','=',$millTypeAdmin);
+        if($itemTypeId != 0){
+            $chemicalItemList->where('smm_item.ITEM_NO','=',$itemTypeId);
         }else{
             $chemicalItemList->whereBetween('tmm_itemstock.TRAN_DATE',[$starDate, $endDate]);
         }
@@ -428,7 +428,7 @@ class Report extends Model
                  WHERE     i.ITEM_NO = s.ITEM_NO
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 25
-                       AND s.ITEM_NO = 6
+                       AND s.ITEM_NO IN (5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
          
@@ -462,13 +462,13 @@ class Report extends Model
                  WHERE     i.ITEM_NO = s.ITEM_NO
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 25
-                       AND s.ITEM_NO = 6
+                       AND s.ITEM_NO IN (5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
          
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
-                   where  ass.MILL_ID = 559)
+                   where  ass.MILL_ID = $millTypeAdmin)
                    
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME ;"));
         }
@@ -561,7 +561,8 @@ class Report extends Model
                 t.QTY
                 FROM ssm_supplier_info s, tmm_itemstock t
                 WHERE s.SUPP_ID_AUTO = t.SUPP_ID_AUTO
-                AND t.TRAN_FLAG = 'PR' and t.center_id = $centerId $condition) a
+                AND t.TRAN_FLAG = 'PR' and t.center_id = $centerId $condition
+                AND s.SUPPLIER_TYPE_ID = 41) a
                 GROUP BY a.TRADING_NAME, a.supplier_type, a.DISTRICT_ID, a.DIVISION_ID, a.SUPPLIER_TYPE_ID, a.DISTRICT_NAME, a.DIVISION_NAME"));
         return $data;
     }

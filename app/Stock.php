@@ -180,7 +180,7 @@ class Stock extends Model
         $countProduction->select('tmm_itemstock.QTY');
         $countProduction->where('TRAN_TYPE','=','I');
         $countProduction->where('TRAN_FLAG','=','II');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','<',$date);
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
         if($centerId){
             $countProduction->where('center_id','=',$centerId);
         }
@@ -249,7 +249,7 @@ class Stock extends Model
                                        LEFT JOIN ssm_associationsetup ass ON ass.ASSOCIATION_ID = it.center_id
                                        WHERE it.center_id  and it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II' and ass.center_id = $centerId
                                        and YEAR(TRAN_DATE)
-                                       and TRAN_DATE <= $date
+                                       and TRAN_DATE >= $date
                                        GROUP BY month"));
     }
     /// ----------------------Production Graph
@@ -615,7 +615,7 @@ class Stock extends Model
         $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
 //        $countProduction->where('TRAN_TYPE','=','W');
         $countProduction->where('tmm_itemstock.TRAN_FLAG','=','II');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','<',$date);
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
         if($centerId){
             $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
         }
@@ -644,7 +644,7 @@ class Stock extends Model
         $totalIo->select('tmm_itemstock.QTY');
         $totalIo->where('tmm_itemstock.TRAN_TYPE','=','I');
         $totalIo->where('tmm_itemstock.TRAN_FLAG','=','II');
-        $totalIo->where('tmm_itemstock.TRAN_DATE','<',$date);
+        $totalIo->where('tmm_itemstock.TRAN_DATE','>',$date);
         if($centerId){
             $totalIo->where('tmm_itemstock.center_id','=',$centerId);
         }
@@ -670,7 +670,7 @@ class Stock extends Model
         $totalIo->select('tmm_itemstock.QTY');
         $totalIo->where('tmm_itemstock.TRAN_TYPE','=','I');
         $totalIo->where('tmm_itemstock.TRAN_FLAG','=','II');
-        $totalIo->where('tmm_itemstock.TRAN_DATE','<',$date);
+        $totalIo->where('tmm_itemstock.TRAN_DATE','>',$date);
 
         return $totalIo->sum('tmm_itemstock.QTY');
     }

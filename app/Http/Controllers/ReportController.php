@@ -290,12 +290,12 @@ class ReportController extends Controller
 
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        //$itemTypeId = $request->input('chemicalItemType');
-        $millTypeAdmin = $request->input('millTypeAdmin');
+        $itemTypeId = $request->input('chemicalItemType');
+        //$millTypeAdmin = $request->input('millTypeAdmin');
 
         //return $itemTypeId;
 
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId);
         //return $endDate;
         $view = view("reportView.purchaseChemical",compact('purchaseChemicals','starDate','endDate','itemTypeId','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);

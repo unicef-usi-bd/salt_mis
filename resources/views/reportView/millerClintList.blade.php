@@ -23,8 +23,8 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Supplier type</th>
-                <th>Supplier Name</th>
+                <th>seller type</th>
+                <th>seller name</th>
                 <th>Division</th>
                 <th>District</th>
                 <th>Total Volume</th>

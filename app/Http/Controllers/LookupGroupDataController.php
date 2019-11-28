@@ -127,11 +127,11 @@ class LookupGroupDataController extends Controller
     {
         $rules = array(
             'LOOKUPCHD_NAME' => 'required|max:60',
-            'UD_ID' => 'required|integer'
+            //'UD_ID' => 'required|integer'
         );
         $error = array(
             'LOOKUPCHD_NAME.required' =>'The Group Data Name field is required.',
-            'UD_ID.required' => 'The User Define Id field is required.',
+            //'UD_ID.required' => 'The User Define Id field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules,$error);

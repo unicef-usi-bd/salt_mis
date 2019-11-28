@@ -109,7 +109,7 @@
                     <th style="width: 255px;">Brand Name<span style="color: red;"></span> </th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
-                    <th style="width: 255px;">Quantity (KG)<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;">Quantity (PCS)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Total<span style="color:red;"> </span></th>
                     <th style="width: 255px;">Stock<span style="color:red;"> </span></th>
 
