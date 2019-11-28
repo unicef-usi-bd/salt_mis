@@ -13,6 +13,7 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\LookupGroup;
+use phpDocumentor\Reflection\Types\Null_;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -89,6 +90,12 @@ class CertificateController extends Controller
 
                     }
                 }
+                $renewingDate = $request->input('RENEWING_DATE')[$i];
+                if(empty($renewingDate)){
+                    $renewingDate = '';
+                }else{
+                    $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
+                }
                 $data[] = array(
                     'MILL_ID' => $request->input('MILL_ID'),
                     'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
@@ -98,7 +105,7 @@ class CertificateController extends Controller
                     'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                     //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
                     'TRADE_LICENSE' => $imagePath,
-                    'RENEWING_DATE' =>date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i])),
+                    'RENEWING_DATE' => $renewingDate,
                     'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
                     'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
                     'REMARKS' => $request->input('REMARKS')[$i],
