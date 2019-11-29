@@ -667,11 +667,11 @@ class Report extends Model
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type;"));
     }
 
-    public static function hrMillerEmployee ($centerId){
+    public static function hrMillerEmployee ($links){
         return DB::select(DB::raw("select sum(mi.TOTMALE_EMP + mi.TOTFEM_EMP)Total_Employee,sum(mi.FULLTIMEMALE_EMP + mi.FULLTIMEFEM_EMP)Full_time_total_employee,
                 sum(mi.PARTTIMEMALE_EMP + mi.PARTTIMEFEM_EMP)Parttime_total_employee, sum(mi.TOTMALETECH_PER + mi.TOTFEMTECH_PER)total_tech_employee 
                 from ssm_millemp_info mi
-                where mi.center_id = $centerId "));
+                where mi.MILL_ID = $links "));
     }
 
     public static function adminHrmillerEmployee(){
@@ -760,7 +760,7 @@ class Report extends Model
         (TOTMALETECH_PER+TOTFEMTECH_PER) tot_tech_person
         FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
         WHERE m.MILL_ID = d.MILL_ID
-        AND m.MILL_ID = a.MILL_ID) b, ssm_zonesetup z
+        AND m.MILL_ID = a.MILL_ID) b
        "));
         }else{
             return DB::select(DB::raw("SELECT b.*
@@ -773,7 +773,7 @@ class Report extends Model
         (TOTMALETECH_PER+TOTFEMTECH_PER) tot_tech_person
         FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
         WHERE m.MILL_ID = d.MILL_ID
-        AND m.MILL_ID = a.MILL_ID) b, ssm_zonesetup z
+        AND m.MILL_ID = a.MILL_ID) b
        where z.ZONE_ID = $zone"));
         }
 
