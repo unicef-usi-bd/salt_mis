@@ -639,7 +639,7 @@ class Report extends Model
     }
 
     public static function monitorClintMiller ($centerId){
-        return DB::select(DB::raw(" SELECT i.item_no, SUM(i.qty)QTY, ci.TRADER_NAME,lc.LOOKUPCHD_NAME
+        return DB::select(DB::raw(" SELECT i.item_no, i.QTY, ci.TRADER_NAME,lc.LOOKUPCHD_NAME
                 FROM tmm_itemstock i, tmm_salesmst sm
                 left join ssm_customer_info ci on ci.CUSTOMER_ID = sm.CUSTOMER_ID
                 left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.SELLER_TYPE_ID

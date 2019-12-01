@@ -15,7 +15,7 @@
                                        <option value="purchase-salt-list">List of Item </option>
                                        <option value="miller-purchase-salt-stock">purchase stock</option>
                                        <option value="monitor-salt-report">Monitor Supplier</option>
-                                       <option value="purchase-salt-amount">Total Purchase Stock</option>
+                                       <option value="purchase-salt-amount">Total Purchase Salt</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="purchase-salt-supplier-miller-type">List of Supplier </option>
