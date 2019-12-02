@@ -73,7 +73,8 @@ class ReportAssociation extends Model
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 26
                        AND s.TRAN_FLAG NOT IN ('WI', 'SD')
-                       AND s.TRAN_TYPE NOT IN ('S', 'C')) b
+                       -- AND s.TRAN_TYPE NOT IN ('S', 'C')
+                       ) b
          
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
