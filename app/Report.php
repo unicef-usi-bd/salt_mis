@@ -337,7 +337,7 @@ class Report extends Model
         return $chemicalItemList->get();
     }
 
-    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$itemTypeId){
+    public static function getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin){
         $chemicalItemList = DB::table("tmm_itemstock");
         $chemicalItemList->select('tmm_itemstock.*','smm_item.ITEM_NO','smm_item.ITEM_NAME','ssm_associationsetup.ASSOCIATION_NAME');
         $chemicalItemList->leftJoin('smm_item','tmm_itemstock.ITEM_NO','=','smm_item.ITEM_NO');
@@ -348,8 +348,8 @@ class Report extends Model
         if($centerId){
             $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
         }
-        if($itemTypeId != 0){
-            $chemicalItemList->where('smm_item.ITEM_NO','=',$itemTypeId);
+        if($millTypeAdmin != 0){
+            $chemicalItemList->where('ssm_associationsetup.MILL_ID','=',$millTypeAdmin);
         }else{
             $chemicalItemList->whereBetween('tmm_itemstock.TRAN_DATE',[$starDate, $endDate]);
         }
