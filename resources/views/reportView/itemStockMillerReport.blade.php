@@ -35,8 +35,8 @@
             @foreach($itemStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->ITEM_TYPE_NAME}}</td>
-                    <td>{{$row->ITEM_NAME}}</td>
+                    <td>{{$row->LOOKUPCHD_NAME}}</td>
+                    <td>{{$row->Process_Type}}</td>
                     <td>{{ abs($row->QTY) }}</td>
                 </tr>
 
