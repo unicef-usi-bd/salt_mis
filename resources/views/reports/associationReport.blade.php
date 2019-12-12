@@ -138,6 +138,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="">-Select-</option>
+                                   <option value="2">All</option>
                                    <option value="0">Wash And Crush</option>
                                    <option value="1">Iodized </option>
                                </select>
@@ -385,8 +386,8 @@
 
             $('.adminReportrangeDiv').hide();
             $('.itemTypeAdminDiv').hide();
-            $('.divisionIdDiv').hide();
-            $('.districtIdDiv').hide();
+            $('.divisionIdDiv').show();
+            $('.districtIdDiv').show();
             $('.processTypeDiv').show();
              $('.millerDiv').hide();
         }else if($reportUrl === 'sale-item-list'){

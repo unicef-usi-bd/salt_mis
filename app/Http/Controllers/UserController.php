@@ -142,9 +142,9 @@ class UserController extends Controller
                 $path = 'image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
-                $user_signature = "image/user_signature/$filename";
+                $user_signature = "image/user-signature/$filename";
             }else{
-                $user_signature = 'image/user_signature/defaultUserSignature.png';
+                $user_signature = 'image/user-signature/defaultUserSignature.png';
             }
 
 

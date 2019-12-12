@@ -229,11 +229,11 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
     }
     public function assocSale(Request $request){
-//        $divisionId = $request->input('divisionId');
-//        $districtId = $request->input('districtId');
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
 //  //$this->pr($districtId);
         $processType = $request->input('processType');
-        $assocSale = ReportAssociation::getAssocSale($processType);
+        $assocSale = ReportAssociation::getAssocSale($processType,$divisionId,$districtId);
         $view = view("reportAssociation.assocSaleReport",compact('assocSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
     }

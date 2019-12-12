@@ -132,20 +132,42 @@ class Report extends Model
     }
 
     public static function getItemStock($centerId,$itemType){
+//        dd($centerId, $itemType);
 
-        $purchaseSaltList = DB::table('ssc_lookupchd');
-        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
-        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
-        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
-        if($centerId){
-            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
-        }
-        if ($itemType != 0){
-            $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
-        }
-        return $purchaseSaltList->get();
+//        $purchaseSaltList = DB::table('ssc_lookupchd');
+//        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
+//        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
+//        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
+//        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
+//        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
+//        if($centerId){
+//            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
+//        }
+//        if ($itemType != 0){
+//            $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
+//        }
+//        return $purchaseSaltList->get();
+         if($itemType == 0){
+             return DB::select(DB::raw("select sum(i.QTY) QTY, m.ITEM_NAME, lc.LOOKUPCHD_NAME
+        from tmm_itemstock i
+        left join smm_item m on m.ITEM_NO = i.ITEM_NO
+        inner join ssc_lookupchd lc on lc.LOOKUPCHD_ID = m.ITEM_TYPE
+        where i.TRAN_TYPE = 'SP' 
+        and i.TRAN_FLAG = 'PR'
+        group by m.ITEM_NAME,QTY,lc.LOOKUPCHD_NAME"));
+         }else{
+             return DB::select(DB::raw("select sum(i.QTY) QTY, m.ITEM_NAME, lc.LOOKUPCHD_NAME
+        from tmm_itemstock i
+        left join smm_item m on m.ITEM_NO = i.ITEM_NO
+        inner join ssc_lookupchd lc on lc.LOOKUPCHD_ID = m.ITEM_TYPE
+        where i.TRAN_TYPE = 'SP' 
+        and i.TRAN_FLAG = 'PR'
+        and m.ITEM_NO = $itemType
+        group by m.ITEM_NAME,QTY,lc.LOOKUPCHD_NAME"));
+         }
+
+
+
     }
 
     public static function getStockSaltForAdmin(){

@@ -61,7 +61,7 @@
                     <th>{{ trans('user.signature') }}</th>
                     <th> :</th>
                     <td>
-                        <img src="{{ asset($userView->user_signature) }}" height="80px" width="90px">
+                        <img src="{{ asset('/'.$userView->user_signature) }}" height="80px" width="90px">
                     </td>
                 </tr>
                 <tr>
