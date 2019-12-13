@@ -24,11 +24,17 @@
     @foreach($MillerList as $sl =>  $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$row->mill_name}}</td>
+            <td>{{$row->MILL_NAME}}</td>
             <td>{{$row->BATCH_NO}}</td>
-            <td>{{$row->QC_BY}}</td>
-            <td>{{$row->AGENCY_NAME}}</td>
-            <td>{{$row->QC_TESTNAME}}</td>
+            <td>{{$row->quality_control_by}}</td>
+            <td>{{$row->agency_name}}</td>
+            <td>
+                @if($qualityControlResultRangeMiller->SODIUM_CHLORIDE_MAX >= $row->SODIUM_CHLORIDE && $qualityControlResultRangeMiller->SODIUM_CHLORIDE_MIN <= $row->SODIUM_CHLORIDE && $qualityControlResultRangeMiller->MOISTURIZER_MAX >= $row->MOISTURIZER && $qualityControlResultRangeMiller->MOISTURIZER_MIN <= $row->MOISTURIZER && $qualityControlResultRangeMiller->PPM_MAX >= $row->IODINE_CONTENT && $qualityControlResultRangeMiller->PPM_MIN <= $row->IODINE_CONTENT && $qualityControlResultRangeMiller->PH_MAX >= $row->PH && $qualityControlResultRangeMiller->PH_MIN <= $row->PH)
+                    <span >Pass</span>
+                @else
+                    <span>Fail</span>
+                @endif
+            </td>
         </tr>
     @endforeach
 

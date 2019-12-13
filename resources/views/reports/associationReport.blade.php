@@ -19,9 +19,9 @@
                                        <option value="purchase-chemical-total">Purchase</option>
                                        <option value="purchase-chemical-total-stock">Purchase Stock</option>
                                  </optgroup>
-                                   {{--<optgroup label="Process">--}}
-                                       {{--<option value="assoc-process-stock">Process  Stock</option>--}}
-                                   {{--</optgroup>--}}
+                                   <optgroup label="Process">
+                                       <option value="assoc-process-stock">Process  Stock</option>
+                                   </optgroup>
                                    <optgroup label="Sale">
                                        <option value="association-sale">Total Sale</option>
                                        <option value="sale-item-list">List of Item</option>

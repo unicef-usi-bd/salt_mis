@@ -245,16 +245,27 @@ class ReportAssociation extends Model
     }
     public static function getQcMillerList(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select mi.mill_name,i.BATCH_NO, lc.LOOKUPCHD_NAME as QC_BY, lch.LOOKUPCHD_NAME as AGENCY_NAME, ql.QC_TESTNAME
-          from tmm_qualitycontrol ql
-              left join ssm_associationsetup ass on ql.center_id = ass.ASSOCIATION_ID
-              left join ssm_mill_info mi on ass.MILL_ID = mi.MILL_ID
-              left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
-              left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
-              left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
-              where ql.center_id in (select ass.ASSOCIATION_ID
+//        return DB::select(DB::raw("select mi.mill_name,i.BATCH_NO, lc.LOOKUPCHD_NAME as QC_BY, lch.LOOKUPCHD_NAME as AGENCY_NAME, ql.QC_TESTNAME
+//          from tmm_qualitycontrol ql
+//              left join ssm_associationsetup ass on ql.center_id = ass.ASSOCIATION_ID
+//              left join ssm_mill_info mi on ass.MILL_ID = mi.MILL_ID
+//              left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
+//              left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
+//              left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
+//              where ql.center_id in (select ass.ASSOCIATION_ID
+//             from ssm_associationsetup ass
+//             where ass.PARENT_ID = '$centerId' ) "));
+        return DB::select(DB::raw(" select DISTINCT *, lc.LOOKUPCHD_NAME quality_control_by, lch.LOOKUPCHD_NAME agency_name,
+(select ASSOCIATION_NAME from ssm_associationsetup where ASSOCIATION_ID = ql.center_id) MILL_NAME
+from tmm_qualitycontrol ql
+left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ql.QC_BY
+left join ssc_lookupchd lch on lch.LOOKUPCHD_ID = ql.AGENCY_ID
+left join tmm_iodizedmst i on i.IODIZEDMST_ID = ql.BATCH_NO
+left join ssm_mill_info mi on mi.center_id = ql.center_id
+left join ssm_associationsetup ass on ass.ASSOCIATION_ID = ql.center_id
+where ql.center_id in(select ass.ASSOCIATION_ID
              from ssm_associationsetup ass
-             where ass.PARENT_ID = '$centerId' ) "));
+             where ass.PARENT_ID = $centerId)"));
 
     }
     public static function getLicenseMillerList($issueby,$renawlDate,$failDate){
@@ -276,7 +287,7 @@ class ReportAssociation extends Model
              left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
              where sc.center_id in (select ass.ASSOCIATION_ID
              from ssm_associationsetup ass
-             where ass.PARENT_ID = '$centerId' ) "));
+             where ass.PARENT_ID = '$centerId' ) group by it.ITEM_NAME "));
 
     }
     public static function getSaleItemStock(){

@@ -17,8 +17,10 @@ class Report extends Model
     }
 
     public static function getClintNameList(){
+        $centerId = Auth::user()->center_id;
         return DB::table('ssm_customer_info')
             ->select('ssm_customer_info.*')
+            ->where('ssm_customer_info.center_id','=',$centerId)
             ->get();
     }
 

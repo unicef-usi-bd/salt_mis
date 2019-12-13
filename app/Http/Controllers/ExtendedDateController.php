@@ -143,11 +143,17 @@ class ExtendedDateController extends Controller
             ->where('MILL_ID','=',$request->input('MILL_ID'))
             ->first();
 
-
+        $renewingDate = $request->input('renewing_date');
+        if(empty($renewingDate)){
+            $renewingDate = '';
+        }else{
+            $renewingDate = date('Y-m-d',strtotime($request->input('renewing_date')));
+        }
 
        if($associationId){
            $status = DB::table('users')->where('center_id',$associationId->ASSOCIATION_ID)->update([
-               'renewing_date' => date('Y-m-d', strtotime($request->input('renewing_date'))),
+//               'renewing_date' => date('Y-m-d', strtotime($request->input('renewing_date'))),
+               'renewing_date' => $renewingDate,
                'renewing_days' => $request->input('renewing_days')
            ]);
            if($status)

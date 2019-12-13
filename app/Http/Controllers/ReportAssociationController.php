@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Psy\Util\Json;
 use App\Item;
+use App\BstiTestResultRange;
 
 class ReportAssociationController extends Controller
 {
@@ -175,13 +176,15 @@ class ReportAssociationController extends Controller
     }
 // miller end
     public function getQcMillerList(){
+        $qualityControlResultRangeMiller = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
         $MillerList = ReportAssociation::getQcMillerList();
-        $view = view("reportAssociation.qcMillerListReport",compact('MillerList'))->render();
+        $view = view("reportAssociation.qcMillerListReport",compact('MillerList','qualityControlResultRangeMiller'))->render();
         return response()->json(['html'=>$view]);
     }
     public function getQcMillerListPdf(){
+        $qualityControlResultRangeMiller = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
         $MillerList = ReportAssociation::getQcMillerList();
-        $data = \View::make('reportAssociation.pdf.qcMillerListReportPdf',compact('MillerList'));
+        $data = \View::make('reportAssociation.pdf.qcMillerListReportPdf',compact('MillerList','qualityControlResultRangeMiller'));
         $this->generatePdf($data);
     }
     public function getLicenseMillerList(Request $request){
