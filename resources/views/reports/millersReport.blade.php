@@ -506,7 +506,7 @@
         }else if($reportUrl === 'clint-list-miller'){
             $('.statusAdminDiv').hide();
 
-            $('.adminReportrangeDiv').show();
+            $('.adminReportrangeDiv').hide();
 
             $('.itemTypeAdminDiv').hide();
 
