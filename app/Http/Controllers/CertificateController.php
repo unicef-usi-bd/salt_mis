@@ -260,6 +260,13 @@ class CertificateController extends Controller
                }
            }
 
+            $renewingDate = $request->input('RENEWING_DATE')[$i];
+            if(empty($renewingDate)){
+                $renewingDate = '';
+            }else{
+                $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
+            }
+
            $data = array(
                    'MILL_ID' => $millerInfoId,
                    'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
@@ -267,7 +274,7 @@ class CertificateController extends Controller
                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                    'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
                    'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
-                   'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
+                   'RENEWING_DATE' => $renewingDate,
                    'REMARKS' => $request->input('REMARKS')[$i],
                    'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
                    'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
@@ -380,6 +387,13 @@ class CertificateController extends Controller
                 }
             }
 
+            $renewingDate = $request->input('RENEWING_DATE')[$i];
+            if(empty($renewingDate)){
+                $renewingDate = '';
+            }else{
+                $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
+            }
+
             $data = array(
                 'MILL_ID' => $millerInfoId,
                 'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],
@@ -388,7 +402,7 @@ class CertificateController extends Controller
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                 'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
-                'RENEWING_DATE' => date('Y-m-d', strtotime($request->input('RENEWING_DATE')[$i])),
+                'RENEWING_DATE' => $renewingDate,
                 'REMARKS' => $request->input('REMARKS')[$i],
                 'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
                 'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],

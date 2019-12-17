@@ -14,6 +14,7 @@ class ExtendedDate extends Model
             ->select('ssm_mill_info.MILL_NAME','ssm_mill_info.MILL_ID','ssm_certificate_info.RENEWING_DATE')
             ->leftjoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
             ->where('ssm_certificate_info.RENEWING_DATE','<',$date)
+            ->where('ssm_certificate_info.CERTIFICATE_TYPE','=',1)
             ->groupBy('ssm_certificate_info.MILL_ID')
             ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
             ->get();

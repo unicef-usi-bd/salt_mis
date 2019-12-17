@@ -24,7 +24,7 @@
             <div class="form-group" style="margin-left: -35%">
                 <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-4">
-                    <input type="date" name="renewing_date"  class="expierDateId" value="{{date('Y-m-d',strtotime($millInfo->RENEWING_DATE))}}">
+                    <input type="date" name="renewing_date"  class="expierDateId" value="">
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                    <tr style="margin-left: 200%;">
                        <th>Renewing Date </th>
                        <th> :</th>
-                       <td class="renewalDate" style="background-color: red; max-width: 100px; font-weight: bolder; color: white;">{{date('d-m-Y',strtotime($millInfo->RENEWING_DATE))}}</td>
+                       <td class="renewalDate" style="background-color: red; max-width: 100px; font-weight: bolder; color: white;">{{$millInfo->RENEWING_DATE}}</td>
                    </tr>
                    <tr>
                        <th>Mill&nbsp;Name</th>

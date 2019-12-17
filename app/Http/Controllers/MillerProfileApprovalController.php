@@ -171,7 +171,7 @@ class MillerProfileApprovalController extends Controller
                     'ISSUING_DATE' => date('Y-m-d',strtotime($certificate->ISSUING_DATE)),
                     'CERTIFICATE_NO' => $certificate->CERTIFICATE_NO,
                     'TRADE_LICENSE' => $certificate->TRADE_LICENSE,
-                    'RENEWING_DATE' =>date('Y-m-d',strtotime( $certificate->RENEWING_DATE)),
+                    'RENEWING_DATE' => $certificate->RENEWING_DATE,
                     'CERTIFICATE_TYPE' =>  $certificate->CERTIFICATE_TYPE,
                     'IS_EXPIRE' =>  $certificate->IS_EXPIRE,
                     'REMARKS' =>  $certificate->REMARKS,

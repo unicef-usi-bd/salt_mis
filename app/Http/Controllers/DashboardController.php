@@ -308,14 +308,14 @@ class DashboardController extends Controller
             ->first();
 
         $millercertificateInfo = DB::table('ssm_certificate_info')//Certificate table Renewing date by Mil id
-            ->select('ssm_certificate_info.renewing_date')
+            ->select('ssm_certificate_info.RENEWING_DATE')
             ->where('ssm_certificate_info.MILL_ID','=',$millerId->MILL_ID)
-            ->orderBy('ssm_certificate_info.renewing_date','asc')
+            ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
             ->limit(1)
             ->first();
 
         if($millercertificateInfo) {
-            if (date('Y-m-d', strtotime($millercertificateInfo->renewing_date)) > date('Y-m-d', strtotime($renewingDateCheck->renewing_date))) {
+            if (date('Y-m-d', strtotime($millercertificateInfo->RENEWING_DATE)) > date('Y-m-d', strtotime($renewingDateCheck->renewing_date))) {
                 DB::table('users')->where('center_id', $center_id)->update([
                     'renewing_date' => date('Y-m-d', strtotime($millercertificateInfo->renewing_date)),
                 ]);
