@@ -42,13 +42,13 @@
       <div class="row">
           <div class="col-md-12">
               <div class="col-md-3">
-                  <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> </span> </label>
+                  <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;">*</span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
               </div>
               <div class="col-md-3">
-                  <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> </label>
+                  <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;">*</span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
@@ -277,9 +277,12 @@
             errorClass: "my-error-class",
             //validClass: "my-valid-class",
             rules: {
-//                TRADING_NAME:{
-//                  //required: true
-//                },
+                TRADING_NAME:{
+                  required: true
+                },
+                TRADER_NAME:{
+                  required:true
+                },
                 EMAIL:{
                     //required: true,
                     email: true,

@@ -82,10 +82,11 @@ protected $fillable = [
 
     public static function showSellerDistributorProfile($id){
         return DB::table('ssm_customer_info')
-            ->select('ssm_customer_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME')
+            ->select('ssm_customer_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_thana.THANA_NAME')
             ->leftjoin('ssc_divisions','ssm_customer_info.DIVISION_ID', '=', 'ssc_divisions.DIVISION_ID')
             ->leftjoin('ssc_districts','ssm_customer_info.DISTRICT_ID', '=', 'ssc_districts.DISTRICT_ID')
             ->leftjoin('ssc_upazilas','ssm_customer_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
+            ->leftjoin('ssc_thana','ssm_customer_info.THANA_ID', '=', 'ssc_thana.THANA_ID')
             ->leftjoin('ssc_unions','ssm_customer_info.UNION_ID', '=', 'ssc_unions.UNION_ID')
             ->where('CUSTOMER_ID', '=', $id)
             ->first();

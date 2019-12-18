@@ -39,7 +39,7 @@
                 <tr>
                     <th class=" ">Thana Name/Upazila</th>
                     <th> :</th>
-                    <td>{{ $viewSellerDistributor->UPAZILA_NAME }} </td>
+                    <td>{{ $viewSellerDistributor->THANA_NAME }} </td>
                 </tr>
                 <tr>
                     <th class=" ">Phone Number</th>
