@@ -27,21 +27,12 @@
 
             <tbody>
             <?php $sl=0;?>
-            {{--@foreach($purchaseChemicalStocks as $purchaseChemicalStock)--}}
-                {{--<tr>--}}
-                    {{--<td>{{ ++$sl }}</td>--}}
-                    {{--<td>{{$purchaseChemicalStock->LOOKUPCHD_NAME}}</td>--}}
-                    {{--<td>{{$purchaseChemicalStock->STOCK_QTY}}</td>--}}
-
-                {{--</tr>--}}
-            {{--@endforeach--}}
-            @foreach($purchaseTotalSaltStocks as $purchaseTotalSaltStock)
+            @foreach($purchaseTotalSaltStocks as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$purchaseTotalSaltStock->ASSOCIATION_NAME}}</td>
-                    <td>{{$purchaseTotalSaltStock->Process_Type}}</td>
-                    <td>{{$purchaseTotalSaltStock->QTY}}</td>
-
+                    <td>{{$row->ASSOCIATION_NAME}}</td>
+                    <td>{{$row->Process_Type}}</td>
+                    <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach
             </tbody>
