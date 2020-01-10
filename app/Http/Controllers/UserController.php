@@ -6,14 +6,15 @@ use App\CostCenter;
 use App\LookupGroupData;
 use App\UserGroup;
 use App\UserGroupLevel;
+use App\VerifyUser;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-//use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use App\User;
 use File;
@@ -81,8 +82,7 @@ class UserController extends Controller
         $rules = array(
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
-            //'email' => 'required|string|email|max:255|unique:users',
-            //'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
           //  'cost_center_id' => 'required',
             //'designation_id' => 'required',
@@ -148,7 +148,7 @@ class UserController extends Controller
             }
 
 
-            $data = array([
+            $data = array(
                 'user_full_name' => $request['user_full_name'],
                 'designation' => $request['designation'],
                 'username' => $request['username'],
@@ -158,13 +158,6 @@ class UserController extends Controller
                 'remarks' => $request->input('remarks'),
                 'user_group_id' => $request->input('user_group_id'),
                 'user_group_level_id' => $request->input('user_group_level_id'),
-              //  'cost_center_id' => $request->input('cost_center_id'),
-              //  'cost_center_type' => $costCenter->cost_center_type,
-              //  'designation_id' => $request->input('designation_id'),
-             //   'bank_id' => $request->input('bank_id'),
-              //  'branch_id' => $request->input('branch_id'),
-             //   'account_no' => $request->input('account_no'),
-             //  //'route_no' => $request->input('route_no'),
                 'address' => $request->input('address'),
                 'contact_no' => $request->input('contact_no'),
                 //'active_status' => $request->input('active_status'),
@@ -175,16 +168,20 @@ class UserController extends Controller
                 'user_signature' => $user_signature,
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
-            ]);
+            );
+//            $this->pr($data);
 
-            //$this->pr($data);
+            $userCreateId = User::insertData($data);
 
-            $userCreate = User::insertData($data);
-
-            if ($userCreate) {
+            if ($userCreateId) {
+                VerifyUser::create([
+                    'user_id' => $userCreateId,
+                    'token' => str_random(40)
+                ]);
                 //return response()->json(['success'=>'User Successfully Saved']);
                 return redirect('/users')->with('success', 'User Successfully Saved');
                //return json_encode('Success');
+                Mail::to($data->email)->send(new VerifyMail($data));
             }
         }
     }

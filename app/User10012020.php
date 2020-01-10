@@ -22,6 +22,11 @@ class User extends Authenticatable
         'username', 'email', 'password','org_id','emp_id','remarks','active_status','address','contact_no','designation_id'
     ];
 
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -30,11 +35,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function verifyUser()
-    {
-        return $this->hasOne('App\VerifyUser');
-    }
 
     public static function userDetails($id){
         return DB::table('users as u')
@@ -95,14 +95,13 @@ class User extends Authenticatable
           //  ->leftJoin('cost_center', 'users.cost_center_id', '=', 'cost_center.cost_center_id')
           //  ->leftJoin('cost_center_type', 'users.cost_center_type', '=', 'cost_center_type.cost_center_type_id')
          //   ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
-              ->leftJoin('ssm_associationsetup','users.center_id','=','ssm_associationsetup.ASSOCIATION_ID')
             ->where('id', '=', $id)
-            ->select('users.*','ssm_associationsetup.ASSOCIATION_NAME')
+            ->select('users.*')
             ->first();
     }
 
     public static function insertData($data){
-        return DB::table('users')->insert($data);
+        return DB::table('users')->insertGetId($data);
     }
 
     public static function editData($id){
