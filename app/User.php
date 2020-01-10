@@ -102,7 +102,7 @@ class User extends Authenticatable
     }
 
     public static function insertData($data){
-        return DB::table('users')->insert($data);
+        return DB::table('users')->insertGetId($data);
     }
 
     public static function editData($id){
