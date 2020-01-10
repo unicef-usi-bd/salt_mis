@@ -58,7 +58,7 @@
             <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Expirable Status</b><!-- <span style="color: red;"> *</span>  --></label>
             <div class="col-xs-12 col-sm-9">
                     <span class="checkbox">
-                        <label style="margin-left: 7px;"><input type="checkbox" name="IS_EXPIRE" id="IS_EXPIRE" value="1" class="checkbox_style">Expirable</label>
+                        <label style="margin-left: 7px;"><input type="checkbox"  name="IS_EXPIRE" id="IS_EXPIRE" value="1" class="checkbox_style">Expirable</label>
                         {{--<label style="margin-left: 7px;"><input type="checkbox" name="expire" id="expire" value="0" class="checkbox_style">Not Expirable</label>--}}
                     </span>
 

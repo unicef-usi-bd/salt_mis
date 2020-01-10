@@ -41,10 +41,10 @@
 
                 </tr>
                 <tr>
-                    <th>{{ trans('user.cost_center') }}</th>
+                    <th>Center</th>
                     <th> :</th>
                     <td>
-                        {{--{{$userView->cost_center_name}}--}}
+                        {{$userView->ASSOCIATION_NAME}}
                     </td>
                     <th>{{ trans('user.remark') }}</th>
                     <th> :</th>
