@@ -145,7 +145,7 @@ class ReportAssociation extends Model
                  WHERE     i.ITEM_NO = s.ITEM_NO
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 25
-                       AND s.ITEM_NO = 6
+                       AND s.ITEM_NO in(5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
          
@@ -180,7 +180,7 @@ class ReportAssociation extends Model
                  WHERE     i.ITEM_NO = s.ITEM_NO
                        AND c.LOOKUPCHD_ID = i.ITEM_TYPE
                        AND i.item_type = 25
-                       AND s.ITEM_NO = 6
+                       AND s.ITEM_NO IN (5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
          
@@ -290,16 +290,39 @@ where ql.center_id in(select ass.ASSOCIATION_ID
              where ass.PARENT_ID = '$centerId' ) group by it.ITEM_NAME "));
 
     }
-    public static function getSaleItemStock(){
-        $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE 
-             from tmm_saleschd sc
-             left join smm_item it on sc.ITEM_ID = it.ITEM_NO
-             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-             where sc.center_id in (select ass.ASSOCIATION_ID
-             from ssm_associationsetup ass
-             where ass.PARENT_ID = '$centerId' )
-             "));
+    public static function getSaleItemStock($centerId,$starDate,$endDate){
+
+//        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE
+//             from tmm_saleschd sc
+//             left join smm_item it on sc.ITEM_ID = it.ITEM_NO
+//             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
+//             where sc.center_id in (select ass.ASSOCIATION_ID
+//             from ssm_associationsetup ass
+//             where ass.PARENT_ID = '$centerId' )
+//             "));
+        return DB::select(DB::raw("select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+      case when st.TRAN_TYPE = 'W' then
+        'Wash Crash'
+      end Process_Type
+      from tmm_itemstock st 
+      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'W' and ai.center_id = $centerId and st.TRAN_FLAG IN ('WR','SD','WI')
+      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+      union
+      select i.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+      case when st.TRAN_TYPE = 'I' then
+        'Iodize'
+      end Process_Type
+      from tmm_itemstock st 
+      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+      where st.TRAN_TYPE = 'I' and ai.center_id = $centerId and st.TRAN_FLAG IN ('II','SD')
+      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
 
     }
 

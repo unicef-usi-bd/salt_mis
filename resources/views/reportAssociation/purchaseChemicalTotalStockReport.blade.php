@@ -31,7 +31,7 @@
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->LOOKUPCHD_NAME}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{$row->STOCK_QTY}}</td>
+                    <td>{{sprintf('%0.2f',$row->STOCK_QTY)}}</td>
                 </tr>
             @endforeach
             </tbody>

@@ -90,8 +90,9 @@ class User extends Authenticatable
           //  ->leftJoin('cost_center', 'users.cost_center_id', '=', 'cost_center.cost_center_id')
           //  ->leftJoin('cost_center_type', 'users.cost_center_type', '=', 'cost_center_type.cost_center_type_id')
          //   ->leftJoin('lookup_group_data', 'users.designation_id', '=', 'lookup_group_data.lookup_group_data_id')
+              ->leftJoin('ssm_associationsetup','users.center_id','=','ssm_associationsetup.ASSOCIATION_ID')
             ->where('id', '=', $id)
-            ->select('users.*')
+            ->select('users.*','ssm_associationsetup.ASSOCIATION_NAME')
             ->first();
     }
 

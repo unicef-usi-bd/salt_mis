@@ -211,8 +211,11 @@ class ReportAssociationController extends Controller
         $data = \View::make('reportAssociation.pdf.saleItemListReportPdf',compact('itemList'));
         $this->generatePdf($data);
     }
-    public function getSaleItemStock(){
-        $itemStock = ReportAssociation::getSaleItemStock();
+    public function getSaleItemStock(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $itemStock = ReportAssociation::getSaleItemStock($centerId,$starDate,$endDate);
         $view = view("reportAssociation.saleItemStockReport",compact('itemStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
