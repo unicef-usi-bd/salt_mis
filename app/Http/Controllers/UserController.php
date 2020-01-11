@@ -194,12 +194,13 @@ class UserController extends Controller
             $userCreateId = User::insertData($data);
 
             if ($userCreateId) {
+                $user = User::find($userCreateId);
                 VerifyUser::create([
                     'user_id' => $userCreateId,
                     'token' => str_random(40)
                 ]);
 
-                \Mail::to($data->email)->send(new VerifyMail($data));
+                \Mail::to($user->email)->send(new VerifyMail($user));
 
                 //return response()->json(['success'=>'User Successfully Saved']);
                 return redirect('/users')->with('success', 'User Successfully Saved');
