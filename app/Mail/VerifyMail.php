@@ -31,6 +31,6 @@ class VerifyMail extends Mailable
     public function build()
     {
         $data = $this->user;
-        return $this->view('emails.verifyUser', compact('data'));
+        return $this->view('emails.verify_user', compact('data'));
     }
 }

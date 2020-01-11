@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 use App\Bank;
 use App\CostCenter;
 use App\LookupGroupData;
+use App\Mail\VerifyMail;
 use App\UserGroup;
 use App\UserGroupLevel;
 use App\VerifyUser;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Mailable;
+
+use Illuminate\Support\Facades\Mail;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -53,7 +55,25 @@ class UserController extends Controller
 
         return view('setup.generalSetup.users.userIndex',compact( 'users','heading','previllage'));
     }
-    
+
+    public function verifyUser($token){
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if(isset($verifyUser) ){
+            $user = $verifyUser->user;
+            if(!$user->verified) {
+                $verifyUser->user->verified = 1;
+                $verifyUser->user->save();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+        }
+
+        return redirect('/login')->with('status', $status);
+    }
+
      /**
      * Show the form for creating a new resource.
      *
@@ -79,6 +99,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = array(
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
@@ -169,7 +190,6 @@ class UserController extends Controller
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
             );
-//            $this->pr($data);
 
             $userCreateId = User::insertData($data);
 
@@ -178,10 +198,12 @@ class UserController extends Controller
                     'user_id' => $userCreateId,
                     'token' => str_random(40)
                 ]);
+
+                \Mail::to($data->email)->send(new VerifyMail($data));
+
                 //return response()->json(['success'=>'User Successfully Saved']);
                 return redirect('/users')->with('success', 'User Successfully Saved');
                //return json_encode('Success');
-                Mail::to($data->email)->send(new VerifyMail($data));
             }
         }
     }

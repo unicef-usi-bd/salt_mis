@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/', 'DashboardController@index');
     Route::get('/dashboard', 'DashboardController@index')->name('admin');
     Route::resource('users', 'UserController'); //Rubiyat
+    Route::get('users/verify/{token}', 'UserController@verifyUser');
 
 
 
