@@ -56,10 +56,9 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'ati-erp@atilimited.net'),
         'name' => env('MAIL_FROM_NAME', 'Universal Salt Iodization Program'),
     ],
-
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

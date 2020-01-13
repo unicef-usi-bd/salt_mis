@@ -24,8 +24,6 @@ use Illuminate\Support\Facades\Route;
 use App\AssociationSetup;
 use Intervention\Image\ImageManagerStatic as Image;
 
-
-
 class UserController extends Controller
 {
     /**
@@ -61,8 +59,8 @@ class UserController extends Controller
         if(isset($verifyUser) ){
             $user = $verifyUser->user;
             if(!$user->verified) {
-                $verifyUser->user->verified = 1;
-                $verifyUser->user->save();
+                $verifyUser->verified = 1;
+                $verifyUser->save();
                 $status = "Your e-mail is verified. You can now login.";
             }else{
                 $status = "Your e-mail is already verified. You can now login.";
@@ -200,7 +198,7 @@ class UserController extends Controller
                     'token' => str_random(40)
                 ]);
 
-                \Mail::to($user->email)->send(new VerifyMail($user));
+                Mail::to($user->email)->send(new VerifyMail($user));
 
                 //return response()->json(['success'=>'User Successfully Saved']);
                 return redirect('/users')->with('success', 'User Successfully Saved');
