@@ -59,17 +59,17 @@ class UserController extends Controller
         if(isset($verifyUser) ){
             $user = $verifyUser->user;
             if(!$user->verified) {
-                $verifyUser->verified = 1;
-                $verifyUser->save();
+                $verifyUser->user->mail_verified = 1;
+                $verifyUser->user->save();
                 $status = "Your e-mail is verified. You can now login.";
             }else{
                 $status = "Your e-mail is already verified. You can now login.";
             }
         }else{
-            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+            return redirect('/')->with('warning', "Sorry your email cannot be identified.");
         }
 
-        return redirect('/login')->with('status', $status);
+        return redirect('/')->with('status', $status);
     }
 
      /**
