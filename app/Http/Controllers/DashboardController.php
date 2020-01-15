@@ -17,6 +17,18 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->mail_verified) {
+                return $next($request);
+            } else{
+                $message = "Your account not activated until now! For active check your Email \"".Auth::user()->email.'"';
+                Auth::logout();
+                return redirect()->route('login')->with('warning', $message);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -323,14 +335,12 @@ class DashboardController extends Controller
             if ($renewingDateCheck->renewing_date >= $date) {
                 return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument','totalStockKi'));
             } else {
-                Session::flush();
-                $worningMessage = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
-                return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+                $message = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
+                return redirect()->route('login')->with(['warning' => $message]);
             }
         }else{
-            Session::flush();
-            $worningMessage = "No Info Found. Please Contact With Your Association.!!!";
-            return redirect()->route('login')->with(['worningMessage' => $worningMessage]);
+            $message = "No Info Found. Please Contact With Your Association.!!!";
+            return redirect()->route('login')->with(['warning' => $message]);
         }
       }
 }

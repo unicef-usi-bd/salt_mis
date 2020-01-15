@@ -71,11 +71,9 @@
                                         {{--<img src="{{asset('/'.$orgInfo->org_logo)}}" class="img-responsive center-block">--}}
                                         <img src="{{asset('image/unicef-bd.jpg')}}" class="img-responsive center-block" style="border-radius: 50%;width: 100px;">
                                     </div>
-                                    @if($worningMessage !="")
-                                    <h4 class="header" style="color: red">
-                                        {{$worningMessage}}
-                                    </h4>
-                                    @endif
+                                    {{-- Custom alert message --}}
+                                    @include('includes.alert')
+                                    {{-- Custom alert message --}}
                                     <h4 class="header">
                                         @if (isset($errors) && count($errors) > 0)
                                             <i class="ace-icon fa fa-times-circle red"></i>

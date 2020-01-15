@@ -5,11 +5,15 @@
 </head>
 
 <body>
-<h2>Welcome to the site {{ $data->username }}</h2>
+<p>Mr/Mrs {{ $data->username }},</p>
+<h2>Welcome to the UNIVERSAL SALT IODIZATION PROGRAM</h2>
 <br/>
-Your registered email-id is {{ $data->email }} , Please click on the below link to verify your email account
+Your registered email is <sapn style="font-weight: bold">{{ $data->email }}</sapn> , Please click on the below link to verify your email account
 <br/>
-<a href="{{ url('users/verify', $data->verifyUser->token) }}">Verify Email</a>
+<a href="{{ url('users/verify', $data->verifyUser->token) }}"> confirm verification</a>
+<p>Thank you.</p>
+
+<p>Universal Salt Iodization Program </p>
 </body>
 
 </html>

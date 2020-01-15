@@ -34,6 +34,7 @@
                     <th>{{ trans('user.group_level') }}</th>
                     <th>{{ trans('user.email') }}</th>
                     <th>{{ trans('user.remark') }}</th>
+                    <th>{{ 'Email Verification' }}</th>
                     <th>{{ trans('user.status') }}</th>
                     <th width="50px">{{ trans('dashboard.action') }}</th>
                 </tr>
@@ -54,6 +55,13 @@
                             <td>{{$user->UGLEVE_NAME}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->remarks}}</td>
+                            <td>
+                                @if($user->mail_verified == 1)
+                                    <span class="label label-sm label-info">Verified</span>
+                                @else
+                                    <span class="label label-sm label-danger">Pending</span>
+                                @endif
+                            </td>
                             <td>
                                 @if($user->active_status == 1)
                                     <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
