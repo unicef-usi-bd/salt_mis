@@ -23,7 +23,7 @@ class DashboardController extends Controller
             if(Auth::user()->mail_verified) {
                 return $next($request);
             } else{
-                $message = "Your account not activated until now! For active check your Email \"".Auth::user()->email.'"';
+                $message = "Warning! Your account is not active yet, To activate check your Email \"".Auth::user()->email.'"';
                 Auth::logout();
                 return redirect()->route('login')->with('warning', $message);
             }
