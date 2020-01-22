@@ -44,6 +44,56 @@ class ServiceIodizeController extends Controller
         }
     }
 
+    public function getIodizeBatchDataNew(Request $request){
+
+        $millerId = $request->input('millerId');
+        $millInfo = DB::table('ssm_associationsetup')
+            ->select('ssm_associationsetup.ASSOCIATION_ID')
+            ->where('MILL_ID', '=', $millerId)
+            ->first();
+        $centerId = $millInfo->ASSOCIATION_ID;
+        $iodizeIndex = $this->getIodizeData($centerId);
+        $num = count($iodizeIndex);
+        $batch = 'I' . '-' . $millerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i"). '-' . sprintf("%'.04d", ++$num);
+
+        if (!empty($millerId)){
+            return response()->json([
+                'batch' => $batch
+            ]);
+        }else{
+            return response()->json([]);
+        }
+    }
+    public function getIodizeData($centerId){
+        return DB::table('tmm_iodizedmst')
+            ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY','tmm_iodizedchd.WASTAGE')
+            ->leftJoin('smm_item','tmm_iodizedmst.PRODUCT_ID', '=','smm_item.ITEM_NO')
+            ->leftJoin('tmm_iodizedchd','tmm_iodizedmst.IODIZEDMST_ID', '=','tmm_iodizedchd.IODIZEDMST_ID')
+            ->where('tmm_iodizedmst.center_id','=',$centerId)
+            ->get();
+    }
+    public function getWashCrushStockNew(Request $request){
+        $centerId = $request->input('centerId');
+        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
+
+        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+
+        if($afterSaleWashing){
+            $totalWashing = $WashingTotalUseInIodize - abs($afterSaleWashing);
+        }else{
+            $totalWashing = $WashingTotalUseInIodize;
+        }
+
+        if (!empty($totalWashing)){
+            return response()->json([
+                'totalWashing' => $totalWashing
+            ]);
+        }else{
+            return response()->json([]);
+        }
+    }
     public function getChemicalStock(Request $request){
         $chemicalId = $request->input('chemicalId');
         $centerId = $request->input('centerId');

@@ -87,6 +87,27 @@ class ChemicalPurchase extends Model
                                             AND s.TRAN_TYPE NOT IN ('W','I')) b
                                         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
     }
+    // for service issue fix new
+    public static function totalchemicalPurchaseTypeWiseNew($child_id){
+        return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME, SUM(b.purchase) purchase
+                                        FROM
+                                            (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
+                                            CASE WHEN s.TRAN_FLAG = 'IC' AND s.TRAN_TYPE = 'C' THEN
+                                                s.QTY
+                                            END reduce,
+                                        
+                                            CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'CP' THEN
+                                                s.QTY
+                                            END purchase,
+                                            s.TRAN_DATE, s.center_id
+                                            FROM smm_item i, tmm_itemstock s, ssc_lookupchd c
+                                            WHERE i.ITEM_NO = s.ITEM_NO
+                                            AND c.LOOKUPCHD_ID = i.ITEM_TYPE
+                                            AND i.item_type = 25
+                                            AND s.TRAN_FLAG NOT IN ('WR','II')
+                                            AND s.TRAN_TYPE NOT IN ('W','I')) b WHERE b.center_id='$child_id'
+                                        GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME"));
+    }
     //for service
 
     public static function insertChemicalPurchaseData($request){
