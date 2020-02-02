@@ -77,7 +77,7 @@
 
                                         <tbody>
                                             <?php $sl=0;?>
-                                            <?php $userGrpLvls = DB::table('sa_ug_level as ul')
+                                            <?php $userGrpLvls = DB::table('sa_ug_levels as ul')
                                                 ->select('ul.*','u.id')
                                                 ->leftjoin('users as u','u.user_group_level_id','=','ul.UG_LEVEL_ID')
                                                 ->where('ul.USERGRP_ID','=',$userGroup->USERGRP_ID)
