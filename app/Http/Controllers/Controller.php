@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use DB;
 use Auth;
+use Mockery\Exception;
 use Session;
 use View;
 use PDF;
@@ -62,8 +63,6 @@ class Controller extends BaseController
     //---------- association Id
     public $coxAssoId = 2;
 
-
-
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function checkPrevillage($userGroupId,$userGroupLevelId,$url)
@@ -96,6 +95,25 @@ class Controller extends BaseController
         };
         $tree = $treeBuilder($grouped[0]);
         return $tree;
+    }
+
+    /**
+     * Check date is expired ? false for already expired and true for not expired until now
+     * @parameter date
+     *
+     * @throws Exception None
+     * @author dev Coder <kartic@atilimited.net>
+     * @return true or false
+     */
+    protected function hasAuthorization($date){
+        $currentDate = date('Y-m-d');
+        $date = $this->dateFormat($date);
+        return $date >= $currentDate;
+    }
+
+    protected function dateFormat($date=null){
+        if(!empty($date)) $date = date('Y-m-d', strtotime($date));
+        return $date;
     }
 
     protected function pr($data){

@@ -81,11 +81,7 @@ class UserController extends Controller
     {
         $userGroups = UserGroup::getActiveData();
         $associationCenter = AssociationSetup::getAssociationCenterData();
-//        $this->pr($userGroups);
-        //$banks = Bank::getActiveBanks();
-//        $costCenters = CostCenter::getActiveCostCenter();
-//        $this->pr($costCenters);
-//        $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
+
         return view('setup.generalSetup.users.modals.createUser ',compact('costCenters','designations','banks', 'userGroups','associationCenter'));
     }
 
@@ -103,7 +99,6 @@ class UserController extends Controller
             'username' => 'required|string|unique:users|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-          //  'cost_center_id' => 'required',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
@@ -119,7 +114,6 @@ class UserController extends Controller
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
         }else {
-         //  $costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
             //for user image*************
             //$userImageName = 'defaultUserImage.png';
@@ -179,7 +173,7 @@ class UserController extends Controller
                 'user_group_level_id' => $request->input('user_group_level_id'),
                 'address' => $request->input('address'),
                 'contact_no' => $request->input('contact_no'),
-                //'active_status' => $request->input('active_status'),
+                'renewing_date' => date('Y-m-d'),
                 'active_status' => 1,
 //                'user_image' => 'image/user-image/'.$userImageName,
                 'user_image' => $user_image,
@@ -188,6 +182,8 @@ class UserController extends Controller
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
             );
+
+            dd($data);
 
             $userCreateId = User::insertData($data);
 
@@ -260,7 +256,7 @@ class UserController extends Controller
               //'cost_center_id' => 'required',
 //            'designation_id' => 'required',
              //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
-        );
+            );
         }else{
              $rules = array(
                  'user_full_name' =>'required|string|max:100',
@@ -273,26 +269,18 @@ class UserController extends Controller
                  'user_group_id' => 'required',
                  //'designation_id' => 'required',
                  //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
-        );
+            );
         }
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 6 character',
             'user_group_id.required' => 'The user group field is required.'
         );
         $validator = Validator::make(Input::all(), $rules, $error);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
-        }else {
-
-
-
-
-
+        } else {
             //for user image*************
             //$userImageName = 'defaultUserImage.png';
-
-
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
 
                 $image_path = $editUser->user_image;  // Value is not URL but directory file path
@@ -310,9 +298,6 @@ class UserController extends Controller
                 $user_image = 'image/user-image/defaultUserImage.png';
                 $user_image = $editUser->user_image;
             }
-
-
-
             //for user signature*************
             //$userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
@@ -334,12 +319,10 @@ class UserController extends Controller
             }
 
 //            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);
-            $userUpdate = User::updateData($request, $id,$user_image,$userSignatureName);
+            User::updateData($request, $id, $user_image, $userSignatureName);
 
         }
-
-            //session()->flash('message','User Successfully Updated');
-            //return json_encode('Success');
+        //session()->flash('message','User Successfully Updated');
         return redirect('/users')->with('success', 'User Successfully Updated');
 
     }

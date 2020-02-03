@@ -135,6 +135,7 @@ class User extends Authenticatable
 //            'account_no' => $request->input('account_no'),
             'address' => $request->input('address'),
             'contact_no' => $request->input('contact_no'),
+            'renewing_date' => date('Y-m-d'),
             'active_status' => $request->input('active_status'), 
             'user_image' => $user_image,
 //            'user_image' => 'image/user-image/'.$userImageName,
@@ -147,16 +148,10 @@ class User extends Authenticatable
         if($request['password'] != '')
         {
           $userUpdateData['password'] = Hash::make($request['password']);
-
         }
-         
-
-            
         
-         $update = DB::table('users')->where('id', '=' , $id)->update($userUpdateData);
-
+        $update = DB::table('users')->where('id', '=', $id)->update($userUpdateData);
         return $update;
-
     }
 
     public static function deleteData($id){
@@ -191,12 +186,16 @@ class User extends Authenticatable
 //        return $updateUserPassword;
 //    }
 
-     public static function getDuplicateEmail($email){
-      return DB::table('users')
-          ->select('users.email')
-          ->where('users.email','=',$email)
-          ->first();
-     }
+    public static function userInfoByCenterId($centerId=null){
+        if(empty($centerId)) $centerId = Auth::user()->center_id;
+        $data = DB::table('users')
+            ->where('users.center_id','=', $centerId)
+            ->first();
+        return $data;
+    }
 
+     public static function getDuplicateEmail($email){
+      return DB::table('users')->select('users.email')->where('users.email','=',$email)->first();
+     }
 
 }

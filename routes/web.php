@@ -24,11 +24,11 @@
 //    Route::get('/', 'DashboardController@index')->name('admin');
 //});
 
-
 //======================================================================================
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/home', 'DashboardController@index');
     Route::get('/', 'DashboardController@index');
     Route::get('/dashboard', 'DashboardController@index')->name('admin');
     Route::resource('users', 'UserController'); //Rubiyat
@@ -284,9 +284,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     //Millers Profile Approval System
     Route::resource('miller-profile-approval','MillerProfileApprovalController');//Rubiyat
-
-
-
 
 });
 

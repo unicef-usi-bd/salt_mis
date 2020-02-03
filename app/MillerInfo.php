@@ -92,14 +92,6 @@ class MillerInfo extends Model
             ->leftJoin('ssc_lookupchd','ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('MILL_ID','=',$millerInfoId)
             ->first();
-
-//        return DB::raw(DB::select("select `ssm_mill_info`.*, `ssc_districts`.DISTRICT_ID,`ssc_districts`.DISTRICT_NAME, `ssc_upazilas`.UPAZILA_ID,`ssc_upazilas`.UPAZILA_NAME,  `ssc_lookupchd`.*
-//                                        from `ssm_mill_info`
-//                                        left join `ssc_districts` on `ssm_mill_info`.`DISTRICT_ID` = `ssc_districts`.`DISTRICT_ID`
-//                                        left join `ssc_upazilas` on `ssc_upazilas`.`UPAZILA_ID` = `ssm_mill_info`.`UPAZILA_ID`
-//                                        left join `ssc_lookupchd` on `ssm_mill_info`.`OWNER_TYPE_ID` = `ssc_lookupchd`.`LOOKUPCHD_ID`
-//                                        where `MILL_ID`  = $millerInfoId "));
-
     }
 
     public static function updateMillData($request,$id,$associationId,$mill_logo){
@@ -345,7 +337,7 @@ class MillerInfo extends Model
 
     // for login web service
 
-    public static function millInformation($request,$id){
+    public static function millInformation($request, $id){
 
          $getMillInfo =  DB::table('ssm_mill_info')
                          ->select('ssm_mill_info.MILL_ID','ssm_mill_info.UD_MILL_ID','ssm_mill_info.MILL_NAME','ssm_mill_info.PROCESS_TYPE_ID','ssm_mill_info.MILL_TYPE_ID','ssm_mill_info.CAPACITY_ID','ssm_mill_info.ZONE_ID','ssm_mill_info.MILLERS_ID','ssm_mill_info.DIVISION_ID','ssm_mill_info.DISTRICT_ID','ssm_mill_info.UPAZILA_ID','ssm_mill_info.UNION_ID','ssm_mill_info.ACTIVE_FLG','ssm_mill_info.DESCRIPTION','ssm_mill_info.REMARKS','ssm_mill_info.ENTRY_BY','ssm_mill_info.ENTRY_TIMESTAMP','ssm_mill_info.UPDATE_BY','ssm_mill_info.UPDATE_TIMESTAMP','ssm_mill_info.BRANCH_NO','ssm_mill_info.COMPANY_NO','ssm_mill_info.REG_TYPE_ID','ssm_mill_info.OWNER_TYPE_ID','ssm_mill_info.center_id as parent_id','ssm_associationsetup.ASSOCIATION_ID as child_id','ssm_entrepreneur_info.MOBILE_1','ssm_entrepreneur_info.MOBILE_2','ssm_entrepreneur_info.EMAIL')
@@ -447,4 +439,14 @@ class MillerInfo extends Model
             ->select('ssm_mill_info.*')
             ->get();
     }
+
+    public static function millerInfoByCenterId($centerId=null){
+        if(empty($centerId)) $centerId = Auth::user()->center_id;
+        $data = DB::table('ssm_associationsetup')
+                ->select('ssm_associationsetup.MILL_ID')
+                ->where('ASSOCIATION_ID','=',$centerId)
+                ->first();
+        return $data;
+    }
+
 }

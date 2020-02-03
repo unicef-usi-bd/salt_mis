@@ -77,10 +77,11 @@
 
                                         <tbody>
                                             <?php $sl=0;?>
-                                            <?php $userGrpLvls = DB::table('sa_ug_levels as ul')
+                                            <?php $userGrpLvls = DB::table('sa_ug_level as ul')
                                                 ->select('ul.*','u.id')
                                                 ->leftjoin('users as u','u.user_group_level_id','=','ul.UG_LEVEL_ID')
                                                 ->where('ul.USERGRP_ID','=',$userGroup->USERGRP_ID)
+                                                ->groupBy(['ul.UG_LEVEL_ID', 'ul.POSITIONLEVEl'])
                                                 ->get(); ?>
                                             <?php foreach($userGrpLvls as $userGrpLvl){ ?>
                                             @if(($userGrpLvl->POSITIONLEVEl!=null && ($userGrpLvl->POSITIONLEVEl< Session::get('POSITIONLEVEl') )) || ($userGrpLvl->id==1 && Auth::user()->id != 1)  || ($userGrpLvl->USERGRP_ID!=null && ($userGrpLvl->USERGRP_ID< Session::get('USERGRP_ID'))))

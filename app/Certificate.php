@@ -32,6 +32,15 @@ class Certificate extends Model
          return $insert;
      }
 
+    public static function millerCertificateInfoByMillId($millerId){
+        $data = DB::table('ssm_certificate_info')
+            ->select('ssm_certificate_info.RENEWING_DATE')
+            ->where('ssm_certificate_info.MILL_ID','=', $millerId)
+            ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
+            ->first();
+        return $data;
+    }
+
     public static function getCertificateData($millerInfoId){
         return DB::table('ssm_certificate_info')
             ->select('ssm_certificate_info.*')
@@ -49,10 +58,12 @@ class Certificate extends Model
     }
 
     public static function getAllCertificate($millerId){
-        return DB::select(DB::raw("select sci.*,slc1.LOOKUPCHD_NAME as certificate_type,slc2.LOOKUPCHD_NAME as issuer_name from ssm_certificate_info sci
-left join ssc_lookupchd slc1 on slc1.LOOKUPCHD_ID = sci.CERTIFICATE_TYPE_ID
-left join ssc_lookupchd slc2 on slc2.LOOKUPCHD_ID = sci.ISSURE_ID
-where sci.MILL_ID = $millerId"));
+        $data = DB::select(DB::raw("select sci.*,slc1.LOOKUPCHD_NAME as certificate_type,slc2.LOOKUPCHD_NAME as issuer_name from ssm_certificate_info sci
+                left join ssc_lookupchd slc1 on slc1.LOOKUPCHD_ID = sci.CERTIFICATE_TYPE_ID
+                left join ssc_lookupchd slc2 on slc2.LOOKUPCHD_ID = sci.ISSURE_ID
+                where sci.MILL_ID = $millerId"));
+
+        return $data;
     }
     public static function updateMillCertificateData($request,$id){
         $certificateId = DB::table('ssm_certificate_info')->where('MILL_ID', $id)->delete();
@@ -97,22 +108,13 @@ where sci.MILL_ID = $millerId"));
 
 
 
-    public static function certificateRenewalMessage($links){
-
-//        return DB::select(DB::raw("SELECT MILL_ID, CERTIFICATE_TYPE_ID,RENEWING_DATE,  DATEDIFF(RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME
-//            FROM ssm_certificate_info
-//            left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ssm_certificate_info.CERTIFICATE_TYPE_ID
-//            WHERE MILL_ID = $links
-//            AND CERTIFICATE_TYPE_ID IN (34,39)
-//            and lc.LOOKUPCHD_ID IN (34,39)
-//            AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30"));
-
+    public static function certificateRenewalMessage($millsId=589){
         return DB::select(DB::raw("select c.CERTIFICATE_NAME,ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
-            from ssm_certificate_info ci
+            from ssm_certificate_infos ci
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-            where ci.MILL_ID = $links and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
+            where ci.MILL_ID = $millsId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
             -- and ci.RENEWING_DATE 
             AND ci.RENEWING_DATE >=90 AND ci.RENEWING_DATE >=60 AND ci.RENEWING_DATE >=30
             order By ci.RENEWING_DATE asc;"));
@@ -121,15 +123,6 @@ where sci.MILL_ID = $millerId"));
 
     public static function associatonCertificate(){
         $centerId = Auth::user()->center_id;
-
-//        return DB::select(DB::raw("SELECT c.MILL_ID, c.CERTIFICATE_TYPE_ID,c.RENEWING_DATE,  DATEDIFF(c.RENEWING_DATE, NOW()) RENEW_DAY,lc.LOOKUPCHD_NAME, ass.center_id, ass.ASSOCIATION_NAME
-//            FROM ssm_certificate_info c
-//            left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = c.CERTIFICATE_TYPE_ID
-//            left join ssm_associationsetup ass on ass.MILL_ID = c.MILL_ID
-//            WHERE ass.center_id = $centerId
-//            AND CERTIFICATE_TYPE_ID IN (34,39)
-//            and lc.LOOKUPCHD_ID IN (34,39)
-//            AND RENEWING_DATE >=90 AND RENEWING_DATE >=60 AND RENEWING_DATE >=30;"));
         return DB::select(DB::raw("select c.CERTIFICATE_NAME, DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, mi.MILL_NAME, mi.mill_logo,ci.RENEWING_DATE
             from ssm_certificate_info ci
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
