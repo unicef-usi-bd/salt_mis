@@ -1,95 +1,102 @@
 <div class="col-md-12">
-
-
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-
-
     <form id="myform" action="{{ url('/sales-distribution') }}" method="post" class="form-horizontal" role="form">
 
-            @csrf
-            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> *</span></label>
-                    <div class="col-sm-8">
+        @csrf
+        {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller
+                        Type</b><span style="color: red;"> *</span></label>
+                <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE" name="SELLER_TYPE" data-placeholder="Select Seller Type">
+                <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE"
+                        name="SELLER_TYPE" data-placeholder="Select Seller Type">
                    <option value="">--Select One--</option>
                     @foreach($sellerType as $seller)
-                        <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
+                        <option value="{{$seller->LOOKUPCHD_ID}}"
+                                @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
                     @endforeach
                 </select>
             </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="inputSuccess SALES_DATE" readonly placeholder=" " name="SALES_DATE" class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>
-                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading Name</b><span style="color: red;"> *</span></label>
-                    <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID" name="CUSTOMER_ID" data-placeholder="Select Trading Name">
-                    @foreach($traderName as $row)
-                        <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
-                    @endforeach
-                </select>
-            </span>
-                    </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span
+                            style="color: red;"> </span> </label>
+                <div class="col-sm-8">
+                    <input type="text" id="inputSuccess SALES_DATE" readonly placeholder=" " name="SALES_DATE"
+                           class="form-control col-xs-10 col-sm-5 date-picker" value="{{date('m/d/Y')}}"/>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading
+                        Name</b><span style="color: red;"> *</span></label>
+                <div class="col-sm-8">
+                        <span class="block input-icon input-icon-right">
+                            <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID"
+                                    name="CUSTOMER_ID" data-placeholder="Select Trading Name">
+                                @foreach($traderName as $row)
+                                    <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                </div>
+            </div>
+        </div>
         <div class="col-md-12" style="margin-top: 15px;">
-            <h4  style="color: #1B6AAA;">Transport Details</h4>
+            <h4 style="color: #1B6AAA;">Transport Details</h4>
             <hr>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span
+                                style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here" name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here"
+                               name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle License</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle
+                            License</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here" name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here"
+                               name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile
+                            Number</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here" name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here"
+                               name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving licence</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving
+                            licence</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here"
+                               name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport rent</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport
+                            rent</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here"
+                               name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span
+                                style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-10 col-sm-5" /></textarea>
+                        <textarea rows="3" placeholder="Example: Remarks here" name="REMARKS"
+                                  class="form-control col-xs-10 col-sm-5"/></textarea>
                     </div>
                 </div>
             </div>
@@ -100,20 +107,21 @@
             <div class="alert alert-danger alert-dismissible msg" style="display: none;">
 
             </div>
-            <h4  style="color: #1B6AAA;"></h4>
+            <h4 style="color: #1B6AAA;"></h4>
             <hr>
             <table class="table table-bordered fundAllocation">
                 <thead>
                 <tr>
                     <th style="width: 255px;">Salt Type<span style="color:red;"> *</span></th>
-                    <th style="width: 255px;">Brand Name<span style="color: red;"></span> </th>
+                    <th style="width: 255px;">Brand Name<span style="color: red;"></span></th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
                     <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Quantity (PCS)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Total<span style="color:red;"> </span></th>
                     <th style="width: 255px;">Stock<span style="color:red;"> </span></th>
 
-                    <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                    <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i
+                                    class="fa fa-plus"></i></span></th>
                 </tr>
                 </thead>
                 <tbody class="newRow">
@@ -123,7 +131,8 @@
                                     <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
                                         <option value="">Select</option>
                                         @foreach($saltId as $row)
-                                            <option value="{{$row->ITEM_NO}}" @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
+                                            <option value="{{$row->ITEM_NO}}"
+                                                    @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
                                         @endforeach
                                     </select>
                                 </span>
@@ -148,22 +157,25 @@
                             @endforeach
                          </select>
                     </span>
-                        <input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack" value=""/>
+                        <input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack"
+                               value=""/>
                         {{--<input type="text" class="packSize" value="{{$pckSize->DESCRIPTION}}">--}}
                     </td>
                     {{--<td>--}}
-                        {{--<input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack" value=""/>--}}
+                    {{--<input type="hidden" placeholder=" " name="packNo" class="form-control col-xs-10 col-sm-5 pack" value=""/>--}}
                     {{--</td>--}}
                     <td>
                         <span class="block input-icon input-icon-right">
 
-                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value=""/>
+                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]"
+                                       class="form-control col-xs-10 col-sm-5 crudeSaltAmount" onkeypress="return numbersOnly(this, event)" value=""/>
 
                         </span>
                     </td>
                     <td>
                         <span class="block input-icon input-icon-right">
-                            <input type="text" placeholder="" name="total" readonly class="form-control col-xs-10 col-sm-5 totalQty" value=""/>
+                            <input type="text" placeholder="" name="total" readonly
+                                   class="form-control col-xs-10 col-sm-5 totalQty" value=""/>
                         </span>
                     </td>
 
@@ -171,13 +183,16 @@
                         <span class="block input-icon input-icon-right" style="width: 155px;">
 
                                 {{--<input type="text" id="inputSuccess " placeholder=" " name="" class="form-control col-xs-10 col-sm-5" value="" readonly="readonly"/>--}}
-                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockWashCrash hidden">{{ $iodizeStock }}</span><span class="result">{{ $iodizeStock }}</span>KG)</span>
+                            <span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span
+                                        class="stockWashCrash hidden">{{ $iodizeStock }}</span><span
+                                        class="result">{{ $iodizeStock }}</span>KG)</span>
                             {{--<span class="col-sm-12" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockIodize"></span><span class="result"></span>)</span>--}}
 
                         </span>
                     </td>
 
-                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                    <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -204,15 +219,15 @@
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
 @include('masterGlobal.datePicker')
-{{--@include('masterGlobal.formValidation')--}}
+@include('masterGlobal.formValidation')
 <script>
     //    Add For Multiple Row Dynamically
-    $(document).ready(function(){
-        $('.rowAdd').click(function(){
+    $(document).ready(function () {
+        $('.rowAdd').click(function () {
             var getTr = $('tr.rowFirst:first');
             //alert(getTr.html());
             $("select.chosen-select").chosen('destroy');
-            $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            $('tbody.newRow').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
             var defaultRow = $('tr.removableRow:last');
             defaultRow.find('.result').text('');
             defaultRow.find('.stockWashCrash').text('');
@@ -225,27 +240,27 @@
     });
 
 
-//for showing amount of salt in database using on change
+    //for showing amount of salt in database using on change
     $('.stockWashCrash').hide();
     //$('.stockIodize').hide();
-    $(document).on('change','.saltType',function(){
+    $(document).on('change', '.saltType', function () {
 //        $('.defaultStock').text('');
         var thisRow = $(this).closest('tr');
         var saltTypeId = thisRow.find('.saltType').val();
         var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
         var centerId = '<?php echo Auth::user()->center_id; ?>';
         var $iodizeId = '<?php echo $iodizeId; ?>';
-       // alert($washAndCrushId);
+        // alert($washAndCrushId);
 
-        if(saltTypeId == $washAndCrushId){
+        if (saltTypeId == $washAndCrushId) {
             $.ajax({
-                type : 'GET',
-                url : 'washing-crashing-stock',
-                data : {'centerId':centerId},
+                type: 'GET',
+                url: 'washing-crashing-stock',
+                data: {'centerId': centerId},
                 success: function (data) {
                     thisRow.find('.crudeSaltAmount').val('');
-                  //  console.log(data);
-                   var data = JSON.parse(data);
+                    //  console.log(data);
+                    var data = JSON.parse(data);
                     //$('.stockWashCrash').html(data).show();
                     thisRow.find('.stockWashCrash').html(data).show();
                     thisRow.find('.result').html(data);
@@ -253,11 +268,11 @@
                 }
             })
         }
-        if(saltTypeId == $iodizeId){
+        if (saltTypeId == $iodizeId) {
             $.ajax({
-                type : 'GET',
-                url : 'iodize-stock',
-                data : {'centerId':centerId},
+                type: 'GET',
+                url: 'iodize-stock',
+                data: {'centerId': centerId},
                 success: function (data) {
                     thisRow.find('.crudeSaltAmount').val('');
                     var data = JSON.parse(data);
@@ -270,34 +285,23 @@
 
     });
 
-    $(document).on('change','.packType',function () {
+    $(document).on('change', '.packType', function () {
         $('.pack_Id').text('');
         var packId = $(this).val();
-//        var option = '<option value="">Select pack</option>';
-//        var option = $('.pack_Id').text();
-        //alert(packId);
         $.ajax({
-            type:'GET',
-            url:'get-packsize',
-            data:{'packId':packId},
+            type: 'GET',
+            url: 'get-packsize',
+            data: {'packId': packId},
             success: function (data) {
                 var data = JSON.parse(data);
                 $('.pack').val(data.DESCRIPTION);
                 console.log(data);
-                //$('.pack_Id').show();
-//                $('.packSize').html(data).show();
-//                for (var i = 0; i < data.length; i++){
-//                    option = option + '<option value="'+ data[i].DESCRIPTION +'">'+ data[i].DESCRIPTION+'</option>';
-//                }
-//                $('.pack_Id').text(option);
-//                //$('.pack_Id').html(data.DESCRIPTION);
-//                $('.pack_Id').trigger("chosen:updated");
 
             }
         });
     });
 
-    $(document).on('keyup','.crudeSaltAmount',function () {
+    $(document).on('keyup', '.crudeSaltAmount', function () {
         var amount = parseInt($(this).val()) || 0;
         var packId = $('.pack').val();
         var result = amount * packId;
@@ -305,99 +309,38 @@
         var saltStock = $('.stockWashCrash').text();
         var remainStock = saltStock - result;
 
-        if(saltStock < result){
+        if (saltStock < result) {
             $('.stockWashCrash').hide();
             $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Stock Out Of bound.').fadeIn();
             $('.crudeSaltAmount').val('');
             $('.totalQty').val('');
             $('.result').text(0);
-            if(result === 0){
+            if (result === 0) {
                 $('.stockWashCrash').show();
             }
-        }else{
+        } else {
             $('.stockWashCrash').hide();
             $('.result').text(remainStock);
         }
     });
 
 
-
-    $(document).on("change",".SELLER_TYPE",function(){
+    $(document).on("change", ".SELLER_TYPE", function () {
         var sellerTypeId = $(this).val();
         var option = '<option value="">Select Trading Name</option>';
         $.ajax({
-            type : 'GET',
-            url : 'trading-list',
-            data : {'sellerTypeId':sellerTypeId},
+            type: 'GET',
+            url: 'trading-list',
+            data: {'sellerTypeId': sellerTypeId},
             success: function (data) {
 //                var data = JSON.parse(data);
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].CUSTOMER_ID +'">'+ data[i].TRADER_NAME+'</option>';
+                for (var i = 0; i < data.length; i++) {
+                    option = option + '<option value="' + data[i].CUSTOMER_ID + '">' + data[i].TRADER_NAME + '</option>';
                 }
-
                 $('.CUSTOMER_ID').html(option);
                 $('.CUSTOMER_ID').trigger("chosen:updated");
             }
         })
-    });
-
-    $(document).ready(function () {
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                SELLER_TYPE: {
-                    required: true,
-                },
-                CUSTOMER_ID: {
-                    required: true,
-                },
-                SALES_DATE:{
-                    required: true,
-                },
-                DRIVER_NAME:{
-                    required: true,
-                },
-                VEHICLE_LICENSE:{
-                    required: true,
-                },
-                VEHICLE_NO:{
-                    required: true,
-                },
-                TRANSPORT_NAME:{
-                    required: true,
-                },
-                MOBILE_NO:{
-                    required: true,
-                    maxlength:11,
-                    minlength:11,
-                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
-                },
-                "ITEM_ID[]":{
-                    required: true,
-                },
-                "PACK_TYPE[]":{
-                    required: true,
-                },
-                "PACK_QTY[]":{
-                    required: true,
-                }
-            }
-        });
-
     });
 </script>
 

@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
+                        <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >ltr</i>
                 </div>
@@ -82,8 +82,8 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-
-{{--@include('masterGlobal.formValidation')--}}
+@include('masterGlobal.ajaxFormSubmit')
+@include('masterGlobal.formValidation')
 
 
 

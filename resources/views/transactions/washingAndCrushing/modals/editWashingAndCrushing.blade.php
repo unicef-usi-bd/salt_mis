@@ -43,7 +43,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" value="{{ ($editWashingAndCrushingData->REQ_QTY*100)/(100-$editWashingAndCrushingData->WASTAGE)  }}"/>
+                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" onkeypress="return numbersOnly(this, event)" value="{{ ($editWashingAndCrushingData->REQ_QTY*100)/(100-$editWashingAndCrushingData->WASTAGE)  }}"/>
                 </span>
 
                 <span class="col-sm-6 stockInfo" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt ">{{ $totalStock }}</span><span class="result"></span>)</span>
@@ -52,7 +52,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <span class="col-sm-7">
-                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value="{{ $editWashingAndCrushingData->WASTAGE }}"/>
+                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editWashingAndCrushingData->WASTAGE }}"/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -85,6 +85,7 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
+@include('masterGlobal.formValidation')
 <script>
 $(document).ready(function () {
 //        $('.stockInfo').addClass('hidden');

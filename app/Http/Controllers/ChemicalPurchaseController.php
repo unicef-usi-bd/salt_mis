@@ -28,6 +28,7 @@ class ChemicalPurchaseController extends Controller
         $url = Route::getFacadeRoot()->current()->uri();
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+
         $heading=array(
             'title'=>'Chemical Purchase',
             'library'=>'datatable',
@@ -50,8 +51,6 @@ class ChemicalPurchaseController extends Controller
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $supplierName = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
         $defultSupplier = SupplierProfile::defultSupplierProfile($this->chemicalSupplierTypeId);
-//        $supplierNameBscic = SupplierProfile::supplierProfileBscic();
-        //$this->pr($supplierName);
         return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName','supplierNameBscic','defultSupplier'));
     }
 

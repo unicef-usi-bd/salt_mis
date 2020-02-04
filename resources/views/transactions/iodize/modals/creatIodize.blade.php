@@ -31,7 +31,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" value=""/>
+                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" onkeypress="numbersOnly(this, event)" value=""/>
                 </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }} KG</span><span class="result"></span>)</span>
             </div>
@@ -54,7 +54,7 @@
 
             <div class="col-sm-8">
                     <span class="col-sm-6" style="padding: 0;">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" value=""/>
+                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                     </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical hidden"></span><span class="resultChemical"></span> ltr)</span>
 
@@ -64,7 +64,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <div class="col-sm-7">
-                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value=""/>
 
             </div>
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
@@ -93,8 +93,8 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
+@include('masterGlobal.formValidation')
 
-{{--@include('masterGlobal.formValidation')--}}
 <script>
     //$('.chemicalAmount').attr('readonly', true);
     $(document).on('change','.chemical',function(){
@@ -138,7 +138,7 @@
 
                     if(chemicalStock < amount){
                         $('.stockChemical').hide();
-                        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Chemical Stock Out Of bound.').fadeIn();
+                        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Chemical Stock Out Of bound.').fadeIn();
                         $('.resultChemical').text(0);
                         if(amount === 0){
                             $('.stockChemical').show();
@@ -153,14 +153,14 @@
 
     });
 
-    $(document).on('keyup','.saltAmount',function () {
+    $(document).on('change','.saltAmount',function () {
         var amount = parseInt($(this).val()) || 0;
         var saltStock = parseInt($('.stockSalt').text());
         var remainStock = saltStock - amount;
 
         if(saltStock < amount){
             $('.stockSalt').hide();
-            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>Washing Salt Stock Out Of bound.').fadeIn();
+            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Washing Salt Stock Out Of bound.').fadeIn();
             $('.saltAmount').val('');
             $('.result').text(0);
             if(amount === 0){
@@ -171,35 +171,8 @@
             $('.result').text(remainStock);
         }
     });
-
-    $(document).ready(function () {
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                PRODUCT_ID:{
-                    required: true,
-                },
-                REQ_QTY:{
-                    required: true,
-                },
-            }
-        });
-
-    });
 </script>
+
+
 
 
