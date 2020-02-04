@@ -183,7 +183,7 @@ class UserController extends Controller
                 'create_by' => Auth::user()->id
             );
 
-            dd($data);
+//            dd($data);
 
             $userCreateId = User::insertData($data);
 

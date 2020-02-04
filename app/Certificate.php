@@ -108,9 +108,9 @@ class Certificate extends Model
 
 
 
-    public static function certificateRenewalMessage($millsId=589){
+    public static function certificateRenewalMessage($millsId){
         return DB::select(DB::raw("select c.CERTIFICATE_NAME,ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
-            from ssm_certificate_infos ci
+            from ssm_certificate_info ci
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID

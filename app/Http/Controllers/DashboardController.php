@@ -297,7 +297,6 @@ class DashboardController extends Controller
         $arrayMillsId = (array)$millId;
         $millsId = implode(' ', array_values($arrayMillsId));
         $renewalMessageCertificate = Certificate::certificateRenewalMessage($millsId);
-        //dd($renewalMessageCertificate);
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
