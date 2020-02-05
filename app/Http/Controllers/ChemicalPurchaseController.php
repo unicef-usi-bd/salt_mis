@@ -63,26 +63,22 @@ class ChemicalPurchaseController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'RCV_QTY' => 'required',
-
-
+            'RCV_QTY' => 'required'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
+        $error = array(
+            'RCV_QTY.required' => 'The receive quantity field is required.',
+        );
 
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            //$this->pr($request->input());
-            $chemicalePurchase = ChemicalPurchase::insertChemicalPurchaseData($request);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($chemicalePurchase){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/chemical-purchase')->with('success', 'Chemical Purchase Has been Created !');
-            }
+        //$this->pr($request->input());
+        $chemicalPurchase = ChemicalPurchase::insertChemicalPurchaseData($request);
+
+        if($chemicalPurchase){
+            return response()->json(['success'=>'Chemical purchase has been created']);
         }
     }
 
@@ -130,21 +126,18 @@ class ChemicalPurchaseController extends Controller
 
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        } else {
+        $error = array(
+            'RCV_QTY.required' => 'The receive quantity field is required.',
+        );
 
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            $chemicalPurchesupdate = ChemicalPurchase::updateChemicalPurchaseData($request,$id);
-        }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
+        $update = ChemicalPurchase::updateChemicalPurchaseData($request,$id);
 
-        if ($chemicalPurchesupdate) {
-            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-            //return json_encode('Success');
-            return redirect('/chemical-purchase')->with('success', 'Chemical Purchase Update!');
+        if ($update) {
+            return response()->json(['success'=>'Chemical purchase has been updated']);
         }
     }
 

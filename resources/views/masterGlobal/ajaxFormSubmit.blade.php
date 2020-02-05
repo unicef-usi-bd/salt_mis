@@ -1,35 +1,31 @@
 <script>
-    //    Mark Run Form Submit By Ajax
+//      Form Submit By Ajax
     $(document).on('click', '.ajaxFormSubmit', function () {
 //      Laravel Request Handler
-        var postType = $("input[name=_method]").val();
-        var _method = (typeof(postType)==="undefined")?'POST':postType;
-        var finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
-        var actionUrl = $(this).attr('data-action');
-        var thisForm = document.forms.namedItem("formData");
-        var formData = new FormData(thisForm); // Currently empty
+        let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
+        let postType = $("input[name=_method]").val();
+        let _method = (typeof(postType)==="undefined")?'post':postType;
+        let actionUrl = $(this).attr('data-action');
+        let thisForm = document.forms.namedItem("formData");
+        let formData = new FormData(thisForm); // Currently empty
         formData.append('isFinalSubmit', finalSubmit);
-        var object = {};
-        formData.forEach(function(value, key){ object[key] = value; });
-        var jsonData = JSON.stringify(object);
-//        Request by Ajax
         $.ajax({
             url: actionUrl,
-            type: _method,
-            data: JSON.parse(jsonData),
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
             dataType: 'json',
             success: function (data) {
                 if(data.success){
-                    $('#successMessage').html('<span>'+data.success+'</span>');
-                    $('input[type=text]').val("");
-                    $('#success').delay(1000).show().fadeOut('slow');
-                    jQuery('.alert-danger').hide();
+                    displayAlertHandler(data.success);
+                    if(_method==='post') formClear();
                 }else if(data.errors){
-                    jQuery('.alert-danger').html('');
-                    jQuery.each(data.errors, function(key, value){
-                        jQuery('.alert-danger').show();
-                        jQuery('.alert-danger').delay(3000).append('<li style="list-style-type:none;">'+value+'</li>').fadeOut('very slow');
-                    });
+                    displayAlertHandler(data.errors, 'danger');
+                }else{
+                    let defaultMsg = 'Something is wrong there';
+                    displayAlertHandler(defaultMsg, 'danger');
                 }
             },
             error: function (data) {
@@ -37,4 +33,27 @@
             }
         });
     });
+
+//    For Error Message Show
+    function displayAlertHandler(message, alert='success') {
+        let alertMessage = $('.alert-handler');
+        let duration = 20000;
+        alertMessage.empty().hide();
+        if(message===null) return false;
+        message = `<div class="alert alert-${alert} alert-dismissible" role="alert">
+                      <strong>Alert!</strong> ${message}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>`;
+        if(alert==='success') duration = 5000;
+        alertMessage.delay(duration).append(message).show().fadeOut('very slow');
+    }
+
+//    For Clear Form
+    function formClear() {
+        $('input[type=text]').val("");
+        $('select.chosen-select').chosen(0);
+        $('input.date-picker').datepicker().trigger('changeDate');
+    }
 </script>

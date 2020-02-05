@@ -7,7 +7,10 @@
             </div>
 
             <div class="modal-body">
-                <div class="alert alert-danger" id="err" style="display:none"></div>
+                {{--Custom Alert for Ajax form submit--}}
+                <div class="col-md-12 alert-handler">
+                    {{--Custom Alert Here--}}
+                </div>
                 <div class="row printFormGlobal">
                     {{--Modal Global Form Here--}}
                 </div>

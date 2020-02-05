@@ -1,10 +1,9 @@
 <div class="col-md-12">
 
-    <form action="{{ url('/chemical-purchase/'.$editChemicalpurchase->RECEIVEMST_ID) }}" method="post" class="form-horizontal" role="form">
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             @method('PUT')
-            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
@@ -70,8 +69,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/chemical-purchase/'.$editChemicalpurchase->RECEIVEMST_ID) }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>

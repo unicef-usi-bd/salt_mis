@@ -1,14 +1,5 @@
 <div class="col-md-12">
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-
-    <form id="myform" action="{{ url('/chemical-purchase') }}" method="post" class="form-horizontal" role="form">
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -104,8 +95,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/chemical-purchase') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -117,6 +107,7 @@
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
 @include('masterGlobal.formValidation')
+{{--@include('masterGlobal.ajaxFormSubmit')--}}
 
 <script>
     $(document).on('change', '.chemical-source', function () {
