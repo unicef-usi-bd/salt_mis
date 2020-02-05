@@ -2,7 +2,7 @@
     <form action="" name="formData" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
-            {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
+
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>

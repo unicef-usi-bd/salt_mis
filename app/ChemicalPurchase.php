@@ -37,7 +37,7 @@ class ChemicalPurchase extends Model
             ->leftJoin('smm_item','tmm_receivemst.RECEIVE_NO', '=','smm_item.ITEM_NO')
             ->leftJoin('ssm_supplier_info','tmm_receivemst.SUPP_ID_AUTO', '=','ssm_supplier_info.SUPP_ID_AUTO')
             ->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID', '=','tmm_receivechd.RECEIVEMST_ID')
-            ->where('tmm_receivemst.center_id','=',Auth::user()->center_id)
+            ->where('tmm_receivemst.center_id','=', Auth::user()->center_id)
             ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }
@@ -197,6 +197,7 @@ class ChemicalPurchase extends Model
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
+
         if ($chemicalPurchaseMstId){
             $chemicalPurchaseChdId = DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
                // 'RECEIVEMST_ID' => $chemicalPurchaseMstId,

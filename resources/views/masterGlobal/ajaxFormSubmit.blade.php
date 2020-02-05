@@ -1,6 +1,7 @@
 <script>
 //      Form Submit By Ajax
     $(document).on('click', '.ajaxFormSubmit', function () {
+        formClear();
 //      Laravel Request Handler
         let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
         let postType = $("input[name=_method]").val();
@@ -41,7 +42,7 @@
         alertMessage.empty().hide();
         if(message===null) return false;
         message = `<div class="alert alert-${alert} alert-dismissible" role="alert">
-                      <strong>Alert!</strong> ${message}
+                      <strong>Alert !</strong> ${message}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -52,8 +53,18 @@
 
 //    For Clear Form
     function formClear() {
+        let today = getCurrentDate();
         $('input[type=text]').val("");
-        $('select.chosen-select').chosen(0);
-        $('input.date-picker').datepicker().trigger('changeDate');
+        $('input.date-picker').val(today).trigger('changeDate');
+        $('select.chosen-select').val('').trigger('chosen:updated');
+    }
+
+//    For Get Current Date
+    function getCurrentDate() {
+        let currentDate = new Date();
+        let month = currentDate.getMonth()+1;
+        let day = currentDate.getDate();
+        currentDate = `${(month<10 ? '0' : '')}${month}/${(day<10 ? '0' : '')}${day}/${currentDate.getFullYear()}`;
+        return currentDate;
     }
 </script>
