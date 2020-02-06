@@ -87,50 +87,56 @@ class CrudeSaltProcurement extends Model
 
 
     public static function insertCrudeSaltData($request){
-        $crudeSaltMstId = DB::table('tmm_receivemst')->insertGetId([
+        try{
+            DB::beginTransaction();
+            $crudeSaltMstId = DB::table('tmm_receivemst')->insertGetId([
 //            'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
-            'RECEIVE_NO' => $request->input('RECEIVE_NO'),
-            'RECEIVE_TYPE' => 'SR',//Salt receive
-            'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-            'SOURCE_ID' => $request->input('SOURCE_ID'),
-            'COUNTRY_ID' => $request->input('COUNTRY_ID'),
-            'INVOICE_NO' => $request->input('INVOICE_NO'),
-            'REMARKS' => $request->input('REMARKS'),
-            'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
-            'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
-            'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
-            'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
-            'MOBILE_NO'=> $request->input('MOBILE_NO'),
-            'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
-            'center_id' => Auth::user()->center_id,
-            'ENTRY_BY' => Auth::user()->id,
-            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        if ($crudeSaltMstId){
-            $crudeSaltChdId = DB::table('tmm_receivechd')->insertGetId([
-                'RECEIVEMST_ID' => $crudeSaltMstId,
-                'ITEM_ID' => $request->input('RECEIVE_NO'),
-                'RCV_QTY' => $request->input('RCV_QTY'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
-        }
-        if($crudeSaltChdId){
-            $itemStokId = DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date("Y-m-d h:i:s"),
-                'TRAN_TYPE' => 'SP', //S  = Salt Purchase
-                'TRAN_NO' => $crudeSaltMstId,
-                'ITEM_NO' => $request->input('RECEIVE_NO'),
-                'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
+                'RECEIVE_NO' => $request->input('RECEIVE_NO'),
+                'RECEIVE_TYPE' => 'SR',//Salt receive
                 'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                'SOURCE_ID' => $request->input('SOURCE_ID'),
+                'COUNTRY_ID' => $request->input('COUNTRY_ID'),
+                'INVOICE_NO' => $request->input('INVOICE_NO'),
+                'REMARKS' => $request->input('REMARKS'),
+                'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
+                'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
+                'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
+                'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
+                'MOBILE_NO'=> $request->input('MOBILE_NO'),
+                'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
+            if ($crudeSaltMstId){
+                DB::table('tmm_receivechd')->insertGetId([
+                    'RECEIVEMST_ID' => $crudeSaltMstId,
+                    'ITEM_ID' => $request->input('RECEIVE_NO'),
+                    'RCV_QTY' => $request->input('RCV_QTY'),
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+                DB::table('tmm_itemstock')->insertGetId([
+                    'TRAN_DATE' => date("Y-m-d h:i:s"),
+                    'TRAN_TYPE' => 'SP', //S  = Salt Purchase
+                    'TRAN_NO' => $crudeSaltMstId,
+                    'ITEM_NO' => $request->input('RECEIVE_NO'),
+                    'QTY' => $request->input('RCV_QTY'),
+                    'TRAN_FLAG' => 'PR', // PR = Purchase Receive
+                    'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
         }
-        return $itemStokId;
+
 
     }
 
@@ -157,45 +163,55 @@ class CrudeSaltProcurement extends Model
     }
 
     public static function updateCrudeSaltPurchase($request,$id){
-        $crudeSaltMstId = DB::table('tmm_receivemst')->where('RECEIVEMST_ID',$id)->update([
-            //'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
-            'RECEIVE_NO' => $request->input('RECEIVE_NO'),
-            'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-            'SOURCE_ID' => $request->input('SOURCE_ID'),
-            'RECEIVE_TYPE' => 'SR',//Salt receive
-            'INVOICE_NO' => $request->input('INVOICE_NO'),
-            'REMARKS' => $request->input('REMARKS'),
-            'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
-            'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
-            'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
-            'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
-            'MOBILE_NO'=> $request->input('MOBILE_NO'),
-            'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
-            'UPDATE_BY' => Auth::user()->id,
-            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        if ($crudeSaltMstId){
-            $crudeSaltChdId = DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
-                //'RECEIVEMST_ID' => $id,
-                'ITEM_ID' => $request->input('RECEIVE_NO'),
-                'RCV_QTY' => $request->input('RCV_QTY'),
-                'UPDATE_BY' => Auth::user()->id,
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+        try{
+            DB::beginTransaction();
+            $updated = DB::table('tmm_receivemst')
+                ->where('RECEIVEMST_ID',$id)
+                ->update([
+                    'RECEIVE_NO' => $request->input('RECEIVE_NO'),
+                    'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                    'SOURCE_ID' => $request->input('SOURCE_ID'),
+                    'RECEIVE_TYPE' => 'SR',//Salt receive
+                    'INVOICE_NO' => $request->input('INVOICE_NO'),
+                    'REMARKS' => $request->input('REMARKS'),
+                    'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
+                    'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
+                    'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
+                    'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
+                    'MOBILE_NO'=> $request->input('MOBILE_NO'),
+                    'REMARKS_Tansport'=>$request->input('REMARKS_Tansport'),
+                    'UPDATE_BY' => Auth::user()->id,
+                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+
+            if ($updated){
+                DB::table('tmm_receivechd')
+                    ->where('tmm_receivechd.RECEIVEMST_ID',$id)
+                    ->update([
+                        'ITEM_ID' => $request->input('RECEIVE_NO'),
+                        'RCV_QTY' => $request->input('RCV_QTY'),
+                        'UPDATE_BY' => Auth::user()->id,
+                        'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                    ]);
+
+                DB::table('tmm_itemstock')
+                    ->where('tmm_itemstock.TRAN_NO', $id)
+                    ->update([
+                        'TRAN_DATE' => date("Y-m-d h:i:s"),
+                        'TRAN_TYPE' => 'SP', //S  = Salt Purchase
+                        'ITEM_NO' => $request->input('RECEIVE_NO'),
+                        'QTY' => $request->input('RCV_QTY'),
+                        'TRAN_FLAG' => 'PR', // PR = Purchase Receive
+                        'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                        'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                    ]);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
         }
-        if($crudeSaltChdId){
-            $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
-                //'TRAN_NO' => $id,
-                'TRAN_DATE' => date("Y-m-d h:i:s"),
-                'TRAN_TYPE' => 'SP', //S  = Salt Purchase
-                'ITEM_NO' => $request->input('RECEIVE_NO'),
-                'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
-                'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
-        }
-        return $itemStokId;
     }
 
     public  static function deleteCrudeSaltPurchase($id){

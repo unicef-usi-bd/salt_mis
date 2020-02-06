@@ -69,26 +69,25 @@ class CrudeSaltProcurementController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'RCV_QTY' => 'required',
-
-
+            'RCV_QTY' => 'required'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
+        $error = array(
+            'RCV_QTY.required' => 'Amount field is required.',
+        );
 
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            //$this->pr($request->input());
-            $crudeSalte = CrudeSaltProcurement::insertCrudeSaltData($request);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($crudeSalte){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/crude-salt-procurement')->with('success', 'Crude Salt Has been Created !');
-            }
+        //$this->pr($request->input());
+
+        $crudeSalt = CrudeSaltProcurement::insertCrudeSaltData($request);
+
+        if($crudeSalt){
+            return response()->json(['success'=>'Crud salt has been saved successfully.']);
+        } else{
+            return response()->json(['errors'=>'Crud salt has been save failed.']);
         }
     }
 
@@ -130,26 +129,23 @@ class CrudeSaltProcurementController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'RCV_QTY' => 'required',
-
-
+            'RCV_QTY' => 'required'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
+        $error = array(
+            'RCV_QTY.required' => 'Amount field is required.',
+        );
 
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            //$this->pr($request->input());
-            $crudeSalteUpdate = CrudeSaltProcurement::updateCrudeSaltPurchase($request,$id);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+        //$this->pr($request->input());
+        $crudeSaltUpdate = CrudeSaltProcurement::updateCrudeSaltPurchase($request,$id);
 
-            if($crudeSalteUpdate){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/crude-salt-procurement')->with('success', 'Crude Salt Has been Updated !');
-            }
+        if($crudeSaltUpdate){
+            return response()->json(['success'=>'Crud salt has been updated successfully.']);
+        } else{
+            return response()->json(['errors'=>'Crud salt has been updated failed.']);
         }
     }
 

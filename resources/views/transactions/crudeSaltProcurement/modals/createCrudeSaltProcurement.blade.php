@@ -1,13 +1,5 @@
 <div class="col-md-12">
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-    <form id="myform" action="{{ url('/crude-salt-procurement') }}" method="post" class="form-horizontal" role="form">
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
             <div class="col-md-6">
@@ -133,7 +125,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -144,7 +135,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/crude-salt-procurement') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -155,7 +146,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 
 <script>
     $(document).on('change', '.chemical-source', function () {

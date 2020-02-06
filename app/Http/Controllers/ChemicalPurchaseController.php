@@ -63,11 +63,14 @@ class ChemicalPurchaseController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'RCV_QTY' => 'required'
+            'RECEIVE_NO' => 'required',
+            'RCV_QTY' => 'required',
+            'SUPP_ID_AUTO' => 'required',
         );
-
         $error = array(
             'RCV_QTY.required' => 'Amount field is required.',
+            'RECEIVE_NO.required' => 'Procurement Chemical field is required.',
+            'SUPP_ID_AUTO.required' => 'Chemical Source field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -122,12 +125,15 @@ class ChemicalPurchaseController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
+            'RECEIVE_NO' => 'required',
             'RCV_QTY' => 'required',
-
+            'SUPP_ID_AUTO' => 'required',
         );
 
         $error = array(
             'RCV_QTY.required' => 'Amount field is required.',
+            'RECEIVE_NO.required' => 'Procurement Chemical field is required.',
+            'SUPP_ID_AUTO.required' => 'Chemical Source field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

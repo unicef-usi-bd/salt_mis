@@ -3,21 +3,8 @@
         font-size: 22px;
     }
 </style>
-<style>
-    .my-error-class {
-        color:red;
-    }
-    .my-valid-class {
-        color:green;
-    }
-</style>
 <div class="col-md-12">
-    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
-
-    </div>
-
-    <form id="myform" action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
-
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         @csrf
 
         <div class="form-group">
@@ -85,7 +72,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/washing-crushing') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -96,7 +83,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 
 <script>
     $(document).ready(function () {
@@ -138,32 +124,6 @@
             $('.stockSalt').hide();
             $('.result').text(remainStock);
         }
-    });
-
-    $(document).ready(function () {
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                REQ_QTY:{
-                    required: true,
-                }
-            }
-        });
-
     });
 </script>
 

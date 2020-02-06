@@ -112,51 +112,59 @@ class ChemicalPurchase extends Model
 
     public static function insertChemicalPurchaseData($request){
         $supplierId = $request->input('SUPP_ID_AUTO');
-        if ($supplierId == 1001){
-            $supplierId = DB::table('ssm_supplier_info')->insertGetId([
-                'TRADING_NAME' => $request->input('TRADING_NAME'),
-                'PHONE' => $request->input('PHONE'),
-                'ADDRESS' => $request->input('ADDRESS'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
-        }
+        try{
+            DB::beginTransaction();
+            if ($supplierId == 1001){
+                $supplierId = DB::table('ssm_supplier_info')->insertGetId([
+                    'TRADING_NAME' => $request->input('TRADING_NAME'),
+                    'PHONE' => $request->input('PHONE'),
+                    'ADDRESS' => $request->input('ADDRESS'),
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+            }
 
-        $chemicalPurchaseMstId = DB::table('tmm_receivemst')->insertGetId([
-            'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
-            'RECEIVE_NO' => $request->input('RECEIVE_NO'),
-            'SUPP_ID_AUTO' => $supplierId,
-            'RECEIVE_TYPE' => 'CR',//chemical receive
-            'REMARKS' => $request->input('REMARKS'),
-            'INVOICE_NO' => $request->input('INVOICE_NO'),
-            'center_id' => Auth::user()->center_id,
-            'ENTRY_BY' => Auth::user()->id,
-            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-
-        if ($chemicalPurchaseMstId){
-            DB::table('tmm_receivechd')->insertGetId([
-                'RECEIVEMST_ID' => $chemicalPurchaseMstId,
-                'ITEM_ID' => $request->input('RECEIVE_NO'),
-                'RCV_QTY' => $request->input('RCV_QTY'),
+            $chemicalPurchaseMstId = DB::table('tmm_receivemst')->insertGetId([
+                'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
+                'RECEIVE_NO' => $request->input('RECEIVE_NO'),
+                'SUPP_ID_AUTO' => $supplierId,
+                'RECEIVE_TYPE' => 'CR',//chemical receive
+                'REMARKS' => $request->input('REMARKS'),
+                'INVOICE_NO' => $request->input('INVOICE_NO'),
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
 
-            DB::table('tmm_itemstock')->insertGetId([
-                'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
-                'TRAN_TYPE' => 'CP', //CP  = Chemical Purchase
-                'TRAN_NO' => $chemicalPurchaseMstId,
-                'ITEM_NO' => $request->input('RECEIVE_NO'),
-                'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
-                'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+            if ($chemicalPurchaseMstId){
+                DB::table('tmm_receivechd')->insertGetId([
+                    'RECEIVEMST_ID' => $chemicalPurchaseMstId,
+                    'ITEM_ID' => $request->input('RECEIVE_NO'),
+                    'RCV_QTY' => $request->input('RCV_QTY'),
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+
+                DB::table('tmm_itemstock')->insertGetId([
+                    'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
+                    'TRAN_TYPE' => 'CP', //CP  = Chemical Purchase
+                    'TRAN_NO' => $chemicalPurchaseMstId,
+                    'ITEM_NO' => $request->input('RECEIVE_NO'),
+                    'QTY' => $request->input('RCV_QTY'),
+                    'TRAN_FLAG' => 'PR', // PR = Purchase Receive
+                    'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
         }
     }
 
@@ -185,38 +193,49 @@ class ChemicalPurchase extends Model
 //    }
 
     public static function updateChemicalPurchaseData($request, $id){
-        $chemicalPurchaseMst = DB::table('tmm_receivemst')->where('RECEIVEMST_ID',$id)->update([
-            'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
-            'RECEIVE_NO' => $request->input('RECEIVE_NO'),
-            'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-            'RECEIVE_TYPE' => 'CR',//chemical receive
-            'REMARKS' => $request->input('REMARKS'),
-            'INVOICE_NO' => $request->input('INVOICE_NO'),
-            'UPDATE_BY' => Auth::user()->id,
-            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
+        try{
+            DB::beginTransaction();
+            $updated = DB::table('tmm_receivemst')
+                ->where('RECEIVEMST_ID',$id)
+                ->update([
+                    'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
+                    'RECEIVE_NO' => $request->input('RECEIVE_NO'),
+                    'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                    'RECEIVE_TYPE' => 'CR',//chemical receive
+                    'REMARKS' => $request->input('REMARKS'),
+                    'INVOICE_NO' => $request->input('INVOICE_NO'),
+                    'UPDATE_BY' => Auth::user()->id,
+                    'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
 
-        if ($chemicalPurchaseMst){
-            DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
-               'RECEIVEMST_ID' => $id,
-                'ITEM_ID' => $request->input('RECEIVE_NO'),
-                'RCV_QTY' => $request->input('RCV_QTY'),
-                'UPDATE_BY' => Auth::user()->id,
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+            if ($updated){
+                DB::table('tmm_receivechd')
+                    ->where('tmm_receivechd.RECEIVEMST_ID',$id)
+                    ->update([
+                        'ITEM_ID' => $request->input('RECEIVE_NO'),
+                        'RCV_QTY' => $request->input('RCV_QTY'),
+                        'UPDATE_BY' => Auth::user()->id,
+                        'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                    ]);
 
-            DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
-                'TRAN_NO' => $id,
-                'TRAN_TYPE' => 'CP', // CP = Chemical Purchase
-                'ITEM_NO' => $request->input('RECEIVE_NO'),
-                'QTY' => $request->input('RCV_QTY'),
-                'TRAN_FLAG' => 'PR', // PR = Purchase Receive
-                'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
-                'UPDATE_BY' => Auth::user()->id,
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
+                DB::table('tmm_itemstock')
+                    ->where('tmm_itemstock.TRAN_NO',$id)
+                    ->update([
+                        'TRAN_TYPE' => 'CP', // CP = Chemical Purchase
+                        'ITEM_NO' => $request->input('RECEIVE_NO'),
+                        'QTY' => $request->input('RCV_QTY'),
+                        'TRAN_FLAG' => 'PR', // PR = Purchase Receive
+                        'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                        'UPDATE_BY' => Auth::user()->id,
+                        'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
+                    ]);
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
         }
-        return true;
     }
 
     public  static function deleteChemicalPurchase($id){
