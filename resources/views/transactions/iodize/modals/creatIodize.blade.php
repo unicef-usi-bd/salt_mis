@@ -1,19 +1,7 @@
 <div class="col-md-12">
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
+    <div class="alert alert-danger alert-dismissible msg" style="display: none;"></div>
 
-    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
-
-
-    </div>
-
-    <form id="myform" action="{{ url('/iodized') }}" method="post" class="form-horizontal" role="form">
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
             @csrf
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
@@ -28,10 +16,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" onkeypress="numbersOnly(this, event)" value=""/>
+                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                 </span>
                 <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }} KG</span><span class="result"></span>)</span>
             </div>
@@ -62,7 +50,7 @@
             <span class="requireChemicalPerKg" style="margin-left:27%;display: none;color:#1cabe2;"></span>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-7">
                 <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value=""/>
 
@@ -82,7 +70,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/iodized') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -93,7 +81,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 
 <script>
     //$('.chemicalAmount').attr('readonly', true);

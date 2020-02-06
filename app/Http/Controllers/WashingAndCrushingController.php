@@ -72,23 +72,32 @@ class WashingAndCrushingController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
+            'WASTAGE' => 'required',
         );
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            //$this->pr($request->input());
-            $entryBy = Auth::user()->id;
-            $centerId = Auth::user()->center_id;
+        $error = array(
+            'PRODUCT_ID.required' => 'Salt type field is required.',
+            'REQ_QTY.required' => 'Amount field is required.',
+            'WASTAGE.required' => 'Wastage field is required.',
+        );
 
-            $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            if($washingAndCrashing){
-                return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Created !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+        //$this->pr($request->input());
+
+        $entryBy = Auth::user()->id;
+        $centerId = Auth::user()->center_id;
+
+        $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
+
+        if($washingAndCrashing){
+            return response()->json(['success'=>'Washing & Crashing has been save successfully.']);
+        } else{
+            return response()->json(['success'=>'Washing & Crashing save failed.']);
         }
+
     }
 
     /**
@@ -132,24 +141,30 @@ class WashingAndCrushingController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
+            'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
+            'WASTAGE' => 'required',
         );
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
+        $error = array(
+            'PRODUCT_ID.required' => 'Salt type field is required.',
+            'REQ_QTY.required' => 'Amount field is required.',
+            'WASTAGE.required' => 'Wastage field is required.',
+        );
 
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            //$this->pr($request->input());
-            $oty = intval($request->input('REQ_QTY'));
-            $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
-            $result = $oty - $totalStock;
-            $washingAndCrashing = WashingAndCrushing::updateWashingAndCrushingData($request,$id,$result);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($washingAndCrashing){
-                return redirect('/washing-crushing')->with('success', 'Washing & Crashing Has been Updated !');
-            }
+        //$this->pr($request->input());
+        $oty = intval($request->input('REQ_QTY'));
+        $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
+        $result = $oty - $totalStock;
+        $update = WashingAndCrushing::updateWashingAndCrushingData($request,$id,$result);
+
+        if($update){
+            return response()->json(['success'=>'Washing & Crashing has been updated successfully.']);
+        } else{
+            return response()->json(['success'=>'Washing & Crashing update failed.']);
         }
     }
 

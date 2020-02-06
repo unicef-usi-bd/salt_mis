@@ -4,11 +4,8 @@
     }
 </style>
 <div class="col-md-12">
-    <div class="alert alert-danger alert-dismissible msg" style="display: none;">
 
-    </div>
-    <form action="{{ url('/washing-crushing/'.$editWashingAndCrushingData->WASHCRASHMST_ID) }}" method="post" class="form-horizontal" role="form">
-
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -74,7 +71,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/washing-crushing/'.$editWashingAndCrushingData->WASHCRASHMST_ID) }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>
@@ -85,7 +82,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 <script>
 $(document).ready(function () {
 //        $('.stockInfo').addClass('hidden');

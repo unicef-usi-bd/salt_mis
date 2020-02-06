@@ -54,15 +54,13 @@ class QulityControlTesting extends Model
 
     }
 
-    public static function updateQualityControlTestingData($request,$id,$qulityControlImge){
-
-        $update = DB::table('tmm_qualitycontrol')->where('QUALITYCONTROL_ID','=', $id)->update([
+    public static function updateQualityControlTestingData($request, $id, $image){
+        $data = array(
             'QC_DATE' =>date('Y-m-d', strtotime(Input::get('QC_DATE'))),
             'QC_BY' =>$request->input('QC_BY'),
             'AGENCY_ID' =>$request->input('AGENCY_ID'),
             'BATCH_NO' =>$request->input('BATCH_NO'),
             'QC_TESTNAME' =>$request->input('QC_TESTNAME'),
-            'QUALITY_CONTROL_IMAGE' => 'image/qualitycontrol/'.$qulityControlImge,
             'REMARKS' => $request->input('REMARKS'),
             'SODIUM_CHLORIDE' =>$request->input('SODIUM_CHLORIDE'),
             'MOISTURIZER' =>$request->input('MOISTURIZER'),
@@ -71,7 +69,11 @@ class QulityControlTesting extends Model
             'center_id' => Auth::user()->center_id,
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
+        );
+
+        if(!empty($image)) $data['QUALITY_CONTROL_IMAGE'] = 'image/qualitycontrol/'.$qulityControlImge;
+
+        $update = DB::table('tmm_qualitycontrol')->where('QUALITYCONTROL_ID','=', $id)->update($data);
 
         return $update;
     }

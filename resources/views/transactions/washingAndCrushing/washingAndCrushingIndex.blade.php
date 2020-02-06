@@ -92,6 +92,7 @@
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
+    @include('masterGlobal.ajaxFormSubmit')
     <!-- Add New Group Modal End -->
 
 @endsection

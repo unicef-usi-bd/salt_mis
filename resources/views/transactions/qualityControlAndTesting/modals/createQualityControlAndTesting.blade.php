@@ -1,8 +1,6 @@
 <div class="col-md-12">
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
-    <form id="myform" action="{{ url('/quality-control-testing') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-        {{--<div class="col-md-12">--}}
-            @csrf
+    <form action="" name="formData" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-3">
@@ -15,7 +13,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-md-12"><b>Quality Control BY</b><span style="color: red;"> </span></label>
+                    <label class="col-md-12"><b>Quality Control BY</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
                             <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select Quality Control BY">
@@ -28,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-md-12"><b>Agency</b><span style="color: red;"> </span></label>
+                    <label class="col-md-12"><b>Agency</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
@@ -41,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-md-12"> <b>Batch No</b><span style="color: red;"> </span> </label>
+                    <label class="col-md-12"> <b>Batch No</b><span style="color: red;"> * </span> </label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
                             <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
@@ -62,7 +60,7 @@
         <div class="row">
             <div class="col-md-12 col-md-offset-2">
                 <div class="col-md-4">
-                    <label class="col-md-12"><b>Test Name</b><span style="color: red;"> </span></label>
+                    <label class="col-md-12"><b>Test Name</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
                         <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="BSTI test standard"  value="BSTI test standard" class="form-control col-xs-5 col-sm-5" />
                     </div>
@@ -165,7 +163,7 @@
                     {{ trans('dashboard.reset') }}
                 </button>
                 {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/quality-control-testing') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -176,6 +174,5 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 
 

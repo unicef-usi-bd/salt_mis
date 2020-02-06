@@ -65,11 +65,13 @@ class ChemicalPurchaseController extends Controller
         $rules = array(
             'RECEIVE_NO' => 'required',
             'RCV_QTY' => 'required',
+            'INVOICE_NO' => 'required',
             'SUPP_ID_AUTO' => 'required',
         );
         $error = array(
             'RCV_QTY.required' => 'Amount field is required.',
             'RECEIVE_NO.required' => 'Procurement Chemical field is required.',
+            'INVOICE_NO.required' => 'Invoice number field is required.',
             'SUPP_ID_AUTO.required' => 'Chemical Source field is required.',
         );
 
@@ -127,12 +129,14 @@ class ChemicalPurchaseController extends Controller
         $rules = array(
             'RECEIVE_NO' => 'required',
             'RCV_QTY' => 'required',
+            'INVOICE_NO' => 'required',
             'SUPP_ID_AUTO' => 'required',
         );
 
         $error = array(
             'RCV_QTY.required' => 'Amount field is required.',
             'RECEIVE_NO.required' => 'Procurement Chemical field is required.',
+            'INVOICE_NO.required' => 'Invoice number field is required.',
             'SUPP_ID_AUTO.required' => 'Chemical Source field is required.',
         );
 

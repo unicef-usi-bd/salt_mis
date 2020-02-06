@@ -64,14 +64,6 @@ class IodizedController extends Controller
         }else{
             $totalWashing = $WashingTotalUseInIodize;
         }
-//        $this->pr($afterSaleWashing);
-//        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
-//        if($idoizeSaltAmount){
-//            $totalWashing = $washingSalt - $idoizeSaltAmount;
-//        }else{
-//            $totalWashing = $washingSalt;
-//        }
-//        $this->pr($totalWashing);
 
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
     }
@@ -85,28 +77,32 @@ class IodizedController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'WASH_CRASH_QTY' => 'required',
+            'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-
+            'WASTAGE' => 'required',
         );
+        $error = array(
+            'WASH_CRASH_QTY.required' => 'Amount field is required.',
+            'PRODUCT_ID.required' => 'Chemical type field is required.',
+            'REQ_QTY.required' => 'Chemical Amount field is required.',
+            'WASTAGE.required' => 'Wastage field is required.',
+        );
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+        //$this->pr($request->input());
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        } else {
+        $entryBy = Auth::user()->id;
+        $centerId = Auth::user()->center_id;
 
-            $entryBy = Auth::user()->id;
-            $centerId = Auth::user()->center_id;
+        $inserted = Iodized::insertIodizeData($request,$centerId,$entryBy);
 
-            $iodizeInsert = Iodized::insertIodizeData($request,$centerId,$entryBy);
+        if($inserted){
+            return response()->json(['success'=>'Iodize has been save successfully.']);
+        }else{
+            return response()->json(['success'=>'Iodize save failed.']);
         }
 
-
-        if ($iodizeInsert) {
-            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-            //return json_encode('Success');
-            return redirect('/iodized')->with('success', 'Iodize Created!');
-        }
     }
 
     /**
@@ -167,27 +163,29 @@ class IodizedController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
+            'WASH_CRASH_QTY' => 'required',
+            'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-
+            'WASTAGE' => 'required',
         );
+        $error = array(
+            'WASH_CRASH_QTY.required' => 'Amount field is required.',
+            'PRODUCT_ID.required' => 'Chemical type field is required.',
+            'REQ_QTY.required' => 'Chemical Amount field is required.',
+            'WASTAGE.required' => 'Wastage field is required.',
+        );
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        } else {
-            $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
-            $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
-            $iodizeStock = $washAndCrushQty - $iodizeWastage;
+        $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
+        $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
+        $iodizeStock = $washAndCrushQty - $iodizeWastage;
 
-            $iodizeUpdate = Iodized::updateIodizeData($request,$id,$iodizeStock);
-        }
-
-
-        if ($iodizeUpdate) {
-            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-            //return json_encode('Success');
-            return redirect('/iodized')->with('success', 'Iodize Update!');
+        $updated = Iodized::updateIodizeData($request,$id,$iodizeStock);
+        if($updated){
+            return response()->json(['success'=>'Iodize has been updated successfully.']);
+        }else{
+            return response()->json(['success'=>'Iodize update failed.']);
         }
     }
 

@@ -69,18 +69,24 @@ class CrudeSaltProcurementController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'RCV_QTY' => 'required'
+            'RECEIVE_NO' => 'required',
+            'INVOICE_NO' => 'required',
+            'SUPP_ID_AUTO' => 'required',
+            'SOURCE_ID' => 'required',
+            'RCV_QTY' => 'required',
         );
 
         $error = array(
+            'RECEIVE_NO.required' => 'Salt type field is required.',
+            'INVOICE_NO.required' => 'Invoice field is required.',
+            'SUPP_ID_AUTO.required' => 'Trading field is required.',
+            'SOURCE_ID.required' => 'Source field is required.',
             'RCV_QTY.required' => 'Amount field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
-
-        //$this->pr($request->input());
 
         $crudeSalt = CrudeSaltProcurement::insertCrudeSaltData($request);
 
@@ -129,13 +135,20 @@ class CrudeSaltProcurementController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'RCV_QTY' => 'required'
+            'RECEIVE_NO' => 'required',
+            'INVOICE_NO' => 'required',
+            'SUPP_ID_AUTO' => 'required',
+            'SOURCE_ID' => 'required',
+            'RCV_QTY' => 'required',
         );
 
         $error = array(
+            'RECEIVE_NO.required' => 'Salt type field is required.',
+            'INVOICE_NO.required' => 'Invoice field is required.',
+            'SUPP_ID_AUTO.required' => 'Trading field is required.',
+            'SOURCE_ID.required' => 'Source field is required.',
             'RCV_QTY.required' => 'Amount field is required.',
         );
-
         $validator = Validator::make(Input::all(), $rules, $error);
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
