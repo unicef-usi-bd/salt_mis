@@ -80,7 +80,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.ajaxFormSubmit')
 @include('masterGlobal.formValidation')
 
 

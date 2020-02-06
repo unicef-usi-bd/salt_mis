@@ -67,7 +67,7 @@ class ChemicalPurchaseController extends Controller
         );
 
         $error = array(
-            'RCV_QTY.required' => 'The receive quantity field is required.',
+            'RCV_QTY.required' => 'Amount field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -127,7 +127,7 @@ class ChemicalPurchaseController extends Controller
         );
 
         $error = array(
-            'RCV_QTY.required' => 'The receive quantity field is required.',
+            'RCV_QTY.required' => 'Amount field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -138,6 +138,8 @@ class ChemicalPurchaseController extends Controller
 
         if ($update) {
             return response()->json(['success'=>'Chemical purchase has been updated']);
+        } else{
+            return response()->json(['errors'=>'Chemical purchase update failed']);
         }
     }
 

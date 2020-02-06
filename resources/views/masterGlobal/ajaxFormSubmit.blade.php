@@ -1,7 +1,6 @@
 <script>
 //      Form Submit By Ajax
     $(document).on('click', '.ajaxFormSubmit', function () {
-        formClear();
 //      Laravel Request Handler
         let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
         let postType = $("input[name=_method]").val();
@@ -55,8 +54,9 @@
     function formClear() {
         let today = getCurrentDate();
         $('input[type=text]').val("");
-        $('input.date-picker').val(today).trigger('changeDate');
         $('select.chosen-select').val('').trigger('chosen:updated');
+        let datepicker = $('input.date-picker');
+        if(datepicker) datepicker.val(today).trigger('changeDate');
     }
 
 //    For Get Current Date

@@ -121,8 +121,8 @@ class ChemicalPurchase extends Model
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
-
         }
+
         $chemicalPurchaseMstId = DB::table('tmm_receivemst')->insertGetId([
             'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
             'RECEIVE_NO' => $request->input('RECEIVE_NO'),
@@ -134,8 +134,9 @@ class ChemicalPurchase extends Model
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
+
         if ($chemicalPurchaseMstId){
-            $chemicalPurchaseChdId = DB::table('tmm_receivechd')->insertGetId([
+            DB::table('tmm_receivechd')->insertGetId([
                 'RECEIVEMST_ID' => $chemicalPurchaseMstId,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
@@ -143,9 +144,8 @@ class ChemicalPurchase extends Model
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
-        }
-        if($chemicalPurchaseChdId){
-            $itemStokId = DB::table('tmm_itemstock')->insertGetId([
+
+            DB::table('tmm_itemstock')->insertGetId([
                 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
                 'TRAN_TYPE' => 'CP', //CP  = Chemical Purchase
                 'TRAN_NO' => $chemicalPurchaseMstId,
@@ -158,8 +158,6 @@ class ChemicalPurchase extends Model
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
         }
-
-            return $itemStokId;
     }
 
     public static function chemicalPurchaseShow($id){
@@ -186,8 +184,8 @@ class ChemicalPurchase extends Model
 //        return DB::table('tmm_itemstock')->insert($data);
 //    }
 
-    public static function updateChemicalPurchaseData($request,$id){
-        $chemicalPurchaseMstId = DB::table('tmm_receivemst')->where('RECEIVEMST_ID',$id)->update([
+    public static function updateChemicalPurchaseData($request, $id){
+        $chemicalPurchaseMst = DB::table('tmm_receivemst')->where('RECEIVEMST_ID',$id)->update([
             'RECEIVE_DATE' => date('Y-m-d', strtotime(Input::get('RECEIVE_DATE'))),
             'RECEIVE_NO' => $request->input('RECEIVE_NO'),
             'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
@@ -198,18 +196,17 @@ class ChemicalPurchase extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
 
-        if ($chemicalPurchaseMstId){
-            $chemicalPurchaseChdId = DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
-               // 'RECEIVEMST_ID' => $chemicalPurchaseMstId,
+        if ($chemicalPurchaseMst){
+            DB::table('tmm_receivechd')->where('tmm_receivechd.RECEIVEMST_ID',$id)->update([
+               'RECEIVEMST_ID' => $id,
                 'ITEM_ID' => $request->input('RECEIVE_NO'),
                 'RCV_QTY' => $request->input('RCV_QTY'),
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
-        }
-        if($chemicalPurchaseChdId){
-            $itemStokId = DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
-                //'TRAN_NO' => $chemicalPurchaseMstId,
+
+            DB::table('tmm_itemstock')->where('tmm_itemstock.TRAN_NO',$id)->update([
+                'TRAN_NO' => $id,
                 'TRAN_TYPE' => 'CP', // CP = Chemical Purchase
                 'ITEM_NO' => $request->input('RECEIVE_NO'),
                 'QTY' => $request->input('RCV_QTY'),
@@ -218,10 +215,8 @@ class ChemicalPurchase extends Model
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
-            return $itemStokId;
         }
-
-
+        return true;
     }
 
     public  static function deleteChemicalPurchase($id){
