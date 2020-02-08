@@ -40,29 +40,6 @@ class SalesDistributionController extends Controller
 
         $salesDitributionIndex = SalesDistribution::getSalesDistributionData();
         $centerId = Auth::user()->center_id;
-//     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
-//        $washingSalt = Stock::getTotalWashingSalt($centerId);
-//        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
-
-        //$this->pr($washingSaltSale);
-
-//        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
-//
-//        if($idoizeSaltAmount){
-//            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
-//            if($washingSaltSale){
-//                $washingStock = $afterIodizeWashingStock - $washingSaltSale;
-//            }else{
-//                $washingStock = $afterIodizeWashingStock;
-//            }
-//        }else{
-//            if($washingSaltSale){
-//                $washingStock = $washingSalt - $washingSaltSale;
-//            }else{
-//                $washingStock = $washingSalt;
-//            }
-//
-//        }
 
         $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
         $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
@@ -132,25 +109,47 @@ class SalesDistributionController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'SELLER_TYPE' => 'required',
+            'CUSTOMER_ID' => 'required',
+            'SALES_DATE' => 'required',
             'DRIVER_NAME' => 'required',
-
-
+            'VEHICLE_NO' => 'required',
+            'VEHICLE_LICENSE' => 'required',
+            'TRANSPORT_NAME' => 'required',
+            'MOBILE_NO' => 'required',
+            'ITEM_ID.*' => 'required',
+            'PACK_TYPE.*' => 'required',
+            'PACK_QTY.*' => 'required',
+            'total.*' => 'required',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
+        $error = array(
+            'SELLER_TYPE.required' => 'Seller type field is required.',
+            'CUSTOMER_ID.required' => 'Trade field is required.',
+            'SALES_DATE.required' => 'Date field is required.',
+            'DRIVER_NAME.required' => 'Driver name field is required.',
+            'VEHICLE_NO.required' => 'Driver licence field is required.',
+            'VEHICLE_LICENSE.required' => 'Vehicle licence field is required.',
+            'TRANSPORT_NAME.required' => 'Transport rent field is required.',
+            'MOBILE_NO.required' => 'Mobile Number field is required.',
+            'ITEM_ID.*' => 'Item * field required',
+            'PACK_TYPE.*' => 'Pack type * field required',
+            'PACK_QTY.*' => 'Pack Quantity * field required',
+            'total.*' => 'Total * field required',
+        );
 
-            $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId,$this->washAndCrushId,$this->iodizeId);
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        //$this->pr($request->input());
+        $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId,$this->washAndCrushId,$this->iodizeId);
 
 
-            if($salesDistributionInsert){
-                //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/sales-distribution')->with('success', 'Sales Distribution Has been Created !');
-            }
+        if($salesDistributionInsert){
+            return response()->json(['success'=>'Sales Distribution has been saved successfully.']);
+        }else{
+            return response()->json(['success'=>'Sales Distribution save failed.']);
         }
     }
 

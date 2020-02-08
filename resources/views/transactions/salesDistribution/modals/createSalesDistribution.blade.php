@@ -1,8 +1,6 @@
 <div class="col-md-12">
-    <form id="myform" action="{{ url('/sales-distribution') }}" method="post" class="form-horizontal" role="form">
-
+    <form action="" name="formData" method="post" class="form-horizontal" role="form">
         @csrf
-        {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
         <div class="col-md-6">
             <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller
@@ -34,14 +32,14 @@
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Trading
                         Name</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                        <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID"
-                                    name="CUSTOMER_ID" data-placeholder="Select Trading Name">
-                                @foreach($traderName as $row)
-                                    <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
-                                @endforeach
-                            </select>
-                        </span>
+                    <span class="block input-icon input-icon-right">
+                        <select id="form-field-select-3 inputSuccess CUSTOMER_ID" class="form-control CUSTOMER_ID"
+                                name="CUSTOMER_ID" data-placeholder="Select Trading Name">
+                            @foreach($traderName as $row)
+                                <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
+                            @endforeach
+                        </select>
+                    </span>
                 </div>
             </div>
         </div>
@@ -120,32 +118,33 @@
                     <th style="width: 255px;">Total<span style="color:red;"> </span></th>
                     <th style="width: 255px;">Stock<span style="color:red;"> </span></th>
 
-                    <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i
-                                    class="fa fa-plus"></i></span></th>
+                    <th style="width: 30px;">
+                        <span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody class="newRow">
                 <tr class="rowFirst">
                     <td>
-                                <span class="block input-icon input-icon-right" style="width: 180px;">
-                                    <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
-                                        <option value="">Select</option>
-                                        @foreach($saltId as $row)
-                                            <option value="{{$row->ITEM_NO}}"
-                                                    @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
-                                        @endforeach
-                                    </select>
-                                </span>
+                        <span class="block input-icon input-icon-right" style="width: 180px;">
+                            <select class="form-control saltType" id="ITEM_ID" name="ITEM_ID[]">
+                                <option value="">Select</option>
+                                @foreach($saltId as $row)
+                                    <option value="{{$row->ITEM_NO}}"
+                                            @if($row->ITEM_NO == 8) selected @endif> {{$row->ITEM_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
                     </td>
                     <td>
-                                <span class="block input-icon input-icon-right" style="width: 180px;">
-                                    <select class="form-control" id="brand_id" name="brand_id[]">
-                                        <option value="">Select</option>
-                                        @foreach($brandName as $row)
-                                            <option value="{{$row->brand_id}}"> {{$row->brand_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </span>
+                        <span class="block input-icon input-icon-right" style="width: 180px;">
+                            <select class="form-control" id="brand_id" name="brand_id[]">
+                                <option value="">Select</option>
+                                @foreach($brandName as $row)
+                                    <option value="{{$row->brand_id}}"> {{$row->brand_name}}</option>
+                                @endforeach
+                            </select>
+                        </span>
                     </td>
 
                     <td>
@@ -166,9 +165,9 @@
                     {{--</td>--}}
                     <td>
                         <span class="block input-icon input-icon-right">
-
-                                <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]"
-                                       class="form-control col-xs-10 col-sm-5 crudeSaltAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                            <input type="text" id="inputSuccess PACK_QTY" placeholder=" " name="PACK_QTY[]"
+                                   class="form-control col-xs-10 col-sm-5 crudeSaltAmount"
+                                   onkeypress="return numbersOnly(this, event)" value=""/>
 
                         </span>
                     </td>
@@ -204,8 +203,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/sales-distribution') }}">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -219,37 +217,36 @@
 @include('masterGlobal.getUpazila')
 @include('masterGlobal.getUnion')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
 <script>
     //    Add For Multiple Row Dynamically
     $(document).ready(function () {
         $('.rowAdd').click(function () {
-            var getTr = $('tr.rowFirst:first');
+            let getTr = $('tr.rowFirst:first');
             //alert(getTr.html());
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
-            var defaultRow = $('tr.removableRow:last');
+            let defaultRow = $('tr.removableRow:last');
             defaultRow.find('.result').text('');
             defaultRow.find('.stockWashCrash').text('');
             $('.chosen-select').chosen(0);
         });
     });
+
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
 
-
     //for showing amount of salt in database using on change
     $('.stockWashCrash').hide();
-    //$('.stockIodize').hide();
+
     $(document).on('change', '.saltType', function () {
 //        $('.defaultStock').text('');
-        var thisRow = $(this).closest('tr');
-        var saltTypeId = thisRow.find('.saltType').val();
-        var $washAndCrushId = '<?php echo $washAndCrushId; ?>';
-        var centerId = '<?php echo Auth::user()->center_id; ?>';
-        var $iodizeId = '<?php echo $iodizeId; ?>';
+        let thisRow = $(this).closest('tr');
+        let saltTypeId = thisRow.find('.saltType').val();
+        let $washAndCrushId = '<?php echo $washAndCrushId; ?>';
+        let centerId = '<?php echo Auth::user()->center_id; ?>';
+        let $iodizeId = '<?php echo $iodizeId; ?>';
         // alert($washAndCrushId);
 
         if (saltTypeId == $washAndCrushId) {
@@ -260,7 +257,7 @@
                 success: function (data) {
                     thisRow.find('.crudeSaltAmount').val('');
                     //  console.log(data);
-                    var data = JSON.parse(data);
+                    let data = JSON.parse(data);
                     //$('.stockWashCrash').html(data).show();
                     thisRow.find('.stockWashCrash').html(data).show();
                     thisRow.find('.result').html(data);
@@ -275,7 +272,7 @@
                 data: {'centerId': centerId},
                 success: function (data) {
                     thisRow.find('.crudeSaltAmount').val('');
-                    var data = JSON.parse(data);
+                    let data = JSON.parse(data);
                     thisRow.find('.stockWashCrash').html(data).show();
                     thisRow.find('.result').html(data);
                     thisRow.find('.crudeSaltAmount').val('');
@@ -287,27 +284,26 @@
 
     $(document).on('change', '.packType', function () {
         $('.pack_Id').text('');
-        var packId = $(this).val();
+        let packId = $(this).val();
         $.ajax({
             type: 'GET',
             url: 'get-packsize',
             data: {'packId': packId},
             success: function (data) {
-                var data = JSON.parse(data);
+                let data = JSON.parse(data);
                 $('.pack').val(data.DESCRIPTION);
                 console.log(data);
-
             }
         });
     });
 
     $(document).on('keyup', '.crudeSaltAmount', function () {
-        var amount = parseInt($(this).val()) || 0;
-        var packId = $('.pack').val();
-        var result = amount * packId;
+        let amount = parseInt($(this).val()) || 0;
+        let packId = $('.pack').val();
+        let result = amount * packId;
         $('.totalQty').val(result);
-        var saltStock = $('.stockWashCrash').text();
-        var remainStock = saltStock - result;
+        let saltStock = $('.stockWashCrash').text();
+        let remainStock = saltStock - result;
 
         if (saltStock < result) {
             $('.stockWashCrash').hide();
@@ -324,17 +320,16 @@
         }
     });
 
-
     $(document).on("change", ".SELLER_TYPE", function () {
-        var sellerTypeId = $(this).val();
-        var option = '<option value="">Select Trading Name</option>';
+        let sellerTypeId = $(this).val();
+        let option = '<option value="">Select Trading Name</option>';
         $.ajax({
             type: 'GET',
             url: 'trading-list',
             data: {'sellerTypeId': sellerTypeId},
             success: function (data) {
-//                var data = JSON.parse(data);
-                for (var i = 0; i < data.length; i++) {
+//                let data = JSON.parse(data);
+                for (let i = 0; i < data.length; i++) {
                     option = option + '<option value="' + data[i].CUSTOMER_ID + '">' + data[i].TRADER_NAME + '</option>';
                 }
                 $('.CUSTOMER_ID').html(option);
