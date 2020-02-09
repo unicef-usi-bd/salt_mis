@@ -9,28 +9,6 @@ use Illuminate\Support\Facades\Input;
 
 class ChemicalPurchase extends Model
 {
-//    public static function getChemical(){
-//        return DB::table('smm_item')
-//            ->select('*')
-//            ->where('ITEM_TYPE','=',25)
-//            ->get();
-//    }
-//
-//    public static function getSource(){
-//        return DB::table('smm_item')
-//            ->select('*')
-//            ->where('ITEM_TYPE','=',25)
-//            ->get();
-//    }
-//
-//    public static function getChemicalSupplier(){
-//        return DB::table('ssm_supplier_info')
-//            ->select('ssm_supplier_info.*')
-//            ->get();
-//    }
-
-
-
     public static function chemicalPurchase(){
         return DB::table('tmm_receivemst')
             ->select('tmm_receivemst.*','smm_item.ITEM_NAME','ssm_supplier_info.TRADING_NAME','tmm_receivechd.RCV_QTY')
@@ -110,7 +88,7 @@ class ChemicalPurchase extends Model
     }
     //for service
 
-    public static function insertChemicalPurchaseData($request){
+    public static function insertChemicalPurchaseData($request, $supplierTypeId){
         $supplierId = $request->input('SUPP_ID_AUTO');
         try{
             DB::beginTransaction();
@@ -119,6 +97,7 @@ class ChemicalPurchase extends Model
                     'TRADING_NAME' => $request->input('TRADING_NAME'),
                     'PHONE' => $request->input('PHONE'),
                     'ADDRESS' => $request->input('ADDRESS'),
+                    'SUPPLIER_TYPE_ID' => $supplierTypeId,
                     'center_id' => Auth::user()->center_id,
                     'ENTRY_BY' => Auth::user()->id,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")

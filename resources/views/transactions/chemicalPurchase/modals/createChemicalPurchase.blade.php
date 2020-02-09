@@ -50,13 +50,9 @@
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select class="chosen-select form-control chemical-source" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
-                                @if($defultSupplier)
-                                    <option value="{{$defultSupplier->SUPP_ID_AUTO}}"> {{$defultSupplier->TRADING_NAME}}</option>
-                                @else
-                                    <option value=""> </option>
-                                @endif
-                                @foreach($supplierName as $name)
-                                    <option value="{{$name->SUPP_ID_AUTO}}"> {{$name->TRADING_NAME}}</option>
+                                <option value="">Select One</option>
+                                @foreach($suppliers as $supplier)
+                                    <option value="{{$supplier->SUPP_ID_AUTO}}"> {{$supplier->TRADING_NAME}}</option>
                                 @endforeach
                                 <option value="1001">Other</option>
                             </select>

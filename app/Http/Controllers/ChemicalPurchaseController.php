@@ -49,9 +49,9 @@ class ChemicalPurchaseController extends Controller
     public function create()
     {
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        $supplierName = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
-        $defultSupplier = SupplierProfile::defultSupplierProfile($this->chemicalSupplierTypeId);
-        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','supplierName','supplierNameBscic','defultSupplier'));
+        $suppliers = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
+
+        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','agencyType','chemicalSupplier','suppliers','supplierNameBscic'));
     }
 
     /**
@@ -80,7 +80,7 @@ class ChemicalPurchaseController extends Controller
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
         //$this->pr($request->input());
-        $chemicalPurchase = ChemicalPurchase::insertChemicalPurchaseData($request);
+        $chemicalPurchase = ChemicalPurchase::insertChemicalPurchaseData($request, $this->chemicalSupplierTypeId);
 
         if($chemicalPurchase){
             return response()->json(['success'=>'Chemical purchase has been created']);
@@ -109,12 +109,10 @@ class ChemicalPurchaseController extends Controller
     public function edit($id)
     {
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-        //$supplierName = ChemicalPurchase::getSupplierName();
-        $supplierName = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
+        $suppliers = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
         $editChemicalpurchase = ChemicalPurchase::editChemicalPurchase($id);
-        //$supplierNameBsti = SupplierProfile::supplierProfileBsti();
 
-        return view('transactions.chemicalPurchase.modals.editChemicalPurchase',compact('chemicleType','supplierName','editChemicalpurchase','supplierNameBsti'));
+        return view('transactions.chemicalPurchase.modals.editChemicalPurchase',compact('chemicleType','suppliers','editChemicalpurchase','supplierNameBsti'));
     }
 
     /**
