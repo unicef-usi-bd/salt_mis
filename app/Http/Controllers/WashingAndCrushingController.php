@@ -120,15 +120,16 @@ class WashingAndCrushingController extends Controller
      */
     public function edit($id)
     {
-        $editWashingAndCrushingData = WashingAndCrushing::editWashingAndCrushingData($id);
+        $editData = WashingAndCrushing::editWashingAndCrushingData($id);
+        $editAmount = $editData->REQ_QTY+(($editData->WASTAGE*$editData->REQ_QTY)/(100-$editData->WASTAGE));
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-        $saltStock = Stock::getSaltStock($editWashingAndCrushingData->ITEM_NO,Auth::user()->center_id);
-        $totalReduceSalt = Stock::getTotalReduceSalt($editWashingAndCrushingData->ITEM_NO,Auth::user()->center_id);
+        $saltStock = Stock::getSaltStock($editData->ITEM_NO, Auth::user()->center_id);
+        $totalReduceSalt = Stock::getTotalReduceSalt($editData->ITEM_NO, Auth::user()->center_id);
         $saltStock = $saltStock - abs($totalReduceSalt);
-        $totalStock = sprintf('%0.2f',  $saltStock);
+        $totalStock = sprintf('%0.2f',  $saltStock)+$editAmount;
 
 
-        return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editWashingAndCrushingData','crudeSaltTypes','saltStock','totalStock'));
+        return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editData','crudeSaltTypes','saltStock','totalStock'));
     }
 
     /**
@@ -197,10 +198,8 @@ class WashingAndCrushingController extends Controller
         $centerId = Auth::user()->center_id;
         $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($saltId);
         $saltStock = Stock::getSaltStock($saltId,$centerId);
-        $totalReduceSalt = Stock::getTotalReduceSalt($saltId,$centerId);
-
+        $totalReduceSalt = Stock::getTotalReduceSalt($saltId, $centerId);
         $saltStock = $saltStock - abs($totalReduceSalt);
-
         return json_encode(array("saltStock" => $saltStock, "wastageAmount" => $showRequireChemicalPerKgchd));
     }
 }

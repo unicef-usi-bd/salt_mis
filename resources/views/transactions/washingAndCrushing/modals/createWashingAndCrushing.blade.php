@@ -24,7 +24,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> * </span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control salt" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control saltType" name="PRODUCT_ID" data-placeholder="Select or search data">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -38,18 +38,16 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 crudeSaltAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                 </span>
-
-                <span class="col-sm-6 stockInfo" style="margin-top: 6px;font-weight: bold;"> [Stock have: <span class="stockSalt hidden"></span><span class="result"></span> KG]</span>
+                <span class="col-sm-6 currentStock" data-stock="" style="margin-top: 6px;font-weight: bold;"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> * </span> </label>
             <span class="col-sm-7">
-                {{--<input type="text" class="wastageAmount" value="">--}}
-                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageCal" onkeypress="return numbersOnly(this, event)" value=""/>
+                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -84,45 +82,28 @@
 @include('masterGlobal.datePicker')
 
 <script>
-    $(document).ready(function () {
-//        $('.stockInfo').addClass('hidden');
-    });
-
-    $(document).on('change','.salt',function(){
+    $(document).on('change','.saltType',function(){
+        let scope = $('.currentStock');
+        $('.userAmount').val('');
+        $('.wastageAmount').val('');
+        scope.attr('data-stock', '');
         //$('.stockSalt').empty()
-        var saltId = $(this).val();
+        let saltId = $(this).val();
         $.ajax({
             type : 'GET',
             url : 'crude-salt-stock',
             data : {'saltId':saltId},
             success: function (data) {
-                var data = JSON.parse(data);
-                console.log(data);
-                $('.stockSalt').html(data.saltStock).show();
-                $('.result').html(data.saltStock);
-                $('.wastageAmount').val(data.wastageAmount.WAST_PER);
-                $('.crudeSaltAmount').val('');
-                $('.stockSalt').hide('').show();
+                data = JSON.parse(data);
+                scope.attr('data-stock', data.saltStock);
+                currentStockDisplay(scope);
             }
         })
     });
 
-    $(document).on('keyup','.crudeSaltAmount',function () {
-        var amount = parseInt($(this).val()) || 0;
-        var saltStock = parseInt($('.stockSalt').text());
-        var remainStock = saltStock - amount;
-
-        if(saltStock < amount){
-            $('.stockSalt').hide();
-            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Stock Out Of bound.').fadeIn();
-            $('.result').text(0);
-            if(amount === 0){
-                $('.stockSalt').show();
-            }
-        }else{
-            $('.stockSalt').hide();
-            $('.result').text(remainStock);
-        }
+    $(document).on('keyup','.userAmount',function () {
+        let scope = $('.currentStock');
+        currentStockDisplay(scope);
     });
 </script>
 

@@ -94,6 +94,21 @@
     @include('masterGlobal.deleteScript')
     @include('masterGlobal.ajaxFormSubmit')
     <!-- Add New Group Modal End -->
+    <script>
+        function currentStockDisplay(scope) {
+            let userAmountScope = $('.userAmount');
+            let amount = parseInt(scope.attr('data-stock') || 0);
+            let userAmount = parseInt(userAmountScope.val() || 0);
+            if(userAmount!==0 && userAmount>amount) {
+                displayAlertHandler(`Stock amount is not available. Current stock [${amount}KG]`, 'warning');
+                userAmountScope.val('');
+                userAmount = false;
+            }
+            if(userAmount) amount = amount - userAmount;
+            if(amount) return scope.html(`[Current Stock: ${amount}KG]`);
+            scope.empty();
+        }
+    </script>
 
 @endsection
 
