@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Input;
 
 class RequireChemicalChd extends Model
 {
-    public static function getWastagePercentage($itemNo){
+    public static function getWastagePercentage($recomType, $itemNo){
         return DB::table('smm_rmallocationchd')
             ->select('smm_rmallocationchd.USE_QTY','smm_rmallocationchd.CRUDE_SALT','smm_item.ITEM_NAME')
             ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
-            ->where('ITEM_ID','=',$itemNo)
+            ->where('smm_rmallocationchd.RMALLOMST_ID','=',$recomType)
+            ->where('smm_rmallocationchd.ITEM_ID','=',$itemNo)
             ->first();
     }
 

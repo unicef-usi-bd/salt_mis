@@ -37,6 +37,8 @@ class Controller extends BaseController
     public $saltPackId = 20;
 
 //############## Look Up Group Data Static Id For Get Lookup Group Data ###############
+    public $wcRecommendChemId = 27;
+    public $iodizedRecommendChemId = 28;
     public $chemicalId = 25;
     public $crudSaltId = 26;
     public $finishedSaltId= 29;
@@ -47,7 +49,6 @@ class Controller extends BaseController
     public $importerId = 44;
 
     //############## Static Item Id  ###############
-
     public $washAndCrushId = 7;
     public $iodizeId = 8;
 

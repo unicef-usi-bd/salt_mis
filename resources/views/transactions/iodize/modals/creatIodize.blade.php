@@ -1,8 +1,6 @@
 <div class="col-md-12">
-    <div class="alert alert-danger alert-dismissible msg" style="display: none;"></div>
-
     <form action="" name="formData" method="post" class="form-horizontal" role="form">
-            @csrf
+        @csrf
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
@@ -19,17 +17,17 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 saltAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                    <input type="text" id="inputSuccess WASH_CRASH_QTY" placeholder="Example: Amount here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                 </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockSalt">{{ $totalWashing }} KG</span><span class="result"></span>)</span>
+                <span class="col-sm-6 currentStock" data-stock="{{ $totalWashing }}" style="margin-top: 6px;font-weight: bold;">[Current Stock: {{ $totalWashing }}KG]</span>
             </div>
         </div>
         <div class="form-group">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess PRODUCT_ID" class="form-control chemical" name="PRODUCT_ID" data-placeholder="Select or search data">
-                        <option value=""></option>
+                    <select id="form-field-select-3 inputSuccess" class="form-control chemical  chosen-select" name="PRODUCT_ID" data-placeholder="Select or search data">
+                        <option></option>
                         @foreach($chemicleType as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                         @endforeach
@@ -39,15 +37,13 @@
             </div>
         <div class="form-group">
             <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1" style="margin-left: -47px;"> <b>Amount of Chemical</b><span style="color: red;"> *</span> </label>
-
             <div class="col-sm-8">
-                    <span class="col-sm-6" style="padding: 0;">
-                        <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 chemicalAmount" onkeypress="return numbersOnly(this, event)" value=""/>
-                    </span>
-                <span class="col-sm-6" style="margin-top: 6px;font-weight: bold;">(Stock have: <span class="stockChemical hidden"></span><span class="resultChemical"></span> ltr)</span>
-
+                <span class="col-sm-6" style="padding: 0;">
+                    <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                </span>
+                <span class="col-sm-6 currentChemicalStock" data-stock="" data-recommend="" style="margin-top: 6px;font-weight: bold;"></span>
             </div>
-            <span class="requireChemicalPerKg" style="margin-left:27%;display: none;color:#1cabe2;"></span>
+            <div class="recommendInfo" style="margin-left: 27%;float: left;color:#FF8F37;font-weight: bold"></div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> *</span> </label>
@@ -83,81 +79,93 @@
 @include('masterGlobal.datePicker')
 
 <script>
-    //$('.chemicalAmount').attr('readonly', true);
-    $(document).on('change','.chemical',function(){
-        var washSaltAmount = $('.saltAmount').val();
-        var chemicalId = $(this).val();
-        if(washSaltAmount === ''){
-            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Please Set Washing Salt Amount!').fadeIn();
-        }
+    $(document).on('keyup','.userAmount',function () {
+        let scope = $('.currentStock');
+        iodizeStockDisplay(scope);
+        $('.chemical').val('').trigger('chosen:updated');
+        clearAlert();
+    });
 
+    function iodizeStockDisplay(scope) {
+        let userAmountScope = $('.userAmount');
+        let amount = parseFloat(scope.attr('data-stock') || 0);
+        let userAmount = parseFloat(userAmountScope.val() || 0);
+        if(userAmount!==0 && userAmount>amount) {
+            displayAlertHandler(`Stock amount is not available. Current stock [${amount}KG]`, 'warning');
+            userAmountScope.val('');
+            userAmount = false;
+        }
+        if(userAmount) amount = amount - userAmount;
+        if(amount) {
+            return scope.html(`[Current Stock: ${amount}KG]`);
+        } else{
+            return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
+        }
+    }
+    
+    function clearAlert() {
+        $('.currentChemicalStock').empty();
+        $('.recommendInfo').empty();
+    }
+
+    function chemicalStockDisplay(scope) {
+        let message = null;
+//        For Chemical recommend message
+        let recommendScope = $('.recommendInfo');
+        let recommendChemical = parseFloat(scope.attr('data-recommend') || 0);
+        if(recommendChemical>0) message = `Warning! Recommend chemical <span style="color:green">${recommendChemical.toFixed(2)}</span>KG`;
+        recommendScope.html(message);
+//        For chemical stock
+        let userAmountScope = $('.userChemicalAmount');
+        let amount = parseFloat(scope.attr('data-stock') || 0);
+        let userAmount = parseFloat(userAmountScope.val() || 0);
+        if(userAmount!==0 && userAmount>amount) {
+            displayAlertHandler(`Chemical stock amount is not available. Current stock [${amount}KG]`, 'warning');
+            userAmountScope.val('');
+            userAmount = false;
+        }
+        if(userAmount) amount = amount - userAmount;
+        if(amount) {
+            return scope.html(`[Current Stock: ${amount}KG]`);
+        } else{
+            return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
+        }
+    }
+
+    $(document).on('change','.chemical',function(){
+        let washSaltAmount = parseFloat($('.userAmount').val() || 0);
+        let chemicalId = $(this).val();
+        let recommendScope = $('.recommendInfo');
+        let chemicalStockScope = $('.currentChemicalStock');
+        recommendScope.empty();
+        chemicalStockScope.empty();
+        chemicalStockScope.prop('data-stock', '');
+        chemicalStockScope.prop('data-recommend', '');
         $.ajax({
             type : 'GET',
             url : 'chemical-stock',
             data : {'chemicalId':chemicalId},
             success: function (data) {
-               // alert(data)
-                var data = JSON.parse(data);
-                var recommandedQty = (data.chemicalPerKg.USE_QTY / data.chemicalPerKg.CRUDE_SALT) * washSaltAmount;
-                //console.log(data.chemicalPerKg.USE_QTY * washSaltAmount);
-                $('.chemicalAmount').val(recommandedQty.toFixed(2));
-                $('.requireChemicalPerKg').text('Recommended Chemical for ( '+data.chemicalPerKg.ITEM_NAME+' ) is ' + recommandedQty.toFixed(2)).show();
-                $('.stockChemical').html(data.chemicalStock).show();
-                $('.resultChemical').html(data.chemicalStock.toFixed(2));
-                var chemicalNeed = (parseInt(data.chemicalPerKg.USE_QTY) * parseInt(washSaltAmount)) / parseInt(data.chemicalPerKg.CRUDE_SALT);
-
-              //  alert(chemicalNeed);
-
-                if(parseInt(data.chemicalStock) > chemicalNeed){
-                  //  alert("hi");
-                    $('.chemicalAmount').attr('readonly', true);
-                }else{
-                    //alert("hlw");
-                    $('.chemicalAmount').attr('readonly', true);
-                    $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong>You Have Not enough Chemical Stock.').fadeIn();
-                    $('.saltAmount').val("");
+                data = JSON.parse(data);
+                let chemicalStock = data.chemicalStock;
+                chemicalStockScope.attr('data-stock', chemicalStock);
+                if(data.chemicalPerKg!==null) {
+                    let chemicalAmount = parseFloat(data.chemicalPerKg.USE_QTY);
+                    let saltAmount = parseFloat(data.chemicalPerKg.CRUDE_SALT);
+                    let recommendChemical = (chemicalAmount/saltAmount)*washSaltAmount;
+                    chemicalStockScope.attr('data-recommend', recommendChemical);
                 }
-
-                $(document).on('keyup','.chemicalAmount',function () {
-                    var amount = parseInt($(this).val()) || 0;
-                    var chemicalStock = parseInt($('.stockChemical').text());
-                    var remainStock = chemicalStock - amount;
-
-                    if(chemicalStock < amount){
-                        $('.stockChemical').hide();
-                        $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Chemical Stock Out Of bound.').fadeIn();
-                        $('.resultChemical').text(0);
-                        if(amount === 0){
-                            $('.stockChemical').show();
-                        }
-                    }else{
-                        $('.stockChemical').hide();
-                        $('.resultChemical').text(remainStock);
-                    }
-                });
+                chemicalStockDisplay(chemicalStockScope);
             }
         })
 
     });
 
-    $(document).on('change','.saltAmount',function () {
-        var amount = parseInt($(this).val()) || 0;
-        var saltStock = parseInt($('.stockSalt').text());
-        var remainStock = saltStock - amount;
-
-        if(saltStock < amount){
-            $('.stockSalt').hide();
-            $('.msg').html('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning !</strong> Washing Salt Stock Out Of bound.').fadeIn();
-            $('.saltAmount').val('');
-            $('.result').text(0);
-            if(amount === 0){
-                $('.stockSalt').show();
-            }
-        }else{
-            $('.stockSalt').hide();
-            $('.result').text(remainStock);
-        }
+    $(document).on('keyup','.userChemicalAmount',function () {
+        let chemicalStockScope = $('.currentChemicalStock');
+        chemicalStockDisplay(chemicalStockScope);
     });
+
 </script>
 
 

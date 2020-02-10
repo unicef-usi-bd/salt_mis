@@ -29,7 +29,7 @@ class Stock extends Model
             ->sum('tmm_itemstock.QTY');
     }
 
-    public static function getTotalReduceChemical($chemicalId,$centerId){
+    public static function getTotalReduceChemical($chemicalId, $centerId){
         return DB::table('tmm_itemstock')
             ->select('tmm_itemstock.QTY')
             ->where('tmm_itemstock.ITEM_NO','=',$chemicalId)

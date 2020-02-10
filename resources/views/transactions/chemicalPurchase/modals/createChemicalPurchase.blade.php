@@ -102,8 +102,6 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
-{{--@include('masterGlobal.ajaxFormSubmit')--}}
 
 <script>
     $(document).on('change', '.chemical-source', function () {

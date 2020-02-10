@@ -216,11 +216,10 @@ class IodizedController extends Controller
     public function getChemicalStock(Request $request){
         $chemicalId = $request->input('chemicalId');
         $centerId = Auth::user()->center_id;
-        $chemicalStock = Stock::getChemicalStock($chemicalId,$centerId);
-        $totalReduceChemical = Stock::getTotalReduceChemical($chemicalId,$centerId);
-
-        $chemicalStock = $chemicalStock - abs($totalReduceChemical);
-        $showRequireChemicalPerKgchd = RequireChemicalChd::getWastagePercentage($chemicalId);
-        return json_encode(array("chemicalStock" => $chemicalStock, "chemicalPerKg" => $showRequireChemicalPerKgchd));
+        $totalChemicalStock = Stock::getChemicalStock($chemicalId, $centerId);
+        $usedChemical = Stock::getTotalReduceChemical($chemicalId, $centerId);
+        $chemicalStock = $totalChemicalStock - abs($usedChemical);
+        $recommendChemPerKg = RequireChemicalChd::getWastagePercentage($this->iodizedRecommendChemId, $chemicalId);
+        return json_encode(array("chemicalStock" => $chemicalStock, "chemicalPerKg" => $recommendChemPerKg));
     }
 }
