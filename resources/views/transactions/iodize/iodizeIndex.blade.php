@@ -39,13 +39,16 @@
                 <tbody>
                 <?php $sl=0;?>
                 @foreach($iodizeIndex as $row)
+                    @php
+                        $wasteAmount = ($row->WASH_CRASH_QTY*$row->WASTAGE)/100;
+                    @endphp
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->BATCH_NO}}</td>
-                        <td class="hidden-480">{{ date('d-M-Y',strtotime($row->BATCH_DATE))}}</td>
-                        <td class="hidden-480">{{ sprintf('%0.2f',($row->WASH_CRASH_QTY*100)/(100-$row->WASTAGE)) }}</td>
-                        <td class="hidden-480">{{ $row->WASTAGE }} ( {{ sprintf('%0.2f',($row->WASTAGE*$row->WASH_CRASH_QTY)/(100-$row->WASTAGE)) }} KG)</td>
+                        <td class="hidden-480">{{ date('d-M-Y',strtotime($row->BATCH_DATE)) }}</td>
                         <td class="hidden-480">{{ $row->WASH_CRASH_QTY }}</td>
+                        <td class="hidden-480">{{ $row->WASTAGE }} ( {{ sprintf('%0.2f', $wasteAmount) }} KG)</td>
+                        <td class="hidden-480">{{ sprintf('%0.2f', $row->WASH_CRASH_QTY-$wasteAmount) }}</td>
                         <td class="hidden-480">{{ $row->REQ_QTY }}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
@@ -89,32 +92,59 @@
         </div><!-- /.col -->
 
     </div><!-- /.row -->
-    <script> //This script use for prevent back button after logout to login
-        // window.onload = function () {
-        //     if (typeof history.replaceState === "function") {
-        //         history.replaceState(null, null, "/");
-        //         window.onpopstate = function () {
-        //             history.replaceState( null, null,"/");
-        //         };
-        //     } else {
-        //         var ignoreHashChange = true;
-        //         window.onhashchange = function () {
-        //             if (!ignoreHashChange) {
-        //                 ignoreHashChange = true;
-        //                 window.location.hash = Math.random();
-        //             } else {
-        //                 ignoreHashChange = false;
-        //             }
-        //         };
-        //     }
-        // }
-    </script>
-
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
     <!-- Add New Group Modal End -->
     @include('masterGlobal.ajaxFormSubmit')
+    <script>
+        //    Chemical Stock Handler
+        function iodizeStockDisplay(scope) {
+            let userAmountScope = $('.userAmount');
+            let amount = parseFloat(scope.attr('data-stock') || 0);
+            let userAmount = parseFloat(userAmountScope.val() || 0);
+            if(userAmount!==0 && userAmount>amount) {
+                displayAlertHandler(`Stock amount is not available. Current stock [${amount}KG]`, 'warning');
+                userAmountScope.val('');
+                userAmount = false;
+            }
+            if(userAmount) amount = amount - userAmount;
+            if(amount) {
+                return scope.html(`[Current Stock: ${amount}KG]`);
+            } else{
+                return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
+            }
+        }
 
+        function clearAlert() {
+            $('.currentChemicalStock').empty();
+            $('.recommendInfo').empty();
+        }
+
+        //    Chemical Stock Handler
+        function chemicalStockDisplay(scope) {
+            let message = null;
+//        For Chemical recommend message
+            let recommendScope = $('.recommendInfo');
+            let recommendChemical = parseFloat(scope.attr('data-recommend') || 0);
+            if(recommendChemical>0) message = `Warning! Recommend chemical <span style="color:green">${recommendChemical.toFixed(2)}</span>KG`;
+            recommendScope.html(message);
+//        For chemical stock
+            let userAmountScope = $('.userChemicalAmount');
+            let amount = parseFloat(scope.attr('data-stock') || 0);
+            let userAmount = parseFloat(userAmountScope.val() || 0);
+            if(userAmount!==0 && userAmount>amount) {
+                displayAlertHandler(`Chemical stock amount is not available. Current stock [${amount}KG]`, 'warning');
+                userAmountScope.val('');
+                userAmount = false;
+            }
+            if(userAmount) amount = amount - userAmount;
+            if(amount) {
+                return scope.html(`[Current Stock: ${amount}KG]`);
+            } else{
+                return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
+            }
+        }
+    </script>
 
 @endsection
 

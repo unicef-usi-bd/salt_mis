@@ -129,28 +129,19 @@ class IodizedController extends Controller
         $digits = 4;
         $batchNo = rand(pow(10, $digits-1), pow(10, $digits)-1);
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-
         $centerId = Auth::user()->center_id;
-//        $totalWashingSalt = Stock::getTotalWashingSalt($centerId);
-//        $totalReduceWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
-//        $totalSalt = $totalWashingSalt - abs($totalReduceWashingSalt);
+        $washCrushStock = Stock::getTotalWashingSalt($centerId);
+        $iodizeStock = abs(Stock::getTotalReduceWashingSalt($centerId));
+        $iodizeStock = $washCrushStock - $iodizeStock;
+//        $salesStock = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+//        if($salesStock){
+//            $iodizeStock = $iodizeStock - abs($salesStock);
+//        }
+//        dd($washCrushStock);
 
-        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
-
-        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-
-        if($afterSaleWashing){
-            $totalSalt = $WashingTotalUseInIodize - abs($afterSaleWashing);
-        }else{
-            $totalSalt = $WashingTotalUseInIodize;
-        }
-
-        $totalReduceChemical = Stock::getTotalReduceChemical($editIodize->ITEM_NO,$centerId);
-        $totalChemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO,$centerId);
-        $totalChemical = $totalChemicalStock - abs($totalReduceChemical);
-       return view('transactions.iodize.modals.editIodize',compact('editIodize','batchNo','chemicleType','totalSalt','totalChemical'));
+        $chemicalStock = Stock::getChemicalStock($editIodize->ITEM_NO,$centerId);
+//        dd($usedChemical, $chemicalStock);
+       return view('transactions.iodize.modals.editIodize',compact('editIodize','batchNo','chemicleType','washCrushStock', 'iodizeStock', 'chemicalStock'));
     }
 
     /**

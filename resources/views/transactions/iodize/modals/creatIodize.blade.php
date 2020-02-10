@@ -49,7 +49,6 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-7">
                 <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value=""/>
-
             </div>
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
         </div>
@@ -79,6 +78,8 @@
 @include('masterGlobal.datePicker')
 
 <script>
+
+//    User Input salt amount handler
     $(document).on('keyup','.userAmount',function () {
         let scope = $('.currentStock');
         iodizeStockDisplay(scope);
@@ -86,52 +87,7 @@
         clearAlert();
     });
 
-    function iodizeStockDisplay(scope) {
-        let userAmountScope = $('.userAmount');
-        let amount = parseFloat(scope.attr('data-stock') || 0);
-        let userAmount = parseFloat(userAmountScope.val() || 0);
-        if(userAmount!==0 && userAmount>amount) {
-            displayAlertHandler(`Stock amount is not available. Current stock [${amount}KG]`, 'warning');
-            userAmountScope.val('');
-            userAmount = false;
-        }
-        if(userAmount) amount = amount - userAmount;
-        if(amount) {
-            return scope.html(`[Current Stock: ${amount}KG]`);
-        } else{
-            return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
-        }
-    }
-    
-    function clearAlert() {
-        $('.currentChemicalStock').empty();
-        $('.recommendInfo').empty();
-    }
-
-    function chemicalStockDisplay(scope) {
-        let message = null;
-//        For Chemical recommend message
-        let recommendScope = $('.recommendInfo');
-        let recommendChemical = parseFloat(scope.attr('data-recommend') || 0);
-        if(recommendChemical>0) message = `Warning! Recommend chemical <span style="color:green">${recommendChemical.toFixed(2)}</span>KG`;
-        recommendScope.html(message);
-//        For chemical stock
-        let userAmountScope = $('.userChemicalAmount');
-        let amount = parseFloat(scope.attr('data-stock') || 0);
-        let userAmount = parseFloat(userAmountScope.val() || 0);
-        if(userAmount!==0 && userAmount>amount) {
-            displayAlertHandler(`Chemical stock amount is not available. Current stock [${amount}KG]`, 'warning');
-            userAmountScope.val('');
-            userAmount = false;
-        }
-        if(userAmount) amount = amount - userAmount;
-        if(amount) {
-            return scope.html(`[Current Stock: ${amount}KG]`);
-        } else{
-            return scope.html(`[Current Stock: <span style="color:red">Empty</span>]`);
-        }
-    }
-
+//    User Input Chemical handler
     $(document).on('change','.chemical',function(){
         let washSaltAmount = parseFloat($('.userAmount').val() || 0);
         let chemicalId = $(this).val();
@@ -161,6 +117,7 @@
 
     });
 
+//    User Input Chemical amount handler
     $(document).on('keyup','.userChemicalAmount',function () {
         let chemicalStockScope = $('.currentChemicalStock');
         chemicalStockDisplay(chemicalStockScope);
