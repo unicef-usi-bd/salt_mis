@@ -53,15 +53,15 @@ class SalesDistribution extends Model
                 $pactInput = $request->input('PACK_TYPE')[$i];
                 $extractPact = explode(',', $pactInput);
                 $packTypeId = $extractPact[0];
-                $packQuantity = $extractPact[1];
+                $measurementPack = $extractPact[1];
                 $totalPacket =  (float)$request->input('PACK_QTY')[$i];
-                $totalQuantity = $totalPacket * $packQuantity;
+                $totalQuantity = $totalPacket * $measurementPack;
                 $salesChdData = array(
                     'SALESMST_ID'=>$salesDistributionMstId,
                     'ITEM_ID'=> $request->input('ITEM_ID')[$i],
                     'brand_id'=> $request->input('brand_id')[$i],
                     'PACK_TYPE'=> $packTypeId,
-                    'PACK_QTY'=> $packQuantity,
+                    'PACK_QTY'=> $totalPacket,
                     'center_id' => Auth::user()->center_id,
                     'QTY'=> $totalQuantity
                 );

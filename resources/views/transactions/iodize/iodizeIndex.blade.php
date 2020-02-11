@@ -40,15 +40,16 @@
                 <?php $sl=0;?>
                 @foreach($iodizeIndex as $row)
                     @php
-                        $wasteAmount = ($row->WASH_CRASH_QTY*$row->WASTAGE)/100;
+                        $wasteAmount = ($row->WASH_CRASH_QTY*$row->WASTAGE)/(100-$row->WASTAGE);
+                        $rawAmount = $wasteAmount+$row->WASH_CRASH_QTY;
                     @endphp
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->BATCH_NO}}</td>
                         <td class="hidden-480">{{ date('d-M-Y',strtotime($row->BATCH_DATE)) }}</td>
-                        <td class="hidden-480">{{ number_format($row->WASH_CRASH_QTY, 2) }}</td>
+                        <td class="hidden-480">{{ number_format($rawAmount, 2) }}</td>
                         <td class="hidden-480">{{ $row->WASTAGE }} ( {{ number_format($wasteAmount, 2) }} KG)</td>
-                        <td class="hidden-480">{{ number_format($row->WASH_CRASH_QTY-$wasteAmount, 2) }}</td>
+                        <td class="hidden-480">{{ number_format($rawAmount-$wasteAmount, 2) }}</td>
                         <td class="hidden-480">{{ number_format($row->REQ_QTY, 2) }}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">

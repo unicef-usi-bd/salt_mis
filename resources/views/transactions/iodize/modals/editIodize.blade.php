@@ -2,6 +2,10 @@
     <form action="" name="formData" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
+        @php
+            $wasteAmount = ($editIodize->WASH_CRASH_QTY*$editIodize->WASTAGE)/(100-$editIodize->WASTAGE);
+            $rawAmount = $wasteAmount + $editIodize->WASH_CRASH_QTY;
+        @endphp
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
@@ -18,7 +22,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount"  onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->WASH_CRASH_QTY }}"/>
+                    <input type="text" id="inputSuccess" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount"  onkeypress="return numbersOnly(this, event)" value="{{ number_format($rawAmount, 2) }}"/>
                 </span>
                 <span class="col-sm-6 currentStock" data-stock="{{ $washCrushStock }}" style="margin-top: 6px;font-weight: bold;">[Current Stock: {{ $washCrushStock }}KG]</span>
             </div>

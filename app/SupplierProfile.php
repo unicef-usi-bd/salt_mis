@@ -65,8 +65,6 @@ class SupplierProfile extends Model
             ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$supplierTypeId)
             ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
-            ->where('ssm_supplier_info.TRADING_NAME','!=','BSCIC')
-            ->orderBy('ssm_supplier_info.TRADING_NAME','=','BSCIC','DESC')
             ->get();
     }
 

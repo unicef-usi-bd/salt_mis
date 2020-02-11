@@ -245,7 +245,7 @@
                 return false;
             }
             let remainStock = currentStock-saltAmount;
-            stockScope.html(remainStock);
+            stockScope.html(remainStock.toFixed(2));
         } else if(saltTypeId===8){
             let saltAmount = eachRowCalculation(saltTypeId);
             let stockScope = $('.currentStockIodize');
@@ -257,7 +257,7 @@
                 return false;
             }
             let remainStock = currentStock-saltAmount;
-            stockScope.html(remainStock);
+            stockScope.html(remainStock.toFixed(2));
         }
     }
 

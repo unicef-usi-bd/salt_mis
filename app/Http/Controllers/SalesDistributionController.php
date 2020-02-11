@@ -112,7 +112,7 @@ class SalesDistributionController extends Controller
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
         //$this->pr($request->input());
-        $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request,$this->saltPackId,$this->washAndCrushId,$this->iodizeId);
+        $salesDistributionInsert = SalesDistribution::insertSalesDistributionData($request, $this->washAndCrushId,$this->iodizeId);
 
 
         if($salesDistributionInsert){

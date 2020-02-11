@@ -132,9 +132,10 @@ class Iodized extends Model
             ->first();
     }
 
-    public static function updateIodizeData($request, $id, $iodizeStock){
+    public static function updateIodizeData($request, $id){
         $amount = $request->input('WASH_CRASH_QTY');
-        $wastage = ($amount * $request->input('WASTAGE') / 100);
+        $wastePercentage = $request->input('WASTAGE');
+        $wastage = ($amount * $wastePercentage) / 100;
         $iodizeStock = $amount - $wastage;
         try{
             DB::beginTransaction();
