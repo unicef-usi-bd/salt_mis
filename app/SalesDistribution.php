@@ -29,7 +29,7 @@ class SalesDistribution extends Model
         return $customerInfo->get();
     }
 
-    public static function insertSalesDistributionData($request, $saltPackId, $washAndCrushId, $iodizeId){
+    public static function insertSalesDistributionData($request, $washAndCrushId, $iodizeId){
 
         try{
             DB::beginTransaction();
@@ -50,23 +50,20 @@ class SalesDistribution extends Model
 
             $requestTime = count($_POST['PACK_TYPE']);
             for ($i=0; $i < $requestTime; $i++){
-                $saltPackingSize = DB::table('ssc_lookupchd')
-                    ->select('ssc_lookupchd.DESCRIPTION')
-                    ->where('ssc_lookupchd.LOOKUPCHD_ID','=',$request->input('PACK_TYPE')[$i])
-                    ->first();
-
-                $packageCalculation = (float)$saltPackingSize->DESCRIPTION;
-                $test =  (float)$request->input('PACK_QTY')[$i];
-
-                $packageQuantity = $test * $packageCalculation;
+                $pactInput = $request->input('PACK_TYPE')[$i];
+                $extractPact = explode(',', $pactInput);
+                $packTypeId = $extractPact[0];
+                $packQuantity = $extractPact[1];
+                $totalPacket =  (float)$request->input('PACK_QTY')[$i];
+                $totalQuantity = $totalPacket * $packQuantity;
                 $salesChdData = array(
                     'SALESMST_ID'=>$salesDistributionMstId,
                     'ITEM_ID'=> $request->input('ITEM_ID')[$i],
                     'brand_id'=> $request->input('brand_id')[$i],
-                    'PACK_TYPE'=> $request->input('PACK_TYPE')[$i],
-                    'PACK_QTY'=> $request->input('PACK_QTY')[$i],
+                    'PACK_TYPE'=> $packTypeId,
+                    'PACK_QTY'=> $packQuantity,
                     'center_id' => Auth::user()->center_id,
-                    'QTY'=> $packageQuantity
+                    'QTY'=> $totalQuantity
                 );
 
                 DB::table('tmm_saleschd')->insertGetId($salesChdData);
@@ -82,14 +79,14 @@ class SalesDistribution extends Model
                         'TRAN_TYPE' => 'W', //  W=Wash
                         'TRAN_NO' => $salesDistributionMstId,
                         'ITEM_NO' => $request->input('ITEM_ID')[$i],
-                        'QTY' => '-'.$packageQuantity,
+                        'QTY' => '-'.$totalQuantity,
                         'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
                         'center_id' => Auth::user()->center_id,
                         //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                         'ENTRY_BY' => Auth::user()->id,
                         'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                     );
-                    $itemStock = DB::table('tmm_itemstock')->insert($stockData);
+                    DB::table('tmm_itemstock')->insert($stockData);
                 }
 
                 if($finishSaltId == $iodizeId){
@@ -99,14 +96,14 @@ class SalesDistribution extends Model
                         'TRAN_TYPE' => 'I', //  I= Iodize
                         'TRAN_NO' => $salesDistributionMstId,
                         'ITEM_NO' => $request->input('ITEM_ID')[$i],
-                        'QTY' => '-'.$packageQuantity,
+                        'QTY' => '-'.$totalQuantity,
                         'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
                         'center_id' => Auth::user()->center_id,
                         //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                         'ENTRY_BY' => Auth::user()->id,
                         'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
                     );
-                    $itemStock =  DB::table('tmm_itemstock')->insert($stockData);
+                    DB::table('tmm_itemstock')->insert($stockData);
                 }
             }
             DB::commit();

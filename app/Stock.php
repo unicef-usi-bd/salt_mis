@@ -691,5 +691,25 @@ class Stock extends Model
 
         return $totalIo->sum('tmm_itemstock.QTY');
     }
+
+//    wash and crush stock for sale
+    public static function stockWashAndCrushForSales($centerId){
+        $washingStock = self::getTotalWashingSalt($centerId);
+        $usedWashingSalt = self::getTotalReduceWashingSalt($centerId);
+        $washingStock = $washingStock - abs($usedWashingSalt);
+        $saleWashing = self::getTotalReduceWashingSaltAfterSale($centerId);
+        if($saleWashing){
+            $washingStock = $washingStock - abs($saleWashing);
+        }
+        return $washingStock;
+    }
+
+//    Iodize stock for sale
+    public static function stockIodizeForSales($centerId){
+        $iodizeStock = self::getTotalIodizeSaltForSale($centerId);
+        $iodizeSale = abs(self::getTotalReduceIodizeSaltForSale($centerId));
+        if($iodizeSale) $iodizeStock = $iodizeStock - $iodizeSale;
+        return $iodizeStock;
+    }
 }
 

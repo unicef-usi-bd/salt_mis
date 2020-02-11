@@ -53,7 +53,7 @@
                         <td class="hidden-480">{{$row->SALES_DATE}}</td>
                         <td class="hidden-480">{{ $row->LOOKUPCHD_NAME }}</td>
                         <td class="hidden-480">{{$row->PACK_QTY}} pcs</td>
-                        <td class="hidden-480">{{ $row->DESCRIPTION*$row->PACK_QTY}} KG</td>
+                        <td class="hidden-480">{{--{{ $row->DESCRIPTION*$row->PACK_QTY}}--}} KG</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

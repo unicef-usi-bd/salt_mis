@@ -39,19 +39,11 @@ class SalesDistributionController extends Controller
         );
 
         $salesDistInfo = SalesDistribution::getSalesDistributionData();
+//        dd($salesDistInfo);
         $centerId = Auth::user()->center_id;
 
-        $washingStock = Stock::getTotalWashingSalt($centerId);
-        $usedWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $washingStock = $washingStock - abs($usedWashingSalt);
-        $saleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-        if($saleWashing){
-            $washingStock = $washingStock - abs($saleWashing);
-        }
-
-        $iodizeStock = Stock::getTotalIodizeSaltForSale($centerId);
-        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        if($iodizeSale) $iodizeStock = $iodizeStock - $iodizeSale;
+        $washingStock = Stock::stockWashAndCrushForSales($centerId);
+        $iodizeStock = Stock::stockIodizeForSales($centerId);
 
         return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDistInfo','washingStock','iodizeStock'));
     }
@@ -66,24 +58,15 @@ class SalesDistributionController extends Controller
         $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
         $tradingId = SalesDistribution::getTradingName();
         $saltId = Item::itemTypeWiseItemList($this->finishedSaltId);
-        $saltPackId = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
-        $washAndCrushId = $this->washAndCrushId;
-        $iodizeId = $this->iodizeId;
+        $saltPackTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
         $centerId = Auth::user()->center_id;
-        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
-        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
-        if($iodizeSale){
-            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
-        }else{
-            $iodizeStock = $beforeIodizeSaleStock;
-        }
+
+        $washingStock = Stock::stockWashAndCrushForSales($centerId);
+        $iodizeStock = Stock::stockIodizeForSales($centerId);
 
         $brandName = Brand::millerBrand();
-        $traderName = SellerDistributorProfile::traderName();
-        //$pckSize = SalesDistribution::getPacksize();
-        //$this->pr($brandName);
-        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackId','washAndCrushId','iodizeId','iodizeStock','brandName','traderName'));
+
+        return view('transactions.salesDistribution.modals.createSalesDistribution',compact('sellerType','tradingId','saltId','saltPackTypes','washingStock','iodizeStock','brandName'));
     }
 
     /**
@@ -197,67 +180,6 @@ class SalesDistributionController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-    }
-
-    public function getWashingCrashingSalt(Request $request){
-        $centerId = $request->input('centerId');
-//     $washCrashStock = Stock::getTotalWashingSaltForSale($washCrashId);
-//        $washingSalt = Stock::getTotalWashingSalt($centerId);
-//        $washingSaltSale = abs(Stock::getTotalReduceWashingSaltAfterSale($centerId));
-//
-//        //$this->pr($washingSaltSale);
-//
-//        $idoizeSaltAmount = Stock::getTotalIodizeSaltForSale($centerId);
-//
-//        if($idoizeSaltAmount){
-//            $afterIodizeWashingStock = $washingSalt - $idoizeSaltAmount;
-//            if($washingSaltSale){
-//                $stock = $afterIodizeWashingStock - $washingSaltSale;
-//            }else{
-//                $stock = $afterIodizeWashingStock;
-//            }
-//        }else{
-//            if($washingSaltSale){
-//                $stock = $washingSalt - $washingSaltSale;
-//            }else{
-//                $stock = $washingSalt;
-//            }
-//
-//        }
-
-        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
-
-        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-
-        if($afterSaleWashing){
-            $stock = $WashingTotalUseInIodize - abs($afterSaleWashing);
-        }else{
-            $stock = $WashingTotalUseInIodize;
-        }
-     //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
-
-     //$stock = $washCrashStock - abs($totalReduceWashCrashSalt);
-
-     return $stock;
-
-    }
-
-    public function getIodizeSalt(Request $request){
-        $centerId = $request->input('centerId');
-        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
-        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
-        if($iodizeSale){
-            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
-        }else{
-            $iodizeStock = $beforeIodizeSaleStock;
-        }
-        //$idizeStock = $iodizeStock - abs($totalReduceIodizeSalt);
-
-        return $iodizeStock;
-
     }
 
     public function getpackSizeData(Request $request){

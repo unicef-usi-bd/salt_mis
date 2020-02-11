@@ -196,11 +196,10 @@ protected $fillable = [
         return $traders->get();
     }
 
-    public static function traderName(){
+    public static function millerWiseTraders(){
         $centerId = Auth::user()->center_id;
         return DB::table('ssm_customer_info')
             ->select('ssm_customer_info.*')
-            ->where('ssm_customer_info.SELLER_TYPE_ID','=',7)
             ->where('ssm_customer_info.center_id','=',$centerId)
             ->get();
     }

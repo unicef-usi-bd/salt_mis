@@ -130,8 +130,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('chemical-stock','IodizedController@getChemicalStock');//Rubiyat
     Route::resource('quality-control-testing','QulityControlTestingController');//jalal
     Route::resource('sales-distribution','SalesDistributionController');//jalal
-    Route::get('washing-crashing-stock','SalesDistributionController@getWashingCrashingSalt');//jalal
-    Route::get('iodize-stock','SalesDistributionController@getIodizeSalt');//jalal
     Route::get('get-packsize','SalesDistributionController@getpackSizeData');//jalal
     Route::get('trading-list','SellerDistributorProfileController@getTradingList');//rubiyat
     Route::get('crude-salt-invoice-list','CrudeSaltDetailsController@getInvoiceList');//rubiyat
