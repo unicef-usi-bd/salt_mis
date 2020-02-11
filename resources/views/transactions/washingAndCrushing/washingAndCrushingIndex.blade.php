@@ -38,14 +38,17 @@
                 <tbody>
                 <?php $sl=0;?>
                 @foreach($washingAndCrushingData as $row)
+                    @php
+                        $wastage = ($row->WASTAGE*$row->REQ_QTY)/(100-$row->WASTAGE);
+                    @endphp
                 <tr>
                     <td class="center">{{ ++$sl }}</td>
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{ date('d-M-Y', strtotime($row->BATCH_DATE)) }}</td>
-                    <td>{{ sprintf('%0.2f',($row->REQ_QTY*100)/(100-$row->WASTAGE)) }}</td>
-                    <td>{{$row->WASTAGE}} ( {{ sprintf('%0.2f',($row->WASTAGE*$row->REQ_QTY)/(100-$row->WASTAGE)) }} KG)</td>
-                    <td>{{$row->REQ_QTY}}</td>
+                    <td>{{ number_format($row->REQ_QTY + $wastage, 2) }}</td>
+                    <td>{{$row->WASTAGE}} ( {{ number_format($wastage, 2) }} KG)</td>
+                    <td>{{ number_format($row->REQ_QTY, 2) }}</td>
                     <td class="row{{ $row->WASHCRASHMST_ID }}">
                     <div class="hidden-sm hidden-xs action-buttons">
                     @php

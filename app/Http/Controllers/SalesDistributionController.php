@@ -38,36 +38,22 @@ class SalesDistributionController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        $salesDitributionIndex = SalesDistribution::getSalesDistributionData();
+        $salesDistInfo = SalesDistribution::getSalesDistributionData();
         $centerId = Auth::user()->center_id;
 
-        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
-
-        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-
-        if($afterSaleWashing){
-            $washingStock = $WashingTotalUseInIodize - abs($afterSaleWashing);
-        }else{
-            $washingStock = $WashingTotalUseInIodize;
+        $washingStock = Stock::getTotalWashingSalt($centerId);
+        $usedWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $washingStock = $washingStock - abs($usedWashingSalt);
+        $saleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
+        if($saleWashing){
+            $washingStock = $washingStock - abs($saleWashing);
         }
 
-
-        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
+        $iodizeStock = Stock::getTotalIodizeSaltForSale($centerId);
         $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
-        if($iodizeSale){
-            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
-        }else{
-            $iodizeStock = $beforeIodizeSaleStock;
-        }
-        //$totalReduceWashCrashSalt = Stock::getTotalReduceWashingSaltAfterSale($washCrashId);
+        if($iodizeSale) $iodizeStock = $iodizeStock - $iodizeSale;
 
-        //$stock = $washCrashStock - abs($totalReduceWashCrashSalt);
-
-//        return $stock;
-        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDitributionIndex','washingStock','iodizeStock'));
+        return view('transactions.salesDistribution.salesDistributionIndex',compact('heading','previllage','salesDistInfo','washingStock','iodizeStock'));
     }
 
     /**

@@ -37,7 +37,6 @@ class Controller extends BaseController
     public $saltPackId = 20;
 
 //############## Look Up Group Data Static Id For Get Lookup Group Data ###############
-    public $wcRecommendChemId = 27;
     public $iodizedRecommendChemId = 28;
     public $chemicalId = 25;
     public $crudSaltId = 26;
@@ -115,6 +114,11 @@ class Controller extends BaseController
     protected function dateFormat($date=null){
         if(!empty($date)) $date = date('Y-m-d', strtotime($date));
         return $date;
+    }
+
+    protected function floatFormat($number=0){
+        $number = number_format($number, 2);
+        return $number;
     }
 
     protected function pr($data){

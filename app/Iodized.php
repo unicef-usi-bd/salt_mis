@@ -41,10 +41,9 @@ class Iodized extends Model
     }
 
     public static function insertIodizeData($request,$centerId,$entryBy){
-        $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
-        $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
-        $iodizeStock = $washAndCrushQty - $iodizeWastage;
-
+        $amount = $request->input('WASH_CRASH_QTY');
+        $wastage = ($amount * $request->input('WASTAGE') / 100);
+        $iodizeStock = $amount - $wastage;
         try{
             DB::beginTransaction();
             $iodizeMstId = DB::table('tmm_iodizedmst')->insertGetId([
@@ -95,14 +94,13 @@ class Iodized extends Model
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             ]);
             DB::table('tmm_itemstock')->insertGetId([
-                //'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
+                // 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('TRAN_DATE'))),
                 'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('BATCH_DATE'))),
-                'TRAN_TYPE' => 'I', //I=Iodized
+                'TRAN_TYPE' => 'I', // I=Iodized
                 'TRAN_NO' => $iodizeMstId,
                 'ITEM_NO' => $request->input('PRODUCT_ID'),
-//                'QTY' => $request->input('WASH_CRASH_QTY'),
                 'QTY' => $iodizeStock,
-                'TRAN_FLAG' => 'II', // II = Idonize Increase
+                'TRAN_FLAG' => 'II', // II = Iodize Increase
                 'center_id' => $centerId,
                 //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
                 'ENTRY_BY' => $entryBy,
@@ -135,6 +133,9 @@ class Iodized extends Model
     }
 
     public static function updateIodizeData($request, $id, $iodizeStock){
+        $amount = $request->input('WASH_CRASH_QTY');
+        $wastage = ($amount * $request->input('WASTAGE') / 100);
+        $iodizeStock = $amount - $wastage;
         try{
             DB::beginTransaction();
             DB::table('tmm_iodizedmst')
@@ -200,7 +201,7 @@ class Iodized extends Model
                     'TRAN_TYPE' => 'I', //I=Iodized
                     'TRAN_NO' => $id,
                     'ITEM_NO' => $request->input('PRODUCT_ID'),
-                    'QTY' => $request->input('WASH_CRASH_QTY'),
+                    'QTY' => $iodizeStock,
                     'TRAN_FLAG' => 'II', // II = Idonize Increase
                     'UPDATE_BY' => Auth::user()->id,
                     'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")

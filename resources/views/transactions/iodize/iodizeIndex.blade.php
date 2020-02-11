@@ -46,10 +46,10 @@
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->BATCH_NO}}</td>
                         <td class="hidden-480">{{ date('d-M-Y',strtotime($row->BATCH_DATE)) }}</td>
-                        <td class="hidden-480">{{ $row->WASH_CRASH_QTY }}</td>
-                        <td class="hidden-480">{{ $row->WASTAGE }} ( {{ sprintf('%0.2f', $wasteAmount) }} KG)</td>
-                        <td class="hidden-480">{{ sprintf('%0.2f', $row->WASH_CRASH_QTY-$wasteAmount) }}</td>
-                        <td class="hidden-480">{{ $row->REQ_QTY }}</td>
+                        <td class="hidden-480">{{ number_format($row->WASH_CRASH_QTY, 2) }}</td>
+                        <td class="hidden-480">{{ $row->WASTAGE }} ( {{ number_format($wasteAmount, 2) }} KG)</td>
+                        <td class="hidden-480">{{ number_format($row->WASH_CRASH_QTY-$wasteAmount, 2) }}</td>
+                        <td class="hidden-480">{{ number_format($row->REQ_QTY, 2) }}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

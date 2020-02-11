@@ -41,7 +41,7 @@
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->RECEIVE_DATE}}</td>
                         <td class="hidden-480">{{$row->ITEM_NAME}}</td>
-                        <td class="hidden-480">{{ $row->RCV_QTY }}</td>
+                        <td class="hidden-480">{{ number_format($row->RCV_QTY, 2) }}</td>
                         <td class="hidden-480">{{$row->TRADING_NAME}}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
@@ -85,27 +85,6 @@
         </div><!-- /.col -->
 
     </div><!-- /.row -->
-    <script> //This script use for prevent back button after logout to login
-        // window.onload = function () {
-        //     if (typeof history.replaceState === "function") {
-        //         history.replaceState(null, null, "/");
-        //         window.onpopstate = function () {
-        //             history.replaceState( null, null,"/");
-        //         };
-        //     } else {
-        //         var ignoreHashChange = true;
-        //         window.onhashchange = function () {
-        //             if (!ignoreHashChange) {
-        //                 ignoreHashChange = true;
-        //                 window.location.hash = Math.random();
-        //             } else {
-        //                 ignoreHashChange = false;
-        //             }
-        //         };
-        //     }
-        // }
-    </script>
-
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
     <!-- Add New Group Modal End -->

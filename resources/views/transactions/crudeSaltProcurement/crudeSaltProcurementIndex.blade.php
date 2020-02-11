@@ -33,8 +33,6 @@
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
-
-
                 <tbody>
                 <?php $sl=0;?>
                 @foreach($crudeSalt as $row)
@@ -44,7 +42,7 @@
                         <td class="hidden-480">{{$row->LOOKUPCHD_NAME}}</td>
                         <td class="hidden-480">{{ date('d-M-Y', strtotime($row->ENTRY_TIMESTAMP)) }}</td>
                         <td class="hidden-480">{{ $row->TRADING_NAME }}</td>
-                        <td class="hidden-480">{{$row->RCV_QTY}}</td>
+                        <td class="hidden-480">{{ number_format($row->RCV_QTY, 2) }}</td>
                         <td class="">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

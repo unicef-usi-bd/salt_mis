@@ -17,8 +17,8 @@
             </small>
         </h1>
     </div><!-- /.page-header -->
-    <h4 class="pull-left stockLebel">Washing & Crushing Salt Stock In Amount : <span style="color:red;">{{ $washingStock }}</span> KG</h4>
-    <h4 class="pull-right stockLebel">Iodize Salt Stock In Amount : <span style="color:red;">{{ $iodizeStock }}</span> KG</h4>
+    <h4 class="pull-left stockLebel">Washing & Crushing Salt Stock In Amount : <span style="color:red;">{{ number_format($washingStock, 2) }}</span> KG</h4>
+    <h4 class="pull-right stockLebel">Iodize Salt Stock In Amount : <span style="color:red;">{{ number_format($iodizeStock, 2) }}</span> KG</h4>
     {{--<div class="clearfix"></div>--}}
     <div class="row">
         <div class="col-xs-12">
@@ -46,7 +46,7 @@
 
                 <tbody>
                 <?php $sl=0;?>
-                @foreach($salesDitributionIndex as $row)
+                @foreach($salesDistInfo as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->ITEM_NAME}}</td>

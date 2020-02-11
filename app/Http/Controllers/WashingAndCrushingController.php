@@ -127,7 +127,7 @@ class WashingAndCrushingController extends Controller
         $totalReduceSalt = Stock::getTotalReduceSalt($editData->ITEM_NO, Auth::user()->center_id);
         $saltStock = $saltStock - abs($totalReduceSalt);
         $totalStock = sprintf('%0.2f',  $saltStock)+$editAmount;
-
+        dd($editData);
 
         return view('transactions.washingAndCrushing.modals.editWashingAndCrushing',compact('editData','crudeSaltTypes','saltStock','totalStock'));
     }
