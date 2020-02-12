@@ -46,18 +46,18 @@
             <div class="col-sm-12">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
-
-                            <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                            <li class="disabled disabledTab"> <a class="disabled" data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                            <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                        <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
+                        <li class="disabled disabledTab"> <a class="disabled" data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                        <li class="disabled disabledTab"> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
                     </ul>
 
                     <div class="tab-content">
                         {{--Mill Info--}}
                         @include('profile.miller.millInformation')
                         {{--/-Miller Info--}}
+
                         {{--Entrepreneur Information--}}
                         @include('profile.miller.enterpreneurInformation')
                         {{--/-Entrepreneur Information--}}
@@ -74,112 +74,94 @@
                         @include('profile.miller.employeeInformation')
                         {{--/- Employee Info--}}
 
-
                     </div>
                 </div>
 
                 <br><br>
+
                 <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('module.module_list') }}">
                     <thead>
-                    <tr>
-                        <th class="fixedWidth" style="width: 5px;">Sl</th>
-                        <th class="center fixedWidth">Mill Name</th>
-                        <th class="center fixedWidth">Owner Type</th>
-                        <th class="center fixedWidth">Certificate Renewing Date</th>
-                        <th class="center fixedWidth">Full Time Employee</th>
-                        <th class="center fixedWidth">Active Status</th>
-                        <th class="center fixedWidth">Action</th>
-
-                    </tr>
+                        <tr>
+                            <th class="fixedWidth" style="width: 5px;">Sl</th>
+                            <th class="center fixedWidth">Mill Name</th>
+                            <th class="center fixedWidth">Owner Type</th>
+                            <th class="center fixedWidth">Certificate Renewing Date</th>
+                            <th class="center fixedWidth">Full Time Employee</th>
+                            <th class="center fixedWidth">Active Status</th>
+                            <th class="center fixedWidth">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <?php $sl=0;?>
-                    @foreach( $millerList as $row)
-                        <?php
-                        $activeFlg = DB::selectOne(DB::raw("SELECT ACTIVE_FLG FROM ssm_mill_info WHERE MILL_ID = '$row->MILL_ID' "));
-                        ?>
-                        <tr>
-                            <td class="center" >  {{ ++$sl }}</td>
-                            <td> {{ $row->MILL_NAME }} </td>
-                            <td> {{ $row->LOOKUPCHD_NAME }} </td>
-                            <td> {{ $row->RENEWING_DATE }} </td>
-                            <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
-                            <td class="hidden-480">
+                        @foreach( $millerList as $row)
+                            <?php
+                                $activeFlg = DB::selectOne(DB::raw("SELECT ACTIVE_FLG FROM ssm_mill_info WHERE MILL_ID = '$row->MILL_ID'"))->ACTIVE_FLG;
+                            ?>
+                            <tr>
+                                <td class="center" >  {{ ++$sl }}</td>
+                                <td> {{ $row->MILL_NAME }} </td>
+                                <td> {{ $row->LOOKUPCHD_NAME }} </td>
+                                <td> {{ $row->RENEWING_DATE }} </td>
+                                <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
+                                <td class="hidden-480">
+                                    <?php if ($activeFlg == 1){ ?>
+                                    <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                                    <?php }else{ ?>
+                                    <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
+                                    <?php } ?>
+                                </td>
 
-                                <?php if ($activeFlg->ACTIVE_FLG == 1){ ?>
-                                <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
-                                <?php }else{ ?>
-                                <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
-                                <?php } ?>
-
-                            </td>
-
-                            <td class="">
-                                <div class="hidden-sm hidden-xs action-buttons">
-                                    {{--<a class="blue showModalGlobal" id='{{ "monitoring/$row->MILLMONITORE_ID" }}' data-target=".modal" role="button"  data-toggle="modal" title="View Modules">--}}
-                                    {{--<i class="ace-icon fa fa fa-eye bigger-130"></i>--}}
-                                    {{--</a>--}}
-
-                                    @php
-                                        $editPermissionLevel = $previllage->UPDATE;
-                                        $viewPermissionLevel = $previllage->READ;
-                                    @endphp
-                                    @if($viewPermissionLevel == 1)
-                                        <a href="#" id='{{ "mill-info/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Details">
-                                                        <span class="blue">
-                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                        </span>
-                                        </a>
-                                    @else
-                                        <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Miller Profile Details" style="display: none;">
-                                                        <span class="blue">
-                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                        </span>
-                                        </a>
-                                    @endif
-                                    @if($editPermissionLevel == 1)
-                                        {{--<a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">--}}
-                                            {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                        {{--</a>--}}
-                                        <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
-                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                        </a>
-
-
-                                    @else
-                                        {{--<a class="green showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">--}}
-                                            {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                        {{--</a>--}}
-                                        <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
-                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                        </a>
-
-                                    @endif
-                                    @if($previllage->DELETE == 1)
-
-                                        <a class="red clickForDelete row{{ $row->MILL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'mill-info/'.$row->MILL_ID }}"  role="button" title="Delete Miller Profile Details">
-                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                        </a>
-
-                                    @endif
-
-                                    @if($viewPermissionLevel == 1)
+                                <td class="">
+                                    <div class="hidden-sm hidden-xs action-buttons">
                                         @php
-                                            $millerUpdateStatus = App\MillerInfo::millerUpdateStatus($row->MILL_ID);
+                                            $editPermissionLevel = $previllage->UPDATE;
+                                            $viewPermissionLevel = $previllage->READ;
                                         @endphp
-                                        @if($millerUpdateStatus == 1)
-                                            <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval">
+                                        @if($viewPermissionLevel == 1)
+                                            <a href="#" id='{{ "mill-info/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Details">
                                                 <span class="blue">
-                                                    <i class="ace-icon fa fa-check bigger-130"></i>
+                                                    <i class="ace-icon fa fa-eye bigger-130"></i>
+                                                </span>
+                                            </a>
+                                        @else
+                                            <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Miller Profile Details" style="display: none;">
+                                                <span class="blue">
+                                                    <i class="ace-icon fa fa-eye bigger-130"></i>
                                                 </span>
                                             </a>
                                         @endif
-                                    @endif
-                                </div>
+                                        @if($editPermissionLevel == 1)
+                                            <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
+                                                <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                            </a>
+                                        @else
+                                            <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
+                                                <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                            </a>
+                                        @endif
+                                        @if($previllage->DELETE == 1)
+                                            <a class="red clickForDelete row{{ $row->MILL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'mill-info/'.$row->MILL_ID }}"  role="button" title="Delete Miller Profile Details">
+                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                            </a>
+                                        @endif
 
-                            </td>
-                        </tr>
-                    @endforeach
+                                        @if($viewPermissionLevel == 1)
+                                            @php
+                                                $millerUpdateStatus = App\MillerInfo::millerUpdateStatus($row->MILL_ID);
+                                            @endphp
+                                            @if($millerUpdateStatus == 1)
+                                                <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval">
+                                                    <span class="blue">
+                                                        <i class="ace-icon fa fa-check bigger-130"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                        @endif
+                                    </div>
+
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div><!-- /.col -->

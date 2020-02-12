@@ -75,7 +75,8 @@ class MillerInfoController extends Controller
         $centerId = Auth::user()->center_id;
 
         $individualMillerProfileCheck = MillerInfo::singleMiller($centerId);
-        $millerInfoId = $individualMillerProfileCheck->MILL_ID; //$this->pr($individualMillerProfileCheck);
+        $millerInfoId = $individualMillerProfileCheck->MILL_ID;
+        //$this->pr($individualMillerProfileCheck);
         if(!empty($individualMillerProfileCheck->MILL_ID)){
             //echo "personal dashboard for single miller ".$millerInfoId;
             $editMillData = MillerInfo::getMillData($millerInfoId);
@@ -361,9 +362,8 @@ class MillerInfoController extends Controller
         $checkType =  $request->input("is_checked");
         $millerInfoId =  $request->input("millId");
         //$this->pr($millId);
-        $updateMillStatusFromMillTable = MillerInfo::deactivateMillTable($request, $millerInfoId);
-        $updateMillStatusFromEmpTable = MillerInfo::deactivateMillEmpTable($request, $millerInfoId);
-
+        MillerInfo::deactivateMillTable($request, $millerInfoId);
+        MillerInfo::deactivateMillEmpTable($request, $millerInfoId);
     }
 
 

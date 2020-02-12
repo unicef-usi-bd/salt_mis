@@ -23,17 +23,16 @@
 
                     <li class="active"> <a data-toggle="tab" href="#mill_tab"> Mill Information </a> </li>
                     <li class=""> <a data-toggle="tab" href="#entrepreneur_tab"> Entrepreneur Information  </a> </li>
-
-
-                    <li class=""> <a data-toggle="tab" href="#employee_tab"> Employee Information </a> </li>
-                    <li class=""> <a data-toggle="tab" href="#qc_tab"> QC Information </a> </li>
                     <li class=""> <a data-toggle="tab" href="#certificate_tab">  Certificate Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#qc_tab"> QC Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#employee_tab"> Employee Information </a> </li>
                 </ul>
 
                 <div class="tab-content">
                     {{--Mill Info--}}
                     @include('profile.miller.modal.editMillInformation')
                     {{--/-Miller Info--}}
+
                     {{--Entrepreneur Information--}}
                     @include('profile.miller.modal.editEntrepreneurInformation')
                     {{--/-Entrepreneur Information--}}
@@ -50,13 +49,8 @@
                     {{--Employee Info--}}
                     @include('profile.miller.modal.editEmployeeInformation')
                     {{--/- Employee Info--}}
-
-
                 </div>
             </div>
-
-
-
         </div><!-- /.col -->
 
         <div class="space"></div>
@@ -72,9 +66,9 @@
 
 <!--Add New Group Modal Start-->
 @include('masterGlobal.deleteScript')
-
 @include('masterGlobal.ajaxFormSubmit')
 @include('masterGlobal.getMillersId')
+
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 {{--<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>--}}
@@ -83,12 +77,12 @@
 <script>
 
     $(document).ready(function(){
-        $('.rowAddEntp').click(function(){
-            var getTr = $('tr.rowFirstEntp:first');
+        $('.rowAddEntrepreneur').click(function(){
+            let getTr = $('tr.rowFirstEntrepreneur:first');
 //            alert(getTr.html());
             $("select.chosen-select").chosen('destroy');
-            $('tbody.newRowEntp').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            var defaultRow = $('tr.removableRow:last');
+            $('tbody.tableEntrepreneur').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            let defaultRow = $('tr.removableRow:last');
             defaultRow.find(' input.OWNER_NAME').attr('disabled', false);
             defaultRow.find('select.DIVISION_ID').prop('disabled', false);
             defaultRow.find('select.DISTRICT_ID').prop('disabled', false);

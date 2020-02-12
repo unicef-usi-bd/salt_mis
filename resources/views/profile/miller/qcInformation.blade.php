@@ -1,7 +1,6 @@
 <div id="qc" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-
             <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
                 @csrf
                 @if(isset($createMillerInfo))
@@ -35,6 +34,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have a laboratory Man ?</b> </label>
                         <div class="col-sm-7">
@@ -48,6 +48,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Monitoring Test Kit</b> </label>
                         <div class="col-sm-7">
@@ -61,12 +62,9 @@
                             </label>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="col-md-6">
-
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Standard Operation Procedure (SOP)</b></label>
                         <div class="col-sm-7">
@@ -75,6 +73,7 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                         <div class="col-sm-7">
@@ -83,11 +82,11 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Remarks</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               {{--<input type="text" name="REMARKS" class="chosen-container">--}}
                                 <textarea rows="3" class="form-control col-sm-7" name="REMARKS"></textarea>
                             </span>
                         </div>
@@ -95,9 +94,8 @@
 
                 </div>
 
-
-
                 <hr>
+
                 <div class="clearfix">
                     <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">
                         <button type="reset" class="btn">

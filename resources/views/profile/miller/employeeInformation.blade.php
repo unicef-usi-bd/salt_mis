@@ -46,7 +46,6 @@
                 </div>
 
                 <div class="col-md-6">
-
                     <b style="font-size: 14px;">Full Time Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
@@ -73,8 +72,6 @@
                             </span>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="clearfix">
@@ -90,8 +87,6 @@
                     </div>
                 </div>
             </form>
-
-
         </div>
     </div>
 </div>
