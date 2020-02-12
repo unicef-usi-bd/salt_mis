@@ -237,7 +237,7 @@
         if(saltTypeId===7){
             let saltAmount = eachRowCalculation(saltTypeId);
             let stockScope = $('.currentStockWashCrush');
-            let currentStock = parseFloat(stockScope.attr('data-quantity'));
+            let currentStock = parseFloat(stockScope.attr('data-quantity').replace(/,/g, ''));
             if(saltAmount>currentStock) {
                 stockAlertHandler('Wash & Crushed');
                 thisRow.find('.crudeSaltAmount').val('');
@@ -249,7 +249,7 @@
         } else if(saltTypeId===8){
             let saltAmount = eachRowCalculation(saltTypeId);
             let stockScope = $('.currentStockIodize');
-            let currentStock = parseFloat(stockScope.attr('data-quantity'));
+            let currentStock = parseFloat(stockScope.attr('data-quantity').replace(/,/g, ''));
             if(saltAmount>currentStock) {
                 stockAlertHandler('Iodized');
                 thisRow.find('.crudeSaltAmount').val('');
