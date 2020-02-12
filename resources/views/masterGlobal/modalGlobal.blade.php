@@ -8,7 +8,7 @@
 
             <div class="modal-body">
                 {{--Custom Alert for Ajax form submit--}}
-                <div class="col-md-12 alert-handler">
+                <div class="col-md-12 alertHandlerInModal">
                     {{--Custom Alert Here--}}
                 </div>
                 <div class="row printFormGlobal">

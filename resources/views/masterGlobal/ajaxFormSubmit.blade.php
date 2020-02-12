@@ -36,7 +36,9 @@
 
 //    For Error Message Show
     function displayAlertHandler(message, alert='success') {
-        let alertMessage = $('.alert-handler');
+        let alertMessage = $('.alertHandlerInModal');
+        let hasModalOpen = alertMessage.closest('.modal').hasClass('in');
+        if(!hasModalOpen) alertMessage = $('.alertHandlerOutModal');
         let duration = 20000;
         alertMessage.empty().hide();
         if(message===null) return false;

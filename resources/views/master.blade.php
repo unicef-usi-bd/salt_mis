@@ -120,12 +120,18 @@
                         </h4>
                     @endif
                 </div><!-- /.ace-settings-container -->
+                {{--Custom Alert for Ajax form submit--}}
+                <div class="col-md-12 alertHandlerOutModal">
+                    {{--Custom Alert Here--}}
+                </div>
                 @yield('mainContent')
                 {{--@include('sweet::alert')--}}
             </div><!-- /.page-content -->
         </div>
     </div><!-- /.main-content -->
+
     @include('masterGlobal.generalDataTablesScripts')
+
 @include('includes.footer')
 </div><!-- /.main-container -->
 <!-- <![endif]-->
