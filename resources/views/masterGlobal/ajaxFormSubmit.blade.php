@@ -1,11 +1,39 @@
 <script>
-//      Form Submit By Ajax
+    function formSubmit(form_data){
+        let url = jQuery(form_data).attr('action');
+        let doEmptyForm = $(this).attr('data-clear') || true;
+        let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
+        let formData = new FormData(form_data); // Currently empty
+        formData.append('isFinalSubmit', finalSubmit);
+        $.ajax({
+            type: "post",
+            url: url,
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json'
+        }).done(function(data) {
+            if(data.success){
+                displayAlertHandler(data.success);
+                if(doEmptyForm===true) formClear();
+                if(data.insertId) putInsertIdInClassAttribute(data.insertId);
+            }else if(data.errors){
+                displayAlertHandler(data.errors, 'danger');
+            }else{
+                let defaultMsg = 'Something is wrong there';
+                displayAlertHandler(defaultMsg, 'danger');
+            }
+        }).fail(function(data) {
+            console.log('Error:', data);
+        });
+    }
+
     $(document).on('click', '.ajaxFormSubmit', function () {
 //      Laravel Request Handler
         let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
-        let postType = $("input[name=_method]").val();
-        let _method = (typeof(postType)==="undefined")?'post':postType;
         let actionUrl = $(this).attr('data-action');
+        let doEmptyForm = $(this).attr('data-clear') || true;
         let thisForm = document.forms.namedItem("formData");
         let formData = new FormData(thisForm); // Currently empty
         formData.append('isFinalSubmit', finalSubmit);
@@ -20,7 +48,8 @@
             success: function (data) {
                 if(data.success){
                     displayAlertHandler(data.success);
-                    if(_method==='post') formClear();
+                    if(doEmptyForm===true) formClear();
+                    if(data.insertId) putInsertIdInClassAttribute(data.insertId);
                 }else if(data.errors){
                     displayAlertHandler(data.errors, 'danger');
                 }else{
@@ -33,6 +62,48 @@
             }
         });
     });
+
+//      Form Submit By Ajax
+    $(document).on('click', '.ajaxFormSubmit', function () {
+//      Laravel Request Handler
+        let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
+        let actionUrl = $(this).attr('data-action');
+        let doEmptyForm = $(this).attr('data-clear') || true;
+        let thisForm = document.forms.namedItem("formData");
+        let formData = new FormData(thisForm); // Currently empty
+        formData.append('isFinalSubmit', finalSubmit);
+        $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json',
+            success: function (data) {
+                if(data.success){
+                    displayAlertHandler(data.success);
+                    if(doEmptyForm===true) formClear();
+                    if(data.insertId) putInsertIdInClassAttribute(data.insertId);
+                }else if(data.errors){
+                    displayAlertHandler(data.errors, 'danger');
+                }else{
+                    let defaultMsg = 'Something is wrong there';
+                    displayAlertHandler(defaultMsg, 'danger');
+                }
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+    function putInsertIdInClassAttribute(insertId){
+        let hasContainer = $(document).find('.insertIdContainer');
+        if(hasContainer.length) {
+            hasContainer.val(insertId).trigger('change');
+        }
+    }
 
 //    For Error Message Show
     function displayAlertHandler(message, alert='success') {

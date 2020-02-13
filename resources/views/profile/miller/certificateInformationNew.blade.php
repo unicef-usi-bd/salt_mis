@@ -223,11 +223,11 @@
                         {{--/-Certificate Info--}}
 
                         {{--QC Info--}}
-                        @include('profile.miller.qcInformation')
+                        @include('profile.miller.modal.qcInformation')
                         {{--/- QC Info--}}
 
                         {{--Employee Info--}}
-                        @include('profile.miller.employeeInformation')
+                        @include('profile.miller.modal.employeeInformation')
                         {{--/- Employee Info--}}
 
 

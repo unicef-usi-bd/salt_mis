@@ -1,11 +1,9 @@
 <div id="qc" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ url('/qc-info') }}" method="post" class="form-horizontal" role="form">
+            <form action="{{ url('/qc-info') }}" data-clear="false" method="post" class="form-horizontal" role="form">
                 @csrf
-                @if(isset($createMillerInfo))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
-                @endif
+                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
@@ -102,7 +100,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{ trans('dashboard.submit') }}
                         </button>

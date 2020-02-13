@@ -1,11 +1,9 @@
 <div id="employee" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ url('/employee-info') }}" method="post" class="form-horizontal" role="form" >
+            <form action="{{ url('/employee-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" >
                 @csrf
-                @if(isset($millerInfoId))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
-                @endif
+                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
                 <div class="col-md-6">
                     <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
                     <div class="form-group">
@@ -80,7 +78,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{ trans('dashboard.submit') }}
                         </button>

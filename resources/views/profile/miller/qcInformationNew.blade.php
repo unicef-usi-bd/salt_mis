@@ -214,7 +214,7 @@
                         {{--/- QC Info--}}
 
                         {{--Employee Info--}}
-                        @include('profile.miller.employeeInformation')
+                        @include('profile.miller.modal.employeeInformation')
                         {{--/- Employee Info--}}
 
 

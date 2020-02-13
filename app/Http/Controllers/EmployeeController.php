@@ -53,21 +53,25 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'MILL_ID' => 'required',
             'TOTMALE_EMP' => 'required',
-            //'TOTFEM_EMP' => 'required',
+        );
+        $error = array(
+            'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
+            'TOTMALE_EMP.required' => 'Employee type field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-            //$this->pr($request->input());
-            $millerInfoId = $request->input('MILL_ID');
-            $employeeInfoId = Employee::insertMillerEmployeeInfo($request);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            if($employeeInfoId){
-                return redirect('/mill-info')->with('success', 'Employee Information Has been Added !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $millerId = $request->input('MILL_ID');
+        $inserted = Employee::insertMillerEmployeeInfo($request);
+
+        if($inserted){
+            return response()->json(['success'=>'Employee information has been saved successfully', 'insertId' => $millerId]);
+        } else{
+            return response()->json(['errors'=>'Employee information Profile save failed']);
         }
     }
 

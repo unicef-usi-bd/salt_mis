@@ -1,11 +1,9 @@
 <div id="certificate" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ url('/certificate-info') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            <form action="{{ url('/certificate-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
-                @if(isset($millerInfoId))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
-                @endif
+                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                         <tr>
@@ -23,7 +21,7 @@
                         <tr class="certificateRow">
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" id="CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($certificate as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -33,7 +31,7 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ISSURE_ID" id="ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($issueBy as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -48,26 +46,22 @@
                             </td>
 
                             <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" id="inputSuccess total_amount" value="" class="width-100 CERTIFICATE_NO"  />
+                                    <input type="text" name="CERTIFICATE_NO[]" value="" class="width-100 CERTIFICATE_NO"  />
                                 </span>
                             </td>
                             <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                     <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
                                 </span>
                             </td>
                             <td>
-                                <span class="budget_against_code hidden"><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                    <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE">
                                 </span>
                             </td>
 
                             <td>
-                                <span class="budget_against_code "><!-- Drop Total Budget here By Ajax --></span>
                                 <span class="block input-icon input-icon-right">
                                     <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
                                 </span>
@@ -83,7 +77,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{ trans('dashboard.submit') }}
                         </button>

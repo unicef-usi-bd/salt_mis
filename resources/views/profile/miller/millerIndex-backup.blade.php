@@ -51,22 +51,22 @@
 
                     <div class="tab-content">
                         {{--Mill Info--}}
-                        @include('profile.miller.millInformation')
+                        @include('profile.miller.modal.millInformation')
                         {{--/-Miller Info--}}
                         {{--Entrepreneur Information--}}
-                        @include('profile.miller.enterpreneurInformation')
+                        @include('profile.miller.modal.enterpreneurInformation')
                         {{--/-Entrepreneur Information--}}
 
                         {{--Certificate Info--}}
-                        @include('profile.miller.certificateInformation')
+                        @include('profile.miller.modal.certificateInformation')
                         {{--/-Certificate Info--}}
 
                         {{--QC Info--}}
-                        @include('profile.miller.qcInformation')
+                        @include('profile.miller.modal.qcInformation')
                         {{--/- QC Info--}}
 
                         {{--Employee Info--}}
-                        @include('profile.miller.employeeInformation')
+                        @include('profile.miller.modal.employeeInformation')
                         {{--/- Employee Info--}}
 
 

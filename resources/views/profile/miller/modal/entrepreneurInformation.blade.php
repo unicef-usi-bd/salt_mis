@@ -1,60 +1,24 @@
 <div id="entrepreneur" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-
-            <form action="{{ url('/entrepreneur-info') }}" method="post" class="form-horizontal" role="form">
+            <form action="{{ url('/entrepreneur-info') }}" data-clear="false" method="post" class="form-horizontal" role="form">
                 @csrf
-                @if(isset($millerInfoId))
-                    <input type="hidden" value="{{ $millerInfoId }}" name="MILL_ID">
-                @endif
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Registration Type</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-select chosen-container" name="REG_TYPE_ID" data-placeholder="Select or search data">
-                                   <option value=""></option>
-                                    @foreach($registrationType as $row)
-                                       <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                   @endforeach
+                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
 
-                               </select>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group" >
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Type of Owner</b></label>
-                        <div class="col-sm-8">
-                            <span class="block input-icon input-icon-right">
-                                <select id="OWNER_TYPE_ID" name="OWNER_TYPE_ID" class="chosen-select chosen-container" data-placeholder="Select or search data">
-                                    <option value=""></option>
-                                    @foreach($ownerType as $row)
-                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                    @endforeach
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
+                <table class="table table-bordered" style="margin-top: 64px;">
                     <thead>
                         <tr>
                             <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
                             <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                            <th style="width: ;">District</th>
-                            <th style="width: ;">Upazila</th>
-                            {{--<th style="width: 100px;">Union</th>--}}
-                            <th style="width: ;" >NID</th>
-                            <th style="width: ;">Mobile 1</th>
-                            <th  style="width: ;">Mobile 2</th>
-                            <th  style="width: ;">Email</th>
-                            <th  style="width: ;">Remarks</th>
-                            <th style="width: 30px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                            <th style="width: 130px;">District</th>
+                            <th style="width: 130px;">Upazila</th>
+                            {{--<th style="width: 130px100px;">Union</th>--}}
+                            <th style="width: 130px;" >NID</th>
+                            <th style="width: 130px;">Mobile 1</th>
+                            <th  style="width: 130px;">Mobile 2</th>
+                            <th  style="width: 130px;">Email</th>
+                            <th  style="width: 130px;">Remarks</th>
+                            <th style="width: 130px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
                         </tr>
                     </thead>
                     <tbody class="newRow">
@@ -125,7 +89,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{ trans('dashboard.submit') }}
                         </button>

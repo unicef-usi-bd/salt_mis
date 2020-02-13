@@ -386,15 +386,15 @@
                         {{--/-Entrepreneur Information--}}
 
                         {{--Certificate Info--}}
-                        @include('profile.miller.certificateInformation')
+                        @include('profile.miller.modal.certificateInformation')
                         {{--/-Certificate Info--}}
 
                         {{--QC Info--}}
-                        @include('profile.miller.qcInformation')
+                        @include('profile.miller.modal.qcInformation')
                         {{--/- QC Info--}}
 
                         {{--Employee Info--}}
-                        @include('profile.miller.employeeInformation')
+                        @include('profile.miller.modal.employeeInformation')
                         {{--/- Employee Info--}}
 
 

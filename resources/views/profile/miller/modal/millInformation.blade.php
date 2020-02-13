@@ -6,9 +6,7 @@
 <div id="mill" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
-
-            <form action="{{ url('/mill-info') }}" method="post" class="form-horizontal" role="form" id="myform"
-                  enctype="multipart/form-data">
+            <form action="{{ url('/mill-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-6">
                     <div class="form-group">
@@ -203,9 +201,8 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            {{--{{ trans('dashboard.submit') }}--}}
                             Save & Next
                         </button>
                     </div>
@@ -299,42 +296,10 @@
             url: "deactivate-mill-profile",
             data: {is_checked: checked, millId: millId},
             success: function (data) {
-                //console.log(JSON.parse(data));
-//                console.log(data);
+
             }
         });
     });
 
-
-    $(document).ready(function () {
-
-        $('#myform').validate({
-            // initialize the plugin
-            errorClass: "my-error-class",
-            rules: {
-                REG_TYPE_ID: {
-                    required: true,
-                },
-                MILL_NAME: {
-                    required: true,
-                },
-                PROCESS_TYPE_ID: {
-                    required: true,
-                },
-                MILL_TYPE_ID: {
-                    required: true,
-                },
-                CAPACITY_ID: {
-                    required: true,
-                },
-                ZONE_ID: {
-                    required: true,
-                },
-                ACTIVE_FLG: {
-                    required: true,
-                }
-            }
-        });
-    });
 
 </script>

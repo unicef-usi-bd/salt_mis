@@ -48,26 +48,32 @@ class EntrepreneurController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-//            'OWNER_NAME.*' => 'required',
-//            'MOBILE_1.*' => 'required|digits:11',
-//            'MOBILE_2.*' => 'required|digits:11',
-//            'EMAIL.*' => 'required|email'
+            'MILL_ID' => 'required',
+            'OWNER_NAME.*' => 'required',
+            'MOBILE_1.*' => 'required',
+            'MOBILE_2.*' => 'required',
+            'EMAIL.*' => 'required',
+        );
+        $error = array(
+            'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
+            'OWNER_NAME.*' => 'Registration type field is required.',
+            'MOBILE_1.*' => 'Mill name field is required.',
+            'MOBILE_2.*' => 'Process type field is required.',
+            'EMAIL.*' => 'Mill type field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-            //$this->pr($request->input());
-            $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            $insert = Entrepreneur::insertMillerProfile($request);
-            //$millerInfoId = $request->input('MILL_ID');
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($insert){
-                //return redirect('/mill-info')->with('success', 'Entrepreneur Has been Created !');
-                return redirect('/certificate-info/createCertificate/'.$millerInfoId)->with('success', 'Entrepreneur Has been Created !');
-            }
+        $millerId = $request->input('MILL_ID');
+
+        $inserted = Entrepreneur::insertMillerProfile($request);
+
+        if($inserted){
+            return response()->json(['success'=>'Entrepreneur info has been saved successfully', 'insertId' => $millerId]);
+        } else{
+            return response()->json(['errors'=>'Entrepreneur info save failed']);
         }
     }
 

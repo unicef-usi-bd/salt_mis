@@ -50,23 +50,32 @@ class QcController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-//            'LABORATORY_FLG' => 'required',
-//            'IODINE_CHECK_FLG' => 'required',
-//            'LAB_MAN_FLG' => 'required',
-//            'MONITORING_FLG' => 'required',
+            'MILL_ID' => 'required',
+            'LABORATORY_FLG' => 'required',
+            'IODINE_CHECK_FLG' => 'required',
+            'LAB_MAN_FLG' => 'required',
+            'MONITORING_FLG' => 'required',
+        );
+        $error = array(
+            'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
+            'LABORATORY_FLG.required' => 'Laboratory field is required.',
+            'IODINE_CHECK_FLG.required' => 'Iodine check field is required.',
+            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
+            'MONITORING_FLG.required' => 'Monitoring field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-            //$this->pr($request->input());
-            $millerInfoId = $request->input('MILL_ID');
-            $QcInfoId = Qc::insertMillerQc($request);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            if($QcInfoId){
-                return redirect('/employee-info/createEmployee/'.$millerInfoId)->with('success', 'QC Information Has been Added !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $millerId = $request->input('MILL_ID');
+
+        $insertedId = Qc::insertMillerQc($request);
+
+        if($insertedId){
+            return response()->json(['success'=>'QC Information has been saved successfully', 'insertId' => $millerId]);
+        } else{
+            return response()->json(['errors'=>'QC Information save failed']);
         }
     }
 

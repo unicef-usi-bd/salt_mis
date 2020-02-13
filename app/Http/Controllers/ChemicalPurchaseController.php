@@ -84,6 +84,8 @@ class ChemicalPurchaseController extends Controller
 
         if($chemicalPurchase){
             return response()->json(['success'=>'Chemical purchase has been created']);
+        } else{
+            return response()->json(['errors'=>'Chemical purchase create failed']);
         }
     }
 
