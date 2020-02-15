@@ -1,9 +1,9 @@
 <div id="certificate" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ url('/certificate-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            <form action="{{ url('/certificate-info/'.$millerInfo->MILL_ID) }}" data-clear="false" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
+                @method('PUT')
                 <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
                     <thead>
                         <tr>
@@ -18,6 +18,61 @@
                         </tr>
                     </thead>
                     <tbody class="certificateTable">
+                    @if(sizeof($certificateInfo)>0)
+                        @foreach($certificateInfo as $certificate)
+                        <tr class="certificateRow">
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                        <option value="">Select</option>
+                                        @foreach($certificates as $row)
+                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                        @endforeach
+                                    </select>
+                                </span>
+                                <input type="hidden" class="certificateId" name="CERTIFICATE_ID[]" value="{{ $certificate->CERTIFICATE_ID }}"/>
+                            </td>
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
+                                        <option value="">Select</option>
+                                        @foreach($issueBy as $row)
+                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                        @endforeach
+                                     </select>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <input type="date" name="ISSUING_DATE" value="{{ $certificate->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <input type="text" name="CERTIFICATE_NO[]" value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO" />
+                                </span>
+                            </td>
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+                                </span>
+                            </td>
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                   <input type="date" name="RENEWING_DATE" value="{{ $certificate->RENEWING_DATE }}" class="chosen-container RENEWING_DATE">
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="block input-icon input-icon-right">
+                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"  />
+                                </span>
+                            </td>
+                            <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                        </tr>
+                        @endforeach
+                    @else
                         <tr class="certificateRow">
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -68,6 +123,7 @@
                             </td>
                             <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
                         </tr>
+                    @endif
                     </tbody>
                 </table>
                 <hr>

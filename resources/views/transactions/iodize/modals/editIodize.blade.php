@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form action="" name="formData" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/iodized/'.$editIodize->IODIZEDMST_ID) }}" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
         @php
@@ -71,7 +71,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/iodized/'.$editIodize->IODIZEDMST_ID) }}">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>

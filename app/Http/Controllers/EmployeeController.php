@@ -170,8 +170,8 @@ public function createEmployee($millerInfoId){
     $editMillData = MillerInfo::getMillData($millerInfoId);
     $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
     $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-    $editCertificateData = Certificate::getCertificateData($millerInfoId);
-    $editQcData = Qc::getQcData($millerInfoId);
+    $editCertificateData = Certificate::certificateInformation($millerInfoId);
+    $editQcData = Qc::qcInfo($millerInfoId);
     $certificateId = CertificateIssur::getCertificate();
     $issuerId = Certificate::getIssuerIs();
     //$associationId = AssociationSetup::singleAssociation();

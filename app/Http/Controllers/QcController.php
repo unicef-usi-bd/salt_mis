@@ -174,7 +174,7 @@ class QcController extends Controller
         $editMillData = MillerInfo::getMillData($millerInfoId);
         $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
         $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-        $editCertificateData = Certificate::getCertificateData($millerInfoId);
+        $editCertificateData = Certificate::certificateInformation($millerInfoId);
         $certificateId = CertificateIssur::getCertificate();
         $issuerId = Certificate::getIssuerIs();
         //$associationId = AssociationSetup::singleAssociation();

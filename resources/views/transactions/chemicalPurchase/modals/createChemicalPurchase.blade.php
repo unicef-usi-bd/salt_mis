@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form action="" name="formData" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/chemical-purchase') }}" method="post" class="form-horizontal" role="form">
         <div class="col-md-12">
             @csrf
 
@@ -91,7 +91,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="button" class="btn btn-primary ajaxFormSubmit" data-action="{{ url('/chemical-purchase') }}">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>

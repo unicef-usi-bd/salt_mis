@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Qc extends Model
 {
-
-
     public static function insertMillerQc($request){
         $QcInfoId = DB::table('tsm_qc_info')->insertGetId([
             'MILL_ID' => $request->input('MILL_ID'),
@@ -28,9 +26,9 @@ class Qc extends Model
 
         return $QcInfoId;
     }
-    public static function getQcData($millerInfoId){
+    public static function qcInfo($millerId){
         return DB::table('tsm_qc_info')
-            ->where('MILL_ID','=',$millerInfoId)
+            ->where('MILL_ID','=', $millerId)
             ->first();
 
     }

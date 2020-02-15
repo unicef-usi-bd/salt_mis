@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class MillerInfo extends Model
 {
 
-     public static function insertMillerInfoData($request, $mill_logo){
+     public static function insertMillerInfoData($request, $mill_logo){ // tested
 
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
              'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
@@ -33,25 +33,29 @@ class MillerInfo extends Model
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);
-        //return $millInfoId;
-     //}
-    //public static function insertIntoAssociation($request){
-         if($millInfoId){
-         $association =  DB::table('ssm_associationsetup')->insertGetId([
-             'MILL_ID' => $millInfoId,
-             'ASSOCIATION_NAME'=> $request->input('MILL_NAME'),
-             'PARENT_ID' => Auth::user()->center_id,
-             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-             'center_id' => Auth::user()->center_id,
-             'ENTRY_BY' => Auth::user()->id,
-             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-         ]);
 
+         if($millInfoId){
+             DB::table('ssm_associationsetup')->insertGetId([
+                 'MILL_ID' => $millInfoId,
+                 'ASSOCIATION_NAME'=> $request->input('MILL_NAME'),
+                 'PARENT_ID' => Auth::user()->center_id,
+                 'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+                 'center_id' => Auth::user()->center_id,
+                 'ENTRY_BY' => Auth::user()->id,
+                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+             ]);
          }
          return $millInfoId;
      }
 
-    public static function insertMillerInfoTemData($request, $mill_logo,$millerInfoId){
+     public static function millerInformation($id){ // tested
+         $data =  DB::table('ssm_mill_info')
+             ->where('MILL_ID','=', $id)
+             ->first();
+         return $data;
+     }
+
+    public static function insertMillerInfoTemData($request, $mill_logo, $millerInfoId){
         //return $request->all();
         $MILL_ID = $request->input('MILL_ID');
         $millInfoId = DB::table('tem_ssm_mill_info')->insertGetId([
@@ -94,20 +98,16 @@ class MillerInfo extends Model
             ->first();
     }
 
-    public static function updateMillData($request,$id,$associationId,$mill_logo){
-
-            $info = DB::table('ssm_mill_info')->where('MILL_ID', '=', $id)->first();
-
+    public static function updateMillData($request, $id, $mill_logo){ // tested
             $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
                 'MILL_NAME' => $request->input('MILL_NAME'),
-                'mill_logo' => $mill_logo == "" ? $info->mill_logo : $mill_logo,
+                'mill_logo' => $mill_logo,
                 'PROCESS_TYPE_ID' => $request->input('PROCESS_TYPE_ID'),
                 'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
                 'MILL_TYPE_ID' => $request->input('MILL_TYPE_ID'),
                 'CAPACITY_ID' => $request->input('CAPACITY_ID'),
                 'ZONE_ID' => $request->input('ZONE_ID'),
                 //'MILLERS_ID' => $request->input('MILLERS_ID'),
-
                 'DIVISION_ID' => $request->input('DIVISION_ID'),
                 'DISTRICT_ID' => $request->input('DISTRICT_ID'),
                 'UPAZILA_ID' => $request->input('UPAZILA_ID'),
@@ -118,9 +118,8 @@ class MillerInfo extends Model
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
             ]);
+
             return $update;
-
-
     }
 
     public static function approveByassociation($request,$id,$mill_logo){

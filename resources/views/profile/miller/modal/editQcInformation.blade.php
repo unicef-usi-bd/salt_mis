@@ -14,12 +14,12 @@
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b><span style="color:red;"> *</span></label>
                         <div class="col-sm-7">
                             <label>
-                                <input name="LABORATORY_FLG" type="radio" class="ace merit required"  value="1" @if ($editQcData->LABORATORY_FLG==1) checked @endif/>
+                                <input name="LABORATORY_FLG" type="radio" class="ace merit required"  value="1" @if($editQcData->LABORATORY_FLG==1) checked @endif />
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
                                 {{--<input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LABORATORY_FLG==0) checked @endif/>--}}
-                                <input name="LABORATORY_FLG" type="radio" class="ace merit required"  value="0" @if(isset($editQcData->LABORATORY_FLG))@if($editQcData->LABORATORY_FLG==0) checked @endif @endif/>
+                                <input name="LABORATORY_FLG" type="radio" class="ace merit required"  value="0" @if(isset($editQcData->LABORATORY_FLG)) @if($editQcData->LABORATORY_FLG==0) checked @endif @endif/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -29,11 +29,11 @@
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> <span style="color:red;"> *</span></label>
                         <div class="col-sm-7">
                             <label>
-                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit required"   value="1" @if ($editQcData->IODINE_CHECK_FLG==1) checked @endif/>
+                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit required"   value="1" @if($editQcData->IODINE_CHECK_FLG==1) checked @endif />
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit required"  value="0"  @if ($editQcData->IODINE_CHECK_FLG==0) checked @endif/>
+                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit required"  value="0" @if($editQcData->IODINE_CHECK_FLG==0) checked @endif />
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -46,7 +46,7 @@
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LAB_MAN_FLG==0) checked @endif/>
+                                <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0" @if ($editQcData->LAB_MAN_FLG==0) checked @endif />
                                 <span class="lbl"> No</span>
                             </label>
                         </div>

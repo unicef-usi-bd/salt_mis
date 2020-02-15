@@ -56,10 +56,10 @@ class EntrepreneurController extends Controller
         );
         $error = array(
             'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
-            'OWNER_NAME.*' => 'Registration type field is required.',
-            'MOBILE_1.*' => 'Mill name field is required.',
-            'MOBILE_2.*' => 'Process type field is required.',
-            'EMAIL.*' => 'Mill type field is required.'
+            'OWNER_NAME.*' => 'Owner name field is required.',
+            'MOBILE_1.*' => 'Mobile_1 field is required.',
+            'MOBILE_2.*' => 'Mobile_2 type field is required.',
+            'EMAIL.*' => 'Email field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -110,25 +110,59 @@ class EntrepreneurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $millerId)
     {
-        //print_r($request->input());exit();
-
+        $updated = false;
         $rules = array(
-            'AGENCY_ID' => 'required'
+            'OWNER_NAME.*' => 'required',
+            'MOBILE_1.*' => 'required',
+            'MOBILE_2.*' => 'required',
+            'EMAIL.*' => 'required',
         );
+        $error = array(
+            'OWNER_NAME.*' => 'Owner name field is required.',
+            'MOBILE_1.*' => 'Mobile_1 field is required.',
+            'MOBILE_2.*' => 'Mobile_2 type field is required.',
+            'EMAIL.*' => 'Email field is required.'
+        );
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-//        $updateMonitoringData = Monitoring::updateMonitorData($request, $id);
-//            if($updateMonitoringData){
-//                return redirect('/monitoring')->with('success', 'Monitoring Data Updated !');
-//            }
+        $data = array();
+        $deleted = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
+
+        if($deleted){
+            $reqTime = count($_POST['OWNER_NAME']);
+            for($i=0; $i<$reqTime; $i++){
+                $data = ([
+//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
+                    //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
+                    'MILL_ID' => $millerId,
+                    //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
+                    'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
+                    'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
+                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
+                    'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
+                    'UNION_ID' => $request->input('UNION_ID')[$i],
+                    'NID' => $request->input('NID')[$i],
+                    'MOBILE_1' => $request->input('MOBILE_1')[$i],
+                    'MOBILE_2' => $request->input('MOBILE_2')[$i],
+                    'EMAIL' => $request->input('EMAIL')[$i],
+                    'REMARKS' => $request->input('REMARKS')[$i],
+                    'ACTIVE_FLG' => 1,
+                    'center_id' => Auth::user()->center_id,
+                    'ENTRY_BY' => Auth::user()->id,
+                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                ]);
+            }
+
+            $updated = DB::table('ssm_entrepreneur_info')->insert($data);
         }
-
+        if($updated){
+            return response()->json(['success'=>'Entrepreneur info has been updated successfully']);
+        } else{
+            return response()->json(['errors'=>'Entrepreneur info update failed']);
+        }
     }
 
     /**

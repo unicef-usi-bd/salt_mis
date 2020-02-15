@@ -39,6 +39,12 @@ class Entrepreneur extends Model
          return $insert;
      }
 
+     public static function entrepreneurInformation($millerId){
+         return DB::table('ssm_entrepreneur_info')
+             ->where('MILL_ID','=', $millerId)
+             ->get();
+     }
+
     public static function insertMillerTemProfile($request){
         $reqTime = count($_POST['OWNER_NAME']);
         $MILL_ID = $request->input('MILL_ID');
