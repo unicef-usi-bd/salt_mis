@@ -23,25 +23,6 @@ use Illuminate\Support\Facades\Route;
 class QcController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,39 +51,13 @@ class QcController extends Controller
 
         $millerId = $request->input('MILL_ID');
 
-        $insertedId = Qc::insertMillerQc($request);
+        $inserted = Qc::insertQcInfo($request);
 
-        if($insertedId){
+        if($inserted){
             return response()->json(['success'=>'QC Information has been saved successfully', 'insertId' => $millerId]);
         } else{
             return response()->json(['errors'=>'QC Information save failed']);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-//         $viewMonitoring = Monitoring::showMonitorData($id);
-//        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-     {
-//         $editMonitoring = Monitoring::editMonitorData($id);
-//         $agencyName = Monitoring::agencyName();
-//        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
-
     }
 
     /**
@@ -120,6 +75,7 @@ class QcController extends Controller
             'LAB_MAN_FLG' => 'required',
             'MONITORING_FLG' => 'required',
         );
+
         $error = array(
             'LABORATORY_FLG.required' => 'Laboratory field is required.',
             'IODINE_CHECK_FLG.required' => 'Iodine check field is required.',
@@ -131,7 +87,13 @@ class QcController extends Controller
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $updated = Qc::updateQcInfo($request, $id);
+        $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+
+        if($selfMillerInfo->MILL_ID){
+            $updated = Qc::updateQcInfoTemp($request, $id);
+        } else {
+            $updated = Qc::updateQcInfo($request, $id);
+        }
 
         if($updated){
             return response()->json(['success'=>'QC Information has been updated successfully.']);
@@ -162,38 +124,6 @@ class QcController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-
-
-    }
-
-    public function createQc($millerInfoId){
-        $getDivision = SupplierProfile::getDivision();
-        $getZone = SupplierProfile::getZone();
-        $getDistrict = SupplierProfile::getDistrict();
-        $getUpazilla = SupplierProfile::getUpazilla();
-        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
-        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
-
-        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
-        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
-        $editMillData = MillerInfo::getMillData($millerInfoId);
-        $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
-        $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-        $editCertificateData = Certificate::certificateInformation($millerInfoId);
-        $certificateId = CertificateIssur::getCertificate();
-        $issuerId = Certificate::getIssuerIs();
-        //$associationId = AssociationSetup::singleAssociation();
-        return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));
-    }
-
-    public function updateQcInfoTem(Request $request){
-        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
-        $insertQc = Qc::insertQc($request);
-        return "QC Information has been updated";
-//        return $request;
     }
 
 }

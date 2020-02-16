@@ -66,7 +66,7 @@ class EmployeeController extends Controller
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
         $millerId = $request->input('MILL_ID');
-        $inserted = Employee::insertMillerEmployeeInfo($request);
+        $inserted = Employee::insertEmployeeInfo($request);
 
         if($inserted){
             return response()->json(['success'=>'Employee information has been saved successfully', 'insertId' => $millerId]);
@@ -110,21 +110,29 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$this->pr($request->input());
-
         $rules = array(
             'TOTMALE_EMP' => 'required',
-            'TOTFEM_EMP' => 'required'
+        );
+        $error = array(
+            'TOTMALE_EMP.required' => 'Employee type field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateMillEmployeeData = Employee::updateMillEmployeeData($request, $id);
-            if($updateMillEmployeeData){
-                return response()->json(['success'=> 'Employee Information has been updated!']);
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+
+        if($selfMillerInfo->MILL_ID){
+            $updated = Employee::updateEmployeeInfoTemp($request, $id);
+        } else {
+            $updated = Employee::updateEmployeeInfo($request, $id);
+        }
+
+        if($updated){
+            return response()->json(['success'=>'Employee information has been updated successfully']);
+        } else{
+            return response()->json(['errors'=>'Employee information Profile update failed']);
         }
 
     }
@@ -177,13 +185,6 @@ public function createEmployee($millerInfoId){
     //$associationId = AssociationSetup::singleAssociation();
     return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));
 }
-
-    public function updateEmployeeInfo(Request $request){
-        $millerInfoId = $request->input('MILL_ID');
-        $updateEmpData = Employee::updateMillEmployeeData($request, $millerInfoId);
-        return "Employee Information has been updated";
-
-    }
 
     public function updateEmployeeInfoTem(Request $request){
         $millerInfoId = $request->input('MILL_ID');

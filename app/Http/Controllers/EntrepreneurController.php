@@ -68,7 +68,7 @@ class EntrepreneurController extends Controller
 
         $millerId = $request->input('MILL_ID');
 
-        $inserted = Entrepreneur::insertMillerProfile($request);
+        $inserted = Entrepreneur::insertEntrepreneurInfo($request);
 
         if($inserted){
             return response()->json(['success'=>'Entrepreneur info has been saved successfully', 'insertId' => $millerId]);
@@ -128,36 +128,13 @@ class EntrepreneurController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $data = array();
-        $deleted = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
-
-        if($deleted){
-            $reqTime = count($_POST['OWNER_NAME']);
-            for($i=0; $i<$reqTime; $i++){
-                $data = ([
-//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
-                    //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
-                    'MILL_ID' => $millerId,
-                    //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
-                    'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
-                    'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
-                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                    'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
-                    'UNION_ID' => $request->input('UNION_ID')[$i],
-                    'NID' => $request->input('NID')[$i],
-                    'MOBILE_1' => $request->input('MOBILE_1')[$i],
-                    'MOBILE_2' => $request->input('MOBILE_2')[$i],
-                    'EMAIL' => $request->input('EMAIL')[$i],
-                    'REMARKS' => $request->input('REMARKS')[$i],
-                    'ACTIVE_FLG' => 1,
-                    'center_id' => Auth::user()->center_id,
-                    'ENTRY_BY' => Auth::user()->id,
-                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                ]);
-            }
-
-            $updated = DB::table('ssm_entrepreneur_info')->insert($data);
+        $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+        if($selfMillerInfo->MILL_ID){
+            $updated = Entrepreneur::updateEntrepreneurInfoTemp($request, $millerId);
+        } else {
+            $updated = Entrepreneur::updateEntrepreneurInfo($request, $millerId);
         }
+
         if($updated){
             return response()->json(['success'=>'Entrepreneur info has been updated successfully']);
         } else{
@@ -186,8 +163,6 @@ class EntrepreneurController extends Controller
 //                'message' => 'Error Founded Here!',
 //            ]);
 //        }
-
-
     }
 
     public function createEntrepreneur($millerInfoId){
@@ -207,13 +182,6 @@ class EntrepreneurController extends Controller
         $associationId = AssociationSetup::singleAssociation();
 //        $this->pr($editMillData);
         return view('profile.miller.entrepreneurInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','associationId','getDistrict','getUpazilla'));
-    }
-
-    public function updateEntrepreneurInfo(Request $request){
-        //dd($request);
-        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
-        $updateEmpData = Entrepreneur::updateMillEntrepData($request, $millerInfoId);
-        return "Entrepreneur Information has been updated";
     }
 
     public function updateEntrepreneurInfoUpdate(Request $request){
@@ -251,16 +219,6 @@ class EntrepreneurController extends Controller
         }
 
         return "Entrepreneur Information has been updated";
-    }
-
-    public function updateEntrepreneurInfoTem(Request $request){
-        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
-        $updateEmpData = Entrepreneur::insertMillerTemProfile($request);
-        if($updateEmpData){
-            return "Entrepreneur Information has been updated";
-        }else{
-            return "Entrepreneur Information has been updated failed";
-        }
     }
 
     public function singleEnterpreneurDeleteByAjax(Request $request){

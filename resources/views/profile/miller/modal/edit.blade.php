@@ -56,10 +56,6 @@
 </script>
 
 @include('masterGlobal.chosenSelect')
-{{--@include('masterGlobal.getDistrict')
-@include('masterGlobal.getUpazila')
-@include('masterGlobal.getUnion')
-@include('masterGlobal.getThana')--}}
 @include('masterGlobal.getMillersId')
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script>

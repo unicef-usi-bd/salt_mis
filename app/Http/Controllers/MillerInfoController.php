@@ -38,10 +38,8 @@ class MillerInfoController extends Controller
         $userGroupId = Auth::user()->user_group_id;
         $userGroupLevelId = Auth::user()->user_group_level_id;
         $url = Route::getFacadeRoot()->current()->uri();
-
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
-//        $title = trans('lookupGroupIndex.create_lookup');
         $title = trans('Create Miller Profile');
 
         $heading=array(
@@ -52,46 +50,35 @@ class MillerInfoController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 
-        //$monitoring = Entrepreneur::getMonitorData();
-        $getDivision = SupplierProfile::getDivision();
-        $getZone = SupplierProfile::getZone();
-        $getDistrict = SupplierProfile::getDistrict();
-        $getUpazilla = SupplierProfile::getUpazilla();
-
-        $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
-        $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
-
-        $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
-        $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-        //$zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
-        $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-        $certificate = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $millerList = MillerInfo::getAllMillDataList();
-        //$millerUpdateStatus = MillerInfo::getAllMillDataList($MILL_ID);
         $approvalMillList = MillerInfo::getApprovalAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
-        //$this->pr($millerList);
-        $centerId = Auth::user()->center_id;
+        $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+        if(!empty($selfMillerInfo->MILL_ID)){
+            $millerId = $selfMillerInfo->MILL_ID;
+            $zones = SupplierProfile::getZone();
+            $divisions = SupplierProfile::getDivision();
+            $districts = SupplierProfile::getDistrict();
+            $upazillas = SupplierProfile::getUpazilla();
 
-        $individualMillerProfileCheck = MillerInfo::singleMiller($centerId);
-        $millerInfoId = $individualMillerProfileCheck->MILL_ID;
-        //$this->pr($individualMillerProfileCheck);
-        if(!empty($individualMillerProfileCheck->MILL_ID)){
-            //echo "personal dashboard for single miller ".$millerInfoId;
-            $editMillData = MillerInfo::getMillData($millerInfoId);
-            $editEntrepData = Entrepreneur::getEntrepreneurData($millerInfoId);
-            $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
-            $editCertificateData = Certificate::certificateInformation($millerInfoId);
-            $editQcData = Qc::qcInfo($millerInfoId);
-            $editEmployeeData = Employee::getEmployeeData($millerInfoId);
-            $certificateId = CertificateIssur::getCertificate();
-            $issuerId = Certificate::getIssuerIs();
-            $getUpazilla = SupplierProfile::getUpazilla();
-            return view('profile.miller.singleMiller.singleMillerProfileIndex', compact('millerInfoId','getDivision','getZone','registrationType','ownerType','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','editEmployeeData','getDistrict','certificateId','issuerId','getUpazilla'));
+            $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
+            $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
+            $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
+            $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+            $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
+            $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+            $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+            $millerToMerge = MillerInfo::getMillerToMerge();
+
+            $millerInfo = MillerInfo::millerInformation($millerId);
+            $entrepreneurs = Entrepreneur::entrepreneurInformation($millerId);
+            $certificateInfo = Certificate::certificateInformation($millerId);
+            $qcInfo = Qc::qcInfo($millerId);
+            $employeeInfo = Employee::employeeInformation($millerId);
+            return view('profile.miller.self.index', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
         } else {
-            return view('profile.miller.millerIndex', compact('heading', 'previllage', 'getDivision', 'getZone','getUpazilla', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificate', 'issueBy', 'millerList', 'millerToMerge','approvalMillList'));
+            return view('profile.miller.millerIndex', compact('heading', 'previllage', 'millerList', 'millerToMerge','approvalMillList'));
         }
     }
 
@@ -116,9 +103,6 @@ class MillerInfoController extends Controller
         $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
         $millerToMerge = MillerInfo::getMillerToMerge();
-        $centerId = Auth::user()->center_id;
-
-        $individualMillerProfileCheck = MillerInfo::singleMiller($centerId);
 
         return view('profile.miller.modal.create', compact('getDivision', 'getZone','getUpazilla', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge'));
 
@@ -166,7 +150,7 @@ class MillerInfoController extends Controller
             $mill_logo = 'image/mill-logo/defaultUserImage.png';
         }
 
-        $millerId = MillerInfo::insertMillerInfoData($request, $mill_logo);
+        $millerId = MillerInfo::insertMillerInfo($request, $mill_logo);
 
         if($millerId){
             return response()->json(['success'=>'Miller Profile has been saved successfully', 'insertId' => $millerId]);
@@ -199,7 +183,7 @@ class MillerInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id as MillerId
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -223,8 +207,9 @@ class MillerInfoController extends Controller
         $entrepreneurs = Entrepreneur::entrepreneurInformation($id);
         $certificateInfo = Certificate::certificateInformation($id);
         $qcInfo = Qc::qcInfo($id);
+        $employeeInfo = Employee::employeeInformation($id);
 
-        return view('profile.miller.modal.edit', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo'));
+        return view('profile.miller.modal.edit', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
 
     }
 
@@ -273,7 +258,13 @@ class MillerInfoController extends Controller
             $mill_logo = 'image/mill-logo/defaultUserImage.png';
         }
 
-        $updated = MillerInfo::updateMillData($request, $id, $mill_logo);
+        $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+
+        if($selfMillerInfo->MILL_ID){
+            $updated = MillerInfo::updateMillerInfoTemp($request, $id, $mill_logo);
+        } else {
+            $updated = MillerInfo::updateMillerInfo($request, $id, $mill_logo);
+        }
 
         if($updated){
             return response()->json(['success'=>'Miller Profile has been updated successfully']);
@@ -307,38 +298,6 @@ class MillerInfoController extends Controller
         }
     }
 
-    public function updateMillInfo(Request $request){
-            //$this->pr($request->input());
-            $centerId = Auth::user()->center_id;
-            $associationId = AssociationSetup::singleAssociation();
-            $millerInfoId = $request->input('MILL_ID');
-            $mill_logo = "";
-            if(!empty($request->file('mill_logo'))) {
-                if ($request->file('mill_logo') != null && $request->file('mill_logo')->isValid()) {
-                    $image = $request->file('mill_logo');
-                    $filename = date('Y-m-d') . '_' . time() . '.' . $image->getClientOriginalExtension();
-                    $path = 'image/mill-logo/' . $filename;
-                    Image::make($image->getRealPath())->resize(250, 250)->save($path);
-                    //********* End Image *********
-                    $mill_logo = "image/mill-logo/$filename";
-                } else {
-                    $mill_logo = 'image/mill-logo/defaultUserImage.png';
-                }
-            }
-            $ownerType = $request->input('OWNER_TYPE_ID');
-            //$this->pr($request->input('MILL_NAME'));
-//        $updateMillData = MillerInfo::updateMillData($request, $millerInfoId, $centerId,$associationId,$mill_logo);
-            $updateMillData = MillerInfo::updateMillData($request, $millerInfoId,$associationId,$mill_logo);
-            //echo $updateMillData;die();
-            if($updateMillData){
-//                return redirect('/entrepreneur-info/createEntrepreneur/'.$millerInfoId)->with('success', 'Miller Profile has been Updated !');
-//            return "Mill informatin has been updated!";
-                return "Mill informatin has been updated!";
-            }
-
-//
-    }
-
     public function approveByAssociation(Request $request){
         //return $request->all();
 //        $centerId = Auth::user()->center_id;
@@ -360,32 +319,6 @@ class MillerInfoController extends Controller
 
         //echo $updateMillData;die();
         return "Miller Information has been updated";
-    }
-
-    public function temUpdate(Request $request){
-        //return $request->all();
-        //$centerId = Auth::user()->center_id;
-        //$associationId = AssociationSetup::singleAssociation();
-        $millerInfoId = $request->input('MILL_ID');
-        //$this->pr($request->input('MILL_ID'));exit();
-        if($request->file('mill_logo')!=null && $request->file('mill_logo')->isValid()) {
-            $image = $request->file('mill_logo');
-            $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-            $path = 'image/mill-logo/' . $filename;
-            Image::make($image->getRealPath())->resize(250, 250)->save($path);
-            //********* End Image *********
-            $mill_logo = "image/mill-logo/$filename";
-        }else{
-//            $mill_logo = 'image/mill-logo/defaultUserImage.png';
-            $mill_logo = $request->input('mill_logo');
-        }
-        $ownerType = $request->input('OWNER_TYPE_ID');
-        $updateMillData = MillerInfo::insertMillerInfoTemData($request,$mill_logo,$millerInfoId);
-        if($updateMillData){
-            return "Miller Information has been updated";
-        }else{
-            return "Miller Information has been updated failed";
-        }
     }
 
     public function deactivateMillProfile(Request $request){

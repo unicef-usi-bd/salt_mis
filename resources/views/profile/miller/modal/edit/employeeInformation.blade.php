@@ -1,20 +1,21 @@
 <div id="employee" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ url('/employee-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" >
+            <form action="{{ url('/employee-info/'.$millerInfo->MILL_ID) }}" data-clear="false" method="post" class="form-horizontal" role="form" >
                 @csrf
-                <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
+                @method('PUT')
+                <input type="hidden" name="MILLEMP_ID" value="{{ $employeeInfo->MILLEMP_ID }}" />
                 <div class="col-md-6">
                     <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALE_EMP" value="{{ $employeeInfo->TOTMALE_EMP }}" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" value="{{ $employeeInfo->TOTFEM_EMP }}" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -23,12 +24,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" class="chosen-container" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" value="{{ $employeeInfo->PARTTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" class="chosen-container" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" value="{{ $employeeInfo->PARTTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -36,7 +37,7 @@
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container" placeholder="Male">
+                               <input type="text" name="REMARKS" value="{{ $employeeInfo->REMARKS }}" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                     </div>
@@ -48,12 +49,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" class="chosen-container" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $employeeInfo->FULLTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" class="chosen-container" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $employeeInfo->FULLTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -61,12 +62,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALETECH_PER" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALETECH_PER" value="{{ $employeeInfo->TOTMALETECH_PER }}" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEMTECH_PER" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEMTECH_PER" value="{{ $employeeInfo->TOTFEMTECH_PER }}" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>

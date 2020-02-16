@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Qc extends Model
 {
-    public static function insertMillerQc($request){
+    public static function insertQcInfo($request){
         $QcInfoId = DB::table('tsm_qc_info')->insertGetId([
             'MILL_ID' => $request->input('MILL_ID'),
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
@@ -48,10 +48,9 @@ class Qc extends Model
         return $update;
     }
 
-    public static function insertQc($request){
-        $MILL_ID = $request->input('MILL_ID');
-        $qcInfoId = DB::table('tem_tsm_qc_info')->insertGetId([
-            'MILL_ID' => $request->input('MILL_ID'),
+    public static function updateQcInfoTemp($request, $millerId){
+        $inserted = DB::table('tem_tsm_qc_info')->insertGetId([
+            'MILL_ID' => $millerId,
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
             'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
             'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
@@ -64,13 +63,13 @@ class Qc extends Model
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
-        if($qcInfoId){
-            $millerInfoData = array(
+        if($inserted){
+            $data = array(
                 'approval_status' => 1
             );
-            $updateMillerInfo = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $MILL_ID)->update($millerInfoData);
+            DB::table('tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update($data);
         }
-        return $updateMillerInfo;
+        return $inserted;
     }
 
 

@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entrepreneur extends Model
 {
-
-    public static function insertMillerProfile($request){
+    public static function insertEntrepreneurInfo($request){ // tested
          $reqTime = count($_POST['OWNER_NAME']);
          for($i=0; $i<$reqTime; $i++){
              $data = ([
@@ -34,9 +33,40 @@ class Entrepreneur extends Model
                  'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
              ]);
              $insert = DB::table('ssm_entrepreneur_info')->insert($data);
-
          }
          return $insert;
+     }
+
+    public static function updateEntrepreneurInfo($request, $millerId){ // tested
+         $data = array();
+         $deleted = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
+         if($deleted){
+             $reqTime = count($_POST['OWNER_NAME']);
+             for($i=0; $i<$reqTime; $i++){
+                 $data[] = array(
+//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
+                     //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
+                     'MILL_ID' => $millerId,
+                     //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
+                     'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
+                     'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
+                     'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
+                     'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
+                     'UNION_ID' => $request->input('UNION_ID')[$i],
+                     'NID' => $request->input('NID')[$i],
+                     'MOBILE_1' => $request->input('MOBILE_1')[$i],
+                     'MOBILE_2' => $request->input('MOBILE_2')[$i],
+                     'EMAIL' => $request->input('EMAIL')[$i],
+                     'REMARKS' => $request->input('REMARKS')[$i],
+                     'ACTIVE_FLG' => 1,
+                     'center_id' => Auth::user()->center_id,
+                     'ENTRY_BY' => Auth::user()->id,
+                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                 );
+             }
+         }
+         $updated = DB::table('ssm_entrepreneur_info')->insert($data);
+         return $updated;
      }
 
      public static function entrepreneurInformation($millerId){
@@ -45,11 +75,11 @@ class Entrepreneur extends Model
              ->get();
      }
 
-    public static function insertMillerTemProfile($request){
+    public static function updateEntrepreneurInfoTemp($request, $millerId){
+         $data = array();
         $reqTime = count($_POST['OWNER_NAME']);
-        $MILL_ID = $request->input('MILL_ID');
         for($i=0; $i<$reqTime; $i++){
-            $data = ([
+            $data[] = array(
                 'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
                 //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
                 'MILL_ID' => $request->input('MILL_ID'),
@@ -69,16 +99,16 @@ class Entrepreneur extends Model
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
-            $insert = DB::table('tem_ssm_entrepreneur_info')->insert($data);
+            );
         }
-        if($insert){
-            $enterInfoData = array(
+        $inserted = DB::table('tem_ssm_entrepreneur_info')->insert($data);
+        if($inserted){
+            $status = array(
                 'approval_status' => 1
             );
-            $updatenfo = DB::table('ssm_entrepreneur_info')->where('MILL_ID', '=' , $MILL_ID)->update($enterInfoData);
+            DB::table('ssm_entrepreneur_info')->where('MILL_ID', '=' , $millerId)->update($status);
         }
-        return $updatenfo;
+        return $inserted;
     }
 
     public static function getEntrepreneurData($millerInfoId){
@@ -100,46 +130,6 @@ class Entrepreneur extends Model
             ->where('MILL_ID','=',$millerInfoId)
             ->get();
 
-    }
-
-    public static function updateMillEntrepData($request,$id){
-//        echo '<pre>';
-//        echo($request);exit;
-        $enterId = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $id)->delete();
-        if ($enterId) {
-            $reqTime = count($_POST['OWNER_NAME']);
-            for($i=0; $i<$reqTime; $i++){
-                $data = ([
-//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
-                    //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
-                    'MILL_ID' => $request->input('MILL_ID'),
-                    //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
-                    'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
-                    'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
-                    'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                    'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
-                    'UNION_ID' => $request->input('UNION_ID')[$i],
-                    'NID' => $request->input('NID')[$i],
-                    'MOBILE_1' => $request->input('MOBILE_1')[$i],
-                    'MOBILE_2' => $request->input('MOBILE_2')[$i],
-                    'EMAIL' => $request->input('EMAIL')[$i],
-                    'REMARKS' => $request->input('REMARKS')[$i],
-                    'ACTIVE_FLG' => 1,
-
-                    'ENTRY_BY' => Auth::user()->id,
-                    'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                ]);
-                $insert = DB::table('ssm_entrepreneur_info')->insert($data);
-
-            }
-            return $insert;
-        }
-           // $this->pr($data);
-
-    }
-
-    public static function updateEnterprnuerProfile($request){
-        $millerInfoId = $request->input('MILL_ID');
     }
 
     public static function showEntrepreneurProfile($id){

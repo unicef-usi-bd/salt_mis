@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class MillerInfo extends Model
 {
 
-     public static function insertMillerInfoData($request, $mill_logo){ // tested
+     public static function insertMillerInfo($request, $mill_logo){ // tested
 
          $millInfoId = DB::table('ssm_mill_info')->insertGetId([
              'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
@@ -55,11 +55,9 @@ class MillerInfo extends Model
          return $data;
      }
 
-    public static function insertMillerInfoTemData($request, $mill_logo, $millerInfoId){
-        //return $request->all();
-        $MILL_ID = $request->input('MILL_ID');
+    public static function updateMillerInfoTemp($request, $millerId, $mill_logo){ // tested
         $millInfoId = DB::table('tem_ssm_mill_info')->insertGetId([
-            'MILL_ID' => $request->input('MILL_ID'),
+            'MILL_ID' => $millerId,
             'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
             'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
             'MILL_NAME' => $request->input('MILL_NAME'),
@@ -81,13 +79,14 @@ class MillerInfo extends Model
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         ]);
         if($millInfoId){
-            $millerInfoData = array(
+            $data = array(
                 'approval_status' => 1
             );
-            $updateMillerInfo = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $MILL_ID)->update($millerInfoData);
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($data);
         }
-        return $updateMillerInfo;
+        return true;
     }
+
     public static function getMillData($millerInfoId){
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.*','ssc_districts.DISTRICT_ID','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_ID','ssc_upazilas.UPAZILA_NAME','ssc_lookupchd.*')
@@ -98,7 +97,7 @@ class MillerInfo extends Model
             ->first();
     }
 
-    public static function updateMillData($request, $id, $mill_logo){ // tested
+    public static function updateMillerInfo($request, $id, $mill_logo){ // tested
             $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
                 'MILL_NAME' => $request->input('MILL_NAME'),
                 'mill_logo' => $mill_logo,
@@ -227,10 +226,11 @@ class MillerInfo extends Model
             ->get();
 
     }
-    public static function singleMiller($centerId){
+    public static function selfMillerAuthenticated(){
+        $centerId = Auth::user()->center_id;
          return DB::table('ssm_associationsetup')
              ->select('MILL_ID')
-             ->where('ASSOCIATION_ID','=',$centerId)
+             ->where('ASSOCIATION_ID','=', $centerId)
              ->first();
     }
     //    for view modal
