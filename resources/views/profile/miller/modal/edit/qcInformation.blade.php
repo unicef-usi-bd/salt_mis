@@ -3,6 +3,7 @@
         <div class="col-md-12">
             <form action="{{ url('/qc-info/'.$millerInfo->MILL_ID) }}" data-clear="false" method="post" class="form-horizontal" role="form">
                 @csrf
+                @method('PUT')
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>

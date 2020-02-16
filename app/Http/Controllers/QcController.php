@@ -114,21 +114,29 @@ class QcController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //print_r($request->input());exit();
-
         $rules = array(
-            'AGENCY_ID' => 'required'
+            'LABORATORY_FLG' => 'required',
+            'IODINE_CHECK_FLG' => 'required',
+            'LAB_MAN_FLG' => 'required',
+            'MONITORING_FLG' => 'required',
+        );
+        $error = array(
+            'LABORATORY_FLG.required' => 'Laboratory field is required.',
+            'IODINE_CHECK_FLG.required' => 'Iodine check field is required.',
+            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
+            'MONITORING_FLG.required' => 'Monitoring field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-//        $updateMonitoringData = Monitoring::updateMonitorData($request, $id);
-//            if($updateMonitoringData){
-//                return redirect('/monitoring')->with('success', 'Monitoring Data Updated !');
-//            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $updated = Qc::updateQcInfo($request, $id);
+
+        if($updated){
+            return response()->json(['success'=>'QC Information has been updated successfully.']);
+        } else{
+            return response()->json(['errors'=>'QC Information update failed.']);
         }
 
     }
@@ -179,13 +187,6 @@ class QcController extends Controller
         $issuerId = Certificate::getIssuerIs();
         //$associationId = AssociationSetup::singleAssociation();
         return view('profile.miller.qcInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));
-    }
-
-    public function updateQcInfo(Request $request){
-        $millerInfoId = $request->input('MILL_ID'); //$this->pr($millerInfoId);
-        $updateEmpData = Qc::updateMillQcData($request, $millerInfoId);
-        return "QC Information has been updated";
-//        return $request;
     }
 
     public function updateQcInfoTem(Request $request){

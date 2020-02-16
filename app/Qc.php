@@ -33,8 +33,8 @@ class Qc extends Model
 
     }
 
-    public static function updateMillQcData($request,$id){
-        $update = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $id)->update([
+    public static function updateQcInfo($request, $millerId){
+        $update = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update([
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
             'SOP_DESC' => $request->input('SOP_DESC'),
             'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
@@ -45,7 +45,6 @@ class Qc extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
         ]);
-
         return $update;
     }
 
