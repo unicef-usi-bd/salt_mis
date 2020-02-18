@@ -69,19 +69,9 @@
                                                     <i class="ace-icon fa fa-eye bigger-130"></i>
                                                 </span>
                                     </a>
-                                @else
-                                    <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Miller Profile Details" style="display: none;">
-                                                <span class="blue">
-                                                    <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                </span>
-                                    </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
                                     <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details">
-                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                    </a>
-                                @else
-                                    <a class="showModalGlobal" id='{{ "mill-info/$row->MILL_ID/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Miller Profile Details" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif
@@ -92,14 +82,12 @@
                                 @endif
 
                                 @if($viewPermissionLevel == 1)
-                                    @php
-                                        $millerUpdateStatus = App\MillerInfo::millerUpdateStatus($row->MILL_ID);
-                                    @endphp
+                                    @php $millerUpdateStatus = App\MillerInfo::millerUpdateStatus($row->MILL_ID); @endphp
                                     @if($millerUpdateStatus == 1)
                                         <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval">
-                                                    <span class="blue">
-                                                        <i class="ace-icon fa fa-check bigger-130"></i>
-                                                    </span>
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-check bigger-130"></i>
+                                            </span>
                                         </a>
                                     @endif
                                 @endif

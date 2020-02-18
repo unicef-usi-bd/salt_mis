@@ -59,28 +59,6 @@
 @include('masterGlobal.getMillersId')
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script>
-    $(document).ready(function(){
-        $('.rowAdd').click(function(){
-            let getTr = $('tr.rowFirst:first');
-//            alert(getTr.html());
-            $("select.chosen-select").chosen('destroy');
-            $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            let defaultRow = $('tr.removableRow:last');
-            defaultRow.find(' input.OWNER_NAME').attr('disabled', false);
-            defaultRow.find('select.DIVISION_ID').prop('disabled', false);
-            defaultRow.find('select.DISTRICT_ID').prop('disabled', false);
-            defaultRow.find('select.UPAZILA_ID').prop('disabled', false);
-            defaultRow.find('select.UNION_ID').prop('disabled', false);
-//            For Ignore array Conflict
-            defaultRow.find('input.NID').attr('NID', false);
-            defaultRow.find('input.MOBILE_1').attr('MOBILE_1', false);
-            defaultRow.find('input.MOBILE_2').attr('disabled', false);
-            defaultRow.find('input.EMAIL').attr('disabled', false);
-            defaultRow.find('input.REMARKS').attr('disabled', false);
-            $('.chosen-select').chosen(0);
-        });
-    });
-
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();

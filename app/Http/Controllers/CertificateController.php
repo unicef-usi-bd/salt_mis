@@ -211,31 +211,27 @@ class CertificateController extends Controller
                 }
             }
 
-            $renewingDate = $request->input('RENEWING_DATE')[$i];
-            if(empty($renewingDate)){
-                $renewingDate = '';
-            }else{
-                $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
-            }
+            $renewingDate = $this->dateFormat($request->input('RENEWING_DATE')[$i]);
 
             $data = array(
                 'MILL_ID' => $millerId,
                 'CERTIFICATE_TYPE_ID' => $userCertificates[$i],
                 'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
+                'ISSUING_DATE' => $this->dateFormat($request->input('ISSUING_DATE')[$i]),
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => $renewingDate,
                 'REMARKS' => $request->input('REMARKS')[$i],
-                'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
+                'CERTIFICATE_TYPE' => $this->dateFormat($request->input('CERTIFICATE_TYPE')[$i]),
                 'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );
+
             if(!empty($tempName)){
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
             }
-
+//            dd($data);
             if(!empty($certificateId[$i])){
                 $updated = true;
                 DB::table('ssm_certificate_info')->where('CERTIFICATE_ID', $certificateId[$i])->update($data);
@@ -263,19 +259,14 @@ class CertificateController extends Controller
                 }
             }
 
-            $renewingDate = $request->input('RENEWING_DATE')[$i];
-            if(empty($renewingDate)){
-                $renewingDate = '';
-            }else{
-                $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
-            }
+            $renewingDate = $this->dateFormat($request->input('RENEWING_DATE')[$i]);
 
             $data[$i] = array(
                 'MILL_ID' => $millerId,
                 'CERTIFICATE_TYPE_ID' => $userCertificates[$i],
                 'ISSURE_ID' => $request->input('ISSURE_ID')[$i],
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                'ISSUING_DATE' => date('Y-m-d', strtotime($request->input('ISSUING_DATE')[$i])),
+                'ISSUING_DATE' => $this->dateFormat($request->input('ISSUING_DATE')[$i]),
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => $renewingDate,
                 'REMARKS' => $request->input('REMARKS')[$i],

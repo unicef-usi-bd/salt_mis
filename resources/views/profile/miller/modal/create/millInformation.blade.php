@@ -276,7 +276,7 @@
     </div>
 </div>
 {{--on change registration typr to merging open this modal--}}
-
+@include('masterGlobal.getDistrictUpazilaUnion')
 <script>
     $(document).on('change', 'select.regTypeId', function () {
         var registrationId = $(this).val();
@@ -300,6 +300,4 @@
             }
         });
     });
-
-
 </script>

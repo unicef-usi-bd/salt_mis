@@ -165,7 +165,6 @@ class MillerInfo extends Model
 
     }
     public static function millerUpdateStatus($MILL_ID){
-
         $millerInfoStatus = DB::table('ssm_mill_info')
             ->select('approval_status')
             ->where('MILL_ID','=',$MILL_ID)

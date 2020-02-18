@@ -1,3 +1,15 @@
+<style>
+    table {
+        max-height: 400px;
+        display: block;
+        overflow-y: auto;
+        white-space: nowrap;
+    }
+    th, td{
+        min-width: 120px;
+    }
+</style>
+
 <div id="entrepreneur" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
@@ -7,7 +19,7 @@
 
                 <table class="table table-bordered" style="margin-top: 64px;">
                     <thead>
-                        <tr>
+                        <tr class="custom-overflow">
                             <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
                             <th style="width:130px ;">Division<span style="color:red;"> </span></th>
                             <th style="width: 130px;">District</th>
@@ -18,7 +30,7 @@
                             <th  style="width: 130px;">Mobile 2</th>
                             <th  style="width: 130px;">Email</th>
                             <th  style="width: 130px;">Remarks</th>
-                            <th style="width: 130px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                            <th style="width: 130px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
                         </tr>
                     </thead>
                     <tbody class="newRow">
@@ -168,3 +180,27 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.rowAddEntrepreneur').click(function(){
+            let getTr = $('tr.rowFirst:first');
+//            alert(getTr.html());
+            $("select.chosen-select").chosen('destroy');
+            $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            let defaultRow = $('tr.removableRow:last');
+            defaultRow.find(' input.OWNER_NAME').attr('disabled', false);
+            defaultRow.find('select.DIVISION_ID').prop('disabled', false);
+            defaultRow.find('select.DISTRICT_ID').prop('disabled', false);
+            defaultRow.find('select.UPAZILA_ID').prop('disabled', false);
+            defaultRow.find('select.UNION_ID').prop('disabled', false);
+//            For Ignore array Conflict
+            defaultRow.find('input.NID').attr('NID', false);
+            defaultRow.find('input.MOBILE_1').attr('MOBILE_1', false);
+            defaultRow.find('input.MOBILE_2').attr('disabled', false);
+            defaultRow.find('input.EMAIL').attr('disabled', false);
+            defaultRow.find('input.REMARKS').attr('disabled', false);
+            defaultRow.find('.chosen-select').val('').trigger('chosen:updated');
+            defaultRow.find('input').val('');
+        });
+    });
+</script>

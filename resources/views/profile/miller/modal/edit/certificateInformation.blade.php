@@ -44,7 +44,7 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="date" name="ISSUING_DATE" value="{{ $certificate->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
+                                    <input type="date" name="ISSUING_DATE[]" value="{{ $certificate->ISSUING_DATE }}" class="chosen-container ISSUING_DATE">
                                 </span>
                             </td>
 
@@ -60,7 +60,7 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE" value="{{ $certificate->RENEWING_DATE }}" class="chosen-container RENEWING_DATE">
+                                   <input type="date" name="RENEWING_DATE[]" value="{{ $certificate->RENEWING_DATE }}" class="chosen-container RENEWING_DATE">
                                 </span>
                             </td>
 
