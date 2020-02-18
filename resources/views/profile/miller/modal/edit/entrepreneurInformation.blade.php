@@ -39,13 +39,13 @@
                                 <tr class="rowFirst">
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="{{ $entrepreneur->OWNER_NAME }}" class="width-100 OWNER_NAME" />
+                                            <input type="text" name="OWNER_NAME[]" value="{{ $entrepreneur->OWNER_NAME }}" class="width-100 OWNER_NAME" />
                                         </span>
                                         <input type="hidden" value="{{ $entrepreneur->ENTREPRENEUR_ID }}" name="ENTREPRENEUR_ID">
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <select class="form-control chosen-select DIVISION_ID" name="DIVISION_ID[]">
+                                            <select class="form-control chosen-select division" name="DIVISION_ID[]">
                                                 <option value="">Select</option>
                                                 @foreach($divisions as $row)
                                                     <option value="{{ $row->DIVISION_ID }}" @if($entrepreneur->DIVISION_ID==$row->DIVISION_ID) selected @endif >{{ $row->DIVISION_NAME }}</option>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                            <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
                                                 <option value="">Select</option>
                                                 @foreach($districts as $row)
                                                     <option value="{{ $row->DISTRICT_ID }}" @if($entrepreneur->DISTRICT_ID == $row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
@@ -65,7 +65,7 @@
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
+                                            <select class="form-control chosen-select upazila" name="UPAZILA_ID[]" >
                                                 <option value=""> Select </option>
                                                 @foreach($upazillas as $row)
                                                     <option value="{{ $row->UPAZILA_ID }}" @if($entrepreneur->UPAZILA_ID == $row->UPAZILA_ID) selected @endif>{{ $row->UPAZILA_NAME }}</option>
@@ -75,12 +75,12 @@
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="NID[]" id="inputSuccess" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
+                                            <input type="text" name="NID[]" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="MOBILE_1[]" id="inputSuccess" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
+                                            <input type="text" name="MOBILE_1[]" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
                                         </span>
                                     </td>
                                     <td>

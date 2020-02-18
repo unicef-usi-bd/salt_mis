@@ -25,12 +25,12 @@
                         <tr class="rowFirst">
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />
+                                    <input type="text" name="OWNER_NAME[]" value="" class="width-100 OWNER_NAME"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                    <select class="form-control chosen-select division" name="DIVISION_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($getDivision as $row)
                                             <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -40,42 +40,41 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                    <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
                                         <option value="">Select</option>
                                      </select>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
-                                        <option value=""> Select </option>
+                                    <select class="form-control chosen-select upazila" name="UPAZILA_ID[]"  >
+                                        <option value="">Select</option>
                                     </select>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="NID[]" id="inputSuccess total_amount" value="" class="width-100 NID"  />
+                                    <input type="text" name="NID[]" value="" class="width-100 NID"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_1"  />
+                                    <input type="text" name="MOBILE_1[]" value="" class="width-100 MOBILE_1"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_2"  />
+                                    <input type="text" name="MOBILE_2[]" value="" class="width-100 MOBILE_2"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
-                                    <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
+                                    <input type="text" name="EMAIL[]" value="" class="width-100 EMAIL"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                    <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                             </td>
                             <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>

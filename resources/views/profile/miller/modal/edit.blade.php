@@ -57,6 +57,7 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.getMillersId')
+@include('masterGlobal.locationMapping')
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script>
     // Fore Remove Row By Click
@@ -64,11 +65,7 @@
         $(this).closest("tr.removableRow").remove();
     });
 </script>
-
-
-
 <!--Add New Group Modal Start-->
-@include('masterGlobal.getDistrictUpazilaUnion')
 @include('masterGlobal.ajaxFormSubmit')
 
 

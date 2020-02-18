@@ -130,7 +130,7 @@
                                for="form-field-1-1"><b>Division</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <select id="DIVISION_ID" name="DIVISION_ID"
+                                <select name="DIVISION_ID"
                                         class="chosen-select chosen-container division" data-placeholder="Select">
                                     <option value=""></option>
                                     @foreach($getDivision as $row)
@@ -147,7 +147,7 @@
                                for="form-field-1-1"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="chosen-select chosen-container district"
+                               <select class="chosen-select chosen-container district"
                                        name="DISTRICT_ID" data-placeholder="Select">
                                    <option value="">Select</option>
                                </select>
@@ -160,7 +160,7 @@
                                for="form-field-1-1"><b>Thana/Upazilla</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="UPAZILA_ID" class="chosen-select chosen-container thana" name="UPAZILA_ID"
+                               <select class="chosen-select chosen-container thana" name="UPAZILA_ID"
                                        data-placeholder="Select">
                                    <option value="">Select</option>
                                </select>
@@ -276,7 +276,6 @@
     </div>
 </div>
 {{--on change registration typr to merging open this modal--}}
-@include('masterGlobal.getDistrictUpazilaUnion')
 <script>
     $(document).on('change', 'select.regTypeId', function () {
         var registrationId = $(this).val();

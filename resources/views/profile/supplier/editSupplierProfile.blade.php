@@ -79,7 +79,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control  chosen-select" id="DIVISION_ID" name="DIVISION_ID">
+                        <select class="form-control  chosen-select division" name="DIVISION_ID">
                             <option value="">{{ trans('organization.select_one') }}</option>
                             @foreach($getDivision as $row)
                                 <option value="{{ $row->DIVISION_ID }}" @if($editData->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
@@ -92,7 +92,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District Name</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control district chosen-select" id="DISTRICT_ID" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                        <select class="form-control district chosen-select" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editData->DISTRICT_ID }}">{{ $editData->DISTRICT_NAME }}</option>
                         </select>
                     </span>
@@ -102,7 +102,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control thana chosen-select" id="THANA_ID" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                        <select class="form-control chosen-select thana" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editData->THANA_ID }}">{{ $editData->THANA_NAME }}</option>
                         </select>
                     </span>
@@ -148,7 +148,3 @@
 {{--@include('masterGlobal.formValidation')--}}
 @include('masterGlobal.formValidationEdit')
 @include('masterGlobal.chosenSelect')
-@include('masterGlobal.getDistrict')
-@include('masterGlobal.getUpazila')
-@include('masterGlobal.getUnion')
-@include('masterGlobal.getThana')

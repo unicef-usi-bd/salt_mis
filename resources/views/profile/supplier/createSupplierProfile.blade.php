@@ -72,7 +72,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
-                        <select id="DIVISION_ID" class="form-control chosen-select" name="DIVISION_ID" data-placeholder="Select or search data">
+                        <select id="DIVISION_ID" class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
                             <option value="">Select Division</option>
                             @foreach($getDivision as $row)
                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -135,11 +135,8 @@
 
     </form>
 </div>
+
 @include('masterGlobal.chosenSelect')
-@include('masterGlobal.getDistrict')
-@include('masterGlobal.getUpazila')
-@include('masterGlobal.getUnion')
-@include('masterGlobal.getThana')
 
 <script>
     $(document).ready(function () {
