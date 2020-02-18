@@ -116,8 +116,6 @@ class MillerInfoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input());
-
         $rules = array(
             'REG_TYPE_ID' => 'required',
             'MILL_NAME' => 'required',
