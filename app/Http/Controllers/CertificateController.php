@@ -197,6 +197,7 @@ class CertificateController extends Controller
     private function certificateUpdate($request, $millerId, $userCertificates, $image){
         $updated = false;
         $certificateId = $request->input('CERTIFICATE_ID');
+
         for($i = 0; $i<count($userCertificates); $i++){
             $tempName = null;
             if (isset($image[$i]) && $image[$i]->isValid()) {

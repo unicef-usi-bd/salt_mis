@@ -65,6 +65,16 @@
     {{--<link href="{{ asset('assets/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet"/>--}}
 
     <style>
+        /* div scroll css start */
+        /* Uses Miller profile form and associate miller profile crete and update form */
+        .scroll-div{
+            height: 300px;
+            display: block;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+        /* div scroll css end */
+
         .dataTables_wrapper .dt-buttons {
             position: absolute;
             left: 40%;

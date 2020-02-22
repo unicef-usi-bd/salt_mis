@@ -1,10 +1,4 @@
 <style>
-    table {
-        max-height: 400px;
-        display: block;
-        overflow-y: auto;
-        white-space: nowrap;
-    }
     th, td{
         min-width: 120px;
     }
@@ -16,24 +10,24 @@
             <form action="{{ url('/entrepreneur-info/'.$millerInfo->MILL_ID) }}" method="post" class="form-horizontal" role="form">
                 @csrf
                 @method('PUT')
-
-                <table class="table table-bordered" style="margin-top: 64px;">
-                    <thead>
+                <div class=" scroll-div">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr class="custom-overflow">
-                            <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
-                            <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                            <th style="width: 130px;">District</th>
-                            <th style="width: 130px;">Upazila</th>
+                            <th>Owner Name<span style="color:red;"> *</span></th>
+                            <th>Division<span style="color:red;"> </span></th>
+                            <th>District</th>
+                            <th>Upazila</th>
                             {{--<th style="width: 130px100px;">Union</th>--}}
-                            <th style="width: 130px;" >NID</th>
-                            <th style="width: 130px;">Mobile 1</th>
-                            <th  style="width: 130px;">Mobile 2</th>
-                            <th  style="width: 130px;">Email</th>
-                            <th  style="width: 130px;">Remarks</th>
-                            <th style="width: 130px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
+                            <th>NID</th>
+                            <th>Mobile 1</th>
+                            <th>Mobile 2</th>
+                            <th>Email</th>
+                            <th>Remarks</th>
+                            <th class="addButton"><span class="btn btn-primary btn-sm center rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
                         </tr>
-                    </thead>
-                    <tbody class="newRow">
+                        </thead>
+                        <tbody class="newRow">
                         @if(sizeof($entrepreneurs)>0)
                             @foreach($entrepreneurs as $entrepreneur)
                                 <tr class="rowFirst">
@@ -75,17 +69,17 @@
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="NID[]" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
+                                            <input type="text" name="NID[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="MOBILE_1[]" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
+                                            <input type="text" name="MOBILE_1[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="MOBILE_2[]" id="inputSuccess" value="{{ $entrepreneur->MOBILE_2 }}" class="width-100 MOBILE_2" />
+                                            <input type="text" name="MOBILE_2[]" id="inputSuccess" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_2 }}" class="width-100 MOBILE_2" />
                                         </span>
                                     </td>
                                     <td>
@@ -98,19 +92,19 @@
                                             <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $entrepreneur->REMARKS }}" class="width-100 REMARKS" />
                                         </span>
                                     </td>
-                                    <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                    <th class="removeButton"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="OWNER_NAME[]" id="inputSuccess " value="" class="width-100 OWNER_NAME"  />
+                                    <input type="text" name="OWNER_NAME[]" value="" class="width-100 OWNER_NAME"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select DIVISION_ID" id="ENT_DIVISION_ID" name="DIVISION_ID[]"  >
+                                    <select class="form-control chosen-select division" name="DIVISION_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($divisions as $row)
                                             <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -120,49 +114,50 @@
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_district" id="ENT_DISTRICT_ID" name="DISTRICT_ID[]"  >
+                                    <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
                                         <option value="">Select</option>
                                      </select>
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ent_upazila" id="ENT_UPAZILA_ID" name="UPAZILA_ID[]"  >
+                                    <select class="form-control chosen-select upazila" name="UPAZILA_ID[]"  >
                                         <option value=""> Select </option>
                                     </select>
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="NID[]" id="inputSuccess total_amount" value="" class="width-100 NID"  />
+                                    <input type="text" name="NID[]" value="" onkeypress="return numbersOnly(this, event)" class="width-100 NID"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_1"  />
+                                    <input type="text" name="MOBILE_1[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_1"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_2[]" id="inputSuccess total_amount" value="" class="width-100 MOBILE_2"  />
+                                    <input type="text" name="MOBILE_2[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_2"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="" class="width-100 EMAIL"  />
+                                    <input type="text" name="EMAIL[]" value="" class="width-100 EMAIL"  />
                                     <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                    <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                                 </td>
-                                <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                                <th class="removeButton"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
                             </tr>
                         @endif
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <hr>
                 <div class="clearfix">
                     <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">

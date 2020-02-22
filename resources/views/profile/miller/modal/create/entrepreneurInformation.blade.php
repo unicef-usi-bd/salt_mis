@@ -1,27 +1,32 @@
+<style>
+    th, td{
+        min-width: 120px;
+    }
+</style>
 <div id="entrepreneur" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
             <form action="{{ url('/entrepreneur-info') }}" data-clear="false" method="post" class="form-horizontal" role="form">
                 @csrf
                 <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
-
-                <table class="table table-bordered" style="margin-top: 64px;">
-                    <thead>
+                <div class="scroll-div">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <th style="width:130px ;">Owner Name<span style="color:red;"> *</span></th>
-                            <th style="width:130px ;">Division<span style="color:red;"> </span></th>
-                            <th style="width: 130px;">District</th>
-                            <th style="width: 130px;">Upazila</th>
+                            <th>Owner Name<span style="color:red;"> *</span></th>
+                            <th>Division<span style="color:red;"> </span></th>
+                            <th>District</th>
+                            <th>Upazila</th>
                             {{--<th style="width: 130px100px;">Union</th>--}}
-                            <th style="width: 130px;" >NID</th>
-                            <th style="width: 130px;">Mobile 1</th>
-                            <th  style="width: 130px;">Mobile 2</th>
-                            <th  style="width: 130px;">Email</th>
-                            <th  style="width: 130px;">Remarks</th>
-                            <th style="width: 130px;" class="addButton"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>
+                            <th >NID</th>
+                            <th>Mobile 1</th>
+                            <th >Mobile 2</th>
+                            <th >Email</th>
+                            <th >Remarks</th>
+                            <th class="addButton"><span class="btn btn-primary btn-sm center rowAdd"><i class="fa fa-plus"></i></span></th>
                         </tr>
-                    </thead>
-                    <tbody class="newRow">
+                        </thead>
+                        <tbody class="newRow">
                         <tr class="rowFirst">
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -54,17 +59,17 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="NID[]" value="" class="width-100 NID"  />
+                                    <input type="text" name="NID[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 NID"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]" value="" class="width-100 MOBILE_1"  />
+                                    <input type="text" name="MOBILE_1[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_1"  />
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_2[]" value="" class="width-100 MOBILE_2"  />
+                                    <input type="text" name="MOBILE_2[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_2"  />
                                 </span>
                             </td>
                             <td>
@@ -77,10 +82,11 @@
                                     <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                             </td>
-                            <td class="removeButton"><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                            <th class="removeButton"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <hr>
                 <div class="clearfix">
                     <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">

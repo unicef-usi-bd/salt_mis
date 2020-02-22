@@ -1,23 +1,29 @@
+<style>
+    th, td{
+        min-width: 140px;
+    }
+</style>
 <div id="certificate" class="tab-pane fade">
     <div class="row">
         <div class="col-md-12">
             <form action="{{ url('/certificate-info') }}" data-clear="false" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
-                <table class="table table-bordered fundAllocation" style="margin-top: 64px;">
-                    <thead>
+                <div class="scroll-div">
+                    <table class="table table-bordered fundAllocation">
+                        <thead>
                         <tr>
-                            <th style="width:175px ;">Type of Certificate<span style="color:red;"> </span></th>
-                            <th style="width:130px ;">Issure Name<span style="color:red;"> </span></th>
-                            <th style="width:140px ;">Issuing Date</th>
-                            <th style="width:150px ;">Certificate Number</th>
-                            <th style="width: 260px;">Trade License</th>
-                            <th style="width:140px;" >Renewing Date</th>
-                            <th  style="width:140px ;">Remarks</th>
-                            <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAddCertificate"><i class="fa fa-plus"></i></span></th>
+                            <th>Type of Certificate<span style="color:red;"> </span></th>
+                            <th>Issure Name<span style="color:red;"> </span></th>
+                            <th>Issuing Date</th>
+                            <th>Certificate Number</th>
+                            <th>Trade License</th>
+                            <th>Renewing Date</th>
+                            <th>Remarks</th>
+                            <th><span class="btn btn-primary btn-sm center rowAddCertificate"><i class="fa fa-plus"></i></span></th>
                         </tr>
-                    </thead>
-                    <tbody class="certificateTable">
+                        </thead>
+                        <tbody class="certificateTable">
                         <tr class="certificateRow">
                             <td>
                                 <span class="block input-icon input-icon-right">
@@ -47,7 +53,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" value="" class="width-100 CERTIFICATE_NO"  />
+                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"  />
                                 </span>
                             </td>
                             <td>
@@ -63,13 +69,14 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess total_amount" value="" class="width-100 REMARKS"  />
+                                    <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                             </td>
-                            <td><span class="btn btn-danger btn-sm pull-right rowRemove"><i class="fa fa-remove"></i></span></td>
+                            <th><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <hr>
                 <div class="clearfix">
                     <div class="col-md-offset-3 col-md-9" style="margin-left: 35%!important;">

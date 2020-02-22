@@ -76,7 +76,7 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="LAB_PERSON" class="chosen-container">
+                               <input type="text" name="LAB_PERSON" onkeypress="return numbersOnly(this, event)" class="chosen-container">
                             </span>
                         </div>
                     </div>

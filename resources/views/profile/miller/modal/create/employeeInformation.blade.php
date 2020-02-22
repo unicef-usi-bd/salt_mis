@@ -9,12 +9,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -23,12 +23,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" class="chosen-container" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" class="chosen-container" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
