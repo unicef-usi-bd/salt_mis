@@ -52,8 +52,9 @@ class CertificateIssurController extends Controller
     public function create()
     {
         //$issuerId = CertificateIssur::getIssuer();
-        $issuerId = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
-        return view('setup.certificateIssur.modals.createCertificateIssuer',compact('issuerId'));
+        $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issuers= LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
+        return view('setup.certificateIssur.modals.createCertificateIssuer',compact('certificates', 'issuers'));
     }
 
     /**
@@ -65,34 +66,42 @@ class CertificateIssurController extends Controller
     public function store(Request $request)
     {
 
-        //$this->pr($request->all());exit();
-
+        $certificateId = $request->input('CERTIFICATE_TYPE_ID');
+        $issuerId = $request->input('ISSUR_ID');
         $rules = array(
-            //'ITEM_TYPE' => 'required'
+            'CERTIFICATE_TYPE_ID' => 'required',
+            'ISSUR_ID' => 'required'
+        );
+        $error = array(
+            'CERTIFICATE_TYPE_ID.required' => 'Certificate field is required.',
+            'ISSUR_ID.required' => 'Issuer field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $data = array([
-                'CERTIFICATE_NAME' => $request->input('CERTIFICATE_NAME'),
-                'ISSUR_ID' => $request->input('ISSUR_ID'),
-                'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')?:0,
-                'IS_EXPIRE' => $request->input('IS_EXPIRE')?:0,
-                'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-            ]);
-            //dd($request->input('IS_EXPIRE'));
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            $item = CertificateIssur::insertItemData($data);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($item){
-                return redirect('/certificate')->with('success', 'Certificate Created Successfully!');
-            }
+        $hasDuplicate = CertificateIssur::checkDuplicates($certificateId, $issuerId);
+
+        if($hasDuplicate) return response()->json(['errors'=>'Certificate and issuer mapping already exist.']);
+
+        $data = array([
+            'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID'),
+            'ISSUR_ID' => $request->input('ISSUR_ID'),
+            'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE') ? : 0,
+            'IS_EXPIRE' => $request->input('IS_EXPIRE') ? : 0,
+            'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+        ]);
+
+        $inserted = CertificateIssur::insertItemData($data);
+
+        if($inserted){
+            return response()->json(['success'=>'Certificate and issuer mapping has been created.']);
+        } else{
+            return response()->json(['errors'=>'Certificate and issuer mapping create failed.']);
         }
     }
 
@@ -117,8 +126,9 @@ class CertificateIssurController extends Controller
     public function edit($id)
     {
         $issuerEdit = CertificateIssur::editData($id);
-        $issuerId = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
-        return view('setup.certificateIssur.modals.editCertificateIssuer',compact('issuerEdit','issuerId'));
+        $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+        $issuers= LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
+        return view('setup.certificateIssur.modals.editCertificateIssuer',compact('issuerEdit', 'certificates', 'issuers'));
     }
 
     /**
@@ -130,19 +140,31 @@ class CertificateIssurController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $certificateId = $request->input('CERTIFICATE_TYPE_ID');
+        $issuerId = $request->input('ISSUR_ID');
         $rules = array(
-            //'ITEM_TYPE' => 'required'
+            'CERTIFICATE_TYPE_ID' => 'required',
+            'ISSUR_ID' => 'required'
+        );
+        $error = array(
+            'CERTIFICATE_TYPE_ID.required' => 'Certificate field is required.',
+            'ISSUR_ID.required' => 'Issuer field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateCertificateIssure = CertificateIssur::updateCertificateIssuer($request,$id);
-            if($updateCertificateIssure){
-                return redirect('/certificate')->with('success', 'Certificate Updated !');
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $hasDuplicate = CertificateIssur::checkDuplicates($certificateId, $issuerId, $id);
+
+        if($hasDuplicate) return response()->json(['errors'=>'Certificate and issuer mapping already exist.']);
+
+        $updated = CertificateIssur::updateCertificateIssuer($request,$id);
+
+        if($updated){
+            return response()->json(['success'=>'Certificate and issuer mapping has been updated.']);
+        } else{
+            return response()->json(['errors'=>'Certificate and issuer mapping update failed.']);
         }
     }
 

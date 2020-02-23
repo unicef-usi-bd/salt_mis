@@ -10,8 +10,9 @@ class CertificateIssur extends Model
 {
     public static function getData(){
      return DB::table('smm_certificate')
-         ->select('smm_certificate.*','ssc_lookupchd.LOOKUPCHD_NAME')
-         ->leftJoin('ssc_lookupchd','smm_certificate.ISSUR_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+         ->select('smm_certificate.*','a.LOOKUPCHD_NAME as CERTIFICATE_NAME', 'b.LOOKUPCHD_NAME as ISSUER_NAME')
+         ->leftJoin('ssc_lookupchd as a','smm_certificate.CERTIFICATE_TYPE_ID','=','a.LOOKUPCHD_ID')
+         ->leftJoin('ssc_lookupchd as b','smm_certificate.ISSUR_ID','=','b.LOOKUPCHD_ID')
          ->get();
     }
 
@@ -20,6 +21,22 @@ class CertificateIssur extends Model
             ->select('ssc_lookupchd.*')
             ->where('ssc_lookupchd.LOOKUPMST_ID' ,'=',21)
             ->get();
+    }
+
+    public static function checkDuplicates($certificateId, $issuerId, $id=null){
+        if(empty($id)){
+            $data = DB::table('smm_certificate')
+                ->where('CERTIFICATE_TYPE_ID' ,'=', $certificateId)
+                ->where('ISSUR_ID' ,'=', $issuerId)
+                ->first();
+        } else{
+            $data = DB::table('smm_certificate')
+                ->where('CERTIFICATE_TYPE_ID' ,'=', $certificateId)
+                ->where('ISSUR_ID' ,'=', $issuerId)
+                ->where('CERTIFICATE_ID' ,'!=', $id)
+                ->first();
+        }
+        return $data;
     }
 
     public static function insertItemData($data){
@@ -36,8 +53,6 @@ class CertificateIssur extends Model
 
     public static function editData($id){
         return DB::table('smm_certificate')
-            ->select('smm_certificate.*','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('ssc_lookupchd','smm_certificate.ISSUR_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('smm_certificate.CERTIFICATE_ID','=',$id)
             ->first();
     }
@@ -53,10 +68,10 @@ class CertificateIssur extends Model
 
     public static function updateCertificateIssuer($request,$id){
         $update = DB::table('smm_certificate')->where('CERTIFICATE_ID', '=' , $id)->update([
-            'CERTIFICATE_NAME' => $request->input('CERTIFICATE_NAME'),
+            'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID'),
             'ISSUR_ID' => $request->input('ISSUR_ID'),
-            'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')?:0,
-            'IS_EXPIRE' => $request->input('IS_EXPIRE')?:0,
+            'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE') ? : 0,
+            'IS_EXPIRE' => $request->input('IS_EXPIRE') ? : 0,
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id

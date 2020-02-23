@@ -29,7 +29,7 @@ class MillerInfo extends Model
              'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
              'center_id' => Auth::user()->center_id,
              'REMARKS' => $request->input('REMARKS'),
-//             'approval_status' => 0,
+             'approval_status' => 0,
              'ENTRY_BY' => Auth::user()->id,
              'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
          ]);

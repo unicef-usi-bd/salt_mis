@@ -47,7 +47,6 @@ class Entrepreneur extends Model
 //                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
                      //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
                      'MILL_ID' => $millerId,
-                     //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
                      'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
                      'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
                      'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
@@ -82,8 +81,7 @@ class Entrepreneur extends Model
             $data[] = array(
                 'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
                 //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
-                'MILL_ID' => $request->input('MILL_ID'),
-                //'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
+                'MILL_ID' => $millerId,
                 'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
                 'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],

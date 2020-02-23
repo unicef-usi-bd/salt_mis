@@ -171,6 +171,7 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $millerId = $id;
         $image = $request->file('user_image');
 
@@ -280,6 +281,7 @@ class CertificateController extends Controller
                 $data[$i]['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
             }
         }
+
         $inserted = DB::table('tem_ssm_certificate_info')->insert($data);
 
         if($inserted){

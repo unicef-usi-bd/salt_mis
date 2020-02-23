@@ -1,5 +1,5 @@
 <style>
-    table.borderless td,table.borderless th{
+    table.border-none td,table.border-none th{
         border: none !important;
     }
 </style>
@@ -7,72 +7,70 @@
     <form action="{{ url('/miller-profile-approval/'.$id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
         @csrf
         @method('PUT')
-
         <div class="error-container">
-        <h4 class="center text-success">Mill Information </h4>
-        {{--<h4 class="center text-success">{{ trans('dashboard.details') }} </h4>--}}
+        <h4 class="well center">Miller profile approval </h4>
         <div class="row table-responsive">
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: green;">Previous Mill Information </h4>
-                @if($previousMillerData)
-                <input type="hidden" name="MILL_ID" value="{{ $previousMillerData->MILL_ID }}">
-                <table class="table borderless">
+                <h4 class="center text-primary" style="color: green;">Current Mill Information </h4>
+                @if($currentMillInfo)
+                <input type="hidden" name="MILL_ID" value="{{ $currentMillInfo->MILL_ID }}">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">Name of Mill</th>
                         <th> :</th>
-                        <td> {{ $previousMillerData->MILL_NAME }} </td>
+                        <td> {{ $currentMillInfo->MILL_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Logo</th>
                         <th> :</th>
-                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$previousMillerData->mill_logo) }}" /> </td>
+                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$currentMillInfo->mill_logo) }}" /> </td>
                     </tr>
                     <tr>
                         <th class=" ">Process Type</th>
                         <th> :</th>
-                        <td> {{ $previousMillerData->process_name }} </td>
+                        <td> {{ $currentMillInfo->process_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Type</th>
                         <th> :</th>
-                        <td> {{ $previousMillerData->mill_name }} </td>
+                        <td> {{ $currentMillInfo->mill_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Capacity</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->CAPACITY_ID }}</td>
+                        <td>{{ $currentMillInfo->CAPACITY_ID }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Division Name</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->DIVISION_NAME }} </td>
+                        <td>{{ $currentMillInfo->DIVISION_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">District Name</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->DISTRICT_NAME }} </td>
+                        <td>{{ $currentMillInfo->DISTRICT_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Upazila Name</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->UPAZILA_NAME }} </td>
+                        <td>{{ $currentMillInfo->UPAZILA_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Zone</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->ZONE_NAME }}</td>
+                        <td>{{ $currentMillInfo->ZONE_NAME }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Millers ID</th>
                         <th> :</th>
-                        <td>{{ $previousMillerData->MILLERS_ID }}</td>
+                        <td>{{ $currentMillInfo->MILLERS_ID }}</td>
 
                     </tr>
                     <tr>
                         <th class=" ">Active Status</th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousMillerData->ACTIVE_FLG == 0){ ?>
+                            <?php  if($currentMillInfo->ACTIVE_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
@@ -82,7 +80,7 @@
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td> {{ $previousMillerData->REMARKS }}</td>
+                        <td> {{ $currentMillInfo->REMARKS }}</td>
                     </tr>
                 </table>
                     @else
@@ -91,66 +89,66 @@
             </div>
 
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: red;">Change Mill Information </h4>
-                @if($presentMillerData)
-                <input type="hidden" name="MILL_ID_TEM" value="{{ $presentMillerData->MILL_ID_TEM }}">
-                <table class="table borderless">
+                <h4 class="center text-success" style="color: red;">Update Mill Information </h4>
+                @if($updateMillInfo)
+                <input type="hidden" name="MILL_ID_TEM" value="{{ $updateMillInfo->MILL_ID_TEM }}">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">Name of Mill</th>
                         <th> :</th>
-                        <td> {{ $presentMillerData->MILL_NAME }} </td>
+                        <td> {{ $updateMillInfo->MILL_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Logo</th>
                         <th> :</th>
-                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$presentMillerData->mill_logo) }}" /></td>
+                        <td> <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$updateMillInfo->mill_logo) }}" /></td>
                     </tr>
                     <tr>
                         <th class=" ">Process Type</th>
                         <th> :</th>
-                        <td> {{ $presentMillerData->process_name }} </td>
+                        <td> {{ $updateMillInfo->process_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Type</th>
                         <th> :</th>
-                        <td> {{ $presentMillerData->mill_name }} </td>
+                        <td> {{ $updateMillInfo->mill_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Capacity</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->CAPACITY_ID }}</td>
+                        <td>{{ $updateMillInfo->CAPACITY_ID }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Division Name</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->DIVISION_NAME }} </td>
+                        <td>{{ $updateMillInfo->DIVISION_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">District Name</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->DISTRICT_NAME }} </td>
+                        <td>{{ $updateMillInfo->DISTRICT_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Upazila Name</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->UPAZILA_NAME }} </td>
+                        <td>{{ $updateMillInfo->UPAZILA_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Zone</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->ZONE_NAME }}</td>
+                        <td>{{ $updateMillInfo->ZONE_NAME }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Millers ID</th>
                         <th> :</th>
-                        <td>{{ $presentMillerData->MILLERS_ID }}</td>
+                        <td>{{ $updateMillInfo->MILLERS_ID }}</td>
 
                     </tr>
                     <tr>
                         <th class=" ">Active Status</th>
                         <th> :</th>
                         <td>
-                            <?php  if($presentMillerData->ACTIVE_FLG == 0){ ?>
+                            <?php  if($updateMillInfo->ACTIVE_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
@@ -160,19 +158,19 @@
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td> {{ $presentMillerData->REMARKS }}</td>
+                        <td> {{ $updateMillInfo->REMARKS }}</td>
                     </tr>
                 </table>
                     @else
-                    <h3 style="text-align: center;color: red;">No Data Found</h3>
+                    <h4 style="text-align: center;color: red;">No Data Found</h4>
                     @endif
             </div>
         </div>
 
-        <h4 class="center text-success">Entrepreneur Information Details</h4>
+        <h4 class="center text-success">Entrepreneur Information</h4>
         <div class="row">
             <div class="col-md-12">
-                <h4 class="center text-success" style="color: green;">Previous Entrepreneur Information </h4>
+                <h4 class="center text-success" style="color: green;">Current Information </h4>
                 <table id="simple-table" class="table  table-bordered">
                     <tr>
                         <th class=" ">Owner Name</th>
@@ -185,19 +183,19 @@
                         <th class=" ">Email </th>
                         <th class=" ">Remarks</th>
                     </tr>
-                    @if($previousEnterpreneurData)
-                    @foreach($previousEnterpreneurData as $row)
-                        <input type="hidden" name="ENTREPRENEUR_ID[]" value="{{ $row->ENTREPRENEUR_ID }}">
+                    @if($currentEntrepreneurs)
+                    @foreach($currentEntrepreneurs as $currentEntrepreneur)
+                        <input type="hidden" name="ENTREPRENEUR_ID[]" value="{{ $currentEntrepreneur->ENTREPRENEUR_ID }}">
                         <tr>
-                            <td> {{ $row->OWNER_NAME }}</td>
-                            <td>{{ $row->NID }} </td>
-                            <td>{{ $row->DIVISION_NAME }} </td>
-                            <td>{{ $row->DISTRICT_NAME }} </td>
-                            <td>{{ $row->UPAZILA_NAME }} </td>
-                            <td>{{ $row->MOBILE_1 }}</td>
-                            <td>{{ $row->MOBILE_2 }}</td>
-                            <td> {{ $row->EMAIL }}</td>
-                            <td> {{ $row->REMARKS }}</td>
+                            <td> {{ $currentEntrepreneur->OWNER_NAME }}</td>
+                            <td>{{ $currentEntrepreneur->NID }} </td>
+                            <td>{{ $currentEntrepreneur->DIVISION_NAME }} </td>
+                            <td>{{ $currentEntrepreneur->DISTRICT_NAME }} </td>
+                            <td>{{ $currentEntrepreneur->UPAZILA_NAME }} </td>
+                            <td>{{ $currentEntrepreneur->MOBILE_1 }}</td>
+                            <td>{{ $currentEntrepreneur->MOBILE_2 }}</td>
+                            <td> {{ $currentEntrepreneur->EMAIL }}</td>
+                            <td> {{ $currentEntrepreneur->REMARKS }}</td>
                         </tr>
                     @endforeach
                         @else
@@ -209,7 +207,7 @@
             </div>
 
             <div class="col-md-12">
-                <h4 class="center text-success" style="color: red;">Change Entrepreneur Information </h4>
+                <h4 class="center text-success" style="color: red;">Update Information </h4>
                 <table class="table table-bordered">
                     <tr>
                         <th class=" ">Owner Name</th>
@@ -222,21 +220,21 @@
                         <th class=" ">Email </th>
                         <th class=" ">Remarks</th>
                     </tr>
-                    @if($presentEnterpreneurData)
-                    @foreach($presentEnterpreneurData as $row)
+                    @if($updateEntrepreneurs)
+                    @foreach($updateEntrepreneurs as $updateEntrepreneur)
                         <tr>
-                            <input type="hidden" name="ENTREPRENEUR_ID_TEM[]" value="{{ $row->ENTREPRENEUR_ID_TEM }}">
-                            <input type="hidden" name="TEM_ENTREPRENEUR_ID[]" value="{{ $row->ENTREPRENEUR_ID }}">
-                            <input type="hidden" name="TEM_MILL_ID[]" value="{{ $row->MILL_ID }}">
-                            <td> {{ $row->OWNER_NAME }}</td>
-                            <td>{{ $row->NID }} </td>
-                            <td>{{ $row->DIVISION_NAME }} </td>
-                            <td>{{ $row->DISTRICT_NAME }} </td>
-                            <td>{{ $row->UPAZILA_NAME }} </td>
-                            <td>{{ $row->MOBILE_1 }}</td>
-                            <td>{{ $row->MOBILE_2 }}</td>
-                            <td> {{ $row->EMAIL }}</td>
-                            <td> {{ $row->REMARKS }}</td>
+                            <input type="hidden" name="ENTREPRENEUR_ID_TEM[]" value="{{ $updateEntrepreneur->ENTREPRENEUR_ID_TEM }}">
+                            <input type="hidden" name="TEM_ENTREPRENEUR_ID[]" value="{{ $updateEntrepreneur->ENTREPRENEUR_ID }}">
+                            <input type="hidden" name="TEM_MILL_ID[]" value="{{ $updateEntrepreneur->MILL_ID }}">
+                            <td> {{ $updateEntrepreneur->OWNER_NAME }}</td>
+                            <td>{{ $updateEntrepreneur->NID }} </td>
+                            <td>{{ $updateEntrepreneur->DIVISION_NAME }} </td>
+                            <td>{{ $updateEntrepreneur->DISTRICT_NAME }} </td>
+                            <td>{{ $updateEntrepreneur->UPAZILA_NAME }} </td>
+                            <td>{{ $updateEntrepreneur->MOBILE_1 }}</td>
+                            <td>{{ $updateEntrepreneur->MOBILE_2 }}</td>
+                            <td> {{ $updateEntrepreneur->EMAIL }}</td>
+                            <td> {{ $updateEntrepreneur->REMARKS }}</td>
                         </tr>
                     @endforeach
                     @else
@@ -255,24 +253,24 @@
                 <table class="table table-bordered">
                     <tr>
                         <th class=" ">Type of Certificate </th>
-                        <th class=" ">Issure Name</th>
+                        <th class=" ">Issuer Name</th>
                         <th class=" ">Issuing Date</th>
                         <th class=" ">Certificate Number</th>
                         <th class=" ">Trade License </th>
                         <th class=" ">Renewing Date</th>
                         <th class=" ">Remarks</th>
                     </tr>
-                    @if($previousCertificaterData)
-                    @foreach($previousCertificaterData as $row)
-                        <input type="hidden" name="CERTIFICATE_ID[]" value="{{ $row->CERTIFICATE_ID }}">
+                    @if($presentCertificates)
+                    @foreach($presentCertificates as $presentCertificate)
+                        <input type="hidden" name="CERTIFICATE_ID[]" value="{{ $presentCertificate->CERTIFICATE_ID }}">
                     <tr>
-                        <td> {{ $row->CERTIFICATE_NAME }} </td>
-                        <td> {{ $row->issuer_name }} </td>
-                        <td> {{ $row->ISSUING_DATE }}</td>
-                        <td>{{ $row->CERTIFICATE_NO }} </td>
-                        <td><a href="{{ url('/'. $row->TRADE_LICENSE ) }}" target="_blank">File</a>  </td>
-                        <td>{{ $row->RENEWING_DATE }} </td>
-                        <td>{{ $row->REMARKS }} </td>
+                        <td> {{ $presentCertificate->CERTIFICATE_NAME }} </td>
+                        <td> {{ $presentCertificate->issuer_name }} </td>
+                        <td> {{ $presentCertificate->ISSUING_DATE }}</td>
+                        <td>{{ $presentCertificate->CERTIFICATE_NO }} </td>
+                        <td><a href="{{ url('/'. $presentCertificate->TRADE_LICENSE ) }}" target="_blank">File</a>  </td>
+                        <td>{{ $presentCertificate->RENEWING_DATE }} </td>
+                        <td>{{ $presentCertificate->REMARKS }} </td>
                     </tr>
                     @endforeach
                     @else
@@ -288,25 +286,25 @@
                 <table class="table table-bordered">
                     <tr>
                         <th class=" ">Type of Certificate </th>
-                        <th class=" ">Issure Name</th>
+                        <th class=" ">Issuer Name</th>
                         <th class=" ">Issuing Date</th>
                         <th class=" ">Certificate Number</th>
                         <th class=" ">Trade License </th>
                         <th class=" ">Renewing Date</th>
                         <th class=" ">Remarks</th>
                     </tr>
-                    @if($presentCertificaterData)
-                    @foreach($presentCertificaterData as $row)
-                        <input type="hidden" name="CERTIFICATE_ID_TEM[]" value="{{ $row->CERTIFICATE_ID_TEM }}">
-                        <input type="hidden" name="TEM_CERTIFICATE_ID[]" value="{{ $row->CERTIFICATE_ID }}">
+                    @if($updateCertificates)
+                    @foreach($updateCertificates as $updateCertificate)
+                        <input type="hidden" name="CERTIFICATE_ID_TEM[]" value="{{ $updateCertificate->CERTIFICATE_ID_TEM }}">
+                        <input type="hidden" name="TEM_CERTIFICATE_ID[]" value="{{ $updateCertificate->CERTIFICATE_ID }}">
                     <tr>
-                        <td> {{ $row->CERTIFICATE_NAME }} </td>
-                        <td> {{ $row->issuer_name }} </td>
-                        <td> {{ $row->ISSUING_DATE }}</td>
-                        <td>{{ $row->CERTIFICATE_NO }} </td>
-                        <td><a href="{{ url('/'. $row->TRADE_LICENSE ) }}" target="_blank">File</a>  </td>
-                        <td>{{ $row->RENEWING_DATE }} </td>
-                        <td>{{ $row->REMARKS }} </td>
+                        <td> {{ $updateCertificate->CERTIFICATE_NAME }} </td>
+                        <td> {{ $updateCertificate->issuer_name }} </td>
+                        <td> {{ $updateCertificate->ISSUING_DATE }}</td>
+                        <td>{{ $updateCertificate->CERTIFICATE_NO }} </td>
+                        <td><a href="{{ url('/'. $updateCertificate->TRADE_LICENSE ) }}" target="_blank">File</a>  </td>
+                        <td>{{ $updateCertificate->RENEWING_DATE }} </td>
+                        <td>{{ $updateCertificate->REMARKS }} </td>
                     </tr>
                     @endforeach
                     @else
@@ -324,7 +322,7 @@
                 <h4 class="center text-success" style="color: green;">Previous QC Information </h4>
                 @if($previousQcData)
                     <input type="hidden" name="QCINFO_ID" value="{{ $previousQcData->QCINFO_ID }}">
-                <table class="table borderless">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">laboratory </th>
                         <th> :</th>
@@ -398,7 +396,7 @@
                 <h4 class="center text-success" style="color: red;">Change QC Information </h4>
                 @if($presentQcData)
                 <input type="hidden" name="QCINFO_ID_TEM" value="{{ $presentQcData->QCINFO_ID_TEM }}">
-                <table class="table borderless">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">laboratory </th>
                         <th> :</th>
@@ -473,7 +471,7 @@
                 <h4 class="center text-success" style="color: red;">Previous Employee Information </h4>
                 @if($previousEmployeeData)
                 <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
-                <table class="table borderless">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">Total Male Employee </th>
                         <th> :</th>
@@ -531,7 +529,7 @@
                 <h4 class="center text-success" style="color: green;">Change Employee Information </h4>
                 @if($presentEmployeeData)
                 <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
-                <table class="table borderless">
+                <table class="table border-none">
                     <tr>
                         <th class=" ">Total Male Employee </th>
                         <th> :</th>
@@ -599,14 +597,11 @@
 
             </div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-success">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    {{--{{ trans('dashboard.submit') }}--}}
-                    Approve
-                </button>
+                <button type="button" onclick="formSubmit(this.form)" class="btn btn-success"><i class="ace-icon fa fa-check bigger-110"></i>Approve</button>
             </div>
 
-        <div class="space"></div>
-    </div>
+            <div class="space"></div>
+        </div>
     </form>
 </div>
+@include('masterGlobal.ajaxFormSubmit')

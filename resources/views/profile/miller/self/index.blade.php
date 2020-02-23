@@ -6,88 +6,58 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <style>
-        .table th{
-            text-align: center;
-        }
-
         .chosen-container { width: 100% !important; }
-
-        .select2{
-            width:100% !important;
-        }
-        .disabledTab{
-            pointer-events: none;
-
-        }
-        li .disabledTab:hover{
-            cursor:not-allowed
-        }
-
-        /*.nav-tabs>li.active>a{*/
-        /*background-color: #1CABE2;*/
-        /*}*/
-
     </style>
 
     <div class="page-header">
         <h1>
-            {{--{{ trans('soeReport.report') }}--}}
             Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                {{--{{ trans('soeReport.report_dashboard') }}--}}
                 Miller Profile
             </small>
         </h1>
     </div><!-- /.page-header -->
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-sm-12">
-                <div id="success" class="alert alert-block alert-success" style="display: none;">
-                    <span id="successMessage"></span>
-                    <button type="button" class="close" data-dismiss="alert">
-                        <i class="ace-icon fa fa-times"></i>
-                    </button>
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
+                    <li class=""> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    {{--Mill Info--}}
+                    @include('profile.miller.modal.edit.millInformation')
+
+                    {{--/-Miller Info--}}
+                    {{--Entrepreneur Information--}}
+                    @include('profile.miller.modal.edit.entrepreneurInformation')
+                    {{--/-Entrepreneur Information--}}
+
+                    {{--Certificate Info--}}
+                    @include('profile.miller.modal.edit.certificateInformation')
+                    {{--/-Certificate Info--}}
+
+                    {{--QC Info--}}
+                    @include('profile.miller.modal.edit.qcInformation')
+                    {{--/- QC Info--}}
+
+                    {{--Employee Info--}}
+                    @include('profile.miller.modal.edit.employeeInformation')
+
                 </div>
-                <div class="tabbable">
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li class="active"> <a data-toggle="tab" href="#mill"> Mill Information </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#entrepreneur"> Entrepreneur Information  </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#certificate">  Certificate Information </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#qc"> QC Information </a> </li>
-                        <li class=""> <a data-toggle="tab" href="#employee"> Employee Information </a> </li>
-                    </ul>
+            </div>
+            {{--@endif--}}
+        </div><!-- /.col -->
 
-                    <div class="tab-content">
-
-                        {{--Mill Info--}}
-                        @include('profile.miller.modal.edit.millInformation')
-
-                        {{--/-Miller Info--}}
-                        {{--Entrepreneur Information--}}
-                        @include('profile.miller.modal.edit.entrepreneurInformation')
-                        {{--/-Entrepreneur Information--}}
-
-                        {{--Certificate Info--}}
-                        @include('profile.miller.modal.edit.certificateInformation')
-                        {{--/-Certificate Info--}}
-
-                        {{--QC Info--}}
-                        @include('profile.miller.modal.edit.qcInformation')
-                        {{--/- QC Info--}}
-
-                        {{--Employee Info--}}
-                        @include('profile.miller.modal.edit.employeeInformation')
-
-                    </div>
-                </div>
-                {{--@endif--}}
-            </div><!-- /.col -->
-
-            <div class="space"></div>
-        </div>
-    </div><!-- /.row -->
+        <div class="space"></div>
+    </div>
 
     @include('masterGlobal.chosenSelect')
     @include('masterGlobal.getMillersId')

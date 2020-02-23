@@ -1,8 +1,3 @@
-<style>
-    .my-error-class {
-        color: red;
-    }
-</style>
 <div id="mill" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
@@ -11,8 +6,7 @@
                 @method('PUT')
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Registration Type</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Registration Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="REG_TYPE_ID" class="chosen-container regTypeId" name="REG_TYPE_ID"
@@ -27,8 +21,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Name of Mill</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $millerInfo->MILL_NAME }}">
@@ -37,8 +30,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Process Type</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Process Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="" class="chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
@@ -51,8 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Type of Mill</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Type of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="MILL_TYPE_ID" class="chosen-container" name="MILL_TYPE_ID"
@@ -66,8 +57,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                 <input type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID" onkeypress="return numbersOnly(this, event)" value="{{ $millerInfo->CAPACITY_ID }}">
@@ -75,8 +65,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Zone</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Zone</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="ZONE_ID" class="chosen-container" name="ZONE_ID" data-placeholder="Select">
@@ -90,8 +79,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Millers ID</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Millers ID</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $millerInfo->MILLERS_ID }}">
@@ -113,8 +101,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b> Type Of Owner</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b> Type Of Owner</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID"
@@ -123,15 +110,13 @@
                                    @foreach($ownerType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}" @if($millerInfo->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif >{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
-
                             </select>
                             </span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Division</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Division</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                 <select id="DIVISION_ID" name="DIVISION_ID"
@@ -146,8 +131,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>District</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="DISTRICT_ID" class="chosen-select chosen-container district"
@@ -162,8 +146,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Thana/Upazilla</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID" class="chosen-select chosen-container thana" name="UPAZILA_ID"
@@ -178,8 +161,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Active Status</b><span style="color: red">*</span></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Active Status</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="ACTIVE_FLG" class="chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
@@ -191,8 +173,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Remarks</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                 <textarea rows="3" class="form-control col-sm-8" name="REMARKS"></textarea>
@@ -203,7 +184,7 @@
                 </div>
                 <hr>
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
+                    <div class="col-md-12 center">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}

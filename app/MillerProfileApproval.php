@@ -39,7 +39,7 @@ class MillerProfileApproval extends Model
             ->first();
     }
 
-    public static function previousEntrepreneurInformation($id){
+    public static function currentEntrepreneurInfo($id){
         return DB::table('ssm_entrepreneur_info')
             ->select('ssm_entrepreneur_info.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*')
             ->leftJoin('ssc_divisions','ssm_entrepreneur_info.DIVISION_ID','=','ssc_divisions.DIVISION_ID')
@@ -49,18 +49,18 @@ class MillerProfileApproval extends Model
             ->get();
     }
 
-    public static function presentEntrepreneurInformation($id){
+    public static function updateEntrepreneurInfo($id){
         return DB::table('tem_ssm_entrepreneur_info')
             ->select('tem_ssm_entrepreneur_info.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*')
             ->leftJoin('ssc_divisions','tem_ssm_entrepreneur_info.DIVISION_ID','=','ssc_divisions.DIVISION_ID')
             ->leftJoin('ssc_districts','tem_ssm_entrepreneur_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
             ->leftJoin('ssc_upazilas','tem_ssm_entrepreneur_info.UPAZILA_ID','=','ssc_upazilas.UPAZILA_ID')
-            ->where('tem_ssm_entrepreneur_info.MILL_ID','=',$id)
+            ->where('tem_ssm_entrepreneur_info.MILL_ID','=', $id)
             ->where('tem_ssm_entrepreneur_info.approval_status','=',0)
             ->get();
     }
 
-    public static function previousCertificateInformation($id){
+    public static function currentCertificatesInfo($id){
         return DB::table('ssm_certificate_info')
             ->select('ssm_certificate_info.*','ssc_districts.*','smm_certificate.*','issuer.LOOKUPCHD_NAME as issuer_name')
             ->leftJoin('ssc_districts','ssm_certificate_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')
@@ -70,7 +70,7 @@ class MillerProfileApproval extends Model
             ->get();
     }
 
-    public static function presentCertificateInformation($id){
+    public static function updateCertificatesInfo($id){
         return DB::table('tem_ssm_certificate_info')
             ->select('tem_ssm_certificate_info.*','ssc_districts.*','smm_certificate.*','issuer.LOOKUPCHD_NAME as issuer_name')
             ->leftJoin('ssc_districts','tem_ssm_certificate_info.DISTRICT_ID','=','ssc_districts.DISTRICT_ID')

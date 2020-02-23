@@ -32,8 +32,8 @@
                 @foreach($issuerData as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
-                        <td>{{$row->CERTIFICATE_NAME}}</td>
-                        <td>{{$row->LOOKUPCHD_NAME}}</td>
+                        <td>{{ $row->CERTIFICATE_NAME }}</td>
+                        <td>{{ $row->ISSUER_NAME }}</td>
 
                         <td>
                             @if($row->CERTIFICATE_TYPE == 1)
@@ -93,6 +93,7 @@
     </div><!-- /.row -->
 
     @include('masterGlobal.deleteScript')
+    @include('masterGlobal.ajaxFormSubmit')
 
 @endsection
 

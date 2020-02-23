@@ -1,8 +1,3 @@
-<style>
-    .my-error-class {
-        color: red;
-    }
-</style>
 <div id="mill" class="tab-pane fade in active">
     <div class="row">
         <div class="col-md-12">
@@ -14,8 +9,7 @@
                                for="form-field-1-1"><b>Registration Type</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="REG_TYPE_ID" class="chosen-container regTypeId" name="REG_TYPE_ID"
-                                       data-placeholder="Select">
+                               <select id="REG_TYPE_ID" class="chosen-container regTypeId" name="REG_TYPE_ID" data-placeholder="Select">
                                        <option value="">-Select-</option>
                                    @foreach($registrationType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -196,7 +190,7 @@
                 </div>
                 <hr>
                 <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
+                    <div class="col-md-12 center">
                         <button type="reset" class="btn">
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
