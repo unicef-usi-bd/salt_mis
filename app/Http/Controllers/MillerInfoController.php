@@ -174,8 +174,8 @@ class MillerInfoController extends Controller
         $previousMillerData = MillerProfileApproval::previousMillerInformation($id);
         $previousEnterpreneurData = MillerProfileApproval::currentEntrepreneurInfo($id);
         $previousCertificaterData = MillerProfileApproval::currentCertificatesInfo($id);
-        $previousQcData = MillerProfileApproval::previousQcInformation($id);
-        $previousEmployeeData = MillerProfileApproval::previousEmployeeInformation($id);
+        $previousQcData = MillerProfileApproval::currentQcInfo($id);
+        $previousEmployeeData = MillerProfileApproval::currentEmployeeInfo($id);
         //$this->pr($lookUpDataMill);
         return view('profile.miller.modal.viewMillerIndex', compact('previousMillerData','previousEnterpreneurData','previousCertificaterData','previousQcData','previousEmployeeData'));
     }

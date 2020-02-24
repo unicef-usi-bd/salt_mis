@@ -233,7 +233,7 @@ class CertificateController extends Controller
             if(!empty($tempName)){
                 $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
             }
-//            dd($data);
+
             if(!empty($certificateId[$i])){
                 $updated = true;
                 DB::table('ssm_certificate_info')->where('CERTIFICATE_ID', $certificateId[$i])->update($data);

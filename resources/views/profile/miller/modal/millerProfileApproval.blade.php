@@ -320,14 +320,14 @@
         <div class="row table-responsive">
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: green;">Previous QC Information </h4>
-                @if($previousQcData)
-                    <input type="hidden" name="QCINFO_ID" value="{{ $previousQcData->QCINFO_ID }}">
+                @if($currentQcInfo)
+                    <input type="hidden" name="QCINFO_ID" value="{{ $currentQcInfo->QCINFO_ID }}">
                 <table class="table border-none">
                     <tr>
                         <th class=" ">laboratory </th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousQcData->LABORATORY_FLG == 0){ ?>
+                            <?php  if($currentQcInfo->LABORATORY_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -337,13 +337,13 @@
                     <tr>
                         <th class=" ">Standard Operation Procedure (SOP)</th>
                         <th> :</th>
-                        <td> {{ $previousQcData->SOP_DESC }} </td>
+                        <td> {{ $currentQcInfo->SOP_DESC }} </td>
                     </tr>
                     <tr>
                         <th class=" ">If Iodine content check during production</th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousQcData->IODINE_CHECK_FLG == 0){ ?>
+                            <?php  if($currentQcInfo->IODINE_CHECK_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -354,7 +354,7 @@
                         <th class=" ">Monitoring Test Kit</th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousQcData->MONITORING_FLG == 0){ ?>
+                            <?php  if($currentQcInfo->MONITORING_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -365,7 +365,7 @@
                         <th class=" ">Do you have a laboratory Man</th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousQcData->LAB_MAN_FLG == 0){ ?>
+                            <?php  if($currentQcInfo->LAB_MAN_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -375,12 +375,12 @@
                     <tr>
                         <th class=" ">No of Laboratory Man</th>
                         <th> :</th>
-                        <td>{{ $previousQcData->LAB_PERSON }} </td>
+                        <td>{{ $currentQcInfo->LAB_PERSON }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $previousQcData->REMARKS }}</td>
+                        <td>{{ $currentQcInfo->REMARKS }}</td>
 
                     </tr>
 
@@ -394,14 +394,14 @@
             <div class="col-md-6">
 
                 <h4 class="center text-success" style="color: red;">Change QC Information </h4>
-                @if($presentQcData)
-                <input type="hidden" name="QCINFO_ID_TEM" value="{{ $presentQcData->QCINFO_ID_TEM }}">
+                @if($updateQcInfo)
+                <input type="hidden" name="QCINFO_ID_TEM" value="{{ $updateQcInfo->QCINFO_ID_TEM }}">
                 <table class="table border-none">
                     <tr>
                         <th class=" ">laboratory </th>
                         <th> :</th>
                         <td>
-                            <?php  if($presentQcData->LABORATORY_FLG == 0){ ?>
+                            <?php  if($updateQcInfo->LABORATORY_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -411,13 +411,13 @@
                     <tr>
                         <th class=" ">Standard Operation Procedure (SOP)</th>
                         <th> :</th>
-                        <td> {{ $presentQcData->SOP_DESC }} </td>
+                        <td> {{ $updateQcInfo->SOP_DESC }} </td>
                     </tr>
                     <tr>
                         <th class=" ">If Iodine content check during production</th>
                         <th> :</th>
                         <td>
-                            <?php  if($presentQcData->IODINE_CHECK_FLG == 0){ ?>
+                            <?php  if($updateQcInfo->IODINE_CHECK_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -428,7 +428,7 @@
                         <th class=" ">Monitoring Test Kit</th>
                         <th> :</th>
                         <td>
-                            <?php  if($presentQcData->MONITORING_FLG == 0){ ?>
+                            <?php  if($updateQcInfo->MONITORING_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -439,7 +439,7 @@
                         <th class=" ">Do you have a laboratory Man</th>
                         <th> :</th>
                         <td>
-                            <?php  if($presentQcData->LAB_MAN_FLG == 0){ ?>
+                            <?php  if($updateQcInfo->LAB_MAN_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -449,12 +449,12 @@
                     <tr>
                         <th class=" ">No of Laboratory Man</th>
                         <th> :</th>
-                        <td>{{ $presentQcData->LAB_PERSON }} </td>
+                        <td>{{ $updateQcInfo->LAB_PERSON }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $presentQcData->REMARKS }}</td>
+                        <td>{{ $updateQcInfo->REMARKS }}</td>
 
                     </tr>
 
@@ -469,53 +469,53 @@
         <div class="row table-responsive">
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: red;">Previous Employee Information </h4>
-                @if($previousEmployeeData)
-                <input type="hidden" name="MILLEMP_ID" value="{{ $previousEmployeeData->MILLEMP_ID }}">
+                @if($currentEmployees)
+                <input type="hidden" name="MILLEMP_ID" value="{{ $currentEmployees->MILLEMP_ID }}">
                 <table class="table border-none">
                     <tr>
                         <th class=" ">Total Male Employee </th>
                         <th> :</th>
-                        <td> {{ $previousEmployeeData->TOTMALE_EMP }} </td>
+                        <td> {{ $currentEmployees->TOTMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Total Female Employee</th>
                         <th> :</th>
-                        <td> {{ $previousEmployeeData->TOTFEM_EMP }} </td>
+                        <td> {{ $currentEmployees->TOTFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Male Employee</th>
                         <th> :</th>
-                        <td> {{ $previousEmployeeData->FULLTIMEMALE_EMP }}</td>
+                        <td> {{ $currentEmployees->FULLTIMEMALE_EMP }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->FULLTIMEFEM_EMP }} </td>
+                        <td>{{ $currentEmployees->FULLTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Male Employee</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->PARTTIMEMALE_EMP }} </td>
+                        <td>{{ $currentEmployees->PARTTIMEMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->PARTTIMEFEM_EMP }} </td>
+                        <td>{{ $currentEmployees->PARTTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Technical Male Employee</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->TOTMALETECH_PER }} </td>
+                        <td>{{ $currentEmployees->TOTMALETECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" "> Technical Female Employee</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->TOTFEMTECH_PER }} </td>
+                        <td>{{ $currentEmployees->TOTFEMTECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $previousEmployeeData->REMARKS }} </td>
+                        <td>{{ $currentEmployees->REMARKS }} </td>
 
                     </tr>
 
@@ -527,53 +527,53 @@
 
             <div class="col-md-6">
                 <h4 class="center text-success" style="color: green;">Change Employee Information </h4>
-                @if($presentEmployeeData)
-                <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $presentEmployeeData->MILLEMP_ID_TEM }}">
+                @if($updateEmployees)
+                <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $updateEmployees->MILLEMP_ID_TEM }}">
                 <table class="table border-none">
                     <tr>
                         <th class=" ">Total Male Employee </th>
                         <th> :</th>
-                        <td> {{ $presentEmployeeData->TOTMALE_EMP }} </td>
+                        <td> {{ $updateEmployees->TOTMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Total Female Employee</th>
                         <th> :</th>
-                        <td> {{ $presentEmployeeData->TOTFEM_EMP }} </td>
+                        <td> {{ $updateEmployees->TOTFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Male Employee</th>
                         <th> :</th>
-                        <td> {{ $presentEmployeeData->FULLTIMEMALE_EMP }}</td>
+                        <td> {{ $updateEmployees->FULLTIMEMALE_EMP }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->FULLTIMEFEM_EMP }} </td>
+                        <td>{{ $updateEmployees->FULLTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Male Employee</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->PARTTIMEMALE_EMP }} </td>
+                        <td>{{ $updateEmployees->PARTTIMEMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->PARTTIMEFEM_EMP }} </td>
+                        <td>{{ $updateEmployees->PARTTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Technical Male Employee</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->TOTMALETECH_PER }} </td>
+                        <td>{{ $updateEmployees->TOTMALETECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" "> Technical Female Employee</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->TOTFEMTECH_PER }} </td>
+                        <td>{{ $updateEmployees->TOTFEMTECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $presentEmployeeData->REMARKS }} </td>
+                        <td>{{ $updateEmployees->REMARKS }} </td>
 
                     </tr>
 

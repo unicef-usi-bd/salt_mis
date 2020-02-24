@@ -19,7 +19,7 @@
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Certificate Name</th>
-                    <th>Issuer Name</th>
+                    <th>Provider/Issuer Name</th>
                     <th>Certificate Type</th>
                     <th>Status </th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>

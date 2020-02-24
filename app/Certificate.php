@@ -84,7 +84,7 @@ class Certificate extends Model
 
 
     public static function certificateRenewalMessage($millsId){
-        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME,ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
+        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
             from ssm_certificate_info ci
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
             left join ssc_lookupchd lkp on c.CERTIFICATE_ID = lkp.LOOKUPCHD_ID
@@ -99,9 +99,10 @@ class Certificate extends Model
 
     public static function associatonCertificate(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select c.CERTIFICATE_NAME, DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, mi.MILL_NAME, mi.mill_logo,ci.RENEWING_DATE
+        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, mi.MILL_NAME, mi.mill_logo,ci.RENEWING_DATE
             from ssm_certificate_info ci
             left join smm_certificate c on ci.CERTIFICATE_TYPE_ID = c.CERTIFICATE_ID
+            left join ssc_lookupchd lkp on c.CERTIFICATE_ID = lkp.LOOKUPCHD_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
             where ass.center_id = $centerId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
