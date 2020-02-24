@@ -212,16 +212,10 @@
         overflow-y: auto;
     }
 
-    .fade.in {
-        /*opacity:1;*/
-    }
-
     .modal1 {
-        /*display: none;*/
         position: fixed;
         top: 0;
         z-index: 1050;
-        /*-webkit-overflow-scrolling: touch;*/
         outline: 0;
     }
 
@@ -271,9 +265,10 @@
 </div>
 {{--on change registration typr to merging open this modal--}}
 <script>
+    //    Modal Hide show by Registration type
     $(document).on('change', 'select.regTypeId', function () {
-        var registrationId = $(this).val();
-        if (registrationId == 11) {
+        let registrationId = $(this).val();
+        if (parseInt(registrationId) === 11) {
             $('#mergeMillModal').modal('show');
         } else {
             $('#mergeMillModal').modal('hide');
@@ -282,8 +277,8 @@
 
     //    For Miller Deactivation
     $(document).on("click", ".deactivateMill", function () {
-        var millId = $(this).val(); //alert(millId);//exit();
-        var checked = ($($(this)).is(':checked')) ? 0 : 1;
+        let millId = $(this).val();
+        let checked = ($($(this)).is(':checked')) ? 0 : 1;
         $.ajax({
             type: "get",
             url: "deactivate-mill-profile",

@@ -189,20 +189,17 @@ class CertificateIssurController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-
-
     }
 
-    public function getIssuerIdByAjax(Request $request)
+    public function getProviderByCertificateId($id)
     {
-        $issuerId = $request->input('issuerId');
-        //echo $issuerId;die();
-        //return CertificateIssur::getIssuerByAjax($issuerId);
-        $issurInfo = CertificateIssur::getIssuerByAjax($issuerId);
-        $certificateInfo = CertificateIssur::getCertificateInfoByID($issuerId);
-        $returnArray = array();
-        $returnArray = ([$issurInfo,$certificateInfo]);
-        //dd($returnArray[0]);
-        return $returnArray;
+        $providers = CertificateIssur::getProviderByCertificateId($id);
+        $options = '<option value="">Select</option>';
+        if($providers){
+            foreach ($providers as $provider){
+                $options .= '<option value="'.$provider->ISSUR_ID.'">'.$provider->ISSUER_NAME.'</option>';
+            }
+        }
+        return $options;
     }
 }

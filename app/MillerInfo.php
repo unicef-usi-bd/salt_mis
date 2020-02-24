@@ -328,14 +328,14 @@ class MillerInfo extends Model
             ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->get();
     }
-    public static function deactivateMillTable($request,$id){
+    public static function deactivateMillTable($id){
         $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
             'ACTIVE_FLG' => 0,
         ]);
         return $update;
     }
     // merge mill and deactivate mill accounts
-    public static function deactivateMillEmpTable($request,$id){
+    public static function deactivateMillEmpTable($id){
         $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
             'FINAL_SUBMIT_FLG' => 0,
         ]);

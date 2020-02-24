@@ -20,7 +20,7 @@
                             <th>Trade License</th>
                             <th>Renewing Date</th>
                             <th>Remarks</th>
-                            <th><span class="btn btn-primary btn-sm center rowAddCertificate"><i class="fa fa-plus"></i></span></th>
+                            <th class="text-center"><span class="btn btn-primary btn-sm rowAddCertificate"><i class="fa fa-plus"></i></span></th>
                         </tr>
                         </thead>
                         <tbody class="certificateTable">
@@ -75,7 +75,7 @@
                                     <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"  />
                                 </span>
                                     </td>
-                                    <th><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
+                                    <th class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></th>
                                 </tr>
                             @endforeach
                         @else
@@ -127,7 +127,7 @@
                                     <input type="text" name="REMARKS[]" id="inputSuccess" value="" class="width-100 REMARKS"  />
                                 </span>
                                 </td>
-                                <th><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
+                                <td class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></td>
                             </tr>
                         @endif
                         </tbody>

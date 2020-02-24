@@ -16,13 +16,6 @@ class CertificateIssur extends Model
          ->get();
     }
 
-    public static function getIssuer(){
-        return DB::table('ssc_lookupchd')
-            ->select('ssc_lookupchd.*')
-            ->where('ssc_lookupchd.LOOKUPMST_ID' ,'=',21)
-            ->get();
-    }
-
     public static function checkDuplicates($certificateId, $issuerId, $id=null){
         if(empty($id)){
             $data = DB::table('smm_certificate')
@@ -57,15 +50,6 @@ class CertificateIssur extends Model
             ->first();
     }
 
-    public static function getIssuerId($id){
-        return DB::table('ssc_lookupchd')
-            ->select('ssc_lookupchd.*','smm_certificate.*')
-            ->leftJoin('smm_certificate','ssc_lookupchd.LOOKUPCHD_ID','=','smm_certificate.ISSUR_ID')
-            ->where('ssc_lookupchd.LOOKUPMST_ID' ,'=',21)
-            ->where('smm_certificate.CERTIFICATE_ID','=',$id)
-            ->get();
-    }
-
     public static function updateCertificateIssuer($request,$id){
         $update = DB::table('smm_certificate')->where('CERTIFICATE_ID', '=' , $id)->update([
             'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID'),
@@ -84,25 +68,18 @@ class CertificateIssur extends Model
         return DB::table('smm_certificate')->where('CERTIFICATE_ID', $id)->delete();
     }
 
+    public static function getProviderByCertificateId($id){
+        return DB::table('smm_certificate')
+            ->select('smm_certificate.*','a.LOOKUPCHD_NAME as CERTIFICATE_NAME', 'b.LOOKUPCHD_NAME as ISSUER_NAME')
+            ->leftJoin('ssc_lookupchd as a','smm_certificate.CERTIFICATE_TYPE_ID','=','a.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as b','smm_certificate.ISSUR_ID','=','b.LOOKUPCHD_ID')
+            ->where('smm_certificate.CERTIFICATE_TYPE_ID', '=', $id)
+            ->get();
+    }
+
     public static function getCertificate(){
         return DB::table('smm_certificate')
             ->select('smm_certificate.*')
-            //->leftJoin('ssm_certificate_info','smm_certificate.CERTIFICATE_ID','=','ssm_certificate_info.CERTIFICATE_TYPE_ID')
             ->get();
-    }
-
-    public static function getIssuerByAjax(){
-        return DB::table('ssc_lookupchd')
-            ->select('ssc_lookupchd.*')
-            ->where('ssc_lookupchd.LOOKUPMST_ID', '=', 21)
-            ->orderBy('ssc_lookupchd.LOOKUPCHD_ID','ASC')
-            ->get();
-    }
-
-    public static function getCertificateInfoByID($id){
-        return DB::table('smm_certificate')
-            ->select('smm_certificate.*')
-            ->where('smm_certificate.CERTIFICATE_ID', '=', $id)
-            ->first();
     }
 }

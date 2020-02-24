@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('certificate','CertificateIssurController');//jalal
     Route::resource('extended-date','ExtendedDateController');//jalal
     Route::post('extended-date/miller-info','ExtendedDateController@millerInfo');//jalal
-    Route::post('certificate/get-issuer', 'CertificateIssurController@getIssuerIdByAjax');//jalal
+    Route::get('certificate/{id}/providers', 'CertificateIssurController@getProviderByCertificateId');
     Route::post('extended-date-update','ExtendedDateController@updateExtendedDate');//jalal
 
     // modal edit mill information

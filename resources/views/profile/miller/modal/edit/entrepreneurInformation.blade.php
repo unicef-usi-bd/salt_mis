@@ -18,13 +18,12 @@
                             <th>Division<span style="color:red;"> </span></th>
                             <th>District</th>
                             <th>Upazila</th>
-                            {{--<th style="width: 130px100px;">Union</th>--}}
                             <th>NID</th>
                             <th>Mobile 1</th>
                             <th>Mobile 2</th>
                             <th>Email</th>
                             <th>Remarks</th>
-                            <th class="addButton"><span class="btn btn-primary btn-sm center rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
+                            <th class="addButton text-center"><span class="btn btn-primary btn-sm center rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
                         </tr>
                         </thead>
                         <tbody class="newRow">
@@ -92,7 +91,7 @@
                                             <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $entrepreneur->REMARKS }}" class="width-100 REMARKS" />
                                         </span>
                                     </td>
-                                    <th class="removeButton"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
+                                    <td class="removeButton text-center"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></td>
                                 </tr>
                             @endforeach
                         @else
@@ -152,7 +151,7 @@
                                     <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                                 </td>
-                                <th class="removeButton"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
+                                <th class="removeButton text-center"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>
                             </tr>
                         @endif
                         </tbody>

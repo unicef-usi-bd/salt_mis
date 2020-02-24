@@ -90,6 +90,30 @@
         $(document).on("click", "span.rowRemove ", function () {
             $(this).closest("tr.removableRow").remove();
         });
+
+        $(document).on('change', '.OWNER_TYPE_ID', function () {
+           let ownerType = $(this).val();
+           if(ownerType==='13' || ownerType==='14'){
+               $('.rowAddEntrepreneur').hide();
+           }else{
+               $('.rowAddEntrepreneur').hide();
+           }
+        });
+
+//    For Certificate and Provider Mapping
+        $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+            let thisRow = $(this).closest('tr');
+            let certificateId = $(this).val();
+            if(certificateId){
+                $.ajax({
+                    type : 'get',
+                    url : `certificate/${certificateId}/providers`,
+                    success: function (data) {
+                        thisRow.find('.ISSURE_ID').html(data).trigger("chosen:updated");
+                    }
+                })
+            }
+        });
     </script>
 
 @endsection

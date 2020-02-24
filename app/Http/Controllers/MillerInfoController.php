@@ -322,15 +322,11 @@ class MillerInfoController extends Controller
     }
 
     public function deactivateMillProfile(Request $request){
-        $values = 0;
         $checkType =  $request->input("is_checked");
         $millerInfoId =  $request->input("millId");
-        //$this->pr($millId);
-        MillerInfo::deactivateMillTable($request, $millerInfoId);
-        MillerInfo::deactivateMillEmpTable($request, $millerInfoId);
+
+        MillerInfo::deactivateMillTable($millerInfoId);
+        MillerInfo::deactivateMillEmpTable($millerInfoId);
     }
-
-
-
 
 }

@@ -64,6 +64,21 @@
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
+
+//    For Certificate and Provider Mapping
+    $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+        let thisRow = $(this).closest('tr');
+        let certificateId = $(this).val();
+        if(certificateId){
+            $.ajax({
+                type : 'get',
+                url : `certificate/${certificateId}/providers`,
+                success: function (data) {
+                    thisRow.find('.ISSURE_ID').html(data).trigger("chosen:updated");
+                }
+            })
+        }
+    });
 </script>
 <!--Add New Group Modal Start-->
 @include('masterGlobal.ajaxFormSubmit')
