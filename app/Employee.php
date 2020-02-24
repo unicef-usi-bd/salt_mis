@@ -54,7 +54,7 @@ class Employee extends Model
     }
 
     public static function updateEmployeeInfoTemp($request, $millerId){
-        $inserted = DB::table('tem_ssm_millemp_info')->insertGetId([
+        $data = array(
             'MILL_ID' => $millerId,
             'MILLEMP_ID' => $request->input('MILLEMP_ID'),
             'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
@@ -71,14 +71,23 @@ class Employee extends Model
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        if($inserted){
+        );
+
+        $employeeInfo = DB::table('tem_ssm_millemp_info')->where('MILL_ID', '=', $millerId)->first();
+        if($employeeInfo){
+            $pKey = $employeeInfo->MILLEMP_ID_TEM;
+            $updated = DB::table('tem_ssm_millemp_info')->where('MILLEMP_ID_TEM', '=' , $pKey)->update($data);
+        } else{
+            $updated = DB::table('tem_ssm_millemp_info')->insert($data);
+        }
+
+        if($updated){
             $data = array(
                 'approval_status' => 1
             );
             DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($data);
         }
-        return $inserted;
+        return $updated;
     }
 
 }

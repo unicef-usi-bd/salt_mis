@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 
 class Qc extends Model
@@ -49,7 +50,7 @@ class Qc extends Model
     }
 
     public static function updateQcInfoTemp($request, $millerId){
-        $inserted = DB::table('tem_tsm_qc_info')->insertGetId([
+        $data = array(
             'MILL_ID' => $millerId,
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
             'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
@@ -62,14 +63,22 @@ class Qc extends Model
             'approval_status' => 0,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        if($inserted){
+        );
+
+        $qcInfo = DB::table('tem_tsm_qc_info')->where('MILL_ID', '=', $millerId)->first();
+        if($qcInfo){
+            $pKey = $qcInfo->QCINFO_ID_TEM;
+            $updated = DB::table('tem_tsm_qc_info')->where('QCINFO_ID_TEM', '=' , $pKey)->update($data);
+        } else{
+            $updated = DB::table('tem_tsm_qc_info')->insert($data);
+        }
+        if($updated){
             $data = array(
                 'approval_status' => 1
             );
             DB::table('tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update($data);
         }
-        return $inserted;
+        return $updated;
     }
 
 

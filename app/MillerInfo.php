@@ -56,7 +56,7 @@ class MillerInfo extends Model
      }
 
     public static function updateMillerInfoTemp($request, $millerId, $mill_logo){ // tested
-        $millInfoId = DB::table('tem_ssm_mill_info')->insertGetId([
+        $data = array(
             'MILL_ID' => $millerId,
             'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
             'OWNER_TYPE_ID' => $request->input('OWNER_TYPE_ID'),
@@ -77,12 +77,21 @@ class MillerInfo extends Model
             'approval_status' => 0,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        if($millInfoId){
-            $data = array(
+        );
+
+        $millInfo = DB::table('tem_ssm_mill_info')->where('MILL_ID', '=', $millerId)->first();
+        if($millInfo){
+            $pKey = $millInfo->MILL_ID_TEM;
+            $updated = DB::table('tem_ssm_mill_info')->where('MILL_ID_TEM', '=' , $pKey)->update($data);
+        } else{
+            $updated = DB::table('tem_ssm_mill_info')->insert($data);
+        }
+
+        if($updated){
+            $status = array(
                 'approval_status' => 1
             );
-            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($data);
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($status);
         }
         return true;
     }

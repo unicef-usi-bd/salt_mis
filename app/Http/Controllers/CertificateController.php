@@ -182,6 +182,8 @@ class CertificateController extends Controller
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
 
         if($selfMillerInfo->MILL_ID){
+            $hasRequest = $this->hasUpdateRequested($millerId);
+            if($hasRequest) return response()->json(['errors'=>'You have already requested to update your profile. You need to association approval for further request']);
             $updated = $this->certificateUpdateTemp($request, $millerId, $userCertificates, $image);
         } else {
             $updated = $this->certificateUpdate($request, $millerId, $userCertificates, $image);
@@ -193,6 +195,10 @@ class CertificateController extends Controller
             return response()->json(['errors'=>'Certificate information updated failed']);
         }
 
+    }
+
+    private function hasUpdateRequested($millerId){
+        return DB::table('tem_ssm_certificate_info')->where('Mill_ID', '=', $millerId)->first();
     }
 
     private function certificateUpdate($request, $millerId, $userCertificates, $image){

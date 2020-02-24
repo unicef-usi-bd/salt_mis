@@ -130,6 +130,8 @@ class EntrepreneurController extends Controller
 
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
         if($selfMillerInfo->MILL_ID){
+            $hasRequest = $this->hasUpdateRequested($millerId);
+            if($hasRequest) return response()->json(['errors'=>'You have already requested to update your profile. You need to association approval for further request']);
             $updated = Entrepreneur::updateEntrepreneurInfoTemp($request, $millerId);
         } else {
             $updated = Entrepreneur::updateEntrepreneurInfo($request, $millerId);
@@ -140,6 +142,10 @@ class EntrepreneurController extends Controller
         } else{
             return response()->json(['errors'=>'Entrepreneur info update failed']);
         }
+    }
+
+    private function hasUpdateRequested($millerId){
+        return DB::table('tem_ssm_entrepreneur_info')->where('Mill_ID', '=', $millerId)->first();
     }
 
     public function singleEnterpreneurDeleteByAjax(Request $request){

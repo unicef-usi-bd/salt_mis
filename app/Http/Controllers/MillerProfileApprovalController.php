@@ -67,11 +67,7 @@ class MillerProfileApprovalController extends Controller
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
             );
-            $updated = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($updateInfo);
-
-            if($updated){
-                DB::table('tem_ssm_mill_info')->where('MILL_ID', '=' , $millerId)->delete();
-            }
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($updateInfo);
         }
         // End Mill Info Data
 
@@ -170,10 +166,7 @@ class MillerProfileApprovalController extends Controller
                 'ENTRY_BY' => Auth::user()->id,
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             );
-            $updatedQcInformation = DB::table('tsm_qc_info')->where('MILL_ID', '=', $millerId)->update($updateQc);
-            if($updatedQcInformation){
-                DB::table('tem_tsm_qc_info')->where('MILL_ID', '=' , $millerId)->delete();
-            }
+            DB::table('tsm_qc_info')->where('MILL_ID', '=', $millerId)->update($updateQc);
         }
 //        //Employee Information Data
 
@@ -197,12 +190,7 @@ class MillerProfileApprovalController extends Controller
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
                 'UPDATE_BY' => Auth::user()->id
             );
-
-            $updateEmployeeInfo = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($employeeUpdate);
-
-            if($updateEmployeeInfo){
-                DB::table('tem_ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->delete();
-            }
+            DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($employeeUpdate);
         }
 
         $approveStatus = ['approval_status' => '0'];
