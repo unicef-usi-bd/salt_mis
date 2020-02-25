@@ -50,7 +50,24 @@ class Employee extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
         ]);
-        return $update;
+
+        if(!$update){
+            DB::table('ssm_millemp_info')->insert([
+                'MILL_ID' => $id,
+                'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
+                'TOTFEM_EMP' => $request->input('TOTFEM_EMP'),
+                'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
+                'FULLTIMEFEM_EMP' => $request->input('FULLTIMEFEM_EMP'),
+                'PARTTIMEMALE_EMP' => $request->input('PARTTIMEMALE_EMP'),
+                'PARTTIMEFEM_EMP' => $request->input('PARTTIMEFEM_EMP'),
+                'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
+                'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
+                'REMARKS' => $request->input('REMARKS'),
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+                'UPDATE_BY' => Auth::user()->id
+            ]);
+        }
+        return true;
     }
 
     public static function updateEmployeeInfoTemp($request, $millerId){

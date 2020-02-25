@@ -1,7 +1,5 @@
 @extends('master')
-
 @section('mainContent')
-
     <div class="page-header">
         <h1>
             All Setup
@@ -12,14 +10,6 @@
         </h1>
     </div><!-- /.page-header -->
     <div class="col-md-12">
-        <style>
-            .my-error-class {
-                color:red;
-            }
-            .my-valid-class {
-                color:green;
-            }
-        </style>
             <div class="col-md-12">
                 <div class="col-md-6" style="margin-left: 25%;">
                     <div class="form-group">
@@ -40,143 +30,38 @@
         <br>
         <br>
 
-            <div class="row" style="margin-top: 20px; margin-left: -37px; width: 1185px;">
+        <div class="row" style="margin-top: 20px; margin-left: -37px; width: 1185px;">
+            <div class="col-sm-12">
                 <div class="col-sm-12">
-                    <div class="col-sm-12">
 
-                        <div class="tab-content">
+                    <div class="tab-content">
 
-                            <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
+                        <div class="row tblReport" style="padding-left: 10px;padding-right: 10px;">
 
-                            </div>
                         </div>
-
                     </div>
-
 
                 </div>
             </div>
-            <div class="form-group">
-
-            </div>
+        </div>
     </div>
 
 
     @include('masterGlobal.chosenSelect')
     @include('masterGlobal.datePicker')
-
-    {{--@include('masterGlobal.formValidation')--}}
     <script>
-        var Privileges = jQuery('#privileges');
-        var select = this.value;
-        Privileges.change(function () {
-            if ($(this).val() == 1001) {
-                $('.resources').show();
-            }
-            else $('.resources').hide();
-        });
-
-        $(document).ready(function () {
-            $.validator.addMethod(
-                "regex",
-                function(value, element, regexp)
-                {
-                    if (regexp.constructor != RegExp)
-                        regexp = new RegExp(regexp);
-                    else if (regexp.global)
-                        regexp.lastIndex = 0;
-                    return this.optional(element) || regexp.test(value);
-                },
-                "Please check your input."
-            );
-
-            $('#myform').validate({ // initialize the plugin
-                errorClass: "my-error-class",
-                //validClass: "my-valid-class",
-                rules: {
-
-                    PHONE:{
-                        required: true,
-                        maxlength:11,
-                        minlength:11,
-                        regex:/^(?:\+?88)?01[15-9]\d{8}$/,
-                    },
-                    RCV_QTY:{
-                        required: true,
-                    }
-                }
-            });
-
-        });
-
         $(document).on('change','.millerName',function () {
-            //alert('hi');
-            var mill_id = $(this).val();
-//       alert(mill_id);
-            var _token = '{{ csrf_token() }}';
+            let mill_id = $(this).val();
+            let _token = '{{ csrf_token() }}';
             $.ajax({
                 type: 'POST',
                 url:'{{ url('extended-date/miller-info') }}',
                 data:{'mill_id':mill_id,_token: _token},
                 success:function (data) {
-//                    console.log(data);
-                    //$('.resultTab').show();
                     $('.tblReport').html(data.html);
-
                 }
             });
-
         });
-
-        $(document).on('keyup','.renewingDays',function () {
-            //alert('hi');
-            var dayAdd = $(this).val();
-            var renewalDate = $('.renewalDate').text();
-            if(renewalDate===""){
-                alert('Alert ! Mill name is required.')
-            }
-            var array = renewalDate.split('-');
-            var dd = array[0];
-            var mm = array[1];
-            var yy = array[2];
-            var dateFrom = yy + '-' + mm + '-' + dd;
-            renewalDate = daysAddToDate(dateFrom, dayAdd);
-            $('.expierDateId').val(renewalDate);
-        });
-
-        $(document).on('change','.expierDateId',function () {
-            //alert('hi');
-            var toDate = $(this).val();
-            var fromDate = $('.renewalDate').text();
-//            if(fromDate===""){
-//                alert('Alert ! Mill name is required.')
-//            }
-
-            if(fromDate!=="" && toDate!==""){
-                fromDate = dateToArray(fromDate)[2]+'-'+dateToArray(fromDate)[1]+'-'+dateToArray(fromDate)[0]; // format day-month-year to month-day-year
-                var fromDate = new Date(fromDate);
-                var toDate = new Date(toDate);
-                var diffTime = Math.abs(toDate - fromDate);
-                var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                $('.renewingDays').val(diffDays)
-            }
-        });
-
-        function daysAddToDate(fromDate, daysToAdd) {
-            var someDate = new Date(fromDate);
-            someDate.setDate(someDate.getDate() + parseInt(daysToAdd));
-            var dd = someDate.getDate()+1;
-            var mm = someDate.getMonth() + 1;
-            var yy = someDate.getFullYear();
-            var someFormattedDate = yy +'-'+ mm +'-'+dd;
-            return someFormattedDate;
-        }
-
-        function dateToArray(data) {
-            return data.split('-');
-        }
-
-
     </script>
 
 

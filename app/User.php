@@ -164,27 +164,13 @@ class User extends Authenticatable
             ->get();
     }
 
-    public static function passwordReset($request){//function for password reset
-
-
+    public static function passwordReset($request){
         $updatePassword = DB::table('users')->where('email', '=', $request['email'])->update([
             //'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-
         return $updatePassword;
-
     }
-
-//    public static function changePassword($request){
-//
-//        $updateUserPassword = DB::table('users')->where('id', '=' , $request['id'])->update([
-//            'password' => Hash::make($request['password']),
-//        ]);
-//
-//
-//        return $updateUserPassword;
-//    }
 
     public static function userInfoByCenterId($centerId=null){
         if(empty($centerId)) $centerId = Auth::user()->center_id;

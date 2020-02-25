@@ -46,7 +46,22 @@ class Qc extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
         ]);
-        return $update;
+
+        if(!$update){
+            DB::table('tsm_qc_info')->insert([
+                'MILL_ID' => $millerId,
+                'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
+                'SOP_DESC' => $request->input('SOP_DESC'),
+                'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
+                'MONITORING_FLG' => $request->input('MONITORING_FLG'),
+                'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
+                'LAB_PERSON' => $request->input('LAB_PERSON'),
+                'REMARKS' => $request->input('REMARKS'),
+                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
+                'UPDATE_BY' => Auth::user()->id
+            ]);
+        }
+        return true;
     }
 
     public static function updateQcInfoTemp($request, $millerId){

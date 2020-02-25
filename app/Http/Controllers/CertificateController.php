@@ -103,12 +103,8 @@ class CertificateController extends Controller
 
                 }
             }
-            $renewingDate = $request->input('RENEWING_DATE')[$i];
-            if(empty($renewingDate)){
-                $renewingDate = '';
-            }else{
-                $renewingDate = date('Y-m-d',strtotime($request->input('RENEWING_DATE')[$i]));
-            }
+            $renewingDate = $this->dateFormat($request->input('RENEWING_DATE')[$i]);
+
             $data[] = array(
                 'MILL_ID' => $request->input('MILL_ID'),
                 'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID')[$i],

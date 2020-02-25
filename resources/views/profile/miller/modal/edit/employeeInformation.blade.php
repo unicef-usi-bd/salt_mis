@@ -4,18 +4,18 @@
             <form action="{{ url('/employee-info/'.$millerInfo->MILL_ID) }}" data-clear="false" method="post" class="form-horizontal" role="form" >
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="MILLEMP_ID" value="{{ $employeeInfo->MILLEMP_ID }}" />
+                <input type="hidden" name="MILLEMP_ID" value="@if(!empty($employeeInfo)){{ $employeeInfo->MILLEMP_ID }}@endif" />
                 <div class="col-md-6">
                     <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="{{ $employeeInfo->TOTMALE_EMP }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="{{ $employeeInfo->TOTFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -24,12 +24,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" value="{{ $employeeInfo->PARTTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" value="{{ $employeeInfo->PARTTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" value="{{ $employeeInfo->REMARKS }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="REMARKS" value="@if(!empty($employeeInfo)){{ $employeeInfo->REMARKS }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                     </div>
@@ -49,12 +49,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" value="{{ $employeeInfo->FULLTIMEMALE_EMP }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" value="{{ $employeeInfo->FULLTIMEFEM_EMP }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -62,12 +62,12 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALETECH_PER" value="{{ $employeeInfo->TOTMALETECH_PER }}" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALETECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALETECH_PER }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEMTECH_PER" value="{{ $employeeInfo->TOTFEMTECH_PER }}" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEMTECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEMTECH_PER }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>

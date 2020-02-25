@@ -41,11 +41,11 @@
                 <?php $sl=0;?>
                 @foreach( $millerList as $row)
                     <?php
-                    $activeFlg = DB::selectOne(DB::raw("SELECT ACTIVE_FLG FROM ssm_mill_info WHERE MILL_ID = '$row->MILL_ID'"))->ACTIVE_FLG;
+                    $activeFlg = $row->ACTIVE_FLG;
                     ?>
                     <tr>
                         <td class="center" >  {{ ++$sl }}</td>
-                        <td> {{ $row->MILL_NAME }} </td>
+                        <td> {{ $row->MILL_NAME }} {{ $row->MILL_ID }}</td>
                         <td> {{ $row->LOOKUPCHD_NAME }} </td>
                         <td> {{ $row->RENEWING_DATE }} </td>
                         <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>

@@ -51,6 +51,7 @@ class MillerInfoController extends Controller
         );
 
         $millerList = MillerInfo::getAllMillDataList();
+
         $approvalMillList = MillerInfo::getApprovalAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
@@ -118,7 +119,7 @@ class MillerInfoController extends Controller
     {
         $rules = array(
             'REG_TYPE_ID' => 'required',
-            'MILL_NAME' => 'required',
+            'MILL_NAME' => 'required | unique:ssm_mill_info',
             'PROCESS_TYPE_ID' => 'required',
             'MILL_TYPE_ID' => 'required',
             'CAPACITY_ID' => 'required',
@@ -128,6 +129,7 @@ class MillerInfoController extends Controller
         $error = array(
             'REG_TYPE_ID.required' => 'Registration type field is required.',
             'MILL_NAME.required' => 'Mill name field is required.',
+            'MILL_NAME.unique' => 'Mill name field must be unique.',
             'PROCESS_TYPE_ID.required' => 'Process type field is required.',
             'MILL_TYPE_ID.required' => 'Mill type field is required.',
             'CAPACITY_ID.required' => 'Capacity field is required.',
@@ -296,29 +298,6 @@ class MillerInfoController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-    }
-
-    public function approveByAssociation(Request $request){
-        //return $request->all();
-//        $centerId = Auth::user()->center_id;
-//        $associationId = AssociationSetup::singleAssociation();
-        $millerInfoId = $request->input('MILL_ID');
-        if($request->file('mill_logo')!=null && $request->file('mill_logo')->isValid()) {
-            $image = $request->file('mill_logo');
-            $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-            $path = 'image/mill-logo/' . $filename;
-            Image::make($image->getRealPath())->resize(250, 250)->save($path);
-            //********* End Image *********
-            $mill_logo = "image/mill-logo/$filename";
-        }else{
-            $mill_logo = 'image/mill-logo/defaultUserImage.png';
-        }
-        $ownerType = $request->input('OWNER_TYPE_ID');
-        //$this->pr($request->input('MILL_NAME'));
-        $updateMillData = MillerInfo::approveByassociation($request,$millerInfoId,$mill_logo);
-
-        //echo $updateMillData;die();
-        return "Miller Information has been updated";
     }
 
     public function deactivateMillProfile(Request $request){

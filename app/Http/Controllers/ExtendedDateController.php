@@ -39,20 +39,14 @@ class ExtendedDateController extends Controller
         $userGroupId = Auth::user()->user_group_id;
         $userGroupLevelId = Auth::user()->user_group_level_id;
         $url = Route::getFacadeRoot()->current()->uri();
-
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
-
 
         $heading=array(
             'title'=>'Extended date',
             'library'=>'datatable',
-            'modalSize'=>'modal-bg',
-//            'action'=>'extended-date/create',
-//            'createPermissionLevel' => $previllage->CREATE
+            'modalSize'=>'modal-bg'
         );
-//        dd(session()->all());
-           $millerId = ExtendedDate::millerName();
-//        $this->pr($users);
+        $millerId = ExtendedDate::millerName();
 
         return view('setup.extendate.index',compact( 'users','heading','previllage','millerId'));
     }
@@ -68,104 +62,50 @@ class ExtendedDateController extends Controller
         return view('setup.extendate.modals.create',compact('millerId'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function millerInfo(Request $request){
-     $millId = $request->input('mill_id');
-     $millInfo = ExtendedDate::millerDetails($millId);
-     $millenteprunerInfo = ExtendedDate::millerEnteprunerDetails($millId);
-     $certificateInfo = ExtendedDate::millerCertificateInfo($millId);
-     //dd($millInfo);
-     $view = view("setup.extendate.millerInfo",compact('millInfo','millId','millenteprunerInfo','certificateInfo'))->render();
-     return response()->json(['html'=>$view]);
+        $millId = $request->input('mill_id');
+        $millInfo = ExtendedDate::millerDetails($millId);
+        $entepreunerInfo = ExtendedDate::millerEnteprunerDetails($millId);
+        $certificateInfo = ExtendedDate::millerCertificateInfo($millId);
+
+        $view = view("setup.extendate.millerInfo",compact('millInfo','millId','entepreunerInfo','certificateInfo'))->render();
+        return response()->json(['html'=>$view]);
     }
 
     public function updateExtendedDate(Request $request){
 
-        $center_id = Auth::user()->center_id ;
+        $millerId = $request->input('MILL_ID');
 
-        $associationId = DB::table('ssm_associationsetup')
+        $associationInfo = DB::table('ssm_associationsetup')
             ->select('ssm_associationsetup.ASSOCIATION_ID')
-            ->where('MILL_ID','=',$request->input('MILL_ID'))
+            ->where('MILL_ID','=', $millerId)
             ->first();
 
-        $renewingDate = $request->input('renewing_date');
+        $renewingDate = $this->dateFormat($request->input('renewing_date'));
+
         if(empty($renewingDate)){
             $renewingDate = '';
         }else{
             $renewingDate = date('Y-m-d',strtotime($request->input('renewing_date')));
         }
 
-       if($associationId){
-           $status = DB::table('users')->where('center_id',$associationId->ASSOCIATION_ID)->update([
-//               'renewing_date' => date('Y-m-d', strtotime($request->input('renewing_date'))),
+       if($associationInfo){
+           $updated = DB::table('users')
+               ->where('center_id', $associationInfo->ASSOCIATION_ID)
+               ->update([
                'renewing_date' => $renewingDate,
                'renewing_days' => $request->input('renewing_days')
            ]);
-           if($status)
-           {
-               return redirect()->back()->with('success','Updated successfully');
+
+           if($updated) {
+               return response()->json(['success'=>'Extended date successfully.']);
            }else{
-               return redirect()->back()->with('warning','Updated Fail');
+               return response()->json(['success'=>'Extended date failed.']);
            }
        }else{
-           return redirect()->back()->with('danger','Miller does not found');
+           return response()->json(['success'=>'Miller not found']);
        }
-
-        return redirect('/extended-date');
     }
 }

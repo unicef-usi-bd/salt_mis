@@ -84,7 +84,7 @@
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
-                                        @foreach($certificate as $row)
+                                        @foreach($certificates as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>

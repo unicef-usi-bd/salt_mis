@@ -158,18 +158,17 @@ class MillerInfo extends Model
     }
 
     public static function getAllMillDataList(){
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssm_mill_info.ACTIVE_FLG','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
-//            ->select('ssm_mill_info.*','ssm_entrepreneur_info.*','ssm_certificate_info.*','tsm_qc_info.*','ssm_millemp_info.*','ssc_lookupchd.*')
-            ->leftJoin('ssm_entrepreneur_info','ssm_mill_info.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
-            ->leftJoin('ssm_certificate_info','ssm_mill_info.MILL_ID','=','ssm_certificate_info.MILL_ID')
-            ->leftJoin('tsm_qc_info','ssm_mill_info.MILL_ID','=','tsm_qc_info.MILL_ID')
-            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->leftJoin('ssc_lookupchd','ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
-            ->where('ssm_mill_info.center_id','=',Auth::user()->center_id)
-            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
-            ->groupBy('ssm_mill_info.MILL_ID')
-            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+        return DB::table('ssm_mill_info as smi')
+            ->select('ssm_entrepreneur_info.*', 'ssm_certificate_info.*', 'tsm_qc_info.*', 'ssm_millemp_info.*', 'ssc_lookupchd.*', 'smi.*')
+            ->leftJoin('ssm_entrepreneur_info','smi.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
+            ->leftJoin('ssm_certificate_info','smi.MILL_ID','=','ssm_certificate_info.MILL_ID')
+            ->leftJoin('tsm_qc_info','smi.MILL_ID','=','tsm_qc_info.MILL_ID')
+            ->leftJoin('ssm_millemp_info','smi.MILL_ID','=','ssm_millemp_info.MILL_ID')
+            ->leftJoin('ssc_lookupchd','smi.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
+            ->where('smi.center_id','=', Auth::user()->center_id)
+            ->where('smi.FINAL_SUBMIT_FLG','=', 1)
+            ->groupBy('smi.MILL_ID')
+            ->orderBy('smi.MILL_ID', 'DESC')
             ->get();
 
     }
@@ -227,8 +226,6 @@ class MillerInfo extends Model
             ->leftJoin('tem_tsm_qc_info','tem_ssm_mill_info.MILL_ID','=','tem_tsm_qc_info.MILL_ID')
             ->leftJoin('tem_ssm_millemp_info','tem_ssm_mill_info.MILL_ID','=','tem_ssm_millemp_info.MILL_ID')
             ->leftJoin('ssc_lookupchd','tem_ssm_mill_info.OWNER_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID')
-            //->where('tem_ssm_mill_info.center_id','=',Auth::user()->center_id)
-            ->where('tem_ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
             ->groupBy('tem_ssm_mill_info.MILL_ID_TEM')
             ->orderBy('tem_ssm_mill_info.MILL_ID_TEM', 'DESC')
             ->get();
@@ -393,11 +390,6 @@ class MillerInfo extends Model
 
     public static function associationTotalMill(){
         $centerId = Auth::user()->center_id;
-//        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
-//                 from ssm_mill_info mi
-//                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
-//                 where mi.center_id = $centerId
-//                 Group By mi.MILL_NAME"));
         return DB::select(DB::raw("select mi.MILL_ID
             from ssm_mill_info mi
             left join ssm_millemp_info mie on mie.MILL_ID = mi.MILL_ID
@@ -407,12 +399,6 @@ class MillerInfo extends Model
 
     public static function associationTotalActiveMill(){
         $centerId = Auth::user()->center_id;
-//        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
-//                 from ssm_mill_info mi
-//                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
-//                 where mi.center_id = $centerId
-//                 AND mi.ACTIVE_FLG = 1
-//                 Group By mi.MILL_NAME"));
         return DB::select(DB::raw("select * 
                             from ssm_mill_info mi
                             left join ssm_millemp_info mie on mie.MILL_ID = mi.MILL_ID

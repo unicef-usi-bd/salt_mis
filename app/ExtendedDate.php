@@ -49,8 +49,8 @@ class ExtendedDate extends Model
     public static function millerCertificateInfo($millId){
         $date = date('Y-m-d');
         return DB::table('ssm_certificate_info as ci')
-            ->select('ci.*','mi.MILL_ID','cf.CERTIFICATE_NAME','lc.LOOKUPCHD_NAME as issureName')
-            ->leftJoin('smm_certificate as cf','ci.CERTIFICATE_TYPE_ID','=','cf.CERTIFICATE_ID')
+            ->select('ci.*','mi.MILL_ID','lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME','lc.LOOKUPCHD_NAME as issureName')
+            ->leftJoin('ssc_lookupchd as lkp','ci.CERTIFICATE_ID','=','lkp.LOOKUPCHD_ID')
             ->leftJoin('ssc_lookupchd as lc','ci.ISSURE_ID','=','lc.LOOKUPCHD_ID')
             ->leftJoin('ssm_mill_info as mi','mi.MILL_ID','=','ci.MILL_ID')
             ->where('ci.MILL_ID','=',$millId)

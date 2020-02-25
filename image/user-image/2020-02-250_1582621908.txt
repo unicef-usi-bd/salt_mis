@@ -1,0 +1,39 @@
+  
+  $data = [
+	  'RESPONSIBLE_PERSONS' => $request->input('RESPONSIBLE_PERSONS'),
+	  'MNT_BY_DEPT' => $request->input('MNT_BY_DEPT'),
+	  'INST_ID' => $request->input('INST_ID'),
+	  'PLAN_DATE' => $request->input('PLAN_DATE'),
+	  'CONFIRM_DATE' => $request->input('CONFIRM_DATE'),
+	  'PLAN_DTRNG' => $request->input('PLAN_DTRNG'),
+	  'APPROVED_BY' => $request->input('APPROVED_BY'),
+	  'WORK_DESC' => $request->input('WORK_DESC'),
+	  'REMARKS' => $request->input('REMARKS'),
+	  'ACTIVE_FG' => $request->input('ACTIVE_FG'),
+	  'ENTRY_BY' => $request->input('ENTRY_BY'),
+	  'ENTRY_DT' => $request->input('ENTRY_DT'),
+	  'UPD_BY' => $request->input('UPD_BY'),
+	  'UPD_DT' => $request->input('UPD_DT'),
+	  'UNIT_NO' => $request->input('UNIT_NO')
+  ];
+  
+  
+  $data = [
+  
+  'MNT_NO' => $request->input(''),
+  'MNT_START_TIME' => $request->input(''),
+  'MNT_END_TIME' => $request->input(''),
+  'MNTSCHD_NO' => $request->input(''),
+  'CHECKED_BY' => $request->input(''),
+  'DONE_BY' => $request->input(''),
+  'WORK_DESC' => $request->input(''),
+  'CHECK_DESC' => $request->input(''),
+  'REMARKS' => $request->input(''),
+  'ACTIVE_FG' => $request->input(''),
+  'ENTRY_BY' => $request->input(''),
+  'ENTRY_DT' => $request->input(''),
+  'UPD_BY' => $request->input(''),
+  'UPD_DT' => $request->input(''),
+  'UNIT_NO' => $request->input('')
+  
+  ];

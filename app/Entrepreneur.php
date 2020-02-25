@@ -39,31 +39,27 @@ class Entrepreneur extends Model
 
     public static function updateEntrepreneurInfo($request, $millerId){ // tested
          $data = array();
-         $deleted = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
-         if($deleted){
-             $reqTime = count($_POST['OWNER_NAME']);
-             for($i=0; $i<$reqTime; $i++){
-                 $data[] = array(
-//                    'ENTREPRENEUR_ID' => $request->input('ENTREPRENEUR_ID'),
-                     //'REG_TYPE_ID' => $request->input('REG_TYPE_ID'),
-                     'MILL_ID' => $millerId,
-                     'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
-                     'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
-                     'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
-                     'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
-                     'UNION_ID' => $request->input('UNION_ID')[$i],
-                     'NID' => $request->input('NID')[$i],
-                     'MOBILE_1' => $request->input('MOBILE_1')[$i],
-                     'MOBILE_2' => $request->input('MOBILE_2')[$i],
-                     'EMAIL' => $request->input('EMAIL')[$i],
-                     'REMARKS' => $request->input('REMARKS')[$i],
-                     'ACTIVE_FLG' => 1,
-                     'center_id' => Auth::user()->center_id,
-                     'ENTRY_BY' => Auth::user()->id,
-                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-                 );
-             }
-         }
+         DB::table('ssm_entrepreneur_info')->where('MILL_ID', $millerId)->delete();
+        $reqTime = count($request->input('OWNER_NAME'));
+        for($i=0; $i<$reqTime; $i++){
+            $data[] = array(
+                'MILL_ID' => $millerId,
+                'OWNER_NAME' => $request->input('OWNER_NAME')[$i],
+                'DIVISION_ID' => $request->input('DIVISION_ID')[$i],
+                'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
+                'UPAZILA_ID' => $request->input('UPAZILA_ID')[$i],
+                'UNION_ID' => $request->input('UNION_ID')[$i],
+                'NID' => $request->input('NID')[$i],
+                'MOBILE_1' => $request->input('MOBILE_1')[$i],
+                'MOBILE_2' => $request->input('MOBILE_2')[$i],
+                'EMAIL' => $request->input('EMAIL')[$i],
+                'REMARKS' => $request->input('REMARKS')[$i],
+                'ACTIVE_FLG' => 1,
+                'center_id' => Auth::user()->center_id,
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            );
+        }
          $updated = DB::table('ssm_entrepreneur_info')->insert($data);
          return $updated;
      }
