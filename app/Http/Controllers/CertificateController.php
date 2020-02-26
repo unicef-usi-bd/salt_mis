@@ -57,6 +57,7 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
+        $userImageLimit = 0;
         $data = array();
 
         $rules = array(
@@ -86,7 +87,9 @@ class CertificateController extends Controller
         $userCertificates= $request->input('CERTIFICATE_TYPE_ID');
         $hasRequiredCertificates = $this->isValidateCertificate($userCertificates);
         if($hasRequiredCertificates) return response()->json(['errors'=>'BSTI and Edible certificates must be required.']);
-        $userImageLimit = count($request->file('user_image'));
+        if($request->has('user_image')){
+            $userImageLimit = count($request->file('user_image'));
+        }
         $loopLimit = count($userCertificates);
         if($userImageLimit!=$loopLimit) return response()->json(['errors'=>'Trade Licence * field is must required']);
         for($i=0; $i < $loopLimit; $i++){
@@ -133,32 +136,6 @@ class CertificateController extends Controller
         } else{
             return response()->json(['errors'=>'Certificate information save failed']);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-//         $viewMonitoring = Monitoring::showMonitorData($id);
-//        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-     {
-//         $editMonitoring = Monitoring::editMonitorData($id);
-//         $agencyName = Monitoring::agencyName();
-//        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
-
     }
 
     /**

@@ -95,9 +95,9 @@
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
                                         <option value="">Select</option>
-                                        @foreach($issueBy as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
-                                        @endforeach
+                                        {{--@foreach($issueBy as $row)--}}
+                                            {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                        {{--@endforeach--}}
                                      </select>
                                 </span>
                                 </td>

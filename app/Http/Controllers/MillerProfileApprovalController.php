@@ -68,6 +68,11 @@ class MillerProfileApprovalController extends Controller
                 'UPDATE_BY' => Auth::user()->id
             );
             DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($updateInfo);
+            $association = DB::table('ssm_associationsetup')->where('MILL_ID', '=', $id)->first();
+            if($association){
+                $data = array('ASSOCIATION_NAME' => $request->input('MILL_NAME'));
+                DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', '=', $association->ASSOCIATION_ID)->update($data);
+            }
         }
         // End Mill Info Data
 

@@ -127,6 +127,13 @@ class MillerInfo extends Model
                 'UPDATE_BY' => Auth::user()->id
             ]);
 
+            $association = DB::table('ssm_associationsetup')->where('MILL_ID', '=', $id)->first();
+            if($association){
+                $data = array(
+                    'ASSOCIATION_NAME' => $request->input('MILL_NAME')
+                );
+                DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', '=', $association->ASSOCIATION_ID)->update($data);
+            }
             return $update;
     }
 
