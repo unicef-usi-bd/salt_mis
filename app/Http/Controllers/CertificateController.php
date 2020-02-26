@@ -86,12 +86,13 @@ class CertificateController extends Controller
         $userCertificates= $request->input('CERTIFICATE_TYPE_ID');
         $hasRequiredCertificates = $this->isValidateCertificate($userCertificates);
         if($hasRequiredCertificates) return response()->json(['errors'=>'BSTI and Edible certificates must be required.']);
-
-        for($i=0; $i < count($userCertificates); $i++){
+        $userImageLimit = count($request->file('user_image'));
+        $loopLimit = count($userCertificates);
+        if($userImageLimit!=$loopLimit) return response()->json(['errors'=>'Trade Licence * field is must required']);
+        for($i=0; $i < $loopLimit; $i++){
             // file upload
             $imagePath = '';
-            $arrLimit = count($request->file('user_image'));
-            if($i<$arrLimit && $request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
+            if($i<$userImageLimit && $request->file('user_image')[$i]!=null && $request->file('user_image')[$i]->isValid()) {
                 try {
                     $file = $request->file('user_image')[$i];
                     $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
@@ -103,6 +104,7 @@ class CertificateController extends Controller
 
                 }
             }
+
             $renewingDate = $this->dateFormat($request->input('RENEWING_DATE')[$i]);
 
             $data[] = array(
@@ -123,6 +125,7 @@ class CertificateController extends Controller
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             );
         }
+
         $inserted = DB::table('ssm_certificate_info')->insert($data);
 
         if($inserted){
@@ -167,6 +170,26 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = array(
+            'CERTIFICATE_TYPE_ID.*' => 'required',
+            'ISSURE_ID.*' => 'required',
+            'ISSUING_DATE.*' => 'required',
+            'CERTIFICATE_NO.*' => 'required',
+            'user_image.*' => 'required',
+            'RENEWING_DATE.*' => 'required',
+        );
+        $error = array(
+            'CERTIFICATE_TYPE_ID.*' => 'Certificate type field is required.',
+            'ISSURE_ID.*' => 'Issuer field is required.',
+            'ISSUING_DATE.*' => 'Issue date field is required.',
+            'CERTIFICATE_NO.*' => 'Certificate no field is required.',
+            'user_image.*' => 'File upload is required.',
+            'RENEWING_DATE.*' => 'Renewing date field is required.'
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
         $millerId = $id;
         $image = $request->file('user_image');

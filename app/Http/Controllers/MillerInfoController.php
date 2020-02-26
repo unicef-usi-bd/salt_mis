@@ -69,7 +69,7 @@ class MillerInfoController extends Controller
             $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
             $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
             $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-            $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+            $issueBy = CertificateIssur::getCertificateIssuer();
             $millerToMerge = MillerInfo::getMillerToMerge();
 
             $millerInfo = MillerInfo::millerInformation($millerId);
@@ -203,7 +203,7 @@ class MillerInfoController extends Controller
         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
-        $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
+        $issueBy = CertificateIssur::getCertificateIssuer();
         $millerToMerge = MillerInfo::getMillerToMerge();
 
         $millerInfo = MillerInfo::millerInformation($id);

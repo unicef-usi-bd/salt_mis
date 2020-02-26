@@ -41,9 +41,10 @@
                                     <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
-                                        <option value="">Select</option>
                                         @foreach($issueBy as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->ISSURE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                            @if($certificate->CERTIFICATE_TYPE_ID==$row->CERTIFICATE_TYPE_ID)
+                                                <option value="{{ $row->ISSUR_ID }}" selected>{{ $row->ISSUER_NAME }}</option>
+                                            @endif
                                         @endforeach
                                      </select>
                                 </span>
@@ -142,7 +143,7 @@
                         </button>
                         <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            {{ trans('dashboard.submit') }}
+                            {{--{{ trans('dashboard.submit') }}--}} Update
                         </button>
                     </div>
                 </div>

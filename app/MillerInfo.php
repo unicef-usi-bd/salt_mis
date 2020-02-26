@@ -338,7 +338,7 @@ class MillerInfo extends Model
                 $countActiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
             }
             $countActiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 1);
-            $countActiveMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
+            $countActiveMiller->where('ssm_mill_info.FINAL_SUBMIT_FLG','=', 1);
             return $countActiveMiller->get();
     }
     public  static function countInactiveMillers(){
@@ -350,27 +350,25 @@ class MillerInfo extends Model
                 $countInactiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
             }
             $countInactiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 0);
-            $countInactiveMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
+            $countInactiveMiller->where('ssm_mill_info.FINAL_SUBMIT_FLG','=', 1);
             return $countInactiveMiller->get();
     }
 
     public static function associationTotalMill(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select mi.MILL_ID
-            from ssm_mill_info mi
-            left join ssm_millemp_info mie on mie.MILL_ID = mi.MILL_ID
-            where mie.center_id = $centerId
-            and mie.FINAL_SUBMIT_FLG = 1"));
+        return DB::table('ssm_mill_info as smi')
+            ->where('smi.center_id', '=', $centerId)
+            ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
+            ->count();
     }
 
     public static function associationTotalActiveMill(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select * 
-                            from ssm_mill_info mi
-                            left join ssm_millemp_info mie on mie.MILL_ID = mi.MILL_ID
-                            where mie.center_id = $centerId
-                            and mie.FINAL_SUBMIT_FLG = 1
-                            and mi.ACTIVE_FLG = 1"));
+        return DB::table('ssm_mill_info as smi')
+            ->where('smi.center_id', '=', $centerId)
+            ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
+            ->where('smi.ACTIVE_FLG', '=', 1)
+            ->get();
     }
 
     public static function associationTotalInactiveMill(){

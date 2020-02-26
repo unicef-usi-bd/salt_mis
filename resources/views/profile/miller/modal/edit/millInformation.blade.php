@@ -191,7 +191,7 @@
                         </button>
                         <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            Update & Next
+                            Update
                         </button>
                     </div>
                 </div>

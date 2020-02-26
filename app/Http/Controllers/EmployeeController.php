@@ -65,6 +65,8 @@ class EmployeeController extends Controller
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
+        if(!$this->checkEmployeeCalculation($request)) return response()->json(['errors'=>'Employee male & female calculation miss match']);
+
         $millerId = $request->input('MILL_ID');
         $inserted = Employee::insertEmployeeInfo($request);
 
@@ -73,6 +75,20 @@ class EmployeeController extends Controller
         } else{
             return response()->json(['errors'=>'Employee information Profile save failed']);
         }
+    }
+
+    private function checkEmployeeCalculation($request){
+        $totalMale = $request->input('TOTMALE_EMP');
+        $totalFemale = $request->input('TOTFEM_EMP');
+        $male = $request->input('FULLTIMEMALE_EMP', 0);
+        $female = $request->input('FULLTIMEFEM_EMP', 0);
+        $male += $request->input('PARTTIMEMALE_EMP', 0);
+        $female += $request->input('PARTTIMEFEM_EMP', 0);
+        $male += $request->input('TOTMALETECH_PER', 0);
+        $female += $request->input('TOTFEMTECH_PER', 0);
+
+        if($totalMale==$male && $totalFemale==$female) return true;
+        return false;
     }
 
     /**
@@ -110,6 +126,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $rules = array(
             'TOTMALE_EMP' => 'required',
         );
@@ -120,6 +137,8 @@ class EmployeeController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        if(!$this->checkEmployeeCalculation($request)) return response()->json(['errors'=>'Employee male & female calculation miss match']);
 
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
 
@@ -180,7 +199,7 @@ public function createEmployee($millerInfoId){
     $getEntrepreneurRowData = Entrepreneur::getEntrepreneurRowData($millerInfoId);
     $editCertificateData = Certificate::certificateInformation($millerInfoId);
     $editQcData = Qc::qcInfo($millerInfoId);
-    $certificateId = CertificateIssur::getCertificate();
+    $certificateId = CertificateIssur::getCertificateIssuer();
     $issuerId = Certificate::getIssuerIs();
     //$associationId = AssociationSetup::singleAssociation();
     return view('profile.miller.employeeInformationNew',compact('millerInfoId','registrationType','ownerType','getDivision','getZone','processType','millType','capacity','certificate','issueBy','editMillData','editEntrepData','getEntrepreneurRowData','editCertificateData','editQcData','associationId','certificateId','issuerId','getDistrict','getUpazilla'));

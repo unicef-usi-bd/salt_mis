@@ -232,7 +232,7 @@ class DashboardController extends Controller
     }
 
     public function association(){
-        $totalMiller= count(MillerInfo::associationTotalMill());
+        $totalMiller= MillerInfo::associationTotalMill();
         $totalActiveMiller= count(MillerInfo::associationTotalActiveMill());
         $totalInactiveMiller= count(MillerInfo::associationTotalInactiveMill());
 

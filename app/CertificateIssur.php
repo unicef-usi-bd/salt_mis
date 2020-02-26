@@ -77,9 +77,11 @@ class CertificateIssur extends Model
             ->get();
     }
 
-    public static function getCertificate(){
+    public static function getCertificateIssuer(){
         return DB::table('smm_certificate')
-            ->select('smm_certificate.*')
+            ->select('smm_certificate.*','a.LOOKUPCHD_NAME as CERTIFICATE_NAME', 'b.LOOKUPCHD_NAME as ISSUER_NAME')
+            ->leftJoin('ssc_lookupchd as a','smm_certificate.CERTIFICATE_TYPE_ID','=','a.LOOKUPCHD_ID')
+            ->leftJoin('ssc_lookupchd as b','smm_certificate.ISSUR_ID','=','b.LOOKUPCHD_ID')
             ->get();
     }
 

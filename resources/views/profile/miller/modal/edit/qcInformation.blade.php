@@ -100,7 +100,8 @@
                         </button>
                         <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
-                            {{ trans('dashboard.submit') }}
+                            {{--{{ trans('dashboard.submit') }}--}}
+                            Update
                         </button>
                     </div>
                 </div>

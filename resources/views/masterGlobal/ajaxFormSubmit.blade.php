@@ -3,7 +3,7 @@
         let url = jQuery(form_data).attr('action');
         let postType = $("input[name=_method]").val();
         let _method = (typeof(postType) === "undefined") ? 'post' : postType;
-        let doEmptyForm = $(this).attr('data-clear') || true;
+        let doEmptyForm = jQuery(form_data).attr('data-clear') || true;
         let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
         let formData = new FormData(form_data); // Currently empty
         formData.append('isFinalSubmit', finalSubmit);
