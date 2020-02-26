@@ -11,8 +11,8 @@ use Symfony\Component\VarDumper\Cloner\Data;
 class Qc extends Model
 {
     public static function insertQcInfo($request){
-        $QcInfoId = DB::table('tsm_qc_info')->insertGetId([
-            'MILL_ID' => $request->input('MILL_ID'),
+        $millerId = $request->input('MILL_ID');
+        $data = array(
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
             'SOP_DESC' => $request->input('SOP_DESC'),
             'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
@@ -23,9 +23,9 @@ class Qc extends Model
             'center_id' => Auth::user()->center_id,
              'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-
-        return $QcInfoId;
+        );
+        $qcInfo = self::insertWithMillerId($millerId, $data);
+        return $qcInfo;
     }
     public static function qcInfo($millerId){
         return DB::table('tsm_qc_info')
@@ -34,8 +34,13 @@ class Qc extends Model
 
     }
 
+    public static function insertWithMillerId($millerId, $data){
+        $data['MILL_ID'] = $millerId;
+        return DB::table('tsm_qc_info')->insertGetId($data);
+    }
+
     public static function updateQcInfo($request, $millerId){
-        $update = DB::table('tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update([
+        $data = array(
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
             'SOP_DESC' => $request->input('SOP_DESC'),
             'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
@@ -45,21 +50,13 @@ class Qc extends Model
             'REMARKS' => $request->input('REMARKS'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
-        ]);
+        );
+        $update = DB::table('tsm_qc_info')
+            ->where('MILL_ID', '=' , $millerId)
+            ->update($data);
 
         if(!$update){
-            DB::table('tsm_qc_info')->insert([
-                'MILL_ID' => $millerId,
-                'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
-                'SOP_DESC' => $request->input('SOP_DESC'),
-                'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
-                'MONITORING_FLG' => $request->input('MONITORING_FLG'),
-                'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
-                'LAB_PERSON' => $request->input('LAB_PERSON'),
-                'REMARKS' => $request->input('REMARKS'),
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-                'UPDATE_BY' => Auth::user()->id
-            ]);
+            self::insertWithMillerId($millerId, $data);
         }
         return true;
     }

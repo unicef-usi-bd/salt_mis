@@ -172,48 +172,13 @@ class MillerInfo extends Model
             ->get();
 
     }
-    public static function millerUpdateStatus($MILL_ID){
-        $millerInfoStatus = DB::table('ssm_mill_info')
+    public static function millerUpdateStatus($millerId){
+        $hasUpdate = DB::table('ssm_mill_info')
             ->select('approval_status')
-            ->where('MILL_ID','=',$MILL_ID)
-            ->where('approval_status','=',0)
-            ->groupBy('approval_status')
+            ->where('MILL_ID','=', $millerId)
+            ->where('approval_status','=',1)
             ->first();
-        $millerInfoStatus = isset($millerInfoStatus) ? 0 : 1;
-
-        $enterpreneurInfoStatus = DB::table('ssm_entrepreneur_info')
-                            ->select('approval_status')
-                            ->where('MILL_ID','=',$MILL_ID)
-                            ->where('approval_status','=',0)
-                            ->groupBy('approval_status')
-                            ->first();
-        $enterpreneurInfoStatus = isset($enterpreneurInfoStatus) ? 0 : 1;
-
-        $millerEmpInfoStatus = DB::table('ssm_millemp_info')
-                                ->select('approval_status')
-                                ->where('MILL_ID','=',$MILL_ID)
-                                ->where('approval_status','=',0)
-                                ->groupBy('approval_status')
-                                ->first();
-        $millerEmpInfoStatus = isset($millerEmpInfoStatus) ? 0 : 1;
-        $qcInfoStatus = DB::table('tsm_qc_info')
-                        ->select('approval_status')
-                        ->where('MILL_ID','=',$MILL_ID)
-                        ->where('approval_status','=',0)
-                        ->groupBy('approval_status')
-                        ->first();
-        $qcInfoStatus = isset($qcInfoStatus) ? 0 : 1;
-
-        $certificateInfoStatus = DB::table('ssm_certificate_info')
-                                ->select('approval_status')
-                                ->where('MILL_ID','=',$MILL_ID)
-                                ->where('approval_status','=',0)
-                                ->groupBy('approval_status')
-                                ->first();
-        $certificateInfoStatus = isset($certificateInfoStatus) ? 0 : 1;
-
-        $statusArray = array($millerInfoStatus,$enterpreneurInfoStatus,$millerEmpInfoStatus,$qcInfoStatus,$certificateInfoStatus);
-        return in_array(1, $statusArray) ? 1 : 0;
+        return $hasUpdate;
     }
 
     public static function getApprovalAllMillDataList(){
@@ -231,6 +196,7 @@ class MillerInfo extends Model
             ->get();
 
     }
+
     public static function selfMillerAuthenticated(){
         $centerId = Auth::user()->center_id;
          return DB::table('ssm_associationsetup')

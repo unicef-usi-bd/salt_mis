@@ -45,7 +45,7 @@
                     ?>
                     <tr>
                         <td class="center" >  {{ ++$sl }}</td>
-                        <td> {{ $row->MILL_NAME }} {{ $row->MILL_ID }}</td>
+                        <td> {{ $row->MILL_NAME }} </td>
                         <td> {{ $row->LOOKUPCHD_NAME }} </td>
                         <td> {{ $row->RENEWING_DATE }} </td>
                         <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
@@ -82,8 +82,8 @@
                                 @endif
 
                                 @if($viewPermissionLevel == 1)
-                                    @php $millerUpdateStatus = App\MillerInfo::millerUpdateStatus($row->MILL_ID); @endphp
-                                    @if($millerUpdateStatus == 1)
+                                    @php $hasUpdateRequest = App\MillerInfo::millerUpdateStatus($row->MILL_ID); @endphp
+                                    @if(!empty($hasUpdateRequest))
                                         <a href="#" id='{{ "miller-profile-approval/$row->MILL_ID" }}' class="blue showModalGlobal" modal-size="modal-bg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Miller Profile Approval">
                                             <span class="blue">
                                                 <i class="ace-icon fa fa-check bigger-130"></i>

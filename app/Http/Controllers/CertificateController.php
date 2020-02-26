@@ -115,8 +115,8 @@ class CertificateController extends Controller
                 //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
                 'TRADE_LICENSE' => $imagePath,
                 'RENEWING_DATE' => $renewingDate,
-                'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
-                'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
+                'CERTIFICATE_TYPE' => CertificateIssur::hasMendatory($userCertificates[$i]),
+                'IS_EXPIRE' => CertificateIssur::hasExpired($userCertificates[$i]),
                 'REMARKS' => $request->input('REMARKS')[$i],
                 'center_id' => Auth::user()->center_id,
                 'ENTRY_BY' => Auth::user()->id,
@@ -226,8 +226,8 @@ class CertificateController extends Controller
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => $renewingDate,
                 'REMARKS' => $request->input('REMARKS')[$i],
-                'CERTIFICATE_TYPE' => $this->dateFormat($request->input('CERTIFICATE_TYPE')[$i]),
-                'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
+                'CERTIFICATE_TYPE' => CertificateIssur::hasMendatory($userCertificates[$i]),
+                'IS_EXPIRE' => CertificateIssur::hasExpired($userCertificates[$i]),
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );
@@ -274,8 +274,8 @@ class CertificateController extends Controller
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
                 'RENEWING_DATE' => $renewingDate,
                 'REMARKS' => $request->input('REMARKS')[$i],
-                'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE')[$i],
-                'IS_EXPIRE' => $request->input('IS_EXPIRE')[$i],
+                'CERTIFICATE_TYPE' => CertificateIssur::hasMendatory($userCertificates[$i]),
+                'IS_EXPIRE' => CertificateIssur::hasExpired($userCertificates[$i]),
                 'UPDATE_BY' => Auth::user()->id,
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );

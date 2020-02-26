@@ -16,9 +16,7 @@
     <form id="myform" action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
         @csrf
-
         <div class="col-md-6">
-
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_full_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-sm-8">
@@ -32,7 +30,6 @@
                     <input type="text" id="inputSuccess" placeholder="Designation Here" name="designation" class="form-control col-sm-8" value="{{ old('username') }}"/>
                 </div>
             </div>
-
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_name') }}</b><span style="color: red;"> *</span> </label>
@@ -66,7 +63,6 @@
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
-
                 </div>
             </div>
 
@@ -135,20 +131,6 @@
                 </div>
             </div>
 
-            {{--<div class="form-group resources"  style=" display: none;">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                        {{--<span class="block input-icon input-icon-right">--}}
-                            {{--<select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">--}}
-                                {{--<option value="">-Select One-</option>--}}
-                                {{--@foreach($associationCenter as $center)--}}
-                                    {{--<option value="{{$center->ASSOCIATION_ID}}"> {{$center->ASSOCIATION_NAME}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</span>--}}
-                    {{--<span><p class='result7'></p></span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
             <div class="form-group resources"  style=" display: none;">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
@@ -157,19 +139,20 @@
                                 <option value="">-Select-</option>
                                 @foreach($associationCenter as $center)
                                     <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
-<!--                                        --><?php //$miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
-                                        <?php
-                                    $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME ,a.MILL_ID,mi.ACTIVE_FLG,me.FINAL_SUBMIT_FLG
-                                                                                from ssm_associationsetup a
-                                                                                left join ssm_mill_info mi on mi.MILL_ID = a.MILL_ID
-                                                                                left join ssm_millemp_info me on me.MILL_ID = a.MILL_ID
-                                                                                where a.PARENT_ID = $center->ASSOCIATION_ID
-                                                                                and mi.ACTIVE_FLG = 1
-                                                                                and me.FINAL_SUBMIT_FLG = 1 "));
-                                        ?>
-                                        @foreach($miller as $row)
+                                    @php
+
+                                    $miller = DB::table('ssm_associationsetup as sas')
+                                    ->select('sas.ASSOCIATION_ID', 'sas.ASSOCIATION_NAME', 'sas.MILL_ID', 'smi.ACTIVE_FLG', 'smi.FINAL_SUBMIT_FLG')
+                                    ->leftJoin('ssm_mill_info as smi', 'sas.MILL_ID', '=', 'smi.MILL_ID' )
+                                    ->where('sas.PARENT_ID', '=', $center->ASSOCIATION_ID)
+                                    ->where('smi.ACTIVE_FLG', '=', 1)
+                                    ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
+                                    ->get();
+
+                                    @endphp
+                                    @foreach($miller as $row)
                                         <option value="{{$row->ASSOCIATION_ID}}"> {{$row->ASSOCIATION_NAME}}</option>
-                                        @endforeach
+                                    @endforeach
 
                                 @endforeach
                             </select>

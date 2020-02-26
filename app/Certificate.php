@@ -82,16 +82,14 @@ class Certificate extends Model
     }
 
 
-
-    public static function certificateRenewalMessage($millsId){
+    public static function certificateRenewalMessage($millerId){
         return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
-            from ssm_certificate_info ci
-            left join ssc_lookupchd lkp on ci.CERTIFICATE_TYPE_ID = lkp.LOOKUPCHD_ID
-            left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
-            left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-            where ci.MILL_ID = $millsId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
-            AND ci.RENEWING_DATE >=90 AND ci.RENEWING_DATE >=60 AND ci.RENEWING_DATE >=30
-            order By ci.RENEWING_DATE asc;"));
+                from ssm_certificate_info ci
+                left join ssc_lookupchd lkp on ci.CERTIFICATE_TYPE_ID = lkp.LOOKUPCHD_ID
+                left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
+                left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
+                where ci.MILL_ID = '$millerId' and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
+                order By ci.RENEWING_DATE asc"));
     }
 
 

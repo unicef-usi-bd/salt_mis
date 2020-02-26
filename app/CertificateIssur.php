@@ -82,4 +82,16 @@ class CertificateIssur extends Model
             ->select('smm_certificate.*')
             ->get();
     }
+
+    public static function hasExpired($certificateId){
+        $expiredInfo = DB::table('smm_certificate')->where('CERTIFICATE_TYPE_ID', '=', $certificateId)->first();
+        if($expiredInfo) return $expiredInfo->IS_EXPIRE;
+        return 0;
+    }
+
+    public static function hasMendatory($certificateId){
+        $expiredInfo = DB::table('smm_certificate')->where('CERTIFICATE_TYPE_ID', '=', $certificateId)->first();
+        if($expiredInfo) return $expiredInfo->CERTIFICATE_TYPE;
+        return 0;
+    }
 }

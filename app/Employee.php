@@ -17,8 +17,8 @@ class Employee extends Model
     }
 
     public static function insertEmployeeInfo($request){
-        $EmployeeInfoId = DB::table('ssm_millemp_info')->insertGetId([
-            'MILL_ID' => $request->input('MILL_ID'),
+        $millerId = $request->input('MILL_ID');
+        $data = array(
             'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
             'TOTFEM_EMP' => $request->input('TOTFEM_EMP'),
             'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
@@ -32,12 +32,18 @@ class Employee extends Model
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-        ]);
-        return $EmployeeInfoId;
+        );
+        $employeeInfoId = self::insertWithMillerId($millerId, $data);
+        return $employeeInfoId;
+    }
+
+    public static function insertWithMillerId($millerId, $data){
+        $data['MILL_ID'] = $millerId;
+        return DB::table('ssm_millemp_info')->insertGetId($data);
     }
 
     public static function updateEmployeeInfo($request, $id){
-        $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
+        $data = array(
             'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
             'TOTFEM_EMP' => $request->input('TOTFEM_EMP'),
             'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
@@ -49,24 +55,14 @@ class Employee extends Model
             'REMARKS' => $request->input('REMARKS'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
-        ]);
+        );
+
+        $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update($data);
 
         if(!$update){
-            DB::table('ssm_millemp_info')->insert([
-                'MILL_ID' => $id,
-                'TOTMALE_EMP' => $request->input('TOTMALE_EMP'),
-                'TOTFEM_EMP' => $request->input('TOTFEM_EMP'),
-                'FULLTIMEMALE_EMP' => $request->input('FULLTIMEMALE_EMP'),
-                'FULLTIMEFEM_EMP' => $request->input('FULLTIMEFEM_EMP'),
-                'PARTTIMEMALE_EMP' => $request->input('PARTTIMEMALE_EMP'),
-                'PARTTIMEFEM_EMP' => $request->input('PARTTIMEFEM_EMP'),
-                'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
-                'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
-                'REMARKS' => $request->input('REMARKS'),
-                'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-                'UPDATE_BY' => Auth::user()->id
-            ]);
+            self::insertWithMillerId($id, $data);
         }
+
         return true;
     }
 

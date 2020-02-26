@@ -146,6 +146,7 @@ class MillerInfoController extends Controller
             $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
             $path = 'image/mill-logo/' . $filename;
             Image::make($image->getRealPath())->resize(250, 250)->save($path);
+
             //********* End Image *********
             $mill_logo = "image/mill-logo/$filename";
         }else{

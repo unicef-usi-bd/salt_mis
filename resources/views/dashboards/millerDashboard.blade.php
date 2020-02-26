@@ -29,8 +29,6 @@
                     <span class="alert alert-warning" style="font-weight: bolder;">If don’t  renewal {{ $row->CERTIFICATE_NAME }} then account is deactivate.&nbsp;</span>
                     @elseif($row->RENEW_DAY <=90)
                     <span class="alert alert-success" style="font-weight: bolder;">If don’t  renewal {{ $row->CERTIFICATE_NAME }} then account is deactivate.</span>
-                    @else
-
                     @endif
             @endforeach
         </div>
