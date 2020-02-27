@@ -325,67 +325,31 @@ class MillerInfo extends Model
          return $getMillInfo;
     }
     ///-----------------------Counting Miller
-    public  static function countAllMillers(){
-            $centerId = Auth::user()->center_id;
-            $countMiller = DB::table('ssm_mill_info');
-            $countMiller->select('ssm_mill_info.MILL_ID');
-            $countMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
-            if($centerId){
-                $countMiller->where('ssm_millemp_info.center_id','=',$centerId);
-            }
-            $countMiller->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1);
-            return $countMiller->get();
-    }
-    public  static function countActiveMillers(){
-            $centerId = Auth::user()->center_id;
-            $countActiveMiller = DB::table('ssm_mill_info');
-            $countActiveMiller->select('ssm_mill_info.MILL_ID');
-            $countActiveMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
-            if($centerId){
-                $countActiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
-            }
-            $countActiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 1);
-            $countActiveMiller->where('ssm_mill_info.FINAL_SUBMIT_FLG','=', 1);
-            return $countActiveMiller->get();
-    }
-    public  static function countInactiveMillers(){
-            $centerId = Auth::user()->center_id;
-            $countInactiveMiller = DB::table('ssm_mill_info');
-            $countInactiveMiller->select('ssm_mill_info.MILL_ID');
-            $countInactiveMiller->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID');
-            if($centerId){
-                $countInactiveMiller->where('ssm_millemp_info.center_id','=',$centerId);
-            }
-            $countInactiveMiller->where('ssm_mill_info.ACTIVE_FLG','=', 0);
-            $countInactiveMiller->where('ssm_mill_info.FINAL_SUBMIT_FLG','=', 1);
-            return $countInactiveMiller->get();
+    public static function totalMill(){
+        $centerId = Auth::user()->center_id;
+        $obj = DB::table('ssm_mill_info as smi');
+        if($centerId) $obj->where('smi.center_id', '=', $centerId);
+        $obj->where('smi.FINAL_SUBMIT_FLG', '=', 1);
+        return $obj->count();
     }
 
-    public static function associationTotalMill(){
+    public static function totalActiveMill(){
         $centerId = Auth::user()->center_id;
-        return DB::table('ssm_mill_info as smi')
-            ->where('smi.center_id', '=', $centerId)
-            ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
-            ->count();
+        $obj = DB::table('ssm_mill_info as smi');
+        if($centerId) $obj->where('smi.center_id', '=', $centerId);
+        $obj->where('smi.FINAL_SUBMIT_FLG', '=', 1);
+        $obj->where('smi.ACTIVE_FLG', '=', 1);
+        return $obj->count();
+
     }
 
-    public static function associationTotalActiveMill(){
+    public static function totalInactiveMill(){
         $centerId = Auth::user()->center_id;
-        return DB::table('ssm_mill_info as smi')
-            ->where('smi.center_id', '=', $centerId)
-            ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
-            ->where('smi.ACTIVE_FLG', '=', 1)
-            ->get();
-    }
-
-    public static function associationTotalInactiveMill(){
-        $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select count(mi.MILL_NAME)Total_mill
-                 from ssm_mill_info mi
-                 left join ssm_associationsetup ass on ass.center_id = mi.MILL_ID
-                 where mi.center_id = $centerId
-                 AND mi.ACTIVE_FLG = 0
-                 Group By mi.MILL_NAME"));
+        $obj = DB::table('ssm_mill_info as smi');
+        if($centerId) $obj->where('smi.center_id', '=', $centerId);
+        $obj->where('smi.FINAL_SUBMIT_FLG', '=', 1);
+        $obj->where('smi.ACTIVE_FLG', '=', 0);
+        return $obj->count();
     }
     ///-----------------------Counting Miller
 

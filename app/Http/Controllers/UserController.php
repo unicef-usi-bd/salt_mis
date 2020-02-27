@@ -93,7 +93,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = array(
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
@@ -118,16 +117,6 @@ class UserController extends Controller
             //for user image*************
             //$userImageName = 'defaultUserImage.png';
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
-//                try {
-//                    $file = $request->file('user_image');
-//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_image')));
-//                    $userImageName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-//
-//                    $request->file('user_image')->move("image/user-image/", $userImageName);
-//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-//
-//                }
-
                 $image = $request->file('user_image');
                 $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
                 $path = 'image/user-image/' . $filename;
@@ -141,15 +130,6 @@ class UserController extends Controller
             //for user signature*************
             //$userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
-//                try {
-//                    $file = $request->file('user_signature');
-//                    $tempName = strtolower(str_replace(' ', '', $request->input('user_signature')));
-//                    $userSignatureName = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
-//
-//                    $request->file('user_signature')->move("image/user-signature/", $userSignatureName);
-//                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
-//
-//                }
                 $signature = $request->file('user_signature');
                 $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
                 $path = 'image/user-signature/' . $filename;
@@ -175,9 +155,7 @@ class UserController extends Controller
                 'contact_no' => $request->input('contact_no'),
                 'renewing_date' => date('Y-m-d'),
                 'active_status' => 1,
-//                'user_image' => 'image/user-image/'.$userImageName,
                 'user_image' => $user_image,
-//                'user_signature' => 'image/user-signature/'.$userSignatureName,
                 'user_signature' => $user_signature,
                 'center_id' => $request->input('center_id'),
                 'create_by' => Auth::user()->id
@@ -248,25 +226,12 @@ class UserController extends Controller
             $rules = array(
             'user_full_name' =>'required|string|max:100',    
              'username' => 'required|string|max:100',
-//            'email' => 'required|string|email|max:255',
-              //'email' => 'nullable|string|email|max:255',
-              
-              //'cost_center_id' => 'required',
-//            'designation_id' => 'required',
-             //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
             );
         }else{
              $rules = array(
                  'user_full_name' =>'required|string|max:100',
                  'username' => 'required|string|max:100',
-                 //'email' => 'required|string|email|max:255',
-                 //'email' => 'nullable|string|email|max:255',
-                 
-                 //'cost_center_id' => 'required',
-                 //'designation_id' => 'required',
                  'user_group_id' => 'required',
-                 //'designation_id' => 'required',
-                 //'contact_no' => 'nullable|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
             );
         }
         $error = array(

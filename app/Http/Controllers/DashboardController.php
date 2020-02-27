@@ -66,10 +66,9 @@ class DashboardController extends Controller
     }
 
     public function admin(){
-
-        $totalMiller= count(MillerInfo::countAllMillers());
-        $totalActiveMiller= count(MillerInfo::countActiveMillers());
-        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalMiller= MillerInfo::totalMill();
+        $totalActiveMiller= MillerInfo::totalActiveMill();
+        $totalInactiveMiller= MillerInfo::totalInactiveMill();
 
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
@@ -110,9 +109,9 @@ class DashboardController extends Controller
     }
 
     public function unicef(){
-        $totalMiller= count(MillerInfo::countAllMillers());
-        $totalActiveMiller= count(MillerInfo::countActiveMillers());
-        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalMiller= MillerInfo::totalMill();
+        $totalActiveMiller= MillerInfo::totalActiveMill();
+        $totalInactiveMiller= MillerInfo::totalInactiveMill();
 
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
@@ -150,9 +149,9 @@ class DashboardController extends Controller
     }
 
     public function bsti(){
-        $totalMiller= count(MillerInfo::countAllMillers());
-        $totalActiveMiller= count(MillerInfo::countActiveMillers());
-        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalMiller= MillerInfo::totalMill();
+        $totalActiveMiller= MillerInfo::totalActiveMill();
+        $totalInactiveMiller= MillerInfo::totalInactiveMill();
 
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
@@ -191,9 +190,9 @@ class DashboardController extends Controller
     }
 
     public function basic(){
-        $totalMiller= count(MillerInfo::countAllMillers());
-        $totalActiveMiller= count(MillerInfo::countActiveMillers());
-        $totalInactiveMiller= count(MillerInfo::countInactiveMillers());
+        $totalMiller= MillerInfo::totalMill();
+        $totalActiveMiller= MillerInfo::totalActiveMill();
+        $totalInactiveMiller= MillerInfo::totalInactiveMill();
 
         $totalWashcrashProduction = Stock::totalWashCrashProductions();
         $totalIodizeProduction = Stock::totalIodizeProductions();
@@ -232,9 +231,9 @@ class DashboardController extends Controller
     }
 
     public function association(){
-        $totalMiller= MillerInfo::associationTotalMill();
-        $totalActiveMiller= count(MillerInfo::associationTotalActiveMill());
-        $totalInactiveMiller= count(MillerInfo::associationTotalInactiveMill());
+        $totalMiller= MillerInfo::totalMill();
+        $totalActiveMiller= MillerInfo::totalActiveMill();
+        $totalInactiveMiller= MillerInfo::totalInactiveMill();
 
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();

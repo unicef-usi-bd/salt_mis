@@ -33,12 +33,21 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <img class="nav-user-photo" src="{{ asset('assets/images/avatars/user.png') }}" alt="Jason's Photo" />
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="row" style="line-height: 35px;height: 20px;margin-top: 3px;">
-                                <span style="font-weight: bold;color: #FFFFFF;">{{ Auth::user()->username }}</span>
+                                @php
+                                $sessionInfo = Auth::user();
+                                $organizationType = '';
+                                $centerId = $sessionInfo->center_id;
+                                    if($centerId!=null) {
+                                    $associationInfo = DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', '=', $centerId)->first();
+                                    if($associationInfo) $organizationType = "[ $associationInfo->ASSOCIATION_NAME ]";
+                                }
+                                @endphp
+                                <span style="font-weight: bold;color: #FFFFFF;">{{ $sessionInfo->username }} {{ $organizationType }}</span>
                                 <i class="ace-icon fa fa-caret-down" style="margin-left: 10px;"></i>
                             </div>
                             {{--<div class="row" style="line-height: 25px;height: 20px;">--}}
