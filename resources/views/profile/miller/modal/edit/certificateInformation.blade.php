@@ -40,7 +40,8 @@
                                     </td>
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]">
+                                        <option value="">Select One</option>
                                         @foreach($issueBy as $row)
                                             @if($certificate->CERTIFICATE_TYPE_ID==$row->CERTIFICATE_TYPE_ID)
                                                 <option value="{{ $row->ISSUR_ID }}" selected>{{ $row->ISSUER_NAME }}</option>
@@ -163,14 +164,13 @@
             defaultRow.find('select.ISSURE_ID').prop('disabled', false);
 
 //            For Ignore array Conflict
-            defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
-            defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
-            defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
-            defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
-            defaultRow.find('input.REMARKS').attr('disabled', false);
-            defaultRow.find('span.budget_against_code').text('');
-            defaultRow.find('span.errorMsg').text('');
-            $('.chosen-select').chosen(0);
+            defaultRow.find('input.ISSUING_DATE').val('');
+            defaultRow.find('input.CERTIFICATE_NO').val('');
+            defaultRow.find('input.TRADE_LICENSE').val('');
+            defaultRow.find('input.RENEWING_DATE').val('');
+            defaultRow.find('input.REMARKS').val('');
+            defaultRow.find('.chosen-select').val('').trigger('chosen:updated');
+            defaultRow.find('.ISSURE_ID').html('<option value="0">Select</option>').trigger('chosen:updated');
         });
     });
     // Fore Remove Row By Click
