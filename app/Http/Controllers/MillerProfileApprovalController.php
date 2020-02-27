@@ -19,8 +19,8 @@ class MillerProfileApprovalController extends Controller
      */
     public function show($id)
     {
-        $currentMillInfo = MillerProfileApproval::previousMillerInformation($id);
-        $updateMillInfo = MillerProfileApproval::presentMillerInformation($id);
+        $currentMillInfo = MillerProfileApproval::currentMillerInformation($id);
+        $updateMillInfo = MillerProfileApproval::updateMillerInformation($id);
         $currentEntrepreneurs = MillerProfileApproval::currentEntrepreneurInfo($id);
         $updateEntrepreneurs = MillerProfileApproval::updateEntrepreneurInfo($id);
         $presentCertificates = MillerProfileApproval::currentCertificatesInfo($id);
@@ -43,6 +43,7 @@ class MillerProfileApprovalController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $hasRequested = false;
         $millerId = $id;
         // Start Mill Info Data
         $millerInfo = DB::table('tem_ssm_mill_info')
@@ -70,9 +71,10 @@ class MillerProfileApprovalController extends Controller
             DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($updateInfo);
             $association = DB::table('ssm_associationsetup')->where('MILL_ID', '=', $id)->first();
             if($association){
-                $data = array('ASSOCIATION_NAME' => $request->input('MILL_NAME'));
-                DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', '=', $association->ASSOCIATION_ID)->update($data);
+                DB::table('ssm_associationsetup')->where('ASSOCIATION_ID', '=', $association->ASSOCIATION_ID)->update(['ASSOCIATION_NAME' => $millerInfo->MILL_NAME]);
+                DB::table('tem_ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update(['approval_status' => '1']);
             }
+            $hasRequested = true;
         }
         // End Mill Info Data
 
@@ -111,6 +113,7 @@ class MillerProfileApprovalController extends Controller
                     DB::table('tem_ssm_entrepreneur_info')->where('MILL_ID', '=' , $millerId)->delete();
                 }
             }
+            $hasRequested = true;
         }
         //End Entrepreneur Information Data
 
@@ -148,6 +151,7 @@ class MillerProfileApprovalController extends Controller
                     DB::table('tem_ssm_certificate_info')->where('MILL_ID', '=' , $millerId)->delete();;
                 }
             }
+            $hasRequested = true;
         }
         //End Certificate Information Data
 
@@ -172,6 +176,8 @@ class MillerProfileApprovalController extends Controller
                 'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
             );
             DB::table('tsm_qc_info')->where('MILL_ID', '=', $millerId)->update($updateQc);
+            DB::table('tem_tsm_qc_info')->where('MILL_ID', '=' , $millerId)->update(['approval_status' => '1']);
+            $hasRequested = true;
         }
 //        //Employee Information Data
 
@@ -196,10 +202,13 @@ class MillerProfileApprovalController extends Controller
                 'UPDATE_BY' => Auth::user()->id
             );
             DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($employeeUpdate);
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update(['approval_status' => '1']);
+            $hasRequested = true;
         }
 
-        $approveStatus = ['approval_status' => '0'];
-        DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update($approveStatus);
+        if($hasRequested){
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update(['approval_status' => '0']);
+        }
 
         return response()->json(['success'=>'Miller Profile has been Updated']);
     }

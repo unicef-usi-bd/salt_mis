@@ -95,10 +95,7 @@ class Employee extends Model
         }
 
         if($updated){
-            $data = array(
-                'approval_status' => 1
-            );
-            DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $millerId)->update($data);
+            DB::table('ssm_mill_info')->where('MILL_ID', '=' , $millerId)->update(['approval_status' => 1]);
         }
         return $updated;
     }

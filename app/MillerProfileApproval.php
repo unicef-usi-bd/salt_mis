@@ -7,7 +7,7 @@ use DB;
 
 class MillerProfileApproval extends Model
 {
-    public static function previousMillerInformation($id){
+    public static function currentMillerInformation($id){
         return DB::table('ssm_mill_info')
             ->select('ssm_mill_info.*','ssm_zonesetup.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','reg.LOOKUPCHD_NAME as reg_type','owner.LOOKUPCHD_NAME as owner_type','process.LOOKUPCHD_NAME as process_name','mill.LOOKUPCHD_NAME as mill_name')
             ->leftJoin('ssm_zonesetup','ssm_mill_info.ZONE_ID','=','ssm_zonesetup.ZONE_CODE')
@@ -23,7 +23,7 @@ class MillerProfileApproval extends Model
 
     }
 
-    public static function presentMillerInformation($id){
+    public static function updateMillerInformation($id){
         return DB::table('tem_ssm_mill_info')
             ->select('tem_ssm_mill_info.*','ssm_zonesetup.*','ssc_divisions.*','ssc_districts.*','ssc_upazilas.*','reg.LOOKUPCHD_NAME as reg_type','owner.LOOKUPCHD_NAME as owner_type','process.LOOKUPCHD_NAME as process_name','mill.LOOKUPCHD_NAME as mill_name')
             ->leftJoin('ssm_zonesetup','tem_ssm_mill_info.ZONE_ID','=','ssm_zonesetup.ZONE_CODE')

@@ -78,32 +78,6 @@ class EntrepreneurController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-//         $viewMonitoring = Monitoring::showMonitorData($id);
-//        return view('setup.monitoring.modals.viewMonitoring',compact( 'heading','previllage','viewMonitoring'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-     {
-//         $editMonitoring = Monitoring::editMonitorData($id);
-//         $agencyName = Monitoring::agencyName();
-//        return view('setup.monitoring.modals.editMonitoring' , compact('editMonitoring','agencyName'));
-
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

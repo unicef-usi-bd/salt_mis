@@ -174,7 +174,7 @@ class MillerInfoController extends Controller
     public function show($id)
     {
 
-        $previousMillerData = MillerProfileApproval::previousMillerInformation($id);
+        $previousMillerData = MillerProfileApproval::currentMillerInformation($id);
         $previousEnterpreneurData = MillerProfileApproval::currentEntrepreneurInfo($id);
         $previousCertificaterData = MillerProfileApproval::currentCertificatesInfo($id);
         $previousQcData = MillerProfileApproval::currentQcInfo($id);
