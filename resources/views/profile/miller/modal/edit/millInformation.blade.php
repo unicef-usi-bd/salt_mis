@@ -149,7 +149,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="UPAZILA_ID" class="chosen-select chosen-container thana" name="UPAZILA_ID"
+                               <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID"
                                        data-placeholder="Select">
                                    <option value="">Select</option>
                                    @foreach($upazillas as $row)

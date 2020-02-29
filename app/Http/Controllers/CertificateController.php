@@ -67,7 +67,7 @@ class CertificateController extends Controller
             'ISSUING_DATE.*' => 'required',
             'CERTIFICATE_NO.*' => 'required',
             'user_image.*' => 'required',
-            'RENEWING_DATE.*' => 'required',
+//            'RENEWING_DATE.*' => 'required',
         );
         $error = array(
             'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
@@ -76,7 +76,7 @@ class CertificateController extends Controller
             'ISSUING_DATE.*' => 'Issue date field is required.',
             'CERTIFICATE_NO.*' => 'Certificate no field is required.',
             'user_image.*' => 'File upload is required.',
-            'RENEWING_DATE.*' => 'Renewing date field is required.'
+//            'RENEWING_DATE.*' => 'Renewing date field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -153,7 +153,7 @@ class CertificateController extends Controller
             'ISSUING_DATE.*' => 'required',
             'CERTIFICATE_NO.*' => 'required',
             'user_image.*' => 'required',
-            'RENEWING_DATE.*' => 'required',
+//            'RENEWING_DATE.*' => 'required',
         );
         $error = array(
             'CERTIFICATE_TYPE_ID.*' => 'Certificate type field is required.',
@@ -161,7 +161,7 @@ class CertificateController extends Controller
             'ISSUING_DATE.*' => 'Issue date field is required.',
             'CERTIFICATE_NO.*' => 'Certificate no field is required.',
             'user_image.*' => 'File upload is required.',
-            'RENEWING_DATE.*' => 'Renewing date field is required.'
+//            'RENEWING_DATE.*' => 'Renewing date field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

@@ -195,24 +195,19 @@ class SupplierProfileController extends Controller
 
     }
 
-    public function getDistrictByAjax(Request $request){
-        $divisionId = $request->input('divisionId');
+    public function getDistrictByAjax($divisionId){
         return SupplierProfile::getDistrictByAjax($divisionId);
 
     }
-    public function getUpazilaByAjax(Request $request){
-        $districtId = $request->input('districtId');
+    public function getUpazilaByAjax($districtId){
         return SupplierProfile::getUpazilaByAjax($districtId);
-
     }
-    public function getUnionByAjax(Request $request){
-        $upazilaId = $request->input('upazilaId');
+    public function getUnionByAjax($upazilaId){
         return SupplierProfile::getUnionByAjax($upazilaId);
 
     }
 
-    public static function getThanaByAjax(Request $request){
-        $thanaId = $request->input('districtId');
+    public static function getThanaByAjax($thanaId){
         return SupplierProfile::getThanaByAjax($thanaId);
     }
 }

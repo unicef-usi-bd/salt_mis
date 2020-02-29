@@ -84,7 +84,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
+                        <button type="button" class="btn btn-primary" onclick="formSubmitWithValidation(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{ trans('dashboard.submit') }}
                         </button>
@@ -95,6 +95,31 @@
     </div>
 </div>
 <script>
+
+    function validation() {
+        let scope, certificateId, renewDate, message, status=true;
+        let certificateName=null;
+        $(".certificateTable tr").each(function () {
+            scope = $(this);
+            certificateId = parseInt(scope.find('.CERTIFICATE_TYPE_ID').val() || 0);
+            if(certificateId!==32 && certificateId!==36){
+                certificateName = scope.find('.CERTIFICATE_TYPE_ID').find(":selected").text();
+                renewDate = scope.find('.RENEWING_DATE').val();
+                if(certificateId !==0 && renewDate===''){
+                    message = `${certificateName} Renewing date must be required`;
+                    displayAlertHandler(message, 'danger');
+                    status = false;
+                }
+            }
+        });
+        return status;
+    }
+
+    function formSubmitWithValidation(from_data){
+        let checkValidation = validation();
+        if(checkValidation) formSubmit(from_data);
+    }
+
     $(document).ready(function(){
         $('.rowAddCertificate').click(function(){
             let getTr = $('tr.certificateRow:first');

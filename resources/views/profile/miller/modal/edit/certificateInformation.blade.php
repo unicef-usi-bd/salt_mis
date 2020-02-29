@@ -10,7 +10,7 @@
                 @csrf
                 @method('PUT')
                 <div class="scroll-div">
-                    <table class="table table-bordered fundAllocation">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Type of Certificate<span style="color:red;"> </span></th>
@@ -142,7 +142,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
+                        <button type="button" class="btn btn-primary" onclick="formSubmitWithValidation(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             {{--{{ trans('dashboard.submit') }}--}} Update
                         </button>
@@ -152,7 +152,34 @@
         </div>
     </div>
 </div>
+
 <script>
+
+    function validation() {
+        let scope, certificateId, renewDate, message, status=true;
+        let certificateName=null;
+        $(".certificateTable tr").each(function () {
+            scope = $(this);
+            certificateId = parseInt(scope.find('.CERTIFICATE_TYPE_ID').val() || 0);
+            if(certificateId!==32 && certificateId!==36){
+                certificateName = scope.find('.CERTIFICATE_TYPE_ID').find(":selected").text();
+                renewDate = scope.find('.RENEWING_DATE').val();
+                if(certificateId !==0 && renewDate===''){
+                    message = `${certificateName} Renewing date must be required`;
+                    displayAlertHandler(message, 'danger');
+                    status = false;
+                }
+            }
+        });
+        return status;
+    }
+
+    function formSubmitWithValidation(from_data){
+        let checkValidation = validation();
+        if(checkValidation) formSubmit(from_data);
+    }
+
+
     $(document).ready(function(){
         $('.rowAddCertificate').click(function(){
             let getTr = $('tr.certificateRow:first');
@@ -160,11 +187,9 @@
             $("select.chosen-select").chosen('destroy');
             $('tbody.certificateTable').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             let defaultRow = $('tr.removableRow:last');
-            defaultRow.find(' select.CERTIFICATE_TYPE_ID').attr('disabled', false);
-            defaultRow.find('select.ISSURE_ID').prop('disabled', false);
-
 //            For Ignore array Conflict
             defaultRow.find('input.ISSUING_DATE').val('');
+            defaultRow.find('input.certificateId').val('');
             defaultRow.find('input.CERTIFICATE_NO').val('');
             defaultRow.find('input.TRADE_LICENSE').val('');
             defaultRow.find('input.RENEWING_DATE').val('');

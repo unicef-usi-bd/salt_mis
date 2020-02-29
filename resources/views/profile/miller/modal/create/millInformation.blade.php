@@ -154,7 +154,7 @@
                                for="form-field-1-1"><b>Thana/Upazilla</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select class="chosen-select chosen-container thana" name="UPAZILA_ID"
+                               <select class="chosen-select chosen-container upazila" name="UPAZILA_ID"
                                        data-placeholder="Select">
                                    <option value="">Select</option>
                                </select>

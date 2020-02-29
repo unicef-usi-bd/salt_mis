@@ -8,14 +8,14 @@
             let option = '<option value="">Select District</option>';
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-district/{id}",
-                data : {'divisionId': divisionId},
+                url  : `supplier-profile/get-district/${divisionId}`,
                 success:function (data) {
                     for (let i = 0; i < data.length; i++){
                         option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
                     }
                     thisScope.find('.district').html(option);
                     thisScope.find('.district').trigger("chosen:updated");
+                    thisScope.find('.upazila').empty().trigger("chosen:updated");
                 }
             });
         });
@@ -29,8 +29,7 @@
             let option = '<option value="">Select Upazila</option>';
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-upazila/{id}",
-                data : {'districtId': districtId},
+                url  : `supplier-profile/get-upazila/${districtId}`,
                 success:function (data) {
                     for (let i = 0; i < data.length; i++){
                         option = option + '<option value="'+ data[i].UPAZILA_ID +'">'+ data[i].UPAZILA_NAME+'</option>';
@@ -43,14 +42,14 @@
 
 //    Upazilla to thana
 
-        $(document).on('change', '.district', function(){
+/*        $(document).on('change', '.district', function(){
             let districtId = $(this).val();
             let thisScope = $(this).closest('tr');
             if(typeof thisScope!=='undefined') thisScope = $(this).closest('form');
             let option = '<option value="">Select Thana</option>';
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-thana/{id}",
+                url  : `supplier-profile/get-thana/${districtId}`,
                 data : {'districtId': districtId},
                 success:function (data) {
                     for (let i = 0; i < data.length; i++){
@@ -60,7 +59,7 @@
                     thisScope.find('.thana').trigger("chosen:updated");
                 }
             });
-        });
+        });*/
 
 //    Upazilla to Union
         $(document).on('change', 'upazila', function(){
@@ -70,8 +69,7 @@
             let option = '<option value="">Select Union</option>';
             $.ajax({
                 type : "get",
-                url  : "supplier-profile/get-union/{id}",
-                data : {'upazilaId': upazilaId},
+                url  : `supplier-profile/get-union/${upazilaId}`,
                 success:function (data) {
                     for (let i = 0; i < data.length; i++){
                         option = option + '<option value="'+ data[i].UNION_ID +'">'+ data[i].UNION_NAME+'</option>';
