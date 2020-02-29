@@ -102,8 +102,8 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control chosen-select thana" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
-                            <option value="{{ $editData->THANA_ID }}">{{ $editData->THANA_NAME }}</option>
+                        <select class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                            <option value="{{ $editData->UPAZILA_ID }}">{{ $editData->UPAZILA_NAME }}</option>
                         </select>
                     </span>
                 </div>
