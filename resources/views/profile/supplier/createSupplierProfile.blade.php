@@ -1,18 +1,8 @@
 <div class="col-md-12">
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-    <form id="myform" action="{{ url('/supplier-profile') }}" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/supplier-profile') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="col-md-12">
-
-            <div class="col-md-6" style="margin-top: 75px;">
-
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="form-group">
                         <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
@@ -21,7 +11,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b><span style="color: red">*</span></label>
                         <div class="col-xs-8">
                     <span class="block input-icon input-icon-right" style="width: 365px; margin-left: 5px;">
                         <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select " name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
@@ -66,10 +56,8 @@
             </div>
 
             <div class="col-md-6">
-                <h4  style="color: #1B6AAA; text-align: center;">Address</h4>
-                <hr>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="DIVISION_ID" class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
@@ -82,7 +70,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="DISTRICT_ID" class="form-control chosen-select district" name="DISTRICT_ID" data-placeholder="Select or search data">
@@ -92,11 +80,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana/Upazilla</b></label>
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazilla/Thana</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="THANA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
-                            <option value="">Select Thana</option>
+                            <option value="">Select</option>
                          </select>
                     </span>
                     </div>
@@ -119,12 +107,12 @@
             </div>
             <hr>
             <div class="clearfix">
-                <div class="col-md-offset-3 col-md-9" style="    margin-left: 500px;">
+                <div class="col-md-12 center">
                     <button type="reset" class="btn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                         <i class="ace-icon fa fa-check bigger-110"></i>
                         {{ trans('dashboard.submit') }}
                     </button>
@@ -137,45 +125,3 @@
 </div>
 
 @include('masterGlobal.chosenSelect')
-
-<script>
-    $(document).ready(function () {
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                TRADING_NAME:{
-                    required: true,
-                },
-                TRADER_NAME:{
-                    required: true,
-                },
-                EMAIL:{
-                    //required: true,
-                    email: true
-                },
-                PHONE:{
-                    required: true,
-                    maxlength:11,
-                    minlength:11,
-                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
-                }
-
-            }
-        });
-
-    });
-</script>

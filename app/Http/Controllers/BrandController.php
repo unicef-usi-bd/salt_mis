@@ -65,22 +65,26 @@ class BrandController extends Controller
             'brand_name' => 'required'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $data = array([
-                'brand_name' => $request->input('brand_name'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id
-            ]);
+        $error = array(
+            'brand_name.required' => 'Name field is required.',
+        );
 
-            $brand = Brand::insertBrandData($data);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            if($brand){
-                return redirect('/brand')->with('success', 'Item Data Created !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $data = array([
+            'brand_name' => $request->input('brand_name'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id
+        ]);
+
+        $created = Brand::insertBrandData($data);
+
+        if($created){
+            return response()->json(['success'=>'Brand has been created']);
+        } else{
+            return response()->json(['errors'=>'Brand create failed']);
         }
     }
 
@@ -120,15 +124,20 @@ class BrandController extends Controller
             'brand_name' => 'required'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateBrand = Brand::updateBrandData($request,$id);
-            if($updateBrand){
-                return redirect('/brand')->with('success', 'Brand Data Updated !');
-            }
+        $error = array(
+            'brand_name.required' => 'Name field is required.',
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $updated = Brand::updateBrandData($request,$id);
+
+        if($updated){
+            return response()->json(['success'=>'Brand has been updated']);
+        } else{
+            return response()->json(['errors'=>'Brand update failed']);
         }
     }
 

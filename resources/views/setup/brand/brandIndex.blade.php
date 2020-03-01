@@ -40,7 +40,7 @@
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @else
-                                <a class="green showModalGlobal" id="{{ 'brand/'.$brand->brand_id.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Item" style="display: none;">
+                                <a class="green showModalGlobal" id="{{ 'brand/'.$brand->brand_id.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Brand" style="display: none;">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @endif
@@ -60,6 +60,7 @@
     </div><!-- /.row -->
 
     @include('masterGlobal.deleteScript')
+    @include('masterGlobal.ajaxFormSubmit')
 
 @endsection
 

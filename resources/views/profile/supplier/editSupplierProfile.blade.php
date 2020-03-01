@@ -1,16 +1,10 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="col-md-12">
-    <div id="success" class="alert alert-block alert-success" style="display: none;">
-        <span id="successMessage"></span>
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-    </div>
     <form action="{{ url('/supplier-profile/'.$editData->SUPP_ID_AUTO) }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
         @csrf
         @method('PUT')
 
-        <div class="col-md-6" style="padding: 0px;margin-top: 75px;">
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
                 <div class="col-xs-8">
@@ -18,7 +12,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select" name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
@@ -64,7 +58,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red;"> </span> </label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <input type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
@@ -72,11 +66,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="padding: 0px;">
-            <h4  style="color: #1B6AAA; text-align: center;">Address</h4>
-            <hr>
-            <div class="form-group" style="margin-top: 15px;">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b></label>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control  chosen-select division" name="DIVISION_ID">
@@ -89,7 +81,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District Name</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District Name</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control district chosen-select" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -99,7 +91,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Upazilla/Thana</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -121,22 +113,19 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>REMARKS</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="REMARKS" id="inputSuccess phone" value="{{ $editData->REMARKS }}" class="width-100"  />--}}
                         <textarea class="form-control" rows="6" name="REMARKS" placeholder="Remarks here">{{ $editData->REMARKS }}</textarea>
                     </span>
                 </div>
             </div>
-
-
         </div>
 
         <div class="clearfix">
-            <div class="col-md-offset-5 col-md-7" style="margin-top: 20px;">
+            <div class="col-md-12 center">
                 <button type="reset" class="btn" disabled>
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-info" id="formSubmit">
+                <button type="button" class="btn btn-info" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>
@@ -145,6 +134,4 @@
 
     </form>
 </div>
-{{--@include('masterGlobal.formValidation')--}}
-@include('masterGlobal.formValidationEdit')
 @include('masterGlobal.chosenSelect')

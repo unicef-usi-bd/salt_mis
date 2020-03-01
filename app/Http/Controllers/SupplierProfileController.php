@@ -72,44 +72,53 @@ class SupplierProfileController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'TRADING_NAME' => 'required|max:100',
-            //'LICENCE_NO' => 'required|max:100',
-
+            'SUPPLIER_TYPE_ID' => 'required',
+            'TRADING_NAME' => 'required',
+            'TRADER_NAME' => 'required',
+            'PHONE' => 'required',
+            'DIVISION_ID' => 'required',
+            'DISTRICT_ID' => 'required',
+            'UPAZILA_ID' => 'required',
+        );
+        $error = array(
+            'SUPPLIER_TYPE_ID.required' => 'Supplier type field must be required.',
+            'TRADING_NAME.required' => 'Trading field must be required.',
+            'TRADER_NAME.required' => 'Trader field must be required.',
+            'PHONE.required' => 'Phone number field must be required.',
+            'DIVISION_ID.required' => 'Division field must be required',
+            'DISTRICT_ID.required' => 'District field must be required',
+            'UPAZILA_ID.required' => 'Upazila field must be required',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-           $data = array([
-                'TRADING_NAME' => $request->input('TRADING_NAME'),
-                'TRADER_NAME' => $request->input('TRADER_NAME'),
-                'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
-                'LICENCE_NO' => $request->input('LICENCE_NO'),
-                'SUPPLIER_TYPE_ID' => $request->input('SUPPLIER_TYPE_ID'),
-                'DIVISION_ID' => $request->input('DIVISION_ID'),
-                'DISTRICT_ID' => $request->input('DISTRICT_ID'),
-                'UPAZILA_ID' => $request->input('UPAZILA_ID'),
-                'UNION_ID' => $request->input('UNION_ID'),
-                'THANA_ID' => $request->input('THANA_ID'),
-                'BAZAR_NAME' => $request->input('BAZAR_NAME'),
-                'PHONE' => $request->input('PHONE'),
-                'EMAIL' => $request->input('EMAIL'),
-                'REMARKS' => $request->input('REMARKS'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id,
-                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
-           ]);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            //$this->pr($request->input());
-            $createSupplierProfile = SupplierProfile::insertIntoSupplierProfile($data);
-               
-            if($createSupplierProfile){
-    //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-                //return json_encode('Success');
-                return redirect('/supplier-profile')->with('success', 'Supplier profile Has been Created !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $data = array([
+            'TRADING_NAME' => $request->input('TRADING_NAME'),
+            'TRADER_NAME' => $request->input('TRADER_NAME'),
+            'SUPPLIER_ID' => $request->input('SUPPLIER_ID'),
+            'LICENCE_NO' => $request->input('LICENCE_NO'),
+            'SUPPLIER_TYPE_ID' => $request->input('SUPPLIER_TYPE_ID'),
+            'DIVISION_ID' => $request->input('DIVISION_ID'),
+            'DISTRICT_ID' => $request->input('DISTRICT_ID'),
+            'UPAZILA_ID' => $request->input('UPAZILA_ID'),
+            'UNION_ID' => $request->input('UNION_ID'),
+            'THANA_ID' => $request->input('THANA_ID'),
+            'BAZAR_NAME' => $request->input('BAZAR_NAME'),
+            'PHONE' => $request->input('PHONE'),
+            'EMAIL' => $request->input('EMAIL'),
+            'REMARKS' => $request->input('REMARKS'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id,
+            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+        ]);
+        $created = SupplierProfile::insertIntoSupplierProfile($data);
+
+        if($created){
+            return response()->json(['success'=>'Supplier profile has been created']);
+        } else{
+            return response()->json(['errors'=>'Supplier profile create failed']);
         }
     }
 
@@ -150,22 +159,35 @@ class SupplierProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //print_r($request->input());exit();
-
         $rules = array(
-            'TRADING_NAME' => 'required|max:100',
-            //'LICENCE_NO' => 'required|max:100',
+            'SUPPLIER_TYPE_ID' => 'required',
+            'TRADING_NAME' => 'required',
+            'TRADER_NAME' => 'required',
+            'PHONE' => 'required',
+            'DIVISION_ID' => 'required',
+            'DISTRICT_ID' => 'required',
+            'UPAZILA_ID' => 'required',
+        );
+        $error = array(
+            'SUPPLIER_TYPE_ID.required' => 'Supplier type field must be required.',
+            'TRADING_NAME.required' => 'Trading field must be required.',
+            'TRADER_NAME.required' => 'Trader field must be required.',
+            'PHONE.required' => 'Phone number field must be required.',
+            'DIVISION_ID.required' => 'Division field must be required',
+            'DISTRICT_ID.required' => 'District field must be required',
+            'UPAZILA_ID.required' => 'Upazila field must be required',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-        $updateSupplierData = SupplierProfile::updateSupplierProfileData($request, $id);
-            if($updateSupplierData){
-                return redirect('/supplier-profile')->with('success', 'Supplier Profile Data Updated !');
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $updated = SupplierProfile::updateSupplierProfileData($request, $id);
+
+        if($updated){
+            return response()->json(['success'=>'Supplier profile has been updated']);
+        } else{
+            return response()->json(['errors'=>'Supplier profile update failed']);
         }
 
     }
