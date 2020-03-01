@@ -585,7 +585,6 @@ class Stock extends Model
 
     //For Service
     public static function totalIodizeProductionsService($child_id){
-
         $countProduction = DB::table('tmm_itemstock');
         $countProduction->select('tmm_itemstock.QTY');
         $countProduction->where('TRAN_TYPE','=','I');

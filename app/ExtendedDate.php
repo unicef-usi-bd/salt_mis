@@ -27,13 +27,13 @@ class ExtendedDate extends Model
             ->leftJoin('ssm_zonesetup as zo','mi.ZONE_ID','=','zo.ZONE_ID')
             ->leftJoin('ssc_lookupchd as lco','mi.OWNER_TYPE_ID','=','lco.LOOKUPCHD_ID')
             ->leftjoin('ssc_lookupchd as lcm','mi.MILL_TYPE_ID','=','lcm.UD_ID')
-            ->leftJoin('ssm_certificate_info as ci','mi.MILL_ID','=','ci.MILL_ID')
+            ->leftJoin('ssm_certificate_info as ci', function ($join){ $join->on('mi.MILL_ID', '=', 'ci.MILL_ID')->where('ci.IS_EXPIRE', '=', 1);})
             ->leftJoin('ssc_divisions as dv','mi.DIVISION_ID','=','dv.DIVISION_ID')
             ->leftJoin('ssc_districts as di','mi.DISTRICT_ID','=','di.DISTRICT_ID')
             ->leftJoin('ssc_upazilas as up','mi.UPAZILA_ID','=','up.UPAZILA_ID')
             ->leftJoin('ssm_millemp_info as em','mi.MILL_ID','=','em.MILL_ID')
             ->where('mi.MILL_ID','=',$millId)
-            ->orderBy('ci.RENEWING_DATE','asc')
+            ->orderBy('ci.RENEWING_DATE','desc')
             ->limit(1)
             ->first();
     }
