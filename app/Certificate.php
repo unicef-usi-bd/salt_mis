@@ -11,10 +11,11 @@ class Certificate extends Model
 {
 
     public static function millerCertificateInfoByMillId($millerId){
-        $data = DB::table('ssm_certificate_info')
-            ->select('ssm_certificate_info.RENEWING_DATE')
-            ->where('ssm_certificate_info.MILL_ID','=', $millerId)
-            ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
+        $data = DB::table('ssm_certificate_info as sci')
+            ->select('sci.RENEWING_DATE')
+            ->where('sci.MILL_ID','=', $millerId)
+            ->where('sci.IS_EXPIRE','=', 1)
+            ->orderBy('sci.RENEWING_DATE','desc')
             ->first();
         return $data;
     }
