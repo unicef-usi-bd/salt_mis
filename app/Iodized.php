@@ -30,12 +30,12 @@ class Iodized extends Model
         }
         return $iodizeBatch->get();
     }
-    public static function getIodizeData(){
+    public static function getIodizeData($centerId){
         return DB::table('tmm_iodizedmst')
             ->select('tmm_iodizedmst.*','smm_item.ITEM_NAME','tmm_iodizedchd.WASH_CRASH_QTY','tmm_iodizedchd.REQ_QTY','tmm_iodizedchd.WASTAGE')
             ->leftJoin('smm_item','tmm_iodizedmst.PRODUCT_ID', '=','smm_item.ITEM_NO')
             ->leftJoin('tmm_iodizedchd','tmm_iodizedmst.IODIZEDMST_ID', '=','tmm_iodizedchd.IODIZEDMST_ID')
-            ->where('tmm_iodizedmst.center_id','=',Auth::user()->center_id)
+            ->where('tmm_iodizedmst.center_id','=', $centerId)
 //            ->where('tmm_receivemst.RECEIVE_TYPE','=','CR')
             ->get();
     }

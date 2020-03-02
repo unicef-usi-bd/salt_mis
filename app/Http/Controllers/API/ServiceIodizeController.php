@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\IodizedController;
 use App\Stock;
 use App\Iodized;
 use Illuminate\Http\Request;
@@ -11,20 +12,6 @@ use DB;
 
 class ServiceIodizeController extends Controller
 {
-    public function getIodizeBatchData(Request $request){
-        $iodonizeMillerId = $request->input('millerId');
-
-        $batch = 'I' . '-' . $iodonizeMillerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
-
-        if (!empty($iodonizeMillerId)){
-            return response()->json([
-                'batch' => $batch
-            ]);
-        }else{
-            return response()->json([]);
-        }
-    }
-
     public function getWashCrushStock(Request $request){
         $centerId = $request->input('centerId');
         $totalWashing = Stock::getTotalWashingSalt($centerId);
@@ -44,25 +31,10 @@ class ServiceIodizeController extends Controller
         }
     }
 
-    public function getIodizeBatchDataNew(Request $request){
-
-        $millerId = $request->input('millerId');
-        $millInfo = DB::table('ssm_associationsetup')
-            ->select('ssm_associationsetup.ASSOCIATION_ID')
-            ->where('MILL_ID', '=', $millerId)
-            ->first();
-        $centerId = $millInfo->ASSOCIATION_ID;
-        $iodizeIndex = $this->getIodizeData($centerId);
-        $num = count($iodizeIndex);
-        $batch = 'I' . '-' . $millerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i"). '-' . sprintf("%'.04d", ++$num);
-
-        if (!empty($millerId)){
-            return response()->json([
-                'batch' => $batch
-            ]);
-        }else{
-            return response()->json([]);
-        }
+    public function getIodizeBatchData(Request $request){
+        $centerId = (int) $request->input('millerId');
+        $batch = IodizedController::generateBatchNumberForIodize($centerId);
+        return response()->json(['batch' => $batch]);
     }
     public function getIodizeData($centerId){
         return DB::table('tmm_iodizedmst')

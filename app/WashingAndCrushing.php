@@ -19,12 +19,12 @@ class WashingAndCrushing extends Model
             ->get();
     }
 
-    public static function getWashingAndCrushingData(){
+    public static function getWashingAndCrushingData($centerId){
         return DB::table('tmm_washcrashmst')
             ->select('tmm_washcrashmst.*','smm_item.ITEM_NAME','tmm_washcrashchd.REQ_QTY','tmm_washcrashchd.WASTAGE')
             ->leftJoin('smm_item','tmm_washcrashmst.PRODUCT_ID','=','smm_item.ITEM_NO')
             ->leftJoin('tmm_washcrashchd','tmm_washcrashmst.WASHCRASHMST_ID','=','tmm_washcrashchd.WASHCRASHMST_ID')
-            ->where('tmm_washcrashmst.center_id','=',Auth::user()->center_id)
+            ->where('tmm_washcrashmst.center_id','=', $centerId)
             ->get();
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\WashingAndCrushingController;
 use App\Stock;
 use App\WashingAndCrushing;
 use Illuminate\Http\Request;
@@ -11,19 +12,6 @@ use DB;
 
 class WashCrushService extends Controller
 {
-    public function getWashCrushBatchData(Request $request){
-        $millerId = $request->input('millerId');
-
-        $batch = 'WC' . '-' . $millerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i");
-
-        if (!empty($millerId)){
-            return response()->json([
-                'batch' => $batch
-            ]);
-        }else{
-            return response()->json([]);
-        }
-    }
 
     public function getCrudeSaltStock(Request $request){
 
@@ -41,25 +29,11 @@ class WashCrushService extends Controller
             return response()->json([]);
         }
     }
-    public function getWashCrushBatchDataNew(Request $request){
-        $millerId = $request->input('millerId');
-        $millInfo = DB::table('ssm_associationsetup')
-            ->select('ssm_associationsetup.ASSOCIATION_ID')
-            ->where('MILL_ID', '=', $millerId)
-            ->first();
-        $centerId = $millInfo->ASSOCIATION_ID;
+    public function getWashCrushBatchData(Request $request){
+        $centerId = (int) $request->input('millerId');
+        $batch = WashingAndCrushingController::generateBatchNumberForWashAndCrush($centerId);
+        return response()->json(['batch' => $batch]);
 
-        $iodizeIndex = $this->getWashingAndCrushingData($centerId);
-        $num = count($iodizeIndex);
-        $batch = 'WC' . '-' . $millerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i"). '-' . sprintf("%'.04d", ++$num);
-
-        if (!empty($millerId)){
-            return response()->json([
-                'batch' => $batch
-            ]);
-        }else{
-            return response()->json([]);
-        }
     }
     public static function getWashingAndCrushingData($centerId){
         return DB::table('tmm_washcrashmst')
@@ -77,6 +51,8 @@ class WashCrushService extends Controller
 
 //        $this->pr($centerId);
         $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
+
+        return response()->json($request->input());
 
         if (!empty($washingAndCrashing)){
             return response()->json([

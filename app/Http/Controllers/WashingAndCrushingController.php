@@ -39,8 +39,8 @@ class WashingAndCrushingController extends Controller
             'action'=>'washing-crushing/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-
-        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData();
+        $centerId = Auth::user()->center_id;
+        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData($centerId);
 
 //        dd($washingAndCrushingData);
 
@@ -54,13 +54,18 @@ class WashingAndCrushingController extends Controller
      */
     public function create()
     {
-        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData();
-        $num = count($washingAndCrushingData);
-        $batch = 'WC' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d\n", ++$num);
-
+        $centerId = Auth::user()->center_id;
+        $batch = self::generateBatchNumberForWashAndCrush($centerId);
         $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
 
         return view('transactions.washingAndCrushing.modals.createWashingAndCrushing',compact('crudeSaltTypes','crudeSaltSuppliers','batch'));
+    }
+
+    public static function generateBatchNumberForWashAndCrush($centerId){
+        $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData($centerId);
+        $num = count($washingAndCrushingData);
+        $batch = 'WC' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d", ++$num);
+        return $batch;
     }
 
     /**

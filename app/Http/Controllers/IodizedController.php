@@ -35,8 +35,8 @@ class IodizedController extends Controller
             'action'=>'iodized/create',
             'createPermissionLevel' => $previllage->CREATE
         );
-
-        $iodizeIndex = Iodized::getIodizeData();
+        $centerId = Auth::user()->center_id;
+        $iodizeIndex = Iodized::getIodizeData($centerId);
         return view('transactions.iodize.iodizeIndex',compact('heading','previllage','iodizeIndex'));
     }
 
@@ -47,11 +47,9 @@ class IodizedController extends Controller
      */
     public function create()
     {
-        $iodizeIndex = Iodized::getIodizeData();
-        $num = count($iodizeIndex);
-        $batchNo = 'I' . '-' . Auth::user()->center_id . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d\n", ++$num);
-        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $centerId = Auth::user()->center_id;
+        $batchNo = self::generateBatchNumberForIodize($centerId);
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         //$this->pr($centerId);
         $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
         $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
@@ -66,6 +64,13 @@ class IodizedController extends Controller
         }
 
         return view('transactions.iodize.modals.creatIodize',compact('batchNo','chemicleType','totalReduceSalt','totalSaltStock','totalSalt','totalWashing'));
+    }
+
+    public static function generateBatchNumberForIodize($centerId){
+        $iodizeIndex = Iodized::getIodizeData($centerId);
+        $num = count($iodizeIndex);
+        $batch = 'I' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d", ++$num);
+        return $batch;
     }
 
     /**
