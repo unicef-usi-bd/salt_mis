@@ -287,6 +287,7 @@ class MillerInfoController extends Controller
     {
         //$this->pr($id);
         $delete = MillerInfo::deleteMillerProfile($id);
+        dd($delete);
         if($delete){
             echo json_encode([
                 'type' => 'tr',

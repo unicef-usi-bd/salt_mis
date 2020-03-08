@@ -259,7 +259,7 @@ class DashboardController extends Controller
         $totlaProductionList = Stock::totalProductionList();
         $totalSaleLists = Stock::totalSaleList();
         $associationMonthWishProduction = Stock::monthWiseAsociationProduction();
-        $monthWiseProcurement = Stock::monthWiseProcurement();
+        $monthWiseProcurement = Stock::monthWiseProcurement(); // Non Consider miller active
         $associationMillerCertificate = Certificate::associatonCertificate();
         $totalWcDashboard = Stock::totalAssociationWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalAssociationIodizeForDashboard();
@@ -272,9 +272,7 @@ class DashboardController extends Controller
         $kiUsed = abs(ChemicalPurchase::kiAssociationInUsed());
         $totalKiInStock = $kiStock-$kiUsed;
         $totalStock = $totalProcrument - $kiUsed;
-        // $approvelNotificaion = MillerInfo::approveMill();
-        ////$associationmonthwisestock = Stock::monthWiseAssociationProduction();
-        //$this->pr($associationTotalStockMonthWise);
+
         return view('dashboards.associationDashboard',compact('totalMiller','totalActiveMiller','totalInactiveMiller','associationWashCrash','totalAssociationproduction','associationIodize','totalAssociationIodizeSale','totalAssociationWashCrasheSale','totalSales','totlaProductionList','totalSaleLists','associationMonthWishProduction','totalassociationproduction','associationTotalStockMonthWise','totalassociationsaleMonthwise','totalassociationIodizeSaleMonthWise','totalAssociationWashCrasheSaleMonthWise','monthWiseProcurement','approvelNotificaion','associationMillerCertificate','totalWcIoDashboard','totalSaleDashboard','totalYearProduction','totalProcrument','kiStock','kiUsed','totalKiInStock','totalStock'));
     }
 

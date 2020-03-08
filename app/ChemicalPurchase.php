@@ -280,39 +280,44 @@ class ChemicalPurchase extends Model
     public static function totalAssociationProcurment(){
         $date = date("Y-m-d", strtotime(" -90 days"));
 
-        $procurment = DB::table('tmm_receivemst');
-        $procurment->select('tmm_receivemst.RECEIVE_TYPE','tmm_receivechd.RCV_QTY');
-        $procurment->leftJoin('tmm_receivechd','tmm_receivemst.RECEIVEMST_ID','=','tmm_receivechd.RECEIVEMST_ID');
-        $procurment->where('tmm_receivemst.RECEIVE_TYPE','=','CR');
-        $procurment->where('tmm_receivemst.RECEIVE_DATE','>',$date);
+        $procurment = DB::table('tmm_receivemst as rcvMast')
+            ->select('rcvMast.RECEIVE_TYPE','tmm_receivechd.RCV_QTY')
+            ->leftJoin('tmm_receivechd as rcvChd','rcvMast.RECEIVEMST_ID','=','rcvChd.RECEIVEMST_ID')
+            ->leftJoin('ssm_associationsetup as association','rcvChd.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('rcvMast.RECEIVE_TYPE','=','CR')
+            ->where('rcvMast.RECEIVE_DATE','>',$date);
 
 
-        return $procurment->sum('tmm_receivechd.RCV_QTY');
+        return $procurment->sum('rcvChd.RCV_QTY');
     }
 
     public static function kiAssociationInstock(){
         $date = date("Y-m-d", strtotime(" -90 days"));
-
-        $kiStock = DB::table('tmm_itemstock');
-        $kiStock->select('tmm_itemstock.QTY');
-        $kiStock->where('tmm_itemstock.TRAN_TYPE','=','CP');
-        $kiStock->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        $kiStock->where('tmm_itemstock.TRAN_DATE','<=',$date);
-
-
-        return $kiStock->sum('tmm_itemstock.QTY');
+        $kiStock = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_TYPE','=','CP')
+            ->where('stock.TRAN_FLAG','=','PR')
+            ->where('stock.TRAN_DATE','<=',$date);
+        return $kiStock->sum('stock.QTY');
     }
 
     public static function kiAssociationInUsed(){
         $date = date("Y-m-d", strtotime(" 90 days"));
+        $kiUsed = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_TYPE','=','C')
+            ->where('stock.TRAN_FLAG','=','IC')
+            ->where('stock.TRAN_DATE','<=',$date);
 
-        $kiUsed = DB::table('tmm_itemstock');
-        $kiUsed->select('tmm_itemstock.QTY');
-        $kiUsed->where('tmm_itemstock.TRAN_TYPE','=','C');
-        $kiUsed->where('tmm_itemstock.TRAN_FLAG','=','IC');
-        $kiUsed->where('tmm_itemstock.TRAN_DATE','<=',$date);
 
-
-        return $kiUsed->sum('tmm_itemstock.QTY');
+        return $kiUsed->sum('stock.QTY');
     }
 }

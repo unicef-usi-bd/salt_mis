@@ -268,12 +268,15 @@ class SalesDistribution extends Model
     public static function totalSaleAssociationDashboard(){
         $date = date("Y-m-d", strtotime("- 30 days"));
 
-        $totalSale = DB::table('tmm_itemstock');
-        $totalSale->select('tmm_itemstock.QTY');
-        $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
-        $totalSale->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $totalSale = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_FLAG','=','SD')
+            ->where('stock.TRAN_DATE','>',$date);
 
-        return $totalSale->sum('tmm_itemstock.QTY');
+        return $totalSale->sum('stock.QTY');
     }
 
     public static function saleDistributionDelete($id){
