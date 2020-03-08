@@ -270,20 +270,65 @@ class MillerInfo extends Model
     }
     //    for view modal
     public static function deleteMillerProfile($id){
-         $empInfo = DB::table('ssm_millemp_info')->where('MILL_ID', $id)->delete();
-         if($empInfo){
-             $qcInfoId = DB::table('tsm_qc_info')->where('MILL_ID', $id)->delete();
-         }
-        if($qcInfoId){
-            $certificateInfo = DB::table('ssm_certificate_info')->where('MILL_ID', $id)->delete();
+        $centerId = null;
+        $associationInfo = DB::table('ssm_associationsetup')->where('MILL_ID', $id);
+        if($associationInfo->first()) $centerId = $associationInfo->pluck('ASSOCIATION_ID')->first();
+
+//        Specific Miller Profile related table by Miller Id Start
+        $millerInfo = DB::table('ssm_mill_info')->where('MILL_ID', $id);
+        if($millerInfo->first()) $millerInfo->delete();
+
+        $entrepreneurInfo = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $id);
+        if($entrepreneurInfo->first()) $entrepreneurInfo->delete();
+
+        $certificateInfo = DB::table('ssm_certificate_info')->where('MILL_ID', $id);
+        if($certificateInfo->first()) $certificateInfo->delete();
+
+        $qcInfo = DB::table('tsm_qc_info')->where('MILL_ID', $id);
+        if($qcInfo->first()) $qcInfo->delete();
+
+        $empInfo = DB::table('ssm_millemp_info')->where('MILL_ID', $id);
+        if($empInfo->first()) $empInfo->delete();
+//        Specific Miller Profile related table by Miller Id Start
+
+//        Specific Miller Profile transaction related table  by miller Id Start
+        if(!empty($centerId)) {
+            $receivedChdInfo = DB::table('tmm_receivechd')->where('center_id', $centerId);
+            if ($receivedChdInfo->first()) $receivedChdInfo->delete();
+
+            $receivedMstInfo = DB::table('tmm_receivemst')->where('center_id', $centerId);
+            if ($receivedMstInfo->first()) $receivedMstInfo->delete();
+
+            $washCrashChdInfo = DB::table('tmm_washcrashchd')->where('center_id', $centerId);
+            if ($washCrashChdInfo->first()) $washCrashChdInfo->delete();
+
+            $washCrashMstInfo = DB::table('tmm_washcrashmst')->where('center_id', $centerId);
+            if ($washCrashMstInfo->first()) $washCrashMstInfo->delete();
+
+            $iodizedChdInfo = DB::table('tmm_iodizedchd')->where('center_id', $centerId);
+            if ($iodizedChdInfo->first()) $iodizedChdInfo->delete();
+
+            $iodizedMstInfo = DB::table('tmm_iodizedmst')->where('center_id', $centerId);
+            if ($iodizedMstInfo->first()) $iodizedMstInfo->delete();
+
+            $salesChdInfo = DB::table('tmm_saleschd')->where('center_id', $centerId);
+            if ($salesChdInfo->first()) $salesChdInfo->delete();
+
+            $salesMstInfo = DB::table('tmm_salesmst')->where('center_id', $centerId);
+            if ($salesMstInfo->first()) $salesMstInfo->delete();
+
+            $qualityInfo = DB::table('tmm_qualitycontrol')->where('center_id', $centerId);
+            if ($qualityInfo->first()) $qualityInfo->delete();
+
+            $stockAdjustInfo = DB::table('stock_adjustment')->where('center_id', $centerId);
+            if ($stockAdjustInfo->first()) $stockAdjustInfo->delete();
+
+            $itemStockInfo = DB::table('tmm_itemstock')->where('center_id', $centerId);
+            if ($itemStockInfo->first()) $itemStockInfo->delete();
         }
-         if($certificateInfo){
-             $enterId = DB::table('ssm_entrepreneur_info')->where('MILL_ID', $id)->delete();
-         }
-         if($enterId){
-             $millInfoId = DB::table('ssm_mill_info')->where('MILL_ID', $id)->delete();
-         }
-         return $millInfoId;
+
+
+//        Specific Miller Profile transaction related table  by miller Id End
     }
 
     public  static function getMillerToMerge(){
