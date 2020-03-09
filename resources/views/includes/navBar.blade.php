@@ -9,11 +9,8 @@
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
-
             <span class="icon-bar"></span>
-
             <span class="icon-bar"></span>
-
             <span class="icon-bar"></span>
         </button>
 
@@ -21,10 +18,6 @@
             <a href="{{ url('dashboard') }}" class="navbar-brand">
                 <small>
                     UNIVERSAL SALT IODIZATION PROGRAM
-                    {{--{{ Session::get('orgName') }} <span style="color:#02217d;"></span>--}}
-                </small>
-                <small>
-                    {{--<span>[ {{ Session::get('user_cc_name') }} ]</span>--}}
                 </small>
             </a>
         </div>
@@ -33,7 +26,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle col-md-12">
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="padding-left: 0 !important;">
                             <img class="nav-user-photo" src="{{ asset('assets/images/avatars/user.png') }}" alt="Jason's Photo" />
                         </div>
                         <div class="col-md-9">

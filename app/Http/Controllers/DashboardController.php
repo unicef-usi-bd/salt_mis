@@ -42,13 +42,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $user_group_id = Auth::user()->user_group_id; //$this->pr($user_group_id);
-
-//        $totalActiveMillerUnderAdmin = count(MillerInfo::countActiveMillersUnderAdmin());
-//        $totalDeactiveMillerUnderAdmin = count(MillerInfo::countDeactiveMillersUnderAdmin());
-//        $coxAssoId = $this->coxAssoId;
-//        //$totalMillerUnderCoxAsso = count(MillerInfo::countMillersUnderCoxAsso());
-       //$this->pr(Auth::user());
+        $user_group_id = Auth::user()->user_group_id;
 
         if($user_group_id==$this->bstiId){
             return $this->bsti();

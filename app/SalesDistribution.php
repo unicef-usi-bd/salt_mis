@@ -136,70 +136,78 @@ class SalesDistribution extends Model
     ///-----------------------Sales
     public static function totalWashcrashSales(){
         $centerId = Auth::user()->center_id;
-        $countSales = DB::table('tmm_itemstock');
-        $countSales->select('tmm_itemstock.QTY');
-        $countSales->where('TRAN_TYPE','=','W');
-        $countSales->where('TRAN_FLAG','=','SD');
-        if($centerId){
-            $countSales->where('center_id','=',$centerId);
-        }
+        $countSales = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('TRAN_TYPE','=','W')
+            ->where('TRAN_FLAG','=','SD');
 
-        return $countSales->sum('tmm_itemstock.QTY');
+        if($centerId) $countSales->where('stock.center_id','=',$centerId);
+
+        return $countSales->sum('stock.QTY');
     }
 
     public static function totalIodizeSales(){
         $centerId = Auth::user()->center_id;
-        $countSales = DB::table('tmm_itemstock');
-        $countSales->select('tmm_itemstock.QTY');
-        $countSales->where('TRAN_TYPE','=','I');
-        $countSales->where('TRAN_FLAG','=','SD');
-        if($centerId){
-            $countSales->where('center_id','=',$centerId);
-        }
+        $countSales = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('TRAN_TYPE','=','I')
+            ->where('TRAN_FLAG','=','SD');
 
-        return $countSales->sum('tmm_itemstock.QTY');
+        if($centerId) $countSales->where('stock.center_id','=',$centerId);
+
+        return $countSales->sum('stock.QTY');
     }
 
     public static function totalWashcrashSalesMonthWise(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $countSales = DB::table('tmm_itemstock');
-        $countSales->select('tmm_itemstock.QTY');
-        $countSales->where('TRAN_TYPE','=','W');
-        $countSales->where('TRAN_FLAG','=','SD');
-        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
-        if($centerId){
-            $countSales->where('center_id','=',$centerId);
-        }
+        $countSales = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('TRAN_TYPE','=','W')
+            ->where('TRAN_FLAG','=','SD')
+            ->where('stock.TRAN_DATE','>', $date);
 
-        return $countSales->sum('tmm_itemstock.QTY');
+        if($centerId) $countSales->where('stock.center_id','=',$centerId);
+
+        return $countSales->sum('stock.QTY');
     }
 
     public static function totalIodizeSalesMonthWise(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $countSales = DB::table('tmm_itemstock');
-        $countSales->select('tmm_itemstock.QTY');
-        $countSales->where('TRAN_TYPE','=','I');
-        $countSales->where('TRAN_FLAG','=','SD');
-        $countSales->where('tmm_itemstock.TRAN_DATE','>',$date);
-        if($centerId){
-            $countSales->where('center_id','=',$centerId);
-        }
+        $countSales = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_TYPE','=','I')
+            ->where('stock.TRAN_FLAG','=','SD')
+            ->where('stock.TRAN_DATE','>',$date);
+        if($centerId) $countSales->where('stock.center_id','=',$centerId);
 
-        return $countSales->sum('tmm_itemstock.QTY');
+        return $countSales->sum('stock.QTY');
     }
     ///-----------------------Sales
 
     ///-----------------------Dashboard product sale
     public static function totalproductSale(){
         $centerId = Auth::user()->center_id;
-        $totalProductionSale = DB::table('tmm_itemstock');
-        $totalProductionSale->select('tmm_itemstock.*');
-        $totalProductionSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
-        if($centerId){
-            $totalProductionSale->where('center_id','=',$centerId);
-        }
+        $totalProductionSale = DB::table('tmm_itemstock as stock')
+            ->select('stock.*')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_FLAG','=','SD');
+        if($centerId) $totalProductionSale->where('stock.center_id','=',$centerId);
         return $totalProductionSale->get();
     }
     ///-----------------------Dashboard product sale
@@ -207,13 +215,14 @@ class SalesDistribution extends Model
     /// ----------------------Total Sale
     public static function totalSale(){
         $centerId = Auth::user()->center_id;
-        $totalSale = DB::table('tmm_itemstock');
-        $totalSale->select('tmm_itemstock.QTY');
-        $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
-        if($centerId){
-            $totalSale->where('center_id','=',$centerId);
-        }
-        return $totalSale->sum('tmm_itemstock.QTY');
+        $totalSale = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_FLAG','=','SD');
+        if($centerId) $totalSale->where('stock.center_id','=',$centerId);
+        return $totalSale->sum('stock.QTY');
     }
     /// ----------------------Total Sale
 
@@ -255,14 +264,15 @@ class SalesDistribution extends Model
     public static function totalSaleDashboard(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $totalSale = DB::table('tmm_itemstock');
-        $totalSale->select('tmm_itemstock.QTY');
-        $totalSale->where('tmm_itemstock.TRAN_FLAG','=','SD');
-        $totalSale->where('tmm_itemstock.TRAN_DATE','>',$date);
-        if($centerId){
-            $totalSale->where('tmm_itemstock.center_id','=',$centerId);
-        }
-        return $totalSale->sum('tmm_itemstock.QTY');
+        $totalSale = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_FLAG','=','SD')
+            ->where('stock.TRAN_DATE','>',$date);
+        if($centerId) $totalSale->where('stock.center_id','=',$centerId);
+        return $totalSale->sum('stock.QTY');
     }
 
     public static function totalSaleAssociationDashboard(){
