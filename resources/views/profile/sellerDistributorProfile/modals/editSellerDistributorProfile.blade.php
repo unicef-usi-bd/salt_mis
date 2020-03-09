@@ -6,19 +6,7 @@
         </button>
     </div>
 
-
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-
-
-    <form id="myform" action="{{ url('/seller-distributor-profile/'.$editSellerProfile->CUSTOMER_ID) }}" method="post" class="form-horizontal" role="form">
-        {{--<div class="col-md-12">--}}
+    <form action="{{ url('/seller-distributor-profile/'.$editSellerProfile->CUSTOMER_ID) }}" method="post" class="form-horizontal" role="form">
             @csrf
             @method('PUT')
             {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
@@ -56,19 +44,19 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> *</label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trade Lience no</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-12"> <b>Trade Licence no</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Phone Number</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-12"> <b>Phone Number</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
                     </div>
@@ -79,10 +67,10 @@
         <div class="row" style="margin-top: 20px;">
             <div class="col-md-12">
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12"><b>Division</b><span style="color: red;"> </span></label>
+                    <label for="inputSuccess" class="col-sm-12"><b>Division</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control  chosen-select" id="DIVISION_ID" name="DIVISION_ID">
+                        <select class="form-control  chosen-select division" name="DIVISION_ID">
                             <option value="">{{ trans('organization.select_one') }}</option>
                             @foreach($getDivision as $row)
                                 <option value="{{ $row->DIVISION_ID }}" @if($editSellerProfile->DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
@@ -96,7 +84,7 @@
                     <label for="inputSuccess" class="col-sm-12"><b>District</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control district chosen-select" id="DISTRICT_ID" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                        <select class="form-control district chosen-select district" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editSellerProfile->DISTRICT_ID }}">{{ $editSellerProfile->DISTRICT_NAME }}</option>
                         </select>
                     </span>
@@ -107,7 +95,7 @@
                     <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
-                        <select class="form-control thana chosen-select" id="THANA_ID" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
+                        <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
                             <option value="{{ $editSellerProfile->THANA_ID }}">{{ $editSellerProfile->THANA_NAME }}</option>
                         </select>
                     </span>
@@ -152,36 +140,34 @@
                 </thead>
                 <tbody class="newRow">
                 @foreach($editsellerProfilearray as $seller)
-                    <input type="hidden" name="COVERAGE_ID[]" value="{{ $seller->COVERAGE_ID }}">
-                <tr class="rowFirst">
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select COV_DIVISION_ID" id="COV_DIVISION_ID" name="COV_DIVISION_ID[]">
-                                        <option value="">Select</option>
-                                        @foreach($getDivision as $row)
-                                            <option value="{{ $row->DIVISION_ID }}" @if($seller->COV_DIVISION_ID==$row->DIVISION_ID) selected @endif>{{ $row->DIVISION_NAME }}</option>
-                                        @endforeach
-                                    </select>
-                                </span>
-                    </td>
-                    <td>
-                               <span class="block input-icon input-icon-right">
-                                    <select id="COV_DISTRICT_ID" class="chosen-select form-control districttable" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
-                                        <option value="{{ $seller->COV_DISTRICT_ID }}">{{ $seller->DISTRICT_NAME }}</option>
-                                    </select>
-                                </span>
-                    </td>
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select id="COV_THANA_ID" class="form-control chosen-select thanatable" name="COV_THANA_ID[]" data-placeholder="Select or search data">
-                                        <option value="{{ $seller->COV_THANA_ID }}">{{ $seller->THANA_NAME }}</option>
-                                     </select>
-                                </span>
-                    </td>
-
-
-                    <td><span class="btn btn-danger btn-sm pull-right rowRemove btnRemove" data-fundAllocationChdId="{{ $seller->COVERAGE_ID }}"><i class="fa fa-remove"></i></span></td>
-                </tr>
+                    <tr class="rowFirst">
+                        <input type="hidden" name="COVERAGE_ID[]" value="{{ $seller->COVERAGE_ID }}">
+                        <td>
+                            <span class="block input-icon input-icon-right">
+                                <select class="form-control chosen-select division" name="COV_DIVISION_ID[]">
+                                    <option value="">Select</option>
+                                    @foreach($getDivision as $row)
+                                        <option value="{{ $row->DIVISION_ID }}" @if($seller->COV_DIVISION_ID==$row->DIVISION_ID) selected @endif >{{ $row->DIVISION_NAME }}</option>
+                                    @endforeach
+                                </select>
+                            </span>
+                        </td>
+                        <td>
+                           <span class="block input-icon input-icon-right">
+                                <select class="chosen-select form-control district" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
+                                    <option value="{{ $seller->COV_DISTRICT_ID }}">{{ $seller->DISTRICT_NAME }}</option>
+                                </select>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="block input-icon input-icon-right">
+                                <select class="form-control chosen-select upazila" name="COV_THANA_ID[]" data-placeholder="Select or search data">
+                                    <option value="{{ $seller->COV_THANA_ID }}">{{ $seller->THANA_NAME }}</option>
+                                 </select>
+                            </span>
+                        </td>
+                        <td><span class="btn btn-danger btn-sm pull-right rowRemove btnRemove" data-fundAllocationChdId="{{ $seller->COVERAGE_ID }}"><i class="fa fa-remove"></i></span></td>
+                    </tr>
                @endforeach
                 </tbody>
             </table>
@@ -204,8 +190,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -213,155 +198,24 @@
         </div>
     </form>
 </div>
-
 @include('masterGlobal.chosenSelect')
-@include('masterGlobal.getDistrict')
-@include('masterGlobal.getUpazila')
-@include('masterGlobal.getUnion')
-@include('masterGlobal.getThana')
-{{--@include('masterGlobal.formValidation')--}}
+
 <script>
     //    Add For Multiple Row Dynamically
     $(document).ready(function(){
         $('.rowAdd').click(function(){
-            var getTr = $("<tr class=\"rowFirst\">\n" +
-                "                            <td>\n" +
-                "                                <span class=\"block input-icon input-icon-right\">\n" +
-//                "                                 <input type='hidden' name='fund_allocation_chd_id[]' value=''>"+
-                "                                    <select class=\"form-control chosen-select COV_DIVISION_ID\" id=\"COV_DIVISION_ID\" name=\"COV_DIVISION_ID[]\" required >\n" +
-                "                                        <option value=\"\">Select</option>\n" +
-                "                                        @foreach($getDivision as $row)\n" +
-                "                                            <option value=\"{{ $row->DIVISION_ID }}\"> {{ $row->DIVISION_NAME }}  </option>\n" +
-                "                                        @endforeach\n" +
-                "                                    </select>\n" +
-                "                                </span>\n" +
-
-                "                            </td>\n" +
-                "                            <td>\n" +
-                "                                <span class=\"block input-icon input-icon-right\">\n" +
-                "                                    <select class=\"form-control chosen-select districttable\" id=\"COV_DISTRICT_ID\" name=\"COV_DISTRICT_ID[]\" required >\n" +
-
-                "                                        <option value=\"\"> Select </option>\n" +
-                "                                    </select>\n" +
-//              "                                    <input type=\"hidden\" class=\"tech_disabled\" disabled=\"disabled\" name=\"technology_id[]\" value=\"\">\n" +
-                "                                </span>\n" +
-                "                            </td>\n" +
-                "                            <td>\n" +
-                "                                <span class=\"block input-icon input-icon-right\">\n" +
-                "                                    <select class=\"form-control chosen-select upazilatable\" id=\"COV_UPAZILA_ID\" name=\"COV_UPAZILA_ID[]\" required >\n" +
-
-                "                                        <option value=\"\"> Select </option>\n" +
-                "                                    </select>\n" +
-//                           "                                    <input type=\"hidden\" class=\"tech_disabled\" disabled=\"disabled\" name=\"technology_id[]\" value=\"\">\n" +
-                "                                </span>\n" +
-                "                            </td>\n" +
-                "                            <td><span class=\"btn btn-danger btn-sm pull-right rowRemove btnRemove\"><i class=\"fa fa-remove\"></i></span></td>\n" +
-                "                        </tr>");
-//            alert(getTr.html());
+            let getTr = $('tr.rowFirst:first');
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            var defaultRow = $('tr.removableRow:last');
-
+            let defaultRow = $('tr.removableRow:last');
             $('.chosen-select').chosen(0);
+            defaultRow.find('.chosen-select').val('').trigger('chosen:updated');
         });
     });
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
-
-    $(document).on('change', '.COV_DIVISION_ID', function () {
-        var thisRow = $(this).closest('tr');
-        var divisionId = thisRow.find('.COV_DIVISION_ID').val(); //alert(divisionId);exit();
-        //alert(divisionId);
-        var option = '<option value="">Select District</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-district/{id}",
-            data : {'divisionId': divisionId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-                }
-                thisRow.find('.districttable').html(option);
-                thisRow.find('.districttable').trigger("chosen:updated");
-            }
-        });
-    });
-
-
-    $(document).on('change', '.districttable', function () {
-        var thisRow = $(this).closest('tr');
-        var districtId = thisRow.find('.districttable').val();
-        var option = '<option value="">Select Thana</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-thana/{id}",
-            data : {'districtId': districtId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
-                }
-                thisRow.find('.thanatable').html(option);
-                thisRow.find('.thanatable').trigger("chosen:updated");
-            }
-        });
-    });
-
-    $(document).on('click','span.btnRemove',function(){
-        var fundAllocationChdId = $(this).attr('data-fundAllocationChdId');
-
-        $.ajax({
-            url: "{{ url('fund-allocations-chd-delete') }}",
-            type: 'GET',
-            data: {'fundAllocationChdId':fundAllocationChdId},
-            success: function (data) {
-
-
-            }
-
-        });
-    });
-
-    $(document).ready(function () {
-
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                TRADING_NAME:{
-                    required: true
-                },
-                EMAIL:{
-                    //required: true,
-                    email: true,
-                    //regex: /^[A-Za-z0-9_]+\@[A-Za-z0-9_]+\.[A-Za-z0-9_]+/,
-                    regex: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
-                },
-                PHONE:{
-                    //required: true,
-                    maxlength:11,
-                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
-                },
-
-            }
-        });
-
-    });
-
 </script>
 
 

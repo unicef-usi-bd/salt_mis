@@ -173,6 +173,7 @@
 
     <!--Sweet Alert Global Script Start-->
     @include('masterGlobal.deleteScript')
+    @include('masterGlobal.ajaxFormSubmit')
     <!-- Sweet Alert Global Script End -->
 
 @endsection

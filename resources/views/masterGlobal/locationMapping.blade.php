@@ -4,7 +4,7 @@
         $(document).on('change', '.division', function(){
             let divisionId = $(this).val();
             let thisScope = $(this).closest('tr');
-            if(typeof thisScope!=='undefined') thisScope = $(this).closest('form');
+            if(thisScope.length===0) thisScope = $(this).closest('form');
             let option = '<option value="">Select District</option>';
             $.ajax({
                 type : "get",
@@ -25,7 +25,7 @@
         $(document).on('change', '.district', function(){
             let districtId = $(this).val();
             let thisScope = $(this).closest('tr');
-            if(typeof thisScope!=='undefined') thisScope = $(this).closest('form');
+            if(thisScope.length===0) thisScope = $(this).closest('form');
             let option = '<option value="">Select Upazila</option>';
             $.ajax({
                 type : "get",
@@ -65,7 +65,7 @@
         $(document).on('change', 'upazila', function(){
             let upazilaId = $(this).val();
             let thisScope = $(this).closest('tr');
-            if(typeof thisScope!=='undefined') thisScope = $(this).closest('form');
+            if(thisScope.length===0) thisScope = $(this).closest('form');
             let option = '<option value="">Select Union</option>';
             $.ajax({
                 type : "get",

@@ -1,44 +1,31 @@
 <div class="col-md-12">
-
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-
-
-    <form id="myform" action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
-      {{--<div class="col-md-12">--}}
+    <form action="{{ url('/seller-distributor-profile') }}" method="post" class="form-horizontal" role="form">
         @csrf
         {{--@if($costCenterTypeId != Auth::user()->cost_center_type)--}}
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
-                <div class="col-sm-8">
-            <span class="block input-icon input-icon-right">
-                <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID" data-placeholder="Select or search data">
-                   <option value=""></option>
-                    @foreach($sellerType as $seller)
-                    <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
-                    @endforeach
-                </select>
-            </span>
-                </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Seller Type</b><span style="color: red;"> </span></label>
+            <div class="col-sm-8">
+        <span class="block input-icon input-icon-right">
+            <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID" data-placeholder="Select or search data">
+               <option value=""></option>
+                @foreach($sellerType as $seller)
+                <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
+                @endforeach
+            </select>
+        </span>
             </div>
+        </div>
 
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" readonly/>
-                </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" readonly/>
             </div>
         </div>
-      {{--</div>--}}
+    </div>
       <div class="row">
           <div class="col-md-12">
               <div class="col-md-3">
@@ -54,7 +41,7 @@
                   </div>
               </div>
               <div class="col-md-3">
-                  <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> </span> </label>
+                  <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> *</span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
@@ -75,7 +62,7 @@
                     <label class="col-sm-12"><b>Division</b></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
-                        <select id="DIVISION_ID" class="form-control chosen-select" name="DIVISION_ID" data-placeholder="Select or search data">
+                        <select class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
                             <option value="">Select Division</option>
                             @foreach($getDivision as $row)
                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -88,7 +75,7 @@
                     <label class="col-sm-12" ><b>District</b><span style="color: red;"> </span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
-                        <select id="DISTRICT_ID" class="chosen-select form-control district" name="DISTRICT_ID" data-placeholder="Select or search data">
+                        <select class="chosen-select form-control district" name="DISTRICT_ID" data-placeholder="Select or search data">
                            <option value=""></option>
 
                         </select>
@@ -99,7 +86,7 @@
                     <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazilla</b></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
-                        <select id="THANA_ID" class="form-control chosen-select thana" name="THANA_ID" data-placeholder="Select or search data">
+                        <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="Select or search data">
                             <option value="">Select Thana</option>
                          </select>
                     </span>
@@ -143,25 +130,25 @@
                 <tbody class="newRow">
                 <tr class="rowFirst">
                     <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select COV_DIVISION_ID" id="COV_DIVISION_ID" name="COV_DIVISION_ID[]">
-                                        <option value="">Select</option>
-                                        @foreach($getDivision as $row)
-                                            <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
-                                        @endforeach
-                                    </select>
-                                </span>
-                    </td>
-                    <td>
-                                <span class="block input-icon input-icon-right">
-                                    <select id="COV_DISTRICT_ID" class="chosen-select form-control districttable" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
-
-                                    </select>
-                                </span>
+                        <span class="block input-icon input-icon-right">
+                            <select class="form-control chosen-select division" name="COV_DIVISION_ID[]">
+                                <option value="">Select</option>
+                                @foreach($getDivision as $row)
+                                    <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
+                                @endforeach
+                            </select>
+                        </span>
                     </td>
                     <td>
                         <span class="block input-icon input-icon-right">
-                        <select id="COV_THANA_ID" class="form-control chosen-select thanatable" name="COV_THANA_ID[]" data-placeholder="Select or search data">
+                            <select class="chosen-select form-control district" name="COV_DISTRICT_ID[]" data-placeholder="Select or search data">
+
+                            </select>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="block input-icon input-icon-right">
+                        <select class="form-control chosen-select upazila" name="COV_THANA_ID[]" data-placeholder="Select or search data">
                             <option value="">Select Thana</option>
                          </select>
                     </span>
@@ -187,8 +174,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -198,21 +184,15 @@
 </div>
 
 @include('masterGlobal.chosenSelect')
-@include('masterGlobal.getDistrict')
-{{--@include('masterGlobal.getUpazila')--}}
-@include('masterGlobal.getUnion')
-@include('masterGlobal.getThana')
-{{--@include('masterGlobal.formValidation')--}}
+@include('masterGlobal.locationMapping')
 <script>
     //    Add For Multiple Row Dynamically
     $(document).ready(function(){
         $('.rowAdd').click(function(){
-            var getTr = $('tr.rowFirst:first');
-            //alert(getTr.html());
+            let getTr = $('tr.rowFirst:first');
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
-            var defaultRow = $('tr.removableRow:last');
-
+            $('tr.removableRow:last');
             $('.chosen-select').chosen(0);
         });
     });
@@ -221,82 +201,6 @@
         $(this).closest("tr.removableRow").remove();
     });
 
-    $(document).on('change', '.COV_DIVISION_ID', function () {
-        var thisRow = $(this).closest('tr');
-        var divisionId = thisRow.find('.COV_DIVISION_ID').val(); //alert(divisionId);exit();
-        //alert(divisionId);
-        var option = '<option value="">Select District</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-district/{id}",
-            data : {'divisionId': divisionId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].DISTRICT_ID +'">'+ data[i].DISTRICT_NAME+'</option>';
-                }
-                thisRow.find('.districttable').html(option);
-                thisRow.find('.districttable').trigger("chosen:updated");
-            }
-        });
-    });
-
-
-    $(document).on('change', '.districttable', function () {
-        var thisRow = $(this).closest('tr');
-        var districtId = thisRow.find('.districttable').val();
-        var option = '<option value="">Select Thana</option>';
-        $.ajax({
-            type : "get",
-            url  : "supplier-profile/get-thana/{id}",
-            data : {'districtId': districtId},
-            success:function (data) {
-                for (var i = 0; i < data.length; i++){
-                    option = option + '<option value="'+ data[i].THANA_ID +'">'+ data[i].THANA_NAME+'</option>';
-                }
-                thisRow.find('.thanatable').html(option);
-                thisRow.find('.thanatable').trigger("chosen:updated");
-            }
-        });
-    });
-
-    $(document).ready(function () {
-        $.validator.addMethod(
-            "regex",
-            function(value, element, regexp)
-            {
-                if (regexp.constructor != RegExp)
-                    regexp = new RegExp(regexp);
-                else if (regexp.global)
-                    regexp.lastIndex = 0;
-                return this.optional(element) || regexp.test(value);
-            },
-            "Please check your input."
-        );
-
-        $('#myform').validate({ // initialize the plugin
-            errorClass: "my-error-class",
-            //validClass: "my-valid-class",
-            rules: {
-                TRADING_NAME:{
-                  required: true
-                },
-                TRADER_NAME:{
-                  required:true
-                },
-                EMAIL:{
-                    //required: true,
-                    email: true,
-                    regex: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
-                },
-                PHONE:{
-                    required: true,
-                    maxlength:11,
-                    regex:/^(?:\+?88)?01[1-9]\d{8}$/,
-                }
-            }
-        });
-
-    });
 </script>
 
 

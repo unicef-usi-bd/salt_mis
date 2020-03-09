@@ -39,7 +39,7 @@ protected $fillable = [
             'DIVISION_ID' => $request->input('DIVISION_ID'),
             'DISTRICT_ID' => $request->input('DISTRICT_ID'),
             'UNION_ID' => $request->input('UNION_ID'),
-            'UPAZILA_ID' => $request->input('UPAZILA_ID'),
+            'UPAZILA_ID' => $request->input('THANA_ID'),
             'UNION_ID' => $request->input('UNION_ID'),
             'THANA_ID' => $request->input('THANA_ID'),
             'BAZAR_NAME' => $request->input('BAZAR_NAME'),
@@ -57,7 +57,7 @@ protected $fillable = [
                     'CUSTOMER_ID' => $sellerProfile,
                     'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                     'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
-                    'COV_UPAZILA_ID' => $request->input('COV_UPAZILA_ID')[$i],
+                    'COV_UPAZILA_ID' => $request->input('COV_THANA_ID')[$i],
                     'COV_THANA_ID' => $request->input('COV_THANA_ID')[$i],
                     'center_id' => Auth::user()->center_id,
                     'ENTRY_BY' => Auth::user()->id,
@@ -94,10 +94,10 @@ protected $fillable = [
 
     public static function editSellerDistributorProfile($id){
         return DB::table('ssm_customer_info')
-            ->select('ssm_customer_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME','ssc_thana.THANA_NAME')
+            ->select('ssm_customer_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_lookupchd.LOOKUPCHD_NAME','ssc_upazilas.UPAZILA_NAME as THANA_NAME')
             ->leftjoin('ssc_divisions','ssm_customer_info.DIVISION_ID', '=', 'ssc_divisions.DIVISION_ID')
             ->leftjoin('ssc_districts','ssm_customer_info.DISTRICT_ID', '=', 'ssc_districts.DISTRICT_ID')
-            ->leftjoin('ssc_upazilas','ssm_customer_info.UPAZILA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
+            ->leftjoin('ssc_upazilas','ssm_customer_info.THANA_ID', '=', 'ssc_upazilas.UPAZILA_ID')
             ->leftjoin('ssc_unions','ssm_customer_info.UNION_ID', '=', 'ssc_unions.UNION_ID')
             ->leftJoin('ssc_thana','ssm_customer_info.THANA_ID','=','ssc_thana.THANA_ID')
             ->leftjoin('ssc_divisions as a','ssm_customer_info.COV_DIVISION_ID', '=', 'a.DIVISION_ID')

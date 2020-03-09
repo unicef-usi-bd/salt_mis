@@ -87,31 +87,12 @@
         </div><!-- /.col -->
 
     </div><!-- /.row -->
-    <script> //This script use for prevent back button after logout to login
-        // window.onload = function () {
-        //     if (typeof history.replaceState === "function") {
-        //         history.replaceState(null, null, "/");
-        //         window.onpopstate = function () {
-        //             history.replaceState( null, null,"/");
-        //         };
-        //     } else {
-        //         var ignoreHashChange = true;
-        //         window.onhashchange = function () {
-        //             if (!ignoreHashChange) {
-        //                 ignoreHashChange = true;
-        //                 window.location.hash = Math.random();
-        //             } else {
-        //                 ignoreHashChange = false;
-        //             }
-        //         };
-        //     }
-        // }
-    </script>
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
     <!-- Add New Group Modal End -->
     @include('masterGlobal.ajaxFormSubmit')
+    @include('masterGlobal.locationMapping')
 
 
 @endsection

@@ -2,7 +2,7 @@
     {{--<hr>--}}
     {{--<h4  style="color: #1B6AAA; text-align: center; margin-left: -200px;">Bsti Test Standard Result Range</h4>--}}
     {{--<hr>--}}
-    <form action="{{ url('/bsti-test-result-range/'.$editBstiTestResutlRange->BSTITEST_RESULT_ID) }}" method="post" class="form-horizontal" role="form" id="myform">
+    <form action="{{ url('/bsti-test-result-range/'.$editBstiTestResutlRange->BSTITEST_RESULT_ID) }}" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
         <h4><u>Sodium Chloride</u></h4>
@@ -75,7 +75,7 @@
         </div>
         <div class="clearfix" style="margin-left: 120px;">
             <div class="col-md-offset-3 col-md-9">
-                <button type="submit" class="btn btn-primary submitBtn">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     Update
                 </button>

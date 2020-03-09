@@ -116,16 +116,22 @@ class BstiTestStandardController extends Controller
             'PPM' => 'required',
             'PH' => 'required'
         );
+        $error = array(
+            'SODIUM_CHLORIDE.required' => 'Sodium Chloride field is required.',
+            'MOISTURIZER.required' => 'Moisturizer field is required.',
+            'PPM.required' => 'Iodine Content field is required.',
+            'PH.required' => 'PH field is required.',
+        );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateBstiTestStandard = BstiTestStandard::updateBstiTestData($request, $id);
-            if($updateBstiTestStandard){
-                return redirect('/bsti-test-standard')->with('success', 'Update Bsti Test Standard Data Updated !');
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $updated = BstiTestStandard::updateBstiTestData($request, $id);
+        if($updated){
+            return response()->json(['success'=>'BSTI Test Standard has been updated']);
+        } else{
+            return response()->json(['errors'=>'BSTI Test Standard update failed']);
         }
     }
 

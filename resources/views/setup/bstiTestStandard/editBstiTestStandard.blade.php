@@ -29,7 +29,7 @@
             </div>
         <div class="clearfix" style="margin-left: 120px;">
             <div class="col-md-offset-3 col-md-9">
-                <button type="submit" class="btn btn-primary submitBtn">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     Update
                 </button>

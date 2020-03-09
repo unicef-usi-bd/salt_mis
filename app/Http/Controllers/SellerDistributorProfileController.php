@@ -70,28 +70,34 @@ class SellerDistributorProfileController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-//            'TRADING_NAME' => 'required|max:100',
-//            'LICENCE_NO' => 'required|max:100',
-
+            'TRADING_NAME' => 'required|max:100',
+            'TRADER_NAME' => 'required|max:100',
+            'LICENCE_NO' => 'required|max:100',
+            'PHONE' => 'required|max:100',
+            'DIVISION_ID' => 'required|max:100',
+            'DISTRICT_ID' => 'required|max:100',
+            'THANA_ID' => 'required|max:100',
+        );
+        $error = array(
+            'TRADING_NAME.required' => 'Trade name field is required.',
+            'TRADER_NAME.required' => 'Trader no field is required.',
+            'LICENCE_NO.required' => 'Licence no field is required.',
+            'PHONE.required' => 'Phone number field is required.',
+            'DIVISION_ID.required' => 'Division field is required.',
+            'DISTRICT_ID.required' => 'District no field is required.',
+            'THANA_ID.required' => 'Thana/Upazilla field is required.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        } else {
+        $validator = Validator::make(Input::all(), $rules, $error);
 
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            $SellerDistributorProfile = SellerDistributorProfile::insertData($request);
-        }
+        $inserted = SellerDistributorProfile::insertData($request);
 
-        //$this->pr($request->input());
-
-
-        if ($SellerDistributorProfile) {
-            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-            //return json_encode('Success');
-            return redirect('/seller-distributor-profile')->with('success', 'Seller/Distributor profile Has been Created !');
+        if($inserted){
+            return response()->json(['success'=>'Seller/Distributor created successfully']);
+        } else{
+            return response()->json(['errors'=>'Seller/Distributor create failed']);
         }
 
     }
@@ -120,6 +126,7 @@ class SellerDistributorProfileController extends Controller
     {
         $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
         $editSellerProfile = SellerDistributorProfile::editSellerDistributorProfile($id);
+
         $getDivision = SupplierProfile::getDivision();
         $editsellerProfilearray = SellerDistributorProfile::editSellerDistributorProfilCoverageArea($id);
         return view('profile.sellerDistributorProfile.modals.editSellerDistributorProfile',compact('sellerType','editSellerProfile','getDivision','editsellerProfilearray'));
@@ -137,27 +144,35 @@ class SellerDistributorProfileController extends Controller
 
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
+            'TRADER_NAME' => 'required|max:100',
             'LICENCE_NO' => 'required|max:100',
-
+            'PHONE' => 'required|max:100',
+            'DIVISION_ID' => 'required|max:100',
+            'DISTRICT_ID' => 'required|max:100',
+            'THANA_ID' => 'required|max:100',
+        );
+        $error = array(
+            'TRADING_NAME.required' => 'Trade name field is required.',
+            'TRADER_NAME.required' => 'Trader no field is required.',
+            'LICENCE_NO.required' => 'Licence no field is required.',
+            'PHONE.required' => 'Phone number field is required.',
+            'DIVISION_ID.required' => 'Division field is required.',
+            'DISTRICT_ID.required' => 'District no field is required.',
+            'THANA_ID.required' => 'Thana/Upazilla field is required.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        } else {
+        $validator = Validator::make(Input::all(), $rules, $error);
 
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            $SellerDistributorProfileupdate = SellerDistributorProfile::updateData($request,$id);
-        }
+        dd($request->input());
 
-        //$this->pr($SellerDistributorProfileupdate);
+        $updated = SellerDistributorProfile::updateData($request,$id);
 
-
-        if ($SellerDistributorProfileupdate) {
-            //            return response()->json(['success'=>'Lookup Group Successfully Saved']);
-            //return json_encode('Success');
-            return redirect('/seller-distributor-profile')->with('success', 'Seller/Distributor profile Update!');
+        if($updated){
+            return response()->json(['success'=>'Seller/Distributor created successfully']);
+        } else{
+            return response()->json(['errors'=>'Seller/Distributor create failed']);
         }
     }
 

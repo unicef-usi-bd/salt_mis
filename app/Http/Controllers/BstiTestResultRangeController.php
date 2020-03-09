@@ -115,16 +115,25 @@ class BstiTestResultRangeController extends Controller
             'PH_MIN' => 'required',
             'PH_MAX' => 'required',
         );
+        $error = array(
+            'SODIUM_CHLORIDE_MIN.required' => 'Sodium minimum length field is required.',
+            'SODIUM_CHLORIDE_MAX.required' => 'Sodium maximum length field is required.',
+            'MOISTURIZER_MIN.required' => 'Moisturizer minimum length field is required.',
+            'MOISTURIZER_MAX.required' => 'Moisturizer maximum length field is required.',
+            'PPM_MIN.required' => 'Iodize content minimum length field is required.',
+            'PPM_MAX.required' => 'Iodize content maximum length field is required.',
+            'PH_MIN.required' => 'PH minimum length field is required.',
+            'PH_MAX.required' => 'PH maximum length field is required.',
+        );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateBstiTestStandard = BstiTestResultRange::updateBstiTestDataRang($request, $id);
-            if($updateBstiTestStandard){
-                return redirect('/bsti-test-standard')->with('success', 'Update Bsti Test Standard Data Updated !');
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $updated = BstiTestResultRange::updateBstiTestDataRang($request, $id);
+        if($updated){
+            return response()->json(['success'=>'BSTI Test Standard range has been updated']);
+        } else{
+            return response()->json(['errors'=>'BSTI Test Standard range update failed']);
         }
     }
 
