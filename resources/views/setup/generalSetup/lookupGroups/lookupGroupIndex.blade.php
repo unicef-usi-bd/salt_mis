@@ -77,7 +77,7 @@
 
                                             <th class="fixedWidth" >{{ trans('lookupGroupIndex.sl') }}</th>
                                             <th>{{ trans('lookupGroupIndex.name') }}</th>
-                                            <th class="hidden-480">User Define ID</th>
+                                            {{--<th class="hidden-480">User Define ID</th>--}}
                                             <th class="hidden-480">Description</th>
                                             <th class="hidden-480">Status</th>
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
@@ -91,23 +91,10 @@
 
 
                                         <tr>
-                                            <td  align="center">
-                                                {{ ++$sl }}
-                                            </td>
-
-                                            <td>
-                                                <?php echo $lookupGroupData->LOOKUPCHD_NAME; ?>
-
-                                            </td>
-
-                                            <td class="hidden-480">
-                                                <?php echo $lookupGroupData->UD_ID; ?>
-
-                                            </td>
-                                            <td class="hidden-480">
-                                                <?php echo $lookupGroupData->DESCRIPTION; ?>
-
-                                            </td>
+                                            <td  align="center"> {{ ++$sl }} </td>
+                                            <td>{{ $lookupGroupData->LOOKUPCHD_NAME }}</td>
+                                            {{--<td class="hidden-480">{{ $lookupGroupData->UD_ID }}</td>--}}
+                                            <td class="hidden-480"><?php echo $lookupGroupData->DESCRIPTION; ?></td>
                                             <td class="hidden-480">
                                                 <?php  if($lookupGroupData->ACTIVE_FLG == 0){ ?>
                                                 <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>

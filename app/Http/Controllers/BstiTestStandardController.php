@@ -54,7 +54,9 @@ class BstiTestStandardController extends Controller
     {
         $rules = array(
             'SODIUM_CHLORIDE' => 'required',
-            'MOISTURIZER' => 'required'
+            'MOISTURIZER' => 'required',
+            'PPM' => 'required',
+            'PH' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -110,7 +112,9 @@ class BstiTestStandardController extends Controller
     {
         $rules = array(
             'SODIUM_CHLORIDE' => 'required',
-            'MOISTURIZER' => 'required'
+            'MOISTURIZER' => 'required',
+            'PPM' => 'required',
+            'PH' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);

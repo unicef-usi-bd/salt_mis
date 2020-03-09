@@ -62,6 +62,7 @@
         let today = getCurrentDate();
         $('input[type=text]').val("");
         $('select.chosen-select').val('').trigger('chosen:updated');
+        $('textarea').val('');
         let datepicker = $('input.date-picker');
         if(datepicker) datepicker.val(today).trigger('changeDate');
     }
