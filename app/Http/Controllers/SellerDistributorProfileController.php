@@ -129,6 +129,7 @@ class SellerDistributorProfileController extends Controller
 
         $getDivision = SupplierProfile::getDivision();
         $editsellerProfilearray = SellerDistributorProfile::editSellerDistributorProfilCoverageArea($id);
+
         return view('profile.sellerDistributorProfile.modals.editSellerDistributorProfile',compact('sellerType','editSellerProfile','getDivision','editsellerProfilearray'));
     }
 
@@ -164,8 +165,6 @@ class SellerDistributorProfileController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
-
-        dd($request->input());
 
         $updated = SellerDistributorProfile::updateData($request,$id);
 

@@ -162,7 +162,7 @@
                         <td>
                             <span class="block input-icon input-icon-right">
                                 <select class="form-control chosen-select upazila" name="COV_THANA_ID[]" data-placeholder="Select or search data">
-                                    <option value="{{ $seller->COV_THANA_ID }}">{{ $seller->THANA_NAME }}</option>
+                                    <option value="{{ $seller->COV_THANA_ID }}">{{ $seller->UPAZILA_NAME }}</option>
                                  </select>
                             </span>
                         </td>
