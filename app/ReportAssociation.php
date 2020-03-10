@@ -356,9 +356,8 @@ where ql.center_id in(select ass.ASSOCIATION_ID
     }
     public static function getAssocSale($processType,$divisionId,$districtId){
         $centerId = Auth::user()->center_id;
-
         if($processType == 0){
-            return DB::select(DB::raw(" SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
+            return DB::select(DB::raw("SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME,
         SUM(a.QTY) QTY, 
         (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = $centerId ) cnt_miller
@@ -377,11 +376,10 @@ where ql.center_id in(select ass.ASSOCIATION_ID
             and s.DIVISION_ID = $divisionId
             -- and s.ACTIVE_FLG = 1
             AND t.TRAN_TYPE = 'W'
-            and t.TRAN_FLAG = 'SD'      
-            
+            and t.TRAN_FLAG = 'SD'                  
              ) a
         GROUP BY a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
-        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME "));
+        a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME"));
         }elseif($processType == 1){
             return DB::select(DB::raw(" SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME,
@@ -427,13 +425,11 @@ where ql.center_id in(select ass.ASSOCIATION_ID
             and s.DIVISION_ID = $divisionId
             -- and s.ACTIVE_FLG = 1
             AND t.TRAN_TYPE in ('I','W')
-            and t.TRAN_FLAG = 'SD'      
-            
+            and t.TRAN_FLAG = 'SD'                  
              ) a
         GROUP BY a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME"));
         }
-
 
     }
 

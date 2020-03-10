@@ -198,7 +198,7 @@
         </div>
     </div>
 </div>
-
+@include('masterGlobal.chosenSelect')
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
