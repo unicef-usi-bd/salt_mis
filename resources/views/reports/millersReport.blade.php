@@ -111,7 +111,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
-                                <select id="millerDivision" class="DIVISION_ID form-control chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                <select class="division form-control chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">Select Division</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -124,7 +124,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-xs-8">
                         <span class="block input-icon input-icon-right">
-                            <select id="millerDistrict" class="district form-control chosen-select width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
+                            <select class="district form-control chosen-select width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">Select District</option>
                             </select>
                         </span>
@@ -232,6 +232,7 @@
     </div>
 </div>
 @include('masterGlobal.districtReport')
+@include('masterGlobal.chosenSelect')
 {{--@include('masterGlobal.datePicker')--}}
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>

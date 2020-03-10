@@ -207,7 +207,8 @@
 
     <script type="text/javascript">
         $('.resultTab').hide();
-        $(document).on('click','.btnReport',function(){
+        $(document).on('click','.btnReport',function(e){
+            e.preventDefault();
             var center_type=$(this).attr('center-type');
            // var url = $('.reportType').val();
            // alert(url);
@@ -251,8 +252,8 @@
                 var issuerId = $('.issuerBsti').val();
                 var startDate = $('.bstiReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.bstiReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
-                var divisionId = $('#bstiDivision').val();
-                var districtId = $('#bstiDistrict').val();
+                var divisionId = $('.division').val();
+                var districtId = $('.district').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
@@ -266,8 +267,8 @@
                 var issuerId = $('.issuerBasic').val();
                 var startDate = $('.basicReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.basicReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
-                var divisionId = $('#basicDivision').val();
-                var districtId = $('#basicDistrict').val();
+                var divisionId = $('.division').val();
+                var districtId = $('.district').val();
                 var renawlDate = $('.date-picker').val();
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
@@ -283,9 +284,8 @@
                 var processType = $('.processType').val();
                 var startDate = $('.millReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 var endDate = $('.millReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
-                var divisionId = $('#millerDivision').val();
-                //alert(divisionId);
-                var districtId = $('#millerDistrict').val();
+                var divisionId = $('.division').val();
+                var districtId = $('.district').val();
                 var customerId = $('.customerId').val();
                 var itemTypeId = $('.itemTypeId').val();
                 var renawlDate = $('.date-picker').val();
@@ -300,8 +300,8 @@
                 var assEndDate = $('.assReportrange').data('daterangepicker').endDate.format('YYYY-MM-DD');
                 var issueby = $('select.issueby').val();
                 var itemTypeAssoc = $('.itemTypeAssoc').val();
-                var divisionId = $('.divisionIdd').val();
-                var districtId = $('.districtIdd').val();
+                var divisionId = $('.division').val();
+                var districtId = $('.district').val();
                 var renawlDate = $('.renew-date').val();
                 var failDate = $('.fail-date').val();
                 var processType = $('.processType').val();
@@ -331,7 +331,7 @@
 
     <!--Add New Group Modal Start-->
     @include('masterGlobal.deleteScript')
-    @include('masterGlobal.getDistrictUpazilaUnion')
+    @include('masterGlobal.locationMapping')
     @include('masterGlobal.ajaxFormSubmit')
 
 @endsection

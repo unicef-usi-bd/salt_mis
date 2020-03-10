@@ -41,7 +41,7 @@
                   </div>
               </div>
               <div class="col-md-3">
-                  <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> *</span> </label>
+                  <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> </span> </label>
                   <div class="col-sm-12">
                       <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
@@ -59,7 +59,7 @@
         <div class="row" style="margin-top: 20px;">
             <div class="col-md-12">
                 <div class="col-md-3">
-                    <label class="col-sm-12"><b>Division</b></label>
+                    <label class="col-sm-12"><b>Division</b><span style="color: red;"> *</span></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12" ><b>District</b><span style="color: red;"> </span></label>
+                    <label class="col-sm-12" ><b>District</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="chosen-select form-control district" name="DISTRICT_ID" data-placeholder="Select or search data">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazilla</b></label>
+                    <label  class="col-sm-12"  style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> *</span></label>
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="Select or search data">

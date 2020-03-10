@@ -72,7 +72,7 @@ class SellerDistributorProfileController extends Controller
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
             'TRADER_NAME' => 'required|max:100',
-            'LICENCE_NO' => 'required|max:100',
+//            'LICENCE_NO' => 'required|max:100',
             'PHONE' => 'required|max:100',
             'DIVISION_ID' => 'required|max:100',
             'DISTRICT_ID' => 'required|max:100',
@@ -81,7 +81,7 @@ class SellerDistributorProfileController extends Controller
         $error = array(
             'TRADING_NAME.required' => 'Trade name field is required.',
             'TRADER_NAME.required' => 'Trader no field is required.',
-            'LICENCE_NO.required' => 'Licence no field is required.',
+//            'LICENCE_NO.required' => 'Licence no field is required.',
             'PHONE.required' => 'Phone number field is required.',
             'DIVISION_ID.required' => 'Division field is required.',
             'DISTRICT_ID.required' => 'District no field is required.',
@@ -146,7 +146,7 @@ class SellerDistributorProfileController extends Controller
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
             'TRADER_NAME' => 'required|max:100',
-            'LICENCE_NO' => 'required|max:100',
+//            'LICENCE_NO' => 'required|max:100',
             'PHONE' => 'required|max:100',
             'DIVISION_ID' => 'required|max:100',
             'DISTRICT_ID' => 'required|max:100',
@@ -155,7 +155,7 @@ class SellerDistributorProfileController extends Controller
         $error = array(
             'TRADING_NAME.required' => 'Trade name field is required.',
             'TRADER_NAME.required' => 'Trader no field is required.',
-            'LICENCE_NO.required' => 'Licence no field is required.',
+//            'LICENCE_NO.required' => 'Licence no field is required.',
             'PHONE.required' => 'Phone number field is required.',
             'DIVISION_ID.required' => 'Division field is required.',
             'DISTRICT_ID.required' => 'District no field is required.',

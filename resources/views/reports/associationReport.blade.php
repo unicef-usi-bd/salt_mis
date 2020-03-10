@@ -73,7 +73,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="ASSOC_DIVISION_ID" class="form-control divisionIdd chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                               <select class="form-control division chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">Select Division</option>
                                     @foreach($getDivision as $row)
                                        <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -86,7 +86,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select id="DISTRICT_ID" class="districtIdd form-control chosen-select assoc_district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
+                               <select class="form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">Select District</option>
                             </select>
                             </span>

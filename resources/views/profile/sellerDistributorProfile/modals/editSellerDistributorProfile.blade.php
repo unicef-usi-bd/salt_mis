@@ -44,13 +44,13 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> </span> *</label>
+                    <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trade Licence no</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-12"> <b>Trade Licence no</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
                         <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
                     </div>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12"><b>District</b><span style="color: red;"> </span></label>
+                    <label for="inputSuccess" class="col-sm-12"><b>District</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control district chosen-select district" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> </span></label>
+                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">

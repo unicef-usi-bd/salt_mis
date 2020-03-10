@@ -697,11 +697,11 @@ class Report extends Model
       "));
     }
 
-    public static function hrMillerEmployee ($links){
+    public static function hrMillerEmployee ($millerId){
         return DB::select(DB::raw("select sum(mi.TOTMALE_EMP + mi.TOTFEM_EMP)Total_Employee,sum(mi.FULLTIMEMALE_EMP + mi.FULLTIMEFEM_EMP)Full_time_total_employee,
                 sum(mi.PARTTIMEMALE_EMP + mi.PARTTIMEFEM_EMP)Parttime_total_employee, sum(mi.TOTMALETECH_PER + mi.TOTFEMTECH_PER)total_tech_employee 
                 from ssm_millemp_info mi
-                where mi.MILL_ID = $links "));
+                where mi.MILL_ID = $millerId"));
     }
 
     public static function adminHrmillerEmployee(){

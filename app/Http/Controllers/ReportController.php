@@ -445,6 +445,7 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $divisionId = $request->input('divisionId');
         $districtId = $request->input('districtId');
+
         $clintList = Report::getListofClint($centerId,$divisionId,$districtId);
         $view = view("reportView.millerClintList",compact('clintList','divisionId','districtId'))->render();
         return response()->json(['html'=>$view]);
