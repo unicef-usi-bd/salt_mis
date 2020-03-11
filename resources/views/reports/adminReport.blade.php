@@ -8,7 +8,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Report Type</b></label>
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
-                               <select class="chosen-container reportAdmin" name="PROCESS_TYPE_ID" data-placeholder="Select">
+                               <select class="chosen-container reportAdmin chosen-select" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">Select One</option>
                                    <optgroup label="Association">
                                        <option  value="association-list">List of Total Association </option>
@@ -92,7 +92,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <select class="statusAdmin width-65" name="ACTIVE_FLG">
+                               <select class="statusAdmin width-65 chosen-select" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
                                    <option value="0">Select All</option>
                                    <option value="1">Active</option>
@@ -195,7 +195,7 @@
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
-                                <select class="issuerAdmin width-65 form-control" id="ISSURE_ID" name="ISSURE_ID"  >
+                                <select class="issuerAdmin width-65 form-control chosen-select" id="ISSURE_ID" name="ISSURE_ID"  >
                                     <option value="">Select</option>
                                     @foreach($issueBy as $row)
                                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -212,25 +212,23 @@
                 {{--</div>--}}
             </form>
 
-                <br>
-                <div class="clearfix">
-                    <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                        <button type="reset" class="btn">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            {{ trans('dashboard.reset') }}
-                        </button>
-                        <button type="submit" center-type="admin" class="btn btn-primary btnReport">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                           Show Report
-                        </button>
-                    </div>
+            <br>
+            <div class="clearfix">
+                <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
+                    <button type="reset" class="btn">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        {{ trans('dashboard.reset') }}
+                    </button>
+                    <button type="submit" center-type="admin" class="btn btn-primary btnReport">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                       Show Report
+                    </button>
                 </div>
-
-
-
+            </div>
         </div>
     </div>
 </div>
+@include('masterGlobal.chosenSelect')
 @include('masterGlobal.getDistrict')
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>

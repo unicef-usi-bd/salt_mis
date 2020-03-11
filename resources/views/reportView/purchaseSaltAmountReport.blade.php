@@ -35,9 +35,16 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{ $row->QTY }}</td>
+                    <td>{{ number_format($row->QTY, 2) }}</td>
                 </tr>
             @endforeach
+            @if(sizeof($purchaseTotalSalt)==0)
+                <tr>
+                    <th class="text-danger" colspan="3">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

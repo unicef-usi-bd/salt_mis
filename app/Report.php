@@ -79,10 +79,10 @@ class Report extends Model
  }
 
     public static function getMonitorAssociationList(){
-     return DB::select(DB::raw("select ass.ASSOCIATION_NAME, count(mi.center_id)Total_mill
-                from ssm_associationsetup ass
-                left join ssm_mill_info mi on mi.ZONE_ID = ass.ZONE_ID 
-                where ass.PARENT_ID = 1 group by ass.ASSOCIATION_NAME"));
+     return DB::select(DB::raw("select association2.ASSOCIATION_NAME, COUNT(smi.MILL_ID) as Total_mill from ssm_mill_info smi
+                                        left join ssm_associationsetup as association on smi.center_id=association.ASSOCIATION_ID
+                                        left join ssm_associationsetup as association2 on association2.PARENT_ID = 1
+                                        group by association.PARENT_ID ;"));
     }
 
 
@@ -102,15 +102,14 @@ class Report extends Model
 
     public static function getPurchaseSalteList($centerId){
 
-        $purchaseSaltList = DB::table('ssc_lookupchd');
-        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
-        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
-        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
-        if($centerId){
-            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
-        }
+        $purchaseSaltList = DB::table('ssc_lookupchd')
+            ->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*')
+            ->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE')
+            ->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO')
+            ->where('tmm_itemstock.TRAN_FLAG','=','PR')
+            ->where('tmm_itemstock.TRAN_TYPE','=','SP')
+            ->groupBy('tmm_itemstock.ITEM_NO');
+        if($centerId) $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
         return $purchaseSaltList->get();
     }
 
@@ -133,50 +132,17 @@ class Report extends Model
         return $purchaseSaltList->get();
     }
 
-    public static function getItemStock($centerId,$itemType){
-//        dd($centerId, $itemType);
-        return DB::select(DB::raw(" select lc.LOOKUPCHD_NAME,i.*, sum(ts.QTY) QTY
-        from ssc_lookupchd lc
-        left join smm_item i on i.ITEM_NO = lc.LOOKUPCHD_ID
-        left join tmm_itemstock ts on ts.ITEM_NO = i.ITEM_NO
-        where ts.TRAN_TYPE = 'SP' and ts.TRAN_FLAG = 'PR'
-        and ts.center_id = $centerId
-        group by lc.LOOKUPCHD_NAME"));
-
-//        $purchaseSaltList = DB::table('ssc_lookupchd');
-//        $purchaseSaltList->select('ssc_lookupchd.LOOKUPCHD_NAME','smm_item.*','tmm_itemstock.*');
-//        $purchaseSaltList->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-//        $purchaseSaltList->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
-//        $purchaseSaltList->where('tmm_itemstock.TRAN_FLAG','=','PR');
-//        $purchaseSaltList->where('tmm_itemstock.TRAN_TYPE','=','SP');
-//        if($centerId){
-//            $purchaseSaltList->where('tmm_itemstock.center_id','=',$centerId);
-//        }
-//        if ($itemType != 0){
-//            $purchaseSaltList->where('smm_item.ITEM_NO','=',$itemType);
-//        }
-//        return $purchaseSaltList->get();
-//         if($itemType == 0){
-//             return DB::select(DB::raw("select sum(i.QTY) QTY, m.ITEM_NAME, lc.LOOKUPCHD_NAME
-//        from tmm_itemstock i
-//        left join smm_item m on m.ITEM_NO = i.ITEM_NO
-//        inner join ssc_lookupchd lc on lc.LOOKUPCHD_ID = m.ITEM_TYPE
-//        where i.TRAN_TYPE = 'SP'
-//        and i.TRAN_FLAG = 'PR'
-//        group by m.ITEM_NAME,QTY,lc.LOOKUPCHD_NAME"));
-//         }else{
-//             return DB::select(DB::raw("select sum(i.QTY) QTY, m.ITEM_NAME, lc.LOOKUPCHD_NAME
-//        from tmm_itemstock i
-//        left join smm_item m on m.ITEM_NO = i.ITEM_NO
-//        inner join ssc_lookupchd lc on lc.LOOKUPCHD_ID = m.ITEM_TYPE
-//        where i.TRAN_TYPE = 'SP'
-//        and i.TRAN_FLAG = 'PR'
-//        and m.ITEM_NO = $itemType
-//        group by m.ITEM_NAME,QTY,lc.LOOKUPCHD_NAME"));
-//         }
-
-
-
+    public static function getItemStock($centerId, $itemType){
+        $purchaseLists = DB::table('tmm_itemstock as stock')
+            ->select(DB::raw("SUM(stock.QTY) as QTY"), 'items.ITEM_NAME')
+            ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
+            ->leftJoin('ssc_lookupchd as slc', 'items.ITEM_TYPE', '=', 'slc.LOOKUPCHD_ID')
+            ->where('stock.TRAN_FLAG','=','PR')
+            ->where('stock.TRAN_TYPE','=','SP');
+        if($centerId) $purchaseLists->where('stock.center_id','=',$centerId);
+        if (!empty($itemType) && $itemType!=0) $purchaseLists->where('stock.ITEM_NO','=',$itemType);
+        $data = $purchaseLists->groupBy('stock.ITEM_NO')->get();
+        return $data;
     }
 
     public static function getStockSaltForAdmin(){
@@ -308,7 +274,7 @@ class Report extends Model
             left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
             left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
             where  (its.TRAN_TYPE = 'I' or its.TRAN_TYPE = 'W' ) 
-            and its.TRAN_FLAG = 'SD' "));
+            and its.TRAN_FLAG = 'SD' group by st.ITEM_NO"));
     }
 
     public static function getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate){
@@ -790,8 +756,7 @@ class Report extends Model
         (TOTMALETECH_PER+TOTFEMTECH_PER) tot_tech_person
         FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
         WHERE m.MILL_ID = d.MILL_ID
-        AND m.MILL_ID = a.MILL_ID) b
-       "));
+        AND m.MILL_ID = a.MILL_ID) b group by b.MILL_NAME"));
         }else{
             return DB::select(DB::raw("SELECT b.*
          FROM
@@ -804,7 +769,7 @@ class Report extends Model
         FROM ssm_mill_info m, ssm_millemp_info d, ssm_associationsetup a
         WHERE m.MILL_ID = d.MILL_ID
         AND m.MILL_ID = a.MILL_ID) b
-       where z.ZONE_ID = $zone"));
+       where z.ZONE_ID = $zone group by b.MILL_NAME"));
         }
 
     }
