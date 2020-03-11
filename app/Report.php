@@ -151,8 +151,7 @@ class Report extends Model
                                          (SELECT c.LOOKUPCHD_NAME, i.ITEM_NO, i.ITEM_NAME, s.QTY,
                                             CASE WHEN s.TRAN_FLAG = 'WS' AND s.TRAN_TYPE = 'S' THEN
                                                 s.QTY
-                                            END reduce,
-                                        
+                                            END reduce,                                        
                                             CASE WHEN s.TRAN_FLAG = 'PR' AND s.TRAN_TYPE = 'SP' THEN
                                                 s.QTY
                                             END purchase,
@@ -341,7 +340,6 @@ class Report extends Model
         //$chemicalItemList->leftJoin('ssm_associationsetup','tmm_itemstock.center_id','=','ssm_associationsetup.ASSOCIATION_ID');
         $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE','=','CP');
         $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG','=','PR');
-
 
         if($centerId){
             $chemicalItemList->Where('tmm_itemstock.center_id','=',$centerId);
@@ -797,28 +795,17 @@ left join ssm_mill_info mi on mi.center_id = ql.center_id
 where ql.center_id =$centerId"));
     }
 
-    public static function getProcessStockAdmin($starDate,$endDate){
-        return DB::select(DB::raw("select w.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
-      case when st.TRAN_TYPE = 'W' then
-        'Wash Crash'
-      end Process_Type
-      from tmm_itemstock st 
-      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'W'  and st.TRAN_FLAG = 'WI'
-      and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
-      union
-      select i.BATCH_NO, st.QTY,ai.ASSOCIATION_NAME,
-      case when st.TRAN_TYPE = 'I' then
-        'Iodize'
-      end Process_Type
-      from tmm_itemstock st 
-      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-      where st.TRAN_TYPE = 'I' and st.center_id  and st.TRAN_FLAG = 'II'
-      -- and Date(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'"));
+    public static function getProcessStockAdmin($starDate, $endDate){
+
+        $processStock = DB::table('tmm_itemstock as stock')
+            ->select(DB::raw("SUM(stock.QTY) as QTY"), 'stock.TRAN_TYPE', 'LOOKUPCHD_NAME')
+            ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
+            ->leftJoin('ssc_lookupchd as slc', 'items.ITEM_TYPE', '=', 'slc.LOOKUPCHD_ID')
+            ->whereIn('stock.TRAN_FLAG', ['WI', 'II'])
+            ->whereBetween('stock.TRAN_DATE', [$starDate, $endDate])
+            ->groupBy('TRAN_FLAG')
+            ->get();
+        return $processStock;
     }
 
 }

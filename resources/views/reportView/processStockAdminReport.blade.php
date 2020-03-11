@@ -16,16 +16,9 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Mill Name</th>
                 <th>Process Type</th>
-                <th>Batch No</th>
                 <th>ProductionAmount</th>
             </tr>
 
@@ -36,12 +29,9 @@
             @foreach($processStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{ $row->ASSOCIATION_NAME }}</td>
-                    <td>{{$row->Process_Type}}</td>
-                    <td>{{$row->BATCH_NO}}</td>
-                    <td>{{$row->QTY}}</td>
+                    <td>{{ $row->TRAN_TYPE=='I'? 'Iodized' : 'Wash & Crush' }}</td>
+                    <td>{{ number_format($row->QTY, 2) }}</td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>

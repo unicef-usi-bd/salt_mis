@@ -16,17 +16,11 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
                 <th>Item Name</th>
                 <th>Total Stock Amount</th>
             </tr>
-
             </thead>
 
             <tbody>
@@ -35,10 +29,16 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{$row->ITEM_NAME}}</td>
-                    <td>{{$row->STOCK_QTY}}</td>
-
+                    <td>{{ number_format($row->STOCK_QTY, 2) }}</td>
                 </tr>
             @endforeach
+            @if(sizeof($purchaseTotalSaltStock)==0)
+                <tr>
+                    <th class="text-danger" colspan="2">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

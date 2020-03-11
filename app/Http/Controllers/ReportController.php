@@ -190,7 +190,7 @@ class ReportController extends Controller
     }
 
     public function getProcessReportAdminPdf($starDate,$endDate){
-        $processStock = Report::getProcessStockAdmin($starDate,$endDate);
+        $processStock = Report::getProcessStockAdmin($starDate, $endDate);
         $data = \View::make('reportPdf.processStockAdminReportPdf',compact('processStock'));
         $this->generatePdf($data);
     }
@@ -287,7 +287,6 @@ class ReportController extends Controller
 
     public function getChemicalPurchase(Request $request){
         $centerId = Auth::user()->center_id;
-
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $itemTypeId = $request->input('chemicalItemType');
@@ -303,7 +302,7 @@ class ReportController extends Controller
 
     public function getChemicalPurchasePdf($starDate,$endDate,$millTypeAdmin){
         $centerId = Auth::user()->center_id;
-        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate,$endDate,$millTypeAdmin);
+        $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate, $endDate, $millTypeAdmin);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
         $this->generatePdf($data);
     }

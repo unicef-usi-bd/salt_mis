@@ -23,7 +23,7 @@
         <tr>
             <td>{{ ++$sl }}</td>
             <td>{{$purchaseSalt->ITEM_NAME}}</td>
-            <td>{{$purchaseSalt->STOCK_QTY}}</td>
+            <td>{{ number_format($purchaseSalt->STOCK_QTY, 2) }}</td>
 
         </tr>
     @endforeach
