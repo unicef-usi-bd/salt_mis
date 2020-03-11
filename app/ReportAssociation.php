@@ -236,11 +236,11 @@ class ReportAssociation extends Model
 // hr
     public static function getMillerListForHr(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
+        return DB::select(DB::raw("select mi.MILL_NAME,me.TOTMALE_EMP,me.TOTFEM_EMP, me.FULLTIMEMALE_EMP,me.FULLTIMEFEM_EMP,
               me.PARTTIMEMALE_EMP,me.PARTTIMEFEM_EMP, me.TOTMALETECH_PER,me.TOTFEMTECH_PER
               from ssm_mill_info  mi
               left join ssm_millemp_info me on mi.MILL_ID = me.MILL_ID
-              where mi.center_id = '$centerId' "));
+              where mi.center_id = '$centerId' group by mi.MILL_ID"));
 
     }
     public static function getQcMillerList(){
