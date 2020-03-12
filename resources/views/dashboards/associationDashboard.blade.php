@@ -66,7 +66,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
                     <div class="infobox-content">
-                        {{sprintf('%0.2f',$totalassociationproduction)}}
+                        {{ number_format($totalassociationproduction, 2) }}
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
                     <div class="infobox-content">
-                        {{sprintf('%0.2f',$totalSales)}}
+                        {{ number_format($totalSales, 2)}}
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        {{sprintf('%0.2f',$associationIodize)}}
+                        {{ number_format($associationIodize, 2)}}
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
                     <div class="infobox-content">
-                        {{sprintf('%0.2f',$totalAssociationIodizeSale)}}
+                        {{ number_format($totalAssociationIodizeSale, 2)}}
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
                     <div class="infobox-content">
-                        {{ sprintf('%0.2f',$associationWashCrash) }}
+                        {{ number_format($associationWashCrash, 2) }}
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                         INDUSTRIAL SALT
                         SALES</div>
                     <div class="infobox-content">
-                        {{ sprintf('%0.2f',$totalAssociationWashCrasheSale) }}
+                        {{ number_format($totalAssociationWashCrasheSale, 2) }}
                     </div>
                 </div>
             </div>
@@ -240,13 +240,13 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ abs($row->QTY) }}</td>
+                                    <td>{{ number_format(abs($row->QTY), 2) }}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td><b class="red">Total</b> </td>
-                                <td><b class="red">{{ $totalWcIoDashboard }}</b></td>
+                                <td><b class="red">{{ number_format($totalWcIoDashboard, 2) }}</b></td>
                             </tr>
                             </tbody>
                         </table>
@@ -306,13 +306,13 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ abs($row->QTY) }}</td>
+                                    <td>{{ number_format(abs($row->QTY), 2) }}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td><b class="red">Total</b> </td>
-                                <td><b class="red">{{abs ($totalSaleDashboard) }}</b></td>
+                                <td><b class="red">{{ number_format(abs($totalSaleDashboard), 2) }}</b></td>
                             </tr>
                             </tbody>
                         </table>

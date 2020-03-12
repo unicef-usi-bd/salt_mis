@@ -49,7 +49,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">PRODUCTION</div>
-                    <div class="infobox-content">{{ sprintf('%0.2f',$totalProductons) }} KG</div>
+                    <div class="infobox-content">{{ number_format($totalProductons, 2) }} KG</div>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">INDUSTRIAL SALT PRODUCTION</div>
-                    <div class="infobox-content">{{sprintf('%0.2f',$totalWashcrashProduction)}} KG</div>
+                    <div class="infobox-content">{{ number_format($totalWashcrashProduction, 2)}} KG</div>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT PRODUCTION</div>
-                    <div class="infobox-content">{{ sprintf('%0.2f',$totalIodizeProduction) }} KG</div>
+                    <div class="infobox-content">{{ number_format($totalIodizeProduction, 2) }} KG</div>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">SALES</div>
-                    <div class="infobox-content">{{ $totalProductSales }} KG</div>
+                    <div class="infobox-content">{{ number_format($totalProductSales, 2) }} KG</div>
                 </div>
             </div>
 
@@ -95,10 +95,8 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">
-                        INDUSTRIAL SALT
-                        SALES</div>
-                    <div class="infobox-content">{{ $totalWashCrashSale }} KG</div>
+                    <div class="infobox-content"> INDUSTRIAL SALT SALES</div>
+                    <div class="infobox-content">{{ number_format($totalWashCrashSale, 2) }} KG</div>
                 </div>
             </div>
 
@@ -109,7 +107,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content">IODIZED SALT SALES</div>
-                    <div class="infobox-content">{{ abs($totalIodizeSale) }} KG</div>
+                    <div class="infobox-content">{{ number_format(abs($totalIodizeSale), 2) }} KG</div>
                 </div>
             </div>
 
@@ -146,7 +144,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Procurement List
+                        Last 30 Days Procurements
                     </h4>
 
                     <div class="widget-toolbar">
@@ -182,7 +180,7 @@
                                     <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
                                 </td>
                                 <td>{{ $row->ITEM_NAME }}</td>
-                                <td>{{ $row->QTY }}</td>
+                                <td>{{ number_format($row->QTY, 2) }}</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -214,7 +212,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 days production
+                        Last 30 days productions
                     </h4>
 
                     <div class="widget-toolbar">
@@ -255,13 +253,13 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ $row->QTY }}</td>
+                                    <td>{{ number_format($row->QTY, 2) }}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td><b class="red">Total</b> </td>
-                                <td><b class="red">{{ $totalWcIoDashboard }}</b></td>
+                                <td><b class="red">{{ number_format($totalWcIoDashboard, 2) }}</b></td>
                             </tr>
                             </tbody>
                         </table>
@@ -321,13 +319,13 @@
                                             Iodize
                                         @endif
                                     </td>
-                                    <td>{{ abs($row->QTY) }}</td>
+                                    <td>{{ number_format(abs($row->QTY), 2) }}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td><b class="red">Total</b> </td>
-                                <td><b class="red">{{abs ($totalSaleDashboard) }}</b></td>
+                                <td><b class="red">{{ number_format(abs($totalSaleDashboard), 2) }}</b></td>
                             </tr>
                             </tbody>
                         </table>

@@ -275,6 +275,7 @@ class MillerInfo extends Model
         if($associationInfo->first()) $centerId = $associationInfo->pluck('ASSOCIATION_ID')->first();
 
 //        Specific Miller Profile related table by Miller Id Start
+//        Active Profile
         $millerInfo = DB::table('ssm_mill_info')->where('MILL_ID', $id);
         if($millerInfo->first()) $millerInfo->delete();
 
@@ -288,6 +289,22 @@ class MillerInfo extends Model
         if($qcInfo->first()) $qcInfo->delete();
 
         $empInfo = DB::table('ssm_millemp_info')->where('MILL_ID', $id);
+        if($empInfo->first()) $empInfo->delete();
+
+//        Temporary profile
+        $millerInfo = DB::table('tem_ssm_mill_info')->where('MILL_ID', $id);
+        if($millerInfo->first()) $millerInfo->delete();
+
+        $entrepreneurInfo = DB::table('tem_ssm_entrepreneur_info')->where('MILL_ID', $id);
+        if($entrepreneurInfo->get()) $entrepreneurInfo->delete();
+
+        $certificateInfo = DB::table('tem_ssm_certificate_info')->where('MILL_ID', $id);
+        if($certificateInfo->get()) $certificateInfo->delete();
+
+        $qcInfo = DB::table('tem_tsm_qc_info')->where('MILL_ID', $id);
+        if($qcInfo->first()) $qcInfo->delete();
+
+        $empInfo = DB::table('tem_ssm_millemp_info')->where('MILL_ID', $id);
         if($empInfo->first()) $empInfo->delete();
 //        Specific Miller Profile related table by Miller Id Start
 
@@ -325,9 +342,9 @@ class MillerInfo extends Model
 
             $itemStockInfo = DB::table('tmm_itemstock')->where('center_id', $centerId);
             if ($itemStockInfo->get()) $itemStockInfo->delete();
+
+            if ($associationInfo->get()) $associationInfo->delete();
         }
-
-
 //        Specific Miller Profile transaction related table  by miller Id End
     }
 

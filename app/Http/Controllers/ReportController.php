@@ -329,7 +329,7 @@ class ReportController extends Controller
         $centerId = Auth::user()->center_id;
         $starDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
+        $purchaseChemicalStocks = Report::millerChemicalStock($centerId, $starDate, $endDate);
         //return $purchaseChemicalStocks;
         $view = view("reportView.purchaseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);

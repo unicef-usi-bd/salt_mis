@@ -29,11 +29,17 @@
             @foreach($purchaseChemicalStocks as $purchaseChemicalStock)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$purchaseChemicalStock->ITEM_NAME}}</td>
-                    <td>{{sprintf('%0.2f',$purchaseChemicalStock->STOCK_QTY)}}</td>
-
+                    <td>{{ $purchaseChemicalStock->ITEM_NAME }}</td>
+                    <td>{{ number_format($purchaseChemicalStock->STOCK_QTY, 2) }}</td>
                 </tr>
             @endforeach
+            @if(sizeof($purchaseChemicalStocks)==0)
+                <tr>
+                    <th class="text-danger" colspan="3">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

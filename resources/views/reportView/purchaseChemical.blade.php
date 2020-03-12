@@ -33,6 +33,13 @@
                     <td>{{ number_format($purchaseChemical->QTY, 2)}}</td>
                 </tr>
             @endforeach
+            @if(sizeof($purchaseChemicals)==0)
+                <tr>
+                    <th class="text-danger" colspan="3">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

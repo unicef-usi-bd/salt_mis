@@ -33,9 +33,15 @@
                     <td>{{$monitorSupplier->LOOKUPCHD_NAME}}</td>
                     <td>{{$monitorSupplier->TRADER_NAME}}</td>
                     <td>{{$monitorSupplier->QTY}}</td>
-
                 </tr>
             @endforeach
+            @if(sizeof($monitorSuppliers)==0)
+                <tr>
+                    <th class="text-danger" colspan="5">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

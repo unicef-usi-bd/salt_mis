@@ -33,9 +33,15 @@
                     <td>{{$millerProcessList->Process_Type}}</td>
                     <td>{{$millerProcessList->BATCH_NO}}</td>
                     <td>{{$millerProcessList->QTY}}</td>
-
                 </tr>
             @endforeach
+            @if(sizeof($millerProcessLists)==0)
+                <tr>
+                    <th class="text-danger" colspan="4">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
 
             </tbody>
         </table>

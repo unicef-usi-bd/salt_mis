@@ -305,7 +305,7 @@ class DashboardController extends Controller
         $millerCertificateInfo = Certificate::millerCertificateInfoByMillId($millerInfo->MILL_ID);
         $milerExpireDate = $this->dateFormat($millerCertificateInfo->RENEWING_DATE);
         $userExpireDate = $this->dateFormat($userInfo->renewing_date);
-//        dd($milerExpireDate, $userExpireDate);
+
         if($millerCertificateInfo) {
             $checkExpired = $milerExpireDate > $userExpireDate;
             if ($checkExpired) {

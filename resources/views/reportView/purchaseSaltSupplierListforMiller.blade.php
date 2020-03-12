@@ -16,11 +16,6 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
                 <th>Supplier Name</th>
@@ -43,6 +38,14 @@
                 </tr>
 
             @endforeach
+
+            @if(sizeof($supplierMillerList)==0)
+                <tr>
+                    <th class="text-danger" colspan="5">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

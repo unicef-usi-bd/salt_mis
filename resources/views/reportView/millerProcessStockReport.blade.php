@@ -35,6 +35,13 @@
                     <td>{{$row->QTY}}</td>
                 </tr>
             @endforeach
+            @if(sizeof($purchaseTotalSaltStocks)==0)
+                <tr>
+                    <th class="text-danger" colspan="4">
+                        <h5>Data not found !</h5>
+                    </th>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

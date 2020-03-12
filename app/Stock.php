@@ -290,17 +290,19 @@ class Stock extends Model
 
     ///------------------Procurement List
     public static function procurementList (){
+        $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $procurementLists = DB::table('ssc_lookupchd');
-        $procurementLists->select('ssc_lookupchd.*','smm_item.ITEM_NAME','tmm_itemstock.ENTRY_TIMESTAMP','tmm_itemstock.QTY');
-        $procurementLists->leftJoin('smm_item','ssc_lookupchd.LOOKUPCHD_ID','=','smm_item.ITEM_TYPE');
-        $procurementLists->leftJoin('tmm_itemstock','smm_item.ITEM_NO','=','tmm_itemstock.ITEM_NO');
-        $procurementLists->where('tmm_itemstock.TRAN_FLAG','=','PR');
-        if($centerId){
-            $procurementLists->where('tmm_itemstock.center_id','=',$centerId);
-        }
+        $procurements = DB::table('tmm_itemstock as stock')
+            ->select('stock.*', 'items.ITEM_NAME')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
+            ->where('stock.TRAN_FLAG', '=', 'PR')
+            ->where('stock.TRAN_DATE', '>', $date);
+        if($centerId) $procurements->where('stock.center_id','=',$centerId);
 
-        return $procurementLists->get();
+        return $procurements->get();
     }
     ///------------------Procurement List
 
@@ -346,11 +348,14 @@ class Stock extends Model
     /// ----------------------Production Graph
     public static function millerProduction(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("SELECT it.*
-                                       FROM tmm_itemstock it
-                                       WHERE it.center_id = $centerId
-                                       and (it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II')"));
-        //$monthProduction = DB::table('tmm_itemstock')
+        $productions = DB::table('tmm_itemstock as stock')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.center_id', '=', $centerId)
+            ->whereIn('stock.TRAN_FLAG', ['WI', 'II'])
+            ->get();
+        return $productions;
     }
     /// ----------------------Production Graph
     ///
