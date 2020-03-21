@@ -620,45 +620,38 @@ class Report extends Model
     }
 
     public static function itemStockMiller($centerId){
-//        return DB::select(DB::raw("SELECT a.CUSTOMER_ID ,a.TRADING_NAME,a.TRADER_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
-//        a.ITEM_TYPE_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type,
-//        SUM(a.QTY) QTY
-//        FROM
-//            (SELECT s.CUSTOMER_ID, s.TRADING_NAME,s.TRADER_NAME,s.DISTRICT_ID, s.DIVISION_ID, i.ITEM_TYPE,i.ITEM_NAME,
-//            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd WHERE LOOKUPCHD_ID = i.ITEM_TYPE) ITEM_TYPE_NAME,
-//            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
-//            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
-//            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
-//            t.QTY
-//            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t, smm_item i
-//            WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
-//            AND m.SALESMST_ID = t.TRAN_NO
-//            AND i.ITEM_NO = t.ITEM_NO
-//            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId   ) a
-//        GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
-//        a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type;"));
-         return DB::select(DB::raw("select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
-      case when st.TRAN_TYPE = 'W' then
-        'Wash Crash'
-      end Process_Type
-      from tmm_itemstock st 
-      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
-      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
-      union
-      select i.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
-      case when st.TRAN_TYPE = 'I' then
-        'Iodize'
-      end Process_Type
-      from tmm_itemstock st 
-      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
-      where st.TRAN_TYPE = 'I' and st.center_id = $centerId  and st.TRAN_FLAG = 'II'
-      "));
+         return DB::select(DB::raw("select stock.BATCH_NO, abs(sum(stock.QTY)) QTY,
+                (select abs(sum(stock_cs.QTY)) from tmm_itemstock stock_cs where stock_cs.ITEM_NO=stock.ITEM_NO and stock_cs.center_id=$centerId and stock_cs.TRAN_FLAG=case when stock.TRAN_TYPE = 'CP' then 'IC' when stock.TRAN_TYPE = 'SP' then 'WS'end) SOLD_QTY, ai.ASSOCIATION_NAME,
+                case when stock.TRAN_TYPE = 'CP' then 'Chemical' when stock.TRAN_TYPE = 'SP' then 'Crud Salt'end LOOKUPCHD_NAME, 
+                 si.ITEM_NAME Process_Type
+                from tmm_itemstock stock
+                left join smm_item si on stock.ITEM_NO = si.ITEM_NO
+                left join tmm_washcrashmst w on w.WASHCRASHMST_ID = stock.TRAN_NO
+                left join ssm_associationsetup ai on ai.ASSOCIATION_ID = stock.center_id
+                where stock.TRAN_FLAG='PR' and stock.center_id=$centerId group by stock.TRAN_TYPE, stock.ITEM_NO
+                  union
+                  select w.BATCH_NO, abs(sum(st.QTY)-(select sum(ti.WASH_CRASH_QTY *100)/(100-ti.WASTAGE) from tmm_iodizedchd ti where ti.center_id=$centerId)) QTY, (select abs(sum(wstock.QTY)) from tmm_itemstock wstock where wstock.center_id=$centerId and wstock.TRAN_TYPE = 'W' and wstock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+                  case when st.TRAN_TYPE = 'W' then
+                    'Wash Crash'
+                  end Process_Type
+                  from tmm_itemstock st 
+                  left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+                  left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+                   left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+                  -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+                  where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
+                  union
+                  select i.BATCH_NO, abs(sum(st.QTY)) QTY,(select abs(sum(istock.QTY)) from tmm_itemstock istock where istock.center_id=$centerId and istock.TRAN_TYPE = 'I' and istock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+                  case when st.TRAN_TYPE = 'I' then
+                    'Iodize'
+                  end Process_Type
+                  from tmm_itemstock st 
+                  -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+                  left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+                  left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+                   left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+                  where st.TRAN_TYPE = 'I' and st.center_id = $centerId  and st.TRAN_FLAG = 'II'
+                  "));
     }
 
     public static function hrMillerEmployee ($millerId){

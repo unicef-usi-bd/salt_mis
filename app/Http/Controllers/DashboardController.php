@@ -303,6 +303,11 @@ class DashboardController extends Controller
         $userInfo = User::userInfoByCenterId();
 
         $millerCertificateInfo = Certificate::millerCertificateInfoByMillId($millerInfo->MILL_ID);
+        if(!$millerCertificateInfo){
+            $message = "Miller certificate's not found. Please provide your certificates to association.!!!";
+            Auth::logout();
+            return redirect()->route('login')->with(['warning' => $message]);
+        }
         $milerExpireDate = $this->dateFormat($millerCertificateInfo->RENEWING_DATE);
         $userExpireDate = $this->dateFormat($userInfo->renewing_date);
 

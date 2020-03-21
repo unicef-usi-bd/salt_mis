@@ -1,4 +1,3 @@
-
 <style>
     .table th{
         text-align: center;
@@ -16,11 +15,6 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
                 <th>Items Type </th>
@@ -35,11 +29,10 @@
             @foreach($itemStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->LOOKUPCHD_NAME}}</td>
-                    <td>{{$row->Process_Type}}</td>
-                    <td>{{ abs($row->QTY) }}</td>
+                    <td>{{ $row->LOOKUPCHD_NAME }}</td>
+                    <td>{{ $row->Process_Type }}</td>
+                    <td>{{ number_format($row->QTY-$row->SOLD_QTY, 2) }}</td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>

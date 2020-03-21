@@ -22,9 +22,9 @@
     @foreach($itemStock as $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$row->ITEM_TYPE_NAME}}</td>
-            <td>{{$row->ITEM_NAME}}</td>
-            <td>{{ abs($row->QTY) }}</td>
+            <td>{{ $row->LOOKUPCHD_NAME }}</td>
+            <td>{{ $row->Process_Type }}</td>
+            <td>{{ number_format($row->QTY-$row->SOLD_QTY, 2) }}</td>
         </tr>
     @endforeach
 
