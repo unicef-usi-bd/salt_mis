@@ -17,18 +17,16 @@
         <th>Process Type</th>
         <th>Batch No</th>
         <th>Production Amount</th>
-        <th>Stock</th>
     </tr>
 
     </tr>
     @foreach($processStock as $sl =>  $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{ $row->no_of_mill }}</td>
-            <td>{{ $row->LOOKUPCHD_NAME }}</td>
+            <td>{{ $row->MILL_NO }}</td>
+            <td>{{ $row->TRAN_TYPE=='W'? 'Wash & Crush' : 'Iodized' }}</td>
             <td>{{ $row->BATCH_NO }}</td>
-            <td>{{ $row->production }}</td>
-            <td>{{ $row->stock }}</td>
+            <td>{{ number_format($row->QTY, 2) }}</td>
         </tr>
     @endforeach
 

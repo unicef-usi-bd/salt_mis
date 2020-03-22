@@ -335,25 +335,15 @@ where ql.center_id in(select ass.ASSOCIATION_ID
     }
     public static function assocProcessStock(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" SELECT a.center_id,COUNT(a.MILL_ID) no_of_mill, a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO, SUM(a.production) production,
-                    SUM(a.qty) stock
-                    FROM
-                                    (SELECT m.MILL_ID,c.LOOKUPCHD_ID, c.LOOKUPCHD_NAME, m.center_id, i.BATCH_NO, 
-                                    CASE WHEN s.qty > 0 THEN
-                                                    s.qty
-                                    END production,
-                                    s.qty
-                                    FROM ssc_lookupchd c, ssm_mill_info m, tmm_itemstock s, tmm_iodizedmst i
-                                    WHERE c.LOOKUPCHD_ID = m.PROCESS_TYPE_ID
-                                    AND m.center_id = s.center_id
-                                    AND i.IODIZEDMST_ID = s.TRAN_NO
-                                    AND c.LOOKUPMST_ID = 6) a
-                    WHERE a.center_id in (select ass.ASSOCIATION_ID
-                                     from ssm_associationsetup ass
-                                     where ass.PARENT_ID = $centerId )
-                    GROUP BY a.LOOKUPCHD_ID, a.LOOKUPCHD_NAME, a.BATCH_NO "));
+        $processStock = DB::select(DB::raw("select (select count(distinct mstock.center_id) as MILLER_NO from tmm_itemstock as mstock where mstock.TRAN_FLAG = 'II') MILL_NO, stock.TRAN_TYPE, 
+                        count(STOCK_NO) BATCH_NO, SUM(QTY) as QTY
+                        from tmm_itemstock stock
+                        left join ssm_associationsetup association on stock.center_id = association.ASSOCIATION_ID
+                        where association.center_id=$centerId and stock.TRAN_FLAG in ('WI', 'II') group by TRAN_FLAG"));
+        return $processStock;
 
     }
+
     public static function getAssocSale($processType,$divisionId,$districtId){
         $centerId = Auth::user()->center_id;
         if($processType == 0){

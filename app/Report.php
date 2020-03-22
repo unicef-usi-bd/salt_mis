@@ -789,7 +789,6 @@ where ql.center_id =$centerId"));
     }
 
     public static function getProcessStockAdmin($starDate, $endDate){
-
         $processStock = DB::table('tmm_itemstock as stock')
             ->select(DB::raw("SUM(stock.QTY) as QTY"), 'stock.TRAN_TYPE', 'LOOKUPCHD_NAME')
             ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
