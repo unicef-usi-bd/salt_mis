@@ -71,7 +71,7 @@ class QulityControlTesting extends Model
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
         );
 
-        if(!empty($image)) $data['QUALITY_CONTROL_IMAGE'] = 'image/qualitycontrol/'.$qulityControlImge;
+        if(!empty($image)) $data['QUALITY_CONTROL_IMAGE'] = 'image/qualitycontrol/'.$image;
 
         $update = DB::table('tmm_qualitycontrol')->where('QUALITYCONTROL_ID','=', $id)->update($data);
 
