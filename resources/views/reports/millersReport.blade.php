@@ -111,8 +111,9 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
-                                <select class="division form-control chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
+                                <select class="division form-control chosen-select width-65" name="DIVISION_ID" data-district-all="true" data-placeholder="Select or search data">
                                     <option value="">Select Division</option>
+                                    <option value="">All</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                                     @endforeach

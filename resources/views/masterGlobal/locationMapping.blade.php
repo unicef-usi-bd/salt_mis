@@ -3,9 +3,11 @@
     $(document).ready(function () {
         $(document).on('change', '.division', function(){
             let divisionId = $(this).val();
+            let districtAll = $(this).attr('data-district-all') || false;
             let thisScope = $(this).closest('tr');
             if(thisScope.length===0) thisScope = $(this).closest('form');
             let option = '<option value="">Select District</option>';
+            if(districtAll) option +='<option value="">All</option>';
             $.ajax({
                 type : "get",
                 url  : `supplier-profile/get-district/${divisionId}`,

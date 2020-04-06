@@ -43,8 +43,22 @@ class QulityControlTestingController extends Controller
        $qualityControl = QulityControlTesting::getQualityControlData();
        $qualityControlResultRange = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
 
+        if($qualityControlResultRange && sizeof($qualityControl)>0){
+            foreach ($qualityControl as $quality){
+                $quality->status = self::testPassOrFail($qualityControlResultRange, $quality);
+            }
+        }
+
 //       $this->pr($qualityControlResultRange);
         return view('transactions.qualityControlAndTesting.qualityControlTestingIndex',compact('heading','previllage','qualityControl','qualityControlResultRange'));
+    }
+
+    public static function testPassOrFail($range, $quality){
+        if($quality->SODIUM_CHLORIDE<$range->SODIUM_CHLORIDE_MIN || $quality->SODIUM_CHLORIDE>$range->SODIUM_CHLORIDE_MAX) return 'Fail';
+        if($quality->MOISTURIZER<$range->MOISTURIZER_MIN || $quality->MOISTURIZER>$range->MOISTURIZER_MIN) return 'Fail';
+        if($quality->IODINE_CONTENT<$range->PPM_MIN || $quality->IODINE_CONTENT>$range->PPM_MIN) return 'Fail';
+        if($quality->PH<$range->PH_MIN || $quality->PH>$range->PH_MIN) return 'Fail';
+        return 'Pass';
     }
 
     /**

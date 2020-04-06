@@ -558,6 +558,9 @@ class Report extends Model
     }
 
     public static function getListofClint($centerId,$divisionId,$districtId){
+        $conditions = '';
+        if($divisionId) $conditions .= "and s.DIVISION_ID = $divisionId";
+        if($districtId) $conditions .= "and s.DISTRICT_ID = $districtId";
         return DB::select(DB::raw("SELECT s.TRADING_NAME,s.DISTRICT_ID, s.DIVISION_ID,
             (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
             (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
@@ -566,7 +569,7 @@ class Report extends Model
             FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
-            AND t.TRAN_FLAG = 'SD' and s.center_id = $centerId and s.DIVISION_ID = $divisionId and s.DISTRICT_ID = $districtId"));
+            AND t.TRAN_FLAG = 'SD' and s.center_id = $centerId $conditions"));
     }
 
     public static function getSaleClintList($centerId,$customerId,$itemTypeId){

@@ -232,7 +232,7 @@ class DashboardController extends Controller
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();
 
-        $totalassociationproduction = $associationWashCrash+$associationIodize;
+        $totalassociationproduction = ($associationWashCrash+$associationIodize);
 
         $associationWashCrashMonthwise = Stock::totalAssociationWashcrashMonthWise();
         $associationIodizeMonthWise = Stock::totalAssociationIodizeMonthwise();
