@@ -51,8 +51,9 @@
                         <span class="block input-icon input-icon-right">
                             <select class="chosen-select form-control chemical-source" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
                                 <option value="">Select One</option>
+                                <option value="{{$defaultSupplier->SUPP_ID_AUTO}}" @if($defaultSupplier->TRADING_NAME=='BSCIC') selected @endif > {{$defaultSupplier->TRADING_NAME}}</option>
                                 @foreach($suppliers as $supplier)
-                                    <option value="{{$supplier->SUPP_ID_AUTO}}" @if($supplier->TRADING_NAME=='BSCIC') selected @endif > {{$supplier->TRADING_NAME}}</option>
+                                    <option value="{{$supplier->SUPP_ID_AUTO}}"> {{$supplier->TRADING_NAME}}</option>
                                 @endforeach
                                 <option value="1001">Other</option>
                             </select>

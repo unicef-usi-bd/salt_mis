@@ -68,14 +68,10 @@ class SupplierProfile extends Model
             ->get();
     }
 
-    public static function defultSupplierProfile($crudeSaltSupplierTypeId){
+    public static function defaultSupplierProfile($crudeSaltSupplierTypeId){
         return DB::table('ssm_supplier_info')
-            ->select('*','ssc_lookupchd.LOOKUPCHD_NAME')
-            ->leftJoin('ssc_lookupchd','ssm_supplier_info.SUPPLIER_TYPE_ID', '=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('ssm_supplier_info.SUPPLIER_TYPE_ID','=',$crudeSaltSupplierTypeId)
-            ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
-            ->where('ssm_supplier_info.TRADING_NAME','Like','BSCIC')
-            ->orderBy('ssm_supplier_info.TRADING_NAME','=','BSCIC','DESC')
+            ->where('ssm_supplier_info.TRADING_NAME','=','BSCIC')
             ->first();
     }
 
