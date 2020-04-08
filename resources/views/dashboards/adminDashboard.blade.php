@@ -133,7 +133,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Production stock(W&C + iodized) & sales stock(W&C + iodized)
+                        Production (W&C + iodized) & sales (W&C + iodized)
                     </h5>
 
                 </div>
