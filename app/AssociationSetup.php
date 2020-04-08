@@ -73,4 +73,11 @@ class AssociationSetup extends Model
             ->where('ASSOCIATION_ID','=',$centerId)
             ->first();
     }
+
+    public static function associationByMillId($millId){
+        return DB::table('ssm_associationsetup')
+            ->where('MILL_ID','=', $millId)
+            ->pluck('ASSOCIATION_ID')
+            ->first();
+    }
 }

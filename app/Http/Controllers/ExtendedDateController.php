@@ -69,8 +69,9 @@ class ExtendedDateController extends Controller
         $millInfo = ExtendedDate::millerDetails($millId);
         $entepreunerInfo = ExtendedDate::millerEnteprunerDetails($millId);
         $certificateInfo = ExtendedDate::millerCertificateInfo($millId);
-
-        $view = view("setup.extendate.millerInfo",compact('millInfo','millId','entepreunerInfo','certificateInfo'))->render();
+        $centerId = AssociationSetup::associationByMillId($millId);
+        $extendDate = User::extendDateByCenterId($centerId);
+        $view = view("setup.extendate.millerInfo",compact('millInfo','millId','entepreunerInfo','certificateInfo', 'extendDate'))->render();
         return response()->json(['html'=>$view]);
     }
 

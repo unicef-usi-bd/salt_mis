@@ -180,6 +180,17 @@ class User extends Authenticatable
         return $data;
     }
 
+    public static function extendDateByCenterId($centerId = null){
+        if(empty($centerId)) $centerId = Auth::user()->center_id;
+        $extendDate = DB::table('users')
+            ->where('users.center_id','=', $centerId)
+            ->whereNotNull('renewing_date')
+            ->orderBy('renewing_date', 'desc')
+            ->pluck('renewing_date')
+            ->first();
+        return $extendDate;
+    }
+
      public static function getDuplicateEmail($email){
       return DB::table('users')->select('users.email')->where('users.email','=',$email)->first();
      }

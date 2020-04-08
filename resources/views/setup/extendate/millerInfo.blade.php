@@ -50,6 +50,11 @@
                     <th>Renewing Date </th>
                     <th> :</th>
                     <td class="renewalDate" style="background-color: red; max-width: 100px; font-weight: bolder; color: white;">{{ date('m/d/Y', strtotime($millInfo->RENEWING_DATE)) }}</td>
+                    @if($extendDate)
+                    <th>Extend Date</th>
+                    <th> :</th>
+                    <td style="background: yellowgreen;max-width: 100px; font-weight: bolder; color: black;">{{ date('m/d/Y', strtotime($extendDate)) }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th>Mill&nbsp;Name</th>

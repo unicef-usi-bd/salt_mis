@@ -300,7 +300,7 @@ class DashboardController extends Controller
         $totalStockKi = $totalProcrument - $kiUsed;
         $centerId = Auth::user()->center_id ;
         $millerInfo = MillerInfo::millerInfoByCenterId();
-        $userInfo = User::userInfoByCenterId();
+        $extendDate = User::extendDateByCenterId();
 
         $millerCertificateInfo = Certificate::millerCertificateInfoByMillId($millerInfo->MILL_ID);
         if(!$millerCertificateInfo){
@@ -309,7 +309,7 @@ class DashboardController extends Controller
             return redirect()->route('login')->with(['warning' => $message]);
         }
         $milerExpireDate = $this->dateFormat($millerCertificateInfo->RENEWING_DATE);
-        $userExpireDate = $this->dateFormat($userInfo->renewing_date);
+        $userExpireDate = $this->dateFormat($extendDate);
 
         if($millerCertificateInfo) {
             $checkExpired = $milerExpireDate > $userExpireDate;
