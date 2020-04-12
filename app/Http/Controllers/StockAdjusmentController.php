@@ -63,9 +63,9 @@ class StockAdjusmentController extends Controller
     public function create()
     {
         $centerId = Auth::user()->center_id;
-        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
+        $increasedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $increasedWashingSalt - abs($reducedWashingSalt);
 
         $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
 
@@ -78,12 +78,13 @@ class StockAdjusmentController extends Controller
 
         $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
         $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+
         if($iodizeSale){
             $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
         }else{
             $iodizeStock = $beforeIodizeSaleStock;
         }
+
         return view('transactions.stockAdjustment.modals.createStockAdjustment',compact('washingStock','iodizeStock'));
     }
 
@@ -96,28 +97,71 @@ class StockAdjusmentController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            //'brand_name' => 'required'
+            'system_wc_stock' => 'required',
+            'wc_stock' => 'required',
+            'system_iodize_stock' => 'required',
+            'iodize_stock' => 'required'
+        );
+        $error = array(
+            'system_wc_stock.required' => 'System Wash and crashing stock amount field is required.',
+            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
+            'system_iodize_stock.required' => 'System Iodize stock amount field is required.',
+            'iodize_stock.required' => 'Iodize stock amount field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $data = array([
-                'wc_stock' => $request->input('wc_stock'),
-                'iodize_stock' => $request->input('iodize_stock'),
-                'center_id' => Auth::user()->center_id,
-                'ENTRY_BY' => Auth::user()->id
-            ]);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            $brand = StockAdjusment::insertStockAdjestment($data);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-            if($brand){
-                return redirect('/stock-adjustment')->with('success', 'Stock Adjustment Data Created !');
-            }
+        $data = array(
+            'system_wc_stock' => $request->input('system_wc_stock'),
+            'wc_stock' => $request->input('wc_stock'),
+            'system_iodize_stock' => $request->input('system_iodize_stock'),
+            'iodize_stock' => $request->input('iodize_stock'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id
+        );
+
+        $insertedId = StockAdjusment::insertStockAdjustment($data);
+
+        $this->washCrushingAdjustment($insertedId, $request->input('system_wc_stock'), $request->input('wc_stock'));
+        $this->iodizedAdjustment($insertedId, $request->input('system_iodize_stock'), $request->input('iodize_stock'));
+
+        if($insertedId){
+            return response()->json(['success'=>'Stock adjustment has been created']);
+        } else{
+            return response()->json(['errors'=>'Stock adjustment create failed']);
         }
+
     }
+
+    public function washCrushingAdjustment($stock_adjustment_id, $systemWashCrush, $stockWashCrush){
+        $amount = null;
+        if($systemWashCrush > $stockWashCrush){
+            $amount = $stockWashCrush-$systemWashCrush; // if stock less than system stock
+
+        } else if($systemWashCrush < $stockWashCrush){ // if stock greater than system stock
+            $amount = $stockWashCrush-$systemWashCrush;
+        }
+
+        if(!empty($amount)) return StockAdjusment::washCrushForStock($stock_adjustment_id, $amount);
+        return false;
+    }
+
+    public function iodizedAdjustment($stock_adjustment_id, $systemIodized, $stockIodized){
+        $amount = null;
+        if($systemIodized > $stockIodized){
+            $amount = $stockIodized-$systemIodized; // if stock less than system stock
+
+        } else if($systemIodized < $stockIodized){ // if stock greater than system stock
+            $amount = $stockIodized-$systemIodized;
+        }
+
+        if(!empty($amount)) return StockAdjusment::iodizedForStock($stock_adjustment_id, $amount);
+        return false;
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -139,9 +183,9 @@ class StockAdjusmentController extends Controller
     public function edit($id)
     {
         $centerId = Auth::user()->center_id;
-        $incresedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashinfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $incresedWashingSalt - abs($reducedWashinfSalt);
+        $increasedWashingSalt = Stock::getTotalWashingSalt($centerId);
+        $reducedWashingfSalt = Stock::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $increasedWashingSalt - abs($reducedWashingfSalt);
 
         $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
 
@@ -154,7 +198,7 @@ class StockAdjusmentController extends Controller
 
         $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
         $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-        //$totalReduceIodizeSalt = Stock::getTotalReduceWashingSaltAfterSale($iodizeId);
+
         if($iodizeSale){
             $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
         }else{

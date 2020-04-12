@@ -1,6 +1,5 @@
 <div class="col-md-12">
-    <form id="myform" action="{{ url('/stock-adjustment') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-        {{--<div class="col-md-12">--}}
+    <form action="{{ url('/stock-adjustment') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12" style="margin-top: 15px; margin-left: 50px;">
@@ -15,14 +14,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>W & C Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
-                            <input type="text" name="" id="" placeholder=""  value="{{ $washingStock }}" class="form-control col-xs-5 col-sm-5" readonly />
+                            <input type="text" name="system_wc_stock" id="" placeholder=""  value="{{ $washingStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodize Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
-                            <input type="text" name="" id="" placeholder=""  value="{{ $iodizeStock }}" class="form-control col-xs-5 col-sm-5" readonly />
+                            <input type="text" name="system_iodize_stock" id="" placeholder=""  value="{{ $iodizeStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
@@ -53,8 +52,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'unions' }}">--}}
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary"  onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -65,4 +63,4 @@
 
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.datePicker')
-@include('masterGlobal.formValidation')
+@include('masterGlobal.ajaxFormSubmit')
