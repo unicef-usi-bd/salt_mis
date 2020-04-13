@@ -7,6 +7,7 @@ use App\LookupGroupData;
 use App\UserGroup;
 use App\UserGroupLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -182,28 +183,6 @@ class StockAdjusmentController extends Controller
      */
     public function edit($id)
     {
-        $centerId = Auth::user()->center_id;
-        $increasedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashingfSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $increasedWashingSalt - abs($reducedWashingfSalt);
-
-        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-
-        if($afterSaleWashing){
-            $washingStock = $WashingTotalUseInIodize - abs($afterSaleWashing);
-        }else{
-            $washingStock = $WashingTotalUseInIodize;
-        }
-
-
-        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
-        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-
-        if($iodizeSale){
-            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
-        }else{
-            $iodizeStock = $beforeIodizeSaleStock;
-        }
         $editStockAdjust = StockAdjusment::editStockAdjustment($id);
 
         return view('transactions.stockAdjustment.modals.editStockAdjustment',compact('editStockAdjust','washingStock','iodizeStock'));
@@ -219,18 +198,43 @@ class StockAdjusmentController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            //'brand_name' => 'required'
+            'system_wc_stock' => 'required',
+            'wc_stock' => 'required',
+            'system_iodize_stock' => 'required',
+            'iodize_stock' => 'required'
+        );
+        $error = array(
+            'system_wc_stock.required' => 'System Wash and crashing stock amount field is required.',
+            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
+            'system_iodize_stock.required' => 'System Iodize stock amount field is required.',
+            'iodize_stock.required' => 'Iodize stock amount field is required.'
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $updateStockAsjustment = StockAdjusment::updateStockAdjust($request,$id);
-            if($updateStockAsjustment){
-                return redirect('/stock-adjustment')->with('success', 'Stock Adjustment Data Updated !');
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $data = array(
+            'system_wc_stock' => $request->input('system_wc_stock'),
+            'wc_stock' => $request->input('wc_stock'),
+            'system_iodize_stock' => $request->input('system_iodize_stock'),
+            'iodize_stock' => $request->input('iodize_stock'),
+            'center_id' => Auth::user()->center_id,
+            'ENTRY_BY' => Auth::user()->id
+        );
+
+        $updated = StockAdjusment::updateStockAdjust($data, $id);
+
+        if($updated){
+            $arrayStockId = StockAdjusment::getPrimaryIdByStockAdjustmentId($id);
+            $delete = DB::table('tmm_itemstock')->whereIn('STOCK_NO', $arrayStockId)->delete();
+            if($delete){
+                $this->washCrushingAdjustment($id, $request->input('system_wc_stock'), $request->input('wc_stock'));
+                $this->iodizedAdjustment($id, $request->input('system_iodize_stock'), $request->input('iodize_stock'));
             }
+            return response()->json(['success'=>'Stock adjustment has been updated']);
+        } else{
+            return response()->json(['errors'=>'Stock adjustment update failed']);
         }
     }
 

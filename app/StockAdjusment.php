@@ -57,19 +57,21 @@ class StockAdjusment extends Model
             ->first();
     }
 
-    public static function updateStockAdjust($request,$id){
-        $update = DB::table('stock_adjustment')->where('stock_id','=',$id)->update([
-            'wc_stock' => $request->input('wc_stock'),
-            'iodize_stock' => $request->input('iodize_stock'),
-            'center_id' => Auth::user()->center_id,
-            'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
-            'UPDATE_BY' => Auth::user()->id
-        ]);
-
+    public static function updateStockAdjust($data, $id){
+        $update = DB::table('stock_adjustment')->where('stock_id','=',$id)->update($data);
         return $update;
     }
 
+    public static function getPrimaryIdByStockAdjustmentId($id){
+        return DB::table('tmm_itemstock')->where('stock_adjustment_id', $id)->pluck('STOCK_NO')->toarray();
+    }
+
     public static function deleteStokAdjust($id){
-        return DB::table('stock_adjustment')->where('stock_id',$id)->delete();
+        $arrayStockId = self::getPrimaryIdByStockAdjustmentId($id);
+        $delete = DB::table('tmm_itemstock')->whereIn('STOCK_NO', $arrayStockId)->delete();
+        if($delete){
+            $delete = DB::table('stock_adjustment')->where('stock_id', $id)->delete();
+        }
+        return $delete;
     }
 }
