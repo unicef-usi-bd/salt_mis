@@ -257,7 +257,7 @@ class DashboardController extends Controller
         $associationMillerCertificate = Certificate::associatonCertificate();
         $totalWcDashboard = Stock::totalAssociationWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalAssociationIodizeForDashboard();
-        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleAssociationDashboard();
         $totalYearProduction = Stock::associationYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalAssociationProcurment();

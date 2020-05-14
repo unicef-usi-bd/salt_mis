@@ -141,7 +141,9 @@ class Stock extends Model
             ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('TRAN_TYPE','=','W')
-            ->where('TRAN_FLAG','=','WI');
+            ->where('TRAN_FLAG','=','WI')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
 
         if($centerId) $countProduction->where('stock.center_id','=',$centerId);
 
@@ -156,7 +158,9 @@ class Stock extends Model
             ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('TRAN_TYPE','=','I')
-            ->where('TRAN_FLAG','=','II');
+            ->where('TRAN_FLAG','=','II')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId) $countProduction->where('stock.center_id','=', $centerId);
 
         return $countProduction->sum('stock.QTY');
@@ -249,6 +253,7 @@ class Stock extends Model
                                 left join ssm_associationsetup association on it.center_id = association.ASSOCIATION_ID
                                 left join ssm_mill_info smi on association.MILL_ID = smi.MILL_ID
                                 where smi.ACTIVE_FLG=1 and it.TRAN_FLAG in('WI','II')
+                                AND it.stock_adjustment_id is null and it.TRAN_NO is not null
                                 and it.center_id = $centerId
                                 and YEAR(it.TRAN_DATE)"))[0];
         return $yearWiseProduction;
@@ -260,7 +265,9 @@ class Stock extends Model
                                 from tmm_itemstock it
                                 left join ssm_associationsetup association on it.center_id = association.ASSOCIATION_ID
                                 left join ssm_mill_info smi on association.MILL_ID = smi.MILL_ID
-                                WHERE it.center_id and smi.ACTIVE_FLG=1 and it.TRAN_FLAG in('WI','II') and YEAR(TRAN_DATE)"))[0];
+                                WHERE it.center_id and smi.ACTIVE_FLG=1 and it.TRAN_FLAG in('WI','II')
+                                AND it.stock_adjustment_id is null and it.TRAN_NO is not null
+                                and YEAR(TRAN_DATE)"))[0];
 
         return $yearWiseProduction;
     }
@@ -340,6 +347,7 @@ class Stock extends Model
                                        and (it.TRAN_FLAG = 'WI' or it.TRAN_FLAG = 'II')
                                        and YEAR(TRAN_DATE)
                                        AND TRAN_DATE > $date
+                                       AND it.stock_adjustment_id is null and it.TRAN_NO is not null
                                        GROUP BY month"));
         //$monthProduction = DB::table('tmm_itemstock')
     }
@@ -354,6 +362,8 @@ class Stock extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.center_id', '=', $centerId)
             ->whereIn('stock.TRAN_FLAG', ['WI', 'II'])
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO')
             ->get();
         return $productions;
     }
@@ -401,7 +411,9 @@ class Stock extends Model
                             ->leftJoin('ssm_associationsetup as asstp','asstp.ASSOCIATION_ID','=','stock.center_id')
                             ->leftJoin('ssm_mill_info as smi','asstp.MILL_ID','=','smi.MILL_ID')
                             ->where('smi.ACTIVE_FLG','=','1')
-                            ->where('stock.TRAN_FLAG','=','WI');
+                            ->where('stock.TRAN_FLAG','=','WI')
+                            ->whereNull('stock.stock_adjustment_id')
+                            ->whereNotNull('stock.tran_no');
         if($centerId) $countProduction->where('asstp.center_id','=',$centerId);
 
         return $countProduction->sum('stock.QTY');
@@ -414,7 +426,9 @@ class Stock extends Model
             ->leftJoin('ssm_associationsetup as asstp','asstp.ASSOCIATION_ID','=','stock.center_id')
             ->leftJoin('ssm_mill_info as smi','asstp.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
-            ->where('stock.TRAN_FLAG','=','II');
+            ->where('stock.TRAN_FLAG','=','II')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.tran_no');
 
         if($centerId) $countProduction->where('asstp.center_id','=',$centerId);
 
@@ -505,6 +519,7 @@ class Stock extends Model
                   FROM tmm_itemstock s, ssm_associationsetup a
                   WHERE a.ASSOCIATION_ID = s.center_id
                   -- AND a.center_id = m.center_id
+                  AND it.stock_adjustment_id is null and it.TRAN_NO is not null
                   AND a.center_id  = $centerId
                   GROUP BY a.ASSOCIATION_ID"));
     }
@@ -516,7 +531,9 @@ class Stock extends Model
             ->leftJoin('smm_item','smm_item.ITEM_NO','=','stock.ITEM_NO')
             ->leftJoin('ssm_associationsetup as asstp','asstp.ASSOCIATION_ID','=','stock.center_id')
             ->leftJoin('ssm_mill_info as smi','asstp.MILL_ID','=','smi.MILL_ID')
-            ->where('smi.ACTIVE_FLG','=','1');
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.tran_no');
         if($centerId) {
             $totalProductions->where(function ($query) use ($centerId) {
                 $query->where('stock.center_id','=',$centerId)->orwhere('stock.TRAN_FLAG','=','WI')->orWhere('stock.TRAN_FLAG','=','II');
@@ -536,7 +553,9 @@ class Stock extends Model
             ->leftJoin('ssm_associationsetup as asstp','asstp.ASSOCIATION_ID','=','stock.center_id')
             ->leftJoin('ssm_mill_info as smi','asstp.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
-            ->where('stock.TRAN_FLAG','=','SD');
+            ->where('stock.TRAN_FLAG','=','SD')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.tran_no');
         if($centerId) $totalProductionSale->where('asstp.center_id','=',$centerId);
         return $totalProductionSale->get();
     }
@@ -550,6 +569,7 @@ class Stock extends Model
                   AND a.center_id  = $centerId
                   and (s.TRAN_FLAG = 'WI' or s.TRAN_FLAG = 'II')
                   and YEAR(TRAN_DATE)
+                  AND it.stock_adjustment_id is null and it.TRAN_NO is not null
                   GROUP BY a.ASSOCIATION_ID,month"));
     }
 
@@ -561,7 +581,6 @@ class Stock extends Model
         $countProduction->where('TRAN_FLAG','=','II');
         $countProduction->where('center_id','=',$child_id);
 
-
         return $countProduction->sum('tmm_itemstock.QTY');
     }
 
@@ -571,7 +590,6 @@ class Stock extends Model
         $countProduction->where('TRAN_TYPE','=','W');
         $countProduction->where('TRAN_FLAG','=','WI');
         $countProduction->where('center_id','=',$child_id);
-
 
         return $countProduction->sum('tmm_itemstock.QTY');
     }
@@ -619,7 +637,9 @@ class Stock extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.TRAN_TYPE','=','W')
             ->where('stock.TRAN_FLAG','=','WI')
-            ->where('stock.TRAN_DATE','>',$date);
+            ->where('stock.TRAN_DATE','>',$date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId) $totalWc->where('stock.center_id','=',$centerId);
         return $totalWc->sum('stock.QTY');
     }
@@ -634,7 +654,9 @@ class Stock extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.TRAN_TYPE','=','I')
             ->where('stock.TRAN_FLAG','=','II')
-            ->where('stock.TRAN_DATE','>',$date);
+            ->where('stock.TRAN_DATE','>',$date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId) $totalIo->where('stock.center_id','=',$centerId);
         return $totalIo->sum('stock.QTY');
     }
@@ -647,6 +669,8 @@ class Stock extends Model
             ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.TRAN_FLAG','=','WI')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO')
             ->where('stock.TRAN_DATE','>',$date);
 
         return $totalWc->sum('stock.QTY');
@@ -661,6 +685,8 @@ class Stock extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.TRAN_TYPE','=','I')
             ->where('stock.TRAN_FLAG','=','II')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO')
             ->where('stock.TRAN_DATE','>',$date);
 
         return $totalIo->sum('stock.QTY');
