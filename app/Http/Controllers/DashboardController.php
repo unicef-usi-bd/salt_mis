@@ -89,7 +89,7 @@ class DashboardController extends Controller
         $monthWiseProcurement = Stock::monthWiseProcurement();
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
-        $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
+        $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
         $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();

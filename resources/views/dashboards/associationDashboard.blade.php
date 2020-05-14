@@ -502,7 +502,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
                 datasets: [{
-                    label: 'Month wise current year production chart Total = ' + yearQty,
+                    label: 'Month wise current year production chart Total = ' + yearQty.toFixed(2),
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                     // data: [0, 10, 5, 2, 20, 30, 45]
