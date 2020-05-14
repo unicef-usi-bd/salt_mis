@@ -81,7 +81,7 @@ class DashboardController extends Controller
         $totalsaleMonthWise = $totalMonthWiseWascrashSale+$totalMonthWiseIodizeSale;
 
         $totalproduction = Stock::totalProduction();
-        $totalSale = SalesDistribution::totalproductSale();
+        $totalSale = SalesDistribution::productSales();
         $totalStock = Stock::totalStocks();
 
         $monthWiseProduction = Stock::monthWiseProduction();
@@ -90,7 +90,7 @@ class DashboardController extends Controller
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
-        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
@@ -124,7 +124,7 @@ class DashboardController extends Controller
         $totalsaleMonthWise = $totalMonthWiseWascrashSale+$totalMonthWiseIodizeSale;
 
         $totalproduction = Stock::totalProduction();
-        $totalSale = SalesDistribution::totalproductSale();
+        $totalSale = SalesDistribution::productSales();
         $totalStock = Stock::totalStocks();
 
         $saleTotal = SalesDistribution::totalSale();
@@ -132,7 +132,7 @@ class DashboardController extends Controller
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
-        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
@@ -164,7 +164,7 @@ class DashboardController extends Controller
         $totalsaleMonthWise = $totalMonthWiseWascrashSale+$totalMonthWiseIodizeSale;
 
         $totalproduction = Stock::totalProduction();
-        $totalSale = SalesDistribution::totalproductSale();
+        $totalSale = SalesDistribution::productSales();
         $totalStock = Stock::totalStocks();
 
         $saleTotal = SalesDistribution::totalSale();
@@ -173,7 +173,7 @@ class DashboardController extends Controller
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
-        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
@@ -205,7 +205,7 @@ class DashboardController extends Controller
         $totalsaleMonthWise = $totalMonthWiseWascrashSale+$totalMonthWiseIodizeSale;
 
         $totalproduction = Stock::totalProduction();
-        $totalSale = SalesDistribution::totalproductSale();
+        $totalSale = SalesDistribution::productSales();
         $totalStock = Stock::totalStocks();
 
         $saleTotal = SalesDistribution::totalSale();
@@ -214,7 +214,7 @@ class DashboardController extends Controller
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard+$totalIoDashboard;
-        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::adminYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock () ;
@@ -279,7 +279,7 @@ class DashboardController extends Controller
         $totalProductSales = $totalWashCrashSale + $totalIodizeSale;
         $procurementList = Stock::procurementList();
         $totalproduction = Stock::millerProduction();
-        $totalSale = SalesDistribution::totalproductSale();
+        $totalSale = SalesDistribution::productSales();
         $monthWiseProduction = Stock::monthWiseMillProduction();
         $monthWiseProcurement = Stock::monthWiseProcurement();
         $totalStock = Stock::totalStocks();
@@ -291,7 +291,7 @@ class DashboardController extends Controller
         $totalWcDashboard = Stock::totalWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
-        $totalSaleDashboard = SalesDistribution::totalSaleDashboard();
+        $totalSaleDashboard = SalesDistribution::totalSaleCurrentMonth();
         $totalYearProduction = Stock::millerYearWiseProduction();
         $totalProcrument = ChemicalPurchase::totalProcurment();
         $kiStock = ChemicalPurchase::kiInstock();

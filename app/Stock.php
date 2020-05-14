@@ -685,5 +685,19 @@ class Stock extends Model
         if($iodizeSale) $iodizeStock = $iodizeStock - $iodizeSale;
         return $iodizeStock;
     }
+//    Stock Wise Sales individual miller
+    public static function millerSales($centerId=null){
+        $sales = DB::table('tmm_itemstock as stock')
+            ->select('stock.*')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('stock.TRAN_FLAG','=','SD')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
+        if($centerId) $sales->where('stock.center_id','=',$centerId);
+
+        return $sales;
+    }
 }
 

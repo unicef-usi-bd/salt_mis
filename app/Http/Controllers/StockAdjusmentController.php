@@ -246,7 +246,7 @@ class StockAdjusmentController extends Controller
      */
     public function destroy($id)
     {
-        $delete = StockAdjusment::deleteStokAdjust($id);
+        $delete = StockAdjusment::deleteStockAdjust($id);
         if($delete){
             echo json_encode([
                 'type' => 'tr',

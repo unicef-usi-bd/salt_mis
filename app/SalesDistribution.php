@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\Input;
 
 class SalesDistribution extends Model
 {
+    private static $parentTable = 'tmm_salesmst', $childTable = 'tmm_saleschd',
+        $pKey = 'tmm_salesmst.SALESMST_ID', $fKey = 'tmm_saleschd.SALESMST_ID';
+
     public static function getSalesDistributionData(){
-        return DB::table('tmm_saleschd')
+        return self::millerSales()->get();
+    }
+
+    public static function millerSales(){
+        return DB::table(self::$childTable)
             ->select('tmm_saleschd.*','smm_item.ITEM_NAME','tmm_salesmst.SALES_DATE','ssc_lookupchd.LOOKUPCHD_NAME', 'ssc_lookupchd.DESCRIPTION')
             ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
-            ->leftJoin('tmm_salesmst','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
+            ->leftJoin(self::$parentTable, self::$fKey,'=', self::$pKey)
             ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->where('tmm_saleschd.center_id','=',Auth::user()->center_id)
-            ->orderBy('tmm_saleschd.SALESMST_ID', 'DESC')
-            ->get();
+            ->orderBy('tmm_saleschd.SALESMST_ID', 'DESC');
     }
+
     public static function getTradingName(){
         $centerId = Auth::user()->center_id;
         $customerInfo =  DB::table('ssm_customer_info');
@@ -142,7 +149,9 @@ class SalesDistribution extends Model
             ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('TRAN_TYPE','=','W')
-            ->where('TRAN_FLAG','=','SD');
+            ->where('TRAN_FLAG','=','SD')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
 
         if($centerId) $countSales->where('stock.center_id','=',$centerId);
 
@@ -157,7 +166,9 @@ class SalesDistribution extends Model
             ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('TRAN_TYPE','=','I')
-            ->where('TRAN_FLAG','=','SD');
+            ->where('TRAN_FLAG','=','SD')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
 
         if($centerId) $countSales->where('stock.center_id','=',$centerId);
 
@@ -174,7 +185,9 @@ class SalesDistribution extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('TRAN_TYPE','=','W')
             ->where('TRAN_FLAG','=','SD')
-            ->where('stock.TRAN_DATE','>', $date);
+            ->where('stock.TRAN_DATE','>', $date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
 
         if($centerId) $countSales->where('stock.center_id','=',$centerId);
 
@@ -191,7 +204,9 @@ class SalesDistribution extends Model
             ->where('smi.ACTIVE_FLG','=','1')
             ->where('stock.TRAN_TYPE','=','I')
             ->where('stock.TRAN_FLAG','=','SD')
-            ->where('stock.TRAN_DATE','>',$date);
+            ->where('stock.TRAN_DATE','>',$date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId) $countSales->where('stock.center_id','=',$centerId);
 
         return $countSales->sum('stock.QTY');
@@ -199,32 +214,20 @@ class SalesDistribution extends Model
     ///-----------------------Sales
 
     ///-----------------------Dashboard product sale
-    public static function totalproductSale(){
+    public static function productSales(){
         $centerId = Auth::user()->center_id;
-        $totalProductionSale = DB::table('tmm_itemstock as stock')
-            ->select('stock.*')
-            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
-            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
-            ->where('smi.ACTIVE_FLG','=','1')
-            ->where('stock.TRAN_FLAG','=','SD');
-        if($centerId) $totalProductionSale->where('stock.center_id','=',$centerId);
+        $totalProductionSale = Stock::millerSales($centerId);
         return $totalProductionSale->get();
     }
     ///-----------------------Dashboard product sale
 
-    /// ----------------------Total Sale
+    // ----------------------Total Sale Start
     public static function totalSale(){
         $centerId = Auth::user()->center_id;
-        $totalSale = DB::table('tmm_itemstock as stock')
-            ->select('stock.QTY')
-            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
-            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
-            ->where('smi.ACTIVE_FLG','=','1')
-            ->where('stock.TRAN_FLAG','=','SD');
-        if($centerId) $totalSale->where('stock.center_id','=',$centerId);
+        $totalSale = Stock::millerSales($centerId);
         return $totalSale->sum('stock.QTY');
     }
-    /// ----------------------Total Sale
+    // ----------------------Total Sale End
 
     public static function getPacksize($packQuantity){
 
@@ -261,16 +264,10 @@ class SalesDistribution extends Model
 
     //for Service
 
-    public static function totalSaleDashboard(){
+    public static function totalSaleCurrentMonth(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $totalSale = DB::table('tmm_itemstock as stock')
-            ->select('stock.QTY')
-            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
-            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
-            ->where('smi.ACTIVE_FLG','=','1')
-            ->where('stock.TRAN_FLAG','=','SD')
-            ->where('stock.TRAN_DATE','>',$date);
+        $totalSale = Stock::millerSales()->where('stock.TRAN_DATE','>',$date);
         if($centerId) $totalSale->where('stock.center_id','=',$centerId);
         return $totalSale->sum('stock.QTY');
     }

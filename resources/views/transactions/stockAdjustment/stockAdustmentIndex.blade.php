@@ -24,10 +24,19 @@
             <table class="table table-striped table-bordered table-hover gridTable" title="Bank List">
                 <thead>
                 <tr>
-                    <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Wash & Crash Stock (KG)</th>
-                    <th>Iodize Stock (KG)</th>
-                    <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
+                    <th rowspan="2" class="fixedWidth">{{ trans('dashboard.sl') }}</th>
+                    <th colspan="3" class="text-center">Wash & Crash Stock (KG)</th>
+                    <th colspan="3" class="text-center">Iodize Stock (KG)</th>
+                    <th rowspan="2">Date</th>
+                    <th rowspan="2" class="fixedWidth">{{ trans('dashboard.action') }}</th>
+                </tr>
+                <tr>
+                    <td><b>System&nbsp;Stock</b></td>
+                    <td><b>Physical&nbsp;Stock</b></td>
+                    <td><b>Stock&nbsp;After&nbsp;Adjustment</b></td>
+                    <td><b>System&nbsp;Stock</b></td>
+                    <td><b>Physical&nbsp;Stock</b></td>
+                    <td><b>Stock&nbsp;After&nbsp;Adjustment</b></td>
                 </tr>
                 </thead>
 
@@ -36,8 +45,13 @@
                 @foreach($stockAdjustmentData as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
+                        <td>{{ number_format($row->system_wc_stock, 2) }}</td>
                         <td>{{ number_format($row->wc_stock, 2) }}</td>
+                        <td>{{ number_format($row->wc_stock, 2) }}</td>
+                        <td>{{ number_format($row->system_iodize_stock, 2) }}</td>
                         <td>{{ number_format($row->iodize_stock, 2) }}</td>
+                        <td>{{ number_format($row->iodize_stock, 2) }}</td>
+                        <td>{{ date('d M, Y', strtotime($row->UPDATE_TIMESTAMP)) }}</td>
                         <td class="row{{ $row->stock_id }}">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php
