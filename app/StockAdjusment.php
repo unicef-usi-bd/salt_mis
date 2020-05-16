@@ -68,10 +68,8 @@ class StockAdjusment extends Model
 
     public static function deleteStockAdjust($id){
         $arrayStockId = self::getPrimaryIdByStockAdjustmentId($id);
-        $delete = DB::table('tmm_itemstock')->whereIn('STOCK_NO', $arrayStockId)->delete();
-        if($delete){
-            $delete = DB::table('stock_adjustment')->where('stock_id', $id)->delete();
-        }
+        if($arrayStockId) DB::table('tmm_itemstock')->whereIn('STOCK_NO', $arrayStockId)->delete();
+        $delete = DB::table('stock_adjustment')->where('stock_id', $id)->delete();
         return $delete;
     }
 }
