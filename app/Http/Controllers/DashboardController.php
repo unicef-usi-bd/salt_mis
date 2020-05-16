@@ -298,29 +298,19 @@ class DashboardController extends Controller
         $kiUsed = abs(ChemicalPurchase::kiInUsed());
         $totalKiInStock = $kiStock - $kiUsed;
         $totalStockKi = $totalProcrument - $kiUsed;
-        $centerId = Auth::user()->center_id ;
         $millerInfo = MillerInfo::millerInfoByCenterId();
         $extendDate = User::extendDateByCenterId();
 
-        $millerCertificateInfo = Certificate::millerCertificateInfoByMillId($millerInfo->MILL_ID);
-        if(!$millerCertificateInfo){
+        $certificateExpireDate = Certificate::millerCertificateExpired($millerInfo->MILL_ID);
+        if(!$certificateExpireDate){
             $message = "Miller certificate's not found. Please provide your certificates to association.!!!";
             Auth::logout();
             return redirect()->route('login')->with(['warning' => $message]);
         }
-        $milerExpireDate = $this->dateFormat($millerCertificateInfo->RENEWING_DATE);
-        $userExpireDate = $this->dateFormat($extendDate);
+        $millExpireDate = $this->dateFormat($extendDate);
 
-        if($millerCertificateInfo) {
-            $checkExpired = $milerExpireDate > $userExpireDate;
-            if ($checkExpired) {
-                $userExpireDate = $milerExpireDate;
-                DB::table('users')->where('center_id', $centerId)->update([
-                    'renewing_date' => $milerExpireDate,
-                ]);
-            }
-
-            if ($this->hasAuthorization($userExpireDate)) {
+        if($certificateExpireDate) {
+            if ($this->hasAuthorization($certificateExpireDate) || $this->hasAuthorization($millExpireDate)) {
                 return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument','totalStockKi'));
             } else {
                 $message = "Your Certificate Is Expired. Please Contact With Your Association.!!!";

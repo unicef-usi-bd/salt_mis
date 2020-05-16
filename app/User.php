@@ -183,10 +183,11 @@ class User extends Authenticatable
     public static function extendDateByCenterId($centerId = null){
         if(empty($centerId)) $centerId = Auth::user()->center_id;
         $extendDate = DB::table('users')
+            ->leftJoin('ssm_associationsetup as asc', 'users.center_id', '=', 'asc.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi', 'asc.MILL_ID', '=', 'smi.MILL_ID')
             ->where('users.center_id','=', $centerId)
-            ->whereNotNull('renewing_date')
-            ->orderBy('renewing_date', 'desc')
-            ->pluck('renewing_date')
+            ->whereNotNull('smi.extend_date')
+            ->pluck('smi.extend_date')
             ->first();
         return $extendDate;
     }

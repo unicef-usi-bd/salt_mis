@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 class Certificate extends Model
 {
 
-    public static function millerCertificateInfoByMillId($millerId){
-        $data = DB::table('ssm_certificate_info as sci')
-            ->select('sci.RENEWING_DATE')
+    public static function millerCertificateExpired($millerId){
+        $expiredDate = DB::table('ssm_certificate_info as sci')
             ->where('sci.MILL_ID','=', $millerId)
             ->where('sci.IS_EXPIRE','=', 1)
-            ->orderBy('sci.RENEWING_DATE','desc')
+            ->orderBy('sci.RENEWING_DATE','asc')
+            ->pluck('sci.RENEWING_DATE')
             ->first();
-        return $data;
+        return $expiredDate;
     }
 
     public static function certificateInformation($millerId){

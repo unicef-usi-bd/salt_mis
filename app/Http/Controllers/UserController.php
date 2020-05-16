@@ -94,9 +94,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $centerId = $request->input('center_id');
-        $renewDate = self::maxDateFromCertificate($centerId);
-
         $rules = array(
             'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|unique:users|max:100',
@@ -156,7 +153,6 @@ class UserController extends Controller
                 'user_group_level_id' => $request->input('user_group_level_id'),
                 'address' => $request->input('address'),
                 'contact_no' => $request->input('contact_no'),
-                'renewing_date' => $renewDate,
                 'active_status' => 1,
                 'user_image' => $user_image,
                 'user_signature' => $user_signature,
@@ -180,17 +176,6 @@ class UserController extends Controller
                //return json_encode('Success');
             }
         }
-    }
-
-    public static function maxDateFromCertificate($centerId){
-        $data = DB::table('ssm_associationsetup as sas')
-            ->leftJoin('ssm_certificate_info as sci', 'sas.MILL_ID', '=', 'sci.MILL_ID')
-            ->where('sas.ASSOCIATION_ID', '=', $centerId)
-            ->orderBy('sci.RENEWING_DATE', 'desc')
-            ->pluck('RENEWING_DATE')
-            ->first();
-        if($data) return $data;
-        return date('Y-m-d');
     }
 
     /**
