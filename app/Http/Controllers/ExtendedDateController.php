@@ -78,9 +78,18 @@ class ExtendedDateController extends Controller
     public function updateExtendedDate(Request $request)
     {
         $millerId = $request->input('MILL_ID');
-
         $extendDate = $this->dateFormat($request->input('renewing_date'));
         $extendDays = $request->input('renewing_days');
+
+        $oldExtendDate = DB::table('miller_extend_dates')
+            ->orderBy('extend_date', 'desc')
+            ->pluck('extend_date')
+            ->first();
+
+        if($oldExtendDate){
+            $oldExtendDate = $this->dateFormat($oldExtendDate);
+            if($oldExtendDate>=$extendDate) return response()->json(['error' => 'Extended date Invalid.']);
+        }
         $updated = DB::table('ssm_mill_info as smi')
             ->where('MILL_ID', $millerId)
             ->update([
@@ -89,6 +98,12 @@ class ExtendedDateController extends Controller
             ]);
 
         if ($updated) {
+            $data = array(
+                'mill_id' => $millerId,
+                'extend_date' => $extendDate,
+                'extend_days' => $extendDays
+            );
+            DB::table('miller_extend_dates')->insert($data);
             return response()->json(['success' => 'Extended date successfully.']);
         } else {
             return response()->json(['success' => 'Extended date failed.']);
