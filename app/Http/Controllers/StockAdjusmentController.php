@@ -64,27 +64,10 @@ class StockAdjusmentController extends Controller
     public function create()
     {
         $centerId = Auth::user()->center_id;
-        $increasedWashingSalt = Stock::getTotalWashingSalt($centerId);
-        $reducedWashingSalt = Stock::getTotalReduceWashingSalt($centerId);
-        $WashingTotalUseInIodize = $increasedWashingSalt - abs($reducedWashingSalt);
+        $washingStock = Stock::currentWashingCrashSaltByCenterId($centerId);
+        $iodizeStock = Stock::currentIodizeStockByCenterId($centerId);
 
-        $afterSaleWashing = Stock::getTotalReduceWashingSaltAfterSale($centerId);
-
-        if($afterSaleWashing){
-            $washingStock = $WashingTotalUseInIodize - abs($afterSaleWashing);
-        }else{
-            $washingStock = $WashingTotalUseInIodize;
-        }
-
-
-        $beforeIodizeSaleStock = Stock::getTotalIodizeSaltForSale($centerId);
-        $iodizeSale = abs(Stock::getTotalReduceIodizeSaltForSale($centerId));
-
-        if($iodizeSale){
-            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
-        }else{
-            $iodizeStock = $beforeIodizeSaleStock;
-        }
+//        dd($iodizeStock);
 
         return view('transactions.stockAdjustment.modals.createStockAdjustment',compact('washingStock','iodizeStock'));
     }
@@ -99,15 +82,15 @@ class StockAdjusmentController extends Controller
     {
         $rules = array(
             'system_wc_stock' => 'required',
-            'wc_stock' => 'required',
+//            'wc_stock' => 'required',
             'system_iodize_stock' => 'required',
-            'iodize_stock' => 'required'
+//            'iodize_stock' => 'required'
         );
         $error = array(
             'system_wc_stock.required' => 'System Wash and crashing stock amount field is required.',
-            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
+//            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
             'system_iodize_stock.required' => 'System Iodize stock amount field is required.',
-            'iodize_stock.required' => 'Iodize stock amount field is required.'
+//            'iodize_stock.required' => 'Iodize stock amount field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -137,6 +120,7 @@ class StockAdjusmentController extends Controller
     }
 
     public function washCrushingAdjustment($stock_adjustment_id, $systemWashCrush, $stockWashCrush){
+        if(empty($stockWashCrush) || $stockWashCrush==0) return false;
         $amount = null;
         if($systemWashCrush > $stockWashCrush){
             $amount = $stockWashCrush-$systemWashCrush; // if stock less than system stock
@@ -144,12 +128,11 @@ class StockAdjusmentController extends Controller
         } else if($systemWashCrush < $stockWashCrush){ // if stock greater than system stock
             $amount = $stockWashCrush-$systemWashCrush;
         }
-
-        if(!empty($amount)) return StockAdjusment::washCrushForStock($stock_adjustment_id, $amount);
-        return false;
+        return StockAdjusment::washCrushForStock($stock_adjustment_id, $amount);
     }
 
     public function iodizedAdjustment($stock_adjustment_id, $systemIodized, $stockIodized){
+        if(empty($stockIodized) || $stockIodized==0) return false;
         $amount = null;
         if($systemIodized > $stockIodized){
             $amount = $stockIodized-$systemIodized; // if stock less than system stock
@@ -157,9 +140,7 @@ class StockAdjusmentController extends Controller
         } else if($systemIodized < $stockIodized){ // if stock greater than system stock
             $amount = $stockIodized-$systemIodized;
         }
-
-        if(!empty($amount)) return StockAdjusment::iodizedForStock($stock_adjustment_id, $amount);
-        return false;
+        return StockAdjusment::iodizedForStock($stock_adjustment_id, $amount);
     }
 
 
@@ -199,15 +180,15 @@ class StockAdjusmentController extends Controller
     {
         $rules = array(
             'system_wc_stock' => 'required',
-            'wc_stock' => 'required',
+//            'wc_stock' => 'required',
             'system_iodize_stock' => 'required',
-            'iodize_stock' => 'required'
+//            'iodize_stock' => 'required'
         );
         $error = array(
             'system_wc_stock.required' => 'System Wash and crashing stock amount field is required.',
-            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
+//            'wc_stock.required' => 'Wash and crashing stock amount field is required.',
             'system_iodize_stock.required' => 'System Iodize stock amount field is required.',
-            'iodize_stock.required' => 'Iodize stock amount field is required.'
+//            'iodize_stock.required' => 'Iodize stock amount field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

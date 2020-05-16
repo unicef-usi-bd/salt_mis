@@ -729,5 +729,34 @@ class Stock extends Model
 
         return $sales;
     }
+
+//    Get Current WC stock by center Id
+    public static function currentWashingCrashSaltByCenterId($centerId){
+        $increasedWashingSalt = self::getTotalWashingSalt($centerId);
+        $reducedWashingSalt = self::getTotalReduceWashingSalt($centerId);
+        $WashingTotalUseInIodize = $increasedWashingSalt - abs($reducedWashingSalt);
+
+        $afterSaleWashing = self::getTotalReduceWashingSaltAfterSale($centerId);
+
+        if($afterSaleWashing){
+            $washingStock = $WashingTotalUseInIodize - abs($afterSaleWashing);
+        }else{
+            $washingStock = $WashingTotalUseInIodize;
+        }
+        return $washingStock;
+    }
+
+//    Get Current Iodize stock by center Id
+    public static function currentIodizeStockByCenterId($centerId){
+        $beforeIodizeSaleStock = self::getTotalIodizeSaltForSale($centerId);
+        $iodizeSale = abs(self::getTotalReduceIodizeSaltForSale($centerId));
+
+        if($iodizeSale){
+            $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
+        }else{
+            $iodizeStock = $beforeIodizeSaleStock;
+        }
+        return $iodizeStock;
+    }
 }
 
