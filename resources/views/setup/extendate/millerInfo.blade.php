@@ -8,8 +8,10 @@
     <form action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">
      @csrf
         <div class="col-md-12">
-
-            <div class="col-md-6">
+            <div class="col-md-2">
+                <button type="button" title="View Mill Extend logs" class="btn btn-warning" data-toggle="collapse" data-target="#extendDetailsTarget">Extend Date details</button>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group" style="margin-left: -95px;">
                     <label  class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Renewing days</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-4">
@@ -19,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group" style="margin-left: -35%">
                     <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-4">
@@ -28,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="clearfix" style="margin-left: 280px;">
+            <div class="col-md-2">
                 <div class="col-md-12 center">
                     <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                         <i class="ace-icon fa fa-check bigger-110"></i>
@@ -36,10 +38,45 @@
                     </button>
                 </div>
             </div>
+
         </div>
     </form>
 </div>
 <hr>
+<div class="col-md-12">
+    <div class="row">
+        <div id="extendDetailsTarget" class="collapse">
+            <h4 class="left text-danger" >Extend date Information</h4>
+            <table  class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Sl.</th>
+                    <th>Renew Date</th>
+                    <th>Expire Data</th>
+                    <th>Extend days</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if(sizeof($extendDetails)!=0)
+                    @foreach($extendDetails as $key=>$row)
+                    <tr>
+                        <td>{{ ++$key }}</td>
+                        <td>{{ date('d-M-Y', strtotime($row->renewing_date)) }}</td>
+                        <td>{{ date('d-M-Y', strtotime($row->extend_date)) }}</td>
+                        <td>{{ $row->extend_days }}</td>
+                    </tr>
+                @endforeach
+                @else
+                    <tr>
+                        <td colspan="4" class="text-center text-danger"><h5>Opps! Data not found.</h5></td>
+                    </tr>
+                @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-6">
@@ -91,7 +128,6 @@
                 </tr>
             </table>
         </div>
-
         <div class="col-md-6">
             <div class="col-md-12">
                 <h4 class="left text-danger" >Entrepreneur&nbsp;Information</h4>

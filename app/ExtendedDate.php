@@ -57,4 +57,12 @@ class ExtendedDate extends Model
             ->where('ci.RENEWING_DATE','<',$date)
             ->get();
     }
+
+    public static function extendDetails($millId){
+        $data = DB::table('miller_extend_dates as med')
+            ->where('med.mill_id', '=', $millId)
+            ->orderBy('med.extend_date', 'desc')
+            ->get();
+        return $data;
+    }
 }
