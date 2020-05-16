@@ -51,9 +51,10 @@
                 <thead>
                 <tr>
                     <th>Sl.</th>
-                    <th>Renew Date</th>
-                    <th>Expire Data</th>
-                    <th>Extend days</th>
+                    <th>Application date for extension </th>
+                    <th>Total days</th>
+                    <th>Start date</th>
+                    <th>End date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,9 +62,10 @@
                     @foreach($extendDetails as $key=>$row)
                     <tr>
                         <td>{{ ++$key }}</td>
-                        <td>{{ date('d-M-Y', strtotime($row->renewing_date)) }}</td>
-                        <td>{{ date('d-M-Y', strtotime($row->extend_date)) }}</td>
+                        <td>{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
                         <td>{{ $row->extend_days }}</td>
+                        <td>{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                        <td>{{ date('d-M-Y', strtotime($row->extend_date)) }}</td>
                     </tr>
                 @endforeach
                 @else
