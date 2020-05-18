@@ -169,31 +169,33 @@ class Stock extends Model
     public static function totalWashCrashProductionsMonthWise(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $countProduction = DB::table('tmm_itemstock');
-        $countProduction->select('tmm_itemstock.QTY');
-        $countProduction->where('TRAN_TYPE','=','W');
-        $countProduction->where('TRAN_FLAG','=','WI');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $countProduction = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->where('stock.TRAN_TYPE','=','W')
+            ->where('stock.TRAN_FLAG','=','WI')
+            ->where('stock.TRAN_DATE','>',$date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId){
             $countProduction->where('stock.center_id','=',$centerId);
         }
-
-        return $countProduction->sum('tmm_itemstock.QTY');
+        return $countProduction->sum('stock.QTY');
     }
 
     public static function totalIodizeProductionsMonthWise(){
         $date = date("Y-m-d", strtotime("- 30 days"));
         $centerId = Auth::user()->center_id;
-        $countProduction = DB::table('tmm_itemstock');
-        $countProduction->select('tmm_itemstock.QTY');
-        $countProduction->where('TRAN_TYPE','=','I');
-        $countProduction->where('TRAN_FLAG','=','II');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $countProduction = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->where('stock.TRAN_TYPE','=','I')
+            ->where('stock.TRAN_FLAG','=','II')
+            ->where('stock.TRAN_DATE','>',$date)
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
         if($centerId){
             $countProduction->where('stock.center_id','=',$centerId);
         }
-
-        return $countProduction->sum('tmm_itemstock.QTY');
+        return $countProduction->sum('stock.QTY');
     }
     /// ----------------------Production
 
@@ -607,11 +609,12 @@ class Stock extends Model
         $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
 //        $countProduction->where('TRAN_TYPE','=','W');
         $countProduction->where('tmm_itemstock.TRAN_FLAG','=','WI');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date)
+            ->whereNull('tmm_itemstock.stock_adjustment_id')
+            ->whereNotNull('tmm_itemstock.TRAN_NO');
         if($centerId){
             $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
         }
-
         return $countProduction->sum('tmm_itemstock.QTY');
     }
 
@@ -623,7 +626,9 @@ class Stock extends Model
         $countProduction->leftJoin('ssm_associationsetup','ssm_associationsetup.ASSOCIATION_ID','=','tmm_itemstock.center_id');
 //        $countProduction->where('TRAN_TYPE','=','W');
         $countProduction->where('tmm_itemstock.TRAN_FLAG','=','II');
-        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date);
+        $countProduction->where('tmm_itemstock.TRAN_DATE','>',$date)
+            ->whereNull('tmm_itemstock.stock_adjustment_id')
+            ->whereNotNull('tmm_itemstock.TRAN_NO');
         if($centerId){
             $countProduction->where('ssm_associationsetup.center_id','=',$centerId);
         }
