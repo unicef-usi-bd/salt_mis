@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Supplier ID</b></label>
                         <div class="col-xs-8">
-                            <input style="width: 365px; margin-left: 5px;" readonly type="text" id="inputSuccess" placeholder="Supplier ID" name="SUPPLIER_ID" class="form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" />
+                            <input style="width: 365px; margin-left: 5px;" readonly type="text" id="inputSuccess" placeholder="Supplier ID" name="SUPPLIER_ID" class="insertIdContainer form-control col-xs-10 col-sm-5" value="{{ $supplierId }}" />
                         </div>
                     </div>
                     <div class="form-group">

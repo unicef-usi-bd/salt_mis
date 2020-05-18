@@ -59,6 +59,12 @@ class SupplierProfile extends Model
             ->get();
     }
 
+    public static function supplierMaxId(){
+        return DB::table('ssm_supplier_info')
+            ->where('ssm_supplier_info.center_id','=',Auth::user()->center_id)
+            ->max('SUPPLIER_ID');
+    }
+
     public static function supplierProfile($supplierTypeId){
         return DB::table('ssm_supplier_info')
             ->select('*','ssc_lookupchd.LOOKUPCHD_NAME')

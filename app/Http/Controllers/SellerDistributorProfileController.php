@@ -48,17 +48,11 @@ class SellerDistributorProfileController extends Controller
      */
     public function create()
     {
-//        $digits = 4;
-//        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
-//        for($i=0;$i<=1000;$i++) {
-//            $supplierId = sprintf("%04d", $i) . "<br>";
-//            //echo $test;
-//        }
-        $sellerDitributorProfile = count(SellerDistributorProfile::sellerDistributorProfile());
-        $supplierId = sprintf("%04d", $sellerDitributorProfile+1);
+        $sellerId = SellerDistributorProfile::sellerDistributorProfileMaxId();
+        $sellerId = sprintf("%04d", $sellerId+1);
         $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
         $getDivision = SupplierProfile::getDivision();
-        return view('profile.sellerDistributorProfile.modals.createSellerDistributorProfile',compact('sellerType','supplierId','getDivision'));
+        return view('profile.sellerDistributorProfile.modals.createSellerDistributorProfile',compact('sellerType','sellerId','getDivision'));
     }
 
     /**
@@ -94,8 +88,11 @@ class SellerDistributorProfileController extends Controller
 
         $inserted = SellerDistributorProfile::insertData($request);
 
+        $sellerId = SellerDistributorProfile::sellerDistributorProfileMaxId();
+        $sellerId = sprintf("%04d", $sellerId+1);
+
         if($inserted){
-            return response()->json(['success'=>'Seller/Distributor created successfully']);
+            return response()->json(['success'=>'Seller/Distributor created successfully', 'insertId'=> $sellerId]);
         } else{
             return response()->json(['errors'=>'Seller/Distributor create failed']);
         }

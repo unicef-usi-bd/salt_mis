@@ -80,6 +80,12 @@ protected $fillable = [
             ->get();
     }
 
+    public static function sellerDistributorProfileMaxId(){
+        return DB::table('ssm_customer_info')
+            ->where('ssm_customer_info.center_id','=',Auth::user()->center_id)
+            ->max('SELLER_ID');
+    }
+
     public static function showSellerDistributorProfile($id){
         return DB::table('ssm_customer_info')
             ->select('ssm_customer_info.*', 'ssc_divisions.DIVISION_NAME','ssc_districts.DISTRICT_NAME','ssc_upazilas.UPAZILA_NAME','ssc_unions.UNION_NAME','ssc_thana.THANA_NAME')

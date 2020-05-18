@@ -53,10 +53,8 @@ class SupplierProfileController extends Controller
      */
     public function create()
     {
-        $supplier = count(SupplierProfile::supplier());
-        $supplierId = sprintf("%04d", $supplier+1);
-//        $digits = 4;
-//        $supplierId = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $supplierId = SupplierProfile::supplierMaxId();
+        $supplierId = sprintf("%04d", $supplierId+1);// $digits = 4;
         $getDivision = SupplierProfile::getDivision();
         $getSupplierType = LookupGroupData::getActiveGroupDataByLookupGroup($this->supplierTypeId);
 //        $this->pr($test);
@@ -115,8 +113,11 @@ class SupplierProfileController extends Controller
         ]);
         $created = SupplierProfile::insertIntoSupplierProfile($data);
 
+        $supplierId = SupplierProfile::supplierMaxId();
+        $supplierId = sprintf("%04d", $supplierId+1);// $digits = 4;
+
         if($created){
-            return response()->json(['success'=>'Supplier profile has been created']);
+            return response()->json(['success'=>'Supplier profile has been created', 'insertId'=>$supplierId]);
         } else{
             return response()->json(['errors'=>'Supplier profile create failed']);
         }
