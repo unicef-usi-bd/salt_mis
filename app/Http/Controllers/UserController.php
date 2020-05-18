@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 use UxWeb\SweetAlert\SweetAlert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -102,42 +103,40 @@ class UserController extends Controller
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
-            //'contact_no' => 'nullable|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
+            'contact_no' => 'required|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
+
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 6 character',
             'user_group_id.required' => 'The user group field is required.',
             'user_group_level_id.required' => 'The user group level field is required.'
         );
-        $validator = Validator::make(Input::all(), $rules, $error);
-        if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-        }else {
 
-            //for user image*************
-            //$userImageName = 'defaultUserImage.png';
-            if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        try {
+            //for user image************* $userImageName = 'defaultUserImage.png';
+            if ($request->file('user_image') != null && $request->file('user_image')->isValid()) {
                 $image = $request->file('user_image');
-                $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
+                $filename = date('Y-m-d') . '_' . time() . '.' . $image->getClientOriginalExtension();
                 $path = 'image/user-image/' . $filename;
                 Image::make($image->getRealPath())->resize(250, 250)->save($path);
                 //********* End Image *********
                 $user_image = "image/user-image/$filename";
-            }else{
+            } else {
                 $user_image = 'image/user-image/defaultUserImage.png';
             }
-
-            //for user signature*************
-            //$userSignatureName = 'defaultUserSignature.png';
-            if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
+            //for user signature************* //$userSignatureName = 'defaultUserSignature.png';
+            if ($request->file('user_signature') != null && $request->file('user_signature')->isValid()) {
                 $signature = $request->file('user_signature');
-                $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
+                $filename = date('Y-m-d') . '_' . time() . '.' . $signature->getClientOriginalExtension();
                 $path = 'image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
                 $user_signature = "image/user-signature/$filename";
-            }else{
+            } else {
                 $user_signature = 'image/user-signature/defaultUserSignature.png';
             }
 
@@ -170,11 +169,16 @@ class UserController extends Controller
                 ]);
 
                 Mail::to($user->email)->send(new VerifyMail($user));
-
-                //return response()->json(['success'=>'User Successfully Saved']);
-                return redirect('/users')->with('success', 'User Successfully Saved');
-               //return json_encode('Success');
             }
+
+            if($userCreateId){
+                return response()->json(['success'=>'User has been created']);
+            } else{
+                return response()->json(['errors'=>'User create failed']);
+            }
+
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
 
@@ -237,12 +241,13 @@ class UserController extends Controller
             'password.required' => 'The Password field is required. Use minimum 6 character',
             'user_group_id.required' => 'The user group field is required.'
         );
+
         $validator = Validator::make(Input::all(), $rules, $error);
-        if ($validator->fails()) {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-        } else {
-            //for user image*************
-            //$userImageName = 'defaultUserImage.png';
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        try{
+            //for user image************* $userImageName = 'defaultUserImage.png';
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
 
                 $image_path = $editUser->user_image;  // Value is not URL but directory file path
@@ -260,8 +265,7 @@ class UserController extends Controller
                 $user_image = 'image/user-image/defaultUserImage.png';
                 $user_image = $editUser->user_image;
             }
-            //for user signature*************
-            //$userSignatureName = 'defaultUserSignature.png';
+            //for user signature************* $userSignatureName = 'defaultUserSignature.png';
             if($request->file('user_signature')!=null && $request->file('user_signature')->isValid()) {
 
                 $signature_path = $editUser->user_signature;  // Value is not URL but directory file path
@@ -279,14 +283,15 @@ class UserController extends Controller
                 //$userSignatureName = 'image/user-signature/defaultUserSignature.png';
                 $userSignatureName = $editUser->user_signature;
             }
-
-//            $userUpdate = User::updateData($request, $id,$userImageName,$userSignatureName);
-            User::updateData($request, $id, $user_image, $userSignatureName);
-
+            $update = User::updateData($request, $id, $user_image, $userSignatureName);
+            if($update){
+                return response()->json(['success'=>'User has been updated']);
+            } else{
+                return response()->json(['errors'=>'User update failed']);
+            }
+        }catch (Exception $e){
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        //session()->flash('message','User Successfully Updated');
-        return redirect('/users')->with('success', 'User Successfully Updated');
-
     }
 
     /**

@@ -1,12 +1,4 @@
 <div class="col-md-12">
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
     <form id="myform" action="{{ url('/users/'.$editData->id) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -180,14 +172,13 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-info">
+                <button type="button" class="btn btn-info" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>
             </div>
         </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
     <script>
         $(document).ready(function () {
             $('.user_group').on('change',function(){
@@ -209,8 +200,8 @@
                 });
             });
         });
-        var Privileges = jQuery('#privileges');
-        var select = this.value;
+        let Privileges = jQuery('#privileges');
+        let select = this.value;
         Privileges.change(function () {
             if ($(this).val() == 21 || $(this).val() == 22) {
                 $('.resources').show();
@@ -218,85 +209,9 @@
             else $('.resources').hide();
         });
 
-        $(document).ready(function () {
-            $.validator.addMethod(
-                "regex",
-                function(value, element, regexp)
-                {
-                    if (regexp.constructor != RegExp)
-                        regexp = new RegExp(regexp);
-                    else if (regexp.global)
-                        regexp.lastIndex = 0;
-                    return this.optional(element) || regexp.test(value);
-                },
-                "Please check your input."
-            );
-
-            $('#myform').validate({ // initialize the plugin
-                errorClass: "my-error-class",
-                //validClass: "my-valid-class",
-                rules: {
-                    user_full_name: {
-                        required: true,
-                        maxlength:100
-                    },
-                    username: {
-                        required: true,
-                        maxlength: 100
-                    },
-                    email:{
-                        required: true,
-                        email: true,
-                    },
-//                    messages:{
-//                        email: {
-//                        remote: jQuery.format("{0} is already in use!")
-//                    }
-//                },
-                    password:{
-                        required: true,
-                        minlength:6
-                    },
-                    contact_no:{
-                        required: true,
-                        maxlength:11,
-                        minlength:11,
-                        regex:/^(?:\+88|01)?\d{11}$/,
-                    },
-                    user_group_id:{
-                        required: true,
-                    },
-                    user_group_level_id:{
-                        required: true,
-                    },
-                    user_image: {
-                        //required: true,
-                        extension: "jpg|jpeg|png|gif"
-                    },
-                    user_signature:{
-                        extension: "jpg|jpeg|png|gif"
-                    }
-//                    center_id:{
-//                        required: true,
-//                    }
-                },
-                messages: {
-                    user_image: {
-                        //required: "Please upload file.",
-                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
-                    },
-                    user_signature:{
-                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
-                    },
-
-                }
-            });
-
-        });
-
         $(document).on('focusout','.email',function () {
             //alert('hi');
-            var email = $('.email').val();
+            let email = $('.email').val();
             //alert(email);
             $.ajax({
                 type: 'GET',
@@ -318,13 +233,13 @@
 
     </script>
     <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('output');
+        let loadFile = function(event) {
+            let output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
         };
 
-        var loadFile1 = function(event) {
-            var output = document.getElementById('output1');
+        let loadFile1 = function(event) {
+            let output = document.getElementById('output1');
             output.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
@@ -332,9 +247,9 @@
 
 </div>
 
-{{--@include('masterGlobal.formValidationEdit')--}}
 @include('masterGlobal.chosenSelect')
 @include('masterGlobal.getBankBranchesEvent')
+@include('masterGlobal.ajaxFormSubmit')
 
 
 

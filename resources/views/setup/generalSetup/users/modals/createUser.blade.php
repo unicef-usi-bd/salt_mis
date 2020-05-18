@@ -1,20 +1,5 @@
 <div class="col-md-12">
-    <div id="success" class="alert alert-block alert-success" style="display: none;">
-        <span id="successMessage"></span>
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-    </div>
-    <style>
-        .my-error-class {
-            color:red;
-        }
-        .my-valid-class {
-            color:green;
-        }
-    </style>
-    <form id="myform" action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-    {{--<form class="form-horizontal frmContent" name="formData" method="POST">--}}
+    <form action="{{ url('/users') }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
             <div class="form-group">
@@ -77,16 +62,8 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.contact_no') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                     <input type="text" id="inputSuccess contact_no" placeholder="{{ trans('user.example_contact_no') }}" name="contact_no" class="form-control col-xs-10 col-sm-5 contact_no" value=""/>
-
                 </div>
             </div>
-
-           <!--  <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
-                <div class="col-sm-8">
-                    <input type="text" id="inputSuccess remarks" placeholder="Example:- Remarks Here " name="remarks" class="form-control col-xs-10 col-sm-5" value=""/>
-                </div>
-            </div> -->
 
         </div>
 
@@ -161,102 +138,13 @@
                 </div>
             </div>
 
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.cost_center') }}</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="form-field-select-3 inputSuccess cost_center_id" class="chosen-select form-control" name="cost_center_id" data-placeholder="Select or search data">--}}
-                            {{--<option value=""> </option>--}}
-                            {{--@foreach($costCenters as $costCenter)--}}
-                                {{--<option value="{{$costCenter->cost_center_id}}"> {{$costCenter->cost_center_name}}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.designation') }}</b><span style="color: red;"> </span></label>--}}
-                {{--<div class="col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select id="form-field-select-3 inputSuccess designation_id" class="chosen-select form-control" name="designation_id" data-placeholder="Select or search data">--}}
-                            {{--<option value=""> </option>--}}
-                            {{--@foreach($designations as $designation)--}}
-                            {{--<option value="{{$designation->lookup_group_data_id}}"> {{$designation->group_data_name}}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            <!-- <div class="form-group">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status </b></label>
-                <div class="col-sm-8">
-                    <span class="block input-icon input-icon-right">
-                        <select id="inputSuccess active_status" class="form-control" name="active_status">
-                            <option value="">Select One</option>
-                            <option value="1" selected>Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                    </span>
-                </div>
-            </div> -->
-
              <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.remark') }}</b></label>
                 <div class="col-sm-8">
-                    {{--<input type="text" id="inputSuccess remarks" placeholder="{{ trans('user.example_remarks_here') }}" name="remarks" class="form-control col-xs-10 col-sm-5" value=""/>--}}
                     <textarea class="form-control col-xs-10 col-sm-5" name="remarks" rows="3"></textarea>
                 </div>
             </div>
-
-
-            {{--<div class="form-group" style="margin-top: 15px;">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bank Name</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select class="form-control bank" id="bank_id" name="bank_id">--}}
-                            {{--<option>Select One</option>--}}
-                            {{--@foreach($banks as $bank)--}}
-                                {{--<option value="{{ $bank->bank_id }}">{{ $bank->bank_name }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Branch</b><span style="color: red;"> *</span></label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<select class="form-control branch" id="branch_id" name="branch_id">--}}
-                            {{--<option>Select One</option>--}}
-                        {{--</select>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Account no.</b><span style="color: red;"> *</span> </label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<input type="text" name="account_no" value="{{ old('account_no') }}" id="inputSuccess account_no" class="width-100"  />--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group">--}}
-                {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Route no.</b></label>--}}
-                {{--<div class="col-xs-12 col-sm-8">--}}
-                    {{--<span class="block input-icon input-icon-right">--}}
-                        {{--<input type="text" name="route_no" id="inputSuccess route_no" value="{{ old('route_no') }}" class="width-100"  />--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
         </div>
-
-
         <hr>
         <div class="clearfix">
             <div class="center col-md-12" style="margin-top: 25px;">
@@ -264,23 +152,19 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                {{--<button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'users' }}">--}}
-                    {{--<i class="ace-icon fa fa-check bigger-110"></i>--}}
-                    {{--{{ trans('dashboard.submit') }}--}}
-                {{--</button>--}}
-                <button type="submit" id="validate" class="btn btn-primary validate">
+                <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
             </div>
         </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
+
     <script>
         $(document).ready(function () {
             $('.user_group').on('change',function(){
-                var groupId = $(this).val();
-                var option = '<option>Select One</option>';
+                let groupId = $(this).val();
+                let option = '<option value="">Select One</option>';
                 $.ajax({
                     type : "get",
                     url  : "get-user-group-levels",
@@ -298,8 +182,8 @@
             });
         });
 
-        var Privileges = jQuery('#privileges');
-        var select = this.value;
+        let Privileges = jQuery('#privileges');
+        let select = this.value;
         Privileges.change(function () {
             if ($(this).val() == 21 || $(this).val() == 22) {
                 $('.resources').show();
@@ -320,67 +204,9 @@
                 },
                 "Please check your input."
             );
-
-            $('#myform').validate({ // initialize the plugin
-                errorClass: "my-error-class",
-                //validClass: "my-valid-class",
-                rules: {
-                    user_full_name: {
-                        required: true,
-                        maxlength:100
-                    },
-                    username: {
-                        required: true,
-                        maxlength: 100,
-                    },
-                    email:{
-                        required: true,
-                        email: true
-                    },
-                    password:{
-                        required: true,
-                        minlength:6
-                    },
-                    contact_no:{
-                        required: true,
-                        maxlength:11,
-                        minlength:11,
-                        regex:/^(?:\+?88)?01[1-9]\d{8}$/,
-                    },
-                    user_group_id:{
-                        required: true,
-                    },
-                    user_group_level_id:{
-                        required: true,
-                    },
-                    center_id:{
-                        required: true,
-                    },
-                    user_image: {
-                        //required: true,
-                        extension: "jpg|jpeg|png|gif"
-                    },
-                    user_signature:{
-                        extension: "jpg|jpeg|png|gif"
-                    }
-                },
-                messages: {
-                    user_image: {
-                        //required: "Please upload file.",
-                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
-                    },
-                    user_signature:{
-                        extension: "Please upload file in these format only ( JPG, JPEG, PNG,GIF )."
-                    },
-
-                }
-
-            });
-
         });
 
         $(document).on('focusout','.email',function () {
-
             var email = $('.email').val();
             $.ajax({
                 type: 'GET',
@@ -398,69 +224,13 @@
                 }
             });
         });
-
-//        $(document).on('submit', function(e){
-//            var email = $('.email').val();
-//           // span.text('');
-//            e.preventDefault(); // <=================== Here
-//            $.ajax({
-//                url: 'email-duplicate',
-//                async: 'false',
-//                cache: 'false',
-//                type: 'GET',
-//                data:{'email':email},
-//                //data: form.serialize(),
-//                success: function(data) {
-//                    if (data == 'yes') {
-//                        // ============================ Not here, this would be too late
-//                        $('.emailId').text('');
-//                        $('.email_grp').append('<span class="emailId" style="color: red">This email already exists</span>');
-//                    }
-//                    else if (data == 'no') {
-//                        $('.emailId').text('');
-//                    }
-//                }
-//            });
-//        });
-
-        //===========image validation============
-//        $(".user_image").bind('change',function () {
-//            var fileSize = this.files[0].size;
-//            var maxSize = 25000;//25kb; // alert(maxSize);
-//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-//            var filename = $('input[type=file]').val().split('\\').pop();
-//
-//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-//                $(".user_image").val('');
-//            }
-//            if (fileSize>maxSize){
-//                alert("Only Supporting jpg, jpeg, png and gif format and Image size width = 250 and hight =250.");
-//                $(".user_image").val('');
-//            }
-//        });
-//        $(".user_signature").bind('change',function () {
-//            var fileSize = this.files[0].size;
-//            var maxSize = 25000;//25kb; // alert(maxSize);
-//            var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
-//            var filename = $('input[type=file]').val().split('\\').pop();
-//
-//            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-//                alert("Only  "+fileExtension.join(', ')+" formats are allowed");
-//                $(".user_signature").val('');
-//            }
-//            if (fileSize>maxSize){
-//                alert("Only Supporting jpg, jpeg, png and gif format and Image size width = 135 and hight = 50.");
-//                $(".user_signature").val('');
-//            }
-//        });
     </script>
 
 </div>
 
 @include('masterGlobal.chosenSelect')
-{{--@include('masterGlobal.formValidation')--}}
 @include('masterGlobal.getBankBranchesEvent')
+@include('masterGlobal.ajaxFormSubmit')
 
 
 
