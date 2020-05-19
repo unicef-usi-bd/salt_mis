@@ -176,7 +176,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <textarea rows="3" class="form-control col-sm-8" name="REMARKS"></textarea>
+                                <textarea rows="3" class="form-control col-sm-8" name="REMARKS">{{ $millerInfo->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>

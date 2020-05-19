@@ -6,28 +6,32 @@
                 @method('PUT')
                 <input type="hidden" name="MILLEMP_ID" value="@if(!empty($employeeInfo)){{ $employeeInfo->MILLEMP_ID }}@endif" />
                 <div class="col-md-6">
-                    <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
+                    <b style="font-size: 14px;">Full Time Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
+                            <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
+                            <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
-
+                    
                     <b style="font-size: 14px;">Part Time Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
+                            <label>Male</label>
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
+                            <label>Female</label>
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
@@ -37,7 +41,7 @@
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" value="@if(!empty($employeeInfo)){{ $employeeInfo->REMARKS }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="REMARKS" value="@if(!empty($employeeInfo)){{ $employeeInfo->REMARKS }}@endif" class="chosen-container" placeholder="Remarks">
                             </span>
                         </div>
                     </div>
@@ -45,29 +49,34 @@
                 </div>
 
                 <div class="col-md-6">
-                    <b style="font-size: 14px;">Full Time Employee</b> <br><br>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
-                            </span>
-                        </div>
-                        <div class="col-sm-4">
-                            <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
-                            </span>
-                        </div>
-                    </div>
                     <b style="font-size: 14px;">Total Number of Technical Person </b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
+                            <label>Male</label>
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="TOTMALETECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALETECH_PER }}@endif" class="chosen-container" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
+                            <label>Female</label>
                             <span class="block input-icon input-icon-right">
                                <input type="text" name="TOTFEMTECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEMTECH_PER }}@endif" class="chosen-container" placeholder="Female">
+                            </span>
+                        </div>
+                    </div>
+
+                    <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label>Male</label>
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
+                            </span>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Female</label>
+                            <span class="block input-icon input-icon-right">
+                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
                             </span>
                         </div>
                     </div>
