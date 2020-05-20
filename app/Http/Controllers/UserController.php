@@ -97,7 +97,7 @@ class UserController extends Controller
     {
         $rules = array(
             'user_full_name' =>'required|string|max:100',
-            'username' => 'required|string|unique:users|max:100',
+            'username' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             //'designation_id' => 'required',
@@ -219,7 +219,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $editUser = User::editData($id);
         if ($editUser->user_full_name == $request->input('user_full_name')) {
             $rules = array(
@@ -239,6 +238,10 @@ class UserController extends Controller
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
+
+
+        $user = User::find($id);
+        $hasUpdateEmail = $user->email!=$request->email;
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
@@ -279,14 +282,15 @@ class UserController extends Controller
                 //$userSignatureName = 'image/user-signature/defaultUserSignature.png';
                 $userSignatureName = $editUser->user_signature;
             }
+
             $update = User::updateData($request, $id, $user_image, $userSignatureName);
 
-            if($update){
-                $user = User::find($id);
+
+            if($update && $hasUpdateEmail){
                 if(!$user->verifyUser) {
                     $this->createTokenForUserVerification($id);
-                    $user = User::find($id);
                 }
+                $user = User::find($id);
                 Mail::to($user->email)->send(new VerifyMail($user));
             }
 

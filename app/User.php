@@ -116,8 +116,8 @@ class User extends Authenticatable
             ->first();
     }
 
-    public static function updateData($request,$id,$user_image,$userSignatureName){
-
+    public static function updateData($request, $id, $user_image, $userSignatureName){
+        $user = User::find($id);
         $userUpdateData=array(
             'user_full_name' => $request['user_full_name'],
             'designation' => $request['designation'],
@@ -131,7 +131,6 @@ class User extends Authenticatable
 //            'designation_id' => $request->input('designation_id'),
             'address' => $request->input('address'),
             'contact_no' => $request->input('contact_no'),
-            'mail_verified' => 0,
             'active_status' => $request->input('active_status'),
             'user_image' => $user_image,
 //            'user_image' => 'image/user-image/'.$userImageName,
@@ -141,6 +140,8 @@ class User extends Authenticatable
             'update_by' => Auth::user()->id,
             'update_at' => date("Y-m-d h:i:s")
         );
+
+        if($user->email!=$request->email) $userUpdateData['mail_verified'] = 0;
 
         if($request['password'] != '') $userUpdateData['password'] = Hash::make($request['password']);
         
