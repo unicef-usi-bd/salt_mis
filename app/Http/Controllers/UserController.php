@@ -163,11 +163,7 @@ class UserController extends Controller
 
             if ($userCreateId) {
                 $user = User::find($userCreateId);
-                VerifyUser::create([
-                    'user_id' => $userCreateId,
-                    'token' => str_random(40)
-                ]);
-
+                $this->createTokenForUserVerification($userCreateId);
                 Mail::to($user->email)->send(new VerifyMail($user));
             }
 
@@ -284,6 +280,16 @@ class UserController extends Controller
                 $userSignatureName = $editUser->user_signature;
             }
             $update = User::updateData($request, $id, $user_image, $userSignatureName);
+
+            if($update){
+                $user = User::find($id);
+                if(!$user->verifyUser) {
+                    $this->createTokenForUserVerification($id);
+                    $user = User::find($id);
+                }
+                Mail::to($user->email)->send(new VerifyMail($user));
+            }
+
             if($update){
                 return response()->json(['success'=>'User has been updated']);
             } else{
@@ -292,6 +298,14 @@ class UserController extends Controller
         }catch (Exception $e){
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+    }
+
+    private function createTokenForUserVerification($id){
+        $_token = str_random(40);
+        return VerifyUser::create([
+            'user_id' => $id,
+            'token' => $_token
+        ]);
     }
 
     /**

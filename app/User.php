@@ -117,7 +117,6 @@ class User extends Authenticatable
     }
 
     public static function updateData($request,$id,$user_image,$userSignatureName){
-        //$costCenter= CostCenter::costCenterDetailsById($request->input('cost_center_id'));
 
         $userUpdateData=array(
             'user_full_name' => $request['user_full_name'],
@@ -132,7 +131,8 @@ class User extends Authenticatable
 //            'designation_id' => $request->input('designation_id'),
             'address' => $request->input('address'),
             'contact_no' => $request->input('contact_no'),
-            'active_status' => $request->input('active_status'), 
+            'mail_verified' => 0,
+            'active_status' => $request->input('active_status'),
             'user_image' => $user_image,
 //            'user_image' => 'image/user-image/'.$userImageName,
 //            'user_signature' => 'image/user-signature/'.$userSignatureName,
@@ -141,10 +141,8 @@ class User extends Authenticatable
             'update_by' => Auth::user()->id,
             'update_at' => date("Y-m-d h:i:s")
         );
-        if($request['password'] != '')
-        {
-          $userUpdateData['password'] = Hash::make($request['password']);
-        }
+
+        if($request['password'] != '') $userUpdateData['password'] = Hash::make($request['password']);
         
         $update = DB::table('users')->where('id', '=', $id)->update($userUpdateData);
         return $update;
