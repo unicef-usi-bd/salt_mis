@@ -104,7 +104,6 @@
                                             </label>
 
                                             <div class="space"></div>
-
                                             <div class="clearfix" style="padding-bottom: 40px;">
                                                 <label class="inline">
                                                     <a href="{{ route('password.request') }}">Forgot Password</a>
@@ -116,8 +115,9 @@
                                                     <span class="bigger-110">Login</span>
                                                 </button>
                                             </div>
-                                            <div style="float:left; margin-top: -30px;"> <img style="width:130px; height: 55px;" src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>
-                                            <div class="space-4"></div>
+                                            <div class="col-md-12" style="padding-top: 0;">
+                                                <img style="width:110px; height: 40px;" src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block">
+                                            </div>
                                         </fieldset>
                                     </form>
 
@@ -242,21 +242,6 @@
                             </div><!-- /.widget-body -->
                         </div><!-- /.signup-box -->
                     </div><!-- /.position-relative -->
-
-                    {{--<div class="navbar-fixed-top align-right">--}}
-                    {{--<br />--}}
-                    {{--&nbsp;--}}
-                    {{--<a id="btn-login-dark" href="#">Dark</a>--}}
-                    {{--&nbsp;--}}
-                    {{--<span class="blue">/</span>--}}
-                    {{--&nbsp;--}}
-                    {{--<a id="btn-login-blur" href="#">Blur</a>--}}
-                    {{--&nbsp;--}}
-                    {{--<span class="blue">/</span>--}}
-                    {{--&nbsp;--}}
-                    {{--<a id="btn-login-light" href="#">Light</a>--}}
-                    {{--&nbsp; &nbsp; &nbsp;--}}
-                    {{--</div>--}}
                 </div>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -270,27 +255,10 @@
 							<span class="blue bolder">{{ Session::get('orgName') }}</span>
                             <div>
                                 <div style="float:left; width:350px;"></div>
-                                {{--<div style="float:right; width:300px;">Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a></div>--}}
-                                {{--<div style="float:right; width:300px;"> <img src="{{asset('assets/images/salt_login/ismos_logo_en (2).png')}}" class="img-responsive center-block"></div>--}}
                                 <div class="clearfix"></div>
                             </div>
-                            {{--Copyright &copy; 2018 DAE, All Rights Reserved. DAE Design & Developed By <a target="_blank" href="{{ url('http://www.atilimited.net') }}"><span style="color:red;">ATI</span> <span style="color: green;">Limited</span></a>--}}
-                            </span>
-
-            &nbsp; &nbsp;
-            <span class="action-buttons">
-							{{--<a href="#">--}}
-                {{--<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>--}}
-                {{--</a>--}}
-
-                {{--<a href="#">--}}
-                {{--<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>--}}
-                {{--</a>--}}
-
-                {{--<a href="#">--}}
-                {{--<i class="ace-icon fa fa-rss-square orange bigger-150"></i>--}}
-                {{--</a>--}}
-						</span>
+                            </span>            &nbsp; &nbsp;
+            <span class="action-buttons"></span>
         </div>
     </div>
 </div>
