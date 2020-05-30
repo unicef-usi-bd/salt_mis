@@ -108,102 +108,15 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-    {{--<br>--}}
-    {{--<div class="row " style="width: 92%">--}}
-        {{--<div class="col-md-12">--}}
-            {{--<div class="col-sm-12">--}}
-                {{--<div class="tabbable">--}}
-                    {{--<div class="tab-content">--}}
-                        {{--<span class="btnPrint pull-right"></span>--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-md-12">--}}
-                                {{--<div class="row" style="text-align: center;"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-md-12">--}}
-                                {{--<p class="center">--}}
-
-                                    {{--<br>--}}
-                                    {{--<span class="currentMonth"></span>--}}
-                                {{--</p>--}}
-
-                                {{--<div class="clearfix"></div>--}}
-
-                            {{--</div><!-- /.col -->--}}
-                        {{--</div><!-- /.row -->--}}
-                        {{--<div class="clearfix"></div>--}}
-                        {{--<table id="" class="table table-striped table-bordered table-hover" style="font-size: 9px">--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                                {{--<th></th>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody id="w">--}}
-
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-md-12">--}}
-                                {{--<div class="col-md-6">--}}
-                                    {{--<p></p>--}}
-                                    {{--<p></p>--}}
-                                    {{--<ol>--}}
-                                    {{--<li></li>--}}
-                                    {{--<li></li>--}}
-                                    {{--</ol>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-md-6">--}}
-                                    {{--<div class="pull-right center" style="margin-top: 18%;">--}}
-                                        {{--<span></span><br>--}}
-                                        {{--<span></span><br>--}}
-                                        {{--<span></span><br>--}}
-                                        {{--<span></span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</span>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-        {{--</div>--}}
-
-
-    {{--</div>--}}
-
-
 
     {{--@include('masterGlobal.chosenSelect')--}}
     @include('masterGlobal.getDistrict')
     @include('masterGlobal.getUpazila')
     @include('masterGlobal.getUnion')
     @include('masterGlobal.getMillersId')
-    {{--<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>--}}
-    {{--<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>--}}
-    {{--<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>--}}
 
-    {{--<script src="{{ asset('assets/js/select2.min.js') }}"></script>--}}
-    {{--<script>--}}
-
-
-
-
-    {{--</script>--}}
 
     <script type="text/javascript">
         $('.resultTab').hide();
@@ -213,7 +126,7 @@
            // var url = $('.reportType').val();
            // alert(url);
 
-            if(center_type == 'admin'){
+            if(center_type === 'admin'){
                 var url = $('.reportAdmin').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusAdmin').val();
@@ -228,7 +141,7 @@
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
                 var millTypeAdmin = $('.millTypeAdmin').val();
-            }else if(center_type == 'unicef'){
+            }else if(center_type === 'unicef'){
                 var url = $('.reportUnicef').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusUnicef').val();
@@ -243,7 +156,7 @@
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
                 var millTypeAdmin = $('.millTypeAdmin').val();
-            }else if(center_type == 'bsti'){
+            }else if(center_type === 'bsti'){
                 var url = $('.reportBsti').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBsti').val();
@@ -258,7 +171,7 @@
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
                 var millTypeAdmin = $('.millTypeAdmin').val();
-            }else if(center_type == 'basic'){
+            }else if(center_type === 'basic'){
                 var url = $('.reportBasic').val();
                 //var centerId = $('.center').val();
                 var activStatus = $('.statusBasic').val();
@@ -273,7 +186,7 @@
                 var failDate = $('.end-date').val();
                 var processType = $('.processType').val();
                 var millTypeAdmin = $('.millTypeAdmin').val();
-            }else if(center_type == 'miller'){
+            }else if(center_type === 'miller'){
                 var url = $('.reportMiller').val();
                 var itemType = $('.itemTypeMiller').val();
                 var chemicalItemType = $('.chemicalItemTypeMiller').val();
@@ -293,7 +206,7 @@
                 var processType = $('.processType').val();
                 var millTypeAdmin = $('.millTypeAdmin').val();
 
-            }else if(center_type == 'association'){
+            }else if(center_type === 'association'){
                 var url = $('.reportAssociation').val();
                 var activStatus = $('.statusAssociation').val();
                 var assStartDate = $('.assReportrange').data('daterangepicker').startDate.format('YYYY-MM-DD');
