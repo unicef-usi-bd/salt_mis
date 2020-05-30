@@ -10,6 +10,7 @@
 
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/ajax-loader.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/font-awesome/4.5.0/css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/fonts.googleapis.com.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/ace.min.css') }}" class="ace-main-stylesheet" id="main-ace-style" />

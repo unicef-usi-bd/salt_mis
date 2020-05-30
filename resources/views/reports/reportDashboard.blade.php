@@ -225,15 +225,18 @@
             }
             //console.log(url);
             $.ajax({
-                type : "get",
-                url  : url,
-                data : {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'chemicalItemType':chemicalItemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId,'renawlDate':renawlDate,'failDate':failDate,'itemTypeAssoc':itemTypeAssoc,'millTypeAdmin':millTypeAdmin},
+                type: "get",
+                url: url,
+                data: {'centerId':centerId,'activStatus':activStatus,'itemType':itemType,'chemicalItemType':chemicalItemType,'zone':zone,'issuerId':issuerId,'startDate':startDate,'endDate':endDate,'assStartDate':assStartDate,'assEndDate':assEndDate,'issueby':issueby,'processType':processType,'divisionId':divisionId,'districtId':districtId,'customerId':customerId,'itemTypeId':itemTypeId,'renawlDate':renawlDate,'failDate':failDate,'itemTypeAssoc':itemTypeAssoc,'millTypeAdmin':millTypeAdmin},
+                beforeSend: function () {
+                    $('#ajax-loader').show();
+                },
                 success:function (data) {
+                    $('#ajax-loader').hide();
 //                    console.log(data);
                     $('.soeRowDiv').hide();
                     $('.resultTab').show();
                     $('.tblReport').html(data.html);
-
                 }
             });
 

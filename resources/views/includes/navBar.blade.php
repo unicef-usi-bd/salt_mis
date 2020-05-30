@@ -3,7 +3,6 @@
         background-color: #006699;
         color: #FFFFFF;
     }
-
 </style>
 <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1CABE2;">
     <div class="navbar-container ace-save-state" id="navbar-container">
@@ -19,6 +18,11 @@
                 <small>
                     UNIVERSAL SALT IODIZATION PROGRAM
                 </small>
+            </a>
+            <a href="#" class="navbar-brand">
+                <div id="ajax-loader" style="display: none;">
+                    <div class="ajax-loader inline"></div>
+                </div>
             </a>
         </div>
 
