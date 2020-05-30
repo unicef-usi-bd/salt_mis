@@ -30,7 +30,7 @@
             <td>{{$row->ITEM_NAME}}</td>
             <td>{{$row->DIVISION_NAME}}</td>
             <td>{{$row->DISTRICT_NAME}}</td>
-            <td>{{abs($row->QTY)}}</td>
+            <td>{{number_format(abs($row->QTY, 2))}}</td>
         </tr>
     @endforeach
 

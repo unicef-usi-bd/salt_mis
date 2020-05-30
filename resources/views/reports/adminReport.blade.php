@@ -82,7 +82,8 @@
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="">-Select-</option>
-                                   <option value="0">Wash And Crush</option>
+                                   <option value="3">Select All</option>
+                                   <option value="2">Wash And Crush</option>
                                    <option value="1">Iodized </option>
                                </select>
                             </span>

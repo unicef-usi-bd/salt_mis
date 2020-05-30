@@ -16,14 +16,9 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
-                <th>Number of Millers</th>
+                <th width="100px">Number of Millers</th>
                 <th>Items Type</th>
                 <th>Items Name</th>
                 <th>Division</th>
@@ -34,19 +29,24 @@
             </thead>
 
             <tbody>
-            <?php $sl=0;?>
+            @if(sizeof($totalSale)>0)
+            @php $sl=0; @endphp
             @foreach($totalSale as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->cnt_miller}}</td>
+                    <td class="text-center">{{$row->cnt_miller}}</td>
                     <td>{{$row->ITEM_TYPE_NAME}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{$row->DIVISION_NAME}}</td>
                     <td>{{$row->DISTRICT_NAME}}</td>
-                    <td>{{abs($row->QTY)}}</td>
+                    <td class="text-right">{{number_format(abs($row->QTY), 2)}}</td>
                 </tr>
-
             @endforeach
+            @else
+                <tr>
+                    <td class="text-danger text-center" colspan="7"><h4>Oops, Data Not Found</h4></td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

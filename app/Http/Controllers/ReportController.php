@@ -553,7 +553,6 @@ class ReportController extends Controller
 //        dd($request->input());
         $processType = $request->input('processType');
         $totalSale = Report::totalSaleAdmin($processType);
-//        dd($totalSale);
 
         $view = view("reportView.totalSaleAdminReport",compact('totalSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
