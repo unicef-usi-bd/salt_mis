@@ -31,7 +31,12 @@
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle col-md-12">
                         <div class="col-md-3" style="padding-left: 0 !important;">
-                            <img class="nav-user-photo" src="{{ asset('assets/images/avatars/user.png') }}" alt="Jason's Photo" />
+                            @php
+                                $defaultImage = asset('assets/images/avatars/user.png');
+                                $uploadedImage = Auth::user()->user_image;
+                                if(file_exists($uploadedImage)) $defaultImage = $uploadedImage;
+                            @endphp
+                            <img class="nav-user-photo" src="{{ $defaultImage }}" alt="" />
                         </div>
                         <div class="col-md-9">
                             <div class="row" style="line-height: 35px;height: 20px;margin-top: 3px;">
