@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\LookupGroupData;
 use App\Employee;
 use App\MillerProfileApproval;
+use App\ProfileCompletePercentage;
 use App\Qc;
 use App\MillerInfo;
 use App\Entrepreneur;
@@ -68,7 +69,7 @@ class MillerInfoController extends Controller
             $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
             $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
             $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-            $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
+            $certificates = Certificate::getCertificates($this->certificateTypeId);
             $issueBy = CertificateIssur::getCertificateIssuer();
             $millerToMerge = MillerInfo::getMillerToMerge();
 
@@ -79,6 +80,10 @@ class MillerInfoController extends Controller
             $employeeInfo = Employee::employeeInformation($millerId);
             return view('profile.miller.self.index', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
         } else {
+            foreach ($millerList as $miller){
+                $miller->profile = ProfileCompletePercentage::profileCompleted($miller->MILL_ID);
+            }
+//            dd($millerList);
             return view('profile.miller.millerIndex', compact('heading', 'previllage', 'millerList', 'millerToMerge','approvalMillList'));
         }
     }

@@ -53,7 +53,18 @@
                             <?php if ($activeFlg == 1){ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
                             <?php }else{ ?>
-                            <span class="label label-sm label-danger arrowed arrowed-righ">Inactive </span>
+                                @php $complete = 0;
+                                $incompleteInfo = array();
+                                @endphp
+                                @foreach($row->profile as $key => $value)
+                                    @if(!$value)
+                                        @php $incompleteInfo[] = $key; @endphp
+                                        @else
+                                        @php $complete += $value @endphp
+                                    @endif
+                                @endforeach
+                            <span class="label label-sm label-danger arrowed arrowed-righ" title="Please provide {{ implode($incompleteInfo, ', ') }} Information">Inactive </span>
+                            <span class="label label-sm label-primary arrowed arrowed-righ">{{ $complete }}% Completed </span>
                             <?php } ?>
                         </td>
 
