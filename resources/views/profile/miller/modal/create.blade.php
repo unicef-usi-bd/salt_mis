@@ -101,6 +101,29 @@
             })
         }
     });
+
+    //    Check Duplicate Certificates
+    $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+        let certificateId = $(this).val();
+        let duplicates = hasDuplicateCertificate(certificateId);
+        if(duplicates){
+            let certificateName = $(this).find(":selected").text();
+            let message = `${certificateName} certificate already exist.`;
+            displayAlertHandler(message, 'danger');
+            $(this).val('').trigger('chosen:updated');
+        }
+    });
+
+    const hasDuplicateCertificate = (certificateId) => {
+        let count = 0;
+        let eachCertificateId;
+        $('.certificateTable tr').each(function () {
+            eachCertificateId = $(this).find('.CERTIFICATE_TYPE_ID').val();
+            if(eachCertificateId===certificateId) count++;
+            if(count===2) return;
+        });
+        return count>1;
+    }
 </script>
 
 

@@ -14,7 +14,7 @@
                         <thead>
                         <tr>
                             <th>Type of Certificate<span style="color:red;"> </span></th>
-                            <th>Issure Name<span style="color:red;"> </span></th>
+                            <th>Issuer Name<span style="color:red;"> </span></th>
                             <th>Issuing Date</th>
                             <th>Certificate Number</th>
                             <th>Trade License</th>
@@ -32,7 +32,7 @@
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($certificates as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                            <option @if($row->CERTIFICATE_TYPE==1) style="color: purple;font-weight: bold;" @endif value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>
                                 </span>
@@ -58,7 +58,7 @@
 
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO" />
+                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO" />
                                 </span>
                                     </td>
                                     <td>
@@ -198,9 +198,33 @@
             defaultRow.find('.ISSURE_ID').html('<option value="0">Select</option>').trigger('chosen:updated');
         });
     });
+
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
         $(this).closest("tr.removableRow").remove();
     });
+
+//    Check Duplicate Certificates
+    $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
+        let certificateId = $(this).val();
+        let duplicates = hasDuplicateCertificate(certificateId);
+        if(duplicates){
+            let certificateName = $(this).find(":selected").text();
+            let message = `${certificateName} certificate already exist.`;
+            displayAlertHandler(message, 'danger');
+            $(this).val('').trigger('chosen:updated');
+        }
+    });
+
+    const hasDuplicateCertificate = (certificateId) => {
+        let count = 0;
+        let eachCertificateId;
+        $('.certificateTable tr').each(function () {
+            eachCertificateId = $(this).find('.CERTIFICATE_TYPE_ID').val();
+            if(eachCertificateId===certificateId) count++;
+            if(count===2) return;
+        });
+        return count>1;
+    }
 
 </script>

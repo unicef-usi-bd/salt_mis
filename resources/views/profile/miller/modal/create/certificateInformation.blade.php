@@ -14,7 +14,7 @@
                         <thead>
                         <tr>
                             <th>Type of Certificate<span style="color:red;"> </span></th>
-                            <th>Issure Name<span style="color:red;"> </span></th>
+                            <th>Issuer Name<span style="color:red;"> </span></th>
                             <th>Issuing Date</th>
                             <th>Certificate Number</th>
                             <th>Trade License</th>
@@ -30,7 +30,7 @@
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
                                         <option value="">Select</option>
                                         @foreach($certificates as $row)
-                                            <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                            <option @if($row->CERTIFICATE_TYPE==1) style="color: purple;font-weight: bold;" @endif value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>
                                 </span>
@@ -53,7 +53,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"  />
+                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="" class="width-100 CERTIFICATE_NO"  />
                                 </span>
                             </td>
                             <td>

@@ -106,6 +106,16 @@ class Certificate extends Model
             order By ci.RENEWING_DATE asc"));
     }
 
+    public static function getCertificates($id){
+        return DB::table('ssc_lookupchd as slc')
+            ->select('slc.LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID', 'sc.CERTIFICATE_TYPE')
+            ->leftJoin('smm_certificate as sc', 'slc.LOOKUPCHD_ID', '=', 'sc.CERTIFICATE_TYPE_ID')
+            ->where('slc.LOOKUPMST_ID', '=', $id)
+            ->where('slc.LOOKUPCHD_NAME','!=','Local')
+            ->where('slc.ACTIVE_FLG', '=', 1)
+            ->get();
+    }
+
 } //end Class
 
 
