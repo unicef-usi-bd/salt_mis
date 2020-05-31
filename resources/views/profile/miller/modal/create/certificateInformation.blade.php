@@ -63,7 +63,7 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE">
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ date('Y') }}-06-30">
                                 </span>
                             </td>
 
@@ -95,7 +95,6 @@
     </div>
 </div>
 <script>
-
     function validation() {
         let scope, certificateId, renewDate, message, status=true;
         let certificateName=null;
