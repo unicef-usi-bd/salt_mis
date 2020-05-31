@@ -109,7 +109,7 @@
             </div>
 
             <div class="form-group resources"  style=" display: none;">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Center</b><span style="color: red;">*</span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
