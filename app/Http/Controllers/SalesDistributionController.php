@@ -116,9 +116,9 @@ class SalesDistributionController extends Controller
 
 
         if($salesDistributionInsert){
-            return response()->json(['success'=>'Sales Distribution has been saved successfully.']);
+            return response()->json(['success'=>'Sales Distribution submission completed.']);
         }else{
-            return response()->json(['success'=>'Sales Distribution save failed.']);
+            return response()->json(['success'=>'Sales Distribution submission failed.']);
         }
     }
 

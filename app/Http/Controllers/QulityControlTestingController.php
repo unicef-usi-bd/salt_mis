@@ -165,9 +165,9 @@ class QulityControlTestingController extends Controller
         $inserted = QulityControlTesting::insertQualityControlTestingData($data);
 
         if($inserted){
-            return response()->json(['success'=>'Quality  Control & Testing has been saved successfully.']);
+            return response()->json(['success'=>'Quality  Control & Testing submission completed.']);
         } else {
-            return response()->json(['success'=>'Quality  Control & Testing save failed.']);
+            return response()->json(['success'=>'Quality  Control & Testing submission failed.']);
         }
     }
 
@@ -269,9 +269,9 @@ class QulityControlTestingController extends Controller
         $updated = QulityControlTesting::updateQualityControlTestingData($request, $id, $qualityTestImage);
 
         if($updated){
-            return response()->json(['success'=>'Quality  Control & Testing has been updated successfully.']);
+            return response()->json(['success'=>'Quality  Control & Testing submission completed.']);
         } else {
-            return response()->json(['success'=>'Quality  Control & Testing updated failed.']);
+            return response()->json(['success'=>'Quality  Control & Testing submission failed.']);
         }
     }
 

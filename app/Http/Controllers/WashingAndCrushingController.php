@@ -79,12 +79,12 @@ class WashingAndCrushingController extends Controller
         $rules = array(
             'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-            'WASTAGE' => 'required',
+//            'WASTAGE' => 'required',
         );
         $error = array(
             'PRODUCT_ID.required' => 'Salt type field is required.',
             'REQ_QTY.required' => 'Amount field is required.',
-            'WASTAGE.required' => 'Wastage field is required.',
+//            'WASTAGE.required' => 'Wastage field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -98,9 +98,9 @@ class WashingAndCrushingController extends Controller
         $washingAndCrashing = WashingAndCrushing::insertWashingAndCrushingData($request,$entryBy,$centerId);
 
         if($washingAndCrashing){
-            return response()->json(['success'=>'Washing & Crashing has been save successfully.']);
+            return response()->json(['success'=>'Washing & Crashing submission completed.']);
         } else{
-            return response()->json(['success'=>'Washing & Crashing save failed.']);
+            return response()->json(['success'=>'Washing & Crashing submission failed.']);
         }
 
     }
@@ -148,12 +148,12 @@ class WashingAndCrushingController extends Controller
         $rules = array(
             'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-            'WASTAGE' => 'required',
+//            'WASTAGE' => 'required',
         );
         $error = array(
             'PRODUCT_ID.required' => 'Salt type field is required.',
             'REQ_QTY.required' => 'Amount field is required.',
-            'WASTAGE.required' => 'Wastage field is required.',
+//            'WASTAGE.required' => 'Wastage field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -167,9 +167,9 @@ class WashingAndCrushingController extends Controller
         $update = WashingAndCrushing::updateWashingAndCrushingData($request,$id,$result);
 
         if($update){
-            return response()->json(['success'=>'Washing & Crashing has been updated successfully.']);
+            return response()->json(['success'=>'Washing & Crashing submission completed.']);
         } else{
-            return response()->json(['success'=>'Washing & Crashing update failed.']);
+            return response()->json(['success'=>'Washing & Crashing submission failed.']);
         }
     }
 

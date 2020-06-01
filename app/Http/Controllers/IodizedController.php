@@ -103,9 +103,9 @@ class IodizedController extends Controller
         $inserted = Iodized::insertIodizeData($request,$centerId,$entryBy);
 
         if($inserted){
-            return response()->json(['success'=>'Iodize has been save successfully.']);
+            return response()->json(['success'=>'Iodize submission completed.']);
         }else{
-            return response()->json(['success'=>'Iodize save failed.']);
+            return response()->json(['success'=>'Iodize submission failed.']);
         }
 
     }
@@ -179,7 +179,7 @@ class IodizedController extends Controller
 
         $updated = Iodized::updateIodizeData($request,$id,$iodizeStock);
         if($updated){
-            return response()->json(['success'=>'Iodize has been updated successfully.']);
+            return response()->json(['success'=>'Iodize submission completed.']);
         }else{
             return response()->json(['success'=>'Iodize update failed.']);
         }

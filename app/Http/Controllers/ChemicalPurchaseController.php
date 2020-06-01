@@ -84,9 +84,9 @@ class ChemicalPurchaseController extends Controller
         $chemicalPurchase = ChemicalPurchase::insertChemicalPurchaseData($request, $this->chemicalSupplierTypeId);
 
         if($chemicalPurchase){
-            return response()->json(['success'=>'Chemical purchase has been created']);
+            return response()->json(['success'=>'Chemical purchase submission Completed.']);
         } else{
-            return response()->json(['errors'=>'Chemical purchase create failed']);
+            return response()->json(['errors'=>'Chemical purchase submission failed.']);
         }
     }
 
@@ -149,9 +149,9 @@ class ChemicalPurchaseController extends Controller
         $update = ChemicalPurchase::updateChemicalPurchaseData($request,$id);
 
         if ($update) {
-            return response()->json(['success'=>'Chemical purchase has been updated']);
+            return response()->json(['success'=>'Chemical purchase submission completed.']);
         } else{
-            return response()->json(['errors'=>'Chemical purchase update failed']);
+            return response()->json(['errors'=>'Chemical purchase submission failed.']);
         }
     }
 

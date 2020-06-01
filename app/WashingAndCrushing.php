@@ -29,9 +29,9 @@ class WashingAndCrushing extends Model
     }
 
     public static function insertWashingAndCrushingData($request,$entryBy,$centerId){
-
+        $wasteAmount = $request->input('WASTAGE') ?: 0;
         $oty = intval($request->input('REQ_QTY'));
-        $totalStock = (intval($request->input('REQ_QTY'))*intval($request->input('WASTAGE'))/100);
+        $totalStock = (intval($request->input('REQ_QTY'))*intval($wasteAmount)/100);
         $result = $oty - $totalStock;
 
         try{
@@ -51,7 +51,7 @@ class WashingAndCrushing extends Model
                     'WASHCRASHMST_ID' => $washingCrushingMstId,
                     'ITEM_ID' => $request->input('PRODUCT_ID'),
                     'REQ_QTY' => $result,
-                    'WASTAGE' => $request->input('WASTAGE'),
+                    'WASTAGE' => $wasteAmount,
                     'center_id' => $centerId,
                     'ENTRY_BY' => $entryBy,
                     'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -110,6 +110,7 @@ class WashingAndCrushing extends Model
     }
 
     public static function updateWashingAndCrushingData($request,$id,$result){
+        $wasteAmount = $request->input('WASTAGE') ?: 0;
         try{
             DB::beginTransaction();
             DB::table('tmm_washcrashmst')
@@ -128,7 +129,7 @@ class WashingAndCrushing extends Model
                 ->update([
                     'ITEM_ID' => $request->input('ITEM_ID'),
                     'REQ_QTY' => $result,
-                    'WASTAGE' => $request->input('WASTAGE'),
+                    'WASTAGE' => $wasteAmount,
                     'center_id' => Auth::user()->center_id,
                     'UPDATE_BY' => Auth::user()->id,
                     'UPDATE_TIMESTAMP' => date("Y-m-d h:i")

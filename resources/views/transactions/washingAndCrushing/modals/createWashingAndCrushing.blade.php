@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> * </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
             <span class="col-sm-7">
                 <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
             </span>

@@ -91,9 +91,9 @@ class CrudeSaltProcurementController extends Controller
         $crudeSalt = CrudeSaltProcurement::insertCrudeSaltData($request);
 
         if($crudeSalt){
-            return response()->json(['success'=>'Crud salt has been saved successfully.']);
+            return response()->json(['success'=>'Crud salt submission completed.']);
         } else{
-            return response()->json(['errors'=>'Crud salt has been save failed.']);
+            return response()->json(['errors'=>'Crud salt submission failed.']);
         }
     }
 
@@ -156,9 +156,9 @@ class CrudeSaltProcurementController extends Controller
         $crudeSaltUpdate = CrudeSaltProcurement::updateCrudeSaltPurchase($request,$id);
 
         if($crudeSaltUpdate){
-            return response()->json(['success'=>'Crud salt has been updated successfully.']);
+            return response()->json(['success'=>'Crud salt submission completed.']);
         } else{
-            return response()->json(['errors'=>'Crud salt has been updated failed.']);
+            return response()->json(['errors'=>'Crud salt submission failed.']);
         }
     }
 

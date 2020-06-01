@@ -112,9 +112,9 @@ class StockAdjusmentController extends Controller
         $this->iodizedAdjustment($insertedId, $request->input('system_iodize_stock'), $request->input('iodize_stock'));
 
         if($insertedId){
-            return response()->json(['success'=>'Stock adjustment has been created']);
+            return response()->json(['success'=>'Stock adjustment submission completed.']);
         } else{
-            return response()->json(['errors'=>'Stock adjustment create failed']);
+            return response()->json(['errors'=>'Stock adjustment submission failed.']);
         }
 
     }
@@ -213,9 +213,9 @@ class StockAdjusmentController extends Controller
                 $this->washCrushingAdjustment($id, $request->input('system_wc_stock'), $request->input('wc_stock'));
                 $this->iodizedAdjustment($id, $request->input('system_iodize_stock'), $request->input('iodize_stock'));
             }
-            return response()->json(['success'=>'Stock adjustment has been updated']);
+            return response()->json(['success'=>'Stock adjustment submission completed.']);
         } else{
-            return response()->json(['errors'=>'Stock adjustment update failed']);
+            return response()->json(['errors'=>'Stock adjustment submission failed.']);
         }
     }
 
