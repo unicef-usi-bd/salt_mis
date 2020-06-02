@@ -48,7 +48,7 @@
                 </span>
                 <span class="col-sm-6 currentChemicalStock" data-stock="{{ $chemicalStock }}" data-recommend="" style="margin-top: 6px;font-weight: bold;">[Current Stock: {{ $chemicalStock }}KG]</span>
             </div>
-            <div class="recommendInfo" style="margin-left: 2%;float: left;color:#FF8F37;font-weight: bold"></div>
+            <div class="recommendInfo" style="margin-left: 27%;float: left;color:#FF8F37;font-weight: bold"></div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
@@ -115,6 +115,7 @@
                     let saltAmount = parseFloat(data.chemicalPerKg.CRUDE_SALT);
                     let recommendChemical = (chemicalAmount/saltAmount)*washSaltAmount;
                     chemicalStockScope.attr('data-recommend', recommendChemical);
+                    $('.userChemicalAmount').val(recommendChemical);
                 }
                 chemicalStockDisplay(chemicalStockScope);
             }
