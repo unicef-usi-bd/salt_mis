@@ -40,10 +40,11 @@ class Iodized extends Model
             ->get();
     }
 
-    public static function insertIodizeData($request,$centerId,$entryBy){
+    public static function insertIodizeData($request, $centerId, $entryBy){
         $amount = $request->input('WASH_CRASH_QTY');
-        $wastage = ($amount * $request->input('WASTAGE') / 100);
-        $iodizeStock = $amount - $wastage;
+        $wastagePercent = $request->input('WASTAGE') ?: 0;
+        $wastageAmount = ($amount * $wastagePercent / 100);
+        $iodizeStock = $amount - $wastageAmount;
         try{
             DB::beginTransaction();
             $iodizeMstId = DB::table('tmm_iodizedmst')->insertGetId([
@@ -61,7 +62,7 @@ class Iodized extends Model
                 'IODIZEDMST_ID' => $iodizeMstId,
                 'ITEM_ID' => $request->input('PRODUCT_ID'),
                 'REQ_QTY' => $request->input('REQ_QTY'),
-                'WASTAGE' => $request->input('WASTAGE'),
+                'WASTAGE' => $wastagePercent,
                 'WASH_CRASH_QTY' => $iodizeStock,
                 'ITEM_TYPE' => 'I',//I=Iodized
                 'center_id' => $centerId,
@@ -134,9 +135,9 @@ class Iodized extends Model
 
     public static function updateIodizeData($request, $id){
         $amount = $request->input('WASH_CRASH_QTY');
-        $wastePercentage = $request->input('WASTAGE');
-        $wastage = ($amount * $wastePercentage) / 100;
-        $iodizeStock = $amount - $wastage;
+        $wastePercentage = $request->input('WASTAGE')?:0;
+        $wastageAmount = ($amount * $wastePercentage) / 100;
+        $iodizeStock = $amount - $wastageAmount;
         try{
             DB::beginTransaction();
             DB::table('tmm_iodizedmst')
@@ -158,7 +159,7 @@ class Iodized extends Model
                     //'IODIZEDMST_ID' => $iodizeMstId,
                     'ITEM_ID' => $request->input('PRODUCT_ID'),
                     'REQ_QTY' => $request->input('REQ_QTY'),
-                    'WASTAGE' => $request->input('WASTAGE'),
+                    'WASTAGE' => $wastePercentage,
                     'WASH_CRASH_QTY' => $iodizeStock,
                     'ITEM_TYPE' => 'I',//I=Iodized
                     'UPDATE_BY' => Auth::user()->id,

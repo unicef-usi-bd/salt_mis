@@ -36,7 +36,7 @@
                 </div>
             </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1" style="margin-left: -47px;"> <b>Amount of Chemical</b><span style="color: red;"> *</span> </label>
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1" style="margin-left: -47px;"> <b>Chemical amount</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
                     <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value=""/>
@@ -46,7 +46,7 @@
             <div class="recommendInfo" style="margin-left: 27%;float: left;color:#FF8F37;font-weight: bold"></div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> *</span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;"> </span> </label>
             <div class="col-sm-7">
                 <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value=""/>
             </div>

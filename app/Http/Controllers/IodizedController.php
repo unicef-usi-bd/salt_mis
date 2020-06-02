@@ -85,13 +85,13 @@ class IodizedController extends Controller
             'WASH_CRASH_QTY' => 'required',
             'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-            'WASTAGE' => 'required',
+//            'WASTAGE' => 'required',
         );
         $error = array(
             'WASH_CRASH_QTY.required' => 'Amount field is required.',
             'PRODUCT_ID.required' => 'Chemical type field is required.',
             'REQ_QTY.required' => 'Chemical Amount field is required.',
-            'WASTAGE.required' => 'Wastage field is required.',
+//            'WASTAGE.required' => 'Wastage field is required.',
         );
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
@@ -162,22 +162,18 @@ class IodizedController extends Controller
             'WASH_CRASH_QTY' => 'required',
             'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',
-            'WASTAGE' => 'required',
+//            'WASTAGE' => 'required',
         );
         $error = array(
             'WASH_CRASH_QTY.required' => 'Amount field is required.',
             'PRODUCT_ID.required' => 'Chemical type field is required.',
             'REQ_QTY.required' => 'Chemical Amount field is required.',
-            'WASTAGE.required' => 'Wastage field is required.',
+//            'WASTAGE.required' => 'Wastage field is required.',
         );
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $washAndCrushQty = intval($request->input('WASH_CRASH_QTY'));
-        $iodizeWastage = ($washAndCrushQty *intval($request->input('WASTAGE')) / 100);
-        $iodizeStock = $washAndCrushQty - $iodizeWastage;
-
-        $updated = Iodized::updateIodizeData($request,$id,$iodizeStock);
+        $updated = Iodized::updateIodizeData($request, $id);
         if($updated){
             return response()->json(['success'=>'Iodize submission completed.']);
         }else{
