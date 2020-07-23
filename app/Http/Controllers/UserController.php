@@ -168,7 +168,7 @@ class UserController extends Controller
             }
 
             if($userCreateId){
-                return response()->json(['success'=>'User has been created']);
+                return response()->json(['success'=>'Submission Completed']);
             } else{
                 return response()->json(['errors'=>'User create failed']);
             }
@@ -222,7 +222,7 @@ class UserController extends Controller
         $editUser = User::editData($id);
         if ($editUser->user_full_name == $request->input('user_full_name')) {
             $rules = array(
-            'user_full_name' =>'required|string|max:100',    
+            'user_full_name' =>'required|string|max:100',
              'username' => 'required|string|max:100',
             );
         }else{
@@ -295,7 +295,7 @@ class UserController extends Controller
             }
 
             if($update){
-                return response()->json(['success'=>'User has been updated']);
+                return response()->json(['success'=>'Submission Completed']);
             } else{
                 return response()->json(['errors'=>'User update failed']);
             }

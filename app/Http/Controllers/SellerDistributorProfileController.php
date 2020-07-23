@@ -92,7 +92,7 @@ class SellerDistributorProfileController extends Controller
         $sellerId = sprintf("%04d", $sellerId+1);
 
         if($inserted){
-            return response()->json(['success'=>'Seller/Distributor created successfully', 'insertId'=> $sellerId]);
+            return response()->json(['success'=>'Seller/Distributor Submission Completed', 'insertId'=> $sellerId]);
         } else{
             return response()->json(['errors'=>'Seller/Distributor create failed']);
         }
@@ -166,7 +166,7 @@ class SellerDistributorProfileController extends Controller
         $updated = SellerDistributorProfile::updateData($request,$id);
 
         if($updated){
-            return response()->json(['success'=>'Seller/Distributor created successfully']);
+            return response()->json(['success'=>'Seller/Distributor Submission Completed']);
         } else{
             return response()->json(['errors'=>'Seller/Distributor create failed']);
         }

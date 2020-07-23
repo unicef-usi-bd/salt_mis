@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $inserted = Employee::insertEmployeeInfo($request);
 
         if($inserted){
-            return response()->json(['success'=>'Employee information has been saved successfully', 'insertId' => $millerId]);
+            return response()->json(['success'=>'Profile is completed', 'insertId' => $millerId]);
         } else{
             return response()->json(['errors'=>'Employee information Profile save failed']);
         }
@@ -123,7 +123,7 @@ class EmployeeController extends Controller
         }
 
         if($updated){
-            return response()->json(['success'=>'Employee information has been updated successfully']);
+            return response()->json(['success'=>'Profile is completed']);
         } else{
             return response()->json(['errors'=>'Employee information Profile update failed']);
         }

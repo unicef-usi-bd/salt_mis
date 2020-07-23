@@ -123,6 +123,7 @@
         $('.rowAddCertificate').click(function(){
             let getTr = $('tr.certificateRow:first');
 //            alert(getTr.html());
+            let thisYear = new Date().getFullYear();
             $("select.chosen-select").chosen('destroy');
             $('tbody.certificateTable').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             let defaultRow = $('tr.removableRow:last');
@@ -133,7 +134,7 @@
             defaultRow.find('input.ISSUING_DATE').attr('disabled', false);
             defaultRow.find('input.CERTIFICATE_NO').attr('disabled', false);
             defaultRow.find('input.TRADE_LICENSE').attr('disabled', false);
-            defaultRow.find('input.RENEWING_DATE').attr('disabled', false);
+            defaultRow.find('input.RENEWING_DATE').val(`${thisYear}-06-30`);
             defaultRow.find('input.REMARKS').attr('disabled', false);
             defaultRow.find('span.budget_against_code').text('');
             defaultRow.find('span.errorMsg').text('');

@@ -117,7 +117,7 @@ class SupplierProfileController extends Controller
         $supplierId = sprintf("%04d", $supplierId+1);// $digits = 4;
 
         if($created){
-            return response()->json(['success'=>'Supplier profile has been created', 'insertId'=>$supplierId]);
+            return response()->json(['success'=>'Supplier profile submission Completed', 'insertId'=>$supplierId]);
         } else{
             return response()->json(['errors'=>'Supplier profile create failed']);
         }
@@ -186,7 +186,7 @@ class SupplierProfileController extends Controller
         $updated = SupplierProfile::updateSupplierProfileData($request, $id);
 
         if($updated){
-            return response()->json(['success'=>'Supplier profile has been updated']);
+            return response()->json(['success'=>'Supplier Profile Submission Completed']);
         } else{
             return response()->json(['errors'=>'Supplier profile update failed']);
         }
