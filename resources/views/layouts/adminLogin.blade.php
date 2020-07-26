@@ -68,8 +68,7 @@
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <div class="center">
-                                        {{--<img src="{{asset('/'.$orgInfo->org_logo)}}" class="img-responsive center-block">--}}
-                                        <img src="{{asset('image/unicef-bd.jpg')}}" class="img-responsive center-block" style="border-radius: 50%;width: 100px;">
+                                        <img src="{{asset('image/unicef-bd.png')}}" class="img-responsive center-block" style=" width: 100px;margin-top:15px">
                                     </div>
                                     {{-- Custom alert message --}}
                                     @include('includes.alert')
