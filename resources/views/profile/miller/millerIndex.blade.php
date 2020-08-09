@@ -64,7 +64,7 @@
                                     @endif
                                 @endforeach
                             <span class="label label-sm label-danger arrowed arrowed-righ" title="Please provide {{ implode($incompleteInfo, ', ') }} Information">Inactive </span>
-                            <span class="label label-sm label-primary arrowed arrowed-righ">{{ $complete }}% Completed </span>
+{{--                            <span class="label label-sm label-primary arrowed arrowed-righ">{{ $complete }}% Completed </span>--}}
                             <?php } ?>
                         </td>
 

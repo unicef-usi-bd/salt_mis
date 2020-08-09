@@ -149,13 +149,13 @@ class MillerInfoController extends Controller
         if($request->file('mill_logo')!=null && $request->file('mill_logo')->isValid()) {
             $image = $request->file('mill_logo');
             $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-            $path = 'image/mill-logo/' . $filename;
+            $path = 'public/image/mill-logo/' . $filename;
             Image::make($image->getRealPath())->resize(250, 250)->save($path);
 
             //********* End Image *********
-            $mill_logo = "image/mill-logo/$filename";
+            $mill_logo = "public/image/mill-logo/$filename";
         }else{
-            $mill_logo = 'image/mill-logo/defaultUserImage.png';
+            $mill_logo = 'public/image/mill-logo/defaultUserImage.png';
         }
 
         $millerId = MillerInfo::insertMillerInfo($request, $mill_logo);
@@ -256,14 +256,14 @@ class MillerInfoController extends Controller
         if($request->file('mill_logo')!=null && $request->file('mill_logo')->isValid()) {
             $image = $request->file('mill_logo');
             $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-            $path = 'image/mill-logo/' . $filename;
+            $path = 'public/image/mill-logo/' . $filename;
             Image::make($image->getRealPath())->resize(250, 250)->save($path);
             //********* End Image *********
-            $mill_logo = "image/mill-logo/$filename";
+            $mill_logo = "public/image/mill-logo/$filename";
         } else if($request->file('mill_logo')==null){
             $mill_logo = $request->input('pre_mill_logo');
         }else{
-            $mill_logo = 'image/mill-logo/defaultUserImage.png';
+            $mill_logo = 'public/image/mill-logo/defaultUserImage.png';
         }
 
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();

@@ -130,7 +130,7 @@ class QulityControlTestingController extends Controller
                 if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
                     $image = $request->file('QUALITY_CONTROL_IMAGE');
                     $filename = date('Y-m-d').'_'.time() . '.' . $extension;
-                    $path = 'image/qualitycontrol/' . $filename;
+                    $path = 'public/image/qualitycontrol/' . $filename;
                     Image::make($image->getRealPath())->resize(250, 250)->save($path);
                     //********* End Image *********
                     $qualityTestImage = "$filename";
@@ -159,7 +159,7 @@ class QulityControlTestingController extends Controller
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
         );
 
-        if(!empty($qualityTestImage)) $data['QUALITY_CONTROL_IMAGE'] = 'image/qualitycontrol/'.$qualityTestImage;
+        if(!empty($qualityTestImage)) $data['QUALITY_CONTROL_IMAGE'] = 'public/image/qualitycontrol/'.$qualityTestImage;
 
         //$this->pr($request->input());
         $inserted = QulityControlTesting::insertQualityControlTestingData($data);
@@ -243,7 +243,7 @@ class QulityControlTestingController extends Controller
                 if($request->file('QUALITY_CONTROL_IMAGE')!=null && $request->file('QUALITY_CONTROL_IMAGE')->isValid()) {
                     $image = $request->file('QUALITY_CONTROL_IMAGE');
                     $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-                    $path = 'image/qualitycontrol/' . $filename;
+                    $path = 'public/image/qualitycontrol/' . $filename;
                     Image::make($image->getRealPath())->resize(250, 250)->save($path);
                     //********* End Image *********
                     $qualityTestImage = "$filename";
@@ -257,7 +257,7 @@ class QulityControlTestingController extends Controller
 //                    $tempName = strtolower(str_replace(' ', '', $request->input('QUALITY_CONTROL_IMAGE')));
 //                    $qualityTestImage = $tempName.date("Y-m-d")."_".time().'.' . $file->getClientOriginalExtension();
 //
-//                    $request->file('QUALITY_CONTROL_IMAGE')->move("image/qualitycontrol/", $qualityTestImage);
+//                    $request->file('QUALITY_CONTROL_IMAGE')->move("public/image/qualitycontrol/", $qualityTestImage);
 //                } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 //
 //                }

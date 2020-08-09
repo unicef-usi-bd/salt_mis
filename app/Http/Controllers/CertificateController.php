@@ -100,8 +100,8 @@ class CertificateController extends Controller
                     $file = $request->file('user_image')[$i];
                     $tempName = strtolower(str_replace(' ', '', $request->input('user_image')[$i]));
                     $userImageName = $tempName.date("Y-m-d").$i.'_'.time().'.' . $file->getClientOriginalExtension();
-                    $imagePath= 'image/user-image/'.$userImageName;
-                    $request->file('user_image')[$i]->move("image/user-image", $userImageName);
+                    $imagePath= 'public/image/user-image/'.$userImageName;
+                    $request->file('user_image')[$i]->move("public/image/user-image", $userImageName);
 
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
@@ -117,7 +117,7 @@ class CertificateController extends Controller
                 'DISTRICT_ID' => $request->input('DISTRICT_ID')[$i],
                 'ISSUING_DATE' => date('Y-m-d',strtotime($request->input('ISSUING_DATE')[$i])),
                 'CERTIFICATE_NO' => $request->input('CERTIFICATE_NO')[$i],
-                //'TRADE_LICENSE' => 'image/user-image/'.$request->file('user_image')[$i],
+                //'TRADE_LICENSE' => 'public/image/user-image/'.$request->file('user_image')[$i],
                 'TRADE_LICENSE' => $imagePath,
                 'RENEWING_DATE' => $renewingDate,
                 'CERTIFICATE_TYPE' => CertificateIssur::hasMendatory($userCertificates[$i]),
@@ -208,7 +208,7 @@ class CertificateController extends Controller
                     $file = $image[$i];
                     $tempName = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
 
-                    $image[$i]->move("image/user-image", $tempName);
+                    $image[$i]->move("public/image/user-image", $tempName);
 
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
@@ -233,7 +233,7 @@ class CertificateController extends Controller
             );
 
             if(!empty($tempName)){
-                $data['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
+                $data['TRADE_LICENSE'] = 'public/image/user-image/' . $tempName;
             }
 
             if(!empty($certificateId[$i])){
@@ -256,7 +256,7 @@ class CertificateController extends Controller
                     $file = $image[$i];
                     $tempName = $tempName . date("Y-m-d") . $i . '_' . time() . '.' . $file->getClientOriginalExtension();
 
-                    $image[$i]->move("image/user-image", $tempName);
+                    $image[$i]->move("public/image/user-image", $tempName);
 
                 } catch (Illuminate\Filesystem\FileNotFoundException $e) {
 
@@ -280,7 +280,7 @@ class CertificateController extends Controller
                 'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
             );
             if(!empty($tempName)){
-                $data[$i]['TRADE_LICENSE'] = 'image/user-image/' . $tempName;
+                $data[$i]['TRADE_LICENSE'] = 'public/image/user-image/' . $tempName;
             }
         }
 

@@ -96,14 +96,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'user_full_name' =>'required|string|max:100',
+//            'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
-            'contact_no' => 'required|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
+//            'contact_no' => 'required|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
 
         $error = array(
@@ -121,23 +121,23 @@ class UserController extends Controller
             if ($request->file('user_image') != null && $request->file('user_image')->isValid()) {
                 $image = $request->file('user_image');
                 $filename = date('Y-m-d') . '_' . time() . '.' . $image->getClientOriginalExtension();
-                $path = 'image/user-image/' . $filename;
+                $path = 'public/image/user-image/' . $filename;
                 Image::make($image->getRealPath())->resize(250, 250)->save($path);
                 //********* End Image *********
-                $user_image = "image/user-image/$filename";
+                $user_image = "public/image/user-image/$filename";
             } else {
-                $user_image = 'image/user-image/defaultUserImage.png';
+                $user_image = 'public/image/user-image/defaultUserImage.png';
             }
             //for user signature************* //$userSignatureName = 'defaultUserSignature.png';
             if ($request->file('user_signature') != null && $request->file('user_signature')->isValid()) {
                 $signature = $request->file('user_signature');
                 $filename = date('Y-m-d') . '_' . time() . '.' . $signature->getClientOriginalExtension();
-                $path = 'image/user-signature/' . $filename;
+                $path = 'public/image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
-                $user_signature = "image/user-signature/$filename";
+                $user_signature = "public/image/user-signature/$filename";
             } else {
-                $user_signature = 'image/user-signature/defaultUserSignature.png';
+                $user_signature = 'public/image/user-signature/defaultUserSignature.png';
             }
 
             $data = array(
@@ -222,12 +222,12 @@ class UserController extends Controller
         $editUser = User::editData($id);
         if ($editUser->user_full_name == $request->input('user_full_name')) {
             $rules = array(
-            'user_full_name' =>'required|string|max:100',
+//            'user_full_name' =>'required|string|max:100',
              'username' => 'required|string|max:100',
             );
         }else{
              $rules = array(
-                 'user_full_name' =>'required|string|max:100',
+//                 'user_full_name' =>'required|string|max:100',
                  'username' => 'required|string|max:100',
                  'user_group_id' => 'required',
             );
@@ -256,12 +256,12 @@ class UserController extends Controller
 
                 $image = $request->file('user_image');
                 $filename = date('Y-m-d').'_'.time() . '.' . $image->getClientOriginalExtension();
-                $path = 'image/user-image/' . $filename;
+                $path = 'public/image/user-image/' . $filename;
                 Image::make($image->getRealPath())->resize(250, 250)->save($path);
                 //********* End Image *********
-                $user_image = "image/user-image/$filename";
+                $user_image = "public/image/user-image/$filename";
             }else{
-                $user_image = 'image/user-image/defaultUserImage.png';
+                $user_image = 'public/image/user-image/defaultUserImage.png';
                 $user_image = $editUser->user_image;
             }
             //for user signature************* $userSignatureName = 'defaultUserSignature.png';
@@ -274,10 +274,10 @@ class UserController extends Controller
 
                 $signature = $request->file('user_signature');
                 $filename = date('Y-m-d').'_'.time() . '.' . $signature->getClientOriginalExtension();
-                $path = 'image/user-signature/' . $filename;
+                $path = 'public/image/user-signature/' . $filename;
                 Image::make($signature->getRealPath())->resize(135, 50)->save($path);
                 //********* End Image *********
-                $userSignatureName = "image/user-signature/$filename";
+                $userSignatureName = "public/image/user-signature/$filename";
             }else{
                 //$userSignatureName = 'image/user-signature/defaultUserSignature.png';
                 $userSignatureName = $editUser->user_signature;
