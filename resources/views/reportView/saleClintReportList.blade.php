@@ -43,6 +43,11 @@
                 </tr>
 
             @endforeach
+            @if(sizeof($saleClintList)==0)
+                <tr>
+                    <td class="text-danger center" colspan="5">Data not found !</td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>
