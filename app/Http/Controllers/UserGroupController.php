@@ -26,19 +26,19 @@ class UserGroupController extends Controller
         $userGroupLevelId = Auth::user()->user_group_level_id;
         $url = Route::getFacadeRoot()->current()->uri();
 
-        $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
+        $previllage = $this->checkPrevillage($userGroupId, $userGroupLevelId, $url);
         $usergroup = trans('module.user_group_create');
-        $heading=array(
-            'title'=>$usergroup,
-            'library'=>'datatable',
-            'modalSize'=>'modal-md',
-            'action'=>'user-groups/create',
+        $heading = array(
+            'title' => $usergroup,
+            'library' => 'datatable',
+            'modalSize' => 'modal-md',
+            'action' => 'user-groups/create',
             'createPermissionLevel' => $previllage->CREATE
         );
 
         $userGroups = UserGroup::getData();
 
-        return view('accessControl.userGroup.userGroupIndex',compact( 'userGroups','heading','previllage'));
+        return view('accessControl.userGroup.userGroupIndex', compact('userGroups', 'heading', 'previllage'));
     }
 
     /**
@@ -56,7 +56,7 @@ class UserGroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -64,37 +64,35 @@ class UserGroupController extends Controller
 
         $rules = array(
             'group_name' => 'required',
-            //'active_status' => 'required',
+//            'active_status' => 'required',
         );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails())
-        {
-            //return response()->json(['errors'=>$validator->errors()->all()]);
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $data = array([
-                'USERGRP_NAME' => $request->input('group_name'),
-                'ORG_ID' => 1,
-                //'IS_ACTIVE' => $request->input('active_status'),
-                'IS_ACTIVE' => 1,
-                'CREATED_BY' => auth()->user()->id,
-                'CREATED_AT' => date("Y-m-d h:i:s"),
-            ]);
+        $error = array(
+            'group_name.required' => 'Group name field is required.',
+        );
 
-            $role = UserGroup::insertData($data);
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
 
-            if ($role) {
-                return response()->json(['success'=>'User Group Successfully Saved']);
-                //return redirect('/user-groups')->with('success', 'User Group Successfully Saved!');
-                //return json_encode('Success');
-            }
+        $data = array([
+            'USERGRP_NAME' => $request->input('group_name'),
+            'ORG_ID' => 1,
+            //'IS_ACTIVE' => $request->input('active_status'),
+            'IS_ACTIVE' => 1,
+            'CREATED_BY' => auth()->user()->id,
+            'CREATED_AT' => date("Y-m-d h:i:s"),
+        ]);
+        $role = UserGroup::insertData($data);
+        if ($role) {
+            return response()->json(['success' => 'Submission Completed.']);
+        } else {
+            return response()->json(['errors' => 'Submission failed.']);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -109,7 +107,7 @@ class UserGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -122,57 +120,52 @@ class UserGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $editUserGroup = UserGroup::editData($id);
-        if ($editUserGroup->USERGRP_NAME == $request->input('group_name')) {
-            $rules = array(
+        $rules = array(
             'group_name' => 'required',
             //'active_status' => 'required',
         );
-        }else{
-             $rules = array(
-            'group_name' => 'required',
-            //'active_status' => 'required',
+
+        $error = array(
+            'group_name.required' => 'Group name field is required.',
         );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
+
+        $role = UserGroup::updateData($request, $id);
+
+        if ($role) {
+            return response()->json(['success' => 'Submission Completed.']);
+        } else {
+            return response()->json(['errors' => 'Submission failed.']);
         }
-       
-        $validator = Validator::make(Input::all(), $rules);
-         if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-        }else {
-            $updateUserGroup = UserGroup::updateData($request, $id);
-
-            }
-
-            session()->flash('message','User Group Successfully Updated');
-            //return json_encode('Success');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
 
         $delete = UserGroup::deleteData($id);
-        if($delete){
+        if ($delete) {
             echo json_encode([
                 'type' => 'div',
                 'id' => $id,
                 'flag' => true,
                 'message' => 'Level Successfully Deleted.',
             ]);
-        } else{
+        } else {
             echo json_encode([
                 'message' => 'Error Founded Here!',
             ]);

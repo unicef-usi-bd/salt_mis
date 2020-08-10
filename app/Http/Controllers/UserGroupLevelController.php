@@ -58,27 +58,29 @@ class UserGroupLevelController extends Controller
             'group_id' => 'required',
             //'active_status' => 'required',
         );
-        $validator = Validator::make(Input::all(), $rules);
-         if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
+        $error = array(
+            'group_level_name.required' => 'Group level name field is required.',
+            'group_id.required' => 'Group Id name field is required.',
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
+
+        $data = array([
+            'UGLEVE_NAME' => $request->input('group_level_name'),
+            'USERGRP_ID' => $request->input('group_id'),
+            'ORG_ID' => 1,
+            'IS_ACTIVE' => $request->input('active_status'),
+            'CREATED_BY' => auth()->user()->id,
+            'CREATED_AT' => date("Y-m-d h:i:s"),
+        ]);
+
+        $role = UserGroupLevel::insertData($data);
+
+        if ($role) {
+            return response()->json(['success' => 'Submission Completed.']);
         } else {
-            $data = array([
-                'UGLEVE_NAME' => $request->input('group_level_name'),
-                'USERGRP_ID' => $request->input('group_id'),
-                'ORG_ID' => 1,
-                //'IS_ACTIVE' => $request->input('active_status'),
-                'IS_ACTIVE' => 1,
-                'CREATED_BY' => auth()->user()->id,
-                'CREATED_AT' => date("Y-m-d h:i:s"),
-            ]);
-
-            $role = UserGroupLevel::insertData($data);
-
-            if ($role) {
-                return response()->json(['success'=>'User Group Level Successfully Saved']);
-                //return json_encode('Success');
-            }
+            return response()->json(['errors' => 'Submission failed.']);
         }
     }
 
@@ -115,28 +117,27 @@ class UserGroupLevelController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $editUserGroupLevel = UserGroupLevel::editData($id);
-        if ($editUserGroupLevel->UGLEVE_NAME == $request->input('group_level_name')) {
-            $rules = array(
-            'group_level_name' => 'required',
-            //'active_status' => 'required',
-        );
-        } else{
-            $rules = array(
-            'group_level_name' => 'required',
-            //'active_status' => 'required',
-        );
-        }
-        
-        $validator = Validator::make(Input::all(), $rules);
-         if ($validator->fails())
-        {
-            return response()->json(['errors'=>$validator->errors()->all()]);
-        } else {
-            $updateUserGroupLevel = UserGroupLevel::updateData($request, $id);
-        }
 
-        session()->flash('message','User Group Level Successfully Updated');
+        $rules = array(
+            'group_level_name' => 'required',
+            'active_status' => 'required',
+        );
+
+        $error = array(
+            'group_level_name.required' => 'Group level name field is required.',
+            'group_id.required' => 'Group Id name field is required.',
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
+
+        $updateUserGroupLevel = UserGroupLevel::updateData($request, $id);
+
+        if ($updateUserGroupLevel) {
+            return response()->json(['success' => 'Submission Completed.']);
+        } else {
+            return response()->json(['errors' => 'Submission failed.']);
+        }
 
     }
 

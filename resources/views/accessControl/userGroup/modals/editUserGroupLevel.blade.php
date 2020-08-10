@@ -1,6 +1,6 @@
 <div class="col-md-12">
 
-    <form action="{{ url('/user-group-levels/'.$editUserGroupLevel->UG_LEVEL_ID) }}" method="post" class="form-horizontal checkValidation" role="form">
+    <form action="{{ url('/user-group-levels/'.$editUserGroupLevel->UG_LEVEL_ID) }}" class="form-horizontal" name="formData" method="POST">
         @csrf
         @method('PUT')
         {{--<input type="hidden" name="group_id" value="{{ $id }}">--}}
@@ -11,7 +11,7 @@
                 <input type="text" id="inputSuccess group_level_name" placeholder="{{ trans('module.example_group_name_here') }}" name="group_level_name" class="form-control col-xs-10 col-sm-5" value="{{ $editUserGroupLevel->UGLEVE_NAME }}"/>
             </div>
         </div>
-       <!--  <div class="form-group">
+       <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status </b></label>
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
@@ -22,7 +22,7 @@
                 </select>
             </span>
             </div>
-        </div> -->
+        </div>
         <hr>
         <div class="clearfix">
             <div class="col-md-offset-3 col-md-9">
@@ -30,7 +30,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-info" id="formSubmit">
+                <button type="button" class="btn btn-info" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>
@@ -39,5 +39,4 @@
     </form>
 </div>
 
-
-@include('masterGlobal.formValidationEdit')
+@include('masterGlobal.ajaxFormSubmit')

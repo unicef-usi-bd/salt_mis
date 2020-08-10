@@ -5,7 +5,7 @@
             <i class="ace-icon fa fa-times"></i>
         </button>
     </div>
-    <form class="form-horizontal frmContent" name="formData" method="POST">
+    <form action="{{ 'user-groups' }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('module.group_level_name') }}</b><span style="color: red;"> *</span> </label>
@@ -13,7 +13,7 @@
                 <input type="text" id="inputSuccess group_name" placeholder="{{ trans('module.example_group_name_here') }}" name="group_name" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
-        <!-- <div class="form-group">
+{{--        <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status </b></label>
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
@@ -24,7 +24,7 @@
                 </select>
             </span>
             </div>
-        </div> -->
+        </div>--}}
         <hr>
         <div class="clearfix">
             <div class="col-md-offset-3 col-md-9">
@@ -32,7 +32,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="button" class="btn btn-success ajaxFormSubmit" data-action ="{{ 'user-groups' }}">
+                <button type="button" class="btn btn-success" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.submit') }}
                 </button>
@@ -40,7 +40,4 @@
         </div>
     </form>
 </div>
-
-
-{{--@include('masterGlobal.formValidation')--}}
-{{--@include('masterGlobal.ajaxFormSubmit')--}}
+@include('masterGlobal.ajaxFormSubmit')

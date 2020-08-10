@@ -46,8 +46,7 @@ class UserGroupLevel extends Model
         return DB::table('sa_ug_level')->where('UG_LEVEL_ID', '=' , $id)->update([
             'UGLEVE_NAME' => $request->input('group_level_name'),
             'ORG_ID' => 1,
-            //'IS_ACTIVE' => $request->input('active_status'),
-            'IS_ACTIVE' => 1,
+            'IS_ACTIVE' => $request->input('active_status'),
             'UPDATED_BY' => auth()->user()->id,
             'UPDATED_AT' => date("Y-m-d h:i:s"),
         ]);

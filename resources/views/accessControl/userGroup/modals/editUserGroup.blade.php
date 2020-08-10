@@ -27,7 +27,7 @@
                     <i class="ace-icon fa fa-undo bigger-110"></i>
                     {{ trans('dashboard.reset') }}
                 </button>
-                <button type="submit" class="btn btn-info" id="formSubmit">
+                <button type="button" class="btn btn-info" onclick="formSubmit(this.form)">
                     <i class="ace-icon fa fa-check bigger-110"></i>
                     {{ trans('dashboard.update') }}
                 </button>
@@ -36,6 +36,4 @@
     </form>
 </div>
 
-
-{{--@include('masterGlobal.formValidation')--}}
-@include('masterGlobal.formValidationEdit')
+@include('masterGlobal.ajaxFormSubmit')
