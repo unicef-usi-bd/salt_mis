@@ -336,5 +336,17 @@ class CertificateController extends Controller
         return "Certificate Successfully Deleted";
     }
 
+    public function getCertificateByMillTypeId($id){
+        $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $id);
+        $options = '<option value="">Select</option>';
+        foreach ($certificates as $row){
+            $hasClass = '';
+            if($row->CERTIFICATE_TYPE==1) $hasClass = 'color: purple;font-weight: bold;';
+            $options .= '<option style="'.$hasClass.'" value="'.$row->LOOKUPCHD_ID.'">'.$row->LOOKUPCHD_NAME .'</option>';
+        }
+        echo $options;
+        die();
+    }
+
 
 } // END CLASS

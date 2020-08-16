@@ -54,6 +54,7 @@ class CertificateIssur extends Model
         $update = DB::table('smm_certificate')->where('CERTIFICATE_ID', '=' , $id)->update([
             'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID'),
             'ISSUR_ID' => $request->input('ISSUR_ID'),
+            'mill_type_id' => $request->input('mill_type_id') ? : 0,
             'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE') ? : 0,
             'IS_EXPIRE' => $request->input('IS_EXPIRE') ? : 0,
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),

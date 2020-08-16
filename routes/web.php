@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('brand', 'BrandController'); //Rubiyat
 
     Route::resource('certificate','CertificateIssurController');//jalal
+    Route::get('certificate-by-mill-type/{id}','CertificateController@getCertificateByMillTypeId');
     Route::resource('extended-date','ExtendedDateController');//jalal
     Route::post('extended-date/miller-info','ExtendedDateController@millerInfo');//jalal
     Route::get('certificate/{id}/providers', 'CertificateIssurController@getProviderByCertificateId');

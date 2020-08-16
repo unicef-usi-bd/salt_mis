@@ -114,6 +114,21 @@
         }
     });
 
+    $(document).on('change', '#MILL_TYPE_ID', function () {
+        let millType = parseInt($(this).val()||0);
+        if(millType){
+            $.ajax({
+                type : 'get',
+                url : `certificate-by-mill-type/${millType}`,
+                success: function (data) {
+                    if(data){
+                        $('.CERTIFICATE_TYPE_ID').html(data).trigger("chosen:updated");
+                    }
+                }
+            })
+        }
+    });
+
     const hasDuplicateCertificate = (certificateId) => {
         let count = 0;
         let eachCertificateId;
@@ -124,6 +139,16 @@
         });
         return count>1;
     }
+
+    $(document).on('change', '.OWNER_TYPE_ID', function () {
+        let ownerType = parseInt($(this).val()||0);
+        if(ownerType!==12){
+            $('.rowAddEntrepreneur').hide();
+        }else{
+            $('.rowAddEntrepreneur').hide();
+        }
+    });
+
 </script>
 
 

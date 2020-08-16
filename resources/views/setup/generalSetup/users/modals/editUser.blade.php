@@ -196,6 +196,7 @@
                         }
                         childScope.html(option);
                         childScope.trigger("chosen:updated");
+                        $('#center_id').val('').trigger("chosen:updated");
 //                        alert(data);
                     }
                 });
@@ -210,7 +211,6 @@
             }else{
                 $('.resources').hide();
             }
-            $('#center_id').val('');
         });
 
         $(document).on('focusout','.email',function () {

@@ -50,7 +50,7 @@
                                        data-placeholder="Select">
                                    <option value="">-Select-</option>
                                    @foreach($millType as $row)
-                                       <option value="{{ $row->UD_ID }}" @if($millerInfo->MILL_TYPE_ID==$row->UD_ID) selected @endif >{{ $row->LOOKUPCHD_NAME }}</option>
+                                       <option value="{{ $row->LOOKUPCHD_ID }}" @if($millerInfo->MILL_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif >{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
                                </select>
                             </span>

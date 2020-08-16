@@ -52,7 +52,7 @@
                                        data-placeholder="Select">
                                    <option value="">-Select-</option>
                                    @foreach($millType as $row)
-                                       <option value="{{ $row->UD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
+                                       <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
                                </select>
                             </span>

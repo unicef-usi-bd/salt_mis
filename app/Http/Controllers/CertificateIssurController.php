@@ -54,7 +54,8 @@ class CertificateIssurController extends Controller
         //$issuerId = CertificateIssur::getIssuer();
         $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issuers= LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
-        return view('setup.certificateIssur.modals.createCertificateIssuer',compact('certificates', 'issuers'));
+        $millTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+        return view('setup.certificateIssur.modals.createCertificateIssuer',compact('certificates', 'issuers', 'millTypes'));
     }
 
     /**
@@ -70,11 +71,13 @@ class CertificateIssurController extends Controller
         $issuerId = $request->input('ISSUR_ID');
         $rules = array(
             'CERTIFICATE_TYPE_ID' => 'required',
-            'ISSUR_ID' => 'required'
+            'ISSUR_ID' => 'required',
+            'mill_type_id' => 'required',
         );
         $error = array(
             'CERTIFICATE_TYPE_ID.required' => 'Certificate field is required.',
-            'ISSUR_ID.required' => 'Issuer field is required.'
+            'ISSUR_ID.required' => 'Issuer field is required.',
+            'mill_type_id.required' => 'Mill type field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -89,6 +92,7 @@ class CertificateIssurController extends Controller
             'CERTIFICATE_TYPE_ID' => $request->input('CERTIFICATE_TYPE_ID'),
             'ISSUR_ID' => $request->input('ISSUR_ID'),
             'CERTIFICATE_TYPE' => $request->input('CERTIFICATE_TYPE') ? : 0,
+            'mill_type_id' => $request->input('mill_type_id') ? : 0,
             'IS_EXPIRE' => $request->input('IS_EXPIRE') ? : 0,
             'ACTIVE_FLG' => $request->input('ACTIVE_FLG'),
             'center_id' => Auth::user()->center_id,
@@ -128,7 +132,9 @@ class CertificateIssurController extends Controller
         $issuerEdit = CertificateIssur::editData($id);
         $certificates = LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateTypeId);
         $issuers= LookupGroupData::getActiveGroupDataByLookupGroup($this->certificateissureTypeId);
-        return view('setup.certificateIssur.modals.editCertificateIssuer',compact('issuerEdit', 'certificates', 'issuers'));
+        $millTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
+//        dd($millTypes);
+        return view('setup.certificateIssur.modals.editCertificateIssuer',compact('issuerEdit', 'certificates', 'issuers', 'millTypes'));
     }
 
     /**
@@ -144,11 +150,13 @@ class CertificateIssurController extends Controller
         $issuerId = $request->input('ISSUR_ID');
         $rules = array(
             'CERTIFICATE_TYPE_ID' => 'required',
-            'ISSUR_ID' => 'required'
+            'ISSUR_ID' => 'required',
+            'mill_type_id' => 'required'
         );
         $error = array(
             'CERTIFICATE_TYPE_ID.required' => 'Certificate field is required.',
-            'ISSUR_ID.required' => 'Issuer field is required.'
+            'ISSUR_ID.required' => 'Issuer field is required.',
+            'mill_type_id.required' => 'Mill type field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

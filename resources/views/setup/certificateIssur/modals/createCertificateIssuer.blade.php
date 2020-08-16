@@ -25,6 +25,16 @@
             </span>
             </div>
         </div>
+        <div class="form-group" style="padding-left: 0 !important;">
+            <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right" style="padding-left: 0 !important;"><b>Mill Type </b><!-- <span style="color: red;"> *</span>  --></label>
+            <div class="col-xs-12 col-sm-9" style="padding-left: 0 !important;">
+                <span class="checkbox">
+                    @foreach($millTypes as $key=>$millType)
+                        <label style="margin-right: 10px;"><input type="radio" name="mill_type_id" value="{{ $millType->LOOKUPCHD_ID }}" @if($key==0) checked @endif class="checkbox_style"> {{ $millType->LOOKUPCHD_NAME }}</label>
+                    @endforeach
+                </span>
+            </div>
+        </div>
         <div class="form-group">
             <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Certificate Type</b><!-- <span style="color: red;"> *</span>  --></label>
             <div class="col-xs-12 col-sm-9">
