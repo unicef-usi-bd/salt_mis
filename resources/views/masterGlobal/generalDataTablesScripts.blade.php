@@ -12,10 +12,10 @@
 
 <script type="text/javascript">
     //         Data table print
-    var logoDir = '{{ url(Session::get('orgLogo')) }}';
-    var orgName ='{{ Session::get('orgName') }}';
-    var tableName = $('.table').attr('title');
-    $('.gridTable').DataTable( {
+    let logoDir = '{{ url(Session::get('orgLogo')) }}';
+    let orgName ='{{ Session::get('orgName') }}';
+    let tableName = $('.table').attr('title');
+    let dataTables = $('.gridTable').DataTable( {
         dom: 'Blfrtip',
         buttons: [
             {
@@ -50,7 +50,6 @@
                 } ,
                 footer: true
             },
-            ,
             {
                 extend: 'excel',
                 text: '<i class="fa fa-file-excel-o"></i> Excel',
@@ -84,5 +83,8 @@
             },
         ],
     });
+
+    let hasTools = $('table.gridTable').attr('data-tools') || true;
+    if(hasTools==='false') $(document).find('div.dt-buttons').remove();
     //        Data table print
 </script>

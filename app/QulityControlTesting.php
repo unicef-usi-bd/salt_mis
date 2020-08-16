@@ -66,6 +66,8 @@ class QulityControlTesting extends Model
             'MOISTURIZER' =>$request->input('MOISTURIZER'),
             'IODINE_CONTENT' =>$request->input('IODINE_CONTENT'),
             'PH' =>$request->input('PH'),
+            'water_insoluble_matter' =>$request->input('water_insoluble_matter'),
+            'matter_soluble_sc' =>$request->input('matter_soluble_sc'),
             'center_id' => Auth::user()->center_id,
             'UPDATE_BY' => Auth::user()->id,
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")

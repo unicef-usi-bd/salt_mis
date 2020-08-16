@@ -19,6 +19,7 @@
      'edit_user_group' => 'Edit User Group',
      'add_new' => 'Add New',
      'group_level_name' => 'Group Level Name',
+     'position' => 'Position',
      'edit_user_group_level' => 'Edit User Group Level',
      'delete_user_group_level' => 'Delete User Group Level' ,
      'group_name' => 'Group Name',

@@ -56,7 +56,7 @@ class UserGroupLevelController extends Controller
         $rules = array(
             'group_level_name' => 'required',
             'group_id' => 'required',
-            //'active_status' => 'required',
+            'active_status' => 'required',
         );
         $error = array(
             'group_level_name.required' => 'Group level name field is required.',
@@ -71,6 +71,7 @@ class UserGroupLevelController extends Controller
             'USERGRP_ID' => $request->input('group_id'),
             'ORG_ID' => 1,
             'IS_ACTIVE' => $request->input('active_status'),
+            'POSITIONLEVEl' => $request->input('POSITIONLEVEl'),
             'CREATED_BY' => auth()->user()->id,
             'CREATED_AT' => date("Y-m-d h:i:s"),
         ]);

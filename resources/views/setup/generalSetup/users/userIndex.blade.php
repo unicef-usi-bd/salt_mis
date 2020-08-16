@@ -22,7 +22,7 @@
 
             @endif
 
-            <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('user.user_list') }}">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('user.user_list') }}">
                 <thead>
                 <tr>
 

@@ -58,18 +58,33 @@ class BstiTestResultRangeController extends Controller
             'PPM_MAX' => 'required',
             'PH_MIN' => 'required',
             'PH_MAX' => 'required',
+            'WIM_MIN' => 'required',
+            'WIM_MAX' => 'required',
+            'MSWSC_MIN' => 'required',
+            'MSWSC_MAX' => 'required',
+        );
+        $error = array(
+            'SODIUM_CHLORIDE_MIN.required' => 'Sodium minimum length field is required.',
+            'SODIUM_CHLORIDE_MAX.required' => 'Sodium maximum length field is required.',
+            'MOISTURIZER_MIN.required' => 'Moisturizer minimum length field is required.',
+            'MOISTURIZER_MAX.required' => 'Moisturizer maximum length field is required.',
+            'PPM_MIN.required' => 'Iodize content minimum length field is required.',
+            'PPM_MAX.required' => 'Iodize content maximum length field is required.',
+            'PH_MIN.required' => 'PH minimum length field is required.',
+            'PH_MAX.required' => 'PH maximum length field is required.',
+            'WIM_MIN.required' => 'Water insoluble matter minimum length field is required.',
+            'WIM_MAX.required' => 'Water insoluble matter maximum length field is required.',
+            'MSWSC_MIN.required' => 'Matter soluble water sodium chloride minimum length field is required.',
+            'MSWSC_MAX.required' => 'Matter soluble water sodium chloride maximum length field is required.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $bstiTestStandardResultRange = BstiTestResultRange::insertBstiTestRangeData($request);
-
-            if($bstiTestStandardResultRange){
-                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Range Data Created !');
-            }
+        $validator = Validator::make(Input::all(), $rules, $error);
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+        $created = BstiTestResultRange::insertBstiTestRangeData($request);
+        if($created){
+            return response()->json(['success'=>'BSTI Test Standard range has been created']);
+        } else{
+            return response()->json(['errors'=>'BSTI Test Standard range create failed']);
         }
     }
 
@@ -114,6 +129,10 @@ class BstiTestResultRangeController extends Controller
             'PPM_MAX' => 'required',
             'PH_MIN' => 'required',
             'PH_MAX' => 'required',
+            'WIM_MIN' => 'required',
+            'WIM_MAX' => 'required',
+            'MSWSC_MIN' => 'required',
+            'MSWSC_MAX' => 'required',
         );
         $error = array(
             'SODIUM_CHLORIDE_MIN.required' => 'Sodium minimum length field is required.',
@@ -124,6 +143,10 @@ class BstiTestResultRangeController extends Controller
             'PPM_MAX.required' => 'Iodize content maximum length field is required.',
             'PH_MIN.required' => 'PH minimum length field is required.',
             'PH_MAX.required' => 'PH maximum length field is required.',
+            'WIM_MIN.required' => 'Water insoluble matter minimum length field is required.',
+            'WIM_MAX.required' => 'Water insoluble matter maximum length field is required.',
+            'MSWSC_MIN.required' => 'Matter soluble water sodium chloride minimum length field is required.',
+            'MSWSC_MAX.required' => 'Matter soluble water sodium chloride maximum length field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

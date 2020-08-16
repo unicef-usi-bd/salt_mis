@@ -26,7 +26,6 @@
 
                     @foreach( $userGroups as $key => $userGroup)
 
-
                         <div class="group">
                             @php
                                 $editPermissionLevel = $previllage->UPDATE;
@@ -64,13 +63,14 @@
                                     <button id="{{ 'user-group-levels/create-data/'.$userGroup->USERGRP_ID }}" data-target=".modal" data-id="{{ $userGroup->USERGRP_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" data-toggle="modal" title="User Group Level Create"> {{ trans('dashboard.add_new') }} </button>
                                 </p>
                                 <div class="col-lg-12">
-                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" title="User Group Level List">
+                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="User Group Level List">
                                         <thead>
                                         <tr>
 
                                             <th class="fixedWidth" >{{ trans('dashboard.sl') }}</th>
                                             <th>{{ trans('user.name') }}</th>
                                             <th class="hidden-480">{{ trans('user.status') }}</th>
+                                            <th class="hidden-480">Positions</th>
                                             <th class="center fixedWidth" >{{ trans('dashboard.action') }}</th>
                                         </tr>
                                         </thead>
@@ -103,6 +103,7 @@
                                                     <?php } ?>
 
                                                 </td>
+                                                <td class="hidden-480">{{ $userGrpLvl->POSITIONLEVEl }}</td>
 
                                                 <td class="row{{ $userGrpLvl->UG_LEVEL_ID }}">
                                                     <div class="hidden-sm hidden-xs action-buttons">
@@ -159,8 +160,6 @@
 
 
     <script type="text/javascript">
-
-
         //jquery accordion
         $( "#accordion" ).accordion({
             active: false,

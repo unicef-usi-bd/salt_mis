@@ -105,30 +105,44 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
                         <input type="text" name="" id="E" placeholder=""  value="{{ $bstiChemicalData->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
                         <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodine content(PPM),</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Iodine content(PPM),</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
                         <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PPM }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
                         <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PH }}" class="form-control col-xs-5 col-sm-5" readonly />
+                    </div>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-6">
+                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5" readonly />
+                    </div>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble sodium chloride</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-6">
+                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
@@ -156,6 +170,18 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <input type="text" name="PH" id="PH" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->PH }}" class="form-control col-xs-5 col-sm-5"  />
+                    </div>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <input type="text" name="water_insoluble_matter" id="water_insoluble_matter" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5"  />
+                    </div>
+                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <input type="text" name="matter_soluble_sc" id="matter_soluble_sc" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>

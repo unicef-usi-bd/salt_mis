@@ -104,6 +104,8 @@ class QulityControlTestingController extends Controller
             'MOISTURIZER' => 'required',
             'IODINE_CONTENT' => 'required',
             'PH' => 'required',
+            'water_insoluble_matter' => 'required',
+            'matter_soluble_sc' => 'required',
         );
         $error = array(
             'QC_BY.required' => 'Quality control by is required.',
@@ -115,6 +117,8 @@ class QulityControlTestingController extends Controller
             'MOISTURIZER.required' => 'Moisturizer field is required.',
             'IODINE_CONTENT.required' => 'Iodin content field is required.',
             'PH.required' => 'PH field is required.',
+            'water_insoluble_matter.required' => 'Water insoluble matter field is required.',
+            'matter_soluble_sc.required' => 'Matter soluble sodium chloride field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -154,6 +158,8 @@ class QulityControlTestingController extends Controller
             'MOISTURIZER' =>$request->input('MOISTURIZER'),
             'IODINE_CONTENT' =>$request->input('IODINE_CONTENT'),
             'PH' =>$request->input('PH'),
+            'water_insoluble_matter' =>$request->input('water_insoluble_matter'),
+            'matter_soluble_sc' =>$request->input('matter_soluble_sc'),
             'center_id' => Auth::user()->center_id,
             'ENTRY_BY' => Auth::user()->id,
             'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
@@ -219,6 +225,8 @@ class QulityControlTestingController extends Controller
             'MOISTURIZER' => 'required',
             'IODINE_CONTENT' => 'required',
             'PH' => 'required',
+            'water_insoluble_matter' => 'required',
+            'matter_soluble_sc' => 'required',
         );
         $error = array(
             'QC_BY.required' => 'Quality control by is required.',
@@ -230,6 +238,8 @@ class QulityControlTestingController extends Controller
             'MOISTURIZER.required' => 'Moisturizer field is required.',
             'IODINE_CONTENT.required' => 'Iodin content field is required.',
             'PH.required' => 'PH field is required.',
+            'water_insoluble_matter.required' => 'Water insoluble matter field is required.',
+            'matter_soluble_sc.required' => 'Matter soluble sodium chloride field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

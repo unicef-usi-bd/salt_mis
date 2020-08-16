@@ -11,6 +11,12 @@
                 <input type="text" id="inputSuccess group_level_name" placeholder="{{ trans('module.example_group_name_here') }}" name="group_level_name" class="form-control col-xs-10 col-sm-5" value="{{ $editUserGroupLevel->UGLEVE_NAME }}"/>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Position</b><span style="color: red;"></span> </label>
+            <div class="col-sm-8">
+                <input type="text" id="inputSuccess POSITIONLEVEl" placeholder="Number" name="POSITIONLEVEl" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editUserGroupLevel->POSITIONLEVEl }}"/>
+            </div>
+        </div>
        <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status </b></label>
             <div class="col-sm-8">

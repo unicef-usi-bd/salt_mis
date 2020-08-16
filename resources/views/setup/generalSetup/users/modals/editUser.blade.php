@@ -137,7 +137,7 @@
             </div>
 
 
-            <div class="form-group resources"  >
+            <div class="form-group resources" style="display: @if($editData->user_group_id==22) block @else none @endif">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
@@ -182,19 +182,20 @@
     <script>
         $(document).ready(function () {
             $('.user_group').on('change',function(){
-                var groupId = $(this).val();
-                var option = '<option>Select One</option>';
+                let groupId = $(this).val();
+                let option = '<option>Select One</option>';
+                let childScope = $('.user_group_level');
                 $.ajax({
                     type : "get",
                     url  : "get-user-group-levels",
                     data : {'group_id': groupId},
                     success:function (data) {
 //                        console.log(data);exit();
-                        for (var i = 0; i < data.length; i++){
+                        for (let i = 0; i < data.length; i++){
                             option = option + '<option value="'+ data[i].UG_LEVEL_ID +'">'+ data[i].UGLEVE_NAME+'</option>';
                         }
-                        $('.user_group_level').html(option);
-                        $('.user_group_level').trigger("chosen:updated");
+                        childScope.html(option);
+                        childScope.trigger("chosen:updated");
 //                        alert(data);
                     }
                 });
@@ -203,10 +204,13 @@
         let Privileges = jQuery('#privileges');
         let select = this.value;
         Privileges.change(function () {
-            if ($(this).val() == 21 || $(this).val() == 22) {
+            let userGroupId = parseInt($(this).val());
+            if (userGroupId === 22) {
                 $('.resources').show();
+            }else{
+                $('.resources').hide();
             }
-            else $('.resources').hide();
+            $('#center_id').val('');
         });
 
         $(document).on('focusout','.email',function () {
@@ -230,9 +234,6 @@
             });
         });
 
-
-    </script>
-    <script>
         let loadFile = function(event) {
             let output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);

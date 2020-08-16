@@ -56,19 +56,29 @@ class BstiTestStandardController extends Controller
             'SODIUM_CHLORIDE' => 'required',
             'MOISTURIZER' => 'required',
             'PPM' => 'required',
-            'PH' => 'required'
+            'PH' => 'required',
+            'water_insoluble_matter' => 'required',
+            'matter_soluble_sc' => 'required'
+        );
+        $error = array(
+            'SODIUM_CHLORIDE.required' => 'Sodium Chloride field is required.',
+            'MOISTURIZER.required' => 'Moisturizer field is required.',
+            'PPM.required' => 'Iodine Content field is required.',
+            'PH.required' => 'PH field is required.',
+            'water_insoluble_matter.required' => 'Water insoluble matter field is required.',
+            'matter_soluble_sc.required' => 'Matter soluble sodium chloride field is required.',
         );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
-            //SweetAlert::error('Error','Something is Wrong !');
-            return Redirect::back()->withErrors($validator);
-        }else {
-            $bstiTestStandard = BstiTestStandard::insertBstiTestData($request);
+        $validator = Validator::make(Input::all(), $rules, $error);
 
-            if($bstiTestStandard){
-                return redirect('/bsti-test-standard')->with('success', 'BSTI Test Standard Data Created !');
-            }
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        $created = BstiTestStandard::insertBstiTestData($request);
+
+        if($created){
+            return response()->json(['success'=>'BSTI Test Standard has been created']);
+        } else{
+            return response()->json(['errors'=>'BSTI Test Standard create failed']);
         }
     }
 
@@ -92,13 +102,7 @@ class BstiTestStandardController extends Controller
     public function edit($id)
     {
         $editBstiTestStandard = BstiTestStandard::editBstiTestData($id);
-        $editBstiTestStandardResultRange = BstiTestResultRange::editBstiTestResultDataRange($id);
-        if($editBstiTestStandard ){
-
-         return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
-        }elseif ($editBstiTestStandardResultRange ){
-            return view('setup.bstiTestStandard.editBstiTestStandardRange',compact('editBstiTestResutlRange'));
-        }
+        return view('setup.bstiTestStandard.editBstiTestStandard',compact('editBstiTestStandard'));
     }
 
     /**
@@ -114,13 +118,17 @@ class BstiTestStandardController extends Controller
             'SODIUM_CHLORIDE' => 'required',
             'MOISTURIZER' => 'required',
             'PPM' => 'required',
-            'PH' => 'required'
+            'PH' => 'required',
+            'water_insoluble_matter' => 'required',
+            'matter_soluble_sc' => 'required'
         );
         $error = array(
             'SODIUM_CHLORIDE.required' => 'Sodium Chloride field is required.',
             'MOISTURIZER.required' => 'Moisturizer field is required.',
             'PPM.required' => 'Iodine Content field is required.',
             'PH.required' => 'PH field is required.',
+            'water_insoluble_matter.required' => 'Water insoluble matter field is required.',
+            'matter_soluble_sc.required' => 'Matter soluble sodium chloride field is required.',
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

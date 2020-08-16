@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class UserGroupLevel extends Model
 {
     public static function getActiveUserGroupLevel($id, $orgId){
-        return DB::table('sa_ug_level')
-            ->select('UG_LEVEL_ID', 'UGLEVE_NAME', 'POSITIONLEVEl')
-            ->where('USERGRP_ID','=',$id)
-            ->where('ORG_ID','=',$orgId)
-            ->where('IS_ACTIVE','=','1')
-            ->where('POSITIONLEVEl','>',$id)
+        return DB::table('sa_ug_level as sul')
+            ->select('sul.UG_LEVEL_ID', 'sul.UGLEVE_NAME', 'sul.POSITIONLEVEl')
+            ->where('sul.USERGRP_ID','=',$id)
+            ->where('sul.ORG_ID','=',$orgId)
+            ->where('sul.IS_ACTIVE','=','1')
+            ->where('sul.POSITIONLEVEl','>',$id)
             ->get();
     }
 
@@ -47,6 +47,7 @@ class UserGroupLevel extends Model
             'UGLEVE_NAME' => $request->input('group_level_name'),
             'ORG_ID' => 1,
             'IS_ACTIVE' => $request->input('active_status'),
+            'POSITIONLEVEl' => $request->input('POSITIONLEVEl'),
             'UPDATED_BY' => auth()->user()->id,
             'UPDATED_AT' => date("Y-m-d h:i:s"),
         ]);
