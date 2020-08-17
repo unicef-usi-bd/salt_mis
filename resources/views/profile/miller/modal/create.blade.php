@@ -124,6 +124,7 @@
                 success: function (data) {
                     if(data){
                         $('.CERTIFICATE_TYPE_ID').html(data).trigger("chosen:updated");
+                        $('.ISSURE_ID').val('').trigger("chosen:updated");
                     }
                 }
             })
