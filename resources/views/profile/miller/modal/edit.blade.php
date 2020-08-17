@@ -60,11 +60,6 @@
 @include('masterGlobal.locationMapping')
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script>
-    // Fore Remove Row By Click
-    $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
-    });
-
 //    For Certificate and Provider Mapping
     $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
         let thisRow = $(this).closest('tr');
@@ -104,9 +99,11 @@
         }
     });
 
-    $(document).on('click', '.rowRemove', function () {
-        let thisRow = $(this).closest('tr');
-        thisRow.remove();
+    // Fore Remove Row By Click
+    $(document).on("click", "span.rowRemove ", function () {
+        let thisRow = $(this).closest("tr");
+        let isLast = thisRow.is(":last-child");
+        if(!isLast) thisRow.remove();
     });
 
 </script>

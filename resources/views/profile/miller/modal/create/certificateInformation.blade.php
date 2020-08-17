@@ -63,7 +63,12 @@
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ date('Y') }}-06-30">
+                                    @php
+                                        $currentMonth = date('m');
+                                        $date = date('Y-m-d', strtotime(date('Y-06-30')));
+                                        if($currentMonth>=6) $date = date('Y-m-d', strtotime('+1 year', strtotime(date('Y-06-30'))));
+                                    @endphp
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ $date }}">
                                 </span>
                             </td>
 
@@ -122,8 +127,9 @@
     $(document).ready(function(){
         $('.rowAddCertificate').click(function(){
             let getTr = $('tr.certificateRow:first');
-//            alert(getTr.html());
             let thisYear = new Date().getFullYear();
+            let thisMonth = new Date().getMonth()+1;
+            if(thisMonth>=6) thisYear += 1
             $("select.chosen-select").chosen('destroy');
             $('tbody.certificateTable').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             let defaultRow = $('tr.removableRow:last');

@@ -86,21 +86,7 @@
             });
         });
 
-        // Fore Remove Row By Click
-        $(document).on("click", "span.rowRemove ", function () {
-            $(this).closest("tr.removableRow").remove();
-        });
-
-        $(document).on('change', '.OWNER_TYPE_ID', function () {
-           let ownerType = $(this).val();
-           if(ownerType==='13' || ownerType==='14'){
-               $('.rowAddEntrepreneur').hide();
-           }else{
-               $('.rowAddEntrepreneur').hide();
-           }
-        });
-
-//    For Certificate and Provider Mapping
+        //    For Certificate and Provider Mapping
         $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
             let thisRow = $(this).closest('tr');
             let certificateId = $(this).val();
@@ -113,6 +99,37 @@
                     }
                 })
             }
+        });
+        // Owner type wise enterprenur info handling
+        $(document).on('change', '.OWNER_TYPE_ID', function () {
+            let ownerType = parseInt($(this).val()||0);
+            if(ownerType===12){
+                $('.rowAddEntrepreneur').hide();
+            }else{
+                $('.rowAddEntrepreneur').show();
+            }
+        });
+
+        $(document).on('change', '#MILL_TYPE_ID', function () {
+            let millType = parseInt($(this).val()||0);
+            if(millType){
+                $.ajax({
+                    type : 'get',
+                    url : `certificate-by-mill-type/${millType}`,
+                    success: function (data) {
+                        if(data){
+                            $('.CERTIFICATE_TYPE_ID').html(data).trigger("chosen:updated");
+                        }
+                    }
+                })
+            }
+        });
+
+        // Fore Remove Row By Click
+        $(document).on("click", "span.rowRemove ", function () {
+            let thisRow = $(this).closest("tr");
+            let isLast = thisRow.is(":last-child");
+            if(!isLast) thisRow.remove();
         });
     </script>
 

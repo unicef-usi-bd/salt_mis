@@ -57,7 +57,14 @@ class MillerInfoController extends Controller
         $millerToMerge = MillerInfo::getMillerToMerge();
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
         if(!empty($selfMillerInfo->MILL_ID)){
+
             $millerId = $selfMillerInfo->MILL_ID;
+            $millerInfo = MillerInfo::millerInformation($millerId);
+            $entrepreneurs = Entrepreneur::entrepreneurInformation($millerId);
+            $certificateInfo = Certificate::certificateInformation($millerId);
+            $qcInfo = Qc::qcInfo($millerId);
+            $employeeInfo = Employee::employeeInformation($millerId);
+
             $zones = SupplierProfile::getZone();
             $divisions = SupplierProfile::getDivision();
             $districts = SupplierProfile::getDistrict();
@@ -69,15 +76,10 @@ class MillerInfoController extends Controller
             $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
             $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
             $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-            $certificates = Certificate::getCertificates($this->certificateTypeId);
+            $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $millerInfo->MILL_TYPE_ID);
             $issueBy = CertificateIssur::getCertificateIssuer();
             $millerToMerge = MillerInfo::getMillerToMerge();
 
-            $millerInfo = MillerInfo::millerInformation($millerId);
-            $entrepreneurs = Entrepreneur::entrepreneurInformation($millerId);
-            $certificateInfo = Certificate::certificateInformation($millerId);
-            $qcInfo = Qc::qcInfo($millerId);
-            $employeeInfo = Employee::employeeInformation($millerId);
             return view('profile.miller.self.index', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
         } else {
             foreach ($millerList as $miller){

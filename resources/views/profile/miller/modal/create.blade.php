@@ -63,7 +63,6 @@
     $(document).ready(function(){
         $('.rowAdd').click(function(){
             let getTr = $('tr.rowFirst:first');
-//            alert(getTr.html());
             $("select.chosen-select").chosen('destroy');
             $('tbody.newRow').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
             let defaultRow = $('tr.removableRow:last');
@@ -84,7 +83,9 @@
 
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
+        let thisRow = $(this).closest("tr");
+        let isLast = thisRow.is(":last-child");
+        if(!isLast) thisRow.remove();
     });
 
 //    For Certificate and Provider Mapping

@@ -88,7 +88,7 @@ class CertificateController extends Controller
         $userCertificates = $request->input('CERTIFICATE_TYPE_ID');
         $hasRequiredCertificates = $this->isValidateCertificate($millerId, $userCertificates);
         if ($hasRequiredCertificates) {
-            $certificates = implode(',', $hasRequiredCertificates);
+            $certificates = implode(', ', $hasRequiredCertificates);
             return response()->json(['errors' => "<b>$certificates </b>certificates must be required."]);
         }
         if ($request->has('user_image')) {
@@ -178,7 +178,7 @@ class CertificateController extends Controller
         $userCertificates = $request->input('CERTIFICATE_TYPE_ID');
         $hasRequiredCertificates = $this->isValidateCertificate($millerId, $userCertificates);
         if ($hasRequiredCertificates) {
-            $certificates = implode(',', $hasRequiredCertificates);
+            $certificates = implode(', ', $hasRequiredCertificates);
             return response()->json(['errors' => "<b>$certificates </b>certificates must be required."]);
         }
 
