@@ -22,7 +22,6 @@
         <marquee   direction="left"   height="23px" width="95%">
         <div>
             @foreach($renewalMessageCertificate as $row)
-
                     @if($row->RENEW_DAY <=30)
                     <span class="alert alert-danger" style="font-weight: bolder;">Your <span>{{ $row->CERTIFICATE_NAME }}</span> certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivate.&nbsp;</span>
                     @elseif($row->RENEW_DAY <=60)
