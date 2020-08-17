@@ -21,14 +21,14 @@
                     <th>Certificate Name</th>
                     <th>Provider/Issuer Name</th>
                     <th>Certificate Type</th>
-                    <th>Status </th>
+                    <th>Status</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
 
 
                 <tbody>
-                <?php $sl=0;?>
+                <?php $sl = 0;?>
                 @foreach($issuerData as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
@@ -56,24 +56,18 @@
                                 $viewPermissionLevel = $previllage->READ;
                             @endphp
                             @if($viewPermissionLevel == 1)
-                                <a href="#" id="{{ 'certificate/'.$row->CERTIFICATE_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Certificate Issuer">
-                        <span class="blue">
-                            <i class="ace-icon fa fa-eye bigger-130"></i>
-                        </span>
-                                </a>
-                            @else
-                                <a href="#" id="{{ 'certificate/'.$row->CERTIFICATE_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Certificate Issuer" style="display: none;">
-                        <span class="blue">
-                            <i class="ace-icon fa fa-eye bigger-130"></i>
-                        </span>
-                                </a>
+{{--                                <a href="#" id="{{ 'certificate/'.$row->CERTIFICATE_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Certificate Issuer">
+                                    <span class="blue">
+                                        <i class="ace-icon fa fa-eye bigger-130"></i>
+                                    </span>
+                                </a>--}}
                             @endif
                             @if($editPermissionLevel == 1)
-                                <a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Certificate Issuer">
+                                <a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}" data-toggle="modal" title="Edit Certificate Issuer">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @else
-                                <a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Certificate Issuer" style="display: none;">
+                                <a class="green showModalGlobal" id="{{ 'certificate/'.$row->CERTIFICATE_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}" data-toggle="modal" title="Edit Certificate Issuer" style="display: none;">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @endif

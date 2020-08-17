@@ -104,7 +104,7 @@ class MillerInfoController extends Controller
 
         $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
-        //$zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
+        // $zoneType = LookupGroupData::getActiveGroupDataByLookupGroup($this->zoneTypeId);
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificates = Certificate::getCertificates($this->certificateTypeId);
         $issueBy = LookupGroupData::getActiveGroupDataByLookupGroup($this->issureTypeId);
@@ -196,6 +196,12 @@ class MillerInfoController extends Controller
      */
     public function edit($id)
     {
+        $millerInfo = MillerInfo::millerInformation($id);
+        $entrepreneurs = Entrepreneur::entrepreneurInformation($id);
+        $certificateInfo = Certificate::certificateInformation($id);
+        $qcInfo = Qc::qcInfo($id);
+        $employeeInfo = Employee::employeeInformation($id);
+
         $zones = SupplierProfile::getZone();
         $divisions = SupplierProfile::getDivision();
         $districts = SupplierProfile::getDistrict();
@@ -207,15 +213,9 @@ class MillerInfoController extends Controller
         $processType = LookupGroupData::getActiveGroupDataByLookupGroup($this->processTypeId);
         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
-        $certificates = Certificate::getCertificates($this->certificateTypeId);
+        $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $millerInfo->MILL_TYPE_ID);
         $issueBy = CertificateIssur::getCertificateIssuer();
         $millerToMerge = MillerInfo::getMillerToMerge();
-
-        $millerInfo = MillerInfo::millerInformation($id);
-        $entrepreneurs = Entrepreneur::entrepreneurInformation($id);
-        $certificateInfo = Certificate::certificateInformation($id);
-        $qcInfo = Qc::qcInfo($id);
-        $employeeInfo = Employee::employeeInformation($id);
 
         return view('profile.miller.modal.edit', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
 

@@ -1,5 +1,5 @@
 <style>
-    th, td{
+    th, td {
         min-width: 160px;
     }
 </style>
@@ -29,7 +29,7 @@
                                 <tr class="certificateRow">
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]">
                                         <option value="">Select</option>
                                         @foreach($certificates as $row)
                                             <option @if($row->CERTIFICATE_TYPE==1) style="color: purple;font-weight: bold;" @endif value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
@@ -58,12 +58,12 @@
 
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO" />
+                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"/>
                                 </span>
                                     </td>
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE">
                                 </span>
                                     </td>
                                     <td>
@@ -74,7 +74,7 @@
 
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"  />
+                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"/>
                                 </span>
                                     </td>
                                     <th class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></th>
@@ -84,7 +84,7 @@
                             <tr class="certificateRow">
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]"  >
+                                    <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]">
                                         <option value="">Select</option>
                                         @foreach($certificates as $row)
                                             <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
@@ -94,10 +94,10 @@
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]"  >
+                                    <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]">
                                         <option value="">Select</option>
                                         {{--@foreach($issueBy as $row)--}}
-                                            {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
+                                        {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
                                         {{--@endforeach--}}
                                      </select>
                                 </span>
@@ -110,12 +110,12 @@
 
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"  />
+                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"/>
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE" >
+                                    <input type="file" name="user_image[]" class="chosen-container TRADE_LICENSE">
                                 </span>
                                 </td>
                                 <td>
@@ -126,7 +126,7 @@
 
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="" class="width-100 REMARKS"  />
+                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="" class="width-100 REMARKS"/>
                                 </span>
                                 </td>
                                 <td class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></td>
@@ -156,15 +156,15 @@
 <script>
 
     function validation() {
-        let scope, certificateId, renewDate, message, status=true;
-        let certificateName=null;
+        let scope, certificateId, renewDate, message, status = true;
+        let certificateName = null;
         $(".certificateTable tr").each(function () {
             scope = $(this);
             certificateId = parseInt(scope.find('.CERTIFICATE_TYPE_ID').val() || 0);
-            if(certificateId!==32 && certificateId!==36){
+            if (certificateId !== 32 && certificateId !== 36) {
                 certificateName = scope.find('.CERTIFICATE_TYPE_ID').find(":selected").text();
                 renewDate = scope.find('.RENEWING_DATE').val();
-                if(certificateId !==0 && renewDate===''){
+                if (certificateId !== 0 && renewDate === '') {
                     message = `${certificateName} Renewing date must be required`;
                     displayAlertHandler(message, 'danger');
                     status = false;
@@ -174,19 +174,19 @@
         return status;
     }
 
-    function formSubmitWithValidation(from_data){
+    function formSubmitWithValidation(from_data) {
         let checkValidation = validation();
-        if(checkValidation) formSubmit(from_data);
+        if (checkValidation) formSubmit(from_data);
     }
 
 
-    $(document).ready(function(){
-        $('.rowAddCertificate').click(function(){
+    $(document).ready(function () {
+        $('.rowAddCertificate').click(function () {
             let getTr = $('tr.certificateRow:first');
 //            alert(getTr.html());
             let thisYear = new Date().getFullYear();
             $("select.chosen-select").chosen('destroy');
-            $('tbody.certificateTable').append("<tr class='removableRow'>"+getTr.html()+"</tr>");
+            $('tbody.certificateTable').append("<tr class='removableRow'>" + getTr.html() + "</tr>");
             let defaultRow = $('tr.removableRow:last');
 //            For Ignore array Conflict
             defaultRow.find('input.ISSUING_DATE').val('');
@@ -205,11 +205,11 @@
         $(this).closest("tr.removableRow").remove();
     });
 
-//    Check Duplicate Certificates
+    //    Check Duplicate Certificates
     $(document).on('change', '.CERTIFICATE_TYPE_ID', function () {
         let certificateId = $(this).val();
         let duplicates = hasDuplicateCertificate(certificateId);
-        if(duplicates){
+        if (duplicates) {
             let certificateName = $(this).find(":selected").text();
             let message = `${certificateName} certificate already exist.`;
             displayAlertHandler(message, 'danger');
@@ -222,10 +222,10 @@
         let eachCertificateId;
         $('.certificateTable tr').each(function () {
             eachCertificateId = $(this).find('.CERTIFICATE_TYPE_ID').val();
-            if(eachCertificateId===certificateId) count++;
-            if(count===2) return;
+            if (eachCertificateId === certificateId) count++;
+            if (count === 2) return;
         });
-        return count>1;
+        return count > 1;
     }
 
 </script>

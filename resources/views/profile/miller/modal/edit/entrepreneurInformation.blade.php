@@ -23,7 +23,8 @@
                             <th>Mobile 2</th>
                             <th>Email</th>
                             <th>Remarks</th>
-                            <th class="addButton text-center"><span class="btn btn-primary btn-sm center rowAddEntrepreneur"><i class="fa fa-plus"></i></span></th>
+                            @php $buttonStyle = $millerInfo->OWNER_TYPE_ID==12 ? 'none' : 'block'; @endphp
+                            <th class="addButton text-center"><span class="btn btn-primary btn-sm center rowAddEntrepreneur" style="display: {{ $buttonStyle }}"><i class="fa fa-plus"></i></span></th>
                         </tr>
                         </thead>
                         <tbody class="newRow">

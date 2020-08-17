@@ -116,15 +116,32 @@ class Certificate extends Model
             ->get();
     }
 
-    public static function getCertificateByMillTypeId($certificateTypeId, $id){
-        return DB::table('ssc_lookupchd as slc')
+    public static function getCertificateByMillTypeId($certificateTypeId, $millTypeId){
+        $data = DB::table('ssc_lookupchd as slc')
             ->select('slc.LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID', 'sc.CERTIFICATE_TYPE')
             ->leftJoin('smm_certificate as sc', 'slc.LOOKUPCHD_ID', '=', 'sc.CERTIFICATE_TYPE_ID')
             ->where('slc.LOOKUPMST_ID', '=', $certificateTypeId)
-            ->where('sc.mill_type_id', '=', $id)
             ->where('slc.LOOKUPCHD_NAME','!=','Local')
             ->where('slc.ACTIVE_FLG', '=', 1)
-            ->get();
+            ->whereNotNull('sc.mill_type_id');
+
+        if($millTypeId!=21) $data->where('sc.mill_type_id', '=', $millTypeId); // both type id = 21
+        return $data->get();
+    }
+
+    public static function getMandatoryCertificatesRemain($certificateTypeId, $millTypeId, array $certificates = null){
+        $data = DB::table('ssc_lookupchd as slc')
+            ->select('slc.LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID', 'sc.CERTIFICATE_TYPE')
+            ->leftJoin('smm_certificate as sc', 'slc.LOOKUPCHD_ID', '=', 'sc.CERTIFICATE_TYPE_ID')
+            ->where('slc.LOOKUPMST_ID', '=', $certificateTypeId)
+            ->where('sc.CERTIFICATE_TYPE', '=', 1) // Mandatory check
+            ->where('slc.LOOKUPCHD_NAME','!=','Local')
+            ->where('slc.ACTIVE_FLG', '=', 1) // Active check;
+            ->whereNotNull('sc.mill_type_id'); // Mill type null check
+
+        if($certificates) $data->whereNotIn('slc.LOOKUPCHD_ID', $certificates); // find remain certificates
+        if($millTypeId!=21) $data->where('sc.mill_type_id', '=', $millTypeId); // both type id = 21
+        return $data->pluck('LOOKUPCHD_NAME')->toArray();
     }
 
 } //end Class

@@ -140,12 +140,13 @@
         return count>1;
     }
 
+    // Owner type wise enterprenur info handling
     $(document).on('change', '.OWNER_TYPE_ID', function () {
         let ownerType = parseInt($(this).val()||0);
-        if(ownerType!==12){
+        if(ownerType===12){
             $('.rowAddEntrepreneur').hide();
         }else{
-            $('.rowAddEntrepreneur').hide();
+            $('.rowAddEntrepreneur').show();
         }
     });
 

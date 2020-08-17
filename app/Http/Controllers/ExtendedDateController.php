@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 //use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use Psy\Util\Json;
@@ -78,36 +79,48 @@ class ExtendedDateController extends Controller
 
     public function updateExtendedDate(Request $request)
     {
+
         $millerId = $request->input('MILL_ID');
         $extendDate = $this->dateFormat($request->input('renewing_date'));
-        $extendDays = $request->input('renewing_days');
+        $today = date('Y-m-d');
+        if ($extendDate <= $today) {
+            return response()->json(['errors' => 'Extended date must be greater than today.']);
+        }
+        $diff = date_diff(date_create($today), date_create($extendDate));
+        $extendDays = $diff->format('%a');
 
         $oldExtendDate = DB::table('miller_extend_dates')
+            ->where('mill_id', '=', $millerId)
             ->orderBy('extend_date', 'desc')
             ->pluck('extend_date')
             ->first();
 
-        if($oldExtendDate){
+        if ($oldExtendDate) {
             $oldExtendDate = $this->dateFormat($oldExtendDate);
-            if($oldExtendDate>=$extendDate) return response()->json(['error' => 'Extended date Invalid.']);
+            if ($oldExtendDate >= $extendDate) return response()->json(['errors' => "Extended date invalid. Last extend date is $oldExtendDate."]);
         }
-        $updated = DB::table('ssm_mill_info as smi')
-            ->where('MILL_ID', $millerId)
-            ->update([
-                'extend_date' => $extendDate,
-                'extend_days' => $extendDays
-            ]);
+        try {
+            DB::beginTransaction();
+            $updated = DB::table('ssm_mill_info as smi')
+                ->where('smi.MILL_ID', $millerId)
+                ->update([
+                    'smi.extend_date' => $extendDate,
+                    'smi.extend_days' => $extendDays
+                ]);
 
-        if ($updated) {
-            $data = array(
-                'mill_id' => $millerId,
-                'extend_date' => $extendDate,
-                'extend_days' => $extendDays
-            );
-            DB::table('miller_extend_dates')->insert($data);
+            if ($updated) {
+                $data = array(
+                    'mill_id' => $millerId,
+                    'extend_date' => $extendDate,
+                    'extend_days' => $extendDays
+                );
+                DB::table('miller_extend_dates')->insert($data);
+            }
+            DB::commit();
             return response()->json(['success' => 'Extended date successfully.']);
-        } else {
-            return response()->json(['success' => 'Extended date failed.']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['errors' => 'Extended date failed.']);
         }
 
     }

@@ -85,7 +85,7 @@
         if(ownerType===12){
             $('.rowAddEntrepreneur').hide();
         }else{
-            $('.rowAddEntrepreneur').hide();
+            $('.rowAddEntrepreneur').show();
         }
     });
 
@@ -102,6 +102,11 @@
                 }
             })
         }
+    });
+
+    $(document).on('click', '.rowRemove', function () {
+        let thisRow = $(this).closest('tr');
+        thisRow.remove();
     });
 
 </script>

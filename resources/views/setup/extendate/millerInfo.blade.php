@@ -8,7 +8,7 @@
     <form action="{{ url('/extended-date-update') }}" method="post" class="form-horizontal" role="form">
      @csrf
         <div class="col-md-12">
-
+            <input type="hidden" name="MILL_ID" class="extendMillerId" value="{{$millInfo->MILL_ID}}">
             <div class="col-md-12">
                 <div class="col-md-7 form-group text-right">
                     <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
