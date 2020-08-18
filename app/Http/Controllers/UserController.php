@@ -50,7 +50,7 @@ class UserController extends Controller
             'createPermissionLevel' => $previllage->CREATE
         );
 //        dd(session()->all());
-        $users = User::getData();
+        $users = User::getData($this->millerId);
 //        $this->pr($users);
 
         return view('setup.generalSetup.users.userIndex',compact( 'users','heading','previllage'));
@@ -246,6 +246,7 @@ class UserController extends Controller
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
         try{
+            DB::beginTransaction();
             //for user image************* $userImageName = 'defaultUserImage.png';
             if($request->file('user_image')!=null && $request->file('user_image')->isValid()) {
 
@@ -283,7 +284,7 @@ class UserController extends Controller
                 $userSignatureName = $editUser->user_signature;
             }
 
-            $update = User::updateData($request, $id, $user_image, $userSignatureName);
+            $update = User::updateData($request, $id, $user_image, $userSignatureName, $this->millerId);
 
 
             if($update && $hasUpdateEmail){
@@ -293,14 +294,12 @@ class UserController extends Controller
                 $user = User::find($id);
                 Mail::to($user->email)->send(new VerifyMail($user));
             }
-
-            if($update){
-                return response()->json(['success'=>'Submission Completed']);
-            } else{
-                return response()->json(['errors'=>'User update failed']);
-            }
-        }catch (Exception $e){
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            DB::commit();
+            return response()->json(['success'=>'Submission Completed']);
+        } catch (Exception $e){
+            DB::rollBack();
+            return response()->json(['errors'=>'User update failed']);
+//            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
 
