@@ -52,7 +52,6 @@ class MillerInfoController extends Controller
         );
 
         $millerList = MillerInfo::getAllMillDataList();
-
         $approvalMillList = MillerInfo::getApprovalAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();

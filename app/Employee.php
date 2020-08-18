@@ -52,6 +52,7 @@ class Employee extends Model
             'PARTTIMEFEM_EMP' => $request->input('PARTTIMEFEM_EMP'),
             'TOTMALETECH_PER' => $request->input('TOTMALETECH_PER'),
             'TOTFEMTECH_PER' => $request->input('TOTFEMTECH_PER'),
+            'FINAL_SUBMIT_FLG' => 1,
             'REMARKS' => $request->input('REMARKS'),
             'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s"),
             'UPDATE_BY' => Auth::user()->id
