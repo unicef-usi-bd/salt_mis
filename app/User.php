@@ -148,7 +148,7 @@ class User extends Authenticatable
             'update_at' => date("Y-m-d h:i:s")
         );
 
-        if($request->input('user_group_level_id')==$millerId) $data['center_id'] = $request->input('center_id'); // 22 as Miller Id as Group level id
+        if($request->input('user_group_id')==$millerId) $data['center_id'] = $request->input('center_id'); // 22 as Miller Id as Group level id
 
             if ($user->email != $request->email) $userUpdateData['mail_verified'] = 0;
 

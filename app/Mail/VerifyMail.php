@@ -31,6 +31,6 @@ class VerifyMail extends Mailable
     public function build()
     {
         $data = $this->user;
-        return $this->view('emails.verify_user', compact('data'));
+        return $this->subject('E-mail Verification Link from USI BD Central MIS Supported by UNICEF')->view('emails.verify_user', compact('data'));
     }
 }
