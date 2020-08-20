@@ -52,9 +52,14 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.address') }}</b></label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.re_password') }}</b> <span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value=""/>
+                    <input id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Example: Confirm Password"/>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                    @endif
                 </div>
             </div>
 
@@ -135,6 +140,13 @@
                             </select>
                         </span>
                     <span><p class='result7'></p></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.address') }}</b></label>
+                <div class="col-sm-8">
+                    <input type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value=""/>
                 </div>
             </div>
 

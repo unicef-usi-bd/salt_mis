@@ -21,6 +21,7 @@
                     <th>Certificate Name</th>
                     <th>Provider/Issuer Name</th>
                     <th>Certificate Type</th>
+                    <th>Expireable</th>
                     <th>Status</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
@@ -34,20 +35,25 @@
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{ $row->CERTIFICATE_NAME }}</td>
                         <td>{{ $row->ISSUER_NAME }}</td>
-
                         <td>
                             @if($row->CERTIFICATE_TYPE == 1)
-                                <span class="label label-sm label-info arrowed arrowed-righ">Mandatory</span>
+                                <span class="label label-sm label-info arrowed arrowed-right">Mandatory</span>
                             @else
-                                <span class="label label-sm label-danger arrowed arrowed-righ">Not Mandatory</span>
+                                <span class="label label-sm label-danger arrowed arrowed-right">Not Mandatory</span>
                             @endif
                         </td>
-
+                        <td>
+                            @if($row->IS_EXPIRE == 1)
+                                <span class="label label-sm label-danger arrowed arrowed-right">Yes</span>
+                            @else
+                                <span class="label label-sm label-success arrowed arrowed-right">No</span>
+                            @endif
+                        </td>
                         <td>
                             @if($row->ACTIVE_FLG == 1)
-                                <span class="label label-sm label-info arrowed arrowed-righ">Active</span>
+                                <span class="label label-sm label-info arrowed arrowed-right">Active</span>
                             @else
-                                <span class="label label-sm label-danger arrowed arrowed-righ">Inactive</span>
+                                <span class="label label-sm label-danger arrowed arrowed-right">Inactive</span>
                             @endif
                         </td>
                         <td class="row{{ $row->CERTIFICATE_ID }}">

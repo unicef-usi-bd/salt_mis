@@ -99,7 +99,7 @@ class UserController extends Controller
 //            'user_full_name' =>'required|string|max:100',
             'username' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
@@ -108,6 +108,7 @@ class UserController extends Controller
 
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 6 character',
+            'password.confirmed' => 'The Password not matched. Please try again',
             'user_group_id.required' => 'The user group field is required.',
             'user_group_level_id.required' => 'The user group level field is required.'
         );
@@ -224,10 +225,12 @@ class UserController extends Controller
             $rules = array(
 //            'user_full_name' =>'required|string|max:100',
              'username' => 'required|string|max:100',
+             'password' => 'confirmed',
             );
         }else{
              $rules = array(
 //                 'user_full_name' =>'required|string|max:100',
+                 'password.confirmed' => 'The Password not matched. Please try again',
                  'username' => 'required|string|max:100',
                  'user_group_id' => 'required',
             );

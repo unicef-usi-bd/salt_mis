@@ -16,6 +16,7 @@
      'full_nameen' => 'Full Name(EN)',
      'full_namebn' => 'Full Name(Bangla)',
      'password' => 'Password',
+     're_password' => 'Confirm Password',
      'example_full_nameen' => 'Example:- User Full name in English here',
      'example_full_namebn' => 'Example:- User Full name in Bangla here',
      'example_user_name' => 'Example:- User name here',

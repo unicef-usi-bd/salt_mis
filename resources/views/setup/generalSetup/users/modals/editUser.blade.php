@@ -57,9 +57,14 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.address') }}</b></label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.re_password') }}</b> <span style="color: red;"> </span></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value="{{ $editData->address }}"/>
+                    <input id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Example: Confirm Password"/>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                    @endif
                 </div>
             </div>
 
@@ -140,19 +145,26 @@
             <div class="form-group resources" style="display: @if($editData->user_group_id==22) block @else none @endif">
                 <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;">*</span></label>
                 <div class="col-sm-8">
-                        <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess center_id" class=" form-control" name="center_id" data-placeholder="Select Center">
-                                <option value="">-Select-</option>
-                                @foreach($associationCenter as $center)
-                                    <option value="<?php echo $center->ASSOCIATION_ID ?>" @if($center->ASSOCIATION_ID==$editData->center_id) selected @endif><?php echo $center->ASSOCIATION_NAME ?></option>
-                                    <?php $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
-                                    @foreach($miller as $row)
-                                        <option value="{{$row->ASSOCIATION_ID}}" @if($row->ASSOCIATION_ID==$editData->center_id) selected @endif> {{$row->ASSOCIATION_NAME}}</option>
-                                    @endforeach
-
+                    <span class="block input-icon input-icon-right">
+                        <select id="form-field-select-3 inputSuccess center_id" class=" form-control" name="center_id" data-placeholder="Select Center">
+                            <option value="">-Select-</option>
+                            @foreach($associationCenter as $center)
+                                <option value="<?php echo $center->ASSOCIATION_ID ?>" @if($center->ASSOCIATION_ID==$editData->center_id) selected @endif><?php echo $center->ASSOCIATION_NAME ?></option>
+                                <?php $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
+                                @foreach($miller as $row)
+                                    <option value="{{$row->ASSOCIATION_ID}}" @if($row->ASSOCIATION_ID==$editData->center_id) selected @endif> {{$row->ASSOCIATION_NAME}}</option>
                                 @endforeach
-                            </select>
-                        </span>
+
+                            @endforeach
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.address') }}</b></label>
+                <div class="col-sm-8">
+                    <input type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value="{{ $editData->address }}"/>
                 </div>
             </div>
 
