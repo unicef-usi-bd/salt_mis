@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'ati-erp@atilimited.net'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@ismos.org.bd'),
         'name' => env('MAIL_FROM_NAME', 'Universal Salt Iodization Program'),
     ],
     /*

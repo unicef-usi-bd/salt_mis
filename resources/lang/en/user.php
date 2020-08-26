@@ -2,10 +2,10 @@
  return[
      'user_list' => 'User List',
      'user_full_name' => 'User Full Name',
-     'user_name' => 'User Name',
+     'user_name' => 'Short Name',
      'cost_center' => 'Cost Center',
      'user_group' => 'User Group',
-     'group_level' => 'Group Levels',
+     'group_level' => 'Group Level',
      'email' => 'Email',
      'remark' => 'Remarks',
      'status' => 'Status',

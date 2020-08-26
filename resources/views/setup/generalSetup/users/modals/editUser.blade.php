@@ -128,7 +128,7 @@
             </div>
 
             <div class="form-group" >
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b><span style="color: red;">*</span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>{{ trans('user.group_level') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select Group Level">
@@ -143,7 +143,7 @@
 
 
             <div class="form-group resources" style="display: @if($editData->user_group_id==22) block @else none @endif">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;">*</span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
                         <select id="form-field-select-3 inputSuccess center_id" class=" form-control" name="center_id" data-placeholder="Select Center">

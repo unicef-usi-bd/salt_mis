@@ -17,7 +17,7 @@
                             <th>Issuer Name<span style="color:red;"> </span></th>
                             <th>Issuing Date</th>
                             <th>Certificate Number</th>
-                            <th>Trade License</th>
+                            <th>Certificate Image</th>
                             <th>Renewing Date</th>
                             <th>Remarks</th>
                             <th class="text-center"><span class="btn btn-primary btn-sm rowAddCertificate"><i class="fa fa-plus"></i></span></th>
