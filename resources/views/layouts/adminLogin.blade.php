@@ -52,7 +52,7 @@
             <div class="col-md-2 col-md-offset-1 offset-2">
                 <img class="img-responsive salt_spoon" src="{{ url('assets/images/salt_login/salt_spoon.png') }}" width="80%"/>
             </div>
-            <div class="col-md-3 col-md-offset-5">
+            <div class="col-md-3 col-md-offset-5" {{--style="padding-right: 50px;"--}}>
                 <div class="row" style="min-height: 420px;margin-top: 30px;border: 2px solid #4685B1;background: #EDF3F7">
                     <img class="img-responsive" src="{{ url('assets/images/salt_login/form-header.png') }}" style="height: 150px;width: 100%"/>
                     {{-- Custom alert message --}}
