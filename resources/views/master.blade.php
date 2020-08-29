@@ -116,7 +116,7 @@
 
     <div class="main-content">
         <div class="main-content-inner">
-            <div class="page-content">
+            <div class="page-content" style="margin-bottom: 100px;">
                 <div class="col-xs-12">
                     <div class="col-xs-11" style="padding-left: 0px;">
                         @include('masterGlobal.success')
