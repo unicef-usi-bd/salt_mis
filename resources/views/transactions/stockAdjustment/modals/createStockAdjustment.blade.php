@@ -14,14 +14,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>W & C Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
-                            <input type="text" name="system_wc_stock" id="" placeholder=""  value="{{ $washingStock }}" class="form-control col-xs-5 col-sm-5" readonly />
+                            <input autocomplete="off" type="text" name="system_wc_stock" id="" placeholder=""  value="{{ $washingStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodize Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
-                            <input type="text" name="system_iodize_stock" id="" placeholder=""  value="{{ $iodizeStock }}" class="form-control col-xs-5 col-sm-5" readonly />
+                            <input autocomplete="off" type="text" name="system_iodize_stock" id="" placeholder=""  value="{{ $iodizeStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
@@ -30,13 +30,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <input type="text" name="wc_stock" id="wc_stock" placeholder="" onkeypress="return numbersOnly(this, event)" value="" class="form-control col-xs-5 col-sm-5"  />
+                            <input autocomplete="off" type="text" name="wc_stock" id="wc_stock" placeholder="" onkeypress="return numbersOnly(this, event)" value="" class="form-control col-xs-5 col-sm-5"  />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <input type="text" name="iodize_stock" id="iodize_stock" placeholder="" onkeypress="return numbersOnly(this, event)" value="" class="form-control col-xs-5 col-sm-5" />
+                            <input autocomplete="off" type="text" name="iodize_stock" id="iodize_stock" placeholder="" onkeypress="return numbersOnly(this, event)" value="" class="form-control col-xs-5 col-sm-5" />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>

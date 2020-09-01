@@ -28,7 +28,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trading Name</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" id="inputSuccess org_name" name="TRADING_NAME" value="{{ $editData->TRADING_NAME }}" class="width-100" />
+                        <input autocomplete="off" type="text" id="inputSuccess org_name" name="TRADING_NAME" value="{{ $editData->TRADING_NAME }}" class="width-100" />
                     </span>
 
                 </div>
@@ -37,7 +37,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trader Name</b><span style="color: red;">* </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="TRADER_NAME" value="{{ $editData->TRADER_NAME }}" id="inputSuccess ogr_address" class="width-100"  />
+                        <input autocomplete="off" type="text" name="TRADER_NAME" value="{{ $editData->TRADER_NAME }}" id="inputSuccess ogr_address" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />
+                        <input autocomplete="off" type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>EMAIL</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="EMAIL" id="inputSuccess fax" value="{{ $editData->EMAIL }}" class="width-100" />
+                        <input autocomplete="off" type="text" name="EMAIL" id="inputSuccess fax" value="{{ $editData->EMAIL }}" class="width-100" />
                     </span>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
+                        <input autocomplete="off" type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar Name</b></label>
                 <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
-                <input type="text"  name="BAZAR_NAME" id="inputSuccess email_address" value="{{ $editData->BAZAR_NAME }}" class="width-100"  />
+                <input autocomplete="off" type="text"  name="BAZAR_NAME" id="inputSuccess email_address" value="{{ $editData->BAZAR_NAME }}" class="width-100"  />
              </span>
                 </div>
             </div>

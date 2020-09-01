@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\SellerDistributorProfile;
@@ -139,7 +140,6 @@ class SellerDistributorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $rules = array(
             'TRADING_NAME' => 'required|max:100',
             'TRADER_NAME' => 'required|max:100',
@@ -163,7 +163,7 @@ class SellerDistributorProfileController extends Controller
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
 
-        $updated = SellerDistributorProfile::updateData($request,$id);
+        $updated = SellerDistributorProfile::updateData($request, $id);
 
         if($updated){
             return response()->json(['success'=>'Seller/Distributor Submission Completed']);

@@ -18,7 +18,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Text Field </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
+                        <input autocomplete="off" type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
                     </div>
                 </div>
 
@@ -26,7 +26,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Full Length </label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="form-field-1-1" placeholder="Text Field" class="form-control" />
+                        <input autocomplete="off" type="text" id="form-field-1-1" placeholder="Text Field" class="form-control" />
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Password Field </label>
 
                     <div class="col-sm-9">
-                        <input type="password" id="form-field-2" placeholder="Password" class="col-xs-10 col-sm-5" />
+                        <input autocomplete="off" type="password" id="form-field-2" placeholder="Password" class="col-xs-10 col-sm-5" />
                         <span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">Inline help text</span>
 											</span>
@@ -91,12 +91,12 @@
 
                     <div class="col-sm-9">
 											<span class="input-icon">
-												<input type="text" id="form-field-icon-1" />
+												<input autocomplete="off" type="text" id="form-field-icon-1" />
 												<i class="ace-icon fa fa-leaf blue"></i>
 											</span>
 
                         <span class="input-icon input-icon-right">
-												<input type="text" id="form-field-icon-2" />
+												<input autocomplete="off" type="text" id="form-field-icon-2" />
 												<i class="ace-icon fa fa-leaf green"></i>
 											</span>
                     </div>
@@ -120,7 +120,7 @@
 
                     <div class="col-sm-9">
                         <div class="inline">
-                            <input type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." />
+                            <input autocomplete="off" type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." />
                         </div>
                     </div>
                 </div>
@@ -583,35 +583,35 @@
 
                             <div class="checkbox">
                                 <label>
-                                    <input name="form-field-checkbox" type="checkbox" class="ace" />
+                                    <input autocomplete="off" name="form-field-checkbox" type="checkbox" class="ace" />
                                     <span class="lbl"> choice 1</span>
                                 </label>
                             </div>
 
                             <div class="checkbox">
                                 <label>
-                                    <input name="form-field-checkbox" type="checkbox" class="ace" />
+                                    <input autocomplete="off" name="form-field-checkbox" type="checkbox" class="ace" />
                                     <span class="lbl"> choice 2</span>
                                 </label>
                             </div>
 
                             <div class="checkbox">
                                 <label>
-                                    <input name="form-field-checkbox" class="ace ace-checkbox-2" type="checkbox" />
+                                    <input autocomplete="off" name="form-field-checkbox" class="ace ace-checkbox-2" type="checkbox" />
                                     <span class="lbl"> choice 3</span>
                                 </label>
                             </div>
 
                             <div class="checkbox">
                                 <label class="block">
-                                    <input name="form-field-checkbox" disabled="" type="checkbox" class="ace" />
+                                    <input autocomplete="off" name="form-field-checkbox" disabled="" type="checkbox" class="ace" />
                                     <span class="lbl"> disabled</span>
                                 </label>
                             </div>
 
                             <div class="checkbox">
                                 <label class="block">
-                                    <input name="form-field-checkbox" type="checkbox" class="ace input-lg" />
+                                    <input autocomplete="off" name="form-field-checkbox" type="checkbox" class="ace input-lg" />
                                     <span class="lbl bigger-120"> large checkbox</span>
                                 </label>
                             </div>
@@ -624,21 +624,21 @@
 
                             <div class="radio">
                                 <label>
-                                    <input name="form-field-radio" type="radio" class="ace" />
+                                    <input autocomplete="off" name="form-field-radio" type="radio" class="ace" />
                                     <span class="lbl"> radio option 1</span>
                                 </label>
                             </div>
 
                             <div class="radio">
                                 <label>
-                                    <input name="form-field-radio" type="radio" class="ace" />
+                                    <input autocomplete="off" name="form-field-radio" type="radio" class="ace" />
                                     <span class="lbl"> radio option 2</span>
                                 </label>
                             </div>
 
                             <div class="radio">
                                 <label>
-                                    <input name="form-field-radio" type="radio" class="ace" />
+                                    <input autocomplete="off" name="form-field-radio" type="radio" class="ace" />
                                     <span class="lbl"> radio option 3</span>
                                 </label>
                             </div>
@@ -652,7 +652,7 @@
 
                             <div class="radio">
                                 <label>
-                                    <input name="form-field-radio" type="radio" class="ace input-lg" />
+                                    <input autocomplete="off" name="form-field-radio" type="radio" class="ace input-lg" />
                                     <span class="lbl bigger-120"> large radio</span>
                                 </label>
                             </div>
@@ -668,28 +668,28 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch" type="checkbox" />
                                     <span class="lbl" data-lbl="CUS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOM"></span>
                                 </label>
                             </div>
@@ -698,28 +698,28 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-4" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-4" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-5" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-5" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-7" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-7" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
@@ -728,28 +728,28 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch btn-rotate" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch btn-rotate" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-4 btn-rotate" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-4 btn-rotate" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-4 btn-empty" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-4 btn-empty" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
 
                             <div class="col-xs-3">
                                 <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-4 btn-flat" type="checkbox" />
+                                    <input autocomplete="off" name="switch-field-1" class="ace ace-switch ace-switch-4 btn-flat" type="checkbox" />
                                     <span class="lbl"></span>
                                 </label>
                             </div>
@@ -834,16 +834,16 @@
 
                             <div class="widget-body">
                                 <div class="widget-main">
-                                    <input type="text" id="spinner1" />
+                                    <input autocomplete="off" type="text" id="spinner1" />
                                     <div class="space-6"></div>
 
-                                    <input type="text" class="input-sm" id="spinner2" />
+                                    <input autocomplete="off" type="text" class="input-sm" id="spinner2" />
                                     <div class="space-6"></div>
 
-                                    <input type="text" id="spinner3" />
+                                    <input autocomplete="off" type="text" id="spinner3" />
                                     <div class="space-6"></div>
 
-                                    <input type="text" class="input-lg" id="spinner4" />
+                                    <input autocomplete="off" type="text" class="input-lg" id="spinner4" />
                                 </div>
                             </div>
                         </div>
@@ -897,12 +897,12 @@
                                     <div class="row">
                                         <div class="col-xs-8 col-sm-11">
                                             <div class="input-daterange input-group">
-                                                <input type="text" class="input-sm form-control" name="start" />
+                                                <input autocomplete="off" type="text" class="input-sm form-control" name="start" />
                                                 <span class="input-group-addon">
 																		<i class="fa fa-exchange"></i>
 																	</span>
 
-                                                <input type="text" class="input-sm form-control" name="end" />
+                                                <input autocomplete="off" type="text" class="input-sm form-control" name="end" />
                                             </div>
                                         </div>
                                     </div>
@@ -926,7 +926,7 @@
                                     <label for="timepicker1">Time Picker</label>
 
                                     <div class="input-group bootstrap-timepicker">
-                                        <input id="timepicker1" type="text" class="form-control" />
+                                        <input autocomplete="off" id="timepicker1" type="text" class="form-control" />
                                         <span class="input-group-addon">
 																<i class="fa fa-clock-o bigger-110"></i>
 															</span>
@@ -936,7 +936,7 @@
                                     <label for="date-timepicker1">Date/Time Picker</label>
 
                                     <div class="input-group">
-                                        <input id="date-timepicker1" type="text" class="form-control" />
+                                        <input autocomplete="off" id="date-timepicker1" type="text" class="form-control" />
                                         <span class="input-group-addon">
 																<i class="fa fa-clock-o bigger-110"></i>
 															</span>
@@ -963,7 +963,7 @@
 
                                     <div class="control-group">
                                         <div class="bootstrap-colorpicker">
-                                            <input id="colorpicker1" type="text" class="input-small" />
+                                            <input autocomplete="off" id="colorpicker1" type="text" class="input-small" />
                                         </div>
                                     </div>
 
@@ -1020,13 +1020,13 @@
                                         <div class="row">
                                             <div class="col-xs-6 center">
                                                 <div class="knob-container inline">
-                                                    <input type="text" class="input-small knob" value="15" data-min="0" data-max="100" data-step="10" data-width="80" data-height="80" data-thickness=".2" />
+                                                    <input autocomplete="off" type="text" class="input-small knob" value="15" data-min="0" data-max="100" data-step="10" data-width="80" data-height="80" data-thickness=".2" />
                                                 </div>
                                             </div>
 
                                             <div class="col-xs-6  center">
                                                 <div class="knob-container inline">
-                                                    <input type="text" class="input-small knob" value="41" data-min="0" data-max="100" data-width="80" data-height="80" data-thickness=".2" data-fgcolor="#87B87F" data-displayprevious="true" data-anglearc="250" data-angleoffset="-125" />
+                                                    <input autocomplete="off" type="text" class="input-small knob" value="41" data-min="0" data-max="100" data-width="80" data-height="80" data-thickness=".2" data-fgcolor="#87B87F" data-displayprevious="true" data-anglearc="250" data-angleoffset="-125" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1034,7 +1034,7 @@
                                         <div class="row">
                                             <div class="col-xs-12 center">
                                                 <div class="knob-container inline">
-                                                    <input type="text" class="input-small knob" value="1" data-min="0" data-max="10" data-width="150" data-height="150" data-thickness=".2" data-fgcolor="#B8877F" data-angleoffset="90" data-cursor="true" />
+                                                    <input autocomplete="off" type="text" class="input-small knob" value="1" data-min="0" data-max="10" data-width="150" data-height="150" data-thickness=".2" data-fgcolor="#B8877F" data-angleoffset="90" data-cursor="true" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1070,7 +1070,7 @@
                                     <fieldset>
                                         <label>Label name</label>
 
-                                        <input type="text" placeholder="Type something&hellip;" />
+                                        <input autocomplete="off" type="text" placeholder="Type something&hellip;" />
                                         <span class="help-block">Example block-level help text here.</span>
 
                                         <label class="pull-right">
@@ -1100,8 +1100,8 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline">
-                                    <input type="text" class="input-small" placeholder="Username" />
-                                    <input type="password" class="input-small" placeholder="Password" />
+                                    <input autocomplete="off" type="text" class="input-small" placeholder="Username" />
+                                    <input autocomplete="off" type="password" class="input-small" placeholder="Password" />
                                     <label class="inline">
                                         <input type="checkbox" class="ace" />
                                         <span class="lbl"> remember me</span>
@@ -1132,7 +1132,7 @@
 																		<i class="ace-icon fa fa-check"></i>
 																	</span>
 
-                                                <input type="text" class="form-control search-query" placeholder="Type your query" />
+                                                <input autocomplete="off" type="text" class="form-control search-query" placeholder="Type your query" />
                                                 <span class="input-group-btn">
 																		<button type="button" class="btn btn-purple btn-sm">
 																			<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
@@ -1148,7 +1148,7 @@
 																		<i class="ace-icon fa fa-check"></i>
 																	</span>
 
-                                                <input type="text" class="form-control search-query" placeholder="Type your query" />
+                                                <input autocomplete="off" type="text" class="form-control search-query" placeholder="Type your query" />
                                                 <span class="input-group-btn">
 																		<button type="button" class="btn btn-default btn-lg">
 																			<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
@@ -1164,7 +1164,7 @@
 																		<i class="ace-icon fa fa-check"></i>
 																	</span>
 
-                                                <input type="text" class="form-control search-query" placeholder="Type your query" />
+                                                <input autocomplete="off" type="text" class="form-control search-query" placeholder="Type your query" />
                                                 <span class="input-group-btn">
 																		<button type="button" class="btn btn-inverse btn-white">
 																			<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
@@ -1242,7 +1242,7 @@
                                         <label for="form-field-username">Username</label>
 
                                         <div>
-                                            <input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+                                            <input autocomplete="off" type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
                                         </div>
                                     </div>
 
@@ -1252,8 +1252,8 @@
                                         <label for="form-field-first">Name</label>
 
                                         <div>
-                                            <input type="text" id="form-field-first" placeholder="First Name" value="Alex" />
-                                            <input type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
+                                            <input autocomplete="off" type="text" id="form-field-first" placeholder="First Name" value="Alex" />
+                                            <input autocomplete="off" type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
                                         </div>
                                     </div>
                                 </div>
@@ -1299,7 +1299,7 @@
                                 <b>Validation</b>
                             </small>
 
-                            <input id="skip-validation" type="checkbox" class="ace ace-switch ace-switch-4" />
+                            <input autocomplete="off" id="skip-validation" type="checkbox" class="ace ace-switch ace-switch-4" />
                             <span class="lbl middle"></span>
                         </label>
                     </div>
@@ -1344,7 +1344,7 @@
 
                                             <div class="col-xs-12 col-sm-5">
 																	<span class="block input-icon input-icon-right">
-																		<input type="text" id="inputWarning" class="width-100" />
+																		<input autocomplete="off" type="text" id="inputWarning" class="width-100" />
 																		<i class="ace-icon fa fa-leaf"></i>
 																	</span>
                                             </div>
@@ -1356,7 +1356,7 @@
 
                                             <div class="col-xs-12 col-sm-5">
 																	<span class="block input-icon input-icon-right">
-																		<input type="text" id="inputError" class="width-100" />
+																		<input autocomplete="off" type="text" id="inputError" class="width-100" />
 																		<i class="ace-icon fa fa-times-circle"></i>
 																	</span>
                                             </div>
@@ -1368,7 +1368,7 @@
 
                                             <div class="col-xs-12 col-sm-5">
 																	<span class="block input-icon input-icon-right">
-																		<input type="text" id="inputSuccess" class="width-100" />
+																		<input autocomplete="off" type="text" id="inputSuccess" class="width-100" />
 																		<i class="ace-icon fa fa-check-circle"></i>
 																	</span>
                                             </div>
@@ -1380,7 +1380,7 @@
 
                                             <div class="col-xs-12 col-sm-5">
 																	<span class="block input-icon input-icon-right">
-																		<input type="text" id="inputInfo" class="width-100" />
+																		<input autocomplete="off" type="text" id="inputInfo" class="width-100" />
 																		<i class="ace-icon fa fa-info-circle"></i>
 																	</span>
                                             </div>
@@ -1392,7 +1392,7 @@
 
                                             <div class="col-xs-12 col-sm-5">
 																	<span class="input-icon block">
-																		<input type="text" id="inputError2" class="width-100" />
+																		<input autocomplete="off" type="text" id="inputError2" class="width-100" />
 																		<i class="ace-icon fa fa-times-circle red"></i>
 																	</span>
                                             </div>
@@ -1418,7 +1418,7 @@
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="password" name="password" id="password" class="col-xs-12 col-sm-4" />
+                                                    <input autocomplete="off" type="password" name="password" id="password" class="col-xs-12 col-sm-4" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1430,7 +1430,7 @@
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="password" name="password2" id="password2" class="col-xs-12 col-sm-4" />
+                                                    <input autocomplete="off" type="password" name="password2" id="password2" class="col-xs-12 col-sm-4" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1442,7 +1442,7 @@
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="name" name="name" class="col-xs-12 col-sm-5" />
+                                                    <input autocomplete="off" type="text" id="name" name="name" class="col-xs-12 col-sm-5" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1483,14 +1483,14 @@
                                             <div class="col-xs-12 col-sm-9">
                                                 <div>
                                                     <label>
-                                                        <input name="subscription" value="1" type="checkbox" class="ace" />
+                                                        <input autocomplete="off" name="subscription" value="1" type="checkbox" class="ace" />
                                                         <span class="lbl"> Latest news and announcements</span>
                                                     </label>
                                                 </div>
 
                                                 <div>
                                                     <label>
-                                                        <input name="subscription" value="2" type="checkbox" class="ace" />
+                                                        <input autocomplete="off" name="subscription" value="2" type="checkbox" class="ace" />
                                                         <span class="lbl"> Product offers and discounts</span>
                                                     </label>
                                                 </div>
@@ -1505,14 +1505,14 @@
                                             <div class="col-xs-12 col-sm-9">
                                                 <div>
                                                     <label class="line-height-1 blue">
-                                                        <input name="gender" value="1" type="radio" class="ace" />
+                                                        <input autocomplete="off" name="gender" value="1" type="radio" class="ace" />
                                                         <span class="lbl"> Male</span>
                                                     </label>
                                                 </div>
 
                                                 <div>
                                                     <label class="line-height-1 blue">
-                                                        <input name="gender" value="2" type="radio" class="ace" />
+                                                        <input autocomplete="off" name="gender" value="2" type="radio" class="ace" />
                                                         <span class="lbl"> Female</span>
                                                     </label>
                                                 </div>
@@ -1617,7 +1617,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12 col-sm-4 col-sm-offset-3">
                                                 <label>
-                                                    <input name="agree" id="agree" type="checkbox" class="ace" />
+                                                    <input autocomplete="off" name="agree" id="agree" type="checkbox" class="ace" />
                                                     <span class="lbl"> I accept the policy</span>
                                                 </label>
                                             </div>

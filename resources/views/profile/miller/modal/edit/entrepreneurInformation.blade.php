@@ -33,7 +33,7 @@
                                 <tr class="rowFirst">
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="OWNER_NAME[]" value="{{ $entrepreneur->OWNER_NAME }}" class="width-100 OWNER_NAME" />
+                                            <input autocomplete="off" type="text" name="OWNER_NAME[]" value="{{ $entrepreneur->OWNER_NAME }}" class="width-100 OWNER_NAME" />
                                         </span>
                                         <input type="hidden" value="{{ $entrepreneur->ENTREPRENEUR_ID }}" name="ENTREPRENEUR_ID">
                                     </td>
@@ -69,27 +69,27 @@
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="NID[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
+                                            <input autocomplete="off" type="text" name="NID[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->NID }}" class="width-100 NID" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="MOBILE_1[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
+                                            <input autocomplete="off" type="text" name="MOBILE_1[]" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_1 }}" class="width-100 MOBILE_1" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="MOBILE_2[]" id="inputSuccess" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_2 }}" class="width-100 MOBILE_2" />
+                                            <input autocomplete="off" type="text" name="MOBILE_2[]" id="inputSuccess" onkeypress="return numbersOnly(this, event)" value="{{ $entrepreneur->MOBILE_2 }}" class="width-100 MOBILE_2" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $entrepreneur->EMAIL }}" class="width-100 EMAIL" />
+                                            <input autocomplete="off" type="text" name="EMAIL[]" id="inputSuccess batch_no" value="{{ $entrepreneur->EMAIL }}" class="width-100 EMAIL" />
                                         </span>
                                     </td>
                                     <td>
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $entrepreneur->REMARKS }}" class="width-100 REMARKS" />
+                                            <input autocomplete="off" type="text" name="REMARKS[]" id="inputSuccess" value="{{ $entrepreneur->REMARKS }}" class="width-100 REMARKS" />
                                         </span>
                                     </td>
                                     <td class="removeButton text-center"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></td>
@@ -99,7 +99,7 @@
                             <tr>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="OWNER_NAME[]" value="" class="width-100 OWNER_NAME"  />
+                                    <input autocomplete="off" type="text" name="OWNER_NAME[]" value="" class="width-100 OWNER_NAME"  />
                                 </span>
                                 </td>
                                 <td>
@@ -128,28 +128,28 @@
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="NID[]" value="" onkeypress="return numbersOnly(this, event)" class="width-100 NID"  />
+                                    <input autocomplete="off" type="text" name="NID[]" value="" onkeypress="return numbersOnly(this, event)" class="width-100 NID"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_1[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_1"  />
+                                    <input autocomplete="off" type="text" name="MOBILE_1[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_1"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="MOBILE_2[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_2"  />
+                                    <input autocomplete="off" type="text" name="MOBILE_2[]"  onkeypress="return numbersOnly(this, event)" value="" class="width-100 MOBILE_2"  />
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="EMAIL[]" value="" class="width-100 EMAIL"  />
+                                    <input autocomplete="off" type="text" name="EMAIL[]" value="" class="width-100 EMAIL"  />
                                     <input type="hidden" class="batch_disabled" disabled="disabled" name="batch_no[]" value="">
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
+                                    <input autocomplete="off" type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                                 </td>
                                 <th class="removeButton text-center"><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>

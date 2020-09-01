@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('emailTemplete.subject') }}</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess email_subject" placeholder="{{ trans('emailTemplete.ex_email_subject') }}" name="email_subject" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input autocomplete="off" type="text" id="inputSuccess email_subject" placeholder="{{ trans('emailTemplete.ex_email_subject') }}" name="email_subject" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
 

@@ -5,7 +5,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('lookupGroupIndex.group_name') }}</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess group-name" placeholder="Example:- Group name here" name="LOOKUPMST_NAME" class="form-control" value="{{ $lookupGroup->LOOKUPMST_NAME }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess group-name" placeholder="Example:- Group name here" name="LOOKUPMST_NAME" class="form-control" value="{{ $lookupGroup->LOOKUPMST_NAME }}"/>
             </div>
         </div>
         {{--<div class="form-group">--}}

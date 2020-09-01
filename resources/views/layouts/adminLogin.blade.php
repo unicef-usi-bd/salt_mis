@@ -67,11 +67,11 @@
                             @csrf
                         <div class="form-group">
                             <label for="usr">Email Address</label>
-                            <input id="email" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="&#xf0e0;" style="font-family:Arial, FontAwesome" required autofocus autocomplete="off">
+                            <input autocomplete="off" id="email" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="&#xf0e0;" style="font-family:Arial, FontAwesome" required autofocus autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password</label>
-                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="&#xf023;" style="font-family:Arial, FontAwesome" required>
+                            <input autocomplete="off" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="&#xf023;" style="font-family:Arial, FontAwesome" required>
 
                             <span toggle="#password-field" class="fa fa-eye-slash field-icon toggle-password"></span>
                         </div>

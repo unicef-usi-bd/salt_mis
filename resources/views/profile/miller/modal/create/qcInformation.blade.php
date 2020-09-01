@@ -9,11 +9,11 @@
                         <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
                         <div class="col-sm-5">
                             <label>
-                                <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
+                                <input autocomplete="off" name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="LABORATORY_FLG" type="radio" class="ace merit"  value="0"/>
+                                <input autocomplete="off" name="LABORATORY_FLG" type="radio" class="ace merit"  value="0"/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -23,11 +23,11 @@
                         <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> </label>
                         <div class="col-sm-5">
                             <label>
-                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
+                                <input autocomplete="off" name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
+                                <input autocomplete="off" name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -37,11 +37,11 @@
                         <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have trained laboratory person ?</b> </label>
                         <div class="col-sm-5">
                             <label>
-                                <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
+                                <input autocomplete="off" name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0"/>
+                                <input autocomplete="off" name="LAB_MAN_FLG" type="radio" class="ace merit"  value="0"/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -51,11 +51,11 @@
                         <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Does laboratory use test kit ?</b> </label>
                         <div class="col-sm-7">
                             <label>
-                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
+                                <input autocomplete="off" name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
+                                <input autocomplete="off" name="MONITORING_FLG" type="radio" class="ace merit"  value="0"/>
                                 <span class="lbl"> No</span>
                             </label>
                         </div>
@@ -67,7 +67,7 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Do you follow Standard Operating Procedure ?</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="SOP_DESC" class="chosen-container" placeholder="Yes/No">
+                               <input autocomplete="off" type="text" name="SOP_DESC" class="chosen-container" placeholder="Yes/No">
                             </span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="LAB_PERSON" onkeypress="return numbersOnly(this, event)" class="chosen-container">
+                               <input autocomplete="off" type="text" name="LAB_PERSON" onkeypress="return numbersOnly(this, event)" class="chosen-container">
                             </span>
                         </div>
                     </div>

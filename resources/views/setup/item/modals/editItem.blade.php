@@ -22,7 +22,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="ITEM_NAME"  class="form-control" value="{{ $editItem->ITEM_NAME }}"/>
+                        <input autocomplete="off" type="text" name="ITEM_NAME"  class="form-control" value="{{ $editItem->ITEM_NAME }}"/>
                     </span>
             </div>
         </div>

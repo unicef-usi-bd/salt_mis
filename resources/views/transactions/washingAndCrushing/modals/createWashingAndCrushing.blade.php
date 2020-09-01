@@ -9,14 +9,14 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess" readonly placeholder="Example: Batch here" name="BATCH_NO" class="form-control col-xs-10 col-sm-5" value="{{ $batch }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" readonly placeholder="Example: Batch here" name="BATCH_NO" class="form-control col-xs-10 col-sm-5" value="{{ $batch }}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" name="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                <input autocomplete="off" type="text" name="BATCH_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
             </div>
         </div>
 
@@ -38,7 +38,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                     <input type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                     <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                 </span>
                 <span class="col-sm-6 currentStock" data-stock="" style="margin-top: 6px;font-weight: bold;"></span>
             </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
             <span class="col-sm-7">
-                <input type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">

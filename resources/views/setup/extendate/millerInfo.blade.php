@@ -13,7 +13,7 @@
                 <div class="col-md-7 form-group text-right">
                     <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-4">
-                        <input type="text" readonly name="renewing_date"  class="expireDate date-picker" value="{{ date('m/d/Y') }}"/>
+                        <input autocomplete="off" type="text" readonly name="renewing_date"  class="expireDate date-picker" value="{{ date('m/d/Y') }}"/>
                     </div>
                 </div>
                 <div class="col-md-4 form-group">

@@ -35,7 +35,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('moduleLinks.module_link') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" id="inputSuccess link_name" name="link_name" placeholder="Example:Module Link Name Here" value="{{ old('link_name') }}" class="width-100" />
+                        <input autocomplete="off" type="text" id="inputSuccess link_name" name="link_name" placeholder="Example:Module Link Name Here" value="{{ old('link_name') }}" class="width-100" />
                     </span>
 
                 </div>
@@ -45,7 +45,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('moduleLinks.link_url') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="link_url" value="{{ old('link_url') }}" placeholder="Example:Module Link URL Here" id="inputSuccess link_url" class="width-100"  />
+                        <input autocomplete="off" type="text" name="link_url" value="{{ old('link_url') }}" placeholder="Example:Module Link URL Here" id="inputSuccess link_url" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>SL No.</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="sl_no" value="{{ old('sl_no') }}" id="inputSuccess sl_no" class="width-100"  />
+                        <input autocomplete="off" type="text" name="sl_no" value="{{ old('sl_no') }}" id="inputSuccess sl_no" class="width-100"  />
                     </span>
                 </div>
             </div> -->

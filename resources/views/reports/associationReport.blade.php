@@ -52,7 +52,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <input type="text" id="reportrange"  name="reportrange" class="width-65 assReportrange" /></select>
+                                <input autocomplete="off" type="text" id="reportrange"  name="reportrange" class="width-65 assReportrange" /></select>
                             </span>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="renew_date" id="" readonly value="" class="width-100 renew-date" />
+                               <input autocomplete="off" type="text" name="renew_date" id="" readonly value="" class="width-100 renew-date" />
                             </span>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="fail_date" id="" readonly value="" class="width-100 fail-date" />
+                               <input autocomplete="off" type="text" name="fail_date" id="" readonly value="" class="width-100 fail-date" />
                             </span>
                         </div>
                     </div>

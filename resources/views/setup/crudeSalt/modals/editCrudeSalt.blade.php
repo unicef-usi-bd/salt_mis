@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Sodium chloride</b><span style="color: red;"> </span> </label>
             <span class="col-sm-7">
-                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Sodium chloride Here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->SODIUM_CHLORIDE }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess user_define_sl" placeholder="Example:- Sodium chloride Here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->SODIUM_CHLORIDE }}"/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -40,7 +40,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
             <span class="col-sm-7">
-                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Moisturizer Here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->MOISTURIZER }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess user_define_sl" placeholder="Example:- Moisturizer Here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->MOISTURIZER }}"/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -51,13 +51,13 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodine content(PPM)</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- Iodine content(PPM) Here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PPM }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess user_define_sl" placeholder="Example:- Iodine content(PPM) Here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PPM }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess user_define_sl" placeholder="Example:- PH Here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PH }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess user_define_sl" placeholder="Example:- PH Here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudSaltDetail->PH }}"/>
             </div>
         </div>
         <div class="form-group">

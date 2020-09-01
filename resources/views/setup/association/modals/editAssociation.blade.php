@@ -8,7 +8,7 @@
             <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"> <b>Name </b><span style="color: red;"> *</span></label>
             <div class="col-xs-12 col-sm-7">
                 <span class="block input-icon input-icon-right">
-                    <input type="text" id="inputSuccess" name="ASSOCIATION_NAME" value="{{ $editData->ASSOCIATION_NAME }}" class="width-100" />
+                    <input autocomplete="off" type="text" id="inputSuccess" name="ASSOCIATION_NAME" value="{{ $editData->ASSOCIATION_NAME }}" class="width-100" />
                 </span>
 
             </div>

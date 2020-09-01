@@ -204,7 +204,7 @@
                     var userData = JSON.parse(data);
                     for (var i = 0; i < userData.length; i++){
                         rows += '<tr>' +
-                            '<td class="center"> <label class="pos-rel"> <input name="user_id[]" type="checkbox" class="ace" value="'+ userData[i].id +'"/> <span class="lbl"></span> </label></td>'+
+                            '<td class="center"> <label class="pos-rel"> <input autocomplete="off" name="user_id[]" type="checkbox" class="ace" value="'+ userData[i].id +'"/> <span class="lbl"></span> </label></td>'+
                             '<td>'+ userData[i].username +'</td>' +
                             '<td>'+ userData[i].email +'</td>' +
                             '<td>'+ userData[i].contact_no +'</td>' +
@@ -251,7 +251,7 @@
                     var userData = JSON.parse(data);
                     for (var i = 0; i < userData.length; i++){
                         rows += '<tr>' +
-                        '<td class="center"> <label class="pos-rel"> <input name="user_id[]" type="checkbox" class="ace" value="'+ userData[i].id +'"/> <span class="lbl"></span> </label></td>'+
+                        '<td class="center"> <label class="pos-rel"> <input autocomplete="off" name="user_id[]" type="checkbox" class="ace" value="'+ userData[i].id +'"/> <span class="lbl"></span> </label></td>'+
                         '<td>'+ userData[i].username +'</td>' +
                         '<td>'+ userData[i].email +'</td>' +
                         '<td>'+ userData[i].contact_no +'</td>' +

@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label class="col-sm-12"> <b>Date</b><span style="color: red;"> * </span> </label>
                         <div class="col-sm-12">
-                            <input type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
+                            <input autocomplete="off" type="text" name="QC_DATE" id="QC_DATE" readonly value="{{date('m/d/Y',strtotime($editQualityControl->QC_DATE))}}" class="width-100 date-picker" />
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="col-md-4">
                     <label class="col-sm-12"><b>Attached Test Document</b><span style="color: red;"> * </span></label>
                     <div class="col-sm-12">
-                        <input type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
+                        <input autocomplete="off" type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -107,42 +107,42 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="E" placeholder=""  value="{{ $bstiChemicalData->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="E" placeholder=""  value="{{ $bstiChemicalData->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Iodine content(PPM),</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PPM }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PPM }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PH }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PH }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble sodium chloride</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-6">
-                        <input type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5" readonly />
+                        <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
@@ -151,37 +151,37 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="SODIUM_CHLORIDE" id="SODIUM_CHLORIDE" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5"  />
+                        <input autocomplete="off" type="text" name="SODIUM_CHLORIDE" id="SODIUM_CHLORIDE" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="MOISTURIZER" id="" placeholder="MOISTURIZER" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" />
+                        <input autocomplete="off" type="text" name="MOISTURIZER" id="" placeholder="MOISTURIZER" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="IODINE_CONTENT" id="IODINE_CONTENT" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->IODINE_CONTENT }}" class="form-control col-xs-5 col-sm-5" />
+                        <input autocomplete="off" type="text" name="IODINE_CONTENT" id="IODINE_CONTENT" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->IODINE_CONTENT }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="PH" id="PH" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->PH }}" class="form-control col-xs-5 col-sm-5"  />
+                        <input autocomplete="off" type="text" name="PH" id="PH" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->PH }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="water_insoluble_matter" id="water_insoluble_matter" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5"  />
+                        <input autocomplete="off" type="text" name="water_insoluble_matter" id="water_insoluble_matter" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" name="matter_soluble_sc" id="matter_soluble_sc" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5"  />
+                        <input autocomplete="off" type="text" name="matter_soluble_sc" id="matter_soluble_sc" placeholder="" onkeypress="return numbersOnly(this, event)" value="{{ $editQualityControl->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5"  />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>

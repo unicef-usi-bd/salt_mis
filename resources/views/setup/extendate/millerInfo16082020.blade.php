@@ -25,7 +25,7 @@
                 <div class="form-group" style="margin-left: -35%">
                     <label  class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> <b>Extended Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-4">
-                        <input type="text" readonly name="renewing_date"  class="expireDate date-picker" value=""/>
+                        <input autocomplete="off" type="text" readonly name="renewing_date"  class="expireDate date-picker" value=""/>
                     </div>
                 </div>
             </div>

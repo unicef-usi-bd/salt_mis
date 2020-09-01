@@ -8,7 +8,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="inputSuccess module_name" name="module_name" placeholder="Example:Module Name Here" value="{{ $editModule->MODULE_NAME }}" class="width-100" />
+                <input autocomplete="off" type="text" id="inputSuccess module_name" name="module_name" placeholder="Example:Module Name Here" value="{{ $editModule->MODULE_NAME }}" class="width-100" />
             </span>
 
                 </div>
@@ -18,7 +18,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_icon') }}</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="module_icon" placeholder="Example:Module Icon Here" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />
+                        <input autocomplete="off" type="text" name="module_icon" placeholder="Example:Module Icon Here" value="{{ $editModule->MODULE_ICON }}" id="inputSuccess module_icon" class="width-100"  />
                     </span>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.sl_no') }}</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        <input type="text" name="sl_no" placeholder="Example:Module SL NO Here" value="{{ $editModule->SL_NO }}" id="inputSuccess sl_no" class="width-100"  />
+                        <input autocomplete="off" type="text" name="sl_no" placeholder="Example:Module SL NO Here" value="{{ $editModule->SL_NO }}" id="inputSuccess sl_no" class="width-100"  />
                     </span>
                 </div>
             </div>

@@ -24,7 +24,7 @@
                                for="form-field-1-1"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="MILL_NAME" class="chosen-container ">
+                               <input autocomplete="off" type="text" name="MILL_NAME" class="chosen-container ">
                             </span>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                for="form-field-1-1"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <input type="text" name="CAPACITY_ID" onkeypress="return numbersOnly(this, event)" class="chosen-container CAPACITY_ID">
+                                <input autocomplete="off" type="text" name="CAPACITY_ID" onkeypress="return numbersOnly(this, event)" class="chosen-container CAPACITY_ID">
                             </span>
                         </div>
                     </div>

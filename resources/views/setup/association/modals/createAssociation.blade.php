@@ -6,7 +6,7 @@
             <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> {{ trans('lookupGroupIndex.name') }}</b> <span style="color: red;"> *</span></label>
             <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="inputSuccess" name="ASSOCIATION_NAME" value="{{ old('ASSOCIATION_NAME') }}" placeholder="Enter Lavel Name" class="width-100" />
+                <input autocomplete="off" type="text" id="inputSuccess" name="ASSOCIATION_NAME" value="{{ old('ASSOCIATION_NAME') }}" placeholder="Enter Lavel Name" class="width-100" />
                 <input type="hidden" id="inputSuccess" name="PARENT_ID" value="{{ $pr_id }}" class="width-100" />
             </span>
             </div>

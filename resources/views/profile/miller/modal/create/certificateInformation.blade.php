@@ -53,7 +53,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="" class="width-100 CERTIFICATE_NO"  />
+                                    <input autocomplete="off" type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="" class="width-100 CERTIFICATE_NO"  />
                                 </span>
                             </td>
                             <td>
@@ -74,7 +74,7 @@
 
                             <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
+                                    <input autocomplete="off" type="text" name="REMARKS[]" value="" class="width-100 REMARKS"  />
                                 </span>
                             </td>
                             <th><span class="btn btn-danger btn-sm center rowRemove"><i class="fa fa-remove"></i></span></th>

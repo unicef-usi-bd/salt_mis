@@ -24,7 +24,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name of Mill</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="MILL_NAME" class="chosen-container" value="{{ $millerInfo->MILL_NAME }}">
+                               <input autocomplete="off" type="text" name="MILL_NAME" class="chosen-container" value="{{ $millerInfo->MILL_NAME }}">
                             </span>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                                <input type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID" onkeypress="return numbersOnly(this, event)" value="{{ $millerInfo->CAPACITY_ID }}">
+                                <input autocomplete="off" type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID" onkeypress="return numbersOnly(this, event)" value="{{ $millerInfo->CAPACITY_ID }}">
                             </span>
                         </div>
                     </div>

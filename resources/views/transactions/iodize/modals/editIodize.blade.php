@@ -9,20 +9,20 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y',strtotime($editIodize->BATCH_DATE))}}" class="width-100 date-picker" />
+                <input autocomplete="off" type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y',strtotime($editIodize->BATCH_DATE))}}" class="width-100 date-picker" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch Number</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess BATCH_NO" placeholder="Example: Auto Generate" name="BATCH_NO" readonly class="form-control col-xs-10 col-sm-5" value="{{ $editIodize->BATCH_NO }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess BATCH_NO" placeholder="Example: Auto Generate" name="BATCH_NO" readonly class="form-control col-xs-10 col-sm-5" value="{{ $editIodize->BATCH_NO }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount"  onkeypress="return numbersOnly(this, event)" value="{{ number_format($rawAmount, 2) }}"/>
+                    <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount"  onkeypress="return numbersOnly(this, event)" value="{{ number_format($rawAmount, 2) }}"/>
                 </span>
                 <span class="col-sm-6 currentStock" data-stock="{{ $washCrushStock }}" style="margin-top: 6px;font-weight: bold;">[Current Stock: {{ $washCrushStock }}KG]</span>
             </div>
@@ -44,7 +44,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical amount</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->REQ_QTY }}"/>
+                    <input autocomplete="off" type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->REQ_QTY }}"/>
                 </span>
                 <span class="col-sm-6 currentChemicalStock" data-stock="{{ $chemicalStock }}" data-recommend="" style="margin-top: 6px;font-weight: bold;">[Current Stock: {{ $chemicalStock }}KG]</span>
             </div>
@@ -53,7 +53,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
             <div class="col-sm-7">
-                <input type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->WASTAGE }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->WASTAGE }}"/>
 
             </div>
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>

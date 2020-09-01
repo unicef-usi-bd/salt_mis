@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y',strtotime($editChemicalpurchase->RECEIVE_DATE))}}" class="width-100 date-picker" />
+                        <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y',strtotime($editChemicalpurchase->RECEIVE_DATE))}}" class="width-100 date-picker" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >KG</i>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Invoice No</b><span style="color: red;"> * </span> </label>
                     <div class="col-sm-8">
-                        <input type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editChemicalpurchase->INVOICE_NO }}"/>
+                        <input autocomplete="off" type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editChemicalpurchase->INVOICE_NO }}"/>
                     </div>
                 </div>
                 <div class="form-group">

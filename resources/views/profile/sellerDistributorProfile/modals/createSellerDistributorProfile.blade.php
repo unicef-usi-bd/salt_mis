@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="insertIdContainer form-control col-xs-10 col-sm-5" value="{{ $sellerId }}" readonly/>
+                <input autocomplete="off" type="text" id="inputSuccess SELLER_ID" placeholder="Example: Auto Generate" name="SELLER_ID" class="insertIdContainer form-control col-xs-10 col-sm-5" value="{{ $sellerId }}" readonly/>
             </div>
         </div>
     </div>
@@ -31,25 +31,25 @@
               <div class="col-md-3">
                   <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;">*</span> </label>
                   <div class="col-sm-12">
-                      <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                      <input autocomplete="off" type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
               </div>
               <div class="col-md-3">
                   <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;">*</span> </label>
                   <div class="col-sm-12">
-                      <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                      <input autocomplete="off" type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Trader Name" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
               </div>
               <div class="col-md-3">
                   <label class="col-sm-12" > <b>Trade Licence no</b><span style="color: red;"> </span> </label>
                   <div class="col-sm-12">
-                      <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                      <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Trade Licence no here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
               </div>
               <div class="col-md-3">
                   <label class="col-sm-12" > <b>Phone Number</b><span style="color: red;"> *</span> </label>
                   <div class="col-sm-12">
-                      <input type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
+                      <input autocomplete="off" type="text" id="inputSuccess PHONE" placeholder="Example: Phone Number here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                   </div>
               </div>
           </div>
@@ -100,13 +100,13 @@
                 <div class="col-md-4">
                     <label class="col-sm-12" > <b>Bazar</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Bazar  here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Bazar  here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-sm-12"  style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess EMAIL" placeholder="Example: Email here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess EMAIL" placeholder="Example: Email here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
             </div>

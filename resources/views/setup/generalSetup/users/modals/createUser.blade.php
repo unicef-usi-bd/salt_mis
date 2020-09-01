@@ -5,21 +5,21 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_full_name') }}</b><span style="color: red;"></span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="fullname" placeholder="{{ trans('user.example_full_nameen') }}" name="user_full_name" class="form-control col-sm-8 fullname" value="{{ old('username') }}"/>
+                    <input autocomplete="off" type="text" id="fullname" placeholder="{{ trans('user.example_full_nameen') }}" name="user_full_name" class="form-control col-sm-8 fullname" value="{{ old('username') }}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Designation</b></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess" placeholder="Designation Here" name="designation" class="form-control col-sm-8" value="{{ old('username') }}"/>
+                    <input autocomplete="off" type="text" id="inputSuccess" placeholder="Designation Here" name="designation" class="form-control col-sm-8" value="{{ old('username') }}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.user_name') }}</b><span style="color: red;"> *</span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="username" placeholder="{{ trans('user.example_user_name') }}" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 username" value="{{ old('username') }}"/>
+                    <input autocomplete="off" type="text" id="username" placeholder="{{ trans('user.example_user_name') }}" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 username" value="{{ old('username') }}"/>
                     @if ($errors->has('username'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('username') }}</strong>
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.email') }}</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8 email_grp">
-                    <input type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 email" value="{{ old('email') }}"/>
+                    <input autocomplete="off" type="text" id="inputSuccess email" placeholder="{{ trans('user.example_email') }}" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 email" value="{{ old('email') }}"/>
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.password') }}</b> <span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input type="password" id="inputSuccess password" placeholder="{{ trans('user.example_password') }}" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 password" value=""/>
+                    <input autocomplete="off" type="password" id="inputSuccess password" placeholder="{{ trans('user.example_password') }}" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} col-xs-10 col-sm-5 password" value=""/>
                     @if ($errors->has('password'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.re_password') }}</b> <span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Example: Confirm Password"/>
+                    <input autocomplete="off" id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Example: Confirm Password"/>
                     @if ($errors->has('password'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.contact_no') }}</b><span style="color: red;"> </span></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess contact_no" placeholder="{{ trans('user.example_contact_no') }}" name="contact_no" class="form-control col-xs-10 col-sm-5 contact_no" value=""/>
+                    <input autocomplete="off" type="text" id="inputSuccess contact_no" placeholder="{{ trans('user.example_contact_no') }}" name="contact_no" class="form-control col-xs-10 col-sm-5 contact_no" value=""/>
                 </div>
             </div>
 
@@ -146,7 +146,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.address') }}</b></label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value=""/>
+                    <input autocomplete="off" type="text" id="inputSuccess address" placeholder="{{ trans('user.example_address') }}" name="address" class="form-control col-xs-10 col-sm-5" value=""/>
                 </div>
             </div>
 

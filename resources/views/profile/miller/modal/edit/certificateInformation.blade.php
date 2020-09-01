@@ -58,7 +58,7 @@
 
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"/>
+                                    <input autocomplete="off" type="text" name="CERTIFICATE_NO[]" {{--onkeypress="return numbersOnly(this, event)"--}} value="{{ $certificate->CERTIFICATE_NO }}" class="width-100 CERTIFICATE_NO"/>
                                 </span>
                                     </td>
                                     <td>
@@ -74,7 +74,7 @@
 
                                     <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"/>
+                                    <input autocomplete="off" type="text" name="REMARKS[]" id="inputSuccess" value="{{ $certificate->REMARKS }}" class="width-100 REMARKS"/>
                                 </span>
                                     </td>
                                     <th class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></th>
@@ -110,7 +110,7 @@
 
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"/>
+                                    <input autocomplete="off" type="text" name="CERTIFICATE_NO[]" onkeypress="return numbersOnly(this, event)" value="" class="width-100 CERTIFICATE_NO"/>
                                 </span>
                                 </td>
                                 <td>
@@ -131,7 +131,7 @@
 
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="text" name="REMARKS[]" id="inputSuccess" value="" class="width-100 REMARKS"/>
+                                    <input autocomplete="off" type="text" name="REMARKS[]" id="inputSuccess" value="" class="width-100 REMARKS"/>
                                 </span>
                                 </td>
                                 <td class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></td>

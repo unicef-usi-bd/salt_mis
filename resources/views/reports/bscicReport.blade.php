@@ -107,8 +107,8 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
                         <div class="col-sm-8">
                                 <span class="block input-icon input-icon-right ">
-                                    {{--<input type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
-                                    <input type="text" id="reportrange"  name="reportrange" class="width-65 basicReportrange " />
+                                    {{--<input autocomplete="off" type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
+                                    <input autocomplete="off" type="text" id="reportrange"  name="reportrange" class="width-65 basicReportrange " />
 
                                 </span>
                         </div>
@@ -153,13 +153,13 @@
                     <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Renew Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
-                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
+                            <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
                         </div>
                     </div>
                     <div class="form-group failDateDiv" style="margin-left:22px;width: 334px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Fail Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
-                            <input type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
+                            <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
                         </div>
                     </div>
                 </div>

@@ -5,37 +5,37 @@
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Sodium Chloride Percentage here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->SODIUM_CHLORIDE }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Sodium Chloride Percentage here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->SODIUM_CHLORIDE }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Moisturizer Percentage here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->MOISTURIZER }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Moisturizer Percentage here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->MOISTURIZER }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Iodine Content(PPM)</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Iodine Content(PPM) here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PPM }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Iodine Content(PPM) here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PPM }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PH }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PH }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble matter</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="water_insoluble_matter" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->water_insoluble_matter }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="water_insoluble_matter" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->water_insoluble_matter }}"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble in water other than sodium chloride</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-6">
-                <input type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="matter_soluble_sc" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->matter_soluble_sc }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="matter_soluble_sc" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->matter_soluble_sc }}"/>
             </div>
         </div>
         <div class="clearfix" style="margin-left: 120px;">

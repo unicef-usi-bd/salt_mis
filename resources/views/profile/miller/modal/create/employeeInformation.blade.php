@@ -10,13 +10,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" class="chosen-container FULLTIMEMALE_EMP" placeholder="Male">
+                               <input autocomplete="off" type="text" name="FULLTIMEMALE_EMP" class="chosen-container FULLTIMEMALE_EMP" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" class="chosen-container FULLTIMEFEM_EMP" placeholder="Female">
+                               <input autocomplete="off" type="text" name="FULLTIMEFEM_EMP" class="chosen-container FULLTIMEFEM_EMP" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -26,13 +26,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container PARTTIMEMALE_EMP" placeholder="Male">
+                               <input autocomplete="off" type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container PARTTIMEMALE_EMP" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container PARTTIMEFEM_EMP" placeholder="Female">
+                               <input autocomplete="off" type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container PARTTIMEFEM_EMP" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="REMARKS" class="chosen-container" placeholder="Remarks">
+                               <input autocomplete="off" type="text" name="REMARKS" class="chosen-container" placeholder="Remarks">
                             </span>
                         </div>
                     </div>
@@ -53,13 +53,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALETECH_PER" class="chosen-container TOTMALETECH_PER" placeholder="Male">
+                               <input autocomplete="off" type="text" name="TOTMALETECH_PER" class="chosen-container TOTMALETECH_PER" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEMTECH_PER" class="chosen-container TOTFEMTECH_PER" placeholder="Female">
+                               <input autocomplete="off" type="text" name="TOTFEMTECH_PER" class="chosen-container TOTFEMTECH_PER" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -69,13 +69,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container TOTMALE_EMP" readonly placeholder="Male">
+                               <input autocomplete="off" type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container TOTMALE_EMP" readonly placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container TOTFEM_EMP" readonly placeholder="Female">
+                               <input autocomplete="off" type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" class="chosen-container TOTFEM_EMP" readonly placeholder="Female">
                             </span>
                         </div>
                     </div>

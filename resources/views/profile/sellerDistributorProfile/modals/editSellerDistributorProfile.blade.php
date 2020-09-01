@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
-                    <input type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" readonly="readonly" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
+                    <input autocomplete="off" type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" readonly="readonly" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
                 </div>
             </div>
         </div>
@@ -40,25 +40,25 @@
                 <div class="col-md-3">
                     <label class="col-sm-12"> <b>Trading Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADING_NAME }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADING_NAME" placeholder="Example: Trading Name here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADING_NAME }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="col-sm-12"> <b>Trader Name</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADER_NAME" placeholder="Example: Auto Generate" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->TRADER_NAME }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="col-sm-12"> <b>Trade Licence no</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label class="col-sm-12"> <b>Phone Number</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
                     </div>
                 </div>
             </div>
@@ -110,13 +110,13 @@
                 <div class="col-md-4">
                     <label class="col-sm-12 " > <b>Bazar</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Amount per KG here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->BAZAR_NAME }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess BAZAR_NAME" placeholder="Example: Amount per KG here" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->BAZAR_NAME }}"/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label class="col-sm-12" style="margin-left: -2%;"> <b>Email</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
-                        <input type="text" id="inputSuccess EMAIL" placeholder="Example: Amount per KG here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->EMAIL }}"/>
+                        <input autocomplete="off" type="text" id="inputSuccess EMAIL" placeholder="Example: Amount per KG here" name="EMAIL" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->EMAIL }}"/>
                     </div>
                 </div>
             </div>
@@ -210,11 +210,13 @@
             let defaultRow = $('tr.removableRow:last');
             $('.chosen-select').chosen(0);
             defaultRow.find('.chosen-select').val('').trigger('chosen:updated');
+            defaultRow.find('input').val('');
         });
     });
     // Fore Remove Row By Click
     $(document).on("click", "span.rowRemove ", function () {
-        $(this).closest("tr.removableRow").remove();
+        let thisRow = $(this).closest('tr');
+        if(!thisRow.is(':last-child')) thisRow.remove();
     });
 </script>
 

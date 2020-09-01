@@ -12,7 +12,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess union_name" placeholder="Example: Salt Amount here" name="SALT_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->SALT_AMOUNT }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess union_name" placeholder="Example: Salt Amount here" name="SALT_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->SALT_AMOUNT }}"/>
             </div>
         </div>
 
@@ -33,14 +33,14 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess union_name" placeholder="Example: Chemical Amount here" name="CHEMICAL_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->CHEMICAL_AMOUNT }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess union_name" placeholder="Example: Chemical Amount here" name="CHEMICAL_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->CHEMICAL_AMOUNT }}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage Amount</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input type="text" id="inputSuccess union_name" placeholder="Example: Wastage Amount here" name="WASTAGE_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->WASTAGE_AMOUNT }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess union_name" placeholder="Example: Wastage Amount here" name="WASTAGE_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->WASTAGE_AMOUNT }}"/>
             </div>
         </div>
 

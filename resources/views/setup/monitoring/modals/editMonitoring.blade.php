@@ -10,8 +10,8 @@
                 {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>{{ trans('module.module_name') }}</b><span style="color: red;"> *</span> </label>--}}
                 {{--<div class="col-xs-12 col-sm-7">--}}
             {{--<span class="block input-icon input-icon-right">--}}
-                {{--<input type="text" id="inputSuccess module_name" name="module_name" value="{{ $editModule->MODULE_NAME }}" class="width-100" />--}}
-                {{--<input type="text" id="inputSuccess module_name" name="module_name" value="1" class="width-100" />--}}
+                {{--<input autocomplete="off" type="text" id="inputSuccess module_name" name="module_name" value="{{ $editModule->MODULE_NAME }}" class="width-100" />--}}
+                {{--<input autocomplete="off" type="text" id="inputSuccess module_name" name="module_name" value="1" class="width-100" />--}}
             {{--</span>--}}
 
                 {{--</div>--}}
@@ -46,7 +46,7 @@
                 <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
-                        {{--<input type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100" placeholder="Example:- Remarks Here" />--}}
+                        {{--<input autocomplete="off" type="text" name="REMARKS" value="{{ $editMonitoring->REMARKS }}" id="inputSuccess module_icon" class="width-100" placeholder="Example:- Remarks Here" />--}}
                         <textarea class="form-control col-sm-8" rows="3"  id="inputSuccess DESCRIPTION form-field-8" name="REMARKS" placeholder="Remarks">{{ $editMonitoring->REMARKS }}</textarea>
                     </span>
                 </div>

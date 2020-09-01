@@ -146,21 +146,24 @@ protected $fillable = [
         ]);
         //return $update;
         if($update){
+            $areas = self::deleteCoverageAreaWhenEdit($id, $request->input('COVERAGE_ID'));
+            if($areas) DB::table('ssm_coverage_area')->whereIn('COVERAGE_ID', $areas)->delete();
             $coverageArea = count($_POST['COV_DIVISION_ID']);
             for ($i=0;$i<$coverageArea;$i++){
-                if(isset($request->input('COVERAGE_ID')[$i])){
+                $coverageAreaId = $request->input('COVERAGE_ID')[$i];
+                if(!empty($coverageAreaId)){
                     $coverageAreaId = $request->input('COVERAGE_ID')[$i];
                     $updateOrinsertSeller = DB::table('ssm_coverage_area')->where('ssm_coverage_area.COVERAGE_ID',$coverageAreaId)->update([
                     'CUSTOMER_ID' => $id,
                     'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                     'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
                     'COV_UPAZILA_ID' => $request->input('COV_THANA_ID')[$i],
-                     'COV_THANA_ID' => $request->input('COV_THANA_ID')[$i],
+                    'COV_THANA_ID' => $request->input('COV_THANA_ID')[$i],
                      'center_id' => Auth::user()->center_id,
                     'UPDATE_TIMESTAMP' => date("Y-m-d h:i:s")
                 ]);
                 }else{
-                    $updateOrinsertSeller = DB::table('ssm_coverage_area')->insertGetId([
+                    $updateOrinsertSeller = DB::table('ssm_coverage_area')->insert([
                         'CUSTOMER_ID' => $id,
                         'COV_DIVISION_ID' => $request->input('COV_DIVISION_ID')[$i],
                         'COV_DISTRICT_ID' => $request->input('COV_DISTRICT_ID')[$i],
@@ -173,6 +176,17 @@ protected $fillable = [
             return $updateOrinsertSeller;
         }
 
+    }
+
+    public static function deleteCoverageAreaWhenEdit($id, array $ariaId){
+        $ariaId = array_filter($ariaId);
+        $areas = DB::table('ssm_coverage_area')
+            ->where('CUSTOMER_ID', '=', $id)
+            ->where('center_id', '=', Auth::user()->center_id)
+            ->whereNotIn('COVERAGE_ID', $ariaId)
+            ->pluck('COVERAGE_ID')
+            ->toArray();
+        return  $areas;
     }
 
 //    public static function deleteSellerProfile($id){

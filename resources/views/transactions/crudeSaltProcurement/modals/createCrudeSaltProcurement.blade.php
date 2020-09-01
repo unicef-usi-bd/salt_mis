@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-7">
-                        <input type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here in KG" name="RCV_QTY" class="form-control col-xs-10 col-sm-5"  onkeypress="return numbersOnly(this, event)" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here in KG" name="RCV_QTY" class="form-control col-xs-10 col-sm-5"  onkeypress="return numbersOnly(this, event)" value=""/>
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >KG</i>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Invoice No</b><span style="color: red;"> * </span> </label>
                     <div class="col-sm-7">
-                        <input type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input autocomplete="off" type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -89,19 +89,19 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-7">
-                            <input type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here" name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                            <input autocomplete="off" type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here" name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle License</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-7">
-                            <input type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here" name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
+                            <input autocomplete="off" type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here" name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Mobile Number</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-7">
-                            <input type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here" name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                            <input autocomplete="off" type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here" name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                         </div>
                     </div>
                 </div>
@@ -109,13 +109,13 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Driving licence</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-7">
-                            <input type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
+                            <input autocomplete="off" type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Transport rent</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-7">
-                            <input type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
+                            <input autocomplete="off" type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here" name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                         </div>
                     </div>
                     <div class="form-group">

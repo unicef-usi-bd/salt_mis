@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <div class="input-group" style="width: 100%">
-                        <input type="text" name="SearchDualList" class="form-control" placeholder="Search" style="padding-left:10px;margin-top: 2px;width: 100%"/>
+                        <input autocomplete="off" type="text" name="SearchDualList" class="form-control" placeholder="Search" style="padding-left:10px;margin-top: 2px;width: 100%"/>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-10">
                     <div class="input-group" style="width: 100%">
-                        <input type="text" name="SearchDualList" class="form-control" placeholder="Search"  style="padding-left:10px;margin-top: 2px;width: 100%" />
+                        <input autocomplete="off" type="text" name="SearchDualList" class="form-control" placeholder="Search"  style="padding-left:10px;margin-top: 2px;width: 100%" />
                     </div>
                 </div>
             </div>

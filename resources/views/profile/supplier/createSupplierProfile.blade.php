@@ -25,31 +25,31 @@
                     </div>
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trading Name</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess TRADING_NAME" placeholder="Trading Name Here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5 TRADING_NAME" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADING_NAME" placeholder="Trading Name Here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5 TRADING_NAME" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess TRADER_NAME" placeholder="Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5 TRADER_NAME" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADER_NAME" placeholder="Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5 TRADER_NAME" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade licence No</b><span style="color: red"></span> </label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess LICENCE_NO" placeholder="licence No Here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5 LICENCE_NO" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="licence No Here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5 LICENCE_NO" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess EMAIL" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5 EMAIL" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess EMAIL" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5 EMAIL" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red"> *</span> </label>
                     <div class="col-xs-8">
-                        <input type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
                     <div class="col-xs-8">
-                        <input type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
+                        <input autocomplete="off" type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
                     </div>
                 </div>
                 <div class="form-group">
