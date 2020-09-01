@@ -96,7 +96,7 @@
                     <tr>
                         <th class=" ">Name of Mill</th>
                         <th> :</th>
-                        <td> {{ $updateMillInfo->MILL_NAME }} </td>
+                        <td class="@if($currentMillInfo->MILL_NAME!=$updateMillInfo->MILL_NAME) text-danger @endif"> {{ $updateMillInfo->MILL_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Logo</th>
@@ -106,42 +106,42 @@
                     <tr>
                         <th class=" ">Process Type</th>
                         <th> :</th>
-                        <td> {{ $updateMillInfo->process_name }} </td>
+                        <td class="@if($currentMillInfo->process_name!=$updateMillInfo->process_name) text-danger @endif"> {{ $updateMillInfo->process_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Mill Type</th>
                         <th> :</th>
-                        <td> {{ $updateMillInfo->mill_name }} </td>
+                        <td class="@if($currentMillInfo->mill_name!=$updateMillInfo->mill_name) text-danger @endif"> {{ $updateMillInfo->mill_name }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Capacity</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->CAPACITY_ID }}</td>
+                        <td class="@if($currentMillInfo->CAPACITY_ID!=$updateMillInfo->CAPACITY_ID) text-danger @endif">{{ $updateMillInfo->CAPACITY_ID }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Division Name</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->DIVISION_NAME }} </td>
+                        <td class="@if($currentMillInfo->DIVISION_NAME!=$updateMillInfo->DIVISION_NAME) text-danger @endif">{{ $updateMillInfo->DIVISION_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">District Name</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->DISTRICT_NAME }} </td>
+                        <td class="@if($currentMillInfo->DISTRICT_NAME!=$updateMillInfo->DISTRICT_NAME) text-danger @endif">{{ $updateMillInfo->DISTRICT_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Upazila Name</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->UPAZILA_NAME }} </td>
+                        <td class="@if($currentMillInfo->UPAZILA_NAME!=$updateMillInfo->UPAZILA_NAME) text-danger @endif">{{ $updateMillInfo->UPAZILA_NAME }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Zone</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->ZONE_NAME }}</td>
+                        <td class="@if($currentMillInfo->ZONE_NAME!=$updateMillInfo->ZONE_NAME) text-danger @endif">{{ $updateMillInfo->ZONE_NAME }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Millers ID</th>
                         <th> :</th>
-                        <td>{{ $updateMillInfo->MILLERS_ID }}</td>
+                        <td class="@if($currentMillInfo->MILLERS_ID!=$updateMillInfo->MILLERS_ID) text-danger @endif">{{ $updateMillInfo->MILLERS_ID }}</td>
 
                     </tr>
                     <tr>
@@ -222,7 +222,7 @@
                     </tr>
                     @if($updateEntrepreneurs)
                     @foreach($updateEntrepreneurs as $updateEntrepreneur)
-                        <tr>
+                        <tr class="bg-warning">
                             <input type="hidden" name="ENTREPRENEUR_ID_TEM[]" value="{{ $updateEntrepreneur->ENTREPRENEUR_ID_TEM }}">
                             <input type="hidden" name="TEM_ENTREPRENEUR_ID[]" value="{{ $updateEntrepreneur->ENTREPRENEUR_ID }}">
                             <input type="hidden" name="TEM_MILL_ID[]" value="{{ $updateEntrepreneur->MILL_ID }}">
@@ -297,7 +297,7 @@
                     @foreach($updateCertificates as $updateCertificate)
                         <input type="hidden" name="CERTIFICATE_ID_TEM[]" value="{{ $updateCertificate->CERTIFICATE_ID_TEM }}">
                         <input type="hidden" name="TEM_CERTIFICATE_ID[]" value="{{ $updateCertificate->CERTIFICATE_ID }}">
-                    <tr>
+                    <tr class="bg-warning">
                         <td> {{ $updateCertificate->CERTIFICATE_NAME }} </td>
                         <td> {{ $updateCertificate->issuer_name }} </td>
                         <td> {{ $updateCertificate->ISSUING_DATE }}</td>
@@ -400,7 +400,7 @@
                     <tr>
                         <th class=" ">laboratory </th>
                         <th> :</th>
-                        <td>
+                        <td class="@if($currentQcInfo->LABORATORY_FLG !=$updateQcInfo->LABORATORY_FLG) bg-warning @endif">
                             <?php  if($updateQcInfo->LABORATORY_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
@@ -411,12 +411,12 @@
                     <tr>
                         <th class=" ">Standard Operation Procedure (SOP)</th>
                         <th> :</th>
-                        <td> {{ $updateQcInfo->SOP_DESC }} </td>
+                        <td class="@if($currentQcInfo->SOP_DESC !=$updateQcInfo->SOP_DESC) bg-warning @endif"> {{ $updateQcInfo->SOP_DESC }} </td>
                     </tr>
                     <tr>
                         <th class=" ">If Iodine content check during production</th>
                         <th> :</th>
-                        <td>
+                        <td class="@if($currentQcInfo->IODINE_CHECK_FLG !=$updateQcInfo->IODINE_CHECK_FLG) bg-warning @endif">
                             <?php  if($updateQcInfo->IODINE_CHECK_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
@@ -427,7 +427,7 @@
                     <tr>
                         <th class=" ">Monitoring Test Kit</th>
                         <th> :</th>
-                        <td>
+                        <td class="@if($currentQcInfo->MONITORING_FLG !=$updateQcInfo->MONITORING_FLG) bg-warning @endif">
                             <?php  if($updateQcInfo->MONITORING_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
@@ -438,7 +438,7 @@
                     <tr>
                         <th class=" ">Do you have a laboratory Man</th>
                         <th> :</th>
-                        <td>
+                        <td class="@if($currentQcInfo->LAB_MAN_FLG !=$updateQcInfo->LAB_MAN_FLG) bg-warning @endif">
                             <?php  if($updateQcInfo->LAB_MAN_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
@@ -449,12 +449,12 @@
                     <tr>
                         <th class=" ">No of Laboratory Man</th>
                         <th> :</th>
-                        <td>{{ $updateQcInfo->LAB_PERSON }} </td>
+                        <td class="@if($currentQcInfo->LAB_PERSON !=$updateQcInfo->LAB_PERSON) bg-warning @endif">{{ $updateQcInfo->LAB_PERSON }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $updateQcInfo->REMARKS }}</td>
+                        <td class="@if($currentQcInfo->REMARKS !=$updateQcInfo->REMARKS) bg-warning @endif">{{ $updateQcInfo->REMARKS }}</td>
 
                     </tr>
 
@@ -468,7 +468,7 @@
         <h4 class="center text-success">Employee Information </h4>
         <div class="row table-responsive">
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: red;">Previous Employee Information </h4>
+                <h4 class="center text-success" style="color: green;">Previous Employee Information </h4>
                 @if($currentEmployees)
                 <input type="hidden" name="MILLEMP_ID" value="{{ $currentEmployees->MILLEMP_ID }}">
                 <table class="table border-none">
@@ -526,54 +526,54 @@
             </div>
 
             <div class="col-md-6">
-                <h4 class="center text-success" style="color: green;">Change Employee Information </h4>
+                <h4 class="center text-success" style="color: red;">Change Employee Information </h4>
                 @if($updateEmployees)
                 <input type="hidden" name="MILLEMP_ID_TEM" value="{{ $updateEmployees->MILLEMP_ID_TEM }}">
                 <table class="table border-none">
                     <tr>
                         <th class=" ">Total Male Employee </th>
                         <th> :</th>
-                        <td> {{ $updateEmployees->TOTMALE_EMP }} </td>
+                        <td class="@if($currentEmployees->TOTMALE_EMP!=$updateEmployees->TOTMALE_EMP) bg-warning @endif"> {{ $updateEmployees->TOTMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Total Female Employee</th>
                         <th> :</th>
-                        <td> {{ $updateEmployees->TOTFEM_EMP }} </td>
+                        <td class="@if($currentEmployees->TOTFEM_EMP!=$updateEmployees->TOTFEM_EMP) bg-warning @endif"> {{ $updateEmployees->TOTFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Male Employee</th>
                         <th> :</th>
-                        <td> {{ $updateEmployees->FULLTIMEMALE_EMP }}</td>
+                        <td class="@if($currentEmployees->FULLTIMEMALE_EMP!=$updateEmployees->FULLTIMEMALE_EMP) bg-warning @endif"> {{ $updateEmployees->FULLTIMEMALE_EMP }}</td>
                     </tr>
                     <tr>
                         <th class=" ">Full Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->FULLTIMEFEM_EMP }} </td>
+                        <td class="@if($currentEmployees->FULLTIMEFEM_EMP!=$updateEmployees->FULLTIMEFEM_EMP) bg-warning @endif">{{ $updateEmployees->FULLTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Male Employee</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->PARTTIMEMALE_EMP }} </td>
+                        <td class="@if($currentEmployees->PARTTIMEMALE_EMP!=$updateEmployees->PARTTIMEMALE_EMP) bg-warning @endif">{{ $updateEmployees->PARTTIMEMALE_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Part Time Female Employee</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->PARTTIMEFEM_EMP }} </td>
+                        <td class="@if($currentEmployees->PARTTIMEFEM_EMP!=$updateEmployees->PARTTIMEFEM_EMP) bg-warning @endif">{{ $updateEmployees->PARTTIMEFEM_EMP }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Technical Male Employee</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->TOTMALETECH_PER }} </td>
+                        <td class="@if($currentEmployees->TOTMALETECH_PER!=$updateEmployees->TOTMALETECH_PER) bg-warning @endif">{{ $updateEmployees->TOTMALETECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" "> Technical Female Employee</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->TOTFEMTECH_PER }} </td>
+                        <td class="@if($currentEmployees->TOTFEMTECH_PER!=$updateEmployees->TOTFEMTECH_PER) bg-warning @endif">{{ $updateEmployees->TOTFEMTECH_PER }} </td>
                     </tr>
                     <tr>
                         <th class=" ">Remarks</th>
                         <th> :</th>
-                        <td>{{ $updateEmployees->REMARKS }} </td>
+                        <td class="@if($currentEmployees->REMARKS!=$updateEmployees->REMARKS) bg-warning @endif">{{ $updateEmployees->REMARKS }} </td>
 
                     </tr>
 
