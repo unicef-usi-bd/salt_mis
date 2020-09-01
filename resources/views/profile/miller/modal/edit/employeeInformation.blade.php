@@ -11,29 +11,29 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEMALE_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="FULLTIMEMALE_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEMALE_EMP }}@endif" class="chosen-container FULLTIMEMALE_EMP" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="FULLTIMEFEM_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
+                               <input type="text" name="FULLTIMEFEM_EMP" value="@if(!empty($employeeInfo)){{ $employeeInfo->FULLTIMEFEM_EMP }}@endif" class="chosen-container FULLTIMEFEM_EMP" placeholder="Female">
                             </span>
                         </div>
                     </div>
-                    
+
                     <b style="font-size: 14px;">Part Time Employee</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="PARTTIMEMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEMALE_EMP }}@endif" class="chosen-container PARTTIMEMALE_EMP" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
+                               <input type="text" name="PARTTIMEFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->PARTTIMEFEM_EMP }}@endif" class="chosen-container PARTTIMEFEM_EMP" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -54,13 +54,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALETECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALETECH_PER }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALETECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALETECH_PER }}@endif" class="chosen-container TOTMALETECH_PER" placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEMTECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEMTECH_PER }}@endif" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEMTECH_PER" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEMTECH_PER }}@endif" class="chosen-container TOTFEMTECH_PER" placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -70,13 +70,13 @@
                         <div class="col-sm-4">
                             <label>Male</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALE_EMP }}@endif" class="chosen-container" placeholder="Male">
+                               <input type="text" name="TOTMALE_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTMALE_EMP }}@endif" class="chosen-container TOTMALE_EMP" readonly placeholder="Male">
                             </span>
                         </div>
                         <div class="col-sm-4">
                             <label>Female</label>
                             <span class="block input-icon input-icon-right">
-                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEM_EMP }}@endif" class="chosen-container" placeholder="Female">
+                               <input type="text" name="TOTFEM_EMP" onkeypress="return numbersOnly(this, event)" value="@if(!empty($employeeInfo)){{ $employeeInfo->TOTFEM_EMP }}@endif" class="chosen-container TOTFEM_EMP" readonly placeholder="Female">
                             </span>
                         </div>
                     </div>
@@ -99,3 +99,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // For Employee Calculations Start
+        $(document).on('keyup', '.FULLTIMEMALE_EMP, .FULLTIMEFEM_EMP, .TOTMALETECH_PER, .TOTFEMTECH_PER, .PARTTIMEMALE_EMP, .PARTTIMEFEM_EMP', function () {
+            employeeCalculation();
+        });
+        function employeeCalculation() {
+            let fullTimeMale = parseInt($('.FULLTIMEMALE_EMP').val() || 0);
+            let fullTimeFemale = parseInt($('.FULLTIMEFEM_EMP').val() || 0);
+
+            let techMale = parseInt($('.TOTMALETECH_PER').val() || 0);
+            let techFemale = parseInt($('.TOTFEMTECH_PER').val() || 0);
+
+            let partMale = parseInt($('.PARTTIMEMALE_EMP').val() || 0);
+            let partFemale = parseInt($('.PARTTIMEFEM_EMP').val() || 0);
+
+            let totalMale = fullTimeMale + techMale + partMale;
+            let totalFemale = fullTimeFemale + techFemale + partFemale;
+            // console.log(totalMale, totalFemale);
+
+            $('.TOTMALE_EMP').val(totalMale)
+            $('.TOTFEM_EMP').val(totalFemale)
+        }
+        // For Employee Calculations End
+    });
+</script>
