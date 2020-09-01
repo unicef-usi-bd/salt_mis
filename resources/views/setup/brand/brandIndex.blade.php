@@ -19,6 +19,8 @@
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Brand Name</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -30,6 +32,8 @@
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$brand->brand_name}}</td>
+                        <td>{{ date('d-M-Y', strtotime($brand->ENTRY_TIMESTAMP)) }}</td>
+                        <td>@if(isset($brand->UPDATE_TIMESTAMP)) {{ date('d-M-Y', strtotime($brand->UPDATE_TIMESTAMP)) }} @endif</td>
                         <td class="row{{ $brand->brand_id }}">
                             @php
                                 $editPermissionLevel = $previllage->UPDATE;

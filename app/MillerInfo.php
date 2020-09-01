@@ -165,7 +165,7 @@ class MillerInfo extends Model
     }
 
     public static function getAllMillDataList(){
-        return DB::table('ssm_mill_info as smi')
+        $data = DB::table('ssm_mill_info as smi')
             ->select('ssm_entrepreneur_info.*', 'ssm_certificate_info.*', 'tsm_qc_info.*', 'ssm_millemp_info.*', 'ssc_lookupchd.*', 'smi.*')
             ->leftJoin('ssm_entrepreneur_info','smi.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
             ->leftJoin('ssm_certificate_info','smi.MILL_ID','=','ssm_certificate_info.MILL_ID')
@@ -177,6 +177,12 @@ class MillerInfo extends Model
             ->groupBy('smi.MILL_ID')
             ->orderBy('smi.MILL_ID', 'DESC')
             ->get();
+
+        foreach ($data as $mill){
+            $mill->owners = DB::table('ssm_entrepreneur_info')->where('MILL_ID', '=', $mill->MILL_ID)->pluck('OWNER_NAME')->toArray();
+        }
+        return $data;
+
 
     }
     public static function millerUpdateStatus($millerId){

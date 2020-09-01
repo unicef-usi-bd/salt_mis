@@ -31,8 +31,8 @@
                     <th class="fixedWidth" style="width: 5px;">Sl</th>
                     <th class="center fixedWidth">Mill Name</th>
                     <th class="center fixedWidth">Owner Type</th>
-                    <th class="center fixedWidth">Certificate Renewing Date</th>
-                    <th class="center fixedWidth">Full Time Employee</th>
+                    <th class="center fixedWidth">Owner Name</th>
+                    <th class="center fixedWidth">Joining Date</th>
                     <th class="center fixedWidth">Active Status</th>
                     <th class="center fixedWidth">Action</th>
                 </tr>
@@ -47,8 +47,8 @@
                         <td class="center" >  {{ ++$sl }}</td>
                         <td> {{ $row->MILL_NAME }} </td>
                         <td> {{ $row->LOOKUPCHD_NAME }} </td>
-                        <td> {{ $row->RENEWING_DATE }} </td>
-                        <td> {{ $row->FULLTIMEMALE_EMP+$row->FULLTIMEFEM_EMP }} </td>
+                        <td> @if(sizeof($row->owners)>0) {{ implode(' / ', $row->owners) }} @endif</td>
+                        <td> {{ date('d-M-Y', strtotime($row->ENTRY_TIMESTAMP)) }} </td>
                         <td class="hidden-480">
                             <?php if ($activeFlg == 1){ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Active</span>

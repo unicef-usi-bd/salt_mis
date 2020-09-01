@@ -84,7 +84,6 @@ class MillerInfoController extends Controller
             foreach ($millerList as $miller){
                 $miller->profile = ProfileCompletePercentage::profileCompleted($miller->MILL_ID);
             }
-//            dd($millerList);
             return view('profile.miller.millerIndex', compact('heading', 'previllage', 'millerList', 'millerToMerge','approvalMillList'));
         }
     }

@@ -76,6 +76,7 @@ class BrandController extends Controller
         $data = array([
             'brand_name' => $request->input('brand_name'),
             'center_id' => Auth::user()->center_id,
+            'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s"),
             'ENTRY_BY' => Auth::user()->id
         ]);
 
