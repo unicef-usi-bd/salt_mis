@@ -83,15 +83,7 @@ class Stock extends Model
     }
 
 
-
-
-
-
-
-
-
     // For sale
-
     public static function getTotalWashingSaltForSale($centerId){
         return DB::table('tmm_itemstock')
             ->select(('tmm_itemstock.QTY'))
@@ -133,8 +125,8 @@ class Stock extends Model
     }
 
     ///-----------------------Production
-    public static function totalWashCrashProductions(){
-        $centerId = Auth::user()->center_id;
+    public static function totalWashCrashProductions($centerId = null){
+        if(empty($centerId)) $centerId = Auth::user()->center_id;
         $countProduction = DB::table('tmm_itemstock as stock')
             ->select('stock.QTY')
             ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
@@ -150,8 +142,8 @@ class Stock extends Model
         return $countProduction->sum('stock.QTY');
     }
 
-    public static function totalIodizeProductions(){
-        $centerId = Auth::user()->center_id;
+    public static function totalIodizeProductions($centerId=null){
+        if(empty($centerId)) $centerId = Auth::user()->center_id;
         $countProduction = DB::table('tmm_itemstock as stock')
             ->select('stock.QTY')
             ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
@@ -265,7 +257,7 @@ class Stock extends Model
 
     public static function associationYearWiseProduction(){
         //$centerId = Auth::user()->center_id;
-        $yearWiseProduction = DB::select(DB::raw("select MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY), 2) as qty 
+        $yearWiseProduction = DB::select(DB::raw("select MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY), 2) as qty
                                 from tmm_itemstock it
                                 left join ssm_associationsetup association on it.center_id = association.ASSOCIATION_ID
                                 left join ssm_mill_info smi on association.MILL_ID = smi.MILL_ID
@@ -281,7 +273,7 @@ class Stock extends Model
         $yearWiseProduction = DB::select(DB::raw("select MONTH(TRAN_DATE) month, ROUND(SUM( it.QTY), 2) as qty from tmm_itemstock it
                                 left join ssm_associationsetup association on it.center_id = association.ASSOCIATION_ID
                                 left join ssm_mill_info smi on association.MILL_ID = smi.MILL_ID
-                                WHERE it.center_id and smi.ACTIVE_FLG=1 
+                                WHERE it.center_id and smi.ACTIVE_FLG=1
                                 AND it.stock_adjustment_id is null and it.TRAN_NO is not null
                                 and it.TRAN_FLAG in ('WI','II')and YEAR(TRAN_DATE)"))[0];
         return $yearWiseProduction;
@@ -382,26 +374,26 @@ class Stock extends Model
                   ROUND(SUM(CASE WHEN s.tran_flag IN ('WI','II','SD') THEN
                      s.QTY
                   END)) stock_total,
-                  
+
                   ROUND(SUM(CASE WHEN s.tran_flag = 'WI' THEN
                      s.QTY
                   END))washcrash_stock,
                   ROUND(SUM(CASE WHEN s.tran_flag = 'II' THEN
                      s.QTY
                   END))iodize_stock,
-                  
+
                   ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'W' THEN
                     s.QTY
                   END))washcrash_sales,
                   ROUND(SUM(CASE WHEN s.tran_flag = 'SD' AND tran_type = 'I' THEN
                     s.QTY
                   END))iodize_sale,
-                  
+
                   ROUND(SUM(CASE WHEN s.tran_flag = 'SD' THEN
                     s.QTY
                   END))Sales_total
-                  
-                  
+
+
                   FROM tmm_itemstock s, ssm_associationsetup a, ssm_mill_info m
                   WHERE a.ASSOCIATION_ID = s.center_id
                   AND a.center_id = m.center_id

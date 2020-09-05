@@ -48,53 +48,26 @@ class ProductionAndSaleController extends Controller
                     ->first();
                 $millId = $millInfo->MILL_ID;
 
-                $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
-                $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-                $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-
                 $totalIodizeProduction = Stock::totalIodizeProductionsService($child_id);
                 $totalWashcrashProduction = Stock::totalWashCrashProductionsService($child_id);
                 $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
                 $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
                 $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
-                $chemiclePurchase = ChemicalPurchase::chemicalPurchaseService();
-                $saltprocrurement = CrudeSaltProcurement::crudeSaltePurchaseService();
-//                $totalchemicalPurchaseKI = ChemicalPurchase::totalkIpurchase();
-//                $totlalChemivalPurchaseKIO3 = ChemicalPurchase::totalkio3purchase();
+
                 $totalChemicalPurchaseTypewise = ChemicalPurchase::totalchemicalPurchaseTypeWise($child_id);
                 $totalSaltePurchaseTypeWise = CrudeSaltProcurement::totalSaltpurchaseTypeWise($child_id);
-                //$organogramDt = AssociationSetup::getZoneList();
-
-//                $requireChemicalIodizedSalt = DB::table('smm_rmallocationchd')
-//                    ->select('smm_item.ITEM_NAME','smm_rmallocationchd.*')
-//                    ->leftJoin('smm_item','smm_rmallocationchd.ITEM_ID','=','smm_item.ITEM_NO')
-//                    ->where('smm_rmallocationchd.RMALLOMST_ID','=',25)//it can be changed
-//                    ->get();
-                //$this->pr($requireChemicalIodizedSalt);
                 return response()->json([
-
                     'message'=> 'Sales and Production Information are given below',
-                    //'child_id'=>$child_id,
-                    //'crude_salt_types' => $crudeSaltTypes,
-                    //'chemical_types' => $chemicleType,
-                    //'mill_information' => $millerInfo,
-                    //'require_iodized_salt' => $requireChemicalIodizedSalt,
-
                     'iodize_production' => $totalIodizeProduction,
                     'wash_crash_production' => $totalWashcrashProduction,
                     'total_production' => $totalProductons,
                     'iodize_sale' => $totalIodizeSale,
                     'wash_crash_sale' => $totalWashCrashSale,
                     'total_sale' => $totalProductSales,
-                    //'chemicalPurchase' => $chemiclePurchase,
-                    //'saltProcurement' => $saltprocrurement,
-//                    'totalchemicalpurchaseKI' => $totalchemicalPurchaseKI,
-//                    'totlalChemivalPurchaseKIO3' => $totlalChemivalPurchaseKIO3,
                     'totalChemicalPurchaseTypewise' => $totalChemicalPurchaseTypewise,
                     'totalSaltePurchaseTypeWise' => $totalSaltePurchaseTypeWise,
                     'center_id' => $child_id,
-                    //'zone_name' => $organogramDt
                 ]);
             }else{
                 return response()->json([
@@ -108,11 +81,6 @@ class ProductionAndSaleController extends Controller
                 'message'=> 'Please, check your user name!'
             ]);
         }
-
-
-
-
-
     }
 
     public function userLoginNew(Request $request)
@@ -142,28 +110,17 @@ class ProductionAndSaleController extends Controller
                     ->first();
                 $millId = $millInfo->MILL_ID;
 
-                $millerInfo = MillerInfo::millInformation($request, $millId); //$this->pr($millId);
-                $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
-                $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
-
                 $totalIodizeProduction = Stock::totalIodizeProductionsService($child_id);
                 $totalWashcrashProduction = Stock::totalWashCrashProductionsService($child_id);
                 $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
                 $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
                 $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
-                $chemiclePurchase = ChemicalPurchase::chemicalPurchaseService();
-                $saltprocrurement = CrudeSaltProcurement::crudeSaltePurchaseService();
-//                $totalchemicalPurchaseKI = ChemicalPurchase::totalkIpurchase();
-//                $totlalChemivalPurchaseKIO3 = ChemicalPurchase::totalkio3purchase();
                 $totalChemicalPurchaseTypewise = ChemicalPurchase::totalchemicalPurchaseTypeWiseNew($child_id);
-                //$this->pr($totalChemicalPurchaseTypewise);
                 $totalSaltePurchaseTypeWise = CrudeSaltProcurement::totalSaltpurchaseTypeWiseNew($child_id);
 
                 return response()->json([
-
                     'message'=> 'Sales and Production Information are given below',
-
                     'iodize_production' => $totalIodizeProduction,
                     'wash_crash_production' => $totalWashcrashProduction,
                     'total_production' => $totalProductons,

@@ -65,9 +65,9 @@ class ServiceController extends Controller
                 $crudeSaltTypes = Item::itemTypeWiseItemList($this->crudSaltId);
                 $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
 
-                $totalIodizeProduction = Stock::totalIodizeProductionsService($child_id);
-                $totalWashcrashProduction = Stock::totalWashCrashProductionsService($child_id);
-                $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
+                $totalWashcrashProduction = Stock::totalWashCrashProductions($child_id);
+                $totalIodizeProduction = Stock::totalIodizeProductions($child_id);
+                $totalProductons = $totalWashcrashProduction + $totalIodizeProduction;
                 $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
                 $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
@@ -109,11 +109,6 @@ class ServiceController extends Controller
                 'message'=> 'Please, check your user name!'
             ]);
         }
-
-
-
-
-
     }
 
 
