@@ -28,7 +28,36 @@
         </div>
     </form>
 </div>
-<hr>
+
+<div class="row" style="margin-top: 50px;padding:15px;">
+    <div class="panel panel-default">
+        <div class="panel-heading"><b style="font-size: 14px">All Certificates.</b> <span class="text-danger">NB: Expired certificate identify by RED color.</span></div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Sl</th>
+                    <th>Certificate Name</th>
+                    <th>Issuer Name</th>
+                    <th>Issuing Date</th>
+                    <th>Renewing Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($certificates as $key=>$certificate)
+                <tr class="@if($certificate->IS_EXPIRE==1 && $certificate->RENEWING_DATE<date('Y-m-d')) bg-danger @endif">
+                    <td>{{ ++$key }}</td>
+                    <td>{{ $certificate->certificate_type }}</td>
+                    <td>{{ $certificate->issuer_name }}</td>
+                    <td>@if(!empty($certificate->ISSUING_DATE)) {{ date('d M Y', strtotime($certificate->ISSUING_DATE)) }} @endif</td>
+                    <td>@if(!empty($certificate->RENEWING_DATE)) {{ date('d M Y', strtotime($certificate->RENEWING_DATE)) }} @endif</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 @include('masterGlobal.datePicker')
 @include('masterGlobal.ajaxFormSubmit')

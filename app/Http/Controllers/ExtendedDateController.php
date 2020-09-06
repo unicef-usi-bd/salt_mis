@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
+use App\Certificate;
 use App\CostCenter;
 use App\LookupGroupData;
 use App\UserGroup;
@@ -69,11 +70,11 @@ class ExtendedDateController extends Controller
         $millId = $request->input('mill_id');
         $millInfo = ExtendedDate::millerDetails($millId);
         $entepreunerInfo = ExtendedDate::millerEnteprunerDetails($millId);
-        $certificateInfo = ExtendedDate::millerCertificateInfo($millId);
+        $certificates = Certificate::getAllCertificate($millId);
         $centerId = AssociationSetup::associationByMillId($millId);
         $extendDate = User::extendDateByCenterId($centerId);
         $extendDetails = ExtendedDate::extendDetails($millId);
-        $view = view("setup.extendate.millerInfo", compact('millInfo', 'millId', 'entepreunerInfo', 'certificateInfo', 'extendDate', 'extendDetails'))->render();
+        $view = view("setup.extendate.millerInfo", compact('millInfo', 'millId', 'entepreunerInfo', 'certificates', 'extendDate', 'extendDetails'))->render();
         return response()->json(['html' => $view]);
     }
 
