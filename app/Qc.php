@@ -14,8 +14,7 @@ class Qc extends Model
         $millerId = $request->input('MILL_ID');
         $data = array(
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
-            'SOP_DESC' => $request->input('SOP_DESC'),
-            'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
+            'OPERATION_PROCEDURE_FLG' => $request->input('OPERATION_PROCEDURE_FLG'),
             'MONITORING_FLG' => $request->input('MONITORING_FLG'),
             'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
             'LAB_PERSON' => $request->input('LAB_PERSON'),
@@ -42,8 +41,7 @@ class Qc extends Model
     public static function updateQcInfo($request, $millerId){
         $data = array(
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
-            'SOP_DESC' => $request->input('SOP_DESC'),
-            'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
+            'OPERATION_PROCEDURE_FLG' => $request->input('OPERATION_PROCEDURE_FLG'),
             'MONITORING_FLG' => $request->input('MONITORING_FLG'),
             'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
             'LAB_PERSON' => $request->input('LAB_PERSON'),
@@ -65,10 +63,9 @@ class Qc extends Model
         $data = array(
             'MILL_ID' => $millerId,
             'LABORATORY_FLG' => $request->input('LABORATORY_FLG'),
-            'IODINE_CHECK_FLG' => $request->input('IODINE_CHECK_FLG'),
+            'OPERATION_PROCEDURE_FLG' => $request->input('OPERATION_PROCEDURE_FLG'),
             'LAB_MAN_FLG' => $request->input('LAB_MAN_FLG'),
             'MONITORING_FLG' => $request->input('MONITORING_FLG'),
-            'SOP_DESC' => $request->input('SOP_DESC'),
             'LAB_PERSON' => $request->input('LAB_PERSON'),
             'REMARKS' => $request->input('REMARKS'),
             'center_id' => Auth::user()->center_id,

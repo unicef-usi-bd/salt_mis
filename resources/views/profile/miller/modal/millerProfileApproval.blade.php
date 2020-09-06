@@ -335,15 +335,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class=" ">Standard Operation Procedure (SOP)</th>
-                        <th> :</th>
-                        <td> {{ $currentQcInfo->SOP_DESC }} </td>
-                    </tr>
-                    <tr>
-                        <th class=" ">If Iodine content check during production</th>
+                        <th class=" ">Do you follow Standard Operating Procedure</th>
                         <th> :</th>
                         <td>
-                            <?php  if($currentQcInfo->IODINE_CHECK_FLG == 0){ ?>
+                            <?php  if($currentQcInfo->OPERATION_PROCEDURE_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
@@ -409,15 +404,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class=" ">Standard Operation Procedure (SOP)</th>
+                        <th class=" ">Do you follow Standard Operating Procedure ?</th>
                         <th> :</th>
-                        <td class="@if($currentQcInfo->SOP_DESC !=$updateQcInfo->SOP_DESC) bg-warning @endif"> {{ $updateQcInfo->SOP_DESC }} </td>
-                    </tr>
-                    <tr>
-                        <th class=" ">If Iodine content check during production</th>
-                        <th> :</th>
-                        <td class="@if($currentQcInfo->IODINE_CHECK_FLG !=$updateQcInfo->IODINE_CHECK_FLG) bg-warning @endif">
-                            <?php  if($updateQcInfo->IODINE_CHECK_FLG == 0){ ?>
+                        <td class="@if($currentQcInfo->OPERATION_PROCEDURE_FLG !=$updateQcInfo->OPERATION_PROCEDURE_FLG) bg-warning @endif">
+                            <?php  if($updateQcInfo->OPERATION_PROCEDURE_FLG == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>

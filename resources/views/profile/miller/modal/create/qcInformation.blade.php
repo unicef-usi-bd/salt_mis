@@ -20,15 +20,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>If Iodine content check during production</b> </label>
-                        <div class="col-sm-5">
+                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you follow Standard Operating Procedure ?</b> </label>
+                        <div class="col-sm-4">
                             <label>
-                                <input autocomplete="off" name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="1"/>
+                                <input autocomplete="off" name="OPERATION_PROCEDURE_FLG" type="radio" class="ace merit"  value="1" @if(!empty($qcInfo) && $qcInfo->OPERATION_PROCEDURE_FLG==1) checked @endif />
                                 <span class="lbl"> Yes</span>
                             </label>
                             <label>
-                                <input autocomplete="off" name="IODINE_CHECK_FLG" type="radio" class="ace merit"  value="0"/>
-                                <span class="lbl"> No</span>
+                                <input autocomplete="off" name="OPERATION_PROCEDURE_FLG" type="radio" class="ace merit"  value="0" @if(!empty($qcInfo) && $qcInfo->OPERATION_PROCEDURE_FLG==0) checked @endif />
+                                <span class="lbl">No</span>
                             </label>
                         </div>
                     </div>
@@ -63,15 +63,6 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Do you follow Standard Operating Procedure ?</b></label>
-                        <div class="col-sm-7">
-                            <span class="block input-icon input-icon-right">
-                               <input autocomplete="off" type="text" name="SOP_DESC" class="chosen-container" placeholder="Yes/No">
-                            </span>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
                         <div class="col-sm-7">
