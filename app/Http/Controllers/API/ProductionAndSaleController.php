@@ -110,9 +110,9 @@ class ProductionAndSaleController extends Controller
                     ->first();
                 $millId = $millInfo->MILL_ID;
 
-                $totalIodizeProduction = Stock::totalIodizeProductionsService($child_id);
-                $totalWashcrashProduction = Stock::totalWashCrashProductionsService($child_id);
-                $totalProductons = $totalWashcrashProduction+$totalIodizeProduction;
+                $totalWashcrashProduction = Stock::totalWashCrashProductions($child_id);
+                $totalIodizeProduction = Stock::totalIodizeProductions($child_id);
+                $totalProductons = $totalWashcrashProduction + $totalIodizeProduction;
                 $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSalesService($child_id));
                 $totalIodizeSale = abs(SalesDistribution::totalIodizeSalesService($child_id));
                 $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
