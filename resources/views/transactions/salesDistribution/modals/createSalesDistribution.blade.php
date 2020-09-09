@@ -46,7 +46,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span
-                                style="color: red;"> *</span> </label>
+                                style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here"
                                name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle
-                            License</b><span style="color: red;"> *</span> </label>
+                            License</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here"
                                name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile
-                            Number</b><span style="color: red;"> *</span> </label>
+                            Number</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here"
                                name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
@@ -72,7 +72,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving
-                            licence</b><span style="color: red;"> *</span> </label>
+                            licence</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here"
                                name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport
-                            rent</b><span style="color: red;"> *</span> </label>
+                            rent</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here"
                                name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>

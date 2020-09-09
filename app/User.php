@@ -127,9 +127,8 @@ class User extends Authenticatable
             ->first();
     }
 
-    public static function updateData($request, $id, $user_image, $userSignatureName, $millerId)
+    public static function updateData($request, $id, $user_image, $userSignatureName, $millerId, $hasUpdateEmail=false)
     {
-        $user = User::find($id);
         $data = array(
             'user_full_name' => $request['user_full_name'],
             'designation' => $request['designation'],
@@ -149,10 +148,8 @@ class User extends Authenticatable
         );
 
         if($request->input('user_group_id')==$millerId) $data['center_id'] = $request->input('center_id'); // 22 as Miller Id as Group level id
-
-            if ($user->email != $request->email) $userUpdateData['mail_verified'] = 0;
-
-        if ($request['password'] != '') $userUpdateData['password'] = Hash::make($request['password']);
+        if ($hasUpdateEmail) $data['mail_verified'] = 0;
+        if ($request['password'] != '') $data['password'] = Hash::make($request['password']);
 
         $update = DB::table('users')->where('id', '=', $id)->update($data);
         return $update;

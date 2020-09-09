@@ -287,8 +287,7 @@ class UserController extends Controller
                 $userSignatureName = $editUser->user_signature;
             }
 
-            $update = User::updateData($request, $id, $user_image, $userSignatureName, $this->millerId);
-
+            $update = User::updateData($request, $id, $user_image, $userSignatureName, $this->millerId, $hasUpdateEmail);
 
             if($update && $hasUpdateEmail){
                 if(!$user->verifyUser) {
