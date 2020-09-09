@@ -169,8 +169,7 @@ class MillerProfileApprovalController extends Controller
                 $updateQc = array(
                     'MILL_ID' => $qcInfo->MILL_ID,
                     'LABORATORY_FLG' => $qcInfo->LABORATORY_FLG,
-                    'SOP_DESC' => $qcInfo->SOP_DESC,
-                    'IODINE_CHECK_FLG' => $qcInfo->IODINE_CHECK_FLG,
+                    'OPERATION_PROCEDURE_FLG' => $qcInfo->OPERATION_PROCEDURE_FLG,
                     'MONITORING_FLG' => $qcInfo->MONITORING_FLG,
                     'LAB_MAN_FLG' => $qcInfo->LAB_MAN_FLG,
                     'LAB_PERSON' => $qcInfo->LAB_PERSON,
