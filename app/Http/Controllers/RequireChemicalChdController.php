@@ -36,7 +36,7 @@ class RequireChemicalChdController extends Controller
      */
     public function createData($id)
     {
-        $chemicleType = Item::getItemName();
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $productionType = $this->finishedSaltId;
         return view('setup.requireChemicalPerKg.modals.createRequireChemicalPerKgChd',compact('id','chemicleType','productionType'));
     }
@@ -98,7 +98,7 @@ class RequireChemicalChdController extends Controller
     {
         $editRequireChemicalPerKgchd = RequireChemicalChd::editRequirChemicalPerKgchd($id);
        // $this->pr($editRequireChemicalPerKgchd);
-        $chemicleType = Item::getItemName();
+        $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $productionType = $this->finishedSaltId;
         return view('setup.requireChemicalPerKg.modals.editRequireChemicalPerKgChd',compact('editRequireChemicalPerKgchd','chemicleType','productionType'));
     }

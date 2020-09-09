@@ -29,13 +29,13 @@ class RequireChemicalMstController extends Controller
 
         //$title = trans('lookupGroupIndex.create_lookup');
 
-        $heading=array(
+/*        $heading=array(
             'title'=> 'Require Chemical Per Kg',
             'library'=>'datatable',
             'modalSize'=>'modal-md',
             'action'=>'require-chemical-mst/create',
             'createPermissionLevel' => $previllage->CREATE
-        );
+        );*/
 
         //$lookupGroups = LookupGroup::getSSCLookupData();
         //print_r($lookupGroups);exit;

@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class StockAdjusment extends Model
 {
     public static function getData(){
+        $centerId = Auth::user()->center_id;
         return DB::table('stock_adjustment')
             ->select('stock_adjustment.*')
+            ->where('center_id', '=', $centerId)
             ->get();
     }
 
