@@ -595,7 +595,7 @@ class Report extends Model
             FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t
             WHERE
             m.SALESMST_ID = t.TRAN_NO
-            AND t.TRAN_FLAG = 'SD' and s.center_id = $centerId $conditions"));
+            AND t.TRAN_FLAG = 'SD' and t.stock_adjustment_id is null and s.center_id = $centerId $conditions"));
         return $data;
     }
 
