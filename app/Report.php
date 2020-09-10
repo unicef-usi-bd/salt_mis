@@ -584,18 +584,18 @@ class Report extends Model
     public static function getListofClint($centerId, $divisionId, $districtId)
     {
         $conditions = '';
-        if ($divisionId) $conditions .= "and s.DIVISION_ID = $divisionId";
-        if ($districtId) $conditions .= " and s.DISTRICT_ID = $districtId";
+        if ($divisionId) $conditions .= "and sci.DIVISION_ID = $divisionId";
+        if ($districtId) $conditions .= " and sci.DISTRICT_ID = $districtId";
 
-        $data = DB::select(DB::raw("SELECT s.TRADING_NAME,s.DISTRICT_ID, s.DIVISION_ID,
-            (SELECT DISTRICT_NAME FROM ssc_districts WHERE DISTRICT_ID = s.DISTRICT_ID) DISTRICT_NAME,
-            (SELECT DIVISION_NAME FROM ssc_divisions WHERE DIVISION_ID = s.DIVISION_ID) DIVISION_NAME,
-            (SELECT LOOKUPCHD_NAME FROM ssc_lookupchd  WHERE LOOKUPCHD_ID = s.SELLER_TYPE_ID) seller_type,
-            t.QTY
-            FROM ssm_customer_info s, tmm_salesmst m, tmm_itemstock t
-            WHERE
-            m.SALESMST_ID = t.TRAN_NO
-            AND t.TRAN_FLAG = 'SD' and t.stock_adjustment_id is null and s.center_id = $centerId $conditions"));
+        $data = DB::select(DB::raw("select sci.TRADING_NAME, sci.DISTRICT_ID, sci.DIVISION_ID,dis.DISTRICT_NAME, divs.DIVISION_NAME, lc.LOOKUPCHD_NAME as seller_type, abs(tis.QTY) QTY,
+                (case when (tis.TRAN_TYPE = 'W') THEN 'Wash & Crash' ELSE 'Iodized' END) as ITEM_NAME
+                from ssm_customer_info sci
+                left join tmm_salesmst tsm on sci.CUSTOMER_ID = tsm.CUSTOMER_ID
+                left join tmm_itemstock tis on tsm.SALESMST_ID = tis.TRAN_NO
+                left join ssc_divisions divs on sci.DIVISION_ID = divs.DIVISION_ID
+                left join ssc_districts dis on sci.DISTRICT_ID = dis.DISTRICT_ID
+                left join ssc_lookupchd lc on sci.SELLER_TYPE_ID=lc.LOOKUPCHD_ID
+                where sci.center_id=$centerId and tis.stock_adjustment_id is null and tis.TRAN_FLAG = 'SD' $conditions"));
         return $data;
     }
 

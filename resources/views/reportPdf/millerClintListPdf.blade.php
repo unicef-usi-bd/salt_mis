@@ -13,6 +13,7 @@
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <th>Sl.</th>
+        <th>Item Name</th>
         <th>Supplier type</th>
         <th>Supplier Name</th>
         <th>Division</th>
@@ -24,6 +25,7 @@
     @foreach($clintList as $row)
         <tr>
             <td>{{ ++$sl }}</td>
+            <td>{{$row->ITEM_NAME}}</td>
             <td>{{$row->seller_type}}</td>
             <td>{{$row->TRADING_NAME}}</td>
             <td>{{ $row->DIVISION_NAME }}</td>

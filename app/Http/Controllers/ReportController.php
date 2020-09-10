@@ -121,7 +121,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getPurchaseSaltAmountPdf($itemType){
+    public function getPurchaseSaltAmountPdf($itemType=null){
         $centerId = Auth::user()->center_id;
         //$itemType = $request->input('itemType');
 //        $purchaseTotalSalt = Report::getPurchaseSalteLists($centerId,$itemType,$starDate,$endDate);
@@ -300,7 +300,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getChemicalPurchasePdf($starDate,$endDate,$millTypeAdmin){
+    public function getChemicalPurchasePdf($starDate,$endDate,$millTypeAdmin=0){
         $centerId = Auth::user()->center_id;
         $purchaseChemicals = Report::getPurchaseChemicalList($centerId,$starDate, $endDate, $millTypeAdmin);
         $data = \View::make('reportPdf.purchaseChemicalPdf',compact('purchaseChemicals'));
@@ -416,7 +416,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getListSupplierForMillerPdf($divisionId,$districtId){
+    public function getListSupplierForMillerPdf($divisionId=null,$districtId=null){
         $centerId = Auth::user()->center_id;
         $itemType = $this->crudeSaltSupplierTypeId;
         $supplierMillerList = Report::getListOfSupplierForMiller($centerId,$divisionId,$districtId, $itemType);
@@ -435,7 +435,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getListSupplierWithNameForMillerPdf($divisionId,$districtId){
+    public function getListSupplierWithNameForMillerPdf($divisionId=null,$districtId=null){
         $centerId = Auth::user()->center_id;
         $itemType = $this->chemicalSupplierTypeId;
         $supplierMillerLisType = Report::getListOfSupplierWithNmaeForMiller($centerId,$divisionId,$districtId, $itemType);
@@ -453,7 +453,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getClintListFormillerPdf($divisionId,$districtId){
+    public function getClintListFormillerPdf($divisionId=null,$districtId=null){
         $centerId = Auth::user()->center_id;
         $clintList = Report::getListofClint($centerId,$divisionId,$districtId);
         $data = \View::make('reportPdf.millerClintListPdf',compact('clintList'));
@@ -471,7 +471,7 @@ class ReportController extends Controller
         return response()->json(['html'=>$view]);
     }
 
-    public function getSaleClintListPdf($customerId,$itemTypeId){
+    public function getSaleClintListPdf($customerId=null,$itemTypeId=null){
         $centerId = Auth::user()->center_id;
         $saleClintList = Report::getSaleClintList($centerId,$customerId,$itemTypeId);
         $data = \View::make('reportPdf.saleClintReportListPdf',compact('saleClintList'));

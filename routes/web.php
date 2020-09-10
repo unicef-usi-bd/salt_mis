@@ -247,12 +247,12 @@ Route::group(['middleware' => ['auth']], function() {
     //Report reportPdf
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
-    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{millTypeAdmin}','ReportController@getChemicalPurchasePdf');//Rubiyat
-    Route::get('chemical-purchase-stock-pdf/{millTypeAdmin}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
+    Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{millTypeAdmin?}','ReportController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}/{millTypeAdmin?}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
 
 
     Route::get('purchase-salt-list-pdf','ReportController@getPurchaseSalteListPdf');//jalal
-    Route::get('purchase-salt-amount-pdf/{itemType}','ReportController@getPurchaseSaltAmountPdf');//jalal
+    Route::get('purchase-salt-amount-pdf/{itemType?}','ReportController@getPurchaseSaltAmountPdf');//jalal
     Route::get('purchase-salt-stock-pdf','ReportController@getAdminSaltStockPdf');//jalal
     Route::get('miller-purchase-salt-stock-pdf/{starDate}/{endDate}/{itemType}','ReportController@getMillerSaltStockPdf');//jalal
     Route::get('monitor-salt-report-pdf/{starDate}/{endDate}','ReportController@getMonitorSaltsupplierListPdf');//jalal
@@ -266,9 +266,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('miller-license-report-pdf/{zone}/{issuerId}/{renawlDate}/{failDate}','ReportController@getListofMillerLicensesPdf');//jalal
     Route::get('qc-report-pdf/{zone}','ReportController@getQcreportPdf');//jalal
     Route::get('hr-report-pdf/{zone}','ReportController@getHrreportpdf');//jalal
-    Route::get('purchase-salt-supplier-miller-pdf/{divisionId}/{districtId}','ReportController@getListSupplierForMillerPdf');//jalal
-    Route::get('purchase-salt-supplier-miller-type-pdf/{divisionId}/{districtId}','ReportController@getListSupplierWithNameForMillerPdf');//jalal
-    Route::get('clint-list-miller-pdf/{divisionId}/{districtId}','ReportController@getClintListFormillerPdf');//jalal
+    Route::get('purchase-salt-supplier-miller-pdf/{divisionId?}/{districtId?}','ReportController@getListSupplierForMillerPdf');//jalal
+    Route::get('purchase-salt-supplier-miller-type-pdf/{divisionId?}/{districtId?}','ReportController@getListSupplierWithNameForMillerPdf');//jalal
+    Route::get('clint-list-miller-pdf/{divisionId?}/{districtId?}','ReportController@getClintListFormillerPdf');//jalal
     Route::get('sale-clint-list-miller-pdf/{customerId}/{itemTypeId}','ReportController@getSaleClintListPdf');//jalal
     Route::get('monitor-clint-list-miller-pdf','ReportController@getMonitorClintListMillerPdf');//jalal
     Route::get('item-stock-miller-pdf','ReportController@getItemStockMillerPdf');//jalal
