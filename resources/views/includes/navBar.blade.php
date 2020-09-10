@@ -4,7 +4,8 @@
         color: #FFFFFF;
     }
 </style>
-<div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1CABE2;">
+{{--<div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #1CABE2;">--}}
+<div id="navbar" class="navbar navbar-default ace-save-state" style="background-image: url('assets/images/app-images/banner.png');background-repeat: no-repeat;background-size: cover;background-size: 100% 100%;">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
@@ -14,12 +15,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="{{ url('dashboard') }}" class="navbar-brand">
-                <small>
-                    UNIVERSAL SALT IODIZATION PROGRAM
-                </small>
-            </a>
-            <a href="#" class="navbar-brand">
+            <a href="#" class="navbar-brand" style="margin-left: 400px;">
                 <div id="ajax-loader" style="display: none;">
                     <div class="ajax-loader inline"></div>
                 </div>
@@ -29,7 +25,7 @@
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle col-md-12">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle col-md-12" style="background-color: #96C3EF!important;">
                         <div class="col-md-3" style="padding-left: 0 !important;">
                             @php
                                 $defaultImage = asset('assets/images/avatars/user.png');
