@@ -27,21 +27,21 @@ class ReportAssociation extends Model
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId') 
+            where ass.PARENT_ID = '$centerId')
             "));
         }else{
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME 
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID
             from ssm_associationsetup ass
-            where ass.PARENT_ID = '$centerId') 
-          
-             and 
+            where ass.PARENT_ID = '$centerId')
+
+             and
             its.ITEM_NO = '$itemTypeAssoc' "));
         }
 
@@ -75,18 +75,18 @@ class ReportAssociation extends Model
                        AND s.TRAN_FLAG NOT IN ('WI', 'SD')
                        -- AND s.TRAN_TYPE NOT IN ('S', 'C')
                        ) b
-         
+
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
                    where ass.PARENT_ID = '$centerId')
-                  
+
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME "));
     }
     // purchase salt End
 // purchase chemical
     public static function getPurchaseChemicalItem(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME, st.ITEM_NAME 
+        return DB::select(DB::raw("select lc.LOOKUPCHD_NAME, st.ITEM_NAME
           from smm_item st
           left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = st.ITEM_TYPE
           where st.ACTIVE_FLG and st.item_type=25 "));
@@ -95,22 +95,22 @@ class ReportAssociation extends Model
     public static function getPurchaseChemicalTotal($starDate,$endDate,$millTypeAdmin){
         $centerId = Auth::user()->center_id;
         if($millTypeAdmin==0){
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP'  and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP'  and its.center_id in (select ass.ASSOCIATION_ID
             from ssm_associationsetup ass
             where ass.PARENT_ID = '$centerId'  )
             and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
         }else{
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id 
+            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai on ai.ASSOCIATION_ID = its.center_id
             left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
-            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and ai.MILL_ID = $millTypeAdmin and its.center_id in (select ass.ASSOCIATION_ID 
+            where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'CP' and ai.MILL_ID = $millTypeAdmin and its.center_id in (select ass.ASSOCIATION_ID
             from ssm_associationsetup ass
             where ass.PARENT_ID = '$centerId'  )
             and  its.TRAN_DATE BETWEEN '$starDate' AND '$endDate'"));
@@ -148,12 +148,12 @@ class ReportAssociation extends Model
                        AND s.ITEM_NO in(5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
-         
+
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
                    where ass.PARENT_ID = '$centerId'
                    )
-                   
+
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME ; "));
         }else{
             return DB::select(DB::raw("SELECT b.LOOKUPCHD_NAME,
@@ -183,12 +183,12 @@ class ReportAssociation extends Model
                        AND s.ITEM_NO IN (5,6)
                        AND s.TRAN_FLAG NOT IN ('WR', 'II')
                        AND s.TRAN_TYPE NOT IN ('W', 'I')) b
-         
+
          WHERE b.center_id in (select ass.ASSOCIATION_ID
                     from ssm_associationsetup ass
                    where ass.PARENT_ID = '$centerId'
                    and ass.MILL_ID = $millTypeAdmin)
-                   
+
         GROUP BY b.LOOKUPCHD_NAME, b.ITEM_NO, b.ITEM_NAME ; "));
         }
 
@@ -216,7 +216,7 @@ class ReportAssociation extends Model
         $centerId = Auth::user()->center_id;
         $miller = DB::table('ssm_mill_info');
         $miller->select('ssm_mill_info.*','ssc_lookupchd.LOOKUPCHD_NAME');
-        $miller->leftJoin('ssc_lookupchd','ssm_mill_info.MILL_TYPE_ID','=','ssc_lookupchd.UD_ID');
+        $miller->leftJoin('ssc_lookupchd','ssm_mill_info.MILL_TYPE_ID','=','ssc_lookupchd.LOOKUPCHD_ID');
         if($centerId){
             $miller->where('ssm_mill_info.center_id','=',$centerId);
         }
@@ -225,7 +225,7 @@ class ReportAssociation extends Model
     public static function getMonitorMiller(){
         $centerId = Auth::user()->center_id;
         return DB::select(DB::raw("select mi.MILL_NAME,(lc.LOOKUPCHD_NAME)MONITOR_BY,mm.MOMITOR_DATE
-              from tsm_millmonitore mm     
+              from tsm_millmonitore mm
               left join ssm_mill_info  mi on mm.MILL_ID = mi.MILL_ID
               left join ssc_lookupchd lc on mm.AGENCY_ID = lc.LOOKUPCHD_ID
               where mm.center_id = '$centerId' "));
@@ -281,7 +281,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
     }
     public static function getSaleItemList(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE 
+        return DB::select(DB::raw("select sc.SALESCHD_ID,sc.SALESMST_ID,sc.ITEM_ID,it.ITEM_NAME,it.ITEM_TYPE,lc.LOOKUPCHD_NAME as IT_TYPE,sc.QTY,sc.UNIT_PRICE
              from tmm_saleschd sc
              left join smm_item it on sc.ITEM_ID = it.ITEM_NO
              left join ssc_lookupchd lc on it.ITEM_TYPE = lc.LOOKUPCHD_ID
@@ -304,7 +304,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
       case when st.TRAN_TYPE = 'W' then
         'Wash Crash'
       end Process_Type
-      from tmm_itemstock st 
+      from tmm_itemstock st
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
        left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
@@ -316,7 +316,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
       case when st.TRAN_TYPE = 'I' then
         'Iodize'
       end Process_Type
-      from tmm_itemstock st 
+      from tmm_itemstock st
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
       left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
       left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
@@ -328,14 +328,14 @@ where ql.center_id in(select ass.ASSOCIATION_ID
 
     public static function getListOfMiller(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw(" select mi.MILL_NAME 
+        return DB::select(DB::raw(" select mi.MILL_NAME
            from ssm_mill_info mi
            where mi.center_id = '$centerId' "));
 
     }
     public static function assocProcessStock(){
         $centerId = Auth::user()->center_id;
-        $processStock = DB::select(DB::raw("select (select count(distinct mstock.center_id) as MILLER_NO from tmm_itemstock as mstock where mstock.TRAN_FLAG = 'II') MILL_NO, stock.TRAN_TYPE, 
+        $processStock = DB::select(DB::raw("select (select count(distinct mstock.center_id) as MILLER_NO from tmm_itemstock as mstock where mstock.TRAN_FLAG = 'II') MILL_NO, stock.TRAN_TYPE,
                         count(STOCK_NO) BATCH_NO, SUM(QTY) as QTY
                         from tmm_itemstock stock
                         left join ssm_associationsetup association on stock.center_id = association.ASSOCIATION_ID
@@ -349,7 +349,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
         if($processType == 0){
             return DB::select(DB::raw("SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME,
-        SUM(a.QTY) QTY, 
+        SUM(a.QTY) QTY,
         (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = $centerId ) cnt_miller
         FROM
             (
@@ -366,14 +366,14 @@ where ql.center_id in(select ass.ASSOCIATION_ID
             and s.DIVISION_ID = $divisionId
             -- and s.ACTIVE_FLG = 1
             AND t.TRAN_TYPE = 'W'
-            and t.TRAN_FLAG = 'SD'                  
+            and t.TRAN_FLAG = 'SD'
              ) a
         GROUP BY a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME"));
         }elseif($processType == 1){
             return DB::select(DB::raw(" SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME,
-        SUM(a.QTY) QTY, 
+        SUM(a.QTY) QTY,
         (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = $centerId ) cnt_miller
         FROM
             (
@@ -390,15 +390,15 @@ where ql.center_id in(select ass.ASSOCIATION_ID
             and s.DIVISION_ID = $divisionId
             -- and s.ACTIVE_FLG = 1
             AND t.TRAN_TYPE = 'I'
-            and t.TRAN_FLAG = 'SD'      
-            
+            and t.TRAN_FLAG = 'SD'
+
              ) a
         GROUP BY a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME "));
         }else{
             return DB::select(DB::raw("SELECT a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME,
-        SUM(a.QTY) QTY, 
+        SUM(a.QTY) QTY,
         (SELECT COUNT(MILL_ID) FROM ssm_mill_info  WHERE DISTRICT_ID = a.DISTRICT_ID AND DIVISION_ID = a.DIVISION_ID AND center_id = $centerId ) cnt_miller
         FROM
             (
@@ -415,7 +415,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
             and s.DIVISION_ID = $divisionId
             -- and s.ACTIVE_FLG = 1
             AND t.TRAN_TYPE in ('I','W')
-            and t.TRAN_FLAG = 'SD'                  
+            and t.TRAN_FLAG = 'SD'
              ) a
         GROUP BY a.DISTRICT_ID, a.DIVISION_ID, A.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.ITEM_NO, a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME"));
