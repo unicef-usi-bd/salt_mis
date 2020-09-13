@@ -72,7 +72,7 @@ class ReportController extends Controller
     public function getMillerList(Request $request){
         $activStatus = $request->input('activStatus');
         $millerLists = Report::getMillerList($activStatus);
-        //$this->pr($millerLists);
+//        $this->pr($millerLists);
         $view = view("reportView.millerListReport",compact('millerLists','activStatus'))->render();
         return response()->json(['html'=>$view]);
     }

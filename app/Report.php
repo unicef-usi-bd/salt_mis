@@ -71,7 +71,7 @@ class Report extends Model
         $centerId = Auth::user()->center_id;
         $miller = DB::table('ssm_mill_info');
         $miller->select('ssm_mill_info.*', 'ssc_lookupchd.LOOKUPCHD_NAME');
-        $miller->leftJoin('ssc_lookupchd', 'ssm_mill_info.MILL_TYPE_ID', '=', 'ssc_lookupchd.UD_ID');
+        $miller->leftJoin('ssc_lookupchd', 'ssm_mill_info.MILL_TYPE_ID', '=', 'ssc_lookupchd.LOOKUPCHD_ID');
         if ($centerId) {
             $miller->where('ssm_mill_info.center_id', '=', $centerId);
         }
@@ -320,7 +320,7 @@ class Report extends Model
     public static function getQcReport($centerId, $zone)
     {
         $qcReports = DB::table('tmm_qualitycontrol as ql');
-        $qcReports->select('ql.*', 'lc.LOOKUPCHD_NAME as quality_control_by', 'lch.LOOKUPCHD_NAME as agency_name', 'mi.MILL_NAME', 'i.BATCH_NO');
+        $qcReports->select('ql.*', 'lc.LOOKUPCHD_NAME as quality_control_by', 'lch.LOOKUPCHD_NAME as agency_name', 'mi.MILL_NAME', 'i.BATCH_NO', 'QUALITY_CONTROL_IMAGE as file_path');
         $qcReports->leftJoin('ssc_lookupchd as lc', 'ql.QC_BY', '=', 'lc.LOOKUPCHD_ID');
         $qcReports->leftJoin('ssc_lookupchd as lch', 'ql.AGENCY_ID', '=', 'lch.LOOKUPCHD_ID');
         $qcReports->leftJoin('ssm_mill_info as mi', 'ql.center_id', '=', 'mi.center_id');

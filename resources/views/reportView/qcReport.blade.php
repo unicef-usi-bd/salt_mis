@@ -16,11 +16,6 @@
     <div class="col-md-12 table-responsive">
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
-            {{--<tr>--}}
-            {{--<th rowspan="2">No. of Established FIACs </th>--}}
-            {{--<th colspan="12">No. of Farmers Visited FIAC</th>--}}
-            {{--<th rowspan="2">Total Nos.</th>--}}
-            {{--</tr>--}}
             <tr>
                 <th>Sl.</th>
                 {{--<th>Millers Name</th>--}}
@@ -28,6 +23,7 @@
                 <th>QC BY</th>
                 <th>Agency Name</th>
                 <th>Test Result</th>
+                <th>Attached File</th>
             </tr>
 
             </thead>
@@ -37,7 +33,6 @@
             @foreach($qcReports as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    {{--<td>{{$row->MILL_NAME}}</td>--}}
                     <td>{{$row->BATCH_NO}}</td>
                     <td>{{$row->quality_control_by}}</td>
                     <td>{{$row->agency_name}}</td>
@@ -46,6 +41,11 @@
                             <span >Pass</span>
                         @else
                             <span>Fail</span>
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if(!empty($row->file_path) && file_exists($row->file_path))
+                            <a href="{{ url($row->file_path) }}" target="_blank" ><i class="fa fa-2x fa-file-pdf-o"></i></a>
                         @endif
                     </td>
                 </tr>
