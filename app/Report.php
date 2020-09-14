@@ -618,7 +618,7 @@ class Report extends Model
             WHERE s.CUSTOMER_ID = m.CUSTOMER_ID
             AND m.SALESMST_ID = t.TRAN_NO
             AND i.ITEM_NO = t.ITEM_NO
-            AND t.TRAN_FLAG = 'SD' and   s.center_id = $centerId $conditions) a
+            AND t.TRAN_FLAG = 'SD' and s.center_id = $centerId $conditions) a
         GROUP BY a.CUSTOMER_ID ,a.TRADING_NAME,a.DISTRICT_ID, a.DIVISION_ID, a.ITEM_TYPE,
         a.ITEM_TYPE_NAME,a.TRADER_NAME,a.ITEM_NAME, a.DISTRICT_NAME, a.DIVISION_NAME, a.seller_type"));
         return $data;

@@ -18,11 +18,11 @@
             <thead>
             <tr>
                 <th>Sl.</th>
-                <th>Number of Millers</th>
                 <th>Items Type</th>
                 <th>Items Name</th>
                 <th>Division</th>
                 <th>District</th>
+                <th>Client Name</th>
                 <th>Sales Amount</th>
 
             </tr>
@@ -30,19 +30,23 @@
             </thead>
 
             <tbody>
-            @foreach($assocSale as $sl =>  $row)
-                <tr>
+            <?php $sl=0;?>
+            @foreach($assocSale as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{$row->cnt_miller}}</td>
                     <td>{{$row->ITEM_TYPE_NAME}}</td>
                     <td>{{$row->ITEM_NAME}}</td>
                     <td>{{$row->DIVISION_NAME}}</td>
                     <td>{{$row->DISTRICT_NAME}}</td>
+                    <td>{{$row->TRADER_NAME}}</td>
                     <td>{{abs($row->QTY)}}</td>
                 </tr>
-                </tr>
             @endforeach
+            @if(sizeof($assocSale)==0)
+                <tr>
+                    <td class="text-danger center" colspan="5">Data not found !</td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>

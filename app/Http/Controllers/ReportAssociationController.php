@@ -243,8 +243,11 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.assocSaleReport",compact('assocSale','divisionId','districtId','processType'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function assocSalePdf($processType){
-        $assocSale = ReportAssociation::getAssocSale($processType);
+    public function assocSalePdf(Request $request){
+        $divisionId = $request->input('divisionId');
+        $districtId = $request->input('districtId');
+        $processType = $request->input('processType');
+        $assocSale = ReportAssociation::getAssocSale($processType,$divisionId,$districtId);;
         $data = \View::make('reportAssociation.pdf.assocSaleReportPdf',compact('assocSale'));
         $this->generatePdf($data);
     }
