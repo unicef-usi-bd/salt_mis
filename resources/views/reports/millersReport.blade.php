@@ -204,7 +204,6 @@
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >
-                                    <option value="">Select</option>
                                     <option value="0">Select All</option>
                                     @foreach($finishSaltItem as $row)
                                         <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>

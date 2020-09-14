@@ -551,11 +551,6 @@ class ReportController extends Controller
     }
 
     public function getTotalSaleAdmin(Request $request){
-/*        $divisionId = $request->input('divisionId');
-        echo $request->input('processType');exit;
-        $districtId = $request->input('districtId');
-*/
-//        dd($request->input());
         $processType = $request->input('processType');
         $totalSale = Report::totalSaleAdmin($processType);
 

@@ -81,10 +81,10 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
-                                   <option value="">-Select-</option>
-                                   <option value="3">Select All</option>
-                                   <option value="2">Wash And Crush</option>
-                                   <option value="1">Iodized </option>
+                                   <option value="0">Select All</option>
+                                    @foreach($finishSaltItem as $row)
+                                       <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>
+                                   @endforeach
                                </select>
                             </span>
                         </div>
