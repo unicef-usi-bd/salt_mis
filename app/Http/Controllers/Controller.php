@@ -40,7 +40,7 @@ class Controller extends BaseController
     public $edibleCertificateId = 39;
 
 //############## Look Up Group Data Static Id For Get Lookup Group Data ###############
-    public $iodizedRecommendChemId = 28;
+    public $iodizedRecommendChemId = 29;
     public $chemicalId = 25;
     public $crudSaltId = 26;
     public $finishedSaltId= 29;

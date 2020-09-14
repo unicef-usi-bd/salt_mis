@@ -115,7 +115,7 @@
                     let saltAmount = parseFloat(data.chemicalPerKg.CRUDE_SALT);
                     let recommendChemical = (chemicalAmount/saltAmount)*washSaltAmount;
                     chemicalStockScope.attr('data-recommend', recommendChemical);
-                    $('.userChemicalAmount').val(recommendChemical);
+                    $('.userChemicalAmount').val(recommendChemical.toFixed(4));
                 }
                 chemicalStockDisplay(chemicalStockScope);
             }
