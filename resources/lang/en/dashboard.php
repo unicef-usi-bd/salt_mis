@@ -9,7 +9,7 @@ return [
     'cancel' => 'Cancel',
     'details' => 'Details',
     'update' => 'Update',
-    'sl' => 'SL.',
+    'sl' => 'SL',
     'action' => 'Action',
     'total_union' => 'Total Unions',
     'total_cig' => 'Total CIG',

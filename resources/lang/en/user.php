@@ -17,15 +17,15 @@
      'full_namebn' => 'Full Name(Bangla)',
      'password' => 'Password',
      're_password' => 'Confirm Password',
-     'example_full_nameen' => 'Example:- User Full name in English here',
-     'example_full_namebn' => 'Example:- User Full name in Bangla here',
-     'example_user_name' => 'Example:- User name here',
-     'example_email' => 'Example:- E-Mail Address Here',
-     'example_password' => 'Example:- Password here',
+     'example_full_nameen' => 'User Full Name In English Here',
+     'example_full_namebn' => 'User Full Name In Bangla Here',
+     'example_user_name' => 'User Name Here',
+     'example_email' => 'E-Mail Address Here',
+     'example_password' => 'Password Here',
      'address' => 'Address',
-     'example_address' => 'Example:-Address Here ',
+     'example_address' => 'Address Here ',
      'contact_no' => 'Contact No',
-     'example_contact_no' => 'Example:- Contact No Here ',
+     'example_contact_no' => 'Contact No Here ',
      'image' => 'Image',
      'signature' => 'Signature',
      'designation' => 'Designation',
@@ -41,6 +41,6 @@
      'name' => 'Name',
      'status' => 'Status',
      'user_log' => 'User Log',
-     'example_remarks_here' => 'Example:- Remarks Here'
+     'example_remarks_here' => 'Remarks Here'
 
  ];

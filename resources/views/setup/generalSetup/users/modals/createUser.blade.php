@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>{{ trans('user.re_password') }}</b> <span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
-                    <input autocomplete="off" id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Example: Confirm Password"/>
+                    <input autocomplete="off" id="password-confirm" type="password" class="form-control required" name="password_confirmation" placeholder="Confirm Password"/>
                     @if ($errors->has('password'))
                         <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -93,7 +93,7 @@
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class=" form-control user_group" name="user_group_id" data-placeholder="Select User Group">
-                                <option value="">-Select One-</option>
+                                <option value="">-Select-</option>
                                 @foreach($userGroups as $userGroup)
                                     <option value="{{$userGroup->USERGRP_ID}}"> {{$userGroup->USERGRP_NAME}}</option>
                                 @endforeach
@@ -107,7 +107,7 @@
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess user_group_level" class=" form-control user_group_level" name="user_group_level_id" data-placeholder="Select Group Level">
-                                <option value="">-Select One-</option>
+                                <option value="">-Select-</option>
                             </select>
                         </span>
                 </div>

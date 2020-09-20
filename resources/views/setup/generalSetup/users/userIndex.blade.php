@@ -29,7 +29,7 @@
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>{{ trans('user.user_full_name') }}</th>
                     <th>{{ trans('user.user_name') }}</th>
-                    <th>Center</th>
+                    <th>Centre</th>
                     <th>{{ trans('user.user_group') }}</th>
                     <th>{{ trans('user.group_level') }}</th>
                     <th>{{ trans('user.email') }}</th>

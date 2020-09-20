@@ -84,7 +84,7 @@ class UserController extends Controller
         $userGroups = UserGroup::getActiveData();
         $associationCenter = AssociationSetup::getAssociationCenterData();
 
-        return view('setup.generalSetup.users.modals.createUser ',compact('costCenters','designations','banks', 'userGroups','associationCenter'));
+        return view('setup.generalSetup.users.modals.createUser',compact('costCenters','designations','banks', 'userGroups','associationCenter'));
     }
 
     /**
@@ -189,7 +189,7 @@ class UserController extends Controller
     {
         $userView = User::viewData($id);
 
-        return view('setup.generalSetup.users.modals.viewUser ', compact('userView'));
+        return view('setup.generalSetup.users.modals.viewUser', compact('userView'));
     }
 
     /**

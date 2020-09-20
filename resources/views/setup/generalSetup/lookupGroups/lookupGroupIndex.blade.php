@@ -71,7 +71,7 @@
                                     <button id="{{ 'lookup-groups-data/create-data/'.$lookupGroup->LOOKUPMST_ID }}" data-target=".modal" data-id="{{ $lookupGroup->LOOKUPMST_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" data-toggle="modal" title="{{ trans('lookupGroupIndex.lookup_group_data_create') }}"> {{ trans('dashboard.add_new') }} </button>
                                 </p>
                                 <div class="col-lg-12">
-                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" title="{{ trans('lookupGroupIndex.lookup_group_data_list') }}">
+                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('lookupGroupIndex.lookup_group_data_list') }}">
                                         <thead>
                                         <tr>
 

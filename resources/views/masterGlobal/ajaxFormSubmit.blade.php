@@ -19,6 +19,9 @@
         }).done(function(data) {
             if(data.success){
                 displayAlertHandler(data.success);
+                setTimeout(function(){
+                    $('.modal').modal('hide')
+                },2000);
                 if(doEmptyForm===true) formClear();
                 if(data.insertId) putInsertIdInClassAttribute(data.insertId);
             }else if(data.errors){

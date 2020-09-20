@@ -56,12 +56,6 @@
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="#">
-                                <i class="ace-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                        <li>
                             <a href="#" id="{{ 'users-change-password'  }}" class="showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="1" role="button" title="Change Password">
                                 <i class="ace-icon fa fa-key"></i>
                                 Change Password

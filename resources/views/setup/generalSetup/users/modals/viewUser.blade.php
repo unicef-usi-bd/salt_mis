@@ -41,7 +41,7 @@
 
                 </tr>
                 <tr>
-                    <th>Center</th>
+                    <th>Centre</th>
                     <th> :</th>
                     <td>
                         {{$userView->ASSOCIATION_NAME}}
