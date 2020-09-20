@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form action="{{ url('/brand') }}" method="post" class="form-horizontal" role="form">
+    <form action="{{ url('/brand') }}" method="post" class="form-horizontal" id="brandModal" aria-hidden="true" role="dialog">
         @csrf
         <div class="form-group">
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name</b><span style="color: red;"> *</span> </label>

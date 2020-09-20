@@ -333,13 +333,27 @@ where ql.center_id in(select ass.ASSOCIATION_ID
            where mi.center_id = '$centerId' "));
 
     }
-    public static function assocProcessStock(){
+    public static function assocProcessStock($starDate, $endDate){
         $centerId = Auth::user()->center_id;
-        $processStock = DB::select(DB::raw("select (select count(distinct mstock.center_id) as MILLER_NO from tmm_itemstock as mstock where mstock.TRAN_FLAG = 'II') MILL_NO, stock.TRAN_TYPE,
-                        count(STOCK_NO) BATCH_NO, SUM(QTY) as QTY
-                        from tmm_itemstock stock
-                        left join ssm_associationsetup association on stock.center_id = association.ASSOCIATION_ID
-                        where association.center_id=$centerId and stock.TRAN_FLAG in ('WI', 'II') group by TRAN_FLAG"));
+        $processStock = DB::select(DB::raw("SELECT  (SELECT COUNT(DISTINCT ist.center_id) FROM tmm_itemstock ist WHERE ist.TRAN_FLAG='II' ) AS MILL_NO
+                                            ,st.TRAN_TYPE,COUNT(STOCK_NO) BATCH_NO,SUM(st.QTY) QTY
+                                             FROM tmm_itemstock st
+                                             LEFT JOIN ssm_associationsetup ai ON st.center_id=ai.ASSOCIATION_ID
+                                             WHERE st.TRAN_TYPE='W'
+                                              AND ai.center_id= $centerId
+                                             AND st.TRAN_FLAG IN('WR','SD','WI')
+                                               AND DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'   
+                                               UNION ALL       
+                                               SELECT 
+                                            (SELECT COUNT(DISTINCT ist.center_id) FROM tmm_itemstock ist WHERE ist.TRAN_FLAG='II' ) AS MILL_NO
+                                            ,st.TRAN_TYPE,COUNT(STOCK_NO) BATCH_NO,SUM(st.QTY) QTY
+                                             FROM tmm_itemstock st
+                                             LEFT JOIN ssm_associationsetup ai ON st.center_id=ai.ASSOCIATION_ID
+                                             WHERE st.TRAN_TYPE='I'
+                                              AND ai.center_id= $centerId
+                                             AND st.TRAN_FLAG IN('II','SD')
+                                               AND DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                               "));
         return $processStock;
 
     }

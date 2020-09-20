@@ -239,7 +239,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('sale-item-stock', 'ReportAssociationController@getSaleItemStock');//azharul
     Route::get('sale-item-stock-pdf', 'ReportAssociationController@getSaleItemStockPdf');//azharul
     Route::get('assoc-process-stock', 'ReportAssociationController@assocProcessStock');//azharul
-    Route::get('assoc-process-stock-pdf', 'ReportAssociationController@assocProcessStockPdf');//azharul
+    Route::get('assoc-process-stock-pdf/{starDate}/{endDate}', 'ReportAssociationController@assocProcessStockPdf');//azharul
     Route::get('association-sale', 'ReportAssociationController@assocSale');//azharul
     Route::get('association-sale-pdf/{processType}', 'ReportAssociationController@assocSalePdf');//azharul
     // Report and PDF for Association End

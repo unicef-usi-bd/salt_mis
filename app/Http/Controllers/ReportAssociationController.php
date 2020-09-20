@@ -225,12 +225,14 @@ class ReportAssociationController extends Controller
         $this->generatePdf($data);
     }
     public function assocProcessStock(){
-        $processStock = ReportAssociation::assocProcessStock();
-        $view = view("reportAssociation.assocProcessStockReport",compact('processStock'))->render();
+        $starDate = Input::post('assStartDate');
+        $endDate = Input::post('assEndDate');
+        $processStock = ReportAssociation::assocProcessStock($starDate,$endDate);
+        $view = view("reportAssociation.assocProcessStockReport",compact('processStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function assocProcessStockPdf(){
-        $processStock = ReportAssociation::assocProcessStock();
+    public function assocProcessStockPdf($starDate,$endDate){
+        $processStock = ReportAssociation::assocProcessStock($starDate,$endDate);
         $data = \View::make('reportAssociation.pdf.assocProcessStockReportPdf',compact('processStock'));
         $this->generatePdf($data);
     }
