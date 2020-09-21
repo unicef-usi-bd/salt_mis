@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table table-striped table-bordered table-hover gridTable" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable"  data-tools="false" title="Bank List">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>

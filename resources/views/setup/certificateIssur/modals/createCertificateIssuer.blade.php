@@ -2,7 +2,7 @@
     <form action="{{ url('/certificate') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Certificate Name</b><span style="color: red;"> *</span> </label>
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Certificate Issuer</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
                 <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID"  >
                     <option value="">Select</option>

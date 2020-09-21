@@ -45,7 +45,7 @@ class UserController extends Controller
         $heading=array(
             'title'=>$userCreate,
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-bg',
             'action'=>'users/create',
             'createPermissionLevel' => $previllage->CREATE
         );

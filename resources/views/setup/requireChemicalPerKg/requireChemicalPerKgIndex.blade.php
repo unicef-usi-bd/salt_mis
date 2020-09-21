@@ -7,7 +7,7 @@
             All Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Require Chemical Per ltr
+                Require Chemical Per KG
             </small>
         </h1>
     </div><!-- /.page-header -->
