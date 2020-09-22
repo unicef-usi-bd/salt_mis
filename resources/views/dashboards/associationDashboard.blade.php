@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Millers</div>
+                    <div class="infobox-content">MILLERS</div>
                     <div class="infobox-content">{{ $totalMiller }}</div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Active MILLERS</div>
+                    <div class="infobox-content">ACTIVE MILLERS</div>
                     <div class="infobox-content">{{ $totalActiveMiller }}</div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Inactive MILLERS</div>
+                    <div class="infobox-content">INACTIVE MILLERS</div>
                     <div class="infobox-content">{{ $totalInactiveMiller }}</div>
                 </div>
             </div>
@@ -171,7 +171,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Production stock(W&C + iodized) & sales stock(W&C + iodized)
+                        Production (W & C + Iodized) & Sale (W & C + Iodized)
                     </h5>
 
                 </div>
@@ -198,7 +198,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 days production
+                        Last 30 Days Production
                     </h4>
 
                     <div class="widget-toolbar">
@@ -222,7 +222,7 @@
                                 </th>
 
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Amount In KG
                                 </th>
                             </tr>
                             </thead>
@@ -235,9 +235,9 @@
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')
-                                            Wash And Crush Salt
+                                            Wash And Crushing Salt
                                         @else
-                                            Iodize
+                                            Iodized Salt
                                         @endif
                                     </td>
                                     <td>{{ number_format(abs($row->QTY), 2) }}</td>
@@ -266,7 +266,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 days sales
+                        Last 30 Days Sales
                     </h4>
 
                     <div class="widget-toolbar">
@@ -288,7 +288,7 @@
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sale Type
                                 </th>
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount In KG
                                 </th>
                             </tr>
                             </thead>
@@ -301,9 +301,9 @@
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')
-                                            Wash And Crush Salt
+                                            Wash And Crushing Salt
                                         @else
-                                            Iodize
+                                            Iodized Salt
                                         @endif
                                     </td>
                                     <td>{{ number_format(abs($row->QTY), 2) }}</td>
@@ -328,7 +328,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Last month sales report W&C vs Iodized
+                        Last Month Sales Statistics (W & C vs Iodized)
                     </h5>
 
                 </div>
@@ -349,7 +349,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        KI last 3 month statistics (Procurment + Used + In stock)
+                        Last 3 Months Statistics of KIO3 (Procurement + Used + In stock)
                     </h5>
 
                 </div>
@@ -370,7 +370,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Miller's Certificate Status
+                         Certificate Status of Miller
                     </h5>
                 </div>
 
@@ -409,7 +409,7 @@
                                 </th>
 
                                 <th>
-                                    Renewing&nbsp;Date
+                                    Renewal&nbsp;Date
                                 </th>
                             </tr>
                             </thead>
@@ -502,7 +502,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
                 datasets: [{
-                    label: 'Month wise current year production chart Total = ' + yearQty.toFixed(2),
+                    label: 'Month-Wise Current Year Total Production Chart ( KG) = ' + yearQty.toFixed(2),
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                     // data: [0, 10, 5, 2, 20, 30, 45]
@@ -569,7 +569,7 @@
             data: {
                 labels: [
                     'INDUSTRIAL SALT ',
-                    'IDONAIZE SALT'
+                    'IDIZED SALT'
                 ],
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],

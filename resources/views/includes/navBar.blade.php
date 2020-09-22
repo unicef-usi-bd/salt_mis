@@ -63,7 +63,7 @@
                         </li>
 
                         <li>
-                            <a href="#" id="{{ 'users/'.Auth::user()->id }}" class="showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="1" role="button" title="View Profile">
+                            <a href="#" id="{{ 'users/'.Auth::user()->id }}" class="showModalGlobal" data-target=".modal" modal-size="modal-lg" data-toggle="modal" data-permission="1" role="button" title="View Profile">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>
