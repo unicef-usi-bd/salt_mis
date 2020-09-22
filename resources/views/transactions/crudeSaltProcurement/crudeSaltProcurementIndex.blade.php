@@ -7,7 +7,7 @@
             Transaction
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                 CRUDE Salt Procurement
+                 Crude Salt Procurement
             </small>
         </h1>
     </div><!-- /.page-header -->

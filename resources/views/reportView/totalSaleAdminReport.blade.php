@@ -22,8 +22,8 @@
                 <th>Item Name</th>
                 <th>Division</th>
                 <th>District</th>
-                <th>Client's Name</th>
-                <th>Sale Amount</th>
+                <th>Name of Client</th>
+                <th>Sale Amount (KG)</th>
             </tr>
             </thead>
             <tbody>

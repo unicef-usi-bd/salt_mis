@@ -24,7 +24,7 @@
             <tr>
                 <th>Sl</th>
                 <td>Name of Association </td>
-                <th>Number Of Millers</th>
+                <th>Number Of Mills</th>
             </tr>
 
             </thead>

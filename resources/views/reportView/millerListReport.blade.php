@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-list-pdf/'.$activStatus) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Association</h4>
+        <h4>Type of Mill</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -22,9 +22,9 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
-                <td>Miller Type</td>
-                <th>Millers Name</th>
+                <th>Sl</th>
+                <td>Type of Mill</td>
+                <th> Name of Mill</th>
                 <th>Status</th>
             </tr>
 

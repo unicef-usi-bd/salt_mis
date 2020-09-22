@@ -14,7 +14,7 @@
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
         <th>Item Name</th>
-        <th>Total Purchases Amount </th>
+        <th>Total Purchases Amount (KG) </th>
 
     </tr>
     <?php $sl = 0; ?>

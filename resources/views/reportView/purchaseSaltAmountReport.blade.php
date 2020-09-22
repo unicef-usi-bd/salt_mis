@@ -24,7 +24,7 @@
             <tr>
                 <th>Sl</th>
                 <th>Item Name</th>
-                <th>Total Purchases Amount</th>
+                <th>Total Purchases Amount (KG)</th>
             </tr>
 
             </thead>

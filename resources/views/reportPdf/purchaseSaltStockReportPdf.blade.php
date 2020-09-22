@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Purchase Salt Stock</p>
+    <p>Purchase Stock</p>
 </div><!-- /.row -->
 
 
@@ -14,7 +14,7 @@
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
         <th>Item Name</th>
-        <th>Total Stock Amount</th>
+        <th>Total Stock Amount (KG)</th>
 
     </tr>
     <?php $sl = 0; ?>

@@ -14,9 +14,9 @@
     <tr>
         <th>Sl</th>
         <th>Name of Association </th>
-        <th>Total Raw salt Purchase </th>
+        <th>Total Raw Salt Purchase </th>
         <th>Total Chemical Purchase </th>
-        <th>Total Processed Salt sale</th>
+        <th>Total Processed Salt Sale</th>
     </tr>
     <?php $sl = 0; ?>
 

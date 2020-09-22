@@ -6,14 +6,14 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>List of Miller</p>
+    <p>List of Mill</p>
 </div><!-- /.row -->
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <th>Sl</th>
-        <th>Name Millers </th>
+        <th>Name Mill </th>
         <th>Total Number of Employees </th>
         <th>Number of Full-Time Employees </th>
         <th>Number of Part-Time Employees</th>

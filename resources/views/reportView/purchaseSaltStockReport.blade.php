@@ -19,7 +19,7 @@
             <tr>
                 <th>Sl</th>
                 <th>Item Name</th>
-                <th>Total Stock Amount</th>
+                <th>Total Stock Amount (KG)</th>
             </tr>
             </thead>
 

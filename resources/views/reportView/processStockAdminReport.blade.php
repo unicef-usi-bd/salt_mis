@@ -17,9 +17,9 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
+                <th>Sl</th>
                 <th>Process Type</th>
-                <th>ProductionAmount</th>
+                <th>Production Amount (KG)</th>
             </tr>
 
             </thead>

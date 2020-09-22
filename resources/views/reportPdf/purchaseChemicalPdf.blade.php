@@ -14,7 +14,7 @@
     <tr>
         <th>Sl</th>
         <th>Item Name</th>
-        <th>Total Purchase Amount</th>
+        <th>Total Purchase Amount (KG)</th>
     </tr>
     <?php $sl=0;?>
     @foreach($purchaseChemicals as $purchaseChemical)

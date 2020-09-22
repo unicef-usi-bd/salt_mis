@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('miller-under-association-pdf/'.$zone) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>List of Miller</h4>
+        <h4>List of Mill</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -23,7 +23,7 @@
             {{--</tr>--}}
             <tr>
                 <th>Sl</th>
-                <th>Name Millers </th>
+                <th>Name Mill </th>
                 <th>Total Number of Employees </th>
                 <th>Number of Full-Time Employees </th>
                 <th>Number of Part-Time Employees</th>
