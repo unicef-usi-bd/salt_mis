@@ -9,7 +9,7 @@
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE"
                         name="SELLER_TYPE" data-placeholder="Select Seller Type">
-                   <option value="">Select One</option>
+                   <option value="">-Select-</option>
                     @foreach($sellerType as $seller)
                         <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
                     @endforeach
@@ -301,7 +301,7 @@
     $(document).on("change", ".SELLER_TYPE", function () {
         let sellerTypeId = $(this).val();
         let tradeScope = $('.tradeId');
-        let option = '<option value="">Select One</option>';
+        let option = '<option value="">-Select-</option>';
         $.ajax({
             type: 'GET',
             url: 'trading-list',

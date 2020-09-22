@@ -17,7 +17,7 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
+                <th>Sl</th>
                 <th>No. of Millers</th>
                 <th>Process Type</th>
                 <th>Batch No</th>

@@ -22,7 +22,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editUserGroupLevel->IS_ACTIVE==1) selected @endif>Active</option>
                     <option value="0" @if($editUserGroupLevel->IS_ACTIVE==0) selected @endif>Inactive</option>
                 </select>

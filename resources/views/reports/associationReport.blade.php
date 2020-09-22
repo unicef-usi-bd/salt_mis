@@ -8,7 +8,7 @@
                     <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select id="" class="chosen-select chosen-container reportAssociation" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value="">Select One</option>
+                                   <option value="">-Select-</option>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-item">List of Item </option>
                                        <option value="purchase-salt-total">Total Purchase</option>
@@ -114,7 +114,7 @@
                             <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select One-</option>
+                               <option value="">-Select-</option>
                                 <option value="0">All Mill</option>
                                 @foreach($millInfo as $row)
                                     <option value="{{$row->MILL_ID}}"> {{$row->MILL_NAME}}</option>
@@ -137,7 +137,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
-                                   <option value="0">Select All</option>
+                                   <option value="0">-Select-</option>
                                     @foreach($finishSaltItem as $row)
                                        <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>
                                    @endforeach

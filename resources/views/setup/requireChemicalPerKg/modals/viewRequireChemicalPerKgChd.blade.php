@@ -15,7 +15,7 @@
                     <td>{{ $showRequireChemicalPerKgchd->ITEM_NAME}} </td>
                     <th class=" ">Chemical Amount</th>
                     <th> :</th>
-                    <td>{{ $showRequireChemicalPerKgchd->USE_QTY}} ltr</td>
+                    <td>{{ $showRequireChemicalPerKgchd->USE_QTY}} gm</td>
                 </tr>
                 <tr>
                     <th class=" ">Salt Amount</th>

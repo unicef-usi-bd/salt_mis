@@ -4,11 +4,11 @@
         @csrf
         <input type="hidden" id="inputSuccess RMALLOMST_ID"  name="RMALLOMST_ID" value="{{ $id }}" />
         <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item List</b><span style="color: red;"> *</span></label>
+            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item Type</b><span style="color: red;"> *</span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
                     <select id="form-field-select-3 inputSuccess ITEM_ID" class="chosen-select form-control" name="ITEM_ID" data-placeholder="Select or search data">
-                       <option value="">Select Chemical Type</option>
+                       <option value="">-Select-</option>
                         @foreach($chemicleType as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                         @endforeach
@@ -17,15 +17,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount( KG)</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input autocomplete="off" type="text" id="inputSuccess WAST_PER" placeholder="Example: Wastage Amount here" name="CRUDE_SALT" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input autocomplete="off" type="text" id="inputSuccess WAST_PER" placeholder="Wastage Amount here" name="CRUDE_SALT" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount(gm)</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <input autocomplete="off" type="text" id="inputSuccess USE_QTY" placeholder="Example: Chemical Amount here" name="USE_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
+                <input autocomplete="off" type="text" id="inputSuccess USE_QTY" placeholder="Chemical Amount here" name="USE_QTY" class="form-control col-xs-10 col-sm-5" value=""/>
             </div>
         </div>
         <div class="form-group">
@@ -33,7 +33,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess ACTIVE_FLG" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" selected>Active</option>
                     <option value="0">Inactive</option>
                 </select>

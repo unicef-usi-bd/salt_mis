@@ -71,7 +71,7 @@ class RequireChemicalChdController extends Controller
             $requirePerKgChd = RequireChemicalChd::insertRequireChemicalPerKgchd($data);
 
             if($requirePerKgChd){
-                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg  Created !');
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per KG  Created !');
             }
         }
     }
@@ -126,7 +126,7 @@ class RequireChemicalChdController extends Controller
             $updateRequirePerKgChd = RequireChemicalChd::updateRequireChemicalPerKgchd($request,$id);
 
             if($updateRequirePerKgChd){
-                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per Kg  Updated !');
+                return redirect('/require-chemical-mst')->with('success', 'Require Chemical Per KG Updated !');
             }
         }
     }
@@ -145,7 +145,7 @@ class RequireChemicalChdController extends Controller
                 'type' => 'tr',
                 'id' => $id,
                 'flag' => true,
-                'message' => 'Require per kg level  Successfully Deleted.',
+                'message' => 'Require Per KG Level Successfully Deleted.',
             ]);
         } else{
             echo json_encode([

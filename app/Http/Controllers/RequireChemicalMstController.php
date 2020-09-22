@@ -159,7 +159,7 @@ class RequireChemicalMstController extends Controller
                 'type' => 'div',
                 'id' => $id,
                 'flag' => true,
-                'message' => 'Require per kg level  Successfully Deleted.',
+                'message' => 'Require per KG level  Successfully Deleted.',
             ]);
         } else{
             echo json_encode([

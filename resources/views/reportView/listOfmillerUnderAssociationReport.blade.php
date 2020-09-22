@@ -22,12 +22,12 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
-                <th>Millers Name</th>
-                <th>Total Number of Employee </th>
-                <th>Number of full time Employee </th>
-                <th>Number of part time Employee</th>
-                <th>Number of Technical Person e</th>
+                <th>Sl</th>
+                <th>Name Millers </th>
+                <th>Total Number of Employees </th>
+                <th>Number of Full-Time Employees </th>
+                <th>Number of Part-Time Employees</th>
+                <th>Number of Technical People</th>
             </tr>
 
             </thead>

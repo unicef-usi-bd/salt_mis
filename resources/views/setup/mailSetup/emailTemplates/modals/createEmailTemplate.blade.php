@@ -13,7 +13,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 inputSuccess email_type_id" class="form-control" name="email_type_id" data-placeholder="Select or search data">
-                    <option value="">-Select One-</option>
+                    <option value="">-Select-</option>
                     @foreach($emailTypes as $emailType)
                         <option value="{{$emailType->lookup_group_data_id}}"> {{$emailType->group_data_name}}</option>
                     @endforeach

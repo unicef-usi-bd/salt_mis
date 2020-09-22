@@ -9,7 +9,7 @@
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-container reportAdmin chosen-select" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value="">Select One</option>
+                                   <option value="">-Select-</option>
                                    <optgroup label="Association">
                                        <option  value="association-list">List of Total Association </option>
                                        <option value="miller-list/{activStatus}">Type of Miller</option>
@@ -67,7 +67,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select One-</option>
+                               <option value="">-Select-</option>
                                 <option value="0">All Mill</option>
                                 @foreach($millInfo as $row)
                                     <option value="{{$row->MILL_ID}}"> {{$row->MILL_NAME}}</option>
@@ -81,7 +81,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
-                                   <option value="0">Select All</option>
+                                   <option value="0">-Select-</option>
                                     @foreach($finishSaltItem as $row)
                                        <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>
                                    @endforeach
@@ -95,7 +95,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="statusAdmin width-65 chosen-select" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
-                                   <option value="0">Select All</option>
+                                   <option value="0">-Select-</option>
                                    <option value="1">Active</option>
                                    <option value="2">Inactive</option>
                                </select>
@@ -117,7 +117,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAdmin chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select One-</option>
+                               <option value="">-Select-</option>
                                 <option value="0">All Purchase</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>

@@ -41,7 +41,7 @@
                                     <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]">
-                                        <option value="">Select One</option>
+                                        <option value="">-Select-</option>
                                         @foreach($issueBy as $row)
                                             @if($certificate->CERTIFICATE_TYPE_ID==$row->CERTIFICATE_TYPE_ID)
                                                 <option value="{{ $row->ISSUR_ID }}" selected>{{ $row->ISSUER_NAME }}</option>

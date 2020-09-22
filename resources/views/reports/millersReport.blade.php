@@ -9,7 +9,7 @@
                         <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select  class="chosen-select chosen-container reportMiller" name="PROCESS_TYPE_ID" data-placeholder="Select">
-                                   <option value="">Select One</option>
+                                   <option value="">-Select-</option>
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-supplier-miller">List of Supplier </option>
                                        <option value="purchase-salt-list">List of Item </option>
@@ -69,7 +69,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select One-</option>
+                               <option value="">-Select-</option>
                                 <option value="0">All Purchase</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -83,7 +83,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chemicalItemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select One-</option>
+                               <option value="">-Select-</option>
                                 <option value="0">All Purchase</option>
                                 @foreach($chemicalTypes as $row)
                                     <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
@@ -165,7 +165,7 @@
                             <span class="block input-icon input-icon-right">
                                 <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneMiller form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
                                     <option value="">Select Association Name</option>
-                                    <option value="0">Select All</option>
+                                    <option value="0">-Select-</option>
                                     @foreach($associationList as $association)
                                         <option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>
                                     @endforeach
@@ -204,7 +204,7 @@
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >
-                                    <option value="0">Select All</option>
+                                    <option value="0">-Select-</option>
                                     @foreach($finishSaltItem as $row)
                                         <option value="{{ $row->ITEM_NO }}">{{ $row->ITEM_NAME }}</option>
                                     @endforeach

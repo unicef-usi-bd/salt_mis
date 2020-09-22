@@ -12,7 +12,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-8">
-                <input autocomplete="off" type="text" id="inputSuccess union_name" placeholder="Example: Salt Amount here" name="SALT_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->SALT_AMOUNT }}"/>
+                <input autocomplete="off" type="text" id="inputSuccess union_name" placeholder="Salt Amount here" name="SALT_AMOUNT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequiredPerkg->SALT_AMOUNT }}"/>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editRequiredPerkg->ACTIVE_FLG == 1) selected @endif>Active</option>
                     <option value="0" @if($editRequiredPerkg->ACTIVE_FLG == 0) selected @endif>Inactive</option>
                 </select>

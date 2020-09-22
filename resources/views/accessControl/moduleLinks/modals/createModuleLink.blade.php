@@ -21,7 +21,7 @@
             <div class="col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select id="form-field-select-3 inputSuccess module_id" class="chosen-select form-control" name="module_id" data-placeholder="Select or search data">
-                            <option value="">Select One</option>
+                            <option value="">-Select-</option>
                             @foreach($modules as $module)
                                 <option value="{{$module->MODULE_ID}}"> {{$module->MODULE_NAME}}</option>
                             @endforeach

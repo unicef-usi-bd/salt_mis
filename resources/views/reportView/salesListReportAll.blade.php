@@ -22,9 +22,9 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
-                <th>Items Type </th>
-                <th>Items Name</th>
+                <th>Sl</th>
+                <th>Item Type </th>
+                <th>Item Name</th>
             </tr>
 
             </thead>

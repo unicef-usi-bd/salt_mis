@@ -17,13 +17,13 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
-                <th>Items Type</th>
-                <th>Items Name</th>
+                <th>Sl</th>
+                <th>Item Type</th>
+                <th>Item Name</th>
                 <th>Division</th>
                 <th>District</th>
-                <th>Client Name</th>
-                <th>Sales Amount</th>
+                <th>Client's Name</th>
+                <th>Sale Amount</th>
             </tr>
             </thead>
             <tbody>

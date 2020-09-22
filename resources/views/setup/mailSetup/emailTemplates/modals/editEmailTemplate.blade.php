@@ -8,7 +8,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 inputSuccess email_type_id" class="form-control" name="email_type_id" data-placeholder="Select or search data">
-                    <option value="">-Select One-</option>
+                    <option value="">-Select-</option>
                     @foreach($emailTypes as $emailType)
                         <option value="{{$emailType->lookup_group_data_id}}" @if($emailType->lookup_group_data_id==$editEmailTemplate->email_type_id) selected @endif> {{$emailType->group_data_name}}</option>
                     @endforeach
@@ -39,7 +39,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="active_status">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editEmailTemplate->active_status==1) selected @endif>Active</option>
                     <option value="0" @if($editEmailTemplate->active_status==0) selected @endif>Inactive</option>
                 </select>

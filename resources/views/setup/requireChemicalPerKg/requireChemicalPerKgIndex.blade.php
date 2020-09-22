@@ -43,20 +43,20 @@
 
                                 {{--@endif--}}
                                 @if($editPermissionLevel == 1)
-                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Chemical Per kg">
+                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  modal-size="modal-lg" data-toggle="modal" title="Edit Chemical Per KG">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @else
-                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Chemical Per kg" style="display: none;">
+                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID.'/edit' }}" class="green pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  modal-size="modal-lg" data-toggle="modal" title="Edit Chemical Per KG" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif
                                 @if($viewPermissionLevel == 1)
-                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" class="blue pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $viewPermissionLevel }}"  data-toggle="modal" title="View Chemical Per Kg">
+                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" class="blue pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $viewPermissionLevel }}"   data-toggle="modal" title="View Chemical Per KG">
                                         <i class="ace-icon fa fa-eye bigger-130"></i>
                                     </a>
                                 @else
-                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" class="blue pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $viewPermissionLevel }}"  data-toggle="modal" title="View Chemical Per Kg" style="display: none;">
+                                    <a id="{{ 'require-chemical-mst/'.$chemical->RMALLOMST_ID }}" class="blue pull-right showModalGlobal" data-target=".modal" role="button" data-permission="{{ $viewPermissionLevel }}"   data-toggle="modal" title="View Chemical Per KG" style="display: none;">
                                         <i class="ace-icon fa fa-eye bigger-130"></i>
                                     </a>
                                 @endif
@@ -68,10 +68,10 @@
                                     @php
                                         $createPermissionLevel = $previllage->CREATE;
                                     @endphp
-                                    <button id="{{ 'require-chemical-chd/create-data/'.$chemical->RMALLOMST_ID }}" data-target=".modal" data-id="{{ $chemical->RMALLOMST_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" data-toggle="modal" title="Require Chemical"> {{ trans('dashboard.add_new') }} </button>
+                                    <button id="{{ 'require-chemical-chd/create-data/'.$chemical->RMALLOMST_ID }}" data-target=".modal" data-id="{{ $chemical->RMALLOMST_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" modal-size="modal-lg" data-toggle="modal" title="Required Chemical"> {{ trans('dashboard.add_new') }} </button>
                                 </p>
                                 <div class="col-lg-12">
-                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" title="{{ trans('lookupGroupIndex.lookup_group_data_list') }}">
+                                    <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('lookupGroupIndex.lookup_group_data_list') }}">
                                         <thead>
                                         <tr>
 
@@ -79,7 +79,7 @@
                                             <th>Chemical Name</th>
                                             {{--<th class="hidden-480">Chemical Type</th>--}}
                                             <th class="hidden-480">Salt Amount (KG)</th>
-                                            <th class="hidden-480">Chemical Amount (ltr)</th>
+                                            <th class="hidden-480">Chemical Amount (gm)</th>
                                             <th class="center fixedWidth" >{{ trans('lookupGroupIndex.action') }}</th>
                                         </tr>
                                         </thead>
@@ -116,24 +116,24 @@
                                                             $viewPermissionLevel = $previllage->READ;
                                                         @endphp
                                                         @if($viewPermissionLevel == 1)
-                                                            <a href="#" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Chemical Per Kg">
+                                                            <a href="#" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Chemical Per KG">
                                                             <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                             </span>
                                                             </a>
                                                         @else
-                                                            <a href="#" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Chemical Per Kg" style="display: none;">
+                                                            <a href="#" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Chemical Per KG" style="display: none;">
                                                             <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                             </span>
                                                             </a>
                                                         @endif
                                                         @if($editPermissionLevel == 1)
-                                                            <a class="green showModalGlobal" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="{{ trans('lookupGroupIndex.edit_lookup_group_data') }}">
+                                                            <a class="green showModalGlobal" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  modal-size="modal-lg" data-toggle="modal" title="{{ trans('lookupGroupIndex.edit_lookup_group_data') }}">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                             </a>
                                                         @else
-                                                            <a class="green showModalGlobal" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" data-permission="{{ $editPermissionLevel }}" title="{{ trans('lookupGroupIndex.edit_lookup_group_data') }}" style="display: none;">
+                                                            <a class="green showModalGlobal" id="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" modal-size="modal-lg" data-permission="{{ $editPermissionLevel }}" title="{{ trans('lookupGroupIndex.edit_lookup_group_data') }}" style="display: none;">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                             </a>
                                                         @endif

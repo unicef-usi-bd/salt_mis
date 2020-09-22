@@ -9,7 +9,7 @@
                     <div class="col-md-8">
                     <span class="block input-icon input-icon-right">
                         <select id="form-field-select-3 inputSuccess cost_center_type cc_search" class="cost_center_type_id form-control" name="cost_center_type_id" data-placeholder="Select or search data">
-                            <option value="">-Select One-</option>
+                            <option value="">-Select-</option>
                             @foreach($costCenterTypes as $costCenterType)
                                 <option value="{{$costCenterType->cost_center_type_id}}"> {{$costCenterType->cost_center_type_name}}</option>
                             @endforeach
@@ -77,7 +77,7 @@
                 <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
                         <select id="form-field-select-3 inputSuccess email_type_id" class="chosen-select form-control templateType" name="email_type_id" data-placeholder="Select or search data">
-                            <option value="">-Select One- </option>
+                            <option value="">-Select- </option>
                             @foreach($emailTypes as $emailType)
                                 <option value="{{$emailType->lookup_group_data_id}}"> {{$emailType->group_data_name}}</option>
                             @endforeach
@@ -219,7 +219,7 @@
         $('.cost_center_type_id').on('change',function () {
             $('.search').prop('disabled', false);
             var costCenterTypeId = $(this).val();
-            var option = '<option value=""> Select One </option>';
+            var option = '<option value="">-Select-</option>';
 
             $.ajax({
                 type : "get",

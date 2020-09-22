@@ -2,7 +2,7 @@
     $(document).ready(function () {
         $('.bank').on('change',function(){
             var bankId = $(this).val();
-            var option = '<option value="">Select One</option>';
+            var option = '<option value="">-Select-</option>';
             $.ajax({
                 type : "get",
                 url  : "get-bank-branches",

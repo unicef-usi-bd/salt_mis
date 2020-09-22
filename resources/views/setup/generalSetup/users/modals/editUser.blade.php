@@ -82,7 +82,7 @@
                 <div class="col-sm-8">
                     <span class="block input-icon input-icon-right">
                         <select id="inputSuccess active_status" class="form-control" name="active_status">
-                            <option value="">Select One</option>
+                            <option value="">-Select-</option>
                             <option value="1" @if($editData->active_status==1) selected @endif >Active</option>
                             <option value="0" @if($editData->active_status==0) selected @endif >Inactive</option>
                         </select>
@@ -118,7 +118,7 @@
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="privileges" onclick="craateUserJsObject.ShowPrivileges();" class="form-control user_group" name="user_group_id" data-placeholder="Select User Group">
-                                <option value="">-Select One-</option>
+                                <option value="">-Select-</option>
                                 @foreach($userGroups as $userGroup)
                                     <option value="{{$userGroup->USERGRP_ID}}" @if($userGroup->USERGRP_ID==$editData->user_group_id) selected @endif> {{$userGroup->USERGRP_NAME}}</option>
                                 @endforeach
@@ -195,7 +195,7 @@
         $(document).ready(function () {
             $('.user_group').on('change',function(){
                 let groupId = $(this).val();
-                let option = '<option>Select One</option>';
+                let option = '<option>-Select-</option>';
                 let childScope = $('.user_group_level');
                 $.ajax({
                     type : "get",

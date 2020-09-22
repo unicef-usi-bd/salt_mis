@@ -17,7 +17,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 ISSUR_ID inputSuccess" class="form-control ISSUR_ID" name="ISSUR_ID" >
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     @foreach($issuers as $row)
                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                     @endforeach
@@ -61,7 +61,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG" id="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" selected>Active</option>
                     <option value="0">Inactive</option>
                 </select>

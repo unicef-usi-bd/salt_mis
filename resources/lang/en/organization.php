@@ -18,6 +18,6 @@ return [
     'view_organisation' => 'View Organisation',
     'edit_organisation' => 'Edit Organisation',
     'delete_organisation' => 'Delete Organisation',
-    'select_one' => 'Select One'
+    'select_one' => '-Select-'
 ];
 ?>

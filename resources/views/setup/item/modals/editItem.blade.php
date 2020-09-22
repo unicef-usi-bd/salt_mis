@@ -32,7 +32,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editItem->ACTIVE_FLG == 1) selected @endif>Active</option>
                     <option value="0" @if($editItem->ACTIVE_FLG == 0) selected @endif>Inactive</option>
                 </select>

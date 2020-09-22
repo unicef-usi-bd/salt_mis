@@ -23,7 +23,7 @@
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control" name="AGENCY_ID">
-                            <option value="">Select One</option>
+                            <option value="">-Select-</option>
                             @foreach($agencyName as $row)
                                 <option value="{{$row->LOOKUPCHD_ID}}" @if($row->LOOKUPCHD_ID==$editMonitoring->AGENCY_ID) selected @endif> {{$row->LOOKUPCHD_NAME}}</option>
                             @endforeach

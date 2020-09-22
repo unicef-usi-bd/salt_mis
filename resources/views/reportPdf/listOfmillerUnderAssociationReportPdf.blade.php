@@ -12,12 +12,12 @@
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
-        <th>Millers Name</th>
-        <th>Total Number of Employee </th>
-        <th>Number of full time Employee </th>
-        <th>Number of part time Employee</th>
-        <th>Number of Technical Person e</th>
+        <th>Sl</th>
+        <th>Name Millers </th>
+        <th>Total Number of Employees </th>
+        <th>Number of Full-Time Employees </th>
+        <th>Number of Part-Time Employees</th>
+        <th>Number of Technical People</th>
     </tr>
     <?php $sl = 0; ?>
 

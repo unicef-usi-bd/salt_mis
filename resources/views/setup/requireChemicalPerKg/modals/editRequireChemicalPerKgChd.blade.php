@@ -14,7 +14,7 @@
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
                     <select id="form-field-select-3 inputSuccess ITEM_ID" class="chosen-select form-control" name="ITEM_ID" data-placeholder="Select or search data">
-                       <option value="">Select Chemical Type</option>
+                       <option value="">-Select-</option>
                         @foreach($chemicleType as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"@if($chemical->ITEM_NO==$editRequireChemicalPerKgchd->ITEM_ID) selected @endif>{{ $chemical->ITEM_NAME }}</option>
                         @endforeach
@@ -23,13 +23,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Salt Amount (KG)</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input autocomplete="off" type="text" id="inputSuccess WAST_PER" placeholder="Example: Wastage Amount here" name="CRUDE_SALT" class="form-control col-xs-10 col-sm-5" value="{{ $editRequireChemicalPerKgchd->CRUDE_SALT }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount(gm)</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input autocomplete="off" type="text" id="inputSuccess USE_QTY" placeholder="Example: Chemical Amount here" name="USE_QTY" class="form-control col-xs-10 col-sm-5" value="{{ $editRequireChemicalPerKgchd->USE_QTY }}"/>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="ACTIVE_FLG" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editRequireChemicalPerKgchd->ACTIVE_FLG==1) selected @endif>Active</option>
                     <option value="0" @if($editRequireChemicalPerKgchd->ACTIVE_FLG==0) selected @endif>Inactive</option>
                 </select>

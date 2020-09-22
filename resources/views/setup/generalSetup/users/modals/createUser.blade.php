@@ -176,7 +176,7 @@
         $(document).ready(function () {
             $('.user_group').on('change',function(){
                 let groupId = $(this).val();
-                let option = '<option value="">Select One</option>';
+                let option = '<option value="">-Select-</option>';
                 $.ajax({
                     type : "get",
                     url  : "get-user-group-levels",

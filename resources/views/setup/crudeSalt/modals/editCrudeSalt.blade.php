@@ -8,7 +8,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess" class="form-control crudSaltType" name="CRUDSALT_TYPE_ID">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     @foreach($crudSaltTypes as $crudSaltType)
                         <option value="{{ $crudSaltType->ITEM_NO }}" @if($editCrudSaltDetail->CRUDSALT_TYPE_ID == $crudSaltType->ITEM_NO) selected @endif>{{ $crudSaltType->ITEM_NAME  }}</option>
                     @endforeach
@@ -65,7 +65,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" @if($editCrudSaltDetail->ACTIVE_FLG == 1) selected @endif>Active</option>
                     <option value="0" @if($editCrudSaltDetail->ACTIVE_FLG == 0) selected @endif>Inactive</option>
                 </select>

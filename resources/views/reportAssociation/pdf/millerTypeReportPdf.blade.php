@@ -6,15 +6,15 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Miller Type</p>
+    <p>Type of Miller</p>
 </div>
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <th>Mill Type</th>
-        <th>Mill Name</th>
+        <th>Type of Miller </th>
+        <th>Name of Miller </th>
 
     </tr>
     @foreach($millerType as $sl =>  $row)

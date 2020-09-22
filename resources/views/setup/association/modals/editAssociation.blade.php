@@ -33,7 +33,7 @@
             <div class="col-xs-12 col-sm-7">
                 <span class="block input-icon input-icon-right">
                     <select class="form-control" name="ACTIVE_FLG">
-                        <option value="">Select One</option>
+                        <option value="">-Select-</option>
                         <option value="1" selected>Active</option>
                         <option value="0">Inactive</option>
                     </select>

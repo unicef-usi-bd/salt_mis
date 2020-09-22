@@ -13,7 +13,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess" class="form-control crudSaltType" name="CRUDSALT_TYPE_ID">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     @foreach($crudSaltTypes as $crudSaltType)
                         <option value="{{ $crudSaltType->ITEM_NO }}">{{ $crudSaltType->ITEM_NAME  }}</option>
                     @endforeach
@@ -70,7 +70,7 @@
             <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="inputSuccess active_status" class="form-control" name="ACTIVE_FLG">
-                    <option value="">Select One</option>
+                    <option value="">-Select-</option>
                     <option value="1" selected>Active</option>
                     <option value="0">Inactive</option>
                 </select>

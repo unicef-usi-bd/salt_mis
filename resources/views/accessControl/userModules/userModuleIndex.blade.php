@@ -47,7 +47,7 @@
                 <label for="inputSuccess" class="row control-label no-padding-right" for="form-field-1-1" style="padding: 0px 15px 0px 11px;"><b> {{ trans('module.user_group') }}</b><span style="color: red;"> *</span></label>
                 <span class="row block input-icon input-icon-right" style="padding:0px 15px 0px 11px;">
                     <select id="form-field-select-3 inputSuccess USERGRP_ID" class="form-control userGroup chosen-select" name="USERGRP_ID" data-placeholder="Select or search data">
-                        <option value="">Select One</option>
+                        <option value="">-Select-</option>
                         @foreach($userGroups as $userGroup)
                             <option value="{{$userGroup->USERGRP_ID}}"> {{$userGroup->USERGRP_NAME}}</option>
                         @endforeach
@@ -59,7 +59,7 @@
                 <label for="inputSuccess" class="row control-label no-padding-right" for="form-field-1-1" style="padding: 0px 15px 0px 11px;"><b>{{ trans('module.user_group_level') }}</b><span style="color: red;"> *</span></label>
                 <span class="row block input-icon input-icon-right"  style="padding: 0px 5px 0px 11px;">
                     <select id="form-field-select-3 inputSuccess UG_LEVEL_ID" class="form-control userGroupLevel chosen-select" name="UG_LEVEL_ID" data-placeholder="Select or search data">
-                        <option value="">Select One</option>
+                        <option value="">-Select-</option>
                     </select>
                 </span>
             </div>
@@ -80,7 +80,7 @@
 //            Get User Group level by User Group
             $(document).on("click", ".userGroup", function () {
                 var userGroupId = $(this).val();
-                var option = '<option value="">Select One</option>';
+                var option = '<option value="">-Select-</option>';
 
                 $.ajax({
                     type : "get",
