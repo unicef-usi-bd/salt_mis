@@ -61,7 +61,7 @@
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="DIVISION_ID" class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
-                            <option value="">Select Division</option>
+                            <option value="">-Select-</option>
                             @foreach($getDivision as $row)
                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                             @endforeach
@@ -74,7 +74,7 @@
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="DISTRICT_ID" class="form-control chosen-select district" name="DISTRICT_ID" data-placeholder="Select or search data">
-                            <option value="">Select District</option>
+                            <option value="">-Select-</option>
                         </select>
                     </span>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
                         <select id="THANA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
-                            <option value="">Select</option>
+                            <option value="">-Select-</option>
                          </select>
                     </span>
                     </div>

@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Purchase Salt Total Stock</p>
+    <p>Total Purchase Stock</p>
 </div>
 
 
@@ -15,7 +15,7 @@
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
         <th>Item Type</th>
         <th>Item Name</th>
-        <th>Purchase Volume</th>
+        <th>Purchased Quantity (KG)</th>
 
     </tr>
     @foreach($purchaseSaltTotalStock as $sl =>  $row)

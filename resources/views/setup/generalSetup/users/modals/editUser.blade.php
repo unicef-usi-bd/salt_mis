@@ -99,7 +99,7 @@
                     <input type="file" id="user_image" name="user_image" class="form-control col-xs-10 col-sm-5 user_image" value="" onchange="loadFile(event)"/>
                 </div>
                 <div style="margin-top: 40px; margin-left: 120px;">
-                    <img id="output"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editData->user_image) }}" />
+                    <img id="output"  style="width: 50px;height: 50px; margin-left: 40px;" src="{{ asset('/'.$editData->user_image) }}" />
                 </div>
             </div>
 
@@ -109,7 +109,7 @@
                     <input type="file" id="user_signature" name="user_signature" class="form-control col-xs-10 col-sm-5 user_signature" value="" onchange="loadFile1(event)"/>
                 </div>
                 <div style="margin-top: 40px; margin-left: 120px;">
-                    <img id="output1"  style="width: 50px;height: 50px;" src="{{ asset('/'.$editData->user_signature) }}" />
+                    <img id="output1"  style="width: 50px;height: 50px; margin-left: 40px;" src="{{ asset('/'.$editData->user_signature) }}" />
                 </div>
             </div>
 

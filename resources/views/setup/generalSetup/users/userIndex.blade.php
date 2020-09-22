@@ -89,11 +89,11 @@
                                         </a>
                                     @endif
                                     @if($editPermissionLevel == 1)
-                                        <a class="green showModalGlobal" id="{{ 'users/'.$user->id.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" data-permission="{{ $editPermissionLevel }}" modal-size="modal-lg" title="{{ trans('user.edit_user') }}">
+                                        <a class="green showModalGlobal" id="{{ 'users/'.$user->id.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" data-permission="{{ $editPermissionLevel }}" modal-size="modal-bg" title="{{ trans('user.edit_user') }}">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
                                     @else
-                                        <a class="green showModalGlobal" id="{{ 'users/'.$user->id.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" data-permission="{{ $editPermissionLevel }}" modal-size="modal-lg" title="{{ trans('user.edit_user') }}" style="display: none;">
+                                        <a class="green showModalGlobal" id="{{ 'users/'.$user->id.'/edit' }}" data-target=".modal" role="button"  data-toggle="modal" data-permission="{{ $editPermissionLevel }}" modal-size="modal-bg" title="{{ trans('user.edit_user') }}" style="display: none;">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
                                     @endif

@@ -84,7 +84,7 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"
-                               for="form-field-1-1"><b>Millers ID</b></label>
+                               for="form-field-1-1"><b>Miller ID</b></label>
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId">
@@ -109,7 +109,7 @@
                             <span class="block input-icon input-icon-right">
                                <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID"
                                        data-placeholder="Select or search data">
-                                <option value=""></option>
+                                <option value="">-Select-</option>
                                    @foreach($ownerType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
@@ -126,7 +126,7 @@
                             <span class="block input-icon input-icon-right">
                                 <select name="DIVISION_ID"
                                         class="chosen-select chosen-container division" data-placeholder="Select">
-                                    <option value=""></option>
+                                    <option value="">-Select-</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{ $row->DIVISION_ID }}">{{ $row->DIVISION_NAME }}</option>
                                     @endforeach
@@ -143,7 +143,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select chosen-container district"
                                        name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                                   <option value="">-Select-</option>
                                </select>
                             </span>
                         </div>
@@ -156,7 +156,7 @@
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select chosen-container upazila" name="UPAZILA_ID"
                                        data-placeholder="Select">
-                                   <option value="">Select</option>
+                                   <option value="">-Select-</option>
                                </select>
                             </span>
                         </div>

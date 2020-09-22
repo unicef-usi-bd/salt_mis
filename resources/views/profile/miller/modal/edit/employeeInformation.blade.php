@@ -6,7 +6,7 @@
                 @method('PUT')
                 <input type="hidden" name="MILLEMP_ID" value="@if(!empty($employeeInfo)){{ $employeeInfo->MILLEMP_ID }}@endif" />
                 <div class="col-md-6">
-                    <b style="font-size: 14px;">Full Time Employee</b> <br><br>
+                    <b style="font-size: 14px;">Full-Time Employees</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Male</label>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
 
-                    <b style="font-size: 14px;">Part Time Employee</b> <br><br>
+                    <b style="font-size: 14px;">Part-Time Employees</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Male</label>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <b style="font-size: 14px;">Total Number of Technical Person </b> <br><br>
+                    <b style="font-size: 14px;">Total Number of Technical People </b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Male</label>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                    <b style="font-size: 14px;">Total Number of Employee</b> <br><br>
+                    <b style="font-size: 14px;">Total Number of Employees</b> <br><br>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label>Male</label>

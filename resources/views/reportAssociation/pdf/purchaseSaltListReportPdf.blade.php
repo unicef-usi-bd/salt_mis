@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Purchase Salt Item</p>
+    <p>List of Item</p>
 </div>
 
 

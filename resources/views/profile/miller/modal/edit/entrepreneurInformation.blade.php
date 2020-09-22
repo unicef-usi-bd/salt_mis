@@ -40,7 +40,7 @@
                                     <td>
                                         <span class="block input-icon input-icon-right">
                                             <select class="form-control chosen-select division" name="DIVISION_ID[]">
-                                                <option value="">Select</option>
+                                                <option value="">-Select-</option>
                                                 @foreach($divisions as $row)
                                                     <option value="{{ $row->DIVISION_ID }}" @if($entrepreneur->DIVISION_ID==$row->DIVISION_ID) selected @endif >{{ $row->DIVISION_NAME }}</option>
                                                 @endforeach
@@ -50,7 +50,7 @@
                                     <td>
                                         <span class="block input-icon input-icon-right">
                                             <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
-                                                <option value="">Select</option>
+                                                <option value="">-Select-</option>
                                                 @foreach($districts as $row)
                                                     <option value="{{ $row->DISTRICT_ID }}" @if($entrepreneur->DISTRICT_ID == $row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
                                                 @endforeach
@@ -60,7 +60,7 @@
                                     <td>
                                         <span class="block input-icon input-icon-right">
                                             <select class="form-control chosen-select upazila" name="UPAZILA_ID[]" >
-                                                <option value=""> Select </option>
+                                                <option value=""> -Select- </option>
                                                 @foreach($upazillas as $row)
                                                     <option value="{{ $row->UPAZILA_ID }}" @if($entrepreneur->UPAZILA_ID == $row->UPAZILA_ID) selected @endif>{{ $row->UPAZILA_NAME }}</option>
                                                 @endforeach
@@ -105,7 +105,7 @@
                                 <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select division" name="DIVISION_ID[]"  >
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                         @foreach($divisions as $row)
                                             <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                                         @endforeach
@@ -115,14 +115,14 @@
                                 <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                      </select>
                                 </span>
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select upazila" name="UPAZILA_ID[]"  >
-                                        <option value=""> Select </option>
+                                        <option value=""> -Select- </option>
                                     </select>
                                 </span>
                                 </td>

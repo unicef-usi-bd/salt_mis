@@ -8,7 +8,7 @@
             <div class="col-sm-8">
         <span class="block input-icon input-icon-right">
             <select id="form-field-select-3 inputSuccess SELLER_TYPE_ID" class="chosen-select form-control" name="SELLER_TYPE_ID" data-placeholder="Select or search data">
-               <option value=""></option>
+               <option value="">-Select-</option>
                 @foreach($sellerType as $seller)
                 <option value="{{$seller->LOOKUPCHD_ID}}" @if($seller->LOOKUPCHD_ID == 7) selected @endif> {{$seller->LOOKUPCHD_NAME}}</option>
                 @endforeach
@@ -63,7 +63,7 @@
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
-                            <option value="">Select Division</option>
+                            <option value="">-Select-</option>
                             @foreach($getDivision as $row)
                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                             @endforeach
@@ -87,7 +87,7 @@
                     <div class="col-xs-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="Select or search data">
-                            <option value="">Select Thana</option>
+                            <option value="">-Select-</option>
                          </select>
                     </span>
                     </div>
@@ -132,7 +132,7 @@
                     <td>
                         <span class="block input-icon input-icon-right">
                             <select class="form-control chosen-select division" name="COV_DIVISION_ID[]">
-                                <option value="">Select</option>
+                                <option value="">-Select-</option>
                                 @foreach($getDivision as $row)
                                     <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                                 @endforeach
@@ -149,7 +149,7 @@
                     <td>
                         <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="COV_THANA_ID[]" data-placeholder="Select or search data">
-                            <option value="">Select Thana</option>
+                            <option value="">-Select-</option>
                          </select>
                     </span>
                     </td>

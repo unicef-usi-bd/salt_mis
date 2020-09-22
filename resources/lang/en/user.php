@@ -25,7 +25,7 @@
      'address' => 'Address',
      'example_address' => 'Address Here ',
      'contact_no' => 'Contact No',
-     'example_contact_no' => 'Contact No Here ',
+     'example_contact_no' => 'Contact No ',
      'image' => 'Image',
      'signature' => 'Signature',
      'designation' => 'Designation',

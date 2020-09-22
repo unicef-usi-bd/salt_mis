@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('assoc-process-stock-pdf/'.$starDate.'/'. $endDate) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Association</h4>
+        <h4>Process Stock</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -18,10 +18,10 @@
             <thead>
             <tr>
                 <th>Sl</th>
-                <th>No. of Millers</th>
+                <th>Number of Mill</th>
                 <th>Process Type</th>
-                <th>Batch No</th>
-                <th>Production Amount</th>
+                <th>Total Number of Batch</th>
+                <th>Production Amount (KG)</th>
             </tr>
 
             </thead>

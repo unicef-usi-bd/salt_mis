@@ -70,7 +70,7 @@
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select-</option>
-                                <option value="0">All Purchase</option>
+                                <option value="0">-Select-</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                                 @endforeach
@@ -84,7 +84,7 @@
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chemicalItemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select-</option>
-                                <option value="0">All Purchase</option>
+                                <option value="0">-Select-</option>
                                 @foreach($chemicalTypes as $row)
                                     <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
                                 @endforeach
@@ -112,7 +112,7 @@
                         <div class="col-xs-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="division form-control chosen-select width-65" name="DIVISION_ID" data-district-all="true" data-placeholder="Select or search data">
-                                    <option value="">Select Division</option>
+                                    <option value="">-Select-</option>
                                     <option value="">All</option>
                                     @foreach($getDivision as $row)
                                         <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -126,7 +126,7 @@
                         <div class="col-xs-8">
                         <span class="block input-icon input-icon-right">
                             <select class="district form-control chosen-select width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
-                                <option value="">Select District</option>
+                                <option value="">-Select-</option>
                             </select>
                         </span>
                         </div>
@@ -178,7 +178,7 @@
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="issuerMiller width-65 form-control chosen-select " id="ISSURE_ID" name="ISSURE_ID"  >
-                                    <option value="">Select</option>
+                                    <option value="">-Select-</option>
                                     @foreach($issueBy as $row)
                                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                     @endforeach
@@ -191,7 +191,7 @@
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="customerId width-65 form-control chosen-select " id="CUSTOMER_ID" name="CUSTOMER_ID"  >
-                                    <option value="">Select</option>
+                                    <option value="">-Select-</option>
                                     @foreach($clintNameList as $row)
                                         <option value="{{ $row->CUSTOMER_ID }}">{{ $row->TRADER_NAME }}</option>
                                     @endforeach
