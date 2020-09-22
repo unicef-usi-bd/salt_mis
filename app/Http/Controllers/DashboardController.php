@@ -300,7 +300,7 @@ class DashboardController extends Controller
         $totalStockKi = $totalProcrument - $kiUsed;
         $millerInfo = MillerInfo::millerInfoByCenterId();
         $extendDate = User::extendDateByCenterId();
-
+        $centerId = Auth::user()->center_id;
         $certificateExpireDate = Certificate::millerCertificateExpired($millerInfo->MILL_ID);
         if(!$certificateExpireDate){
             $message = "Miller certificate's not found. Please provide your certificates to association.!!!";
@@ -311,7 +311,7 @@ class DashboardController extends Controller
 
         if($certificateExpireDate) {
             if ($this->hasAuthorization($certificateExpireDate) || $this->hasAuthorization($millExpireDate)) {
-                return view('dashboards.millerDashboard', compact('totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument','totalStockKi'));
+                return view('dashboards.millerDashboard', compact('centerId','totalWashcrashProduction', 'totalIodizeProduction', 'totalProductons', 'totalWashCrashSale', 'totalIodizeSale', 'totalProductSales', 'procurementList', 'totalproduction', 'totalSale', 'totalStock', 'saleTotal', 'monthWiseProcurement', 'monthWiseProduction', 'renewalMessageCertificate', 'millId', 'totalWcIoDashboard', 'totalSaleDashboard', 'totalYearProduction', 'kiStock', 'kiUsed', 'totalKiInStock', 'totalProcrument','totalStockKi'));
             } else {
                 $message = "Your Certificate Is Expired. Please Contact With Your Association.!!!";
             }

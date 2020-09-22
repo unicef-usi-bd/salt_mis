@@ -95,7 +95,7 @@
 
                 <div class="infobox-data">
                     <div class="infobox-content"> INDUSTRIAL SALT SALES</div>
-                    <div class="infobox-content">{{ number_format($totalWashCrashSale, 2) }} KG</div>
+                    <div class="infobox-content">{{ number_format($totalWashCrashSale, 2) }} KG-{{$centerId}}</div>
                 </div>
             </div>
 

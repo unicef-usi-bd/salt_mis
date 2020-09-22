@@ -239,7 +239,7 @@ class SalesDistribution extends Model
 
     //for Service
     public static function totalWashcrashSalesService($child_id){
-
+        /*
         $countSales = DB::table('tmm_itemstock');
         $countSales->select('tmm_itemstock.QTY');
         $countSales->where('TRAN_TYPE','=','W');
@@ -248,6 +248,21 @@ class SalesDistribution extends Model
 
 
         return $countSales->sum('tmm_itemstock.QTY');
+        */
+        $centerId = $child_id;//Auth::user()->center_id;
+        $countSales = DB::table('tmm_itemstock as stock')
+            ->select('stock.QTY')
+            ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
+            ->leftJoin('ssm_mill_info as smi','association.MILL_ID','=','smi.MILL_ID')
+            ->where('smi.ACTIVE_FLG','=','1')
+            ->where('TRAN_TYPE','=','W')
+            ->where('TRAN_FLAG','=','SD')
+            ->whereNull('stock.stock_adjustment_id')
+            ->whereNotNull('stock.TRAN_NO');
+
+        if($centerId) $countSales->where('stock.center_id','=',$centerId);
+
+        return $countSales->sum('stock.QTY');
     }
 
     public static function totalIodizeSalesService($child_id){
