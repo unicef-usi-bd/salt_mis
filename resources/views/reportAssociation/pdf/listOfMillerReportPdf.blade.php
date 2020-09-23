@@ -6,14 +6,14 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>List Of Miller Report</p>
+    <p>Lost of Mill</p>
 </div>
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <th>Miller Name</th>
+        <th>Name of Mill </th>
         {{--<th>Item Type</th>--}}
         {{--<th>Item Name</th>--}}
         {{--<th>Purchases Volume</th>--}}

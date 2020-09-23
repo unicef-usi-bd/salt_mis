@@ -21,7 +21,7 @@
                     <th>Certificate Name</th>
                     <th>Provider/Issuer Name</th>
                     <th>Certificate Type</th>
-                    <th>Expireable</th>
+                    <th>Expirable</th>
                     <th>Status</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>

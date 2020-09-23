@@ -18,8 +18,8 @@
                             <th>District</th>
                             <th>Upazila</th>
                             <th >NID</th>
-                            <th>Mobile 1</th>
-                            <th >Mobile 2</th>
+                            <th>Mobile No</th>
+                            <th >Mobile No</th>
                             <th >Email</th>
                             <th >Remarks</th>
                             <th class="addButton"><span class="btn btn-primary btn-sm center rowAdd"><i class="fa fa-plus"></i></span></th>
@@ -35,7 +35,7 @@
                             <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select division" name="DIVISION_ID[]"  >
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                         @foreach($getDivision as $row)
                                             <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                                         @endforeach
@@ -45,14 +45,14 @@
                             <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select district" name="DISTRICT_ID[]"  >
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                      </select>
                                 </span>
                             </td>
                             <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select upazila" name="UPAZILA_ID[]"  >
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                     </select>
                                 </span>
                             </td>

@@ -41,7 +41,7 @@ class MillerInfoController extends Controller
         $url = Route::getFacadeRoot()->current()->uri();
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
-        $title = trans('Create Miller Profile');
+        $title = trans('Create Mill Profile');
 
         $heading=array(
             'title'=> $title,

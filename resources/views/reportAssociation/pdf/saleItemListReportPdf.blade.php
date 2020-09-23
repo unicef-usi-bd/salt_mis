@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Sale Item List Report</p>
+    <p>List of Item</p>
 </div>
 
 

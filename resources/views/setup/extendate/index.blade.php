@@ -17,7 +17,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess " class="chosen-select millerName form-control" name="MILL_ID" data-placeholder="Select Mill Name">
-                               <option value="">Select Mill Name</option>
+                               <option value="">-Select-</option>
                                 @foreach($millerId as $row)
                                     <option value="{{$row->MILL_ID}}">{{ $row->MILL_NAME }}</option>
                                 @endforeach

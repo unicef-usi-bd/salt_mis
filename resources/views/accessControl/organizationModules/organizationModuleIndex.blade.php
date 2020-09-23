@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('organizationModule.org_list') }}">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('organizationModule.org_list') }}">
                 <thead>
                 <tr>
 

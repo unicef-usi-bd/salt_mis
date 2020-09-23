@@ -22,7 +22,7 @@
                 </p>
 
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" title="{{ trans('module.module_list') }}">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('module.module_list') }}">
                 <thead>
                     <tr>
                         <th class="fixedWidth" >{{ trans('dashboard.sl') }}</th>

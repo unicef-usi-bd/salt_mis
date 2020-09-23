@@ -106,7 +106,7 @@
                             <span class="block input-icon input-icon-right">
                                <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID"
                                        data-placeholder="Select or search data">
-                                <option value=""></option>
+                                <option value="">-Select-</option>
                                    @foreach($ownerType as $row)
                                        <option value="{{ $row->LOOKUPCHD_ID }}" @if($millerInfo->OWNER_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif >{{ $row->LOOKUPCHD_NAME }}</option>
                                    @endforeach
@@ -121,7 +121,7 @@
                             <span class="block input-icon input-icon-right">
                                 <select id="DIVISION_ID" name="DIVISION_ID"
                                         class="chosen-select chosen-container division" data-placeholder="Select">
-                                    <option value=""></option>
+                                    <option value="">-Select-</option>
                                     @foreach($divisions as $row)
                                         <option value="{{ $row->DIVISION_ID }}" @if($millerInfo->DIVISION_ID==$row->DIVISION_ID) selected @endif >{{ $row->DIVISION_NAME }}</option>
                                     @endforeach
@@ -136,7 +136,7 @@
                             <span class="block input-icon input-icon-right">
                                <select id="DISTRICT_ID" class="chosen-select chosen-container district"
                                        name="DISTRICT_ID" data-placeholder="Select">
-                                   <option value="">Select</option>
+                                   <option value="">-Select-</option>
                                    @foreach($districts as $row)
                                        <option value="{{ $row->DISTRICT_ID }}" @if($millerInfo->DISTRICT_ID ==$row->DISTRICT_ID) selected @endif>{{ $row->DISTRICT_NAME }}</option>
                                    @endforeach
@@ -151,7 +151,7 @@
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID"
                                        data-placeholder="Select">
-                                   <option value="">Select</option>
+                                   <option value="">-Select-</option>
                                    @foreach($upazillas as $row)
                                        <option value="{{ $row->UPAZILA_ID }}" @if($millerInfo->UPAZILA_ID ==$row->UPAZILA_ID) selected @endif>{{ $row->UPAZILA_NAME }}</option>
                                    @endforeach

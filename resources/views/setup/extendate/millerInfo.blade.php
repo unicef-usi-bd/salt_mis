@@ -31,7 +31,7 @@
 
 <div class="row" style="margin-top: 50px;padding:15px;">
     <div class="panel panel-default">
-        <div class="panel-heading"><b style="font-size: 14px">All Certificates.</b> <span class="text-danger">NB: Expired certificate identify by RED color.</span></div>
+        <div class="panel-heading"><b style="font-size: 14px">All Certificate List</b> <span class="text-danger"></span></div>
         <div class="panel-body">
             <table class="table table-bordered">
                 <thead>
@@ -40,7 +40,7 @@
                     <th>Certificate Name</th>
                     <th>Issuer Name</th>
                     <th>Issuing Date</th>
-                    <th>Renewing Date</th>
+                    <th>Renewal Date</th>
                 </tr>
                 </thead>
                 <tbody>

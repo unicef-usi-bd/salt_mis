@@ -6,17 +6,17 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Process Stock Report</p>
+    <p>Process Stock</p>
 </div>
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <th>No. of Millers</th>
+        <th>Number of Mill</th>
         <th>Process Type</th>
-        <th>Batch No</th>
-        <th>Production Amount</th>
+        <th>Total Number of Batch</th>
+        <th>Production Amount (KG)</th>
     </tr>
 
     </tr>

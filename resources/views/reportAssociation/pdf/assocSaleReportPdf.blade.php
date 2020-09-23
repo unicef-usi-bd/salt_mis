@@ -6,20 +6,20 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Association Sales Report</p>
+    <p>Total Sale</p>
 </div>
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <thead>
     <tr>
-        <th>Sl.</th>
-        <th>Items Type</th>
-        <th>Items Name</th>
+        <th>Sl</th>
+        <th>Item Type</th>
+        <th>Item Name</th>
         <th>Division</th>
         <th>District</th>
-        <th>Client Name</th>
-        <th>Sales Amount</th>
+        <th>Name of Client </th>
+        <th>Sales Amount (KG)</th>
 
     </tr>
 

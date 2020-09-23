@@ -22,7 +22,7 @@
 
             @endif
 
-            <table class="table table-striped table-bordered table-hover gridTable" title="Email Template List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Email Template List">
                 <thead>
                 <tr>
 

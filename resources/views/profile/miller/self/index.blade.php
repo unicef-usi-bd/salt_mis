@@ -14,7 +14,7 @@
             Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Miller Profile
+                Mill Profile
             </small>
         </h1>
     </div><!-- /.page-header -->

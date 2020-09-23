@@ -31,10 +31,10 @@
                                        {{--<option value="license-miller-list">List of Miller </option>--}}
                                   {{--</optgroup>--}}
                                    <optgroup label="QC">
-                                       <option value="qc-miller-list">List of Miller </option>
+                                       <option value="qc-miller-list">Mill-Wise List of QC </option>
                                   </optgroup>
                                    <optgroup label="HR">
-                                       <option value="association-miller-list">List of Miller </option>
+                                       <option value="association-miller-list">List of Mill </option>
                                   </optgroup>
                                    <optgroup label="Miller">
                                        <option value="association-total-miller">Total Miller </option>
@@ -74,7 +74,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="form-control division chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
-                                    <option value="">Select Division</option>
+                                    <option value="">-Select-</option>
                                     @foreach($getDivision as $row)
                                        <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
                                    @endforeach
@@ -87,7 +87,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
-                                <option value="">Select District</option>
+                                <option value="">-Select-</option>
                             </select>
                             </span>
                         </div>
@@ -99,7 +99,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAssoc chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                                <option value="0">All Purchase</option>
+                                <option value="0">-Select-</option>
                                    @foreach($crudeSaltTypes as $chemical)
                                        <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
                                    @endforeach

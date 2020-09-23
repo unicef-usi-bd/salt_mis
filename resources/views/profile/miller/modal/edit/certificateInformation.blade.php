@@ -18,7 +18,7 @@
                             <th>Issuing Date</th>
                             <th>Certificate Number</th>
                             <th>Certificate Image</th>
-                            <th>Renewing Date</th>
+                            <th>Renewal Date</th>
                             <th>Remarks</th>
                             <th class="text-center"><span class="btn btn-primary btn-sm rowAddCertificate"><i class="fa fa-plus"></i></span></th>
                         </tr>
@@ -30,7 +30,7 @@
                                     <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]">
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                         @foreach($certificates as $row)
                                             <option @if($row->CERTIFICATE_TYPE==1) style="color: purple!important;font-weight: bold!important;" @endif value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
@@ -85,7 +85,7 @@
                                 <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]">
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                         @foreach($certificates as $row)
                                             <option @if($row->CERTIFICATE_TYPE==1) style="color: purple!important;font-weight: bold!important;" @endif value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
@@ -95,7 +95,7 @@
                                 <td>
                                 <span class="block input-icon input-icon-right">
                                     <select class="form-control chosen-select ISSURE_ID" name="ISSURE_ID[]">
-                                        <option value="">Select</option>
+                                        <option value="">-Select-</option>
                                         {{--@foreach($issueBy as $row)--}}
                                         {{--<option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>--}}
                                         {{--@endforeach--}}

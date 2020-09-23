@@ -21,7 +21,7 @@
                 </p>
 
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
                 <thead>
                 <tr>
                     <th rowspan="2" class="fixedWidth">{{ trans('dashboard.sl') }}</th>

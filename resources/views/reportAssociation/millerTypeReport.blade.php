@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-miller-type-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>Type of Miller</h4>
+        <h4>Total Mill</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -18,8 +18,8 @@
             <thead>
             <tr>
                 <th>Sl</th>
-                <th>Type of Miller </th>
-                <th>Name of Miller </th>
+                <th>Type of Mill </th>
+                <th>Name of Mill </th>
             </tr>
 
             </thead>

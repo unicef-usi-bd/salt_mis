@@ -6,7 +6,7 @@
                 <input type="hidden" class="insertIdContainer" value="" name="MILL_ID">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a laboratory ?</b> </label>
+                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Have a Laboratory ?</b> </label>
                         <div class="col-sm-5">
                             <label>
                                 <input autocomplete="off" name="LABORATORY_FLG" type="radio" class="ace merit"  value="1"/>
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you follow Standard Operating Procedure ?</b> </label>
+                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do You Follow Standard Operating Procedure ?</b> </label>
                         <div class="col-sm-4">
                             <label>
                                 <input autocomplete="off" name="OPERATION_PROCEDURE_FLG" type="radio" class="ace merit"  value="1" @if(!empty($qcInfo) && $qcInfo->OPERATION_PROCEDURE_FLG==1) checked @endif />
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do you have trained laboratory person ?</b> </label>
+                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do You Have Trained Laboratory Person ?</b> </label>
                         <div class="col-sm-5">
                             <label>
                                 <input autocomplete="off" name="LAB_MAN_FLG" type="radio" class="ace merit"  value="1"/>
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Does laboratory use test kit ?</b> </label>
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Does Laboratory Use Test Kit ?</b> </label>
                         <div class="col-sm-7">
                             <label>
                                 <input autocomplete="off" name="MONITORING_FLG" type="radio" class="ace merit"  value="1"/>
