@@ -32,7 +32,7 @@
                                     <select class="form-control chosen-select CERTIFICATE_TYPE_ID" name="CERTIFICATE_TYPE_ID[]">
                                         <option value="">-Select-</option>
                                         @foreach($certificates as $row)
-                                            <option @if($row->CERTIFICATE_TYPE==1) style="color: purple!important;font-weight: bold!important;" @endif value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID) selected @endif>{{ $row->LOOKUPCHD_NAME }}</option>
+                                            <option @if($row->CERTIFICATE_TYPE==1) style="color: purple!important;font-weight: bold!important;" @endif value="{{ $row->LOOKUPCHD_ID }}" @if($certificate->CERTIFICATE_TYPE_ID==$row->LOOKUPCHD_ID)  @endif>{{ $row->LOOKUPCHD_NAME }}</option>
                                         @endforeach
                                     </select>
                                 </span>

@@ -28,7 +28,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller Id</b><span style="color: red;"> </span> </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Seller ID</b><span style="color: red;"> </span> </label>
                 <div class="col-sm-8">
                     <input autocomplete="off" type="text" id="inputSuccess SELLER_ID" placeholder="Example: Amount per KG here" name="SELLER_ID" readonly="readonly" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->SELLER_ID }}" readonly/>
                 </div>
@@ -50,13 +50,13 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Trade Licence no</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-12"> <b>Trade Licence No.</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-12">
                         <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="Example: Amount per KG here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->LICENCE_NO }}"/>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-sm-12"> <b>Phone Number</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-12"> <b>Mobile No.</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-12">
                         <input autocomplete="off" type="text" id="inputSuccess PHONE" placeholder="Example: Amount per KG here" name="PHONE" class="form-control col-xs-10 col-sm-5" value="{{ $editSellerProfile->PHONE }}"/>
                     </div>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazilla</b><span style="color: red;"> *</span></label>
+                    <label for="inputSuccess" class="col-sm-12" style="margin-left: -2%;"><b>Thana/Upazila</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-12">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="THANA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -132,7 +132,7 @@
                 <tr>
                     <th style="width: 255px;">Division<span style="color:red;"> </span></th>
                     <th style="width: 255px;">District<span style="color:red;"> </span></th>
-                    <th style="width: 255px;">Thana/Upazilla</th>
+                    <th style="width: 255px;">Thana/Upazila</th>
                     {{--<th style="width: 150px;">Problem</th>--}}
 
                     <th style="width: 30px;"><span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span></th>

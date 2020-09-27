@@ -9,27 +9,27 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th>CRUD Salt Type </th>
+                    <th>Crude Salt Type </th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->ITEM_NAME}}</td>
-                    <th>Sodium chloride</th>
+                    <th>Chloride content (as NaCl), %m/m</th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->SODIUM_CHLORIDE}}</td>
                 </tr>
                 <tr>
-                    <th>Moisturizer </th>
+                    <th>Moisture, %m/m</th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->MOISTURIZER}}</td>
-                    <th>Iodine content(PPM)</th>
+                    <th>Iodine content, mg/kg</th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->PPM}}</td>
 
                 </tr>
                 <tr>
-                    <th>PH</th>
+                    <th>pH Value</th>
                     <th> :</th>
                     <td>{{$viewCrudSaltDetail->PH}}</td>
-                    <th>Active Status</th>
+                    <th>Status</th>
                     <th> :</th>
                     <td>
                         @if($viewCrudSaltDetail->ACTIVE_FLG==1)

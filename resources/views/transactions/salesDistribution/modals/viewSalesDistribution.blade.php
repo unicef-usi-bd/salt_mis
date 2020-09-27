@@ -21,13 +21,13 @@
                 <tr>
                     <th>Date</th>
                     <th> :</th>
-                    <td>{{$viewSalersDistributor->SALES_DATE}}</td>
+                    <td>{{date('d-m-Y',strtotime($viewSalersDistributor->SALES_DATE))}}</td>
                 </tr>
                 <tr>
                     <th>Driver Name</th>
                     <th> :</th>
                     <td>{{$viewSalersDistributor->DRIVER_NAME}}</td>
-                    <th>Vehicle No</th>
+                    <th>Vehicle No.</th>
                     <th> :</th>
                     <td>{{$viewSalersDistributor->VEHICLE_NO}}</td>
                 </tr>
@@ -40,7 +40,7 @@
                     <td>{{$viewSalersDistributor->TRANSPORT_NAME}}</td>
                 </tr>
                 <tr>
-                    <th>Mobile Number</th>
+                    <th>Mobile No.</th>
                     <th> :</th>
                     <td>{{$viewSalersDistributor->MOBILE_NO}}</td>
                 </tr>
@@ -50,8 +50,8 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th >Salt Type</th>
-                    <th>Salt Amount</th>
+                    <th >Processed Salt Type</th>
+                    <th>Item Name (Package)</th>
                     <th >Quantity</th>
                 </tr>
                 </thead>

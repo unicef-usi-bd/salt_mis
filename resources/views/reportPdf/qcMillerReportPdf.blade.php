@@ -6,17 +6,17 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>List of Miller QC Report</p>
+    <p>Mill-Wise List of QC</p>
 </div><!-- /.row -->
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <th>Millers Name</th>
-        <th>Batch NO</th>
-        <th>QC BY</th>
-        <th>Agency Name</th>
+        <th>Name of Mill</th>
+        <th>Batch NO.</th>
+        <th>QC By</th>
+        <th>Agency</th>
         <th>Test Result</th>
     </tr>
     <?php $sl = 0; ?>

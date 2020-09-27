@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-4">
-                    <label class="col-sm-12"><b>Attached Test Document</b><span style="color: red;"> * </span></label>
+                    <label class="col-sm-12"><b>Test Name</b><span style="color: red;"> * </span></label>
                     <div class="col-sm-12">
                         <input autocomplete="off" type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Document here"  value="{{ $editQualityControl->QC_TESTNAME }}" class="form-control col-xs-5 col-sm-5" />
                     </div>
@@ -86,7 +86,7 @@
                     <label class="col-sm-12"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editQualityControl->REMARKS }}</textarea>
+                            <textarea    rows="3"  placeholder="Example:- Remarks Here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editQualityControl->REMARKS }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -98,50 +98,50 @@
         <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">
             <h4  style="color: #1B6AAA; margin-left: 450px;">Test Result</h4>
             <div class="col-md-6">
-                <h4 style="margin-left: 150px;">BSTI Standard</h4>
+                <h4 style="margin-left: 280px;">BSTI Standard</h4>
             </div>
             <div class="col-md-6">
-                <h4>Batch Wise Result</h4>
+                <h4 style="margin-left: 50px;">Batch Wise Result</h4>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Chloride content (as NaCl),%m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="E" placeholder=""  value="{{ $bstiChemicalData->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Moisture, %m/mMoisturizer</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Iodine content(PPM),</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Iodine content, mg/kg</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PPM }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>pH Value</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PH }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater, %m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble sodium chloride</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble in water other than sodium chloride, %m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>

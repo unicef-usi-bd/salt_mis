@@ -17,10 +17,10 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
+                <th>SL</th>
                 <th>Process Type</th>
-                <th>Batch No</th>
-                <th>Production Amount</th>
+                <th>Batch No.</th>
+                <th>Production Amount (KG)</th>
             </tr>
 
             </thead>

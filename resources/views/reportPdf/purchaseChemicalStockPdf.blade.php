@@ -12,9 +12,9 @@
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
+        <th>SL</th>
         <th>Item Name</th>
-        <th>Total Purchase Amount</th>
+        <th>Total Chemical Stock</th>
     </tr>
     <?php $sl=0;?>
     @foreach($purchaseChemicalStocks as $purchaseChemicalStock)

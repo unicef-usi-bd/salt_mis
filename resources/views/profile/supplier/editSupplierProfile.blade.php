@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade licence No</b><span style="color: red;"> </span> </label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Trade Licence No.</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <input autocomplete="off" type="text" name="LICENCE_NO" id="inputSuccess org_slogan" value="{{ $editData->LICENCE_NO }}" class="width-100"  />
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>EMAIL</b><span style="color: red;"> </span> </label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Email</b><span style="color: red;"> </span> </label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <input autocomplete="off" type="text" name="EMAIL" id="inputSuccess fax" value="{{ $editData->EMAIL }}" class="width-100" />
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Phone </b><span style="color: red">*</span></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Mobile No. </b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <input autocomplete="off" type="text" name="PHONE" id="inputSuccess website" value="{{ $editData->PHONE }}" class="width-100"  />
@@ -68,7 +68,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division Name</b><span style="color: red">*</span></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Division</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control  chosen-select division" name="DIVISION_ID">
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District Name</b><span style="color: red">*</span></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>District</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control district chosen-select" name="DISTRICT_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Upazilla/Thana</b><span style="color: red">*</span></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Thana/Upazila</b><span style="color: red">*</span></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <select class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="{{ trans('organization.select_one') }}">
@@ -102,7 +102,7 @@
             </div>
 
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar Name</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Bazar</b></label>
                 <div class="col-xs-12 col-sm-7">
             <span class="block input-icon input-icon-right">
                 <input autocomplete="off" type="text"  name="BAZAR_NAME" id="inputSuccess email_address" value="{{ $editData->BAZAR_NAME }}" class="width-100"  />
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>REMARKS</b></label>
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
                 <div class="col-xs-12 col-sm-7">
                     <span class="block input-icon input-icon-right">
                         <textarea class="form-control" rows="6" name="REMARKS" placeholder="Remarks here">{{ $editData->REMARKS }}</textarea>

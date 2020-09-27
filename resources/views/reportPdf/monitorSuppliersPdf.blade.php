@@ -12,10 +12,10 @@
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
-        <th>Supplier Type</th>
-        <th>Supplier Name</th>
-        <th>Purchase Volume</th>
+        <th>SL</th>
+        <th>Type of Supplier</th>
+        <th>Name of Supplier</th>
+        <th>Purchase Amount (KG)</th>
     </tr>
     <?php $sl = 0; ?>
 

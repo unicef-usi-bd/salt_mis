@@ -40,7 +40,7 @@
                                 $viewPermissionLevel = $previllage->READ;
                             @endphp
                             @if($editPermissionLevel == 1)
-                                <a class="green showModalGlobal" id="{{ 'brand/'.$brand->brand_id.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Item">
+                                <a class="green showModalGlobal" id="{{ 'brand/'.$brand->brand_id.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Brand Name">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                             @else

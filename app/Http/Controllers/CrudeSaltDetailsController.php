@@ -33,7 +33,7 @@ class CrudeSaltDetailsController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Crude Salt Create');
+        $title = trans('Create Crude Salt Details');
 
         $heading=array(
             'title'=> $title,

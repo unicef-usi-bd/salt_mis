@@ -11,10 +11,10 @@
         {{--</h1>--}}
 
         <h1>
-            Setup
+            Monitor
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Monitoring Setup
+                Monitoring List
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -41,7 +41,7 @@
                 {{--</tr>--}}
                 <tr>
                     <th class="fixedWidth" style="width: 5px;">Sl</th>
-                    <th class="center fixedWidth">Agency Nane</th>
+                    <th class="center fixedWidth">Agency Name</th>
                     <th class="center fixedWidth">Monitoring Date</th>
                     <th class="center fixedWidth">Remarks</th>
                     <th class="center fixedWidth">Action</th>

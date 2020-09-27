@@ -11,7 +11,7 @@ return [
     'sl' => 'SL',
     'create_lookup' => 'Lookup Group Create',
     'group_name' => 'Group Name',
-    'active_status' => 'Active Status',
+    'active_status' => 'Status',
     'exp_group_name' => 'Group Name Here',
     'exp_user_define_id' => 'User Define Serial Number Here',
     'view_lookup_group_data' => 'View Lookup Group Data',

@@ -14,7 +14,7 @@
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Supplier Type</b><span style="color: red">*</span></label>
                         <div class="col-xs-8">
                     <span class="block input-icon input-icon-right" style="width: 365px; margin-left: 5px;">
-                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select " name="SUPPLIER_TYPE_ID" data-placeholder="Select or search data">
+                        <select id="SUPPLIER_TYPE_ID" class="form-control chosen-select " name="SUPPLIER_TYPE_ID" data-placeholder=" -Select-">
                             <option value=""></option>
                             @foreach($getSupplierType as $supplier)
                                 <option value="{{$supplier->LOOKUPCHD_ID}}"> {{$supplier->LOOKUPCHD_NAME}}</option>
@@ -25,31 +25,31 @@
                     </div>
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trading Name</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" id="inputSuccess TRADING_NAME" placeholder="Trading Name Here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5 TRADING_NAME" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADING_NAME" placeholder="Example:- Trading Name Here" name="TRADING_NAME" class="form-control col-xs-10 col-sm-5 TRADING_NAME" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trader Name</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" id="inputSuccess TRADER_NAME" placeholder="Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5 TRADER_NAME" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess TRADER_NAME" placeholder="Example:- Trader Name Here" name="TRADER_NAME" class="form-control col-xs-10 col-sm-5 TRADER_NAME" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade licence No</b><span style="color: red"></span> </label>
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Trade licence No.</b><span style="color: red"></span> </label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="licence No Here" name="LICENCE_NO" class="form-control col-xs-10 col-sm-5 LICENCE_NO" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess LICENCE_NO" placeholder="Example:- Trade Licence No." name="LICENCE_NO" class="form-control col-xs-10 col-sm-5 LICENCE_NO" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Email</b></label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" id="inputSuccess EMAIL" placeholder="Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5 EMAIL" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess EMAIL" placeholder="Example:- Email Here" name="EMAIL" class="form-control col-xs-10 col-sm-5 EMAIL" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Phone Number</b><span style="color: red"> *</span> </label>
+                    <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile No.</b><span style="color: red"> *</span> </label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" id="inputSuccess" placeholder="Phone Number Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
+                        <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Mobile No. Here" name="PHONE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
-                        <select id="DIVISION_ID" class="form-control chosen-select division" name="DIVISION_ID" data-placeholder="Select or search data">
+                        <select id="DIVISION_ID" class="form-control chosen-select division" name="DIVISION_ID" data-placeholder=" -Select-">
                             <option value="">-Select-</option>
                             @foreach($getDivision as $row)
                                 <option value="{{$row->DIVISION_ID}}"> {{$row->DIVISION_NAME}}</option>
@@ -73,17 +73,17 @@
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
-                        <select id="DISTRICT_ID" class="form-control chosen-select district" name="DISTRICT_ID" data-placeholder="Select or search data">
+                        <select id="DISTRICT_ID" class="form-control chosen-select district" name="DISTRICT_ID" data-placeholder=" -Select-">
                             <option value="">-Select-</option>
                         </select>
                     </span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Upazilla/Thana</b><span style="color: red">*</span></label>
+                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Thana/Upazila</b><span style="color: red">*</span></label>
                     <div class="col-xs-8">
                     <span class="block input-icon input-icon-right">
-                        <select id="THANA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder="Select or search data">
+                        <select id="THANA_ID" class="form-control chosen-select upazila" name="UPAZILA_ID" data-placeholder=" -Select-">
                             <option value="">-Select-</option>
                          </select>
                     </span>
@@ -93,13 +93,13 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Bazar</b> </label>
                     <div class="col-xs-8">
-                        <input autocomplete="off" type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Bazar Name Here"/>
+                        <input autocomplete="off" type="text" name="BAZAR_NAME" class="form-control col-xs-10 col-sm-5" value="" placeholder="Example:- Bazar Name Here"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b></label>
                     <div class="col-xs-8">
-                        <textarea class="form-control"  rows="5" name="REMARKS" placeholder="Remarks here"></textarea>
+                        <textarea class="form-control"  rows="5" name="REMARKS" placeholder="Example:- Remarks here"></textarea>
 
                     </div>
                 </div>

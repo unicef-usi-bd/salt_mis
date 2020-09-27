@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <th>Item Name</th>
                 <th>Total Stock Amount</th>
             </tr>

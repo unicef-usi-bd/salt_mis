@@ -9,20 +9,20 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th>Batch Number</th>
+                    <th>Batch No.</th>
                     <th> :</th>
                     <td>{{$viewIodize->BATCH_NO}}</td>
                     <th>Date</th>
                     <th> :</th>
-                    <td>{{$viewIodize->BATCH_DATE}}</td>
+                    <td>{{date("d-m-Y", strtotime($viewIodize->BATCH_DATE))}}</td>
                 </tr>
                 <tr>
-                    <th>Salt Amount</th>
+                    <th>Salt Amount (KG)</th>
                     <th> :</th>
-                    <td>{{$viewIodize->WASH_CRASH_QTY}} KG</td>
-                    <th>Chemical Amount</th>
+                    <td>{{$viewIodize->WASH_CRASH_QTY}}</td>
+                    <th>Chemical Amount (KG)</th>
                     <th> :</th>
-                    <td>{{$viewIodize->REQ_QTY}} ltr</td>
+                    <td>{{$viewIodize->REQ_QTY}}</td>
                 </tr>
             </table>
         </div>

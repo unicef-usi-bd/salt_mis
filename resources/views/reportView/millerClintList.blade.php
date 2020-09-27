@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('clint-list-miller-pdf/'.$divisionId.'/'.$districtId) }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>List Of Client</h4>
+        <h4>List of Client</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -17,13 +17,13 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
+                <th>SL</th>
                 <th>Item Name</th>
-                <th>seller type</th>
-                <th>seller name</th>
+                <th>Type of Seller</th>
+                <th>Name of Seller</th>
                 <th>Division</th>
                 <th>District</th>
-                <th>Total Volume</th>
+                <th>Total Amount (KG)</th>
             </tr>
 
             </thead>

@@ -7,20 +7,20 @@
             $rawAmount = $wasteAmount + $editIodize->WASH_CRASH_QTY;
         @endphp
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Date</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-7">
                 <input autocomplete="off" type="text" name="BATCH_DATE" id="BATCH_DATE" readonly value="{{date('m/d/Y',strtotime($editIodize->BATCH_DATE))}}" class="width-100 date-picker" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch Number</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Batch No.</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-7">
                 <input autocomplete="off" type="text" id="inputSuccess BATCH_NO" placeholder="Example: Auto Generate" name="BATCH_NO" readonly class="form-control col-xs-10 col-sm-5" value="{{ $editIodize->BATCH_NO }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt</b><span style="color: red;"> * </span> </label>
-            <div class="col-sm-8">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount of Salt (KG)</b><span style="color: red;"> * </span> </label>
+            <div class="col-sm-7">
                 <span class="col-sm-6" style="padding: 0;">
                     <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:Amount of Salt here" name="WASH_CRASH_QTY" class="form-control col-xs-10 col-sm-5 userAmount"  onkeypress="return numbersOnly(this, event)" value="{{ number_format($rawAmount, 2) }}"/>
                 </span>
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
-            <div class="col-sm-8">
+            <label for="inputSuccess" class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Chemical Type</b><span style="color: red;"> *</span></label>
+            <div class="col-sm-7">
                 <span class="block input-icon input-icon-right">
                     <select id="form-field-select-3 inputSuccess" class="chosen-select form-control chemical" name="PRODUCT_ID" data-placeholder="Select or search data">
                         <option value=""></option>
@@ -41,8 +41,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Chemical amount</b><span style="color: red;"> * </span> </label>
-            <div class="col-sm-8">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Chemical Amount (KG)</b><span style="color: red;"> * </span> </label>
+            <div class="col-sm-7">
                 <span class="col-sm-6" style="padding: 0;">
                     <input autocomplete="off" type="text" id="inputSuccess REQ_QTY" placeholder="Example: Amount of Chemical here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->REQ_QTY }}"/>
                 </span>
@@ -51,7 +51,7 @@
             <div class="recommendInfo" style="margin-left: 27%;float: left;color:#FF8F37;font-weight: bold"></div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
             <div class="col-sm-7">
                 <input autocomplete="off" type="text" id="inputSuccess WASTAGE" placeholder="Example: Amount of Wastage here" name="WASTAGE" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editIodize->WASTAGE }}"/>
 
@@ -59,8 +59,8 @@
             <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
-            <div class="col-sm-8">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+            <div class="col-sm-7">
                 <textarea rows="3" cols ="2" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5">{{ $editIodize->REMARKS }} </textarea>
             </div>
         </div>

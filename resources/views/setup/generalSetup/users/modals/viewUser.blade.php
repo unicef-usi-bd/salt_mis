@@ -28,7 +28,7 @@
 
                 </tr>
                 <tr>
-                    <th>{{ trans('user.contact_no') }}</th>
+                    <th>{{ trans('user.contact_no') }}.</th>
                     <th> :</th>
                     <td>
                         {{$userView->contact_no}}

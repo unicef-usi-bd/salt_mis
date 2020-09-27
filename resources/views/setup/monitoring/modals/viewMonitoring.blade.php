@@ -15,7 +15,7 @@
                     <td>{{ trans($viewMonitoring->LOOKUPCHD_NAME) }} </td>
                     <th class=" ">Monitoring Date</th>
                     <th> :</th>
-                    <td>{{ trans($viewMonitoring->MOMITOR_DATE) }} </td>
+                    <td>{{ trans(date('d-m-Y',strtotime($viewMonitoring->MOMITOR_DATE))) }} </td>
 
                </tr>
                 <tr>

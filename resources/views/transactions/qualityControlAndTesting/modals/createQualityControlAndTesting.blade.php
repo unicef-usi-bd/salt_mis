@@ -13,10 +13,10 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-md-12"><b>Quality Control BY</b><span style="color: red;"> * </span></label>
+                    <label class="col-md-12"><b>Quality Control By</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
-                            <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder="Select Quality Control BY">
+                            <select id="QC_BY"  class="chosen-select form-control" name="QC_BY" data-placeholder=" -Select-">
                                <option value=""></option>
                                 @foreach($qulityControlId as $name)
                                     <option value="{{$name->LOOKUPCHD_ID}}"> {{$name->LOOKUPCHD_NAME}}</option>
@@ -29,7 +29,7 @@
                     <label class="col-md-12"><b>Agency</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
-                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder="Select Agency">
+                            <select id="form-field-select-3 inputSuccess AGENCY_ID" class="chosen-select form-control" name="AGENCY_ID" data-placeholder=" -Select-">
                                <option value=""></option>
                                 @foreach($agencyId as $agency)
                                     <option value="{{$agency->LOOKUPCHD_ID}}"> {{$agency->LOOKUPCHD_NAME}}</option>
@@ -39,10 +39,10 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="col-md-12"> <b>Batch No</b><span style="color: red;"> * </span> </label>
+                    <label class="col-md-12"> <b>Batch No.</b><span style="color: red;"> * </span> </label>
                     <div class="col-md-12">
                         <span class="block input-icon input-icon-right">
-                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder="Select Batch No">
+                            <select id="BATCH_NO"  class="chosen-select form-control" name="BATCH_NO" data-placeholder=" -Select-">
                                <option value=""></option>
                                 {{--@foreach($iodizeBatch as $iodize)--}}
                                     {{--<option value="{{$iodize->IODIZEDMST_ID}}"> {{$iodize->BATCH_NO}}</option>--}}
@@ -62,7 +62,7 @@
                 <div class="col-md-4">
                     <label class="col-md-12"><b>Test Name</b><span style="color: red;"> * </span></label>
                     <div class="col-md-12">
-                        <input autocomplete="off" type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="BSTI test standard"  value="BSTI test standard" class="form-control col-xs-5 col-sm-5" />
+                        <input autocomplete="off" type="text" name="QC_TESTNAME" id="QC_TESTNAME" placeholder="Example:- Test Name Here"  value="BSTI test standard" class="form-control col-xs-5 col-sm-5" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -81,7 +81,7 @@
                     <div class="form-group">
 
                         <div class="col-md-12">
-                            <textarea rows="3" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
+                            <textarea rows="3" placeholder="Example:- Remarks Here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
                         </div>
                     </div>
                 </div>
@@ -91,50 +91,50 @@
         <div class="col-md-12" style="margin-top: 15px; margin-left: 100px;">
             <h4  style="color: #1B6AAA; margin-left: 450px;">Test Result</h4>
             <div class="col-md-6">
-                <h4 style="margin-left: 150px;">BSTI Standard</h4>
+                <h4 style="margin-left: 280px;">BSTI Standard</h4>
             </div>
             <div class="col-md-6">
-                <h4>Batch Wise Result</h4>
+                <h4 style="margin-left: 50px;">Batch Wise Result</h4>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Chloride content (as NaCl),%m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->SODIUM_CHLORIDE }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Moisture, %m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->MOISTURIZER }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Iodine content(PPM),</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Iodine content, mg/kg</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PPM }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>pH Value</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->PH }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble mater, %m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->water_insoluble_matter }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble sodium chloride</b><span style="color: red;"> </span> </label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble in water other than sodium chloride, %m/m</b><span style="color: red;"> </span> </label>
+                    <div class="col-sm-5">
                         <input autocomplete="off" type="text" name="" id="" placeholder=""  value="{{ $bstiChemicalData->matter_soluble_sc }}" class="form-control col-xs-5 col-sm-5" readonly />
                     </div>
                     <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="fa fa-percent"></i>

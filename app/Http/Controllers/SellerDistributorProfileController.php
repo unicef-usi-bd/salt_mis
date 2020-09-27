@@ -31,7 +31,7 @@ class SellerDistributorProfileController extends Controller
 
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
         $heading=array(
-            'title'=>'Seller & Distributor Profile',
+            'title'=>'Create Seller & Distributor Profile',
             'library'=>'datatable',
             'modalSize'=>'modal-bg',
             'action'=>'seller-distributor-profile/create',

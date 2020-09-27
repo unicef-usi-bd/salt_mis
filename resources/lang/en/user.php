@@ -29,7 +29,7 @@
      'image' => 'Image',
      'signature' => 'Signature',
      'designation' => 'Designation',
-     'active_status' => 'Active Status',
+     'active_status' => 'Status',
      'user_log' => 'User Log List',
      'phone' => 'Phone',
      'browser_details' => 'Browser Details',

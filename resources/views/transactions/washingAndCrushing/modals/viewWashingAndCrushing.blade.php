@@ -9,20 +9,20 @@
         <div class="row table-responsive">
             <table class="table">
                 <tr>
-                    <th>Batch No</th>
+                    <th>Batch No.</th>
                     <th> :</th>
                     <td>{{$viewWashingAndCrushing->BATCH_NO}}</td>
                     <th>Date</th>
                     <th> :</th>
-                    <td>{{$viewWashingAndCrushing->BATCH_DATE}}</td>
+                    <td>{{date("d-m-Y", strtotime($viewWashingAndCrushing->BATCH_DATE))}}</td>
                 </tr>
                 <tr>
-                    <th>Crude Salt Name </th>
+                    <th>Crude Salt Type </th>
                     <th> :</th>
                     <td>{{$viewWashingAndCrushing->ITEM_NAME}}</td>
-                    <th>Amount</th>
+                    <th>Amount (KG)</th>
                     <th> :</th>
-                    <td>{{$viewWashingAndCrushing->REQ_QTY}} KG</td>
+                    <td>{{$viewWashingAndCrushing->REQ_QTY}}</td>
 
                 </tr>
                 <tr>

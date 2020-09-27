@@ -8,7 +8,7 @@
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('hr-employee-miller-pdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
     <div class="col-md-12 center">
-        <h4>List of HR</h4>
+        <h4>Number of Employees</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
 
@@ -22,11 +22,11 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
-                <th>Total Number of Employee</th>
-                <th>Number of full time Employee</th>
-                <th>Number of part time Employee</th>
-                <th>Number of Technical Person </th>
+                <th>SL</th>
+                <th>Total Number of Employees</th>
+                <th>Number of Full-Time Employees</th>
+                <th>Number of Part-Time Employees</th>
+                <th>Number of Technical People</th>
             </tr>
 
             </thead>

@@ -13,8 +13,8 @@
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
         <td class="fixedWidth"> {{ trans('dashboard.sl') }}</td>
-        <td>Zone Name</td>
-        <td>Association List</td>
+        <td>Item Type</td>
+        <td>Item Name</td>
     </tr>
     <?php $sl = 0; ?>
 

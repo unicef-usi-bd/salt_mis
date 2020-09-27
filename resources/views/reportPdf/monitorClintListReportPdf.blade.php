@@ -12,10 +12,10 @@
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
-        <th>Client Type</th>
-        <th>Client Name </th>
-        <th>Sale Volume</th>
+        <th>SL</th>
+        <th> Type of Client</th>
+        <th>Name of Client</th>
+        <th>Sale Amount (KG)</th>
     </tr>
     <?php $sl = 0; ?>
 

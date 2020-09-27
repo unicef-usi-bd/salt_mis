@@ -28,7 +28,7 @@ class BrandController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = trans('Brand');
+        $title = trans(' Add Brand Name');
 
         $heading=array(
             'title'=> $title,

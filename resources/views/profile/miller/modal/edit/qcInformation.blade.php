@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-7 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do You Follow Standard Operating Procedure ?</b> </label>
+                        <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1" style="margin-top: -8px;"> <b>Do You Follow Standard Operating Procedure ?</b> </label>
                         <div class="col-sm-4">
                             <label>
                                 <input autocomplete="off" name="OPERATION_PROCEDURE_FLG" type="radio" class="ace merit"  value="1" @if(!empty($qcInfo) && $qcInfo->OPERATION_PROCEDURE_FLG==1) checked @endif />

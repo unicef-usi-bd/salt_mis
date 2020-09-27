@@ -16,10 +16,10 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
-                <th>Items Type </th>
-                <th>Items Name</th>
-                <th>Stock Volume</th>
+                <th>SL</th>
+                <th>Item Type </th>
+                <th>Item Name</th>
+                <th>Stock Amount (KG)</th>
             </tr>
 
             </thead>

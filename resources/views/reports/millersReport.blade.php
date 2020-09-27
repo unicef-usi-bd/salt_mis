@@ -13,9 +13,9 @@
                                    <optgroup label="Purchase Salt">
                                        <option value="purchase-salt-supplier-miller">List of Supplier </option>
                                        <option value="purchase-salt-list">List of Item </option>
-                                       <option value="miller-purchase-salt-stock">purchase stock</option>
+                                       <option value="miller-purchase-salt-stock">purchase Stock</option>
                                        <option value="monitor-salt-report">Monitor Supplier</option>
-                                       <option value="purchase-salt-amount">Total Purchase Salt</option>
+                                       <option value="purchase-salt-amount">Purchase</option>
                                    </optgroup>
                                    <optgroup label="Purchase Chemical">
                                        <option value="purchase-salt-supplier-miller-type">List of Supplier </option>
@@ -39,10 +39,10 @@
                                        {{--<option value="miller-license-report/{zone}">List of License </option>--}}
                                   {{--</optgroup>--}}
                                    <optgroup label="QC">
-                                       <option value="qc-miller">List of QC </option>
+                                       <option value="qc-miller">Mill-Wise List of QC</option>
                                   </optgroup>
                                    <optgroup label="HR">
-                                       <option value="hr-employee-miller">List of HR </option>
+                                       <option value="hr-employee-miller">Number of Employees </option>
                                   </optgroup>
 
 
@@ -101,7 +101,7 @@
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="">-Select-</option>
                                    <option value="0">All</option>
-                                   <option value="1">Wash And Crush</option>
+                                   <option value="1">Washing And Crushing</option>
                                    <option value="2">Iodized </option>
                                </select>
                             </span>
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                     <div class="form-group clientDiv">
-                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Client</b> <span style="color: red;"> </span></label>
+                        <label for="inputSuccess" class="col-xs-12 col-sm-4 control-label no-padding-right"><b> Client</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="customerId width-65 form-control chosen-select " id="CUSTOMER_ID" name="CUSTOMER_ID"  >
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="form-group finishedSaltItemDiv">
-                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Finished Salt Item</b> <span style="color: red;"> </span></label>
+                        <label for="inputSuccess" class="col-xs-12 col-sm-4 control-label no-padding-right"><b> Processed Salt Item</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >

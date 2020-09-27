@@ -28,7 +28,7 @@
                     <th>Crude Salt Type</th>
                     <th class="hidden-480">Source</th>
                     <th class="hidden-480">Date</th>
-                    <th class="hidden-480">Trading Name (Supplier)</th>
+                    <th class="hidden-480">Trading Name</th>
                     <th class="hidden-480">Amount (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
@@ -50,24 +50,24 @@
                                     $viewPermissionLevel = $previllage->READ;
                                 @endphp
                                 @if($viewPermissionLevel == 1)
-                                    <a href="#" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View CRUDE Salt Procurement">
+                                    <a href="#" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID }}" class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Crude Salt Procurement">
                                 <span class="blue">
                                 <i class="ace-icon fa fa-eye bigger-130"></i>
                                 </span>
                                     </a>
                                 @else
-                                    <a href="#" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View CRUDE Salt Procurement" style="display: none;">
+                                    <a href="#" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal"  role="button" title="View Crude Salt Procurement" style="display: none;">
                                 <span class="blue">
                                 <i class="ace-icon fa fa-eye bigger-130"></i>
                                 </span>
                                     </a>
                                 @endif
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit CRUDE Salt Procurement">
+                                    <a class="green showModalGlobal" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID.'/edit' }}" data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Crude Salt Procurement">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @else
-                                    <a class="green showModalGlobal" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit CRUDE Salt Procurement" style="display: none;">
+                                    <a class="green showModalGlobal" id="{{ 'crude-salt-procurement/'.$row->RECEIVEMST_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Crude Salt Procurement" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif

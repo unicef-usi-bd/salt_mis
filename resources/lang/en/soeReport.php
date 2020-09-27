@@ -23,7 +23,7 @@ return [
     'dhaka_zone' => 'Dhaka Zone, Dhaka',
     'report' => 'Report',
     'financial_report_expanse' => 'Financial Expense Report',
-    'date_between' => 'Date Between',
+    'date_between' => 'Date',
     'financial_type' => 'Financial Type',
     'by_cost_center' => 'By Cost Center',
     'by_region' => 'By Region',

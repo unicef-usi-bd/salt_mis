@@ -25,12 +25,12 @@
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Batch Number</th>
+                    <th>Batch No.</th>
                     <th class="hidden-480">Date</th>
                     <th class="hidden-480">Salt Amount (KG)</th>
-                    <th class="hidden-480">Wastage Amount (%)</th>
-                    <th class="hidden-480">Iodize Process in Stock (KG)</th>
-                    <th class="hidden-480">Chemical Amount in Use (KG)</th>
+                    <th class="hidden-480">Wastage  (%)</th>
+                    <th class="hidden-480">Processed Stock (KG)</th>
+                    <th class="hidden-480"> Used Chemical Amount (KG)</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -46,7 +46,7 @@
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->BATCH_NO}}</td>
-                        <td class="hidden-480">{{ date('d-M-Y',strtotime($row->BATCH_DATE)) }}</td>
+                        <td class="hidden-480">{{ date('d-m-Y',strtotime($row->BATCH_DATE)) }}</td>
                         <td class="hidden-480">{{ number_format($rawAmount, 2) }}</td>
                         <td class="hidden-480">{{ $row->WASTAGE }} ( {{ number_format($wasteAmount, 2) }} KG)</td>
                         <td class="hidden-480">{{ number_format($rawAmount-$wasteAmount, 2) }}</td>

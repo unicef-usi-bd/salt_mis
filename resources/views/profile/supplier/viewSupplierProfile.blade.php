@@ -22,7 +22,7 @@
                     <th class=" ">Supplier ID</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->SUPPLIER_ID }} </td>
-                    <th class=" ">Trade licence No</th>
+                    <th class=" ">Trade Licence No.</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->LICENCE_NO }} </td>
 
@@ -37,13 +37,13 @@
 
                 </tr>
                 <tr>
-                    <th class=" ">Thana\Upazila</th>
+                    <th class=" ">Thana/Upazila</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->THANA_NAME }} </td>
 
                 </tr>
                 <tr>
-                    <th class=" ">Phone Number</th>
+                    <th class=" ">Mobile No.</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->PHONE }} </td>
                     <th class=" ">Email</th>
@@ -52,7 +52,7 @@
 
                 </tr>
                 <tr>
-                    <th class=" ">Bazar Name</th>
+                    <th class=" ">Bazar</th>
                     <th> :</th>
                     <td>{{ $viewSupplierProfile->BAZAR_NAME }} </td>
                     <th class=" ">Remarks</th>

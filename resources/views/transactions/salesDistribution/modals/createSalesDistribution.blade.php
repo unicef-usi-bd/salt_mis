@@ -8,7 +8,7 @@
                 <div class="col-sm-8">
             <span class="block input-icon input-icon-right">
                 <select id="form-field-select-3 inputSuccess SELLER_TYPE" class="form-control SELLER_TYPE"
-                        name="SELLER_TYPE" data-placeholder="Select Seller Type">
+                        name="SELLER_TYPE" data-placeholder=" -Select-">
                    <option value="">-Select-</option>
                     @foreach($sellerType as $seller)
                         <option value="{{$seller->LOOKUPCHD_ID}}"> {{$seller->LOOKUPCHD_NAME}}</option>
@@ -48,7 +48,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driver Name</b><span
                                 style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input autocomplete="off" type="text" id="inputSuccess DRIVER_NAME" placeholder="Example: Driver Name here"
+                        <input autocomplete="off" type="text" id="inputSuccess DRIVER_NAME" placeholder="Example:- Driver Name Here"
                                name="DRIVER_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
@@ -56,15 +56,15 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Vehicle
                             License</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input autocomplete="off" type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example: Vehicle License here"
+                        <input autocomplete="off" type="text" id="inputSuccess VEHICLE_LICENSE" placeholder="Example:- Vehicle License Here"
                                name="VEHICLE_LICENSE" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mobile
-                            Number</b><span style="color: red;"> </span> </label>
+                            No.</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input autocomplete="off" type="text" id="inputSuccess MOBILE_NO" placeholder="Example: Mobile Number here"
+                        <input autocomplete="off" type="text" id="inputSuccess MOBILE_NO" placeholder="Example:- Mobile No. Here"
                                name="MOBILE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
@@ -72,17 +72,17 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Driving
-                            licence</b><span style="color: red;"> </span> </label>
+                            Licence</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input autocomplete="off" type="text" id="inputSuccess VEHICLE_NO" placeholder="Example: Vehicle No here"
+                        <input autocomplete="off" type="text" id="inputSuccess VEHICLE_NO" placeholder="Example:- Driving Licence Here"
                                name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Transport
-                            rent</b><span style="color: red;"> </span> </label>
+                            Fare</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <input autocomplete="off" type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example: Transport Name here"
+                        <input autocomplete="off" type="text" id="inputSuccess TRANSPORT_NAME" placeholder="Example:- Transport Fare Here"
                                name="TRANSPORT_NAME" class="form-control col-xs-10 col-sm-5" value=""/>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span
                                 style="color: red;"> </span> </label>
                     <div class="col-sm-8">
-                        <textarea rows="3" placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-10 col-sm-5"/></textarea>
+                        <textarea rows="3" placeholder="Example:- Remarks Here" name="REMARKS" class="form-control col-xs-10 col-sm-5"/></textarea>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
 
         <div class="col-md-12" style="margin-top: 15px;">
             <div class="col-md-4">
-                <h4 class="pull-left" style="">Wash & Crushed Stock : <span class="currentStockWashCrush" data-quantity="{{ number_format($washingStock, 2) }}" style="color:red;">{{ number_format($washingStock, 2) }}</span> KG</h4>
+                <h4 class="pull-left" style="">Wash & Crushing Stock : <span class="currentStockWashCrush" data-quantity="{{ number_format($washingStock, 2) }}" style="color:red;">{{ number_format($washingStock, 2) }}</span> KG</h4>
             </div>
             <div class="col-md-4"><span class="alertMsgStock"></span></div>
             <div class="col-md-4">
@@ -108,12 +108,12 @@
             <table class="table table-bordered fundAllocation">
                 <thead>
                 <tr>
-                    <th style="width: 255px;">Salt Type<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;"> Processed Salt Type<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Brand Name<span style="color: red;"></span></th>
                     {{--<th style="width: 255px;">Date<span style="color:red;"> </span></th>--}}
-                    <th style="width: 255px;">items name(Package)<span style="color:red;"> *</span></th>
+                    <th style="width: 255px;">Item Name (Package)<span style="color:red;"> *</span></th>
                     <th style="width: 255px;">Quantity (PCS)<span style="color:red;"> *</span></th>
-                    <th style="width: 255px;">Total<span style="color:red;"> </span></th>
+                    <th style="width: 255px;">Total (KG)<span style="color:red;"> </span></th>
 
                     <th style="width: 30px;">
                         <span class="btn btn-primary btn-sm pull-right rowAdd"><i class="fa fa-plus"></i></span>

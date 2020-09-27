@@ -10,7 +10,7 @@
     </style>
     <div class="page-header">
         <h1>
-            Miller Dashboard
+            Mill Dashboard
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Overview
@@ -120,7 +120,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Production (W&C + iodized) & sales (W&C + iodized)
+                        Production (W & C + Iodized) & Sales (W & C + Iodized)
                     </h5>
 
                 </div>
@@ -143,7 +143,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 Days Procurements
+                        Last 30 Days Procurement
                     </h4>
 
                     <div class="widget-toolbar">
@@ -167,7 +167,7 @@
                                 </th>
 
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Amount (KG)
                                 </th>
                             </tr>
                             </thead>
@@ -176,7 +176,7 @@
                            @foreach($procurementList as $row)
                             <tr>
                                 <td>
-                                    <b class="blue">{{ date('d-m-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
+                                    <b class="blue">{{ date('d-M-Y', strtotime($row->ENTRY_TIMESTAMP))  }}</b>
                                 </td>
                                 <td>{{ $row->ITEM_NAME }}</td>
                                 <td>{{ number_format($row->QTY, 2) }}</td>
@@ -211,7 +211,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 days productions
+                        Last 30 Days Production
                     </h4>
 
                     <div class="widget-toolbar">
@@ -234,7 +234,7 @@
                                 </th>
 
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Production Amount (KG)
                                 </th>
                             </tr>
                             </thead>
@@ -247,9 +247,9 @@
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')
-                                            Wash And Crush Salt
+                                            Wash And Crushing Salt
                                         @else
-                                            Iodize
+                                            Iodize Salt
                                         @endif
                                     </td>
                                     <td>{{ number_format($row->QTY, 2) }}</td>
@@ -278,7 +278,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 days sales
+                        Last 30 Days Sale
                     </h4>
 
                     <div class="widget-toolbar">
@@ -300,7 +300,7 @@
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sales Type
                                 </td>
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount (KG)
                                 </th>
                             </tr>
                             </thead>
@@ -313,9 +313,9 @@
                                     </td>
                                     <td>
                                         @if($row->TRAN_TYPE == 'W')
-                                            Wash And Crush Salt
+                                            Wash And Crushing Salt
                                         @else
-                                            Iodize
+                                            Iodized Salt
                                         @endif
                                     </td>
                                     <td>{{ number_format(abs($row->QTY), 2) }}</td>
@@ -340,7 +340,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        Last month sales report W&C vs Iodized
+                        Last Month Sales Statistics (W & C vs Iodized)
                     </h5>
 
                 </div>
@@ -360,7 +360,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-signal"></i>
-                        KI last 3 month statistics (Procurment + Used + In stock)
+                        Last 3 Months Statistics of KIO3 (Procurment + Used + In stock)
                     </h5>
 
                 </div>
@@ -432,7 +432,7 @@
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
                 datasets: [{
-                    label: 'Month wise current year production chart Total = ' + yearQty.toFixed(2),
+                    label: 'Month Wise Current Year Total Production Chart (KG)  = ' + yearQty.toFixed(2),
                     backgroundColor: 'rgb(30, 144, 255)',
                     borderColor: 'rgb(30, 144, 255)',
                     // data: [0, 10, 5, 2, 20, 30, 45]
@@ -464,8 +464,8 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Washing and Crushing',
-                    'Idonaize'
+                    'Wash and Crushing Salt',
+                    'IODIZED SALT'
                 ],
                 datasets: [{
                     backgroundColor: ['#3498DB','#900C3F'],

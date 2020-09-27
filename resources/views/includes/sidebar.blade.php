@@ -66,7 +66,9 @@
                 })
                 ->orderBy('sa_module_links.SL_NO', 'ASC')
                 ->get(['sa_uglw_mlink.LINK_ID', 'sa_module_links.LINK_NAME', 'sa_module_links.LINK_URI']);
+
             /* }*/
+
         }
         if(count($links)>0){
         ?>
@@ -81,6 +83,7 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
+
                 @foreach ($links as $key =>$link)
                     <li class="">
                         <a href="{{ url($link->LINK_URI) }}">

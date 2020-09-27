@@ -5,21 +5,21 @@
             <div class="col-md-12" style="margin-top: 15px; margin-left: 50px;">
                 {{--<h4  style="color: #1B6AAA; margin-left: 350px;">Test Result</h4>--}}
                 <div class="col-md-6">
-                    <h4 style="margin-left: 150px;">System Stock</h4>
+                    <h4 style="margin-left: 220px;">System Stock</h4>
                 </div>
                 <div class="col-md-6">
-                    <h4>Stock</h4>
+                    <h4 style="margin-left: 35px;">Physical Stock</h4>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>W & C Salt</b><span style="color: red;"> </span> </label>
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Wash and Crushing Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
                             <input autocomplete="off" type="text" name="system_wc_stock" id="" placeholder=""  value="{{ $washingStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>
                         <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" class="">KG</i>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Iodize Salt</b><span style="color: red;"> </span> </label>
+                        <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Iodized Salt</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-6">
                             <input autocomplete="off" type="text" name="system_iodize_stock" id="" placeholder=""  value="{{ $iodizeStock }}" class="form-control col-xs-5 col-sm-5" readonly />
                         </div>

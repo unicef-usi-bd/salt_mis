@@ -19,8 +19,8 @@
                             <th>District</th>
                             <th>Upazila</th>
                             <th>NID</th>
-                            <th>Mobile 1</th>
-                            <th>Mobile 2</th>
+                            <th>Mobile No.</th>
+                            <th>Mobile No.</th>
                             <th>Email</th>
                             <th>Remarks</th>
                             @php $buttonStyle = $millerInfo->OWNER_TYPE_ID==12 ? 'none' : 'block'; @endphp

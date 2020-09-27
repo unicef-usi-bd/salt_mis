@@ -11,7 +11,7 @@
                 <tr>
                     <th>Purchase Date</th>
                     <th> :</th>
-                    <td>{{$viewQualityConteol->QC_DATE}}</td>
+                    <td>{{date('d-m-Y',strtotime($viewQualityConteol->QC_DATE))}}</td>
                     <th>Quality Control By</th>
                     <th> :</th>
                     <td>{{$viewQualityConteol->qc}}</td>
@@ -20,7 +20,7 @@
                     <th>Agency</th>
                     <th> :</th>
                     <td>{{$viewQualityConteol->agency}}</td>
-                    <th>Batch No</th>
+                    <th>Batch No.</th>
                     <th> :</th>
                     <td>{{$viewQualityConteol->BATCH_NO}}</td>
                 </tr>

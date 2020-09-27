@@ -6,16 +6,16 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <h4>Monitor Supplier</h4>
+    <h4>List of Process</h4>
 </div><!-- /.row -->
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
+        <th>SL</th>
         <th>Process Type</th>
-        <th>Batch No</th>
-        <th>Production Amount</th>
+        <th>Batch No.</th>
+        <th>Production Amount(KG)</th>
     </tr>
     <?php $sl = 0; ?>
 

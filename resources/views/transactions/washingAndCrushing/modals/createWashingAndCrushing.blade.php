@@ -7,7 +7,7 @@
     <form action="{{ url('/washing-crushing') }}" method="post" class="form-horizontal" role="form">
         @csrf
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No</b><span style="color: red;"> </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Batch No.</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
                 <input autocomplete="off" type="text" id="inputSuccess" readonly placeholder="Example: Batch here" name="BATCH_NO" class="form-control col-xs-10 col-sm-5" value="{{ $batch }}"/>
             </div>
@@ -24,7 +24,7 @@
             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Type</b><span style="color: red;"> * </span></label>
             <div class="col-sm-8">
                 <span class="block input-icon input-icon-right">
-                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control saltType" name="PRODUCT_ID" data-placeholder="Select or search data">
+                    <select id="form-field-select-3 inputSuccess" class="chosen-select form-control saltType" name="PRODUCT_ID" data-placeholder=" -Select-">
                        <option value=""></option>
                         @foreach($crudeSaltTypes as $chemical)
                             <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -35,10 +35,10 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> * </span> </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount (KG)</b><span style="color: red;"> * </span> </label>
             <div class="col-sm-8">
                 <span class="col-sm-6" style="padding: 0;">
-                     <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example: Amount here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                     <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Amount (KG) Here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userAmount" onkeypress="return numbersOnly(this, event)" value=""/>
                 </span>
                 <span class="col-sm-6 currentStock" data-stock="" style="margin-top: 6px;font-weight: bold;"></span>
             </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Wastage</b><span style="color: red;">  </span> </label>
             <span class="col-sm-7">
-                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example: Wastage Amount here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Wastage % Here" name="WASTAGE" class="form-control col-xs-10 col-sm-5 wastageAmount" onkeypress="return numbersOnly(this, event)" value=""/>
             </span>
             <span class="col-sm-1">
                 <span class="group-addon percentageSize">
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
             <div class="col-sm-8">
-                <textarea rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
+                <textarea rows="3"  placeholder="Example:- Remarks Here" name="REMARKS" class="form-control col-xs-5 col-sm-5"></textarea>
             </div>
         </div>
 

@@ -17,10 +17,10 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
-                <th>Mill Name</th>
+                <th>SL</th>
+                <th>Name of Mill</th>
                 <th>Process Type</th>
-                <th>Stock Amount</th>
+                <th>Stock Amount (KG)</th>
             </tr>
 
             </thead>

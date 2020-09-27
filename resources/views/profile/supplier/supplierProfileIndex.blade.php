@@ -29,8 +29,8 @@
                     <th class="center fixedWidth">Trading Name</th>
                     <th class="center fixedWidth">Trader Name</th>
                     <th class="center fixedWidth">Supplier Type</th>
-                    <th class="center fixedWidth">Trade licence No</th>
-                    <th class="center fixedWidth">Phone Number</th>
+                    <th class="center fixedWidth">Trade licence No.</th>
+                    <th class="center fixedWidth">Mobile No.</th>
                     <th class="center fixedWidth">Email</th>
                     <th class="center fixedWidth">Action</th>
 
@@ -56,13 +56,13 @@
                                 @endphp
 
                                 @if($viewPermissionLevel == 1)
-                                    <a href="#" id='{{ "supplier-profile/$row->SUPP_ID_AUTO" }}' class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Supplier Profile Details">
+                                    <a href="#" id='{{ "supplier-profile/$row->SUPP_ID_AUTO" }}' class="blue showModalGlobal" modal-size="modal-lg" data-target=".modal" data-toggle="modal" data-permission="{{ $viewPermissionLevel }}" role="button" title="View Supplier Profile">
                                                         <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                         </span>
                                     </a>
                                 @else
-                                    <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Supplier Profile Details" style="display: none;">
+                                    <a href="#" id="" class="blue showModalGlobal" data-target=".modal" data-toggle="modal" modal-size="modal-lg" role="button" data-permission="{{ $viewPermissionLevel }}" title="View Supplier Profile" style="display: none;">
                                                         <span class="blue">
                                                             <i class="ace-icon fa fa-eye bigger-130"></i>
                                                         </span>
@@ -70,17 +70,17 @@
                                 @endif
 
                                 @if($editPermissionLevel == 1)
-                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile Details">
+                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @else
-                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile Details" style="display: none;">
+                                    <a class="green showModalGlobal" id='{{ "supplier-profile/$row->SUPP_ID_AUTO/edit" }}' data-target=".modal" modal-size="modal-lg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Supplier Profile" style="display: none;">
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif
 
                                 @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete row{{ $row->SUPP_ID_AUTO }}" data-token="{{ csrf_token() }}" data-action="{{ 'supplier-profile/'.$row->SUPP_ID_AUTO }}"  role="button" title="Delete Supplier Profile Details">
+                                    <a class="red clickForDelete row{{ $row->SUPP_ID_AUTO }}" data-token="{{ csrf_token() }}" data-action="{{ 'supplier-profile/'.$row->SUPP_ID_AUTO }}"  role="button" title="Delete Supplier Profile">
                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                     </a>
                                 @endif

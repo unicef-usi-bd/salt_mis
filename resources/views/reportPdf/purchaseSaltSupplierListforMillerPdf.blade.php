@@ -6,17 +6,17 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>List Of Supplier</p>
+    <p>List of Supplier</p>
 </div><!-- /.row -->
 
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl.</th>
-        <th>Supplier Name</th>
+        <th>SL</th>
+        <th>Name of Supplier</th>
         <th>Division</th>
         <th>District</th>
-        <th>Total Volume (KG) </th>
+        <th>Total Amount (KG) </th>
     </tr>
     <?php $sl = 0; ?>
 

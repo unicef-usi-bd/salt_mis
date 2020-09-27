@@ -6,8 +6,8 @@
                 @method('PUT')
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Registration Type</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Registration Type</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="REG_TYPE_ID" class="chosen-container regTypeId" name="REG_TYPE_ID"
                                        data-placeholder="Select">
@@ -21,8 +21,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Name of Mill</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Name of Mill</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <input autocomplete="off" type="text" name="MILL_NAME" class="chosen-container" value="{{ $millerInfo->MILL_NAME }}">
                             </span>
@@ -30,8 +30,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Process Type</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Process Type</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="" class="chosen-container" name="PROCESS_TYPE_ID" data-placeholder="Select">
                                    <option value="">-Select-</option>
@@ -43,8 +43,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Type of Mill</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Type of Mill</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="MILL_TYPE_ID" class="chosen-container" name="MILL_TYPE_ID"
                                        data-placeholder="Select">
@@ -57,16 +57,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Capacity (TPA)</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                 <input autocomplete="off" type="text" name="CAPACITY_ID" class="chosen-container CAPACITY_ID" onkeypress="return numbersOnly(this, event)" value="{{ $millerInfo->CAPACITY_ID }}">
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Zone</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Zone</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="ZONE_ID" class="chosen-container" name="ZONE_ID" data-placeholder="Select">
                                    <option value="">-Select-</option>
@@ -79,8 +79,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Millers ID</b></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-4 control-label no-padding-right"><b>Mill ID</b></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <input readonly type="text" name="MILLERS_ID" class="chosen-container millersId" value="{{ $millerInfo->MILLERS_ID }}">
                             </span>
@@ -90,8 +90,8 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Miller Logo</b></label>
-                        <div class="col-sm-8">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Mill Logo</b></label>
+                        <div class="col-sm-7">
                             <input type="file" id="mill_logo" name="mill_logo" class="form-control col-xs-10 col-sm-5 user_image" value="" onchange="loadFile(event)"/>
                         </div>
                         <div style="margin-top: 40px; margin-left: 152px;">
@@ -102,7 +102,7 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b> Type Of Owner</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select name="OWNER_TYPE_ID" class="chosen-select chosen-container OWNER_TYPE_ID"
                                        data-placeholder="Select or search data">
@@ -117,7 +117,7 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Division</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                 <select id="DIVISION_ID" name="DIVISION_ID"
                                         class="chosen-select chosen-container division" data-placeholder="Select">
@@ -132,7 +132,7 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>District</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="DISTRICT_ID" class="chosen-select chosen-container district"
                                        name="DISTRICT_ID" data-placeholder="Select">
@@ -147,7 +147,7 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Thana/Upazilla</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="UPAZILA_ID" class="chosen-select chosen-container upazila" name="UPAZILA_ID"
                                        data-placeholder="Select">
@@ -161,8 +161,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Active Status</b><span style="color: red">*</span></label>
-                        <div class="col-sm-8">
+                        <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b> Status</b><span style="color: red">*</span></label>
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <select id="ACTIVE_FLG" class="chosen-container" name="ACTIVE_FLG" data-placeholder="Select">
                                    <option value="1" @if($millerInfo->ACTIVE_FLG==1) selected @endif >Active</option>
@@ -174,9 +174,9 @@
 
                     <div class="form-group">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>Remarks</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
-                                <textarea rows="3" class="form-control col-sm-8" name="REMARKS">{{ $millerInfo->REMARKS }}</textarea>
+                                <textarea rows="3" class="form-control col-sm-7" name="REMARKS">{{ $millerInfo->REMARKS }}</textarea>
                             </span>
                         </div>
                     </div>

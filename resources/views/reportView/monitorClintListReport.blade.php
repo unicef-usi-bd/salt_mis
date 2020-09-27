@@ -22,10 +22,10 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
-                <th>Client Type</th>
-                <th>Client Name </th>
-                <th>Sale Volume</th>
+                <th>SL</th>
+                <th>Type of Client</th>
+                <th>Name of Client</th>
+                <th>Sale Amount (KG)</th>
             </tr>
 
             </thead>

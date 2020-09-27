@@ -4,10 +4,10 @@
 
     <div class="page-header">
         <h1>
-            All Setup
+            Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                CRUDE SALT DETAILS
+                Crude Salt Details
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -18,11 +18,11 @@
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>CRUD Salt Type</th>
-                    <th>Sodium chloride</th>
-                    <th>Moisturizer </th>
-                    <th>Iodine content(PPM) </th>
-                    <th>PH </th>
+                    <th>Crude Salt Type</th>
+                    <th>Chloride content (as NaCl), %m/m</th>
+                    <th>Moisture, %m/m</th>
+                    <th>Iodine content, mg/kg</th>
+                    <th>pH Value</th>
                     <th>Status </th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
@@ -52,29 +52,29 @@
                     $viewPermissionLevel = $previllage->READ;
                     @endphp
                     @if($viewPermissionLevel == 1)
-                    <a href="#" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View CRUDE SALT Details">
+                    <a href="#" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Crude Salt Details">
                         <span class="blue">
                             <i class="ace-icon fa fa-eye bigger-130"></i>
                         </span>
                     </a>
                     @else
-                    <a href="#" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View CRUDE SALT Details" style="display: none;">
+                    <a href="#" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" class="blue showModalGlobal" data-target=".modal" data-permission="{{ $viewPermissionLevel }}" data-toggle="modal" role="button" title="View Crude Salt Details" style="display: none;">
                         <span class="blue">
                             <i class="ace-icon fa fa-eye bigger-130"></i>
                         </span>
                     </a>
                     @endif
                     @if($editPermissionLevel == 1)
-                    <a class="green showModalGlobal" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit CRUDE SALT Details">
+                    <a class="green showModalGlobal" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Crude Salt Details">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
                     @else
-                    <a class="green showModalGlobal" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit CRUDE SALT Details" style="display: none;">
+                    <a class="green showModalGlobal" id="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Crude Salt Details" style="display: none;">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
                     @endif
                     @if($previllage->DELETE == 1)
-                    <a class="red clickForDelete row{{ $crudeSalt->CRUDSALTDETAIL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" role="button" title="Delete CRUDE SALT Details">
+                    <a class="red clickForDelete row{{ $crudeSalt->CRUDSALTDETAIL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'crude-salt-details/'.$crudeSalt->CRUDSALTDETAIL_ID }}" role="button" title="Delete Crude Salt Details">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
                     @endif

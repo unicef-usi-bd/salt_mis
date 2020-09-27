@@ -25,9 +25,9 @@
                 <thead>
                 <tr>
                     <th rowspan="2" class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th colspan="3" class="text-center">Wash & Crash Stock (KG)</th>
-                    <th colspan="3" class="text-center">Iodize Stock (KG)</th>
-                    <th rowspan="2">Date</th>
+                    <th colspan="3" class="text-center">Wash and Crashing Stock (KG)</th>
+                    <th colspan="3" class="text-center">Iodized Stock (KG)</th>
+                    <th rowspan="2" width="50px;">Date</th>
                     <th rowspan="2" class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 <tr>
@@ -51,7 +51,7 @@
                         <td>{{ number_format($row->system_iodize_stock, 2) }}</td>
                         <td>{{ number_format($row->iodize_stock, 2) }}</td>
                         <td>{{ number_format($row->iodize_stock, 2) }}</td>
-                        <td>{{ date('d M, Y', strtotime($row->UPDATE_TIMESTAMP)) }}</td>
+                        <td>{{ date('d-m-Y', strtotime($row->UPDATE_TIMESTAMP)) }}</td>
                         <td class="row{{ $row->stock_id }}">
                             <div class="hidden-sm hidden-xs action-buttons">
                                 @php

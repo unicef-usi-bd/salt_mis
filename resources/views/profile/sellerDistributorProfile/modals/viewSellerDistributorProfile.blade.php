@@ -22,27 +22,27 @@
                     <th class=" ">Supplier ID</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->SELLER_ID }} </td>
-                    <th class=" ">Trade licence No</th>
+                    <th class=" ">Trade Licence No.</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->LICENCE_NO }} </td>
 
                 </tr>
                 <tr>
-                    <th class=" ">Division Name</th>
+                    <th class=" ">Division</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->DIVISION_NAME }} </td>
-                    <th class=" ">District Name</th>
+                    <th class=" ">District</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->DISTRICT_NAME }} </td>
 
                 </tr>
                 <tr>
-                    <th class=" ">Thana Name/Upazila</th>
+                    <th class=" ">Thana/Upazila</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->THANA_NAME }} </td>
                 </tr>
                 <tr>
-                    <th class=" ">Phone Number</th>
+                    <th class=" ">Mobile No.</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->PHONE }} </td>
                     <th class=" ">Email</th>
@@ -51,7 +51,7 @@
 
                 </tr>
                 <tr>
-                    <th class=" ">Bazar Name</th>
+                    <th class=" ">Bazar</th>
                     <th> :</th>
                     <td>{{ $viewSellerDistributor->BAZAR_NAME }} </td>
                     <th class=" ">Remarks</th>
@@ -68,7 +68,7 @@
                 <tr>
                     <th >Coverage Division</th>
                     <th>Coverage District</th>
-                    <th >Coverage Upizala/Thana</th>
+                    <th >Coverage Thana/Upazila</th>
                 </tr>
                 </thead>
                 <tbody>

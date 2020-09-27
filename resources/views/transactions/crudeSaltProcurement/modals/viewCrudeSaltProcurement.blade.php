@@ -13,13 +13,13 @@
                     <th class=" ">Crude Salt Type</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->ITEM_NAME }} </td>
-                    <th class=" ">Source</th>
+                    <th class=" ">Source From</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->LOOKUPCHD_NAME }} </td>
 
                 </tr>
                 <tr>
-                    <th class=" ">Invoice No</th>
+                    <th class=" ">Invoice No.</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->INVOICE_NO }} </td>
                     <th class=" ">Trading Name</th>
@@ -27,7 +27,7 @@
                     <td>{{ $crudeSaltShow->TRADING_NAME }} </td>
                 </tr>
                 <tr>
-                    <th class=" ">Amount</th>
+                    <th class=" ">Amount (KG)</th>
                     <th> :</th>
                     <td>{{ $crudeSaltShow->RCV_QTY }} </td>
                 </tr>

@@ -6,13 +6,13 @@
             @method('PUT')
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Purchase Date</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y',strtotime($editChemicalpurchase->RECEIVE_DATE))}}" class="width-100 date-picker" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Procurement Chemical</b><span style="color: red;"> *</span></label>
+                    <label for="inputSuccess" class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Procuring Chemical</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chosen-select form-control" name="RECEIVE_NO" data-placeholder="Select Chemical">
@@ -25,22 +25,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Amount</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount (KG)</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess RCV_QTY" placeholder="Example: Amount here" name="RCV_QTY" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value="{{ $editChemicalpurchase->RCV_QTY }}"/>
                     </div>
-                    <i style="margin-top: 10px; font-weight:bolder;font-size: larger;" >KG</i>
+
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Invoice No</b><span style="color: red;"> * </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Invoice No.</b><span style="color: red;"> * </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" placeholder="Example: Invoice No here" name="INVOICE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editChemicalpurchase->INVOICE_NO }}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Source</b><span style="color: red;"> *</span></label>
+                    <label for="inputSuccess" class="col-sm-4 control-label no-padding-right" for="form-field-1-1"><b>Chemical Source</b><span style="color: red;"> *</span></label>
                     <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess SUPP_ID_AUTO" class="chosen-select form-control" name="SUPP_ID_AUTO" data-placeholder="Select Chemical Source">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Remarks</b><span style="color: red;"> </span> </label>
                     <div class="col-sm-8">
                         <textarea    rows="3"  placeholder="Example: Remarks here" name="REMARKS" class="form-control col-xs-5 col-sm-5" >{{ $editChemicalpurchase->REMARKS }}</textarea>
                     </div>

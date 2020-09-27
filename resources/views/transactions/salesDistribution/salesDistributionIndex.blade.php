@@ -17,8 +17,8 @@
             </small>
         </h1>
     </div><!-- /.page-header -->
-    <h4 class="pull-left stockLebel">Washing & Crushing Salt Stock In Amount : <span style="color:red;">{{ number_format($washingStock, 2) }}</span> KG</h4>
-    <h4 class="pull-right stockLebel">Iodize Salt Stock In Amount : <span style="color:red;">{{ number_format($iodizeStock, 2) }}</span> KG</h4>
+    <h4 class="pull-left stockLebel">Wash and Crushing Salt Stock : <span style="color:red;">{{ number_format($washingStock, 2) }}</span> KG</h4>
+    <h4 class="pull-right stockLebel">Iodized Salt Stock : <span style="color:red;">{{ number_format($iodizeStock, 2) }}</span> KG</h4>
     {{--<div class="clearfix"></div>--}}
     <div class="row">
         <div class="col-xs-12">
@@ -34,7 +34,7 @@
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th>Salt Type</th>
+                    <th> Processed Salt Type</th>
                     <th class="hidden-480">Date</th>
                     <th class="hidden-480">Pack Measurement</th>
                     <th class="hidden-480">Pack Quantity</th>
@@ -50,7 +50,7 @@
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
                         <td>{{$row->ITEM_NAME}}</td>
-                        <td class="hidden-480">{{$row->SALES_DATE}}</td>
+                        <td class="hidden-480">{{date( 'd-m-Y',strtotime($row->SALES_DATE))}}</td>
                         <td class="hidden-480">{{ $row->LOOKUPCHD_NAME }}</td>
                         <td class="hidden-480">{{$row->PACK_QTY}} pcs</td>
                         <td class="hidden-480">{{ number_format($row->DESCRIPTION*$row->PACK_QTY, 2)}} KG</td>

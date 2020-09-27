@@ -233,7 +233,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa-star orange"></i>
-                        Last 30 Days Sales
+                        Last 30 Days Sale
                     </h4>
 
                     <div class="widget-toolbar">
@@ -420,7 +420,7 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'INDUSTRIAL SALT ',
+                    'Wash and Crushing Salt ',
                     'IODIZED SALT'
                 ],
                 datasets: [{

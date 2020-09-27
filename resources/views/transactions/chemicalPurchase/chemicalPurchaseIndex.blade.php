@@ -26,7 +26,7 @@
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Purchase Date</th>
-                    <th class="hidden-480">Procurement Chemical</th>
+                    <th class="hidden-480">Procured Chemical</th>
                     <th class="hidden-480">Amount (KG)</th>
                     <th class="hidden-480">Chemical Source</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
@@ -39,7 +39,7 @@
                 @foreach($chemicalPuchase as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
-                        <td>{{$row->RECEIVE_DATE}}</td>
+                        <td>{{date("d-m-Y", strtotime($row->RECEIVE_DATE))}}</td>
                         <td class="hidden-480">{{$row->ITEM_NAME}}</td>
                         <td class="hidden-480">{{ number_format($row->RCV_QTY, 2) }}</td>
                         <td class="hidden-480">{{$row->TRADING_NAME}}</td>

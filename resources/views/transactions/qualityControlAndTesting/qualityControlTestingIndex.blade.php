@@ -25,10 +25,10 @@
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Test Date</th>
-                    <th class="hidden-480">Batch No</th>
+                    <th class="hidden-480">Batch No.</th>
                     <th class="hidden-480">Test Name</th>
                     <th class="hidden-480">Result</th>
-                    <th class="hidden-480">Result Download</th>
+                    <th class="hidden-480">Download Result</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>
@@ -39,7 +39,7 @@
                 @foreach($qualityControl as $row)
                     <tr>
                         <td class="center">{{ ++$sl }}</td>
-                        <td>{{$row->QC_DATE}}</td>
+                        <td>{{date('d-m-Y',strtotime($row->QC_DATE))}}</td>
                         {{--<td class="hidden-480">{{$row->qc}}</td>--}}
                         {{--<td class="hidden-480">{{ $row->agency }}</td>--}}
                         <td class="hidden-480">{{$row->BATCH_NO}}</td>
