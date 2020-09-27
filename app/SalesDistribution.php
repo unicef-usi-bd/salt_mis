@@ -239,17 +239,7 @@ class SalesDistribution extends Model
 
     //for Service
     public static function totalWashcrashSalesService($child_id){
-        /*
-        $countSales = DB::table('tmm_itemstock');
-        $countSales->select('tmm_itemstock.QTY');
-        $countSales->where('TRAN_TYPE','=','W');
-        $countSales->where('TRAN_FLAG','=','SD');
-        $countSales->where('center_id','=',$child_id);
-
-
-        return $countSales->sum('tmm_itemstock.QTY');
-        */
-        $centerId = $child_id;//Auth::user()->center_id;
+        $centerId = $child_id;
         $countSales = DB::table('tmm_itemstock as stock')
             ->select('stock.QTY')
             ->leftJoin('ssm_associationsetup as association','stock.center_id','=','association.ASSOCIATION_ID')
