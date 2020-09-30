@@ -69,7 +69,7 @@ class IodizedController extends Controller
     public static function generateBatchNumberForIodize($centerId){
         $iodizeIndex = Iodized::getIodizeData($centerId);
         $num = count($iodizeIndex);
-        $batch = 'I' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d", ++$num);
+        $batch = 'I' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d")  . '-' . sprintf("%'.04d", ++$num);
         return $batch;
     }
 

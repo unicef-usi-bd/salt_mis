@@ -249,7 +249,7 @@
                                         @if($row->TRAN_TYPE == 'W')
                                             Wash And Crushing Salt
                                         @else
-                                            Iodize Salt
+                                            Iodized Salt
                                         @endif
                                     </td>
                                     <td>{{ number_format($row->QTY, 2) }}</td>
@@ -464,7 +464,7 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Wash and Crushing Salt',
+                    'WASH AND CRUSHING SALT',
                     'IODIZED SALT'
                 ],
                 datasets: [{

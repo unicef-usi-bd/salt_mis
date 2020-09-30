@@ -132,11 +132,11 @@
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
                                                     @endif
-                                                    @if($previllage->DELETE == 1)
-                                                        <a class="red clickForDelete row{{ $lookupGroupData->LOOKUPCHD_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'lookup-groups-data/'.$lookupGroupData->LOOKUPCHD_ID }}" role="button" title="{{ trans('lookupGroupIndex.delete_lookup_group_data') }}">
-                                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                        </a>
-                                                    @endif
+                                                    {{--@if($previllage->DELETE == 1)--}}
+                                                        {{--<a class="red clickForDelete row{{ $lookupGroupData->LOOKUPCHD_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'lookup-groups-data/'.$lookupGroupData->LOOKUPCHD_ID }}" role="button" title="{{ trans('lookupGroupIndex.delete_lookup_group_data') }}">--}}
+                                                            {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
+                                                        {{--</a>--}}
+                                                    {{--@endif--}}
 
                                                 </div>
 

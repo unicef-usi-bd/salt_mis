@@ -21,11 +21,11 @@
                 </p>
 
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
                 <thead>
                 <tr>
                     <th rowspan="2" class="fixedWidth">{{ trans('dashboard.sl') }}</th>
-                    <th colspan="3" class="text-center">Wash and Crashing Stock (KG)</th>
+                    <th colspan="3" class="text-center">Wash and Crushing Stock (KG)</th>
                     <th colspan="3" class="text-center">Iodized Stock (KG)</th>
                     <th rowspan="2" width="50px;">Date</th>
                     <th rowspan="2" class="fixedWidth">{{ trans('dashboard.action') }}</th>

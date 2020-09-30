@@ -30,13 +30,13 @@ class LookupGroupController extends Controller
 
         $title = trans('lookupGroupIndex.create_lookup');
 
-        $heading=array(
-            'title'=> $title,
-            'library'=>'datatable',
-            'modalSize'=>'modal-md',
-            'action'=>'lookup-groups/create',
-            'createPermissionLevel' => $previllage->CREATE
-        );
+//        $heading=array(
+//            'title'=> $title,
+//            'library'=>'datatable',
+//            'modalSize'=>'modal-md',
+//            'action'=>'lookup-groups/create',
+//            'createPermissionLevel' => $previllage->CREATE
+//        );
 
         $lookupGroups = LookupGroup::getSSCLookupData();
         //print_r($lookupGroups);exit;

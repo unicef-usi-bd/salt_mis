@@ -94,7 +94,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="statusAdmin width-65 chosen-select" name="ACTIVE_FLG">
-                                   <option value="">--Select--</option>
+                                   {{--<option value="">--Select--</option>--}}
                                    <option value="0">-Select-</option>
                                    <option value="1">Active</option>
                                    <option value="2">Inactive</option>
@@ -117,7 +117,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAdmin chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select-</option>
+                               {{--<option value="">-Select-</option>--}}
                                 <option value="0">-Select-</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -234,6 +234,7 @@
 <script type="text/javascript" src="{{ 'assets/js/moment.min.js' }}"></script>
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
+
 <script>
     $(function() {
         var start = moment().subtract(29, 'days');

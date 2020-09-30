@@ -4,7 +4,7 @@
 
     <div class="page-header">
         <h1>
-            All Setup
+            Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Brand
@@ -14,13 +14,13 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
                     <th>Brand Name</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+                    <th>Created On</th>
+                    <th>Updated On</th>
                     <th class="fixedWidth">{{ trans('dashboard.action') }}</th>
                 </tr>
                 </thead>

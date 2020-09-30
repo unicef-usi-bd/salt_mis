@@ -1,9 +1,18 @@
+<style>
+    h4{
+        text-align: center;
+    }
+    .resultRangeStyle{
+        margin-bottom: 70px;
+    }
+</style>
 <div class="col-md-12" style="margin-top: 20px;">
 
     <form action="{{ url('/bsti-test-result-range/'.$editBstiTestResutlRange->BSTITEST_RESULT_ID) }}" method="post" class="form-horizontal" role="form">
         @csrf
         @method('PUT')
-        <h4><u>Sodium Chloride</u></h4>
+        <div class="resultRangeStyle">
+        <h4><u>Chloride Content ( as NaCI, %m/m )</u></h4>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
@@ -20,24 +29,9 @@
                 </div>
             </div>
         </div>
-        <h4><u>Moisturizer</u></h4>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
-                <div class="col-sm-7">
-                    <input autocomplete="off" type="text" id="inputSuccess MOISTURIZER_MIN" onkeypress="return numbersOnly(this, event)" placeholder="" name="MOISTURIZER_MIN" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestResutlRange->MOISTURIZER_MIN }}"/>
-                </div>
-            </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
-                <div class="col-sm-7">
-                    <input autocomplete="off" type="text" id="inputSuccess MOISTURIZER_MAX" onkeypress="return numbersOnly(this, event)" placeholder="" name="MOISTURIZER_MAX" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestResutlRange->MOISTURIZER_MAX }}"/>
-                </div>
-            </div>
-        </div>
-        <h4><u>Iodize Content(PPM)</u></h4>
+        <div class="resultRangeStyle">
+        <h4><u>Iodine Content, mg/kg</u></h4>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
@@ -54,7 +48,28 @@
                 </div>
             </div>
         </div>
-        <h4><u>PH</u></h4>
+        </div>
+        <div class="resultRangeStyle">
+            <h4><u>Moisture, %m/m</u></h4>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
+                    <div class="col-sm-7">
+                        <input autocomplete="off" type="text" id="inputSuccess MOISTURIZER_MIN" onkeypress="return numbersOnly(this, event)" placeholder="" name="MOISTURIZER_MIN" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestResutlRange->MOISTURIZER_MIN }}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Maximum Length</b><span style="color: red;"> *</span> </label>
+                    <div class="col-sm-7">
+                        <input autocomplete="off" type="text" id="inputSuccess MOISTURIZER_MAX" onkeypress="return numbersOnly(this, event)" placeholder="" name="MOISTURIZER_MAX" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestResutlRange->MOISTURIZER_MAX }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="resultRangeStyle">
+        <h4><u>pH Value</u></h4>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
@@ -71,7 +86,9 @@
                 </div>
             </div>
         </div>
-        <h4><u>Water insoluble matter</u></h4>
+        </div>
+        <div class="resultRangeStyle">
+        <h4><u>Water Insoluble Matter, %m/m</u></h4>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
@@ -88,7 +105,9 @@
                 </div>
             </div>
         </div>
-        <h4><u>Matter soluble in water other than sodium chloride</u></h4>
+        </div>
+        <div class="resultRangeStyle">
+        <h4><u>Matter Soluble In Water Other Than Sodium Chloride, %m/m</u></h4>
         <div class="col-md-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Minimum Length</b><span style="color: red;"> *</span> </label>
@@ -104,6 +123,7 @@
                     <input autocomplete="off" type="text" id="inputSuccess MSWSC_MAX" onkeypress="return numbersOnly(this, event)" placeholder="" name="MSWSC_MAX" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestResutlRange->MSWSC_MAX }}"/>
                 </div>
             </div>
+        </div>
         </div>
         <div class="clearfix" style="margin-left: 120px;">
             <div class="col-md-offset-3 col-md-9">

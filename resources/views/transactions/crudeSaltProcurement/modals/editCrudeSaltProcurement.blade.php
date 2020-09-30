@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Driving licence</b><span style="color: red;"></span> </label>
+                        <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Driving Licence</b><span style="color: red;"></span> </label>
                         <div class="col-sm-7">
                             <input autocomplete="off" type="text" id="inputSuccess VEHICLE_NO" placeholder="Example:- Driving licence Here" name="VEHICLE_NO" class="form-control col-xs-10 col-sm-5" value="{{ $editCrudeSalt->VEHICLE_NO  }}"/>
                         </div>

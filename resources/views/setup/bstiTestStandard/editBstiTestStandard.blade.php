@@ -1,41 +1,41 @@
-<div class="col-md-12">
+<div class="col-md-9">
     <form action="{{ url('/bsti-test-standard/'.$editBstiTestStandard->BSTITEST_ID) }}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Sodium Chloride</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Sodium Chloride Percentage here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->SODIUM_CHLORIDE }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Chloride Content ( as NaCI, %m/m )</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Sodium Chloride Percentage here" name="SODIUM_CHLORIDE" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->SODIUM_CHLORIDE }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Moisturizer</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Moisturizer Percentage here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->MOISTURIZER }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Iodine Content, mg/kg</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Iodine Content(PPM) here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PPM }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Iodine Content(PPM)</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- Iodine Content(PPM) here" name="PPM" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PPM }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Moisture, %m/m</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- Moisturizer Percentage here" name="MOISTURIZER" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->MOISTURIZER }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>PH</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PH }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>pH Value</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- PH here" name="PH" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->PH }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Water insoluble matter</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="water_insoluble_matter" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->water_insoluble_matter }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Water Insoluble Matter, %m/m</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- PH here" name="water_insoluble_matter" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->water_insoluble_matter }}"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> <b>Matter soluble in water other than sodium chloride</b><span style="color: red;"> *</span> </label>
-            <div class="col-sm-6">
-                <input autocomplete="off" type="text" id="inputSuccess" onkeypress="return numbersOnly(this, event)" placeholder="Example:- PH here" name="matter_soluble_sc" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->matter_soluble_sc }}"/>
+            <label class="col-sm-8 control-label no-padding-right" for="form-field-1-1"> <b>Matter Soluble In Water Other Than Sodium Chloride, %m/m</b><span style="color: red;"> *</span> </label>
+            <div class="col-sm-4">
+                <input autocomplete="off" type="text" id="inputSuccess" placeholder="Example:- PH here" name="matter_soluble_sc" class="form-control col-xs-10 col-sm-5" value="{{ $editBstiTestStandard->matter_soluble_sc }}"/>
             </div>
         </div>
         <div class="clearfix" style="margin-left: 120px;">

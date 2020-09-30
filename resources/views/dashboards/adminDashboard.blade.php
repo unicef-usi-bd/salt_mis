@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Millers</div>
+                    <div class="infobox-content">MILLS</div>
                     <div class="infobox-content">{{ $totalMiller }}</div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">ACTIVE MILLERS</div>
+                    <div class="infobox-content">ACTIVE MILLS</div>
                     <div class="infobox-content">{{ $totalActiveMiller }}</div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">INACTIVE MILLERS</div>
+                    <div class="infobox-content">INACTIVE MILLS</div>
                     <div class="infobox-content">{{ $totalInactiveMiller }}</div>
                 </div>
             </div>
@@ -255,7 +255,7 @@
                                     <i class="ace-icon fa fa-caret-right blue"></i>Sale Type
                                 </th>
                                 <th>
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Sale Amount In KG
                                 </th>
                             </tr>
                             </thead>
@@ -420,7 +420,7 @@
             // The data for our dataset
             data: {
                 labels: [
-                    'Wash and Crushing Salt ',
+                    'WASH AND CRUSHING SALT ',
                     'IODIZED SALT'
                 ],
                 datasets: [{

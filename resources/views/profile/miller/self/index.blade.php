@@ -11,7 +11,7 @@
 
     <div class="page-header">
         <h1>
-            Setup
+            Mill
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Mill Profile

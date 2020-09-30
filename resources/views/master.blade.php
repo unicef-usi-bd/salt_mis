@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/ace-rtl.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/ace-ie.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
+    <!-- toastify javascript  use -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     {{--For Jquery--}}
     <script src="{{ asset('assets/js/ace-extra.min.js') }}"></script>
@@ -160,6 +162,8 @@
 <!-- ace scripts -->
 <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
 <script src="{{ asset('assets/js/ace.min.js') }}"></script>
+<!-- toastify javascript  use -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">

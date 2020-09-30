@@ -35,6 +35,39 @@
         });
     }
 
+    function formSubmitGeneral(form_data){
+        let url = jQuery(form_data).attr('action');
+        let postType = $("input[name=_method]").val();
+        let _method = (typeof(postType) === "undefined") ? 'post' : postType;
+        let doEmptyForm = jQuery(form_data).attr('data-clear') || true;
+        let finalSubmit = (typeof($(this).attr('finalSubmit'))==="undefined")?'0':1;
+        let formData = new FormData(form_data); // Currently empty
+        formData.append('isFinalSubmit', finalSubmit);
+        if(_method!=='post') doEmptyForm = false;
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json'
+        }).done(function(data) {
+            if(data.success){
+                displayAlertHandler(data.success);
+                if(doEmptyForm===true) formClear();
+                if(data.insertId) putInsertIdInClassAttribute(data.insertId);
+            }else if(data.errors){
+                displayAlertHandler(data.errors, 'danger');
+            }else{
+                let defaultMsg = 'Something is wrong there';
+                displayAlertHandler(defaultMsg, 'danger');
+            }
+        }).fail(function(data) {
+            console.log('Error:', data);
+        });
+    }
+
     function putInsertIdInClassAttribute(insertId){
         let hasContainer = $(document).find('.insertIdContainer');
         if(hasContainer.length) {

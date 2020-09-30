@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount(KG)</b><span style="color: red;"> *</span> </label>
+                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount (KG)</b><span style="color: red;"> *</span> </label>
                     <div class="col-sm-7">
                         <input autocomplete="off" type="text" id="inputSuccess RCV_QTY" placeholder="Example:- Amount Here In KG" name="RCV_QTY" class="form-control col-xs-10 col-sm-5"  onkeypress="return numbersOnly(this, event)" value=""/>
                     </div>

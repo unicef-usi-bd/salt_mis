@@ -7,7 +7,7 @@
             All Setup
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Require Chemical Per KG
+                Required Chemical Per KG
             </small>
         </h1>
     </div><!-- /.page-header -->
@@ -68,7 +68,7 @@
                                     @php
                                         $createPermissionLevel = $previllage->CREATE;
                                     @endphp
-                                    <button id="{{ 'require-chemical-chd/create-data/'.$chemical->RMALLOMST_ID }}" data-target=".modal" data-id="{{ $chemical->RMALLOMST_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" modal-size="modal-lg" data-toggle="modal" title="Required Chemical"> {{ trans('dashboard.add_new') }} </button>
+                                    {{--<button id="{{ 'require-chemical-chd/create-data/'.$chemical->RMALLOMST_ID }}" data-target=".modal" data-id="{{ $chemical->RMALLOMST_ID }}" role="button" data-permission="{{ $createPermissionLevel }}" class="test btn btn-minier btn-primary pull-right showModalGlobal" modal-size="modal-lg" data-toggle="modal" title="Required Chemical"> {{ trans('dashboard.add_new') }} </button>--}}
                                 </p>
                                 <div class="col-lg-12">
                                     <table style="margin-bottom: 10px;" class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('lookupGroupIndex.lookup_group_data_list') }}">
@@ -137,11 +137,11 @@
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                             </a>
                                                         @endif
-                                                        @if($previllage->DELETE == 1)
-                                                            <a class="red clickForDelete row{{ $chemicalData->RMALLOCHD_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" role="button" title="{{ trans('lookupGroupIndex.delete_lookup_group_data') }}">
-                                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                            </a>
-                                                        @endif
+                                                        {{--@if($previllage->DELETE == 1)--}}
+                                                            {{--<a class="red clickForDelete row{{ $chemicalData->RMALLOCHD_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'require-chemical-chd/'.$chemicalData->RMALLOCHD_ID }}" role="button" title="{{ trans('lookupGroupIndex.delete_lookup_group_data') }}">--}}
+                                                            {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
+                                                            {{--</a>--}}
+                                                        {{--@endif--}}
 
                                                     </div>
 

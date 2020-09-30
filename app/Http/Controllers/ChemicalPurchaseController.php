@@ -32,7 +32,7 @@ class ChemicalPurchaseController extends Controller
         $heading=array(
             'title'=>'Chemical Purchase',
             'library'=>'datatable',
-            'modalSize'=>'modal-lg',
+            'modalSize'=>'modal-bg',
             'action'=>'chemical-purchase/create',
             'createPermissionLevel' => $previllage->CREATE
         );

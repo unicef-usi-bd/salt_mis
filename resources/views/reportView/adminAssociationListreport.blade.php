@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <th>Name of Association </th>
                 <th>Total Raw Salt Purchase </th>
                 <th>Total Chemical Purchase </th>

@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <th>Name Mill </th>
                 <th>Total Number of Employees </th>
                 <th>Number of Full-Time Employees </th>

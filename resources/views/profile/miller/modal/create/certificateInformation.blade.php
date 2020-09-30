@@ -121,7 +121,7 @@
 
     function formSubmitWithValidation(from_data){
         let checkValidation = validation();
-        if(checkValidation) formSubmit(from_data);
+        if(checkValidation) formSubmitGeneral(from_data);
     }
 
     $(document).ready(function(){

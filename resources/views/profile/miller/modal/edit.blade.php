@@ -84,20 +84,33 @@
         }
     });
 
+var prev_val;
+$('#MILL_TYPE_ID').focus(function() {
+    prev_val = $(this).val();
+
+});
+
     $(document).on('change', '#MILL_TYPE_ID', function () {
-        let millType = parseInt($(this).val()||0);
-        if(millType){
-            $.ajax({
-                type : 'get',
-                url : `certificate-by-mill-type/${millType}`,
-                success: function (data) {
-                    if(data){
-                        $('.CERTIFICATE_TYPE_ID').html(data).trigger("chosen:updated");
-                        $('.ISSURE_ID').val('').trigger("chosen:updated");
+        if (confirm('Are you sure you want to change mill type? If yes, you must need to update mill certificate section in this profile.')) {
+            let millType = parseInt($(this).val()||0);
+            if(millType){
+                $.ajax({
+                    type : 'get',
+                    url : `certificate-by-mill-type/${millType}`,
+                    success: function (data) {
+                        if(data){
+                            $('.CERTIFICATE_TYPE_ID').html(data).trigger("chosen:updated");
+                            $('.ISSURE_ID').val('').trigger("chosen:updated");
+                        }
                     }
-                }
-            })
+                })
+            }
+        } else {
+            $(this).val(prev_val);
+
+            return false;
         }
+
     });
 
     // Fore Remove Row By Click

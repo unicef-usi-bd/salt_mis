@@ -189,7 +189,7 @@
                             <i class="ace-icon fa fa-undo bigger-110"></i>
                             {{ trans('dashboard.reset') }}
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="formSubmit(this.form)">
+                        <button type="button" class="btn btn-primary" onclick="formSubmitGeneral(this.form)">
                             <i class="ace-icon fa fa-check bigger-110"></i>
                             Update
                         </button>

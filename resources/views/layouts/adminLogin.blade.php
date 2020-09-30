@@ -44,7 +44,7 @@
 
 </head>
 
-<body class="login-layout light-login" style="background-image: url('assets/images/salt_login/salt_bg_photo.jpg');background-repeat: no-repeat;background-size: cover">
+<body class="login-layout light-login" style="background-image: url('assets/images/salt_login/salt_bg_photo.jpg');background-repeat: no-repeat;background-size: cover;overflow: hidden !important;">
 
 <div class="main-container">
     <div class="main-content">

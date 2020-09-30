@@ -31,18 +31,18 @@ class QcController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'MILL_ID' => 'required',
-            'LABORATORY_FLG' => 'required',
-            'LAB_MAN_FLG' => 'required',
-            'OPERATION_PROCEDURE_FLG' => 'required',
-            'MONITORING_FLG' => 'required',
+//            'MILL_ID' => 'required',
+//            'LABORATORY_FLG' => 'required',
+//            'LAB_MAN_FLG' => 'required',
+//            'OPERATION_PROCEDURE_FLG' => 'required',
+//            'MONITORING_FLG' => 'required',
         );
         $error = array(
-            'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
-            'LABORATORY_FLG.required' => 'Laboratory field is required.',
-            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
-            'OPERATION_PROCEDURE_FLG.required' => 'Operation procedure check field is required.',
-            'MONITORING_FLG.required' => 'Monitoring field is required.'
+//            'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
+//            'LABORATORY_FLG.required' => 'Laboratory field is required.',
+//            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
+//            'OPERATION_PROCEDURE_FLG.required' => 'Operation procedure check field is required.',
+//            'MONITORING_FLG.required' => 'Monitoring field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -70,17 +70,17 @@ class QcController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'LABORATORY_FLG' => 'required',
-            'LAB_MAN_FLG' => 'required',
-            'OPERATION_PROCEDURE_FLG' => 'required',
-            'MONITORING_FLG' => 'required',
+//            'LABORATORY_FLG' => 'required',
+//            'LAB_MAN_FLG' => 'required',
+//            'OPERATION_PROCEDURE_FLG' => 'required',
+//            'MONITORING_FLG' => 'required',
         );
 
         $error = array(
-            'LABORATORY_FLG.required' => 'Laboratory field is required.',
-            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
-            'OPERATION_PROCEDURE_FLG.required' => 'Operation procedure check field is required.',
-            'MONITORING_FLG.required' => 'Monitoring field is required.'
+//            'LABORATORY_FLG.required' => 'Laboratory field is required.',
+//            'LAB_MAN_FLG.required' => 'Lab man check field is required.',
+//            'OPERATION_PROCEDURE_FLG.required' => 'Operation procedure check field is required.',
+//            'MONITORING_FLG.required' => 'Monitoring field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

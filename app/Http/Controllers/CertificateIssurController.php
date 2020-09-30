@@ -30,7 +30,7 @@ class CertificateIssurController extends Controller
         $previllage = $this->checkPrevillage($userGroupId,$userGroupLevelId,$url);
 
 //        $title = trans('lookupGroupIndex.create_lookup');
-        $title = 'Certificate Issure Setup';
+        $title = 'Certificate Issuer Setup';
 
         $heading=array(
             'title'=> $title,

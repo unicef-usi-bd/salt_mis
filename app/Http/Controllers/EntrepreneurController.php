@@ -51,15 +51,15 @@ class EntrepreneurController extends Controller
             'MILL_ID' => 'required',
             'OWNER_NAME.*' => 'required',
             'NID.*' => 'required',
-            'MOBILE_1.*' => 'required',
-            'EMAIL.*' => 'required',
+//            'MOBILE_1.*' => 'required',
+//            'EMAIL.*' => 'required',
         );
         $error = array(
             'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
             'OWNER_NAME.*' => 'Owner name field is required.',
             'NID.*' => 'NID field is required.',
-            'MOBILE_1.*' => 'Mobile_1 field is required.',
-            'EMAIL.*' => 'Email field is required.'
+//            'MOBILE_1.*' => 'Mobile_1 field is required.',
+//            'EMAIL.*' => 'Email field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -89,15 +89,15 @@ class EntrepreneurController extends Controller
         $updated = false;
         $rules = array(
             'OWNER_NAME.*' => 'required',
-            'NID.*' => 'required',
-            'MOBILE_1.*' => 'required',
-            'EMAIL.*' => 'required',
+//            'NID.*' => 'required',
+//            'MOBILE_1.*' => 'required',
+//            'EMAIL.*' => 'required',
         );
         $error = array(
             'OWNER_NAME.*' => 'Owner name field is required.',
-            'NID.*' => 'NID field is required.',
-            'MOBILE_1.*' => 'Mobile_1 field is required.',
-            'EMAIL.*' => 'Email field is required.'
+//            'NID.*' => 'NID field is required.',
+//            'MOBILE_1.*' => 'Mobile_1 field is required.',
+//            'EMAIL.*' => 'Email field is required.'
         );
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);

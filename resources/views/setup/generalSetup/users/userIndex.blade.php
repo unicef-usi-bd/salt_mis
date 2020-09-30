@@ -22,7 +22,7 @@
 
             @endif
 
-            <table style="font-size: 11px" class="table table-striped table-bordered table-hover gridTable table-responsive" data-tools="false" title="{{ trans('user.user_list') }}">
+            <table style="font-size: 11px" class="table table-striped table-bordered table-hover gridTable table-responsive" data-tools="false">
                 <thead style="white-space: nowrap">
                 <tr>
 

@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <td>Type of Mill</td>
                 <th> Name of Mill</th>
                 <th>Status</th>

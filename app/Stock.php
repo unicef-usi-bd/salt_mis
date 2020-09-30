@@ -48,6 +48,7 @@ class Stock extends Model
             ->where('TRAN_FLAG','=','PR')
             ->where('tmm_itemstock.center_id','=',$centerId)
             ->sum('tmm_itemstock.QTY');
+
     }
 
     public static function getTotalWashingSalt($centerId){

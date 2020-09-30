@@ -52,6 +52,7 @@ class BstiTestStandardController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($_POST);exit();
         $rules = array(
             'SODIUM_CHLORIDE' => 'required',
             'MOISTURIZER' => 'required',

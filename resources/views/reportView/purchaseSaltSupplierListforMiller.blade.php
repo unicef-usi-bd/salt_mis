@@ -17,7 +17,7 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl.</th>
+                <th>SL</th>
                 <th>Name of Supplier </th>
                 <th>Division</th>
                 <th>District</th>

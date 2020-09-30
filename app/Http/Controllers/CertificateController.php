@@ -151,6 +151,7 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
+       //dd($_POST);exit();
         $rules = array(
             'CERTIFICATE_TYPE_ID.*' => 'required',
             'ISSURE_ID.*' => 'required',
@@ -366,7 +367,9 @@ class CertificateController extends Controller
 
     public function getCertificateByMillTypeId($id)
     {
+
         $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $id);
+
         $options = '<option value="">Select</option>';
         foreach ($certificates as $row) {
             $hasClass = '';

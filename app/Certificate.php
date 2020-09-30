@@ -125,6 +125,7 @@ class Certificate extends Model
             ->where('slc.ACTIVE_FLG', '=', 1)
             ->whereNotNull('sc.mill_type_id');
 
+
         if($millTypeId!=21) $data->where('sc.mill_type_id', '=', $millTypeId); // both type id = 21
         return $data->get();
     }

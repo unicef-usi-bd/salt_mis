@@ -39,7 +39,7 @@
             <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1" style="margin-left: -47px;"> <b>Chemical Amount (KG)</b><span style="color: red;"> *</span> </label>
             <div class="col-sm-7">
                 <span class="col-sm-6" style="padding: 0;">
-                    <input autocomplete="off" type="text" id="inputSuccess REQ_QTY" placeholder="Example:-Chemical Amount(KG) Here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value=""/>
+                    <input autocomplete="off" type="text" id="inputSuccess REQ_QTY" placeholder="Example:-Chemical Amount(KG) Here" name="REQ_QTY" class="form-control col-xs-10 col-sm-5 userChemicalAmount" onkeypress="return numbersOnly(this, event)" value="" readonly/>
                 </span>
                 <span class="col-sm-6 currentChemicalStock" data-stock="" data-recommend="" style="margin-top: 6px;font-weight: bold;"></span>
             </div>
@@ -103,8 +103,9 @@
             data : {'chemicalId':chemicalId},
             success: function (data) {
                 data = JSON.parse(data);
-                let chemicalStock = data.chemicalStock;
+                let chemicalStock = data.chemicalStock.toFixed(4);
                 chemicalStockScope.attr('data-stock', chemicalStock);
+
                 if(data.chemicalPerKg!==null) {
                     let chemicalAmount = parseFloat(data.chemicalPerKg.USE_QTY);
                     let saltAmount = parseFloat(data.chemicalPerKg.CRUDE_SALT);
@@ -122,6 +123,7 @@
     $(document).on('keyup','.userChemicalAmount',function () {
         let chemicalStockScope = $('.currentChemicalStock');
         chemicalStockDisplay(chemicalStockScope);
+
     });
 
 </script>

@@ -4,7 +4,7 @@
 
     <div class="page-header">
         <h1>
-            Setup
+            Crude Salt
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Crude Salt Details
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>

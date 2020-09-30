@@ -20,7 +20,7 @@
                     </button>
                 </p>
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>

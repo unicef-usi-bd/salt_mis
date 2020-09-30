@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <td>Name of Association </td>
                 <th>Number Of Mills</th>
             </tr>

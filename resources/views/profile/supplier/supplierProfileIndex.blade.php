@@ -3,7 +3,7 @@
 
     <div class="page-header">
         <h1>
-            Setup
+            Supplier
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Supplier Profile
@@ -22,10 +22,10 @@
                     </p>
 
                 @endif
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('module.module_list') }}">
-                <thead>
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
+                <thead style="white-space: nowrap">
                 <tr>
-                    <th class="fixedWidth" style="width: 5px;">Sl</th>
+                    <th class="fixedWidth" style="width: 5px;">SL</th>
                     <th class="center fixedWidth">Trading Name</th>
                     <th class="center fixedWidth">Trader Name</th>
                     <th class="center fixedWidth">Supplier Type</th>

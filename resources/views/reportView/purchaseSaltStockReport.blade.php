@@ -17,7 +17,7 @@
         <table id="simple-table" class="table table-bordered table-hover" style="font-size: 9px;">
             <thead>
             <tr>
-                <th>Sl</th>
+                <th>SL</th>
                 <th>Item Name</th>
                 <th>Total Stock Amount (KG)</th>
             </tr>

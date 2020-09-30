@@ -55,6 +55,8 @@ class MillerInfoController extends Controller
         $approvalMillList = MillerInfo::getApprovalAllMillDataList();
         $millerToMerge = MillerInfo::getMillerToMerge();
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+        //dd($selfMillerInfo);exit();
+
         if(!empty($selfMillerInfo->MILL_ID)){
 
             $millerId = $selfMillerInfo->MILL_ID;
@@ -195,18 +197,21 @@ class MillerInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {
+
         $millerInfo = MillerInfo::millerInformation($id);
         $entrepreneurs = Entrepreneur::entrepreneurInformation($id);
         $certificateInfo = Certificate::certificateInformation($id);
+        //dd($certificateInfo);exit();
         $qcInfo = Qc::qcInfo($id);
         $employeeInfo = Employee::employeeInformation($id);
+
 
         $zones = SupplierProfile::getZone();
         $divisions = SupplierProfile::getDivision();
         $districts = SupplierProfile::getDistrict();
         $upazillas = SupplierProfile::getUpazilla();
-
         $registrationType = LookupGroupData::getActiveGroupDataByLookupGroup($this->registrationTypeId);
         $ownerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->ownerTypeId);
 
@@ -214,7 +219,9 @@ class MillerInfoController extends Controller
         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $millerInfo->MILL_TYPE_ID);
+        //dd($certificates);exit();
         $issueBy = CertificateIssur::getCertificateIssuer();
+        //dd($issueBy);exit();
         $millerToMerge = MillerInfo::getMillerToMerge();
 
         return view('profile.miller.modal.edit', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));
@@ -230,6 +237,7 @@ class MillerInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $rules = array(
             'REG_TYPE_ID' => 'required',
             'MILL_NAME' => 'required',
@@ -267,6 +275,7 @@ class MillerInfoController extends Controller
         }
 
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();
+
 
         if($selfMillerInfo->MILL_ID){
             $updated = MillerInfo::updateMillerInfoTemp($request, $id, $mill_logo);

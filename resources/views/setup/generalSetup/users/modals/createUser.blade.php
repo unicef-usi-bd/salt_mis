@@ -114,7 +114,7 @@
             </div>
 
             <div class="form-group resources"  style=" display: none;">
-                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Miller Name</b><span style="color: red;"> *</span></label>
+                <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mills Name</b><span style="color: red;"> *</span></label>
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
@@ -196,8 +196,9 @@
 
         let Privileges = jQuery('#privileges');
         let select = this.value;
+
         Privileges.change(function () {
-            if ($(this).val() == 21 || $(this).val() == 22) {
+            if ($(this).val() == 22) {
                 $('.resources').show();
             }
             else $('.resources').hide();

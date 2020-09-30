@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">MILLERS</div>
+                    <div class="infobox-content">MILLS</div>
                     <div class="infobox-content">{{ $totalMiller }}</div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">ACTIVE MILLERS</div>
+                    <div class="infobox-content">ACTIVE MILLS</div>
                     <div class="infobox-content">{{ $totalActiveMiller }}</div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">INACTIVE MILLERS</div>
+                    <div class="infobox-content">INACTIVE MILLS</div>
                     <div class="infobox-content">{{ $totalInactiveMiller }}</div>
                 </div>
             </div>
@@ -370,7 +370,7 @@
                 <div class="widget-header widget-header-flat widget-header-small">
                     <h5 class="widget-title">
                         <i class="ace-icon fa fa-star orange"></i>
-                         Certificate Status of Miller
+                         Certificate Status of Mills
                     </h5>
                 </div>
 
@@ -401,7 +401,7 @@
                                 </th>
 
                                 <th>
-                                    Miller&nbsp;Name
+                                    Mill&nbsp;Name
                                 </th>
 
                                 <th>

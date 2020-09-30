@@ -30,7 +30,7 @@
                 </p>
 
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('module.module_list') }}">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
                 <thead>
                 {{--<tr>--}}
                     {{--<th class="fixedWidth" >{{ trans('dashboard.sl') }}</th>--}}
@@ -40,7 +40,7 @@
                     {{--<th class="center fixedWidth">{{ trans('dashboard.action') }}</th>--}}
                 {{--</tr>--}}
                 <tr>
-                    <th class="fixedWidth" style="width: 5px;">Sl</th>
+                    <th class="fixedWidth" style="width: 5px;">SL</th>
                     <th class="center fixedWidth">Agency Name</th>
                     <th class="center fixedWidth">Monitoring Date</th>
                     <th class="center fixedWidth">Remarks</th>
