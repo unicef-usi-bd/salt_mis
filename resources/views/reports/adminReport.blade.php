@@ -178,7 +178,8 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
-                    {{--<div class="form-group zoneAdminDiv">--}}
+                    <div class="form-group zoneAdminDiv">
+
                         {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>--}}
                         {{--<div class="col-sm-8">--}}
                             {{--<span class="block input-icon input-icon-right">--}}
@@ -191,7 +192,7 @@
                                 {{--</select>--}}
                              {{--</span>--}}
                         {{--</div>--}}
-                    {{--</div>--}}
+                    </div>
                     <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
@@ -216,7 +217,7 @@
             <br>
             <div class="clearfix">
                 <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                    <button type="reset" class="btn">
+                    <button type="reset" class="btn" id="resetbtn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
@@ -236,6 +237,12 @@
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
 
 <script>
+    $(document).on('click','#resetbtn', function () {
+        $('.chosen-single span').val("");
+        $('.chosen-single span').html("");
+        $('#reportrange').html("");
+        $('#reportrange').val("");
+    });
     $(function() {
         var start = moment().subtract(29, 'days');
         var end = moment();

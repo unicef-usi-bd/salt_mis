@@ -49,7 +49,7 @@
                                 </a>
                             @endif
                             @if($previllage->DELETE == 1)
-                                <a class="red clickForDelete row{{ $brand->brand_id }}" data-token="{{ csrf_token() }}" data-action="{{ 'brand/'.$brand->brand_id }}" role="button" title="Delete CRUDE SALT Details">
+                                <a class="red clickForDelete row{{ $brand->brand_id }}" data-token="{{ csrf_token() }}" data-action="{{ 'brand/'.$brand->brand_id }}" role="button" title="Delete Brand Name">
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </a>
                             @endif

@@ -108,6 +108,7 @@
 
                 if(data.chemicalPerKg!==null) {
                     let chemicalAmount = parseFloat(data.chemicalPerKg.USE_QTY);
+                    //alert(chemicalAmount);
                     let saltAmount = parseFloat(data.chemicalPerKg.CRUDE_SALT);
                     let recommendChemical = (chemicalAmount/saltAmount)*washSaltAmount;
                     chemicalStockScope.attr('data-recommend', recommendChemical);

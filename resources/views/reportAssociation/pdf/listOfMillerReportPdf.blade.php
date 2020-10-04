@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <p>Lost of Mill</p>
+    <p>List of Mill</p>
 </div>
 
 

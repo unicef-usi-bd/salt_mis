@@ -248,6 +248,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('association-list-reportPdf','ReportController@getAssociationListPdf');//jalal
     Route::get('miller-list-pdf/{activStatus}','ReportController@getMillerListPdf');//jalal
     Route::get('chemical-purchase-pdf/{starDate}/{endDate}/{millTypeAdmin?}','ReportController@getChemicalPurchasePdf');//Rubiyat
+    Route::get('chemical-purchase-stock-pdf/{millTypeAdmin?}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
     Route::get('chemical-purchase-stock-pdf/{starDate}/{endDate}/{millTypeAdmin?}','ReportController@getChemicalPurchaseStockPdf');//Rubiyat
 
 

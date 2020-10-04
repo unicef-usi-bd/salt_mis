@@ -12,7 +12,7 @@
 
 <table width="700px" border="1"  style="font-size: 12px; text-align: center;border-collapse: collapse;">
     <tr>
-        <th>Sl</th>
+        <th>SL</th>
         <th>Name Mill </th>
         <th>Total Number of Employees </th>
         <th>Number of Full-Time Employees </th>

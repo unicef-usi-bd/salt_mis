@@ -1,5 +1,5 @@
 <div id="millers" class="tab-pane fade in active">
-    <div class="row">
+<div class="row">
         <div class="col-md-12">
             <form action="" method="post" class="form-horizontal" role="form" >
                 {{--<div class="col-md-6">--}}
@@ -69,7 +69,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select-</option>
+                               {{--<option value="">-Select-</option>--}}
                                 <option value="0">-Select-</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -83,7 +83,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chemicalItemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select-</option>
+                               {{--<option value="">-Select-</option>--}}
                                 <option value="0">-Select-</option>
                                 @foreach($chemicalTypes as $row)
                                     <option value="{{$row->ITEM_NO}}"> {{$row->ITEM_NAME}}</option>
@@ -217,7 +217,7 @@
             <br>
             <div class="clearfix">
                 <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                    <button type="reset" class="btn">
+                    <button type="reset" class="btn" id="resetbtn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
@@ -238,6 +238,12 @@
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
 <script>
+    $(document).on('click','#resetbtn', function () {
+        $('.chosen-single span').val("");
+        $('.chosen-single span').html("");
+        $('#reportrange').html("");
+        $('#reportrange').val("");
+    });
     $(function() {
         var start = moment().subtract(29, 'days');
         var end = moment();

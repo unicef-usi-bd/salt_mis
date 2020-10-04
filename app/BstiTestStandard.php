@@ -40,6 +40,8 @@ class BstiTestStandard extends Model
     }
 
     public static function updateBstiTestData($request,$id){
+
+
         $update = DB::table('ssm_bsti_test')->where('BSTITEST_ID', '=' , $id)->update([
             'SODIUM_CHLORIDE' => $request->input('SODIUM_CHLORIDE'),
             'MOISTURIZER' => $request->input('MOISTURIZER'),

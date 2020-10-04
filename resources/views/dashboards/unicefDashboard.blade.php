@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Millers</div>
+                    <div class="infobox-content">MILLERS</div>
                     <div class="infobox-content">{{ $totalMiller }}</div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Active MILLERS</div>
+                    <div class="infobox-content">ACTIVE MILLERS</div>
                     <div class="infobox-content">{{ $totalActiveMiller }}</div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="infobox-data">
-                    <div class="infobox-content">Inactive MILLERS</div>
+                    <div class="infobox-content">INACTIVE MILLERS</div>
                     <div class="infobox-content">{{ $totalInactiveMiller }}</div>
                 </div>
             </div>

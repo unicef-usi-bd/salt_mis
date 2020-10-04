@@ -64,7 +64,7 @@ class WashingAndCrushingController extends Controller
     public static function generateBatchNumberForWashAndCrush($centerId){
         $washingAndCrushingData = WashingAndCrushing::getWashingAndCrushingData($centerId);
         $num = count($washingAndCrushingData);
-        $batch = 'WC' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' .  date("H") . '-' . date("i") . '-' . sprintf("%'.04d", ++$num);
+        $batch = 'WC' . '-' . $centerId . '-' . date("y") . '-' . date("m") . '-' . date("d") . '-' . sprintf("%'.04d", ++$num);
         return $batch;
     }
 

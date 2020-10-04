@@ -78,7 +78,7 @@
                     </a>
                     @endif
                     @if($previllage->DELETE == 1)
-                    <a class="red clickForDelete row{{ $row->WASHCRASHMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                    <a class="red clickForDelete row{{ $row->WASHCRASHMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'washing-crushing/'.$row->WASHCRASHMST_ID }}" role="button" title="Delete Wash and Crushing Production">
                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
                     @endif

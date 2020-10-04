@@ -17,14 +17,15 @@
         <th>QC By</th>
         <th>Agency Name</th>
         <th>Test Result</th>
-        <th>Attached File</th>
+        {{--<th>Attached File</th>--}}
     </tr>
+
     <?php $sl = 0; ?>
 
     @foreach($qcReports as $row)
         <tr>
             <td>{{ ++$sl }}</td>
-            <td>{{$row->MILL_NAME}}</td>
+            {{--<td>{{$row->MILL_NAME}}</td>--}}
             <td>{{$row->BATCH_NO}}</td>
             <td>{{$row->quality_control_by}}</td>
             <td>{{$row->agency_name}}</td>

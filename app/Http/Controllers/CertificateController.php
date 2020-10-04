@@ -177,7 +177,9 @@ class CertificateController extends Controller
         $image = $request->file('user_image');
 
         $userCertificates = $request->input('CERTIFICATE_TYPE_ID');
+        //dd($userCertificates);
         $hasRequiredCertificates = $this->isValidateCertificate($millerId, $userCertificates);
+        dd($hasRequiredCertificates);
         if ($hasRequiredCertificates) {
             $certificates = implode(', ', $hasRequiredCertificates);
             return response()->json(['errors' => "<b>$certificates </b>certificates must be required."]);
@@ -212,11 +214,14 @@ class CertificateController extends Controller
         $certificateId = $request->input('CERTIFICATE_ID');
         try {
             DB::beginTransaction();
-            $hasDelete = DB::table('ssm_certificate_info')
-                ->whereNotIn('CERTIFICATE_ID', $certificateId)
-                ->where('MILL_ID', '=', $millerId)
-                ->pluck('CERTIFICATE_ID')->toArray();
-            if($hasDelete) $this->deleteCertificates($hasDelete);
+            if($certificateId){
+                $hasDelete = DB::table('ssm_certificate_info')
+                    ->whereNotIn('CERTIFICATE_ID', $certificateId)
+                    ->where('MILL_ID', '=', $millerId)
+                    ->pluck('CERTIFICATE_ID')->toArray();
+                if($hasDelete) $this->deleteCertificates($hasDelete);
+            }
+
 
             for ($i = 0; $i < count($userCertificates); $i++) {
                 $tempName = null;
@@ -264,6 +269,7 @@ class CertificateController extends Controller
             DB::commit();
             return $updated;
         } catch (\Exception $e) {
+//            var_dump($e->getMessage());
             DB::rollBack();
             return $updated;
         }

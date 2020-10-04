@@ -397,7 +397,7 @@
             <br>
             <div class="clearfix">
                 <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                    <button type="reset" class="btn">
+                    <button type="reset" class="btn" id="resetbtn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
@@ -416,6 +416,12 @@
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
 <script>
+    $(document).on('click','#resetbtn', function () {
+        $('.chosen-single span').val("");
+        $('.chosen-single span').html("");
+        $('#reportrange').html("");
+        $('#reportrange').val("");
+    });
     $(function() {
         var start = moment().subtract(29, 'days');
         var end = moment();

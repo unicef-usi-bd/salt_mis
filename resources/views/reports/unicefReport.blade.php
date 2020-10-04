@@ -83,7 +83,7 @@
                         <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
-                                   <option value="">-Select-</option>
+                                   <option value="0">-Select-</option>
                                    <option value="0">Wash And Crush</option>
                                    <option value="1">Iodized </option>
                                </select>
@@ -95,7 +95,7 @@
                     <div class="col-sm-8">
                             <span class="block input-icon input-icon-right">
                                <select class="statusUnicef width-65" name="ACTIVE_FLG">
-                                   <option value="">-Select-</option>
+                                   {{--<option value="">-Select-</option>--}}
                                    <option value="0">-Select-</option>
                                    <option value="1">Active</option>
                                    <option value="2">Inactive</option>
@@ -118,7 +118,7 @@
                         <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeUnicef chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
-                               <option value="">-Select-</option>
+                               {{--<option value="">-Select-</option>--}}
                                 <option value="0">-Select-</option>
                                 @foreach($crudeSaltTypes as $chemical)
                                     <option value="{{$chemical->ITEM_NO}}"> {{$chemical->ITEM_NAME}}</option>
@@ -179,26 +179,26 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
-                    {{--<div class="form-group zoneAdminDiv">--}}
-                        {{--<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>--}}
-                        {{--<div class="col-sm-8">--}}
-                            {{--<span class="block input-icon input-icon-right">--}}
-                                {{--<select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneUnicef form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">--}}
-                                    {{--<option value="">Select Association Name</option>--}}
-                                    {{--<option value="0">Select All</option>--}}
-                                    {{--@foreach($associationList as $association)--}}
-                                        {{--<option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                             {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group zoneAdminDiv">
+                        <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>
+                        <div class="col-sm-8">
+                            <span class="block input-icon input-icon-right">
+                                <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneUnicef form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
+                                    <option value="">Select Association Name</option>
+                                    <option value="0">Select All</option>
+                                    @foreach($associationList as $association)
+                                        <option value="{{$association->ZONE_ID}}"> {{$association->ZONE_NAME}}</option>
+                                    @endforeach
+                                </select>
+                             </span>
+                        </div>
+                    </div>
                     <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
                         <div class="col-md-8">
                             <span class="block input-icon input-icon-right">
                                 <select class="issuerUnicef width-65 form-control chosen-select " id="ISSURE_ID" name="ISSURE_ID"  >
-                                    <option value="">-Select-</option>
+                                    <option value="0">-Select-</option>
                                     @foreach($issueBy as $row)
                                         <option value="{{ $row->LOOKUPCHD_ID }}">{{ $row->LOOKUPCHD_NAME }}</option>
                                     @endforeach
@@ -216,7 +216,7 @@
             <br>
             <div class="clearfix">
                 <div class="col-md-offset-3 col-md-9" style="margin-left: 40%!important;">
-                    <button type="reset" class="btn">
+                    <button type="reset" class="btn" id="resetbtn">
                         <i class="ace-icon fa fa-undo bigger-110"></i>
                         {{ trans('dashboard.reset') }}
                     </button>
@@ -236,6 +236,14 @@
 <script type="text/javascript" src="{{'assets/js/daterangepicker.js'}}"></script>
 <link rel="stylesheet" type="text/css" href="{{'assets/css/daterangepicker.css'}}" />
 <script>
+    $(document).on('click','#resetbtn', function () {
+        $('.reportUnicef').val("");
+        $('.statusUnicef ').val("");
+        $('.zoneUnicef  ').val("");
+        $('.chosen-select').val("");
+        $('#reportrange').html("");
+        $('#reportrange').val("");
+    });
     $(function() {
         var start = moment().subtract(29, 'days');
         var end = moment();

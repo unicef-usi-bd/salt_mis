@@ -233,6 +233,7 @@ class ReportController extends Controller
 
 //        $issuerId = $request->input('issuerId');
         $listLicenseMiller = Report::getListofMillerLicense($centerId,$zone,$issuerId,$renawlDate,$failDate);
+
         //return $listLicenseMiller;
         //$this->pr($listLicenseMiller);
         $view = view("reportView.licenseMillerListReport",compact('listLicenseMiller','zone','issuerId','renawlDate','failDate'))->render();
@@ -253,7 +254,7 @@ class ReportController extends Controller
         $this->generatePdf($data);
     }
 
-    public function getQcreport(Request $request){
+    public function getQcreport(Request $request,$zone){
         $centerId = Auth::user()->center_id;
         $zone = $request->input('zone');
         $qualityControlResultRange = BstiTestResultRange::getBstiTestResultDataRangeForPassOrFail();
@@ -565,7 +566,8 @@ class ReportController extends Controller
     }
 
     public function getListOfMiller(Request $request){
-        $zone = $request->input('zone');
+       // $zone = $request->input('zone');
+        $zone = 0;
         $totalMiller = Report::getListofMillerAdmin($zone);
         $view = view("reportView.listOfmillerUnderAssociationReport",compact('totalMiller','zone'))->render();
         return response()->json(['html'=>$view]);

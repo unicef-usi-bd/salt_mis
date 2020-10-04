@@ -22,7 +22,7 @@
             {{--<th rowspan="2">Total Nos.</th>--}}
             {{--</tr>--}}
             <tr>
-                <th>Sl.</th>
+                <th>SL</th>
                 <th>Association Name</th>
                 <th>Millers Name</th>
                 <th>License Type</th>

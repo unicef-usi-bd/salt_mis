@@ -21,7 +21,7 @@
                 </p>
 
             @endif
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="Bank List">
                 <thead>
                 <tr>
                     <th class="fixedWidth">{{ trans('dashboard.sl') }}</th>
@@ -80,7 +80,7 @@
                                     </a>
                                 @endif
                                 @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete row{{ $row->IODIZEDMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'iodized/'.$row->IODIZEDMST_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                                    <a class="red clickForDelete row{{ $row->IODIZEDMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'iodized/'.$row->IODIZEDMST_ID }}" role="button" title="Delete Iodization Production">
                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                     </a>
                                 @endif
@@ -138,7 +138,7 @@
                 userAmountScope.val('');
                 userAmount = false;
             }
-            if(userAmount) amount = amount - userAmount;
+            if(userAmount) amount = (amount - userAmount).toFixed(4);
             if(amount) {
                 return scope.html(`[Current Stock: ${amount}KG]`);
             } else{

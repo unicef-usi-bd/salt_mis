@@ -84,7 +84,7 @@
                                     </a>
                                 @endif
                                 @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete row{{ $row->QUALITYCONTROL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID }}" role="button" title="{{ trans('bank.delete_bank') }}">
+                                    <a class="red clickForDelete row{{ $row->QUALITYCONTROL_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'quality-control-testing/'.$row->QUALITYCONTROL_ID }}" role="button" title="Delete Quality Control & Testing">
                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                     </a>
                                 @endif
