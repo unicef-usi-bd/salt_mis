@@ -108,7 +108,6 @@
                         </div>
                     </div>
 
-
                         <div class="form-group millerDiv">
                             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
                             <div class="col-sm-8">
@@ -123,14 +122,7 @@
                         </span>
                             </div>
 
-
-
-
                 </div>
-
-
-
-
 
                     <div class="form-group processTypeDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>

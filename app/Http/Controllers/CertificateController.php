@@ -36,6 +36,7 @@ class CertificateController extends Controller
         $links = implode(' ', $millerId);
 
         $certificates = Certificate::getAllCertificate($links);
+
 //        $this->pr($certificates);
         return view('profile.miller.millCertificateList', compact('certificates'));
     }
@@ -179,7 +180,7 @@ class CertificateController extends Controller
         $userCertificates = $request->input('CERTIFICATE_TYPE_ID');
         //dd($userCertificates);
         $hasRequiredCertificates = $this->isValidateCertificate($millerId, $userCertificates);
-        dd($hasRequiredCertificates);
+        //dd($hasRequiredCertificates);
         if ($hasRequiredCertificates) {
             $certificates = implode(', ', $hasRequiredCertificates);
             return response()->json(['errors' => "<b>$certificates </b>certificates must be required."]);

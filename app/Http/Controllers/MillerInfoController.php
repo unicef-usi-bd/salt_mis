@@ -301,8 +301,8 @@ class MillerInfoController extends Controller
     public function destroy($id)
     {
         //$this->pr($id);
-        $delete = MillerInfo::deleteMillerProfile($id);
 
+        $delete = MillerInfo::deleteMillerProfile($id);
         if($delete){
             echo json_encode([
                 'type' => 'tr',
@@ -315,7 +315,9 @@ class MillerInfoController extends Controller
                 'message' => 'Error Founded Here!',
             ]);
         }
-        die();
+          die();
+
+
     }
 
     public function deactivateMillProfile(Request $request){

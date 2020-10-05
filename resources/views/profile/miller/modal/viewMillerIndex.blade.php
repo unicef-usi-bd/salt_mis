@@ -47,7 +47,7 @@
                     </tr>
 
                     <tr>
-                        <th class=" ">Millers ID</th>
+                        <th class=" ">Mills ID</th>
                         <th> :</th>
                         <td>{{ $previousMillerData->MILLERS_ID }}</td>
                         <th class=" ">Active Status</th>
@@ -157,13 +157,13 @@
                         </td>
                         <th class=" ">Standard Operation Procedure (SOP)</th>
                         <th> :</th>
-                        <td> {{ $previousQcData->SOP_DESC }} </td>
+                        <td> {{  isset($previousQcData->SOP_DESC) ? $previousQcData->SOP_DESC : ''}} </td>
                     </tr>
                     <tr>
                         <th class=" ">If Iodine content check during production</th>
                         <th> :</th>
                         <td>
-                            <?php  if($previousQcData->IODINE_CHECK_FLG == 0){ ?>
+                            <?php  if(isset($previousQcData->IODINE_CHECK_FLG)? $previousQcData->IODINE_CHECK_FLG: ''  == 0){ ?>
                             <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
                             <?php }else{ ?>
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>

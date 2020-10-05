@@ -38,6 +38,7 @@ class UserGroupController extends Controller
 
         $userGroups = UserGroup::getData();
 
+
         return view('accessControl.userGroup.userGroupIndex', compact('userGroups', 'heading', 'previllage'));
     }
 

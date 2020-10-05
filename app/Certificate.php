@@ -138,6 +138,13 @@ class Certificate extends Model
     }
 
     public static function getMandatoryCertificatesRemain($certificateTypeId, $millTypeId, array $certificates = null){
+        if($millTypeId == 21) {
+            $condition = [19,20,21];
+        }else if($millTypeId == 20){
+            $condition = [20,21];
+        }else{
+            $condition = [19,21];
+        }
         $data = DB::table('ssc_lookupchd as slc')
             ->select('slc.LOOKUPCHD_ID', 'LOOKUPCHD_NAME','DESCRIPTION','UD_ID', 'sc.CERTIFICATE_TYPE')
             ->leftJoin('smm_certificate as sc', 'slc.LOOKUPCHD_ID', '=', 'sc.CERTIFICATE_TYPE_ID')
@@ -145,10 +152,11 @@ class Certificate extends Model
             ->where('sc.CERTIFICATE_TYPE', '=', 1) // Mandatory check
             ->where('slc.LOOKUPCHD_NAME','!=','Local')
             ->where('slc.ACTIVE_FLG', '=', 1) // Active check;
+            ->whereIn('sc.mill_type_id', $condition)
             ->whereNotNull('sc.mill_type_id'); // Mill type null check
 
         if($certificates) $data->whereNotIn('slc.LOOKUPCHD_ID', $certificates); // find remain certificates
-        if($millTypeId!=21) $data->where('sc.mill_type_id', '=', $millTypeId); // both type id = 21
+        //if($millTypeId!=21) $data->where('sc.mill_type_id', '=', $millTypeId); // both type id = 21
         return $data->pluck('LOOKUPCHD_NAME')->toArray();
     }
 

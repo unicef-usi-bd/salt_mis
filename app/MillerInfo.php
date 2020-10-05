@@ -351,6 +351,7 @@ class MillerInfo extends Model
 
             if ($associationInfo->get()) $associationInfo->delete();
         }
+        return true;
 //        Specific Miller Profile transaction related table  by miller Id End
     }
 

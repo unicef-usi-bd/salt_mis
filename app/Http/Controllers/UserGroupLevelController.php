@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\UserGroupLevel;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+
 
 class UserGroupLevelController extends Controller
 {
@@ -53,6 +54,8 @@ class UserGroupLevelController extends Controller
      */
     public function store(Request $request)
     {
+        $userGrpID = $request->input('group_id');
+        $positionID = $request->input('POSITIONLEVEl');
         $rules = array(
             'group_level_name' => 'required',
             'group_id' => 'required',
@@ -66,22 +69,31 @@ class UserGroupLevelController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
 
-        $data = array([
-            'UGLEVE_NAME' => $request->input('group_level_name'),
-            'USERGRP_ID' => $request->input('group_id'),
-            'ORG_ID' => 1,
-            'IS_ACTIVE' => $request->input('active_status'),
-            'POSITIONLEVEl' => $request->input('POSITIONLEVEl'),
-            'CREATED_BY' => auth()->user()->id,
-            'CREATED_AT' => date("Y-m-d h:i:s"),
-        ]);
+        $check = DB::table('sa_ug_level')->select('*')
+            //->where('USERGRP_ID',$userGrpID)
+            ->where('POSITIONLEVEl',$positionID)
+            ->first();
 
-        $role = UserGroupLevel::insertData($data);
+        if(empty($check)) {
+            $data = array([
+                'UGLEVE_NAME' => $request->input('group_level_name'),
+                'USERGRP_ID' => $request->input('group_id'),
+                'ORG_ID' => 1,
+                'IS_ACTIVE' => $request->input('active_status'),
+                'POSITIONLEVEl' => $request->input('POSITIONLEVEl'),
+                'CREATED_BY' => auth()->user()->id,
+                'CREATED_AT' => date("Y-m-d h:i:s"),
+            ]);
 
-        if ($role) {
-            return response()->json(['success' => 'Submission Completed.']);
-        } else {
-            return response()->json(['errors' => 'Submission failed.']);
+            $role = UserGroupLevel::insertData($data);
+
+            if ($role) {
+                return response()->json(['success' => 'Submission Completed.']);
+            } else {
+                return response()->json(['errors' => 'Submission failed.']);
+            }
+        }else{
+            return response()->json(['errors' => 'This Position already exist.!']);
         }
     }
 
@@ -118,6 +130,7 @@ class UserGroupLevelController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $positionID = $request->input('POSITIONLEVEl');
 
         $rules = array(
             'group_level_name' => 'required',
@@ -132,12 +145,20 @@ class UserGroupLevelController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
 
-        $updateUserGroupLevel = UserGroupLevel::updateData($request, $id);
+        $check = DB::table('sa_ug_level')->select('*')
+            //->where('USERGRP_ID',$userGrpID)
+            ->where('POSITIONLEVEl',$positionID)
+            ->first();
+        if(empty($check)) {
 
-        if ($updateUserGroupLevel) {
-            return response()->json(['success' => 'Submission Completed.']);
-        } else {
-            return response()->json(['errors' => 'Submission failed.']);
+            $updateUserGroupLevel = UserGroupLevel::updateData($request, $id);
+
+            if ($updateUserGroupLevel) {
+                return response()->json(['success' => 'Submission Completed.']);
+            }
+        }
+        else {
+            return response()->json(['errors' => 'This Position already exist.!']);
         }
 
     }
