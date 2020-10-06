@@ -26,6 +26,7 @@
     </thead>
 
     <tbody>
+
     <?php $sl=0;?>
     @foreach($assocSale as $row)
         <tr>

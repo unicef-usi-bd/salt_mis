@@ -178,6 +178,7 @@ class MillerInfo extends Model
             ->orderBy('smi.MILL_ID', 'DESC')
             ->get();
 
+
         foreach ($data as $mill){
             $mill->owners = DB::table('ssm_entrepreneur_info')->where('MILL_ID', '=', $mill->MILL_ID)->pluck('OWNER_NAME')->toArray();
         }

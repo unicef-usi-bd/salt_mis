@@ -131,6 +131,7 @@
                                     ->where('smi.FINAL_SUBMIT_FLG', '=', 1)
                                     ->get();
 
+
                                     @endphp
                                     @foreach($miller as $row)
                                         <option value="{{$row->ASSOCIATION_ID}}"> {{$row->ASSOCIATION_NAME}}</option>

@@ -6,7 +6,7 @@
 </style>
 
 <div style="margin-bottom: 15px;text-align: center;">
-    <h4>Chemical Stock</h4>
+    <h4>Purchase Stock</h4>
 </div><!-- /.row -->
 
 

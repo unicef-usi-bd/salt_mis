@@ -219,8 +219,12 @@ class ReportAssociationController extends Controller
         $view = view("reportAssociation.saleItemStockReport",compact('itemStock','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);
     }
-    public function getSaleItemStockPdf(){
-        $itemStock = ReportAssociation::getSaleItemStock();
+    public function getSaleItemStockPdf(Request $request){
+        $centerId = Auth::user()->center_id;
+        $starDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        //dd($endDate);exit();
+        $itemStock = ReportAssociation::getSaleItemStock($centerId,$starDate,$endDate);
         $data = \View::make('reportAssociation.pdf.saleItemStockReportPdf',compact('itemStock'));
         $this->generatePdf($data);
     }
@@ -249,6 +253,7 @@ class ReportAssociationController extends Controller
         $divisionId = $request->input('divisionId');
         $districtId = $request->input('districtId');
         $processType = $request->input('processType');
+
         $assocSale = ReportAssociation::getAssocSale($processType,$divisionId,$districtId);;
         $data = \View::make('reportAssociation.pdf.assocSaleReportPdf',compact('assocSale'));
         $this->generatePdf($data);
