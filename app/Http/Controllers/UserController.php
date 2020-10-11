@@ -58,9 +58,9 @@ class UserController extends Controller
 
     public function verifyUser($token){
         $verifyUser = VerifyUser::where('token', $token)->first();
-        if(isset($verifyUser) ){
-            $user = $verifyUser->user;
-            if(!$user->verified) {
+        if($verifyUser){
+            $user = User::find($verifyUser->user_id);
+            if(isset($user->mail_verified) && $user->mail_verified == 0) {
                 $verifyUser->user->mail_verified = 1;
                 $verifyUser->user->save();
                 $status = "Your e-mail is verified. You can now login.";

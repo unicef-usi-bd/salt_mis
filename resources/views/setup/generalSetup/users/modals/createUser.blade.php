@@ -118,7 +118,7 @@
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
-                                <option value="">-Select-</option>
+                                <option value="61">-Select-</option>
                                 @foreach($associationCenter as $center)
                                     <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
                                     @php
@@ -203,6 +203,8 @@
                 $('.resources').show();
             }
             else $('.resources').hide();
+
+
         });
 
         $(document).ready(function () {

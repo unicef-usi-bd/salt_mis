@@ -67,6 +67,7 @@ class CertificateIssurController extends Controller
     public function store(Request $request)
     {
 
+        dd($_POST);exit();
         $certificateId = $request->input('CERTIFICATE_TYPE_ID');
         $issuerId = $request->input('ISSUR_ID');
         $rules = array(

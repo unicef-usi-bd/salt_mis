@@ -42,10 +42,12 @@ class DashboardController extends Controller
 
     public function index()
     {
+
         $user_group_id = Auth::user()->user_group_id;
 
         if($user_group_id==$this->bstiId){
             return $this->bsti();
+
         }else if($user_group_id==$this->bscicId){
             return $this->basic();
         }else if($user_group_id==$this->unicefId){
@@ -75,7 +77,7 @@ class DashboardController extends Controller
         $totalWashCrashSale = abs(SalesDistribution::totalWashcrashSales());
         $totalIodizeSale = abs(SalesDistribution::totalIodizeSales());
         $totalProductSales = $totalWashCrashSale+$totalIodizeSale;
-
+        //dd($totalProductSales);exit();
         $totalMonthWiseWascrashSale = abs(SalesDistribution::totalWashcrashSalesMonthWise());
         $totalMonthWiseIodizeSale = abs(SalesDistribution::totalIodizeSalesMonthWise());
         $totalsaleMonthWise = $totalMonthWiseWascrashSale+$totalMonthWiseIodizeSale;
@@ -232,6 +234,7 @@ class DashboardController extends Controller
         $associationWashCrash = Stock::totalAssociationWashcrash();
         $associationIodize = Stock::totalAssociationIodize();
 
+
         $totalassociationproduction = ($associationWashCrash+$associationIodize);
 
         $associationWashCrashMonthwise = Stock::totalAssociationWashcrashMonthWise();
@@ -243,6 +246,7 @@ class DashboardController extends Controller
         $totalAssociationIodizeSale = abs(Stock::totalAssociationIodizeSale());
         $totalAssociationWashCrasheSale = abs(Stock::totalAssociationWashCrashSale());
         $totalSales = $totalAssociationIodizeSale + $totalAssociationWashCrasheSale;
+        //dd($totalSales);exit();
 
         $totalassociationIodizeSaleMonthWise = abs(Stock::totalAssociationIodizeSaleMonthWise());
         $totalAssociationWashCrasheSaleMonthWise = abs(Stock::totalAssociationWashCrashSaleMonthWise());
@@ -252,9 +256,14 @@ class DashboardController extends Controller
         //$totalSales = Stock::totalSale();
         $totlaProductionList = Stock::totalProductionList();
         $totalSaleLists = Stock::totalSaleList();
+
         $associationMonthWishProduction = Stock::monthWiseAsociationProduction();
-        $monthWiseProcurement = Stock::monthWiseProcurement(); // Non Consider miller active
+        $monthWiseProcurement = Stock::monthWiseProcurement();
+        //dd($monthWiseProcurement);
+
+
         $associationMillerCertificate = Certificate::associatonCertificate();
+
         $totalWcDashboard = Stock::totalAssociationWashCrashForDashboard();
         $totalIoDashboard = Stock:: totalAssociationIodizeForDashboard();
         $totalWcIoDashboard = $totalWcDashboard + $totalIoDashboard;
@@ -300,10 +309,10 @@ class DashboardController extends Controller
         $totalStockKi = $totalProcrument - $kiUsed;
         $millerInfo = MillerInfo::millerInfoByCenterId();
         $extendDate = User::extendDateByCenterId();
-        
+
         $certificateExpireDate = Certificate::millerCertificateExpired($millerInfo->MILL_ID);
         if(!$certificateExpireDate){
-            $message = "Miller certificate's not found. Please provide your certificates to association.!!!";
+            $message = "Mill certificate's not found. Please provide your certificates to association.!!!";
             Auth::logout();
             return redirect()->route('login')->with(['warning' => $message]);
         }

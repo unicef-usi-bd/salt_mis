@@ -22,7 +22,7 @@
                     <tr>
                         <th class=" ">Mill Type</th>
                         <th> :</th>
-                        <td> {{ $previousMillerData->mill_name }} </td>
+                        <td> {{ $previousMillerData->mill_type }} </td>
                         <th class=" ">Capacity</th>
                         <th> :</th>
                         <td>{{ $previousMillerData->CAPACITY_ID }}</td>
@@ -117,7 +117,7 @@
                     <th class=" ">Issure Name</th>
                     <th class=" ">Issuing Date</th>
                     <th class=" ">Certificate Number</th>
-                    <th class=" ">Trade License </th>
+                    <th class=" ">Certificate Image </th>
                     <th class=" ">Renewing Date</th>
                     <th class=" ">Remarks</th>
                 </tr>
@@ -146,7 +146,7 @@
             @if($previousQcData)
                 <table class="table borderless">
                     <tr>
-                        <th class=" ">laboratory </th>
+                        <th class=" ">Have a Laboratory ?</th>
                         <th> :</th>
                         <td>
                             <?php  if($previousQcData->LABORATORY_FLG == 0){ ?>
@@ -155,11 +155,28 @@
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
                             <?php } ?>
                         </td>
-                        <th class=" ">Standard Operation Procedure (SOP)</th>
+                        <th class=" ">Do You Follow Standard Operating Procedure ?</th>
                         <th> :</th>
-                        <td> {{  isset($previousQcData->SOP_DESC) ? $previousQcData->SOP_DESC : ''}} </td>
+                        <td>
+                            <?php  if($previousQcData->OPERATION_PROCEDURE_FLG == 0){ ?>
+                            <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
+                            <?php }else{ ?>
+                            <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
+                            <?php } ?>
+                        </td>
+                        {{--<td> {{  isset($previousQcData->SOP_DESC) ? $previousQcData->SOP_DESC : ''}} </td>--}}
                     </tr>
                     <tr>
+                        <th class=" ">Do You Have Trained Laboratory Person ?</th>
+                        <th> :</th>
+                        <td>
+                            <?php  if($previousQcData->LAB_MAN_FLG == 0){ ?>
+                            <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
+                            <?php }else{ ?>
+                            <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
+                            <?php } ?>
+                        </td>
+                        <?php /*
                         <th class=" ">If Iodine content check during production</th>
                         <th> :</th>
                         <td>
@@ -169,7 +186,8 @@
                             <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
                             <?php } ?>
                         </td>
-                        <th class=" ">Monitoring Test Kit</th>
+                        */ ?>
+                        <th class=" ">Does Laboratory Use Test Kit ?</th>
                         <th> :</th>
                         <td>
                             <?php  if($previousQcData->MONITORING_FLG == 0){ ?>
@@ -181,15 +199,7 @@
                     </tr>
 
                     <tr>
-                        <th class=" ">Do you have a laboratory Man</th>
-                        <th> :</th>
-                        <td>
-                            <?php  if($previousQcData->LAB_MAN_FLG == 0){ ?>
-                            <span class="label label-sm label-danger arrowed arrowed-righ">No</span>
-                            <?php }else{ ?>
-                            <span class="label label-sm label-info arrowed arrowed-righ">Yes</span>
-                            <?php } ?>
-                        </td>
+
                         <th class=" ">No of Laboratory Man</th>
                         <th> :</th>
                         <td>{{ $previousQcData->LAB_PERSON }} </td>

@@ -188,5 +188,7 @@ class WashingAndCrushing extends Model
             $deletePr = DB::table('tmm_washcrashmst')->where('WASHCRASHMST_ID', $id)->delete();
             return $deletePr;
         }
+
     }
+
 }

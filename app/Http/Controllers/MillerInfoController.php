@@ -200,7 +200,6 @@ class MillerInfoController extends Controller
     public function edit($id)
 
     {
-
         $millerInfo = MillerInfo::millerInformation($id);
         $entrepreneurs = Entrepreneur::entrepreneurInformation($id);
         $certificateInfo = Certificate::certificateInformation($id);
@@ -220,9 +219,7 @@ class MillerInfoController extends Controller
         $millType = LookupGroupData::getActiveGroupDataByLookupGroup($this->millTypeId);
         $capacity = LookupGroupData::getActiveGroupDataByLookupGroup($this->capacityId);
         $certificates = Certificate::getCertificateByMillTypeId($this->certificateTypeId, $millerInfo->MILL_TYPE_ID);
-        //dd($certificates);exit();
         $issueBy = CertificateIssur::getCertificateIssuer();
-        //dd($issueBy);exit();
         $millerToMerge = MillerInfo::getMillerToMerge();
 
         return view('profile.miller.modal.edit', compact('zones', 'divisions','districts', 'upazillas', 'registrationType', 'ownerType', 'processType', 'millType', 'capacity', 'certificates', 'issueBy', 'millerToMerge', 'millerInfo', 'entrepreneurs', 'certificateInfo', 'qcInfo', 'employeeInfo'));

@@ -48,7 +48,7 @@
 
 <div class="main-container">
     <div class="main-content">
-        <div class="row">
+        <div class="row" style=" position: relative; z-index: 4!important;">
             <div class="col-md-2 col-md-offset-1 offset-2">
                 <img class="img-responsive salt_spoon" src="{{ url('assets/images/salt_login/salt_spoon.png') }}" width="80%"/>
             </div>

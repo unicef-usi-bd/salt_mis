@@ -96,7 +96,7 @@ class CertificateController extends Controller
             $userImageLimit = count($request->file('user_image'));
         }
         $loopLimit = count($userCertificates);
-        if ($userImageLimit != $loopLimit) return response()->json(['errors' => 'Trade Licence * field is must required']);
+        if ($userImageLimit != $loopLimit) return response()->json(['errors' => 'Certificate Image * field is must required']);
         for ($i = 0; $i < $loopLimit; $i++) {
             // file upload
             $imagePath = '';

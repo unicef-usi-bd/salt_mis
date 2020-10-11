@@ -13,7 +13,8 @@ class Certificate extends Model
     public static function millerCertificateExpired($millerId){
         $expiredDate = DB::table('ssm_certificate_info as sci')
             ->where('sci.MILL_ID','=', $millerId)
-            ->where('sci.IS_EXPIRE','=', 1)
+            ->where('sci.CERTIFICATE_TYPE','=', 1)
+            //->where('sci.IS_EXPIRE','=', 1)
             ->orderBy('sci.RENEWING_DATE','asc')
             ->pluck('sci.RENEWING_DATE')
             ->first();
@@ -84,24 +85,24 @@ class Certificate extends Model
 
 
     public static function certificateRenewalMessage($millerId){
-        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
+        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, ci.MILL_ID,DATEDIFF(ci.RENEWING_DATE, NOW()) RENEW_DAY, ci.RENEWING_DATE, mi.MILL_NAME, mi.mill_logo
                 from ssm_certificate_info ci
                 left join ssc_lookupchd lkp on ci.CERTIFICATE_TYPE_ID = lkp.LOOKUPCHD_ID
                 left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
                 left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-                where ci.MILL_ID = '$millerId' and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
+                where ci.MILL_ID = '$millerId' and ci.CERTIFICATE_TYPE =1
                 order By ci.RENEWING_DATE asc"));
     }
 
 
     public static function associatonCertificate(){
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, DATEDIFF(ci.RENEWING_DATE,NOW()) RENEW_DAY, mi.MILL_NAME, mi.mill_logo,ci.RENEWING_DATE
+        return DB::select(DB::raw("select lkp.LOOKUPCHD_NAME as CERTIFICATE_NAME, DATEDIFF(ci.RENEWING_DATE, NOW()) RENEW_DAY, mi.MILL_NAME, mi.mill_logo,ci.RENEWING_DATE
             from ssm_certificate_info ci
-            left join ssc_lookupchd lkp on ci.CERTIFICATE_ID = lkp.LOOKUPCHD_ID
+            left join ssc_lookupchd lkp on ci.CERTIFICATE_TYPE_ID = lkp.LOOKUPCHD_ID
             left join ssm_associationsetup ass on ass.MILL_ID = ci.MILL_ID
             left join ssm_mill_info mi on mi.MILL_ID = ci.MILL_ID
-            where ass.center_id = $centerId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =1
+            where ass.center_id = $centerId and ci.IS_EXPIRE = 1 and ci.CERTIFICATE_TYPE =0
             AND ci.RENEWING_DATE >=90 AND ci.RENEWING_DATE >=60 AND ci.RENEWING_DATE >=30
             order By ci.RENEWING_DATE asc"));
     }
