@@ -25,7 +25,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="{{ trans('module.module_list') }}">
+            <table class="table table-striped table-bordered table-hover gridTable" data-tools="false" title="">
                 <thead>
                 <tr>
                     <th class="fixedWidth" style="width: 5px;">Sl</th>

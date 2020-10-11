@@ -357,17 +357,29 @@ class MillerInfo extends Model
     }
 
     public  static function getMillerToMerge(){
-        $centerId = Auth::user()->center_id;
-        return DB::table('ssm_mill_info')
-            ->select('ssm_mill_info.*','ssm_millemp_info.*')
-            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
-            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
-            ->where('ssm_mill_info.REG_TYPE_ID','=', 10)
-            ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
-            ->where('ssm_mill_info.center_id','=', $centerId)
-            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
-            ->get();
-    }
+    $centerId = Auth::user()->center_id;
+    return DB::table('ssm_mill_info')
+        ->select('ssm_mill_info.*')
+        //->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+        ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+        ->where('ssm_mill_info.REG_TYPE_ID','=', 10)
+        ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
+        ->where('ssm_mill_info.center_id','=', $centerId)
+        ->where('ssm_mill_info.FINAL_SUBMIT_FLG','=', 1)
+        ->get();
+}
+//    public  static function getMillerToMerge(){
+//        $centerId = Auth::user()->center_id;
+//        return DB::table('ssm_mill_info')
+//            ->select('ssm_mill_info.*','ssm_millemp_info.*')
+//            ->leftJoin('ssm_millemp_info','ssm_mill_info.MILL_ID','=','ssm_millemp_info.MILL_ID')
+//            ->orderBy('ssm_mill_info.MILL_ID', 'DESC')
+//            ->where('ssm_mill_info.REG_TYPE_ID','=', 10)
+//            ->where('ssm_mill_info.ACTIVE_FLG','=', 1)
+//            ->where('ssm_mill_info.center_id','=', $centerId)
+//            ->where('ssm_millemp_info.FINAL_SUBMIT_FLG','=', 1)
+//            ->get();
+//    }
     public static function deactivateMillTable($id){
         $update = DB::table('ssm_mill_info')->where('MILL_ID', '=' , $id)->update([
             'ACTIVE_FLG' => 0,
@@ -375,12 +387,12 @@ class MillerInfo extends Model
         return $update;
     }
     // merge mill and deactivate mill accounts
-    public static function deactivateMillEmpTable($id){
-        $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
-            'FINAL_SUBMIT_FLG' => 0,
-        ]);
-        return $update;
-    }
+//    public static function deactivateMillEmpTable($id){
+//        $update = DB::table('ssm_millemp_info')->where('MILL_ID', '=' , $id)->update([
+//            'FINAL_SUBMIT_FLG' => 0,
+//        ]);
+//        return $update;
+//    }
 
     // for login web service
 

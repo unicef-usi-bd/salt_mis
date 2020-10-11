@@ -109,7 +109,7 @@
                                 </td>
                                 <td>
                                 <span class="block input-icon input-icon-right">
-                                    <input type="date" name="ISSUING_DATE" class="chosen-container ISSUING_DATE">
+                                    <input type="date" name="ISSUING_DATE[]" class="chosen-container ISSUING_DATE">
                                 </span>
                                 </td>
 
@@ -130,7 +130,7 @@
                                         $date = date('Y-m-d', strtotime(date('Y-06-30')));
                                         if($currentMonth>=6) $date = date('Y-m-d', strtotime('+1 year', strtotime(date('Y-06-30'))));
                                     @endphp
-                                   <input type="date" name="RENEWING_DATE" class="chosen-container RENEWING_DATE" value="{{ $date }}">
+                                   <input type="date" name="RENEWING_DATE[]" class="chosen-container RENEWING_DATE" value="{{ $date }}">
                                 </span>
                                 </td>
 
@@ -141,6 +141,7 @@
                                 </td>
                                 <td class="text-center"><span class="btn btn-danger btn-sm rowRemove"><i class="fa fa-remove"></i></span></td>
                             </tr>
+
                         @endif
                         </tbody>
                     </table>

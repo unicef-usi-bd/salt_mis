@@ -207,13 +207,13 @@
                                          Iodized Salt
                                     @endif
                                 </td>
-                                <td>{{ $row->QTY }}</td>
+                                <td>{{ number_format(abs( $row->QTY),2) }}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td><b class="red">Total</b> </td>
-                                <td><b class="red">{{ $totalWcIoDashboard }}</b></td>
+                                <td><b class="red">{{ number_format($totalWcIoDashboard ,2) }}</b></td>
                             </tr>
                             </tbody>
                         </table>

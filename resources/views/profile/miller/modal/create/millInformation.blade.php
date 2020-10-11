@@ -279,6 +279,8 @@
     $(document).on("click", ".deactivateMill", function () {
         let millId = $(this).val();
         let checked = ($($(this)).is(':checked')) ? 0 : 1;
+        $(document).on('click','#mergeMill',function() {
+        
         $.ajax({
             type: "get",
             url: "deactivate-mill-profile",
@@ -286,6 +288,7 @@
             success: function (data) {
 
             }
+        });
         });
     });
 </script>
