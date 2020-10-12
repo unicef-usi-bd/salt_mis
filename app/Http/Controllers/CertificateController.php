@@ -134,12 +134,18 @@ class CertificateController extends Controller
             );
         }
 
-        $inserted = DB::table('ssm_certificate_info')->insert($data);
+        $duplicate = DB::table('ssm_certificate_info')->select('*')->where('MILL_ID', $request->input('MILL_ID'))->get();
 
-        if ($inserted) {
-            return response()->json(['success' => 'Certificate information has been saved successfully', 'insertId' => $millerId]);
+        if (count($duplicate) > 0) {
+            return response()->json(['errorss' => 'Already Insert This Certificate']);
         } else {
-            return response()->json(['errors' => 'Certificate information save failed']);
+            $inserted = DB::table('ssm_certificate_info')->insert($data);
+
+            if ($inserted) {
+                return response()->json(['success' => 'Certificate information has been saved successfully', 'insertId' => $millerId]);
+            } else {
+                return response()->json(['errors' => 'Certificate information save failed']);
+            }
         }
     }
 

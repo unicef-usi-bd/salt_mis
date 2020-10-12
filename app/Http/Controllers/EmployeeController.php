@@ -58,7 +58,7 @@ class EmployeeController extends Controller
         );
         $error = array(
             'MILL_ID.required' => 'Miller Information not available. <span class="text-primary">You need to provide miller information</span>.',
-            'TOTMALE_EMP.required' => 'Employee type field is required.'
+            'TOTMALE_EMP.required' => 'Full-Time Employee field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -105,7 +105,7 @@ class EmployeeController extends Controller
             'TOTMALE_EMP' => 'required',
         );
         $error = array(
-            'TOTMALE_EMP.required' => 'Employee type field is required.'
+            'TOTMALE_EMP.required' => 'Full-Time Employee field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

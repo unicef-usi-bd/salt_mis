@@ -162,9 +162,12 @@ class MillerInfoController extends Controller
         }
 
         $millerId = MillerInfo::insertMillerInfo($request, $mill_logo);
+        $millerInfo = MillerInfo::millerInformation($millerId);
+
+
 
         if($millerId){
-            return response()->json(['success'=>'Miller Profile has been saved successfully', 'insertId' => $millerId]);
+            return response()->json(['success'=>'Miller Profile has been saved successfully', 'insertId' => $millerId,'millerInfo' => $millerInfo->OWNER_TYPE_ID]);
         } else{
             return response()->json(['errors'=>'Miller Profile save failed']);
         }

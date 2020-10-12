@@ -57,6 +57,7 @@
                 displayAlertHandler(data.success);
                 if(doEmptyForm===true) formClear();
                 if(data.insertId) putInsertIdInClassAttribute(data.insertId);
+                if(data.millerInfo) millerInfo(data.millerInfo);
             }else if(data.errors){
                 displayAlertHandler(data.errors, 'danger');
             }else{
@@ -72,6 +73,12 @@
         let hasContainer = $(document).find('.insertIdContainer');
         if(hasContainer.length) {
             hasContainer.val(insertId).trigger('change');
+        }
+    }
+    function millerInfo(millerInfo){
+        let button = $(document).find('.addButton');
+        if(millerInfo == '12') {
+            button.hide();
         }
     }
 
