@@ -118,10 +118,11 @@
                 <div class="col-sm-8">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
-                                <option value="61">-Select-</option>
+                                <option value="">-Select-</option>
                                 @foreach($associationCenter as $center)
                                     <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
                                     @php
+
 
                                     $miller = DB::table('ssm_associationsetup as sas')
                                     ->select('sas.ASSOCIATION_ID', 'sas.ASSOCIATION_NAME', 'sas.MILL_ID', 'smi.ACTIVE_FLG', 'smi.FINAL_SUBMIT_FLG')
@@ -142,6 +143,9 @@
                         </span>
                     <span><p class='result7'></p></span>
                 </div>
+            </div>
+            <div class="center_ID">
+                <input type="hidden" name="center_id" value="61">
             </div>
 
             <div class="form-group">
@@ -201,11 +205,23 @@
         Privileges.change(function () {
             if ($(this).val() == 22) {
                 $('.resources').show();
+                $('.center_ID').find('*').prop('disabled', true);
             }
-            else $('.resources').hide();
-
+            else {
+                if ($(this).val() == 21) {
+                    $('.center_ID').find('*').prop('disabled', false);
+                    $('.resources').hide();
+                }
+            }
 
         });
+//        $('.user_group_level').on('change', function() {
+//            var responseId = $(this).val();
+//           if(responseId == 64){
+//               var center_id = 61; //data[2].color;
+//               $('#center_id').val(center_id);
+//           }
+//        });
 
         $(document).ready(function () {
             $.validator.addMethod(

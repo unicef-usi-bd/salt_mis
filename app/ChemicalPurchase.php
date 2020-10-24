@@ -95,6 +95,7 @@ class ChemicalPurchase extends Model
             if ($supplierId == 1001){
                 $supplierId = DB::table('ssm_supplier_info')->insertGetId([
                     'TRADING_NAME' => $request->input('TRADING_NAME'),
+                    'SUPPLIER_ID' =>$request->input('SUPPLIER_ID'),
                     'PHONE' => $request->input('PHONE'),
                     'ADDRESS' => $request->input('ADDRESS'),
                     'SUPPLIER_TYPE_ID' => $supplierTypeId,

@@ -61,10 +61,10 @@
                         </div>
                     </div>
 
-                <div class="col-md-6">
-                    <div class="form-group millerDiv">
+                <div class="col-md-12">
+                    <div class="form-group millerDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select-</option>
@@ -76,9 +76,9 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group processTypeDiv">
+                    <div class="form-group processTypeDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="0">-Select-</option>
@@ -89,9 +89,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group statusAdminDiv">
+                    <div class="form-group statusAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="statusAdmin width-65 chosen-select" name="ACTIVE_FLG">
                                    {{--<option value="">--Select--</option>--}}
@@ -102,9 +102,9 @@
                             </span>
                         </div>
                     </div>
-                <div class="form-group adminReportrangeDiv">
+                <div class="form-group adminReportrangeDiv" style="margin-left: 75px;">
                     <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <span class="block input-icon input-icon-right ">
                             {{--<input autocomplete="off" type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
                             <input autocomplete="off" type="text" id="reportrange"  name="reportrange" class="width-65 adminReportrange" />
@@ -112,9 +112,9 @@
                         </span>
                     </div>
                 </div>
-                    <div class="form-group itemTypeAdminDiv">
+                    <div class="form-group itemTypeAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b><span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAdmin chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                {{--<option value="">-Select-</option>--}}
@@ -126,9 +126,9 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group divisionIdDiv">
+                    <div class="form-group divisionIdDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-5">
                             <span class="block input-icon input-icon-right">
                                 <select class="form-control division chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">-Select-</option>
@@ -139,9 +139,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group districtIdDiv">
+                    <div class="form-group districtIdDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-5">
                         <span class="block input-icon input-icon-right">
                             <select class="district form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">-Select-</option>
@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     {{--<div class="form-group purchaseOrderDiv">--}}
                         {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>--}}
                         {{--<div class="col-sm-8">--}}
@@ -441,7 +441,7 @@
            $('.purchaseOrderDiv').hide();
            $('.zoneAdminDiv').hide();
            $('.issuerAdminDiv').hide();
-
+           $('.processTypeDiv').hide();
            $('.adminReportrangeDiv').show();
            $('.millerDiv').hide();
        }else if($reportUrl === 'total-sale-admin'){
@@ -470,6 +470,7 @@
            $('.zoneAdminDiv').hide();
            $('.issuerAdminDiv').hide();
            $('.millerDiv').hide();
+           $('.processTypeDiv').hide();
        }else if($reportUrl === 'miller-license-report/{zone}'){
            $('.statusAdminDiv').hide();
            $('.adminReportrangeDiv').hide();

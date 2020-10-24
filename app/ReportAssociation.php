@@ -22,7 +22,7 @@ class ReportAssociation extends Model
     public static function getPurchaseSaltTotal($itemTypeAssoc){
         $centerId = Auth::user()->center_id;
         if ($itemTypeAssoc==0){
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
+            return DB::select (DB::raw("select DISTINCT  lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
@@ -30,9 +30,10 @@ class ReportAssociation extends Model
             where its.TRAN_FLAG = 'PR' and its.TRAN_TYPE = 'SP' and its.center_id in (select ass.ASSOCIATION_ID
             from ssm_associationsetup ass
             where ass.PARENT_ID = '$centerId')
+            
             "));
         }else{
-            return DB::select(DB::raw("select lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
+            return DB::select(DB::raw("select DISTINCT  lc.LOOKUPCHD_NAME,it.ITEM_NAME, its.QTY,its.center_id,its.TRAN_DATE,ai.ASSOCIATION_NAME
             from tmm_itemstock its
             left join smm_item it on its.ITEM_NO = it.ITEM_NO
             left join ssm_associationsetup ai  on its.center_id = ai.ASSOCIATION_ID
@@ -302,7 +303,7 @@ where ql.center_id in(select ass.ASSOCIATION_ID
 //             "));
         return DB::select(DB::raw("select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
       case when st.TRAN_TYPE = 'W' then
-        'Wash Crash'
+        'Wash Crushing'
       end Process_Type
       from tmm_itemstock st
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO

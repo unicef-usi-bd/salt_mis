@@ -77,6 +77,7 @@ class SalesDistributionController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = array(
             'SELLER_TYPE' => 'required',
             'CUSTOMER_ID' => 'required',
@@ -122,6 +123,7 @@ class SalesDistributionController extends Controller
     {
         $viewSalersDistributor = SalesDistribution::showSalesDistributionDataMst($id);
         $viewSalersDistributorChd = SalesDistribution::showSalesDistributionDataChd($id);
+
         return view('transactions.salesDistribution.modals.viewSalesDistribution',compact('viewSalersDistributor','viewSalersDistributorChd'));
     }
 
@@ -133,7 +135,21 @@ class SalesDistributionController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $editSalesDestribution = SalesDistribution::editSalesDistribution($id);
+        $stockId = Stock::getStockIdByTranChildId($editSalesDestribution->SALESMST_ID,$editSalesDestribution->ITEM_ID);
+        $sellerType = LookupGroupData::getActiveGroupDataByLookupGroup($this->sellerTypeId);
+        $tradingId = SalesDistribution::getTradingName();
+        $saltId = Item::itemTypeWiseItemList($this->finishedSaltId);
+        $saltPackTypes = LookupGroupData::getActiveGroupDataByLookupGroup($this->saltPackId);
+        $centerId = Auth::user()->center_id;
+
+        $washingStock = Stock::stockWashAndCrushForSales($centerId);
+        $iodizeStock = Stock::stockIodizeForSales($centerId);
+
+        $brandName = Brand::millerBrand();
+
+        return view('transactions.salesDistribution.modals.editsalesDistribution',compact('editSalesDestribution','sellerType','tradingId','saltId','saltPackTypes','washingStock','iodizeStock','brandName','stockId'));
     }
 
     /**
@@ -145,7 +161,40 @@ class SalesDistributionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $rules = array(
+            'SELLER_TYPE' => 'required',
+            'CUSTOMER_ID' => 'required',
+            'SALES_DATE' => 'required',
+            'ITEM_ID.*' => 'required',
+            'PACK_TYPE.*' => 'required',
+            'PACK_QTY.*' => 'required',
+            'total.*' => 'required',
+        );
+
+        $error = array(
+            'SELLER_TYPE.required' => 'Seller type field is required.',
+            'CUSTOMER_ID.required' => 'Trade field is required.',
+            'SALES_DATE.required' => 'Date field is required.',
+            'ITEM_ID.*' => 'Item * field required',
+            'PACK_TYPE.*' => 'Pack type * field required',
+            'PACK_QTY.*' => 'Pack Quantity * field required',
+            'total.*' => 'Total * field required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $error);
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()->first()]);
+
+        //$this->pr($request->input());
+        $salesDistributionUpdate = SalesDistribution::updateSalesDistributionData($request,$this->washAndCrushId,$this->iodizeId,$id);
+
+
+        if($salesDistributionUpdate){
+            return response()->json(['success'=>'Sales Distribution submission completed.']);
+        }else{
+            return response()->json(['success'=>'Sales Distribution submission failed.']);
+        }
     }
 
     /**

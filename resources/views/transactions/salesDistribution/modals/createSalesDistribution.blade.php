@@ -308,7 +308,7 @@
             data: {'sellerTypeId': sellerTypeId},
             success: function (data) {
                 for (let i = 0; i < data.length; i++) {
-                    option = option + '<option value="' + data[i].CUSTOMER_ID + '">' + data[i].TRADER_NAME + '</option>';
+                    option = option + '<option value="' + data[i].CUSTOMER_ID + '">' + data[i].TRADING_NAME + '</option>';
                 }
                 tradeScope.html(option).trigger("chosen:updated");
             }

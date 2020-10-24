@@ -482,6 +482,7 @@ class ReportController extends Controller
     public function getMonitorClintListMiller(){
         $centerId = Auth::user()->center_id;
         $monitorClintList = Report::monitorClintMiller($centerId);
+        //dd($monitorClintList);
         $view = view("reportView.monitorClintListReport",compact('monitorClintList'))->render();
         return response()->json(['html'=>$view]);
     }

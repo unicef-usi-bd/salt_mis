@@ -68,11 +68,11 @@
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif
-                                @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete row{{ $row->stock_id }}" data-token="{{ csrf_token() }}" data-action="{{ 'stock-adjustment/'.$row->stock_id }}" role="button" title="Delete Stock Adjustment">
-                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                    </a>
-                                @endif
+                                {{--@if($previllage->DELETE == 1)--}}
+                                    {{--<a class="red clickForDelete row{{ $row->stock_id }}" data-token="{{ csrf_token() }}" data-action="{{ 'stock-adjustment/'.$row->stock_id }}" role="button" title="Delete Stock Adjustment">--}}
+                                        {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
+                                    {{--</a>--}}
+                                {{--@endif--}}
                             </div>
                         </td>
                     </tr>

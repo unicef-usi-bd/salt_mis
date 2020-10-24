@@ -741,6 +741,8 @@ class Stock extends Model
         }else{
             $washingStock = $WashingTotalUseInIodize;
         }
+        $washingStock = number_format($washingStock, 2);
+
         return $washingStock;
     }
 
@@ -748,13 +750,30 @@ class Stock extends Model
     public static function currentIodizeStockByCenterId($centerId){
         $beforeIodizeSaleStock = self::getTotalIodizeSaltForSale($centerId);
         $iodizeSale = abs(self::getTotalReduceIodizeSaltForSale($centerId));
+        //dd($beforeIodizeSaleStock);exit();
 
         if($iodizeSale){
             $iodizeStock = $beforeIodizeSaleStock - $iodizeSale;
         }else{
             $iodizeStock = $beforeIodizeSaleStock;
+
         }
+        $iodizeStock = number_format($iodizeStock, 2);
         return $iodizeStock;
+    }
+
+    public static function getStockIdByTranChildId($id,$type){
+        if($type == '7') {
+            $tran_type = 'W';
+        } else{
+            $tran_type = 'I';
+        }
+        $stockId = DB::table('tmm_itemstock as s')
+            ->select('s.STOCK_NO','s.TRAN_TYPE','s.TRAN_NO')
+            ->where('s.TRAN_TYPE',$tran_type)
+            ->where('s.TRAN_NO',$id)
+            ->first();
+        return $stockId;
     }
 }
 

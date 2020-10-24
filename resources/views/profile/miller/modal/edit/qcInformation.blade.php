@@ -64,7 +64,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Man</b></label>
+                        <label for="inputSuccess" class="col-sm-5 control-label no-padding-right" for="form-field-1-1"><b>Number Of Laboratory Person</b></label>
                         <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                <input autocomplete="off" type="text" name="LAB_PERSON" class="chosen-container" onkeypress="return numbersOnly(this, event)" value="@if(!empty($qcInfo)){{ $qcInfo->LAB_PERSON }}@endif">

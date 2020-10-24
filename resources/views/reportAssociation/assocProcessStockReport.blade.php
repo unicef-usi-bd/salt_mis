@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ ++$sl }}</td>
                     <td>{{ $row->MILL_NO }}</td>
-                    <td>{{ $row->TRAN_TYPE=='W'? 'Wash & Crush' : 'Iodized' }}</td>
+                    <td>{{ $row->TRAN_TYPE=='W'? 'Wash & Crushing' : 'Iodized' }}</td>
                     <td>{{ $row->BATCH_NO }}</td>
                     <td>{{ number_format($row->QTY, 2) }}</td>
                 </tr>

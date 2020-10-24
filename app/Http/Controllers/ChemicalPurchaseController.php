@@ -48,11 +48,13 @@ class ChemicalPurchaseController extends Controller
      */
     public function create()
     {
+        $supplierId = SupplierProfile::supplierMaxId();
+        $supplierId = sprintf("%04d", $supplierId+1);// $digits = 4;
         $chemicleType = Item::itemTypeWiseItemList($this->chemicalId);
         $suppliers = SupplierProfile::supplierProfile($this->chemicalSupplierTypeId);
         $defaultSupplier = SupplierProfile::defaultSupplierProfile($this->chemicalSupplierTypeId);
 
-        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','suppliers', 'defaultSupplier'));
+        return view('transactions.chemicalPurchase.modals.createChemicalPurchase',compact('chemicleType','suppliers', 'defaultSupplier','supplierId'));
     }
 
     /**

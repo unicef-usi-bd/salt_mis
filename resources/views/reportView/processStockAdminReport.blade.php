@@ -29,7 +29,7 @@
             @foreach($processStock as $row)
                 <tr>
                     <td>{{ ++$sl }}</td>
-                    <td>{{ $row->TRAN_TYPE=='I'? 'Iodized' : 'Wash & Crush' }}</td>
+                    <td>{{ $row->TRAN_TYPE=='I'? 'Iodized' : 'Wash & Crushing' }}</td>
                     <td>{{ number_format($row->QTY, 2) }}</td>
                 </tr>
             @endforeach

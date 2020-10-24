@@ -28,6 +28,7 @@
                     <label class="col-sm-4 control-label no-padding-right" for="form-field-1-1"> <b>Amount (KG)</b><span style="color: red;"> * </span> </label>
                     <div class="col-sm-8">
                         <input autocomplete="off" type="text" id="inputSuccess RCV_QTY" placeholder="Example:- Amount (KG) Here  " name="RCV_QTY" class="form-control col-xs-10 col-sm-5" onkeypress="return numbersOnly(this, event)" value=""/>
+                        <input type="hidden" value="{{ $supplierId }}" name="SUPPLIER_ID">
                     </div>
                 </div>
                 <div class="form-group">

@@ -33,6 +33,7 @@
                     <td>{{$row->ASSOCIATION_NAME}}</td>
                     <td>{{$row->Process_Type}}</td>
                     <td>{{$row->QTY}}</td>
+                    {{--$numberAsString = number_format($numberAsFloat, 2);--}}
                 </tr>
             @endforeach
             @if(sizeof($purchaseTotalSaltStocks)==0)

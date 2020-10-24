@@ -16,6 +16,7 @@ class SalesDistribution extends Model
         return self::millerSales()->get();
     }
 
+
     public static function millerSales(){
         return DB::table(self::$childTable)
             ->select('tmm_saleschd.*','smm_item.ITEM_NAME','tmm_salesmst.SALES_DATE','ssc_lookupchd.LOOKUPCHD_NAME', 'ssc_lookupchd.DESCRIPTION')
@@ -127,16 +128,18 @@ class SalesDistribution extends Model
             ->select('tmm_salesmst.*','ssc_lookupchd.LOOKUPCHD_NAME','ssm_customer_info.TRADING_NAME')
             ->leftJoin('ssc_lookupchd','tmm_salesmst.SELLER_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
             ->leftJoin('ssm_customer_info','tmm_salesmst.CUSTOMER_ID','=','ssm_customer_info.CUSTOMER_ID')
-            ->where('SALESMST_ID','=',$id)
+            ->leftJoin('tmm_saleschd','tmm_saleschd.SALESMST_ID','=','tmm_salesmst.SALESMST_ID')
+            ->where('SALESCHD_ID','=',$id)
             ->first();
     }
 
     public static function showSalesDistributionDataChd($id){
+
       return DB::table('tmm_saleschd')
           ->select('tmm_saleschd.*','smm_item.ITEM_NAME','ssc_lookupchd.LOOKUPCHD_NAME')
           ->leftJoin('smm_item','tmm_saleschd.ITEM_ID','=','smm_item.ITEM_NO')
           ->leftJoin('ssc_lookupchd','tmm_saleschd.PACK_TYPE','=','ssc_lookupchd.LOOKUPCHD_ID')
-          ->where('tmm_saleschd.SALESMST_ID','=',$id)
+          ->where('tmm_saleschd.SALESCHD_ID','=',$id)
           ->get();
     }
 
@@ -302,6 +305,130 @@ class SalesDistribution extends Model
             return $deleteSalePr;
         }
     }
+
+    // Edit Sales Distribution
+    public static function editSalesDistribution($id){
+
+        $centerID = Auth::user()->center_id;
+        return DB::table('tmm_salesmst AS sm')
+            ->select('sm.*','sc.*','is.ITEM_NO','is.STOCK_NO','csi.TRADING_NAME')
+            ->leftJoin('tmm_saleschd AS sc','sm.SALESMST_ID','=','sc.SALESMST_ID')
+            ->leftJoin('ssm_customer_info AS csi','sm.CUSTOMER_ID','=','csi.CUSTOMER_ID')
+            ->leftJoin('tmm_itemstock AS is','sm.SALESMST_ID','=','is.TRAN_NO')
+            ->where('sc.SALESCHD_ID','=',$id)
+            ->where('sm.center_id','=',$centerID)
+            ->first();
+    }
+
+    // End Edit Sales Distribution
+
+    //Update Sale Distribution Start
+    public static function updateSalesDistributionData($request, $washAndCrushId, $iodizeId,$id){
+
+        $salemstID = $request->input('SALESMST_ID');
+        $stockID = $request->input('STOCK_NO');
+
+        try{
+            DB::beginTransaction();
+            $updated = DB::table('tmm_salesmst')
+                ->where('SALESMST_ID',$salemstID)
+                ->update ([
+                'SELLER_TYPE'=> $request->input('SELLER_TYPE'),
+                'SALES_DATE'=> date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
+                'CUSTOMER_ID'=> $request->input('CUSTOMER_ID'),
+                'DRIVER_NAME'=> $request->input('DRIVER_NAME'),
+                'VEHICLE_NO'=> $request->input('VEHICLE_NO'),
+                'VEHICLE_LICENSE'=> $request->input('VEHICLE_LICENSE'),
+                'TRANSPORT_NAME'=> $request->input('TRANSPORT_NAME'),
+                'MOBILE_NO'=> $request->input('MOBILE_NO'),
+                'REMARKS'=> $request->input('REMARKS'),
+                'center_id' => Auth::user()->center_id,
+                'ENTRY_BY' => Auth::user()->id,
+                'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+            ]);
+
+            $requestTime = count($request->input('PACK_TYPE'));
+
+            for ($i=0; $i < $requestTime; $i++){
+                $pactInput = $request->input('PACK_TYPE')[$i];
+                $extractPact = explode(',', $pactInput);
+                $packTypeId = $extractPact[0];
+                $measurementPack = $extractPact[1];
+                $totalPacket =  (float)$request->input('PACK_QTY')[$i];
+                $totalQuantity = $totalPacket * $measurementPack;
+
+//                $salesChdData = array(
+//                    'SALESCHD_ID'=>$id,
+//                    'ITEM_ID'=> $request->input('ITEM_ID')[$i],
+//                    'brand_id'=> $request->input('brand_id')[$i],
+//                    'PACK_TYPE'=> $packTypeId,
+//                    'PACK_QTY'=> $totalPacket,
+//                    'center_id' => Auth::user()->center_id,
+//                    'QTY'=> $totalQuantity
+//                );
+
+                //DB::table('tmm_saleschd')->update($salesChdData);
+                DB::table('tmm_saleschd')
+                    ->where('SALESCHD_ID',$id)
+                    ->update([
+                    'ITEM_ID'=> $request->input('ITEM_ID')[$i],
+                    'brand_id'=> $request->input('brand_id')[$i],
+                    'PACK_TYPE'=> $packTypeId,
+                    'PACK_QTY'=> $totalPacket,
+                    'center_id' => Auth::user()->center_id,
+                    'QTY'=> $totalQuantity
+                ]);
+
+                $finishSaltId = $request->input('ITEM_ID')[$i];
+
+
+                // return $finishSaltId;
+
+                if($finishSaltId == $washAndCrushId){
+//                echo $packageQuantity;exit;
+                    $stockData = array(
+                        'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
+                        'TRAN_TYPE' => 'W', //  W=Wash
+                        'TRAN_NO' => $salemstID,
+                        'ITEM_NO' => $request->input('ITEM_ID')[$i],
+                        'QTY' => '-'.$totalQuantity,
+                        'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
+                        'center_id' => Auth::user()->center_id,
+                        //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                        'ENTRY_BY' => Auth::user()->id,
+                        'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                    );
+
+                    DB::table('tmm_itemstock')->where('STOCK_NO',$stockID)->update($stockData);
+                }
+
+                if($finishSaltId == $iodizeId){
+//                  echo $packageQuantity;exit;
+                    $stockData = array(
+                        'TRAN_DATE' => date('Y-m-d', strtotime(Input::get('SALES_DATE'))),
+                        'TRAN_TYPE' => 'I', //  I= Iodize
+                        'TRAN_NO' => $salemstID,
+                        'ITEM_NO' => $request->input('ITEM_ID')[$i],
+                        'QTY' => '-'.$totalQuantity,
+                        'TRAN_FLAG' => 'SD', // SD = Sales & Distribution
+                        'center_id' => Auth::user()->center_id,
+                        //'SUPP_ID_AUTO' => $request->input('SUPP_ID_AUTO'),
+                        'ENTRY_BY' => Auth::user()->id,
+                        'ENTRY_TIMESTAMP' => date("Y-m-d h:i:s")
+                    );
+                    DB::table('tmm_itemstock')->where('STOCK_NO',$stockID)->update($stockData);
+                }
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+
+    }
+
+    //End Sale Distribution Update
 
 
 }

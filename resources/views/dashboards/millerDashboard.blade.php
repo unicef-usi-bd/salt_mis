@@ -23,11 +23,11 @@
         <div>
             @foreach($renewalMessageCertificate as $row)
                     @if($row->RENEW_DAY <=30)
-                    <span class="alert alert-danger" style="font-weight: bolder;">Your <span>{{ $row->CERTIFICATE_NAME }}</span> certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivate.&nbsp;</span>
+                    <span class="alert alert-danger" style="font-weight: bolder;">Your <span>{{ $row->CERTIFICATE_NAME }}</span> certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivated.&nbsp;</span>
                     @elseif($row->RENEW_DAY <=60)
-                    <span class="alert alert-warning" style="font-weight: bolder;">Your {{ $row->CERTIFICATE_NAME }} certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivate.</span>
+                    <span class="alert alert-warning" style="font-weight: bolder;">Your {{ $row->CERTIFICATE_NAME }} certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivated.</span>
                     @elseif($row->RENEW_DAY <=90)
-                    <span class="alert alert-success" style="font-weight: bolder;">Your {{ $row->CERTIFICATE_NAME }} certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivate.</span>
+                    <span class="alert alert-success" style="font-weight: bolder;">Your {{ $row->CERTIFICATE_NAME }} certificate date will be expired very soon! Please renew it otherwise your miller account might be deactivated.</span>
                     @endif
             @endforeach
         </div>

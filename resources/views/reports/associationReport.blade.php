@@ -47,10 +47,10 @@
                             </span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group adminReportrangeDiv" >
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Date Between</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <span class="block input-icon input-icon-right">
                                 <input autocomplete="off" type="text" id="reportrange"  name="reportrange" class="width-65 assReportrange" /></select>
                             </span>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group issuerAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Issuer</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="issueby width-65" name="">
                                    <option value="">--Select--</option>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group divisionIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="form-control division chosen-select width-65" name="DIVISION_ID" data-placeholder="Select or search data">
                                     <option value="">-Select-</option>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="form-group districtIdDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="form-control chosen-select district width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">-Select-</option>
@@ -96,7 +96,7 @@
 
                     <div class="form-group itemTypeAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Item</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeAssoc chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                 <option value="0">-Select-</option>
@@ -110,7 +110,7 @@
 
                         <div class="form-group millerDiv">
                             <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Mill Name</b><span style="color: red;"> </span></label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-5">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess MILL_ID" class="millTypeAdmin chosen-select form-control width-65" name="MILL_ID" data-placeholder="Select Crude Salt Type">
                                <option value="">-Select-</option>
@@ -126,7 +126,7 @@
 
                     <div class="form-group processTypeDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="0">-Select-</option>
@@ -141,7 +141,7 @@
 
                     <div class="form-group statusAdminDiv">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Active Status</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="statusAssociation width-65" name="ACTIVE_FLG">
                                    <option value="">--Select--</option>
@@ -156,7 +156,7 @@
 
                     <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Renew Date</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                             <span class="block input-icon input-icon-right">
                                <input autocomplete="off" type="text" name="renew_date" id="" readonly value="" class="width-100 renew-date" />
                             </span>
@@ -164,7 +164,7 @@
                     </div>
                     <div class="form-group failDateDiv" style="margin-left:22px;width: 334px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Fail Date</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                             <span class="block input-icon input-icon-right">
                                <input autocomplete="off" type="text" name="fail_date" id="" readonly value="" class="width-100 fail-date" />
                             </span>

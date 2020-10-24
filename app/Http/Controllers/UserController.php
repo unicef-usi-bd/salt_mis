@@ -103,6 +103,7 @@ class UserController extends Controller
             //'designation_id' => 'required',
             'user_group_id' => 'required',
             'user_group_level_id' => 'required',
+            'center_id' => 'required',
 //            'contact_no' => 'required|unique:users|regex:/^(?:\+?88)?01[15-9]\d{8}$/'
         );
 
@@ -110,7 +111,8 @@ class UserController extends Controller
             'password.required' => 'The Password field is required. Use minimum 8 character',
             'password.confirmed' => 'The Password not matched. Please try again',
             'user_group_id.required' => 'The user group field is required.',
-            'user_group_level_id.required' => 'The user group level field is required.'
+            'user_group_level_id.required' => 'The user group level field is required.',
+            'center_id.required' => 'Mill Name field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);
@@ -203,7 +205,7 @@ class UserController extends Controller
         $userGroups = UserGroup::getActiveData();
       //  $banks = Bank::getActiveBanks();
         $editData = User::editData($id);
-      //  $costCenters = CostCenter::getActiveCostCenter();
+        //  $costCenters = CostCenter::getActiveCostCenter();
      //   $designations = LookupGroupData::getActiveGroupDataByLookupGroup($this->designationId);
         $userGroupLevels = UserGroupLevel::getActiveUGL($editData->user_group_id);
         $associationCenter = AssociationSetup::getAssociationCenterData();
@@ -226,6 +228,8 @@ class UserController extends Controller
 //            'user_full_name' =>'required|string|max:100',
              'username' => 'required|string|max:100',
              'password' => 'confirmed|min:8|',
+             'center_id' => 'required',
+
             );
         }else{
              $rules = array(
@@ -233,11 +237,13 @@ class UserController extends Controller
                  'password.confirmed' => 'The Password not matched. Please try again',
                  'username' => 'required|string|max:100',
                  'user_group_id' => 'required',
+                 'center_id' => 'required',
             );
         }
         $error = array(
             'password.required' => 'The Password field is required. Use minimum 8 character',
-            'user_group_id.required' => 'The user group field is required.'
+            'user_group_id.required' => 'The user group field is required.',
+             'center_id.required' => 'Mill Name field is required.'
         );
 
         $validator = Validator::make(Input::all(), $rules, $error);

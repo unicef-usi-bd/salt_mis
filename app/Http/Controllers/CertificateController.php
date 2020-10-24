@@ -96,7 +96,7 @@ class CertificateController extends Controller
             $userImageLimit = count($request->file('user_image'));
         }
         $loopLimit = count($userCertificates);
-        if ($userImageLimit != $loopLimit) return response()->json(['errors' => 'Certificate Image * field is must required']);
+        if ($userImageLimit != $loopLimit) return response()->json(['errors' => 'Certificate Image * field is  required']);
         for ($i = 0; $i < $loopLimit; $i++) {
             // file upload
             $imagePath = '';
@@ -137,14 +137,14 @@ class CertificateController extends Controller
         $duplicate = DB::table('ssm_certificate_info')->select('*')->where('MILL_ID', $request->input('MILL_ID'))->get();
 
         if (count($duplicate) > 0) {
-            return response()->json(['errorss' => 'Already Insert This Certificate']);
+            return response()->json(['errors' => 'Already Insert This Certificate']);
         } else {
             $inserted = DB::table('ssm_certificate_info')->insert($data);
 
             if ($inserted) {
                 return response()->json(['success' => 'Certificate information has been saved successfully', 'insertId' => $millerId]);
             } else {
-                return response()->json(['errors' => 'Certificate information save failed']);
+                return response()->json(['errorss' => 'Certificate information save failed']);
             }
         }
     }
@@ -189,7 +189,7 @@ class CertificateController extends Controller
         //dd($hasRequiredCertificates);
         if ($hasRequiredCertificates) {
             $certificates = implode(', ', $hasRequiredCertificates);
-            return response()->json(['errors' => "<b>$certificates </b>certificates must be required."]);
+            return response()->json(['errors' => "<b>$certificates </b>certificates is  required."]);
         }
 
         $selfMillerInfo = MillerInfo::selfMillerAuthenticated();

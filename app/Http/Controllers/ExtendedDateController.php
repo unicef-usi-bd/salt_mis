@@ -50,6 +50,7 @@ class ExtendedDateController extends Controller
         );
         $millerId = ExtendedDate::millerName();
 
+
         return view('setup.extendate.index', compact('users', 'heading', 'previllage', 'millerId'));
     }
 

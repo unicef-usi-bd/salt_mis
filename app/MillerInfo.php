@@ -165,6 +165,7 @@ class MillerInfo extends Model
     }
 
     public static function getAllMillDataList(){
+
         $data = DB::table('ssm_mill_info as smi')
             ->select('ssm_entrepreneur_info.*', 'ssm_certificate_info.*', 'tsm_qc_info.*', 'ssm_millemp_info.*', 'ssc_lookupchd.*', 'smi.*')
             ->leftJoin('ssm_entrepreneur_info','smi.MILL_ID','=','ssm_entrepreneur_info.MILL_ID')
@@ -177,6 +178,7 @@ class MillerInfo extends Model
             ->groupBy('smi.MILL_ID')
             ->orderBy('smi.MILL_ID', 'DESC')
             ->get();
+
 
 
         foreach ($data as $mill){
@@ -408,6 +410,7 @@ class MillerInfo extends Model
     }
     ///-----------------------Counting Miller
     public static function totalMill(){
+
         $centerId = Auth::user()->center_id;
         $obj = DB::table('ssm_mill_info as smi');
         if($centerId) $obj->where('smi.center_id', '=', $centerId);

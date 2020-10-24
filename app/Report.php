@@ -248,7 +248,7 @@ class Report extends Model
     {
         return DB::select(DB::raw("select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'W' then
-        'Wash Crash'
+        'Wash and Crushing'
       end Process_Type
       from tmm_itemstock st
       left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -259,7 +259,7 @@ class Report extends Model
       union
       select i.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,
       case when st.TRAN_TYPE = 'I' then
-        'Iodize'
+        'Iodized'
       end Process_Type
       from tmm_itemstock st
       -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -272,7 +272,7 @@ class Report extends Model
     public static function getSalesItemMiller()
     {
         $centerId = Auth::user()->center_id;
-        return DB::select(DB::raw("select lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
+        return DB::select(DB::raw("select DISTINCT  lc.LOOKUPCHD_ID,lc.LOOKUPCHD_NAME, st.ITEM_NO,st.ITEM_NAME
             from ssc_lookupchd lc
             left join smm_item st on lc.LOOKUPCHD_ID = st.ITEM_TYPE
             left join tmm_itemstock its on its.ITEM_NO = st.ITEM_NO
@@ -343,10 +343,12 @@ class Report extends Model
         $chemicalItemList->leftJoin('ssc_lookupchd', 'ssc_lookupchd.LOOKUPCHD_ID', '=', 'smm_item.ITEM_TYPE');
         $chemicalItemList->leftJoin('tmm_itemstock', 'tmm_itemstock.ITEM_NO', '=', 'smm_item.ITEM_NO');
         $chemicalItemList->Where('tmm_itemstock.TRAN_TYPE', '=', 'CP');
-        $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG', '=', 'PR');
+        $chemicalItemList->Where('tmm_itemstock.TRAN_FLAG', '=', 'PR')->take(1);
+
+
 
         if ($centerId) {
-            $chemicalItemList->Where('tmm_itemstock.center_id', '=', $centerId);
+            $chemicalItemList->Where('tmm_itemstock.center_id', '=', $centerId)->take(1);
         }
         return $chemicalItemList->get();
     }
@@ -498,7 +500,7 @@ class Report extends Model
         if ($processType == 0) {
             return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
                                           case when st.TRAN_TYPE = 'W' then
-                                            'Wash Crash'
+                                            'Wash Crushing'
                                           end Process_Type
                                           from tmm_itemstock st
                                           left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -509,7 +511,7 @@ class Report extends Model
                                           UNION
                                           select i.BATCH_NO, st.QTY,
                                           case when st.TRAN_TYPE = 'I' then
-                                            'Iodize'
+                                            'Iodized'
                                           end Process_Type
                                           from tmm_itemstock st
                                           -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -520,7 +522,7 @@ class Report extends Model
         } elseif ($processType == 1) {
             return DB::select(DB::raw("select w.BATCH_NO, st.QTY,
                                           case when st.TRAN_TYPE = 'W' then
-                                            'Wash Crash'
+                                            'Wash Crushing'
                                           end Process_Type
                                           from tmm_itemstock st
                                           left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -531,7 +533,7 @@ class Report extends Model
         } else {
             return DB::select(DB::raw("select i.BATCH_NO, st.QTY,
                                           case when st.TRAN_TYPE = 'I' then
-                                            'Iodize'
+                                            'Iodized'
                                           end Process_Type
                                           from tmm_itemstock st
                                           -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -588,7 +590,7 @@ class Report extends Model
         if ($districtId) $conditions .= " and sci.DISTRICT_ID = $districtId";
 
         $data = DB::select(DB::raw("select sci.TRADING_NAME, sci.DISTRICT_ID, sci.DIVISION_ID,dis.DISTRICT_NAME, divs.DIVISION_NAME, lc.LOOKUPCHD_NAME as seller_type, abs(tis.QTY) QTY,
-                (case when (tis.TRAN_TYPE = 'W') THEN 'Wash & Crash' ELSE 'Iodized' END) as ITEM_NAME
+                (case when (tis.TRAN_TYPE = 'W') THEN 'Wash & Crushing' ELSE 'Iodized' END) as ITEM_NAME
                 from ssm_customer_info sci
                 left join tmm_salesmst tsm on sci.CUSTOMER_ID = tsm.CUSTOMER_ID
                 left join tmm_itemstock tis on tsm.SALESMST_ID = tis.TRAN_NO
@@ -627,11 +629,12 @@ class Report extends Model
 
     public static function monitorClintMiller($centerId)
     {
+
         return DB::select(DB::raw(" SELECT i.item_no, i.QTY, ci.TRADER_NAME,lc.LOOKUPCHD_NAME
                 FROM tmm_itemstock i, tmm_salesmst sm
                 left join ssm_customer_info ci on ci.CUSTOMER_ID = sm.CUSTOMER_ID
                 left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = ci.SELLER_TYPE_ID
-                where i.center_id = $centerId and i.TRAN_FLAG = 'SD'
+                where ci.center_id = $centerId and i.TRAN_FLAG = 'SD'
                 GROUP BY i.item_no, ci.TRADER_NAME,lc.LOOKUPCHD_NAME"));
     }
 
@@ -674,7 +677,7 @@ class Report extends Model
         $data = DB::select(DB::raw("
                   select w.BATCH_NO, abs(sum(st.QTY)-(select sum(ti.WASH_CRASH_QTY *100)/(100-ti.WASTAGE) from tmm_iodizedchd ti where ti.center_id=$centerId)) QTY, (select abs(sum(wstock.QTY)) from tmm_itemstock wstock where wstock.center_id=$centerId and wstock.TRAN_TYPE = 'W' and wstock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
                   case when st.TRAN_TYPE = 'W' then
-                    'Wash Crash'
+                    'Wash and Crushing'
                   end Process_Type
                   from tmm_itemstock st
                   left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -685,7 +688,7 @@ class Report extends Model
                   union
                   select i.BATCH_NO, abs(sum(st.QTY)) QTY,(select abs(sum(istock.QTY)) from tmm_itemstock istock where istock.center_id=$centerId and istock.TRAN_TYPE = 'I' and istock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
                   case when st.TRAN_TYPE = 'I' then
-                    'Iodize'
+                    'Iodized'
                   end Process_Type
                   from tmm_itemstock st
                   -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
@@ -819,14 +822,35 @@ where ql.center_id =$centerId"));
 
     public static function getProcessStockAdmin($starDate, $endDate)
     {
-        $processStock = DB::table('tmm_itemstock as stock')
-            ->select(DB::raw("SUM(stock.QTY) as QTY"), 'stock.TRAN_TYPE', 'LOOKUPCHD_NAME')
-            ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
-            ->leftJoin('ssc_lookupchd as slc', 'items.ITEM_TYPE', '=', 'slc.LOOKUPCHD_ID')
-            ->whereIn('stock.TRAN_FLAG', ['WI', 'II'])
-            ->whereBetween('stock.TRAN_DATE', [$starDate, $endDate])
-            ->groupBy('TRAN_FLAG')
-            ->get();
+//        $processStock = DB::table('tmm_itemstock as stock')
+//            ->select(DB::raw("SUM(stock.QTY) as QTY"), 'stock.TRAN_TYPE', 'LOOKUPCHD_NAME')
+//            ->leftJoin('smm_item as items', 'stock.ITEM_NO', '=', 'items.ITEM_NO')
+//            ->leftJoin('ssc_lookupchd as slc', 'items.ITEM_TYPE', '=', 'slc.LOOKUPCHD_ID')
+//            ->whereIn('stock.TRAN_FLAG', ['WI', 'II'])
+//            ->whereBetween('stock.TRAN_DATE', [$starDate, $endDate])
+//            ->groupBy('TRAN_FLAG')
+//            ->get();
+//        return $processStock;
+
+        $processStock = DB::select(DB::raw("SELECT  (SELECT COUNT(DISTINCT ist.center_id) FROM tmm_itemstock ist WHERE ist.TRAN_FLAG='II' ) AS MILL_NO
+                                            ,st.TRAN_TYPE,COUNT(STOCK_NO) BATCH_NO,SUM(st.QTY) QTY
+                                             FROM tmm_itemstock st
+                                             LEFT JOIN ssm_associationsetup ai ON st.center_id=ai.ASSOCIATION_ID
+                                             WHERE st.TRAN_TYPE='W'
+                                            
+                                             AND st.TRAN_FLAG IN('WR','SD','WI')
+                                               AND DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'   
+                                               UNION ALL       
+                                               SELECT 
+                                            (SELECT COUNT(DISTINCT ist.center_id) FROM tmm_itemstock ist WHERE ist.TRAN_FLAG='II' ) AS MILL_NO
+                                            ,st.TRAN_TYPE,COUNT(STOCK_NO) BATCH_NO,SUM(st.QTY) QTY
+                                             FROM tmm_itemstock st
+                                             LEFT JOIN ssm_associationsetup ai ON st.center_id=ai.ASSOCIATION_ID
+                                             WHERE st.TRAN_TYPE='I'
+                                             
+                                             AND st.TRAN_FLAG IN('II','SD')
+                                               AND DATE(st.TRAN_DATE) BETWEEN '$starDate' AND '$endDate'
+                                               "));
         return $processStock;
     }
 

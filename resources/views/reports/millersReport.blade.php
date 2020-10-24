@@ -53,10 +53,10 @@
 
 
                 {{--</div>--}}
-                <div class="col-md-6">
-                    <div class="form-group adminReportrangeDiv">
+                <div class="col-md-12">
+                    <div class="form-group adminReportrangeDiv" style="margin-left: 70px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right"><b>{{ trans('soeReport.date_between') }}</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                                 <span class="block input-icon input-icon-right ">
                                     {{--<input autocomplete="off" type="text" name="from_date" readonly value="" class="width-100 date-picker" />--}}
                                     <input autocomplete="off" type="text" id="reportrange"  name="reportrange" class="width-65 millReportrange " />
@@ -64,9 +64,9 @@
                                 </span>
                         </div>
                     </div>
-                    <div class="form-group itemTypeAdminDiv">
+                    <div class="form-group itemTypeAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Crude Salt Item</b><span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="itemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                {{--<option value="">-Select-</option>--}}
@@ -78,9 +78,9 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group chemicalItemTypeAdminDiv">
+                    <div class="form-group chemicalItemTypeAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Chemical Item</b><span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                         <span class="block input-icon input-icon-right">
                             <select id="form-field-select-3 inputSuccess RECEIVE_NO" class="chemicalItemTypeMiller chosen-select form-control width-65" name="RECEIVE_NO" data-placeholder="Select Crude Salt Type">
                                {{--<option value="">-Select-</option>--}}
@@ -93,10 +93,9 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group processTypeDiv">
+                    <div class="form-group processTypeDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Process Type</b></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                <select class="chosen-select  processType width-65" name="process_type" data-placeholder="Select">
                                    <option value="">-Select-</option>
@@ -107,9 +106,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group divisionIdDiv">
+                    <div class="form-group divisionIdDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Division</b></label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-5">
                             <span class="block input-icon input-icon-right">
                                 <select class="division form-control chosen-select width-65" name="DIVISION_ID" data-district-all="true" data-placeholder="Select or search data">
                                     <option value="">-Select-</option>
@@ -121,9 +120,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group districtIdDiv">
+                    <div class="form-group districtIdDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>District</b></label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-5">
                         <span class="block input-icon input-icon-right">
                             <select class="district form-control chosen-select width-65" name="DISTRICT_ID" data-placeholder="Select or search data">
                                 <option value="">-Select-</option>
@@ -131,20 +130,20 @@
                         </span>
                         </div>
                     </div>
-                    <div class="form-group renewDateDiv" style="margin-left:22px;width: 334px;">
+                    <div class="form-group renewDateDiv" style="margin-left:75px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Renew Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
                             <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 date-picker" />
                         </div>
                     </div>
-                    <div class="form-group failDateDiv" style="margin-left:22px;width: 334px;">
+                    <div class="form-group failDateDiv" style="margin-left:75px;">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> <b>Fail Date</b><span style="color: red;"> </span> </label>
                         <div class="col-sm-8">
                             <input autocomplete="off" type="text" name="RECEIVE_DATE" id="RECEIVE_DATE" readonly value="{{date('m/d/Y')}}" class="width-100 end-date" />
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     {{--<div class="form-group purchaseOrderDiv">--}}
                         {{--<label for="inputSuccess" class="col-sm-3 control-label no-padding-right" for="form-field-1-1"><b>Purchase order</b></label>--}}
                         {{--<div class="col-sm-8">--}}
@@ -159,9 +158,9 @@
                             {{--</span>--}}
                         {{--</div>--}}
                     {{--</div>--}}
-                    <div class="form-group zoneAdminDiv">
+                    <div class="form-group zoneAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Association Name</b> <span style="color: red;"> </span></label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <span class="block input-icon input-icon-right">
                                 <select id="form-field-select-3 inputSuccess ZONE_ID" class="zoneMiller form-control width-65 " name="ZONE_ID" data-placeholder="Select or search data">
                                     <option value="">Select Association Name</option>
@@ -173,9 +172,9 @@
                              </span>
                         </div>
                     </div>
-                    <div class="form-group issuerAdminDiv">
+                    <div class="form-group issuerAdminDiv" style="margin-left: 75px;">
                         <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right"><b> Issuer</b> <span style="color: red;"> </span></label>
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <span class="block input-icon input-icon-right">
                                 <select class="issuerMiller width-65 form-control chosen-select " id="ISSURE_ID" name="ISSURE_ID"  >
                                     <option value="">-Select-</option>
@@ -186,9 +185,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group clientDiv">
+                    <div class="form-group clientDiv" style="margin-left: -45px;">
                         <label for="inputSuccess" class="col-xs-12 col-sm-4 control-label no-padding-right"><b> Client</b> <span style="color: red;"> </span></label>
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <span class="block input-icon input-icon-right">
                                 <select class="customerId width-65 form-control chosen-select " id="CUSTOMER_ID" name="CUSTOMER_ID"  >
                                     <option value="">-Select-</option>
@@ -199,9 +198,9 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group finishedSaltItemDiv">
+                    <div class="form-group finishedSaltItemDiv" style="margin-left: -45px;">
                         <label for="inputSuccess" class="col-xs-12 col-sm-4 control-label no-padding-right"><b> Processed Salt Item</b> <span style="color: red;"> </span></label>
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <span class="block input-icon input-icon-right">
                                 <select class="itemTypeId width-65 form-control chosen-select " id="ITEM_TYPE" name="ITEM_TYPE"  >
                                     <option value="0">-Select-</option>
@@ -362,7 +361,7 @@
             $('.statusAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-
+            $('.chemicalItemTypeAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
             $('.districtIdDiv').hide();
@@ -412,6 +411,7 @@
             $('.finishedSaltItemDiv').hide();
         }else if($reportUrl === 'chemical-item-list'){
             $('.statusAdminDiv').hide();
+            $('.chemicalItemTypeAdminDiv').hide();
             $('.adminReportrangeDiv').hide();
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
@@ -481,7 +481,7 @@
             $('.statusAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-
+            $('.chemicalItemTypeAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
             $('.districtIdDiv').hide();
@@ -499,7 +499,7 @@
             $('.statusAdminDiv').hide();
 
             $('.adminReportrangeDiv').show();
-
+            $('.chemicalItemTypeAdminDiv').hide();
             $('.itemTypeAdminDiv').hide();
             $('.divisionIdDiv').hide();
             $('.districtIdDiv').hide();

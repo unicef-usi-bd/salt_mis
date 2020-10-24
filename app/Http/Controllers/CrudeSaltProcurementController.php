@@ -68,6 +68,7 @@ class CrudeSaltProcurementController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = array(
             'RECEIVE_NO' => 'required',
             'INVOICE_NO' => 'required',

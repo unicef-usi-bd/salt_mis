@@ -71,11 +71,11 @@
                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                     </a>
                                 @endif
-                                @if($previllage->DELETE == 1)
-                                    <a class="red clickForDelete row{{ $row->RECEIVEMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'chemical-purchase/'.$row->RECEIVEMST_ID }}" role="button" title="Delete Chemical Purchase">
-                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                    </a>
-                                @endif
+                                {{--@if($previllage->DELETE == 1)--}}
+                                    {{--<a class="red clickForDelete row{{ $row->RECEIVEMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'chemical-purchase/'.$row->RECEIVEMST_ID }}" role="button" title="Delete Chemical Purchase">--}}
+                                        {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}
+                                    {{--</a>--}}
+                                {{--@endif--}}
                             </div>
                         </td>
                     </tr>
