@@ -763,6 +763,7 @@ class Stock extends Model
     }
 
     public static function getStockIdByTranChildId($id,$type){
+
         if($type == '7') {
             $tran_type = 'W';
         } else{
@@ -771,6 +772,7 @@ class Stock extends Model
         $stockId = DB::table('tmm_itemstock as s')
             ->select('s.STOCK_NO','s.TRAN_TYPE','s.TRAN_NO')
             ->where('s.TRAN_TYPE',$tran_type)
+            ->where('s.TRAN_FLAG','SD')
             ->where('s.TRAN_NO',$id)
             ->first();
         return $stockId;

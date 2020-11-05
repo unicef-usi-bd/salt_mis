@@ -74,15 +74,15 @@
                                 </span>
                                     </a>
                                 @endif
-                                {{--@if($editPermissionLevel == 1)--}}
-                                    {{--<a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESCHD_ID.'/edit' }}" data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution">--}}
-                                        {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@else--}}
-                                    {{--<a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESCHD_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution" style="display: none;">--}}
-                                        {{--<i class="ace-icon fa fa-pencil bigger-130"></i>--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
+                                @if($editPermissionLevel == 1)
+                                    <a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESCHD_ID.'/edit' }}" data-target=".modal" modal-size="modal-bg" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                @else
+                                    <a class="green showModalGlobal" id="{{ 'sales-distribution/'.$row->SALESCHD_ID.'/edit' }}" data-target=".modal" role="button" data-permission="{{ $editPermissionLevel }}"  data-toggle="modal" title="Edit Sales & Distribution" style="display: none;">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                @endif
                                 {{--@if($previllage->DELETE == 1)--}}
                                     {{--<a class="red clickForDelete row{{ $row->SALESMST_ID }}" data-token="{{ csrf_token() }}" data-action="{{ 'sales-distribution/'.$row->SALESMST_ID }}" role="button" title="Delete Sales & Distribution">--}}
                                         {{--<i class="ace-icon fa fa-trash-o bigger-130"></i>--}}

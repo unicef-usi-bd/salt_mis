@@ -350,7 +350,7 @@
            $('.failDateDiv').hide();
            $('.zoneAdminDiv').hide();
            $('.issuerAdminDiv').hide();
-
+           $('.processTypeDiv').hide();
            $('.purchaseOrderDiv').show();
            $('.adminReportrangeDiv').show();
            $('.millerDiv').hide();

@@ -675,27 +675,28 @@ class Report extends Model
 
 //        Update Query 100820201239
         $data = DB::select(DB::raw("
-                  select w.BATCH_NO, abs(sum(st.QTY)-(select sum(ti.WASH_CRASH_QTY *100)/(100-ti.WASTAGE) from tmm_iodizedchd ti where ti.center_id=$centerId)) QTY, (select abs(sum(wstock.QTY)) from tmm_itemstock wstock where wstock.center_id=$centerId and wstock.TRAN_TYPE = 'W' and wstock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
-                  case when st.TRAN_TYPE = 'W' then
-                    'Wash and Crushing'
-                  end Process_Type
-                  from tmm_itemstock st
-                  left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-                  left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-                   left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
-                  -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-                  where st.TRAN_TYPE = 'W' and st.center_id = $centerId and st.TRAN_FLAG = 'WI'
-                  union
-                  select i.BATCH_NO, abs(sum(st.QTY)) QTY,(select abs(sum(istock.QTY)) from tmm_itemstock istock where istock.center_id=$centerId and istock.TRAN_TYPE = 'I' and istock.TRAN_FLAG = 'SD') SOLD_QTY, ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
-                  case when st.TRAN_TYPE = 'I' then
-                    'Iodized'
-                  end Process_Type
-                  from tmm_itemstock st
-                  -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
-                  left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
-                  left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
-                   left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
-                  where st.TRAN_TYPE = 'I' and st.center_id = $centerId  and st.TRAN_FLAG = 'II'
+                 select w.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+      case when st.TRAN_TYPE = 'W' then
+        'Wash and Crushing'
+      end Process_Type
+      from tmm_itemstock st
+      left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+      -- left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      where st.TRAN_TYPE = 'W' and st.center_id = 450 and st.TRAN_FLAG IN ('WR','SD','WI')
+      
+      union
+      select i.BATCH_NO, sum(st.QTY) QTY,ai.ASSOCIATION_NAME,lc.LOOKUPCHD_NAME,
+      case when st.TRAN_TYPE = 'I' then
+        'Iodized'
+      end Process_Type
+      from tmm_itemstock st
+      -- left join tmm_washcrashmst w on w.WASHCRASHMST_ID = st.TRAN_NO
+      left join tmm_iodizedmst i on i.IODIZEDMST_ID = st.TRAN_NO
+      left join ssm_associationsetup ai on ai.ASSOCIATION_ID = st.center_id
+       left join ssc_lookupchd lc on lc.LOOKUPCHD_ID = 29
+      where st.TRAN_TYPE = 'I' and st.center_id =450  and st.TRAN_FLAG IN ('II','SD')
                   "));
 
         return $data;

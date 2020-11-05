@@ -19,6 +19,7 @@ class ExtendedDate extends Model
             ->groupBy('ssm_certificate_info.MILL_ID')
             ->orderBy('ssm_certificate_info.RENEWING_DATE','asc')
             ->get();
+
     }
 
     public static function millerDetails($millId){

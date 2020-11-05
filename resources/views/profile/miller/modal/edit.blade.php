@@ -106,8 +106,8 @@ $('#MILL_TYPE_ID').focus(function() {
                 })
             }
         } else {
-            $(this).val(prev_val);
 
+            $(this).val(prev_val);
             return false;
         }
 

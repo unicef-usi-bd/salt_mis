@@ -31,7 +31,7 @@
                     <td>{{ ++$sl }}</td>
                     <td>{{ $row->LOOKUPCHD_NAME }}</td>
                     <td>{{ $row->Process_Type }}</td>
-                    <td>{{ number_format($row->QTY-$row->SOLD_QTY, 2) }}</td>
+                    <td>{{ number_format($row->QTY, 2) }}</td>
                 </tr>
             @endforeach
             </tbody>
