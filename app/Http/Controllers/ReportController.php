@@ -314,6 +314,7 @@ class ReportController extends Controller
 //        $endDate = $request->input('endDate');
         $millTypeAdmin = $request->input('millTypeAdmin');
         $purchaseChemicalStocks = Report::adminChemicalStock($millTypeAdmin);
+
         //return $purchaseChemicalStocks;
         $view = view("reportView.adminPurchasseChemicalStock",compact('purchaseChemicalStocks','centerId','starDate','endDate','millTypeAdmin'))->render();
         return response()->json(['html'=>$view]);
@@ -375,6 +376,7 @@ class ReportController extends Controller
         $endDate = $request->input('endDate');
         $purchaseChemicalStocks = Report::millerChemicalStock($centerId,$starDate,$endDate);
         $purchaseTotalSaltStocks = Report::getProcessStock($centerId,$starDate,$endDate);
+
 
         $view = view("reportView.millerProcessStockReport",compact('purchaseChemicalStocks','purchaseTotalSaltStocks','centerId','starDate','endDate'))->render();
         return response()->json(['html'=>$view]);

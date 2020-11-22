@@ -120,7 +120,7 @@
                             <select id="form-field-select-3 inputSuccess center_id" class="form-control" name="center_id" data-placeholder="Select Center">
                                 <option value="">-Select-</option>
                                 @foreach($associationCenter as $center)
-                                    <option value="<?php echo $center->ASSOCIATION_ID ?>"><?php echo $center->ASSOCIATION_NAME ?></option>
+                                    <option value="<?php echo $center->ASSOCIATION_ID ?>" disabled><?php echo $center->ASSOCIATION_NAME ?></option>
                                     @php
 
 

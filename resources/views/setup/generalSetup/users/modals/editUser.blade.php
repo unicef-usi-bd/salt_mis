@@ -149,7 +149,7 @@
                         <select id="form-field-select-3 inputSuccess center_id" class=" form-control millName" name="center_id" data-placeholder="Select Center">
                             <option value="">-Select-</option>
                             @foreach($associationCenter as $center)
-                                <option value="<?php echo $center->ASSOCIATION_ID ?>" @if($center->ASSOCIATION_ID==$editData->center_id)  @endif><?php echo $center->ASSOCIATION_NAME ?></option>
+                                <option value="<?php echo $center->ASSOCIATION_ID ?>" disabled @if($center->ASSOCIATION_ID==$editData->center_id)  @endif><?php echo $center->ASSOCIATION_NAME ?></option>
                                 <?php $miller = DB::select(DB::raw("SELECT a.ASSOCIATION_ID,a.ASSOCIATION_NAME from ssm_associationsetup a where a.PARENT_ID = $center->ASSOCIATION_ID "));?>
                                 @foreach($miller as $row)
                                     <option value="{{$row->ASSOCIATION_ID}}" @if($row->ASSOCIATION_ID==$editData->center_id) selected @endif> {{$row->ASSOCIATION_NAME}}</option>

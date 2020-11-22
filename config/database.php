@@ -52,6 +52,7 @@ return [
             'prefix' => '',
             'strict' => false, // was true
             'engine' => null,
+
         ],
 
         'pgsql' => [

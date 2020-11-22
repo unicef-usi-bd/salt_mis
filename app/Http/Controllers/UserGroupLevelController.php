@@ -145,21 +145,16 @@ class UserGroupLevelController extends Controller
         $validator = Validator::make(Input::all(), $rules, $error);
         if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
 
-        $check = DB::table('sa_ug_level')->select('*')
-            //->where('USERGRP_ID',$userGrpID)
-            ->where('POSITIONLEVEl',$positionID)
-            ->first();
-        if(empty($check)) {
+//        $check = DB::table('sa_ug_level')->select('*')
+//            //->where('USERGRP_ID',$userGrpID)
+//            ->where('POSITIONLEVEl',$positionID)
+//            ->first();
 
             $updateUserGroupLevel = UserGroupLevel::updateData($request, $id);
 
             if ($updateUserGroupLevel) {
                 return response()->json(['success' => 'Submission Completed.']);
             }
-        }
-        else {
-            return response()->json(['errors' => 'This Position already exist.!']);
-        }
 
     }
 

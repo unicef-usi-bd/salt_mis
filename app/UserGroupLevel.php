@@ -14,7 +14,7 @@ class UserGroupLevel extends Model
             ->where('sul.USERGRP_ID','=',$id)
             ->where('sul.ORG_ID','=',$orgId)
             ->where('sul.IS_ACTIVE','=','1')
-            ->where('sul.POSITIONLEVEl','>',$id)
+            //->where('sul.POSITIONLEVEl','>',$id)
             ->get();
     }
 

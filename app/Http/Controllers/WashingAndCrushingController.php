@@ -76,6 +76,7 @@ class WashingAndCrushingController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($_POST);exit();
         $rules = array(
             'PRODUCT_ID' => 'required',
             'REQ_QTY' => 'required',

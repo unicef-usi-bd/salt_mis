@@ -84,6 +84,7 @@
                                                 ->groupBy(['ul.UG_LEVEL_ID', 'ul.POSITIONLEVEl'])
                                                 ->get();
 
+
                                             ?>
 
                                             <?php foreach($userGrpLvls as $userGrpLvl){ ?>
