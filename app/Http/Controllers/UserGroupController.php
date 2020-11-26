@@ -157,7 +157,7 @@ class UserGroupController extends Controller
      */
     public function destroy($id)
     {
-      $check = DB::table('sa_ug_level')->select('*')->where('USERGRP_ID',$id)->get();
+      $check = DB::table('sa_ug_level')->select('USERGRP_ID')->where('USERGRP_ID',$id)->get();
       $count = count($check);
       if($count > 0){
           echo json_encode([
