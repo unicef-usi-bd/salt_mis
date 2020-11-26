@@ -1,3 +1,4 @@
+
 @extends('master')
 
 @section('mainContent')
@@ -157,6 +158,13 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 
+        <style>
+        .sweet-alert p{
+            color: orangered;
+        }
+    </style>
+
+
     <!--Sweet Alert Global Script Start-->
     @include('masterGlobal.deleteScript')
     @include('masterGlobal.ajaxFormSubmit')
@@ -184,3 +192,4 @@
     </script>
 
 @endsection
+

@@ -70,7 +70,7 @@ class UserGroupLevelController extends Controller
         if ($validator->fails()) return response()->json(['errors' => $validator->errors()->first()]);
 
         $check = DB::table('sa_ug_level')->select('*')
-            //->where('USERGRP_ID',$userGrpID)
+            ->where('USERGRP_ID',$userGrpID)
             ->where('POSITIONLEVEl',$positionID)
             ->first();
 
@@ -166,18 +166,27 @@ class UserGroupLevelController extends Controller
      */
     public function destroy($id)
     {
-        $delete = UserGroupLevel::deleteData($id);
-        if($delete){
+        $check = DB::table('users')->select('user_group_level_id')->where('user_group_level_id',$id)->get();
+        $count = count($check);
+        if($count > 0){
+
             echo json_encode([
-                'type' => 'tr',
-                'id' => $id,
-                'flag' => true,
-                'message' => 'Level Successfully Deleted.',
+                'message' =>'This group level already used a user. That is the why, it can not be deleted!',
             ]);
-        } else{
-            echo json_encode([
-                'message' => 'Error Founded Here!',
-            ]);
+        }else {
+            $delete = UserGroupLevel::deleteData($id);
+            if ($delete) {
+                echo json_encode([
+                    'type' => 'tr',
+                    'id' => $id,
+                    'flag' => true,
+                    'message' => 'Level Successfully Deleted.',
+                ]);
+            } else {
+                echo json_encode([
+                    'message' => 'Error Founded Here!',
+                ]);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use DB;
 class UserGroupController extends Controller
 {
     /**
@@ -157,20 +157,29 @@ class UserGroupController extends Controller
      */
     public function destroy($id)
     {
+      $check = DB::table('sa_ug_level')->select('*')->where('USERGRP_ID',$id)->get();
+      $count = count($check);
+      if($count > 0){
+          echo json_encode([
+              'message' => 'At First Delete Child Data!',
+          ]);
+      }else{
+          $delete = UserGroup::deleteData($id);
+          if ($delete) {
+              echo json_encode([
+                  'type' => 'div',
+                  'id' => $id,
+                  'flag' => true,
+                  'message' => 'Level Successfully Deleted.',
+              ]);
+          } else {
+              echo json_encode([
+                  'message' => 'Error Founded Here!',
+              ]);
+          }
+      }
 
-        $delete = UserGroup::deleteData($id);
-        if ($delete) {
-            echo json_encode([
-                'type' => 'div',
-                'id' => $id,
-                'flag' => true,
-                'message' => 'Level Successfully Deleted.',
-            ]);
-        } else {
-            echo json_encode([
-                'message' => 'Error Founded Here!',
-            ]);
-        }
+
     }
 }
 
