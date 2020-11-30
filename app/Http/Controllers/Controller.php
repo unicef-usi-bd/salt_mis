@@ -203,6 +203,9 @@ class Controller extends BaseController
 
 
                 <div style="font-family: "SolaimanLipi";"> '.$data.' </div>
+                <div class="header_right" style="float: right; padding-left: 500px; font-size: 12px; margin-top: 15px; font-weight: bold"><span> '.Auth::user()->user_full_name.'</span><br>
+                <span>  <img src="'.Auth::user()->user_signature.'" width="50px" height="15px" alt="User Signature"></span>
+                </div>
 
 
                 <htmlpagefooter name="page-footer">

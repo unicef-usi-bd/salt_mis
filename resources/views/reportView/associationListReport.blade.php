@@ -5,12 +5,17 @@
     }
 </style>
 
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.table2excel.js') }}"></script>
+
 <div class="row" style="margin-bottom: 15px;">
     <a style="margin-right: 15px;margin-bottom: 10px;" href="{{ url('association-list-reportPdf/') }}" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+    {{--<a style="margin-right: 15px;margin-bottom: 10px;" id="button" class="btn btn-success btn-xs pull-right"><i aria-hidden="true"></i> Export</a>--}}
+
     <div class="col-md-12 center">
         <h4>List of Total Association</h4>
     </div><!-- /.col -->
 </div><!-- /.row -->
+
 
 <div class="row">
     <div class="col-md-12 table-responsive">
@@ -43,3 +48,14 @@
         </table>
     </div>
 </div>
+<script>
+    $("#button").click(function(){
+        $("#simple-table").table2excel({
+        exclude:".noExl",
+        name:"Worksheet Name",
+        filename:"SomeFile",//do not include extension
+        fileext:".xls" // file extension
+    });
+
+    });
+</script>
