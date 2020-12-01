@@ -191,7 +191,7 @@ class Controller extends BaseController
                         <div class="header">
                             <div class="header_left">
                                 <div class="logo"><img src="'. Session::get("orgLogo").'" width="50px" height="50px" alt="DAE Logo"></div>
-                                <div class="slogan">'. Session::get("orgName").'</div>
+                                
                             </div>
                             <div class="header_right">
                                 {DATE j-m-Y}

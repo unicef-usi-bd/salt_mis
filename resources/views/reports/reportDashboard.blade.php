@@ -118,6 +118,7 @@
     @include('masterGlobal.getMillersId')
 
 
+    <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.table2excel.js') }}"></script>
     <script type="text/javascript">
         $('.resultTab').hide();
         $(document).on('click','.btnReport',function(e){
@@ -237,9 +238,19 @@
                     $('.soeRowDiv').hide();
                     $('.resultTab').show();
                     $('.tblReport').html(data.html);
+                    $('.addexcelbutton').prepend('<a style="margin-right: 15px;margin-bottom: 10px;" id="excelExportButton" class="btn btn-success btn-xs pull-right"><i aria-hidden="true"></i> Export</a>');
                 }
             });
 
+        });
+
+        $(document).on('click','#excelExportButton',function(){
+            $("#simple-table").table2excel({
+                exclude:".noExl",
+                name:"Worksheet Name",
+                filename:"SomeFile",//do not include extension
+                fileext:".xls" // file extension
+            });
         });
     </script>
 

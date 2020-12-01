@@ -224,11 +224,15 @@
             if (userGroupId == 22) {
                 $('.resources').show();
                 $('.center_ID').find('*').prop('disabled', true);
-            }else{
-                if ($(this).val() == 21) {
-                    $('.center_ID').find('*').prop('disabled', false);
-                    $('.resources').hide();
-                }
+            } else if(userGroupId == 21){
+                $('.center_ID').find('*').prop('disabled', false);
+                $('.resources').hide();
+
+            }else {
+                $('.center_ID').find('*').prop('disabled', true);
+                $('.millName').find('*').prop('disabled', true);
+                $('.resources').hide();
+
             }
         });
         let millName = $('.millName').val();
